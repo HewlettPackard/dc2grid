@@ -96,7 +96,7 @@ def _make_hardware_controller(name: str, env: C2GMacroEnv, sac_model: Any) -> An
     if name == "rule_based":
         fast_env = env._fast_env
         return RuleBasedController(
-            committed_mw_max=float(fast_env._scfg.get("committed_mw_max", 30.0)),
+            committed_mw_max=float(fast_env._committed_mw_max),
             bess_p_max_mw=float(fast_env._bess.P_MAX_MW),
         )
     if name == "sac":
