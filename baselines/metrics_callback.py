@@ -67,6 +67,11 @@ Actions (a_i, 4-D continuous):
 from __future__ import annotations
 
 import csv
+import gzip
+import json
+import math
+from collections.abc import Mapping
+from numbers import Real
 from pathlib import Path
 from typing import Any
 
@@ -76,6 +81,62 @@ from stable_baselines3.common.callbacks import BaseCallback, EvalCallback
 from stable_baselines3.common.vec_env import sync_envs_normalization
 
 from c2g_env.thermal_limits import T_WARN_A, T_WARN_B
+from c2g_env.experiments.identity import configuration_id
+
+def _runtime_json_value(value):
+    if isinstance(value, np.ndarray):
+        return value.tolist()
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, Path):
+        return str(value)
+    raise TypeError(f"Unsupported runtime value: {type(value).__name__}")
+
+
+def _runtime_scalars(values, prefix=""):
+    for name, value in values.items():
+        if name == "last_inner_info":
+            continue
+        key = f"{prefix}.{name}" if prefix else name
+        if isinstance(value, Mapping):
+            yield from _runtime_scalars(value, key)
+        elif isinstance(value, (Real, np.bool_)):
+            yield key, float(value), isinstance(value, (bool, np.bool_))
+
+
+def _accumulate_runtime_scalar(stats, key, value, duration, is_flag, step):
+    entry = stats.setdefault(key, {
+        "count": 0, "sum": 0.0, "sum_squares": 0.0, "absolute_sum": 0.0,
+        "minimum": value, "maximum": value, "final": value,
+        "integral_seconds": 0.0, "absolute_integral_seconds": 0.0,
+        "duration_seconds": 0.0,
+    })
+    entry["count"] += 1
+    entry["sum"] += value
+    entry["sum_squares"] += value * value
+    entry["absolute_sum"] += abs(value)
+    entry["minimum"] = min(entry["minimum"], value)
+    entry["maximum"] = max(entry["maximum"], value)
+    entry["final"] = value
+    entry["integral_seconds"] += value * duration
+    entry["absolute_integral_seconds"] += abs(value) * duration
+    entry["duration_seconds"] += duration
+    if is_flag:
+        entry["true_count"] = entry.get("true_count", 0) + int(value)
+        entry.setdefault("first_true_step", None)
+        if value and entry["first_true_step"] is None:
+            entry["first_true_step"] = step
+
+
+def _summarize_runtime_scalar(entry):
+    return {
+        **entry,
+        "mean": entry["sum"] / entry["count"],
+        "absolute_mean": entry["absolute_sum"] / entry["count"],
+        "rms": math.sqrt(entry["sum_squares"] / entry["count"]),
+        "duration_weighted_mean": entry["integral_seconds"] / entry["duration_seconds"],
+    }
+
 
 STATE_COLUMNS = [
     "s_temp_A_norm",
@@ -699,6 +760,8 @@ class C2GTransitionLoggerCallback(BaseCallback):
         episode_number: int | None = None,
         fixed_action_values: dict[str, float] | None = None,
         verbose: int = 0,
+        experiment_context: dict[str, Any] | None = None,
+        runtime_path: Path | None = None,
     ):
         super().__init__(verbose)
         self._algorithm_name = algorithm_name
@@ -706,7 +769,11 @@ class C2GTransitionLoggerCallback(BaseCallback):
         self._agent_type = agent_type
         self._episode_number = episode_number
         self._fixed_action_values = dict(fixed_action_values or {})
+        self._experiment_context = dict(experiment_context or {})
         self._active = True
+        self._runtime_file = None
+        self._runtime_stats = {}
+        self._runtime_duration = 0.0
 
         self._csv_file: Any | None = None
         self._csv_writer: csv.DictWriter | None = None
@@ -729,6 +796,15 @@ class C2GTransitionLoggerCallback(BaseCallback):
 
         self._global_step = 0
 
+        if runtime_path is not None:
+            if not self._experiment_context:
+                raise ValueError("Runtime recording requires an experiment context.")
+            runtime_path = Path(__file__).resolve().parent.parent / runtime_path
+            runtime_path.parent.mkdir(parents=True, exist_ok=True)
+            self._output_dir = runtime_path.parent
+            self._runtime_file = gzip.open(runtime_path, "xt", encoding="utf-8", compresslevel=1)
+            return
+
         # Transition logs are only written under <project_root>/runs.
         project_root_runs = Path(__file__).resolve().parent.parent / output_dir
         if not project_root_runs.exists() or not project_root_runs.is_dir():
@@ -738,11 +814,19 @@ class C2GTransitionLoggerCallback(BaseCallback):
                 print(f"[transition_logger] Skipping logging: missing {project_root_runs}")
             return
 
+        if self._experiment_context:
+            project_root_runs = project_root_runs / configuration_id(self._experiment_context)
+
         if algorithm_name is not None and scenario_name is not None and agent_type is not None:
             self._output_dir = project_root_runs / f"{algorithm_name}_{scenario_name}_{agent_type}"
         else:
             self._output_dir = project_root_runs
         self._output_dir.mkdir(parents=True, exist_ok=True)
+        if self._experiment_context:
+            (self._output_dir / "experiment.json").write_text(
+                json.dumps(self._experiment_context, sort_keys=True, indent=2, allow_nan=False),
+                encoding="utf-8",
+            )
 
     def _build_ablation_suffix(self) -> str:
         return build_ablation_suffix(self._fixed_action_values)
@@ -775,10 +859,11 @@ class C2GTransitionLoggerCallback(BaseCallback):
         else:
             csv_name = f"episode_{ablation_suffix}.csv"
         csv_path = self._output_dir / csv_name
-        if csv_path.exists():
+        if csv_path.exists() and not self._experiment_context:
             csv_path.unlink()
         write_header = True
-        self._csv_file = open(csv_path, "w", newline="")
+        mode = "x" if self._experiment_context else "w"
+        self._csv_file = open(csv_path, mode, newline="")
 
         self._reward_component_keys = sorted((reward_components or {}).keys())
 
@@ -874,8 +959,54 @@ class C2GTransitionLoggerCallback(BaseCallback):
 
         if d: self.close()
 
+    def _write_runtime_record(self, record):
+        if self._runtime_file is None or self._runtime_file.closed:
+            raise RuntimeError("Runtime recording is not open.")
+        payload = {"schema_version": 2, **self._experiment_context, **record}
+        encoded = json.dumps(payload, default=_runtime_json_value, allow_nan=False, separators=(",", ":"))
+        self._runtime_file.write(encoded + "\n")
+        self._runtime_file.flush()
+
+    def record_runtime_reset(self, observation, info, initial_state):
+        self._write_runtime_record({
+            "event": "reset", "hardware_step": 0, "macro_step": 0,
+            "observation": observation, "info": info, "initial_state": initial_state,
+        })
+
+    def record_runtime_transition(
+        self, state, action, observation, reward, terminated, truncated, info,
+        *, hardware_step, macro_step, duration_seconds,
+    ):
+        if not math.isfinite(duration_seconds) or duration_seconds <= 0.0:
+            raise ValueError("Runtime step duration must be finite and positive.")
+        self._write_runtime_record({
+            "event": "step", "hardware_step": hardware_step, "macro_step": macro_step,
+            "state": state, "action": action, "observation": observation,
+            "reward": reward, "terminated": terminated, "truncated": truncated,
+            "duration_seconds": duration_seconds, "info": info,
+        })
+        self._global_step += 1
+        self._runtime_duration += duration_seconds
+        values = {
+            "reward": reward, "terminated": terminated, "truncated": truncated,
+            "action": dict(zip(self._action_names, action)), "info": info,
+        }
+        for key, value, is_flag in _runtime_scalars(values):
+            _accumulate_runtime_scalar(
+                self._runtime_stats, key, value, duration_seconds, is_flag, self._global_step,
+            )
+
+    def runtime_summary(self):
+        return {
+            "steps": self._global_step,
+            "duration_seconds": self._runtime_duration,
+            "scalars": {key: _summarize_runtime_scalar(entry) for key, entry in self._runtime_stats.items()},
+        }
+
     def close(self) -> None:
         """Flush and close CSV file."""
+        if self._runtime_file is not None and not self._runtime_file.closed:
+            self._runtime_file.close()
         if self._csv_file is not None and not self._csv_file.closed:
             self._csv_file.flush()
             self._csv_file.close()

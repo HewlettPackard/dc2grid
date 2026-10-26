@@ -110,6 +110,11 @@ thermal_sensitivity:
   # training/evaluation. The same frozen SAC checkpoint is used in every
   # scenario; this is an out-of-distribution policy test, not retraining.
   cross_scenario:
+    torch_num_threads: 1
+    controller_pairs:
+      - [rule_macro, rule_based]
+      - [sac_macro, sac]
+    validation_configs: [nominal, combined_adverse]
     scenarios: [default, scenario_a, scenario_b, scenario_c]
     seeds: [100, 101, 102, 103, 104]
     macro_controller: rule_macro

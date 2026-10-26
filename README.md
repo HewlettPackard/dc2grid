@@ -620,7 +620,6 @@ uv run python baselines/train_ppo.py scenario=scenario_b market=entso_de experim
 ```
 dc2grid/
 ├── pyproject.toml                       # uv/hatchling build + all dependencies
-├── uv.lock                              # Reproducible dependency lock
 ├── README.md
 │
 ├── c2g_env/                             # The Core RL Environment
@@ -678,8 +677,7 @@ dc2grid/
 │
 ├── evaluation/                          # Benchmark auditing & analysis
 │   ├── run_benchmark.py                 # Standard benchmark: runs agents on all 4 scenarios
-│   │                                    # Outputs: CSV with cumulative power metrics at
-│   │                                    #   evaluation/results/{algo}_{scenario}_{agent_type}_{ablation}.csv
+│   │                                    # Outputs: per-episode CSVs with cumulative power metrics
 │   ├── run_ha_benchmark.py              # HA safety benchmark: 11-metric evaluation set
 │   │                                    # Same cumulative power metrics as run_benchmark.py
 │   ├── generate_plots.py                # Publication-ready PDF/PNG figures
@@ -841,20 +839,14 @@ The sweep runs in 25 phases:
 | 24    | 1    | Statistical analysis (CIs + significance tests)           |
 | 25    | 1    | Failure-case analysis                                     |
 
-Results are written to `results/sweep_results.csv` (one row per run, upserted on re-runs) and `results/sweep_summary.csv` (mean ± std across seeds).
+The sweep produces a per-run results CSV (one row per run, upserted on re-runs) and a summary CSV (mean and standard deviation across seeds). Output destinations are defined in [scripts/run_sweep.sh](scripts/run_sweep.sh).
 
 ### Run benchmark evaluation directly
 
 Use the evaluation runners when you want targeted experiments instead of the full sweep.
 The `--fixed-action` setting allows granular control experiments by pinning selected actuators to analyst-chosen setpoints.
 
-Unless --output path provided, results saved by default at:
-
-```
-evaluation/results/{algo}_{scenario}_{agent_type}_{ablation}.csv
-```
-
-e.g. `ppo_scenario_b_hardware_BESS_0.5.csv` stores evals for hardware PPO agent with fixed BESS ablation. Here `agent_type` denotes the transition-logging and output suffix for the evaluated controller, and can be `hardware`, `macro`, or `hardware_ha`.
+Unless `--output` is provided, the benchmark runner generates a CSV destination using the algorithm, scenario, controller type, and any fixed-action ablation. For example, a hardware PPO evaluation in `scenario_b` with BESS fixed at `0.5` receives an ablation-tagged CSV. Here `agent_type` denotes the transition-logging and output suffix for the evaluated controller, and can be `hardware`, `macro`, or `hardware_ha`.
 
 ---
 
@@ -868,29 +860,29 @@ uv run evaluation/run_benchmark.py --agents rule_based bang_bang pid random
 
 # SAC low-level agent (requires a trained model)
 uv run evaluation/run_benchmark.py --agents sac --scenarios default scenario_b \
-    --hw-model-dir trained_models/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
 
 # Hierarchical combos: rule-based macro + hardware controller
 uv run evaluation/run_benchmark.py --agents rule_macro+sac rule_macro+rule_based \
     rule_macro+pid rule_macro+bang_bang rule_macro+random \
-    --hw-model-dir trained_models/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
 
 # RL macro (Phase 2) + frozen SAC low-level
 uv run evaluation/run_benchmark.py --agents sac_macro+sac \
-    --macro-model-dir trained_models/sac_macro_default_s100 \
-    --hw-model-dir trained_models/sac_default_s100
+    --macro-model-dir trained_models/BestCheckpoints/sac_macro_default_s100 \
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
 
 # LLM macro + hardware controller (requires a running vLLM server)
 uv run evaluation/run_benchmark.py --agents llm_policy_macro+sac \
-    --hw-model-dir trained_models/sac_default_s100 \
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100 \
     --llm-api-base http://localhost:8000/v1
 
 # With transition logging (per-step CSV traces)
 uv run evaluation/run_benchmark.py --agents rule_macro+sac --record_transitions \
-    --hw-model-dir trained_models/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
 ```
 
-SAC agents automatically load the model from `trained_models/<algo>_<scenario>_s<seed>/final_model.zip`. Use `--hw-model-dir` or `--macro-model-dir` to override.
+SAC agents select default checkpoint directories by algorithm, scenario, and seed. The examples above use bundled, Git-tracked SAC checkpoints via `--hw-model-dir` and `--macro-model-dir`; use these options to select other model directories.
 
 **Agents used in the paper:**
 
@@ -914,40 +906,40 @@ Pin actuators to fixed setpoints to isolate each lever's contribution:
 # Disable BESS (throttle + cooling only)
 uv run evaluation/run_benchmark.py --agents rule_macro+sac \
     --fixed-action bess_dispatch=0.0 \
-    --hw-model-dir trained_models/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
 
 # Disable BESS and fix cooling (throttle only)
 uv run evaluation/run_benchmark.py --agents rule_macro+sac \
     --fixed-action bess_dispatch=0.0 \
     --fixed-action pump_speed_A=0.7 \
     --fixed-action hvac_effort=0.7 \
-    --hw-model-dir trained_models/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
 ```
 
 Action bounds: `throttle_batch ∈ [0, 1]`, `pump_speed_A ∈ [0, 1]`, `hvac_effort ∈ [0, 1]`, `bess_dispatch ∈ [-1, 1]`. Values are validated and clipped to these ranges.
 
 **Key CLI arguments:**
 
-| Argument                                               | Default                                             | Description                                                                                       |
-| ------------------------------------------------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `--agents`                                           | `rule_based bang_bang pid random`                 | One or more agent names (see table above)                                                         |
-| `--scenarios`                                        | all 4                                               | Subset of `default scenario_a scenario_b scenario_c`                                            |
-| `--n_episodes`                                       | `5`                                               | Episodes per agent × scenario combination                                                        |
-| `--seed`                                             | `100`                                             | Starting RNG seed; episode `i` uses `seed + i`                                                |
-| `--hw-model-dir`                                     | `None`                                            | Model directory for the hardware/inner SAC agent                                                  |
-| `--macro-model-dir`                                  | `None`                                            | Model directory for the macro-level SAC agent                                                     |
-| `--output`                                           | auto-generated                                      | Output CSV path; defaults to `evaluation/results/<algo>_<scenario>_<agent_type>_<ablation>.csv` |
-| `--record_transitions` / `--no-record_transitions` | disabled                                            | Write per-step state/action/reward traces to `runs/<agent>_<scenario>_<type>/episode*.csv`      |
-| `--append`                                           | `False`                                           | Append rows to an existing CSV instead of overwriting                                             |
-| `--fixed-action <name>=<value>`                      | none                                                | Pin an actuator to a fixed setpoint (repeatable)                                                  |
-| `--llm-api-base`                                     | `http://localhost:8000/v1`                        | vLLM / OpenAI-compatible server URL                                                               |
-| `--llm-template-path`                                | `conf/chat_templates/run_benchmark_rbc+ICRL.yaml` | YAML prompt templates for LLM agents                                                              |
-| `--llm-max-new-tokens`                               | `8192`                                            | Maximum tokens per LLM generation step                                                            |
-| `--llm-temperature`                                  | `0.0`                                             | Sampling temperature (0 = greedy)                                                                 |
-| `--llm-no-thinking`                                  | off                                                 | Disable `<think>` reasoning blocks                                                              |
-| `--llm-context-num-steps`                            | `10`                                              | ICRL rolling buffer size in past steps (paper uses 5; 0 = disabled)                               |
-| `--llm-context-stride`                               | `1`                                               | Store every *K*-th step in the ICRL buffer                                                      |
-| `--llm-icrl-mode`                                    | `autonomous`                                      | ICRL instruction mode: `autonomous` (paper default), `preset`, or `exploit`                 |
+| Argument | Default | Description |
+|----------|---------|-------------|
+| `--agents` | `rule_based bang_bang pid random` | One or more agent names (see table above) |
+| `--scenarios` | all 4 | Subset of `default scenario_a scenario_b scenario_c` |
+| `--n_episodes` | `5` | Episodes per agent × scenario combination |
+| `--seed` | `100` | Starting RNG seed; episode `i` uses `seed + i` |
+| `--hw-model-dir` | `None` | Model directory for the hardware/inner SAC agent |
+| `--macro-model-dir` | `None` | Model directory for the macro-level SAC agent |
+| `--output` | auto-generated | Output CSV destination; otherwise named by algorithm, scenario, controller type, and ablation |
+| `--record_transitions` / `--no-record_transitions` | disabled | Write per-step state/action/reward traces to per-episode CSVs in the runner's log hierarchy |
+| `--append` | `False` | Append rows to an existing CSV instead of overwriting |
+| `--fixed-action <name>=<value>` | none | Pin an actuator to a fixed setpoint (repeatable) |
+| `--llm-api-base` | `http://localhost:8000/v1` | vLLM / OpenAI-compatible server URL |
+| `--llm-template-path` | `conf/chat_templates/run_benchmark_rbc+ICRL.yaml` | YAML prompt templates for LLM agents |
+| `--llm-max-new-tokens` | `8192` | Maximum tokens per LLM generation step |
+| `--llm-temperature` | `0.0` | Sampling temperature (0 = greedy) |
+| `--llm-no-thinking` | off | Disable `<think>` reasoning blocks |
+| `--llm-context-num-steps` | `10` | ICRL rolling buffer size in past steps (paper uses 5; 0 = disabled) |
+| `--llm-context-stride` | `1` | Store every *K*-th step in the ICRL buffer |
+| `--llm-icrl-mode` | `autonomous` | ICRL instruction mode: `autonomous` (paper default), `preset`, or `exploit` |
 
 **Output metrics:**
 
@@ -973,20 +965,20 @@ For macro agents, additional columns include:
 | `mean_perf_score`     | Mean FERC performance score                  |
 | `mean_committed_mw`   | Mean accepted MW commitment per interval     |
 
-For hierarchical combo agents (`macro+hardware`), results are split into `*_macro.csv` and `*_hardware.csv` automatically, with a separate hardware-schema row for the inner controller enabling direct comparison with standalone hardware results.
+For hierarchical combo agents (`macro+hardware`), results are split into separate macro and hardware CSVs automatically, with a separate hardware-schema row for the inner controller enabling comparison with standalone hardware results.
 
-When `--record_transitions` is enabled, per-step logs are written under `runs/<agent>_<scenario>_<agent_type>/episode*.csv`.
+When `--record_transitions` is enabled and the run-log root defined in [evaluation/run_benchmark.py](evaluation/run_benchmark.py) exists, benchmark logs are grouped by experiment identity, agent, scenario, and controller type. An adjacent JSON manifest records the effective plant and thermal overrides, seed, source fingerprint, checkpoint fingerprints where available, and invocation identity. Macro and hardware streams share the same episode context. Repeated invocations receive separate directories.
 
 #### Multiple facility capacities (50 / 100 / 250 / 500 MW)
 
-DC2Grid ships with **capacity-generalization profiles** so any agent or experiment can be evaluated on data centers of different nameplate sizes without retraining. Profiles live under `conf/plant_profiles/` and override the plant sizing (rack counts, transformer rating, thermal masses, cooling coefficients, BESS energy/power, and market commitments). Extensive quantities scale linearly with capacity; intensive quantities (per-rack power, COP, C/K time constants, SOC bounds, setpoints) are unchanged, so the thermal margin to the fixed 35 °C limit is identical across sizes.
+DC2Grid provides **capacity-generalization profiles** for the benchmark and full-environment thermal runner. Profiles live under `conf/plant_profiles/` and override rack counts, transformer rating, thermal masses, cooling coefficients, BESS energy/power, and standing DR commitments. The environment scales each scenario's commitment cap with effective IT nameplate capacity. Extensive quantities scale linearly with capacity; per-rack power, COP, C/K time constants, SOC bounds, and setpoints remain unchanged. This preserves thermal-model ratios under matched relative inputs, but does not imply identical closed-loop trajectories against an unchanged regional grid and market.
 
-| Profile                | Nameplate | Scale | `committed_mw_max` | Zone A × B racks              | BESS (`E_NOM_MWH` / `P_MAX_MW`) |
-| ---------------------- | --------- | ----- | -------------------- | ------------------------------ | ----------------------------------- |
-| `plant_50mw`         | 50 MW     | 0.2× | 6.0                  | 240+160 × 500                 | 3.0 / 1.0                           |
-| `plant_100mw`        | 100 MW    | 0.4× | 12.0                 | 480+320 × 1000                | 6.0 / 2.0                           |
-| `none` *(default)* | 250 MW    | 1.0× | 30.0                 | built-in (150 MW A + 100 MW B) | 15.0 / 5.0                          |
-| `plant_500mw`        | 500 MW    | 2.0× | 60.0                 | 2400+1600 × 5000              | 30.0 / 10.0                         |
+| Profile | Nameplate | Scale | Default-scenario `committed_mw_max` | Zone A × B racks | BESS (`E_NOM_MWH` / `P_MAX_MW`) |
+|---------|-----------|-------|--------------------|------------------|---------------------------------|
+| `plant_50mw` | 50 MW | 0.2× | 6.0 | 240+160 × 500 | 3.0 / 1.0 |
+| `plant_100mw` | 100 MW | 0.4× | 12.0 | 480+320 × 1000 | 6.0 / 2.0 |
+| `none` *(default)* | 250 MW | 1.0× | 30.0 | built-in (150 MW A + 100 MW B) | 15.0 / 5.0 |
+| `plant_500mw` | 500 MW | 2.0× | 60.0 | 2400+1600 × 5000 | 30.0 / 10.0 |
 
 `none` = the built-in 250 MW facility (no override). Profile names are discovered automatically from `conf/plant_profiles/*.yaml`.
 
@@ -999,8 +991,8 @@ uv run evaluation/run_benchmark.py --agents rule_based bang_bang pid \
 
 # Sweep every capacity in one run; each output row is tagged with `plant_profile`
 uv run evaluation/run_benchmark.py --agents sac_macro+sac \
-    --macro-model-dir trained_models/sac_macro_default_s100 \
-    --hw-model-dir trained_models/sac_default_s100 \
+    --macro-model-dir trained_models/BestCheckpoints/sac_macro_default_s100 \
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100 \
     --plant_profile all
 ```
 
@@ -1008,21 +1000,41 @@ uv run evaluation/run_benchmark.py --agents sac_macro+sac \
 
 **Thermal-sensitivity sweep at a chosen capacity** — the cross-scenario thermal runner takes `--plant-profile` (extensive sweep values are automatically rescaled to match the selected size):
 
+Set `THERMAL_RESULTS_CSV` to a new output CSV destination for the selected capacity before running this example.
+
 ```bash
 uv run python -m c2g_env.experiments.thermal_sensitivity_cross_scenario \
     --plant-profile plant_100mw \
     --macro-controller sac_macro \
     --controllers sac \
-    --out copilot/artifacts/thermal_cross_sacsac_plant_100mw.csv
+    --out "${THERMAL_RESULTS_CSV:?Set THERMAL_RESULTS_CSV to the output CSV for this capacity}"
 ```
 
-**Hydra / training runs** — the same profiles are exposed as a Hydra config group (`conf/config.yaml` selects `plant_profiles: none` by default). Override on the command line to train or run at a different size:
+**Hydra / training runs:** the same profiles are exposed as a Hydra config group (`conf/config.yaml` selects `plant_profiles: none` by default). The standalone SAC and rule-macro SAC trainers forward this group to their environments; the older PPO, hierarchical, and safety trainers do not yet do so. For a supported trainer:
 
 ```bash
 uv run baselines/train_sac.py plant_profiles=plant_500mw
 ```
 
 Standalone (non-Hydra) callers can pass the override dict directly: `C2GFastEnv(plant_overrides=load_plant_profile("plant_100mw"))`.
+
+**Capacity-sensitive execution.** BESS actions use the effective battery power rating. Macro bidding and benchmark rule-controller gains use the effective commitment cap: the scenario's 250 MW reference cap multiplied by effective IT nameplate MW / 250. At 50/100/250/500 MW, the default-scenario caps are 6/12/30/60 MW, scenario A/C caps are 8/16/40/80 MW, and scenario B caps are 12/24/60/120 MW. The cap is recalculated on reset, including scenario changes. An explicit `committed_mw_max` plant override remains an absolute MW limit and takes precedence. Standing DR baselines remain profile-defined. Regional grid size, regulation demand, competitor participation, and market pricing parameters are not capacity-scaled; realized bids and market outcomes can still differ.
+
+Tracking denominator floors are configured by `reward.tracking_floor_fraction` and `reward.macro_tracking_floor_fraction` in [c2g_env/config.yaml](c2g_env/config.yaml). Each fraction is multiplied by effective IT nameplate kW. Their defaults retain the previous 250 MW floors of 100 kW for hardware reward and 1 kW for macro tracking observations and performance scores. Temperature, SOC, and grid protection thresholds are unchanged.
+
+**Result identity and resuming.** Thermal CSVs record `run_id`, `episode_id`, `plant_profile`, `facility_capacity_mw`, and `run_config` alongside the existing metrics. Resume decisions distinguish effective thermal overrides, plant settings, scenario, seed, controllers, checkpoint contents, environment configuration, and source fingerprints. Older summary-only CSV schemas are rejected for appending; retain those files and choose a new output path. These fixes change non-default-capacity behavior, so previous results should not be treated as equivalent reruns.
+
+The thermal runner records complete hardware and macro transitions in separate compressed JSONL streams in its default recording directory, or the destination selected with `--record-dir`. Records include reset state, full `info` mappings, actual durations, and separate termination/truncation flags. Episode summaries include online scalar statistics, energy integrals, tracking error, actuator and battery metrics, and reported market totals. A manifest preserves effective parameters, observation/action maps, source snapshots, package versions, checkpoint identities, and file checksums. Resume requires finalized, checksum-verified recordings; incomplete attempts remain separate. This recording does not change the environment's existing market-accounting formulas.
+
+Recording schema 3 also exports all `C2GMetricsCallback` hardware-episode metrics as named CSV columns and under `hardware.episode_metrics` in the JSON summary. These include reward components, temperatures, tracking RMSE, PUE, power, SOC, action means and standard deviations, backlog, and fault indicators. In the sweep, `ep/length` counts recorded hardware steps and `ep/survived` requires the configured hardware horizon without termination, rather than the callback's legacy 288-tick cutoff. `reward/mean_throughput` is the mean throughput reward component; `workload/mean_throughput_ratio` is the mean reported batch throttle; `workload/served_work_ratio` is total served flexible work divided by arrivals. Choose a fresh output path when moving from an older CSV schema.
+
+The matched-pair workflow is configured by `thermal_sensitivity.cross_scenario.controller_pairs`: rule macro with rule hardware, and SAC macro with SAC hardware. The existing launch helper performs nominal/adverse validation at the smallest and largest capacities, recomputes metrics from raw records, and estimates storage before the full grid. Its `--plant-profile` option limits a worker to one capacity and runs validation once for that capacity. Give parallel workers separate `--artifacts` directories and non-overlapping capacity assignments. Keep source and configuration files unchanged during a running sweep.
+
+Default benchmark CSV names include non-default profile selections. Hydra sweep subdirectories include the job number so different conditions with the same seed do not collide within a sweep.
+
+**Condition-aware analysis.** Statistical summaries and comparisons retain `plant_profile`, `facility_capacity_mw`, `config_id`, and structured `thermal_overrides` when those columns are present. Baselines are matched within a condition. The statistical CLI writes separate LaTeX tables for multiple conditions, with condition metadata alongside them. Direct table generation requires an explicit condition when the input contains several.
+
+The plot generator writes result sets into directories identified by condition, each containing a JSON metadata file. Direct plotting helpers reject mixed conditions; CSVs without condition columns retain the legacy output layout. These changes do not add new metrics or convert the thermal summary schema into the ordinary benchmark plotting schema.
 
 #### High-assurance benchmark runner
 
@@ -1053,11 +1065,11 @@ Notes:
 - These settings allow granular experimentation and control for high-assurance studies as well: you can evaluate whether a safety method still works when specific actuators are pinned to fixed operating points.
 - The same continuous low-level action ranges apply here: `throttle_batch ∈ [0, 1]`, `pump_speed_A ∈ [0, 1]`, `hvac_effort ∈ [0, 1]`, and `bess_dispatch ∈ [-1, 1]`.
 - Fixed-action overrides are applied inside the low-level environment before dynamics are applied.
-- When enabled, transition logs are written under `runs/<agent>_<scenario>_ha/episode*.csv`.
+- When enabled, transition logs are written to per-episode CSVs grouped by agent, scenario, and high-assurance controller type.
 
 #### Plotting episode traces and statistics
 
-After generating transition logs (via `--record_transitions` in benchmark runners), you can visualize per-step state, action, observation, and reward traces as aggregated statistics (mean ± 99% CI across episodes). Writes per-step episode CSV files under `runs/<algo>_<scenario>_<agent_type>/` (e.g., `episode0__HVAC_disabled_BESS_0.csv`).
+After generating per-episode transition CSVs (via `--record_transitions` in benchmark runners), you can visualize per-step state, action, observation, and reward traces as aggregated statistics (mean and 99% confidence intervals across episodes). The logs are grouped by algorithm, scenario, controller type, and any ablation settings.
 
 **Plot episode statistics**:
 
@@ -1073,10 +1085,7 @@ uv run evaluation/plot_episode_traces.py \
   --agent-type macro
 ```
 
-**Outputs:**
-
-- **JPEG**: `figures/<algo>_<scenario>_<agent_type>[__ABLATION_SUFFIX].jpeg`
-- **PDF**: `figures/<algo>_<scenario>_<agent_type>[__ABLATION_SUFFIX].pdf`
+**Outputs:** JPEG and PDF figures named by algorithm, scenario, controller type, and any ablation settings.
 
 Each figure contains one subplot per state/reward column, shows the **mean** line (solid) with a **99% confidence band** (shaded area) computed across all matching episodes.
 
@@ -1092,14 +1101,10 @@ uv run python scripts/download_energy.py  --year 2024
 
 ### Monitor training with TensorBoard
 
-All training scripts log scalar metrics (episode reward, episode length, thermal/tracking/SOC penalties, shield interventions) to TensorBoard. Logs are written to the Hydra output directory under `tensorboard/`.
+All training scripts log scalar metrics (episode reward, episode length, thermal/tracking/SOC penalties, shield interventions) to TensorBoard within the Hydra output directory. Set `TENSORBOARD_LOG_DIR` to the output root to compare runs, or to one run's event-log directory to inspect it separately.
 
 ```bash
-# Point TensorBoard at the outputs directory to compare all runs:
-uv run tensorboard --logdir outputs/
-
-# Or at a specific run:
-uv run tensorboard --logdir outputs/ppo_default/seed_42/2026-04-08_21-00-00/tensorboard/
+uv run tensorboard --logdir "${TENSORBOARD_LOG_DIR:?Set TENSORBOARD_LOG_DIR to the logs to inspect}"
 ```
 
 Then open [http://localhost:6006](http://localhost:6006) in your browser.

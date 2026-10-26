@@ -18,6 +18,112 @@ _EXPECTED_ACT_DIM = C2GFastEnv(scenario="default").action_space.shape[0]
 _EXPECTED_OBS_DIM_MACRO = C2GMacroEnv(scenario="default").observation_space.shape[0]
 _EXPECTED_ACT_DIM_MACRO = C2GMacroEnv(scenario="default").action_space.shape[0]
 
+class TestExperimentTransitionLogging:
+    def test_capacity_and_thermal_conditions_have_distinct_logs(self, tmp_path):
+        from baselines.metrics_callback import C2GTransitionLoggerCallback
+
+        contexts = [
+            {"plant_profile": "plant_50mw", "thermal_overrides": {}},
+            {"plant_profile": "plant_500mw", "thermal_overrides": {}},
+            {"plant_profile": "plant_50mw", "thermal_overrides": {"C_A": 2700.0}},
+        ]
+        for context in contexts:
+            logger = C2GTransitionLoggerCallback(
+                output_dir=tmp_path, algorithm_name="rule_based", scenario_name="default",
+                episode_number=0, experiment_context=context,
+            )
+            try:
+                logger.record_transition(np.zeros(18), np.zeros(4), np.zeros(18), 1.0, True)
+            finally:
+                logger.close()
+        assert len(list(tmp_path.rglob("episode0.csv"))) == 3
+        manifests = [json.loads(path.read_text(encoding="utf-8")) for path in tmp_path.rglob("experiment.json")]
+        assert all(context in manifests for context in contexts)
+
+    def test_existing_context_episode_is_not_overwritten(self, tmp_path):
+        from baselines.metrics_callback import C2GTransitionLoggerCallback
+
+        kwargs = dict(output_dir=tmp_path, algorithm_name="rule_based", scenario_name="default",
+                      episode_number=0, experiment_context={"plant_profile": "plant_50mw"})
+        logger = C2GTransitionLoggerCallback(**kwargs)
+        logger.record_transition(np.zeros(18), np.zeros(4), np.zeros(18), 1.0, True)
+        logger.close()
+        path = next(tmp_path.rglob("episode0.csv"))
+        original = path.read_bytes()
+        duplicate = C2GTransitionLoggerCallback(**kwargs)
+        try:
+            with pytest.raises(FileExistsError):
+                duplicate.record_transition(np.zeros(18), np.zeros(4), np.zeros(18), 2.0, True)
+        finally:
+            duplicate.close()
+        assert path.read_bytes() == original
+
+class TestRuntimeTransitionLogging:
+    def test_runtime_preserves_reset_nested_info_and_end_flags(self, tmp_path):
+        import gzip
+        from baselines.metrics_callback import C2GTransitionLoggerCallback
+
+        path = tmp_path / "hardware.jsonl.gz"
+        logger = C2GTransitionLoggerCallback(runtime_path=path, experiment_context={"episode_id": "test"})
+        info = {"power": np.float64(2.0), "flag": np.bool_(True), "nested": {"value": 3.0},
+                "new_field": np.array([1.0, 2.0]), "last_inner_info": {"power": 99.0}}
+        try:
+            logger.record_runtime_reset(np.zeros(18), {"reset_field": "present"}, {"bess_age_frac": 0.1})
+            logger.record_runtime_transition(
+                np.zeros(18), np.zeros(4), np.ones(18), 1.0, False, True, info,
+                hardware_step=1, macro_step=1, duration_seconds=5.0,
+            )
+            summary = logger.runtime_summary()
+        finally:
+            logger.close()
+        with gzip.open(path, "rt", encoding="utf-8") as handle:
+            records = [json.loads(line) for line in handle]
+        assert len(records) == 2
+        assert records[0]["info"] == {"reset_field": "present"}
+        assert records[1]["info"]["new_field"] == [1.0, 2.0]
+        assert records[1]["info"]["last_inner_info"] == {"power": 99.0}
+        assert records[1]["terminated"] is False and records[1]["truncated"] is True
+        assert summary["steps"] == 1
+        assert summary["scalars"]["info.nested.value"]["mean"] == 3.0
+        assert summary["scalars"]["info.flag"]["first_true_step"] == 1
+        assert "info.last_inner_info.power" not in summary["scalars"]
+
+    def test_runtime_summary_weights_durations_and_preserves_missing_fields(self, tmp_path):
+        from baselines.metrics_callback import C2GTransitionLoggerCallback
+
+        logger = C2GTransitionLoggerCallback(
+            runtime_path=tmp_path / "macro.jsonl.gz", agent_type="macro", experiment_context={"episode_id": "test"},
+        )
+        try:
+            for step, power, duration in [(1, 2.0, 5.0), (2, 4.0, 15.0)]:
+                info = {"power": power, "flag": step == 2, "optional": 3.0 if step == 1 else None}
+                logger.record_runtime_transition(
+                    np.zeros(19), np.zeros(2), np.zeros(19), 1.0, False, step == 2, info,
+                    hardware_step=step, macro_step=step, duration_seconds=duration,
+                )
+            summary = logger.runtime_summary()
+        finally:
+            logger.close()
+        power = summary["scalars"]["info.power"]
+        assert power["mean"] == 3.0
+        assert power["duration_weighted_mean"] == 3.5
+        assert power["integral_seconds"] == 70.0
+        assert power["rms"] == pytest.approx(np.sqrt(10.0))
+        assert summary["scalars"]["info.flag"]["true_count"] == 1
+        assert summary["scalars"]["info.flag"]["first_true_step"] == 2
+        assert summary["scalars"]["info.optional"]["count"] == 1
+
+    def test_runtime_rejects_nonfinite_records(self, tmp_path):
+        from baselines.metrics_callback import C2GTransitionLoggerCallback
+
+        logger = C2GTransitionLoggerCallback(runtime_path=tmp_path / "bad.jsonl.gz", experiment_context={"episode_id": "test"})
+        try:
+            with pytest.raises(ValueError):
+                logger.record_runtime_reset(np.array([np.nan]), {}, {})
+        finally:
+            logger.close()
+
+
 class TestDataLogging:
     def test_eval_log_schema_and_continuity(self):
         # sanity check: previous state = next observation in log

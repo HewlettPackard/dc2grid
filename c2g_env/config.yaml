@@ -50,6 +50,8 @@ global:
 reward:
   alpha:         1.0   # Throughput: reward per unit of batch workload served
   beta:          2.0   # Grid tracking: penalty per normalised tracking error
+  tracking_floor_fraction: 0.0004
+  macro_tracking_floor_fraction: 0.000004
   gamma_thermal: 5.0   # Thermal: penalty per °C above T_warn per tick
   T_warn_A:     33.0   # Zone A warning threshold [°C]  (2°C below T_safe=35)
   T_warn_B:     33.0   # Zone B warning threshold [°C]

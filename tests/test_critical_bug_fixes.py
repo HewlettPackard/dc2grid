@@ -26,6 +26,7 @@ import numpy as np
 import pytest
 
 from c2g_env import C2GFastEnv
+from c2g_env.plant_profiles import available_plant_profiles, load_plant_profile
 from c2g_env.physics.bess import BESSModel, PYSAM_ACTIVE, _SimpleBESSModel
 from c2g_env.thermal_limits import T_WARN_A
 
@@ -485,16 +486,35 @@ class TestSeedFallback:
 
 class TestCommittedMwZeroReward:
 
-    def test_norm_kw_minimum_is_100(self):
-        """norm_kw must be at least 100 kW so tracking penalty stays bounded."""
-        import inspect
-        from c2g_env.env_low_level import C2GFastEnv as E
-        src = inspect.getsource(E.step)
-        # Old code had max(..., 1.0) — floor is now 100
-        assert "100.0" in src, "norm_kw minimum 100 kW not found in step(). Medium Bug #1 not fixed."
-        assert "max(self._committed_mw * 1_000.0, 1.0)" not in src, (
-            "Old norm_kw floor of 1.0 still present. Medium Bug #1 not fixed."
-        )
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    @pytest.mark.parametrize("commitment_fraction", [0.0, 0.0001, 0.02])
+    def test_tracking_floor_scales_with_capacity(self, profile, commitment_fraction):
+        env = C2GFastEnv(plant_overrides=load_plant_profile(profile))
+        try:
+            env.reset(seed=0)
+            env.committed_mw = commitment_fraction * env._facility_cap_kw / 1_000.0
+            *_, info = env.step(np.array([1.0, 0.7, 0.7, 0.0], dtype=np.float32))
+            floor_kw = 100.0 * env._facility_cap_kw / 250_000.0
+            norm_kw = max(env.committed_mw * 1_000.0, floor_kw)
+            assert env._tracking_floor_kw == pytest.approx(floor_kw)
+            assert info["reward_tracking"] == pytest.approx(
+                -env._rcfg["beta"] * info["tracking_err_kw"] / norm_kw
+            )
+        finally:
+            env.close()
+
+    @pytest.mark.parametrize("key", ["tracking_floor_fraction", "macro_tracking_floor_fraction"])
+    @pytest.mark.parametrize("value", [0.0, -1.0, float("nan"), float("inf")])
+    def test_invalid_tracking_floor_rejected(self, tmp_path, key, value):
+        import yaml
+        from c2g_env.env_low_level import _CONFIG_PATH
+
+        config = yaml.safe_load(_CONFIG_PATH.read_text(encoding="utf-8"))
+        config["reward"][key] = value
+        path = tmp_path / "invalid_floor.yaml"
+        path.write_text(yaml.safe_dump(config), encoding="utf-8")
+        with pytest.raises(ValueError, match="finite and positive"):
+            C2GFastEnv(config_path=path)
 
     def test_zero_committed_mw_reward_bounded(self):
         """

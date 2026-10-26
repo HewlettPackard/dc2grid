@@ -43,6 +43,7 @@ from __future__ import annotations
 import argparse, csv, json, random as _py_random, re, time
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 import numpy as np
 import torch
@@ -50,6 +51,7 @@ import yaml
 from tqdm import tqdm
 
 from c2g_env import C2GFastEnv, C2GMacroEnv
+from c2g_env.experiments.identity import file_fingerprint, source_id
 from c2g_env.plant_profiles import available_plant_profiles, load_plant_profile
 from baselines.rule_based_mpc import RuleBasedController
 from baselines.rule_based_macro import RuleBasedMacroController
@@ -70,6 +72,7 @@ T_WARN_NORM  = T_WARN / T_SAFE   # normalised warning threshold
 # Facility-capacity override applied to every constructed env; set from the
 # --plant_profile CLI flag. None = built-in 250 MW facility.
 _PLANT_OVERRIDES: dict | None = None
+_PLANT_PROFILE = "none"
 _RL_ALGOS = {
     "ppo",
     "sac"
@@ -104,6 +107,23 @@ def _make_macro_env(scenario: str, sub_step_callback=None, **kwargs) -> C2GMacro
     """Return a C2GMacroEnv for macro-level agent evaluation."""
     kwargs.setdefault("plant_overrides", _PLANT_OVERRIDES)
     return C2GMacroEnv(scenario=scenario, sub_step_callback=sub_step_callback, **kwargs)
+
+
+def _experiment_context(env, seed: int, agent, inner_action_fn=None) -> dict[str, Any]:
+    fast_env = getattr(env, "_fast_env", env)
+    return {
+        "run_id": uuid4().hex,
+        "source_id": source_id(Path(__file__).resolve().parents[1]),
+        "seed": seed,
+        "scenario": fast_env._scenario,
+        "plant_profile": _PLANT_PROFILE,
+        "facility_capacity_mw": fast_env._facility_cap_kw / 1_000.0,
+        "plant_overrides": fast_env._plant_overrides,
+        "thermal_overrides": fast_env._thermal_overrides,
+        "environment": {"global": fast_env._gcfg, "reward": fast_env._rcfg, "scenario": fast_env._scfg},
+        "checkpoint": getattr(agent, "checkpoint", None),
+        "inner_checkpoint": getattr(inner_action_fn, "checkpoint", None),
+    }
 
 
 def _parse_fixed_action_args(values: list[str] | None) -> dict[str, float]:
@@ -163,7 +183,7 @@ def _make_inner_controller(
     if name == "bang_bang":
         return BangBangController()
     if name == "rule_based":
-        _committed = float(env._scfg.get("committed_mw_max", 30.0))
+        _committed = float(env._committed_mw_max)
         _bess_pmax = float(getattr(env._bess, "P_MAX_MW", 5.0))
         return RuleBasedController(committed_mw_max=_committed, bess_p_max_mw=_bess_pmax)
     if name == "mpc_fast":
@@ -188,6 +208,7 @@ def _default_output_path(
     agents: list[str],
     scenarios: list[str],
     fixed_action_values: dict[str, float] | None = None,
+    plant_profile: str = "none",
 ) -> Path:
     """Build a deterministic output path stem when --output is not provided.
 
@@ -216,7 +237,8 @@ def _default_output_path(
     ablation_suffix = build_ablation_suffix(fixed_action_values)
     ablation_tag = ablation_suffix.lstrip("_") if ablation_suffix else "base"
 
-    return Path("evaluation") / "results" / f"{algo_tag}_{scenario_tag}{agent_type_tag}_{ablation_tag}.csv"
+    capacity_suffix = "" if plant_profile == "none" else f"_{plant_profile}"
+    return Path("evaluation") / "results" / f"{algo_tag}_{scenario_tag}{agent_type_tag}_{ablation_tag}{capacity_suffix}.csv"
 
 
 # ---------------------------------------------------------------------------
@@ -245,10 +267,11 @@ class MacroRandomAgent:
 
 class SB3Agent:
     """Wraps a loaded SB3 model (PPO or SAC)."""
-    def __init__(self, model, algo_name: str, obs_normalizer=None):
+    def __init__(self, model, algo_name: str, obs_normalizer=None, checkpoint=None):
         self._model = model
         self.algo_name = algo_name
         self._obs_normalizer = obs_normalizer
+        self.checkpoint = checkpoint
 
     def predict(self, obs: np.ndarray, deterministic: bool = True):
         if self._obs_normalizer is not None:
@@ -296,7 +319,8 @@ def load_sb3_agent(algo: str, scenario: str, seed: int, model_dir: str | None):
     obs_normalizer = None
     if should_restore_norm:
         obs_normalizer = _maybe_load_obs_normalizer(path.parent / "vec_normalize.pkl", scenario)
-    return SB3Agent(model, algo_name=algo.lower(), obs_normalizer=obs_normalizer)
+    return SB3Agent(model, algo_name=algo.lower(), obs_normalizer=obs_normalizer,
+                    checkpoint=file_fingerprint(path.with_suffix(".zip")))
 
 
 # Metric collection
@@ -330,6 +354,7 @@ def run_episode(
             episode_number=episode_number,
             fixed_action_values=fixed_action_values,
             verbose=0,
+            experiment_context=_experiment_context(env, seed, agent),
         )
 
     rewards       : list[float] = []
@@ -447,6 +472,13 @@ def run_macro_episode(
         "reward_throughput", "reward_tracking", "reward_thermal",
         "reward_soc", "reward_freq", "reward_volt", "reward_backlog",
     )
+    env = _make_macro_env(
+        scenario=scenario,
+        inner_action_fn=inner_action_fn,
+        fixed_action_values=fixed_action_values or None,
+    )
+    obs, _ = env.reset(seed=seed)
+    experiment_context = _experiment_context(env, seed, agent, inner_action_fn) if record_transitions else None
     hw_step_metrics: list[dict] = []
     inner_transition_logger = None
     sub_step_callback = None
@@ -460,6 +492,7 @@ def run_macro_episode(
                 episode_number=episode_number,
                 fixed_action_values=None,
                 verbose=0,
+                experiment_context=experiment_context,
             )
         _lg_ref = inner_transition_logger  # capture before closure
         def sub_step_callback(
@@ -490,13 +523,7 @@ def run_macro_episode(
             if inner_action_fn is not None and hasattr(inner_action_fn, "push_reward"):
                 inner_action_fn.push_reward(float(rew))
 
-    env = _make_macro_env(
-        scenario=scenario,
-        inner_action_fn=inner_action_fn,
-        sub_step_callback=sub_step_callback,
-        fixed_action_values=fixed_action_values or None,
-    )
-    obs, _ = env.reset(seed=seed)
+    env._sub_step_callback = sub_step_callback
     algo_for_logging = combo_name or getattr(agent, "algo_name", (algo_name or "unknown"))
 
     # Extract static env attributes once for LLM agents that need them
@@ -517,6 +544,7 @@ def run_macro_episode(
             episode_number=episode_number,
             fixed_action_values=None,
             verbose=0,
+            experiment_context=experiment_context,
         )
     rewards: list[float] = []
     bids_accepted: list[float] = []
@@ -740,10 +768,10 @@ def benchmark(
                     if hasattr(_inner_agent, "push_reward"):
                         inner_action_fn.push_reward = _inner_agent.push_reward
 
+                inner_action_fn.checkpoint = getattr(_inner_agent, "checkpoint", None)
+
             if agent_name == "rule_based":
-                _committed = float(env_for_space._scfg.get("committed_mw_max", 30.0))
-                _bess_pmax = float(getattr(env_for_space._bess, "P_MAX_MW", 5.0))
-                agent = RuleBasedController(committed_mw_max=_committed, bess_p_max_mw=_bess_pmax)
+                agent = _make_inner_controller("rule_based", env=env_for_space)
             elif agent_name in ("llm_policy", "llm_policy_macro") or macro_part in ("llm_policy", "llm_policy_macro"):
                 state_names = [name.removeprefix("s_") for name in STATE_COLUMNS]
                 # llm_policy_macro is always macro; llm_policy respects --llm-mode
@@ -840,6 +868,7 @@ def benchmark(
             row = {
                 "scenario"          : scenario,
                 "agent"             : agent_name,
+                "facility_capacity_mw": getattr(env_for_space, "_fast_env", env_for_space)._facility_cap_kw / 1_000.0,
                 "n_episodes"        : n_episodes,
                 "wall_time_s"       : round(elapsed, 2),
                 **{k: round(v, 4) for k, v in agg.items() if k != "survived"},
@@ -854,6 +883,7 @@ def benchmark(
                 inner_row = {
                     "scenario"              : scenario,
                     "agent"                 : inner_part_name,
+                    "facility_capacity_mw"  : row["facility_capacity_mw"],
                     "n_episodes"            : n_episodes,
                     "wall_time_s"           : round(elapsed, 2),
                     "mean_reward"           : round(agg.get("inner_mean_reward", 0.0), 4),
@@ -1144,6 +1174,7 @@ if __name__ == "__main__":
     rows = []
     for plant_profile in plant_profiles:
         _PLANT_OVERRIDES = load_plant_profile(plant_profile)
+        _PLANT_PROFILE = plant_profile
         profile_rows = benchmark(
             agents     = agents,
             scenarios  = args.scenarios,
@@ -1176,6 +1207,7 @@ if __name__ == "__main__":
             agents=agents,
             scenarios=args.scenarios,
             fixed_action_values=fixed_action_values,
+            plant_profile=args.plant_profile,
         )
     )
     save_results(rows, output_path, agents=agents)

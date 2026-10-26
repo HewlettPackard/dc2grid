@@ -42,4 +42,4 @@ hydra:
     dir: outputs/${experiment.name}/seed_${experiment.seed}/${now:%Y-%m-%d_%H-%M-%S}
   sweep:
     dir: multirun/${experiment.name}
-    subdir: seed_${experiment.seed}
+    subdir: ${hydra.job.num}_seed_${experiment.seed}

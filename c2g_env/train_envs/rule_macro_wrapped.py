@@ -53,8 +53,8 @@ class RuleMacroWrappedEnv(gym.Wrapper):
         self._rmcp_max = float(hs_cfg.get("rmcp_max", 100.0))
 
         scfg = env._scfg
-        self._committed_max_mw = float(scfg["committed_mw_max"])
-        self._dr_baseline_mw = float(scfg.get("dr_baseline_mw", 5.0))
+        self._committed_max_mw = env._committed_mw_max
+        self._dr_baseline_mw = env._dr_baseline_mw
         self._dr_rate_usd_mw = float(scfg.get("dr_rate_usd_mw", 5.0))
 
         # Tracking state
@@ -70,6 +70,8 @@ class RuleMacroWrappedEnv(gym.Wrapper):
         self, *, seed: int | None = None, options: dict[str, Any] | None = None
     ) -> tuple[np.ndarray, dict]:
         obs, info = self.env.reset(seed=seed, options=options)
+        self._committed_max_mw = self.env._committed_mw_max
+        self._dr_baseline_mw = self.env._dr_baseline_mw
         self._sub_tick = 0
         self._obs_buffer = []
         self._info_buffer = []
@@ -159,6 +161,7 @@ class RuleMacroWrappedEnv(gym.Wrapper):
             self._obs_buffer, self._info_buffer,
             T_safe=self.env._thermal.T_safe,  # type: ignore[attr-defined]
             committed_mw=committed_mw,
+            tracking_floor_kw=self.env._macro_tracking_floor_kw,
             bid_mw_norm=self._prev_bid_mw_norm,
             bid_price_norm=self._prev_bid_price_norm,
             rmcp_norm=self._last_rmcp_norm,
