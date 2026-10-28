@@ -603,6 +603,14 @@ class TestTrainImports:
 
 
 class TestExperimentIdentity:
+    def test_capacity_sweep_controller_matrix(self):
+        from c2g_env.experiments import thermal_sensitivity_cross_scenario as runner
+
+        pairs = runner.load_config()["cross_scenario"]["controller_pairs"]
+        assert pairs == [["rule_macro", "rule_based"], ["rule_macro", "sac"]]
+        jobs = {(profile, macro, hardware) for profile in available_plant_profiles() for macro, hardware in pairs}
+        assert len(jobs) == 8
+
     def test_thermal_runner_resumes_only_identical_conditions(self, monkeypatch, tmp_path):
         from c2g_env.experiments import thermal_sensitivity_cross_scenario as runner
 
@@ -824,6 +832,150 @@ class TestExperimentIdentity:
         path.write_text("config_id,completed\nnominal,True\n", encoding="utf-8")
         with pytest.raises(ValueError, match="new output file"):
             _completed_keys(path)
+
+
+class TestCapacitySweepLauncher:
+    @pytest.fixture
+    def sweep(self):
+        return pytest.importorskip("copilot.helpers.run_capacity_thermal_logged")
+
+    def test_eight_distinct_worker_plans(self, sweep, tmp_path):
+        cfg = sweep.runner.load_config()
+        plan = sweep._build_plan(tmp_path, cfg, available_plant_profiles(), cfg["cross_scenario"]["controller_pairs"])
+
+        assert plan["worker_count"] == len(plan["workers"]) == 8
+        assert plan["total_episodes"] == 5760
+        assert set(plan["episodes_per_capacity"].values()) == {1440}
+        assert {worker["episodes"] for worker in plan["workers"]} == {720}
+        assert {(worker["macro"], worker["hardware"]) for worker in plan["workers"]} == {
+            ("rule_macro", "rule_based"), ("rule_macro", "sac"),
+        }
+        assert len({worker["artifacts"] for worker in plan["workers"]}) == 8
+
+    def test_dispatches_one_process_per_worker(self, sweep, monkeypatch, tmp_path):
+        from concurrent.futures import Future
+        from unittest.mock import Mock
+
+        cfg = sweep.runner.load_config()
+        plan = sweep._build_plan(tmp_path, cfg, available_plant_profiles(), cfg["cross_scenario"]["controller_pairs"])
+
+        def submit(function, root, artifacts, profile, pair, stage, config):
+            assert function is sweep._run_slice
+            assert config is cfg
+            assert stage == "full"
+            artifacts.mkdir(parents=True)
+            future = Future()
+            future.set_result([{"profile": profile, "macro": pair[0], "hardware": pair[1], "episodes": 720}])
+            return future
+
+        executor = Mock()
+        executor.submit.side_effect = submit
+        pool = Mock()
+        pool.return_value.__enter__ = Mock(return_value=executor)
+        pool.return_value.__exit__ = Mock(return_value=False)
+        monkeypatch.setattr(sweep, "ProcessPoolExecutor", pool)
+        status = sweep._run_workers(tmp_path, tmp_path, cfg, plan["workers"])
+
+        assert pool.call_args.kwargs["max_workers"] == 8
+        assert pool.call_args.kwargs["max_tasks_per_child"] == 1
+        assert pool.call_args.kwargs["mp_context"].get_start_method() == "spawn"
+        assert executor.submit.call_count == len(status) == 8
+        assert len({call.args[2] for call in executor.submit.call_args_list}) == 8
+        assert sum(item["episodes"] for item in status) == 5760
+        assert json.loads((tmp_path / "status.json").read_text(encoding="utf-8")) == status
+        for worker in plan["workers"]:
+            result = json.loads((Path(worker["artifacts"]) / "status.json").read_text(encoding="utf-8"))
+            assert result[0]["profile"] == worker["profile"]
+            assert result[0]["hardware"] == worker["hardware"]
+
+    def test_worker_failure_is_not_reported_as_success(self, sweep, monkeypatch, tmp_path):
+        from concurrent.futures import Future
+        from unittest.mock import Mock
+
+        cfg = sweep.runner.load_config()
+        plan = sweep._build_plan(tmp_path, cfg, ["none"], [["rule_macro", "sac"]])
+        future = Future()
+        future.set_exception(RuntimeError("worker failed"))
+        executor = Mock()
+        executor.submit.return_value = future
+        pool = Mock()
+        pool.return_value.__enter__ = Mock(return_value=executor)
+        pool.return_value.__exit__ = Mock(return_value=False)
+        monkeypatch.setattr(sweep, "ProcessPoolExecutor", pool)
+
+        with pytest.raises(RuntimeError, match="worker failed"):
+            sweep._run_workers(tmp_path, tmp_path, cfg, plan["workers"])
+        assert not (tmp_path / "status.json").exists()
+
+    def test_slice_filenames_include_hardware(self, sweep, monkeypatch, tmp_path):
+        cfg = sweep.runner.load_config()
+        calls = []
+
+        def run_slice():
+            calls.append(sys.argv.copy())
+            path = Path(sys.argv[sys.argv.index("--out") + 1])
+            path.write_text("completed\nTrue\n", encoding="utf-8")
+
+        monkeypatch.setattr(sweep.runner, "main", run_slice)
+        results = []
+        for pair in cfg["cross_scenario"]["controller_pairs"]:
+            results.extend(sweep._run_slice(tmp_path, tmp_path, "none", pair, "full", cfg))
+
+        assert {Path(result["csv"]).name for result in results} == {
+            "full_none_rule_macro_rule_based.csv", "full_none_rule_macro_sac.csv",
+        }
+        assert len(list(tmp_path.glob("*.log"))) == 2
+        assert {call[call.index("--macro-controller") + 1] for call in calls} == {"rule_macro"}
+        assert {call[call.index("--controllers") + 1] for call in calls} == {"rule_based", "sac"}
+
+    def test_preflight_covers_both_pairs_at_extreme_capacities(self, sweep, monkeypatch, tmp_path):
+        from unittest.mock import Mock
+
+        cfg = sweep.runner.load_config()
+        profiles = available_plant_profiles()
+        plan = sweep._build_plan(tmp_path, cfg, profiles, cfg["cross_scenario"]["controller_pairs"])
+        measurement = {"hardware_bytes_per_record": 10.0, "macro_bytes_per_record": 20.0, "summary_bytes": 30}
+        screen = Mock(return_value=[measurement, measurement])
+        scaling = Mock(return_value=["checked"])
+        monkeypatch.setattr(sweep, "_run_slice", screen)
+        monkeypatch.setattr(sweep, "_validate_scaling", scaling)
+        monkeypatch.setattr(sweep.shutil, "disk_usage", Mock(return_value=types.SimpleNamespace(free=2**40)))
+        root = Path(sweep.__file__).resolve().parents[2]
+        result = sweep._preflight(root, tmp_path, cfg, plan)
+
+        scaling.assert_called_once_with(cfg, profiles)
+        assert screen.call_count == 4
+        assert {(call.args[2], call.args[3]) for call in screen.call_args_list} == {
+            (profile, ("rule_macro", hardware))
+            for profile in (profiles[0], profiles[-1]) for hardware in ("rule_based", "sac")
+        }
+        assert all(call.args[4] == "screen" for call in screen.call_args_list)
+        assert result["preflight"]["verified_episodes"] == 8
+        assert result["scaling_checks"] == ["checked"]
+
+    @pytest.mark.parametrize("hardware", ["rule_based", "sac"])
+    def test_cli_selects_one_capacity_and_pair(self, sweep, monkeypatch, tmp_path, hardware):
+        from unittest.mock import Mock
+
+        preflight = {"verified_episodes": 2, "estimated_upper_storage_gib": 1.0, "available_gib": 10.0}
+        monkeypatch.setattr(sweep, "_preflight", Mock(return_value={"preflight": preflight, "scaling_checks": []}))
+        dispatch = Mock()
+        monkeypatch.setattr(sweep, "_run_workers", dispatch)
+        monkeypatch.setattr(sys, "argv", ["capacity_sweep", "--artifacts", str(tmp_path), "--plant-profile", "plant_50mw",
+                                         "--controller-pair", f"rule_macro+{hardware}", "--preflight-only"])
+
+        assert sweep.main() == 0
+        plan = json.loads((tmp_path / "plan.json").read_text(encoding="utf-8"))
+        assert plan["controller_pairs"] == [["rule_macro", hardware]]
+        assert plan["worker_count"] == 1
+        assert plan["total_episodes"] == 720
+        dispatch.assert_not_called()
+
+    def test_cli_rejects_sac_macro_pair(self, sweep, monkeypatch):
+        monkeypatch.setattr(sys, "argv", ["capacity_sweep", "--controller-pair", "sac_macro+sac"])
+        with pytest.raises(SystemExit) as error:
+            sweep.main()
+        assert error.value.code == 2
 
 
 class TestConditionAnalysis:
