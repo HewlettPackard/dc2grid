@@ -1,7 +1,6 @@
-# C2G-Bench: Hierarchical AI Orchestration for Grid-Interactive Hyperscale Data Centers
+# DC2Grid: Hierarchical AI Orchestration for Grid-Interactive Hyperscale Data Centers
 
-![C2G-Bench Architecture](figures/architecture_full.png)
-
+![DC2Grid Architecture](figures/dc2grid_architecture.png)
 
 ---
 
@@ -31,11 +30,11 @@ Every **2–5 seconds**, the grid operator broadcasts a normalized score:
 
 The sign convention is:
 
-| Signal value | Grid instruction | Data center must... |
-|---|---|---|
-| **+1** | Grid has excess load — reduce grid draw | Shed batch load, discharge BESS, or slow cooling |
+| Signal value  | Grid instruction                          | Data center must...                                |
+| ------------- | ----------------------------------------- | -------------------------------------------------- |
+| **+1**  | Grid has excess load — reduce grid draw  | Shed batch load, discharge BESS, or slow cooling   |
 | **−1** | Grid has excess generation — absorb more | Increase batch load, charge BESS, or raise cooling |
-| **0** | Balanced | Hold current power level |
+| **0**   | Balanced                                  | Hold current power level                           |
 
 The actual MW response required is:
 
@@ -47,7 +46,7 @@ where $C_{\text{MW}}$ (`committed_mw`) is the regulation capacity the data cente
 
 ### Statistical properties (AR(1) model)
 
-The RegD signal is statistically modelled as a **first-order autoregressive (AR(1)) process** — persistent but zero-mean. At the 5-minute scale it has autocorrelation ρ ≈ 0.80, which time-scales to ρ ≈ 0.997 at the 5-second simulation step used in C2G-Bench. The signal averages to zero over a settlement period, meaning the data center neither gains nor loses net energy from providing regulation.
+The RegD signal is statistically modelled as a **first-order autoregressive (AR(1)) process** — persistent but zero-mean. At the 5-minute scale it has autocorrelation ρ ≈ 0.80, which time-scales to ρ ≈ 0.997 at the 5-second simulation step used in DC2Grid. The signal averages to zero over a settlement period, meaning the data center neither gains nor loses net energy from providing regulation.
 
 In `c2g_env/physics/macro_grid.py`:
 
@@ -58,7 +57,7 @@ regd = np.clip(self._regd_state, -1.0, 1.0)               # normalise to [-1,1]
 
 ### The performance score (mileage metric)
 
-Under FERC Order 755, the *performance score* is the correlation between the demanded signal and the actual response. A score of 1.0 = perfect tracking; 0.0 = random; below a threshold (typically 0.75) results in zero payment and market suspension. This maps directly to the **β tracking term** in the C2G reward function.
+Under FERC Order 755, the *performance score* is the correlation between the demanded signal and the actual response. A score of 1.0 = perfect tracking; 0.0 = random; below a threshold (typically 0.75) results in zero payment and market suspension. This maps directly to the **β tracking term** in the DC2Grid reward function.
 
 ### Why a data center is uniquely suited
 
@@ -84,11 +83,11 @@ Current data center management systems are "grid-blind": they optimize internal 
 
 ## 4. State-of-the-Art and Our Contribution
 
-| SOTA | Gap | Our Step Further |
-|------|-----|-----------------|
-| **Wang et al., 2019** — Proved DCs can follow grid signals using DVFS. | Used "dummy loads" to intentionally waste power to meet the signal. | We use **BESS + thermal storage synergy** — no wasted power. |
+| SOTA                                                                                                | Gap                                                                            | Our Step Further                                                                                                |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| **Wang et al., 2019** — Proved DCs can follow grid signals using DVFS.                       | Used "dummy loads" to intentionally waste power to meet the signal.            | We use **BESS + thermal storage synergy** — no wasted power.                                             |
 | **Fu et al., 2021** — Demonstrated cooling systems have "thermal inertia" for grid services. | Relies on classical MPC, which fails under unpredictable GenAI serving spikes. | We replace MPC with **Hierarchical RL** to handle extreme, non-linear volatility of Alibaba GenAI traces. |
-| **Li et al., 2026** — Identifies the need for intelligent VPP aggregation. | Lacks a standardized, high-fidelity physical testbed for datacenters. | We provide the **first 250 MW-scale evaluation testbed** with real data across 6 global energy markets. |
+| **Li et al., 2026** — Identifies the need for intelligent VPP aggregation.                   | Lacks a standardized, high-fidelity physical testbed for datacenters.          | We provide the **first 250 MW-scale evaluation testbed** with real data across 6 global energy markets.   |
 
 ---
 
@@ -96,7 +95,7 @@ Current data center management systems are "grid-blind": they optimize internal 
 
 ### 5.0. Formal MDP Specification
 
-C2G-Bench defines a **two-level hierarchical Markov Decision Process**. The two agents share no parameters and communicate only through the `inner_action_fn` interface.
+DC2Grid defines a **two-level hierarchical Markov Decision Process**. The two agents share no parameters and communicate only through the `inner_action_fn` interface.
 
 #### Lower-Level MDP — C2GFastEnv (5-second ticks)
 
@@ -104,14 +103,14 @@ C2G-Bench defines a **two-level hierarchical Markov Decision Process**. The two 
 M_{\text{low}} = (\mathcal{S},\, \mathcal{A},\, P,\, R,\, \gamma,\, T)
 ```
 
-| Symbol | Definition |
-|--------|-----------|
-| $\mathcal{S} \subset \mathbb{R}^{18}$ | Normalised observation vector (see §5.2 for index definitions) |
+| Symbol                                  | Definition                                                              |
+| --------------------------------------- | ----------------------------------------------------------------------- |
+| $\mathcal{S} \subset \mathbb{R}^{18}$ | Normalised observation vector (see §5.2 for index definitions)         |
 | $\mathcal{A} = [0,1]^3 \times [-1,1]$ | Continuous 4-D action: throttle, pump speed, HVAC effort, BESS dispatch |
-| $P(s_{t+1} \mid s_t, a_t)$ | Deterministic physics step + stochastic AR(1) RegD signal (see §2) |
-| $R(s_t, a_t)$ | 7-term scalar reward (see §5.3) |
-| $\gamma = 0.99$ | Training discount; undiscounted episodic sum used for benchmark ranking |
-| $T = 17{,}280$ | Steps per episode (24 h at 5 s per step) |
+| $P(s_{t+1} \mid s_t, a_t)$            | Deterministic physics step + stochastic AR(1) RegD signal (see §2)     |
+| $R(s_t, a_t)$                         | 7-term scalar reward (see §5.3)                                        |
+| $\gamma = 0.99$                       | Training discount; undiscounted episodic sum used for benchmark ranking |
+| $T = 17{,}280$                        | Steps per episode (24 h at 5 s per step)                                |
 
 The only stochasticity in $P$ arises from the AR(1) process driving RegD$(t)$. All physics engines (thermal, BESS, electrical) are **deterministic** given $(s_t, a_t)$. A fixed seed fully determines the trajectory.
 
@@ -125,16 +124,17 @@ The macro agent is framed as a **Semi-MDP** (Sutton et al., 1999) with fixed opt
 M_{\text{macro}} = (\mathcal{S}_M,\, \mathcal{A}_M,\, P_M,\, R_M,\, \gamma_M,\, T_M)
 ```
 
-| Symbol | Definition |
-|--------|-----------|
-| $\mathcal{S}_M \subset \mathbb{R}^{19}$ | Aggregated sub-step states: component-wise means + SOC endpoint + extrema + market context |
-| $\mathcal{A}_M = [0,1]^2$ | 2-D: `bid_mw_norm` (MW capacity to offer), `bid_price_norm` (asking price) |
-| $P_M$ | $K$ applications of the lower-level transition $P$ |
-| $R_M$ | $\lambda_{\text{rev}} \times \text{regulation revenue} + \bar{r}_K - \lambda_{\text{elec}} \times \text{electricity cost} - \lambda_{\text{churn}} \times |\Delta\text{bid\_mw}|$ |
-| $\gamma_M = \gamma^K$ | $0.99^{180} \approx 0.163$ effective discount per macro step |
-| $T_M = 96$ | Macro steps per episode (24 h $\div$ 15 min) |
+| Symbol                                    | Definition                                                                                                                                                                          |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| $\mathcal{S}_M \subset \mathbb{R}^{19}$ | Aggregated sub-step states: component-wise means + SOC endpoint + extrema + market context                                                                                          |
+| $\mathcal{A}_M = [0,1]^2$               | 2-D: `bid_mw_norm` (MW capacity to offer), `bid_price_norm` (asking price)                                                                                                      |
+| $P_M$                                   | $K$ applications of the lower-level transition $P$                                                                                                                              |
+| $R_M$                                   | $\lambda_{\text{rev}} \times \text{regulation revenue} + \bar{r}_K - \lambda_{\text{elec}} \times \text{electricity cost} - \lambda_{\text{churn}} \times |\Delta\text{bid\_mw}|$ |
+| $\gamma_M = \gamma^K$                   | $0.99^{180} \approx 0.163$ effective discount per macro step                                                                                                                      |
+| $T_M = 96$                              | Macro steps per episode (24 h $\div$ 15 min)                                                                                                                                      |
 
 where
+
 ```math
 \bar{r}_K = \frac{1}{K}\sum_{i=0}^{K-1} r_i
 ```
@@ -153,27 +153,28 @@ Grid operators (PJM, ERCOT, etc.) clear ancillary-service markets in **15-minute
 
 - **Action Space (2-D):** `[bid_mw_norm ∈ [0,1], bid_price_norm ∈ [0,1]]` — MW capacity to offer (mapped to `[0, committed_max_mw]`) and asking price (mapped to `[0, 2 × rmcp_max]`).
 - **Observation Space (19-D):** Aggregated over 180 sub-steps:
-  | Index | Name | Range | Description |
-  |-------|------|-------|-------------|
-  | 0 | `temp_A_mean` | [0, 1] | Mean Zone A temperature / T_safe |
-  | 1 | `temp_B_mean` | [0, 1] | Mean Zone B temperature / T_safe |
-  | 2 | `bess_soc_end` | [0, 1] | SOC at end of the macro-step |
-  | 3 | `p_base_mean` | [0, 1] | Mean p_base_norm |
-  | 4 | `p_facility_mean` | [0, 2] | Mean p_facility_norm |
-  | 5 | `regd_mean` | [0, 1] | Mean |regd_signal| |
-  | 6 | `lmp_mean` | [0, 1] | Mean lmp_norm |
-  | 7 | `grid_load_mean` | [0, 1] | Mean load_norm |
-  | 8 | `tracking_err_mean` | [0, 2] | Mean |ΔP_demanded − ΔP_actual| / norm |
-  | 9 | `is_spike_any` | {0, 1} | 1.0 if any sub-step had a GenAI spike |
-  | 10 | `thermal_headroom_A` | [0, 1] | (T_safe − T_A_max) / T_safe |
-  | 11 | `thermal_headroom_B` | [0, 1] | (T_safe − T_B_max) / T_safe |
-  | 12 | `bid_mw_prev_norm` | [0, 1] | Previous macro-action bid MW |
-  | 13 | `bid_price_prev_norm` | [0, 1] | Previous macro-action bid price |
-  | 14 | `freq_dev_mean` | [-1, 1] | Mean normalised frequency deviation |
-  | 15 | `v_pcc_mean` | [0, 1.1] | Mean PCC voltage (per-unit) |
-  | 16 | `backlog_norm_mean` | [0, 2] | Mean batch queue depth / p_flex_max |
-  | 17 | `rmcp_norm` | [0, 5] | Grid's posted RMCP / rmcp_max |
-  | 18 | `reg_need_norm` | [0, 5] | Grid's residual regulation need / committed_max |
+
+  | Index | Name                    | Range    | Description                                     |
+  | ----- | ----------------------- | -------- | ----------------------------------------------- |
+  | 0     | `temp_A_mean`         | [0, 1]   | Mean Zone A temperature / T_safe                |
+  | 1     | `temp_B_mean`         | [0, 1]   | Mean Zone B temperature / T_safe                |
+  | 2     | `bess_soc_end`        | [0, 1]   | SOC at end of the macro-step                    |
+  | 3     | `p_base_mean`         | [0, 1]   | Mean p_base_norm                                |
+  | 4     | `p_facility_mean`     | [0, 2]   | Mean p_facility_norm                            |
+  | 5     | `regd_mean`           | [0, 1]   | Mean \|regd_signal\|                           |
+  | 6     | `lmp_mean`            | [0, 1]   | Mean lmp_norm                                   |
+  | 7     | `grid_load_mean`      | [0, 1]   | Mean load_norm                                  |
+  | 8     | `tracking_err_mean`   | [0, 2]   | Mean \|ΔP_demanded − ΔP_actual\| / norm        |
+  | 9     | `is_spike_any`        | {0, 1}   | 1.0 if any sub-step had a GenAI spike           |
+  | 10    | `thermal_headroom_A`  | [0, 1]   | (T_safe − T_A_max) / T_safe                    |
+  | 11    | `thermal_headroom_B`  | [0, 1]   | (T_safe − T_B_max) / T_safe                    |
+  | 12    | `bid_mw_prev_norm`    | [0, 1]   | Previous macro-action bid MW                    |
+  | 13    | `bid_price_prev_norm` | [0, 1]   | Previous macro-action bid price                 |
+  | 14    | `freq_dev_mean`       | [-1, 1]  | Mean normalised frequency deviation             |
+  | 15    | `v_pcc_mean`          | [0, 1.1] | Mean PCC voltage (per-unit)                     |
+  | 16    | `backlog_norm_mean`   | [0, 2]   | Mean batch queue depth / p_flex_max             |
+  | 17    | `rmcp_norm`           | [0, 5]   | Grid's posted RMCP / rmcp_max                   |
+  | 18    | `reg_need_norm`       | [0, 5]   | Grid's residual regulation need / committed_max |
 - **Reward:** $R_{\text{macro}} = \lambda_{\text{rev}} \times \text{regulation\_revenue} / 1000 + \bar{r}_K - \lambda_{\text{elec}} \times \text{electricity\_cost} / 1000 - \lambda_{\text{churn}} \times |\text{bid\_mw\_now} - \text{bid\_mw\_prev}|$
   - $\lambda_{\text{rev}} = 1.0$, $\lambda_{\text{elec}} = 0.5$, $\lambda_{\text{churn}} = 0.05$ (all in `c2g_env/config.yaml`)
 
@@ -181,44 +182,43 @@ Grid operators (PJM, ERCOT, etc.) clear ancillary-service markets in **15-minute
 
 Executes the physical "Handshake." Receives the real-time frequency regulation signal and uses **four physical levers**. The central difficulty is that these levers have fundamentally different dynamics, costs, and side-effects — the agent must learn to combine them in the right order:
 
-| Lever | Response time | Capacity | Side-effect | Role |
-|-------|--------------|----------|-------------|------|
-| **BESS** `action[3]` | <100 ms | 5 MW / 15 MWh | Depletes; capacity fade over time | **First resort** — fastest, zero-penalty, finite |
-| **CDU pump** `action[1]` | Minutes (τ ≈ 12.7 min) | ~30 MW equivalent | Thermal inertia; slow and partially irreversible on short intervals | **Second resort** — exploits physics cheaply |
-| **HVAC** `action[2]` | Seconds | ~50 MW draw | Affects Zone B only; draws additional facility power | **Defensive** — prevents thermal fault, not a primary regulation lever |
-| **IT throttle** `action[0]` | Milliseconds | Up to full flex load | Accrues FIFO backlog; cuts throughput revenue | **Last resort** — immediate but highest SLA cost |
+| Lever                               | Response time            | Capacity             | Side-effect                                                         | Role                                                                          |
+| ----------------------------------- | ------------------------ | -------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **BESS** `action[3]`        | <100 ms                  | 5 MW / 15 MWh        | Depletes; capacity fade over time                                   | **First resort** — fastest, zero-penalty, finite                       |
+| **CDU pump** `action[1]`    | Minutes (τ ≈ 12.7 min) | ~30 MW equivalent    | Thermal inertia; slow and partially irreversible on short intervals | **Second resort** — exploits physics cheaply                           |
+| **HVAC** `action[2]`        | Seconds                  | ~50 MW draw          | Affects Zone B only; draws additional facility power                | **Defensive** — prevents thermal fault, not a primary regulation lever |
+| **IT throttle** `action[0]` | Milliseconds             | Up to full flex load | Accrues FIFO backlog; cuts throughput revenue                       | **Last resort** — immediate but highest SLA cost                       |
 
 The optimal policy learns this hierarchy: use BESS first (fast, free), borrow thermal inertia second (slow, cheap), fall back to DVFS only when both are exhausted. This mirrors how FERC-paid fast-response providers operate in real ancillary-service markets.
 
-| Lever | Action dim | Range | Effect |
-|-------|-----------|-------|--------|
-| **IT (DVFS)** | `action[0]` | [0, 1] | Throttles schedulable Alibaba batch jobs; GenAI/DLRM rigid loads unaffected |
-| **Cooling (CDU pump)** | `action[1]` | [0, 1] | Modulates liquid cooling pump speed, exploiting thermal inertia |
-| **HVAC** | `action[2]` | [0, 1] | Zone B air-side fan speed |
-| **BESS** | `action[3]` | [-1, 1] | Charge (−) / discharge (+) the 15 MWh battery |
+| Lever                        | Action dim    | Range   | Effect                                                                      |
+| ---------------------------- | ------------- | ------- | --------------------------------------------------------------------------- |
+| **IT (DVFS)**          | `action[0]` | [0, 1]  | Throttles schedulable Alibaba batch jobs; GenAI/DLRM rigid loads unaffected |
+| **Cooling (CDU pump)** | `action[1]` | [0, 1]  | Modulates liquid cooling pump speed, exploiting thermal inertia             |
+| **HVAC**               | `action[2]` | [0, 1]  | Zone B air-side fan speed                                                   |
+| **BESS**               | `action[3]` | [-1, 1] | Charge (−) / discharge (+) the 15 MWh battery                              |
 
 - **Action Space (4-D, continuous):** `[throttle_batch, pump_speed_A, hvac_effort, bess_dispatch]`
-- **Observation Space (18-D, normalised):** 
-  | Index | Name | Range | Description |
-  |-------|------|-------|-------------|
-  | 0 | `temp_A_norm` | [0, 2] | Zone A (liquid-cooled GPU) temperature / T_safe |
-  | 1 | `temp_B_norm` | [0, 2] | Zone B (air-cooled CPU) temperature / T_safe |
-  | 2 | `bess_soc` | [0, 1] | Battery state of charge |
-  | 3 | `p_base_norm` | [0, 1] | Rigid IT load (GenAI + DLRM) |
-  | 4 | `p_flex_nom_norm` | [0, 1] | New batch arrivals this tick (trace demand) |
-  | 5 | `p_facility_norm` | [0, 2] | Total facility power |
-  | 6 | `regd_signal` | [-1, 1] | Grid regulation signal (signed) |
-  | 7 | `lmp_norm` | [0, 1] | Locational marginal price |
-  | 8 | `grid_load_norm` | [0, 1] | Regional grid load stress indicator |
-  | 9 | `is_spike` | {0, 1} | GenAI serving spike flag |
-  | 10 | `prev_throttle` | [0, 1] | Previous DVFS throttle |
-  | 11 | `prev_pump_speed` | [0, 1] | Previous pump speed |
-  | 12 | `pue_norm` | [0, 2] | Current Power Usage Effectiveness |
-  | 13 | `T_amb_norm` | [0, 1] | Ambient temperature |
-  | 14 | `freq_dev_norm` | [-1, 1] | Normalised grid frequency deviation (swing equation) |
-  | 15 | `v_pcc_pu` | [0, 1.1] | PCC voltage in per-unit (Thévenin model) |
-  | 16 | `backlog_norm` | [0, 2] | Deferred batch queue depth / p_flex_max (Little's Law queue) |
-  | 17 | `committed_mw_norm` | [0, 1] | Current DR commitment / committed_mw_max|
+- **Observation Space (18-D, normalised):** | Index | Name                  | Range    | Description                                                  |
+  | ----- | --------------------- | -------- | ------------------------------------------------------------ |
+  | 0     | `temp_A_norm`       | [0, 2]   | Zone A (liquid-cooled GPU) temperature / T_safe              |
+  | 1     | `temp_B_norm`       | [0, 2]   | Zone B (air-cooled CPU) temperature / T_safe                 |
+  | 2     | `bess_soc`          | [0, 1]   | Battery state of charge                                      |
+  | 3     | `p_base_norm`       | [0, 1]   | Rigid IT load (GenAI + DLRM)                                 |
+  | 4     | `p_flex_nom_norm`   | [0, 1]   | New batch arrivals this tick (trace demand)                  |
+  | 5     | `p_facility_norm`   | [0, 2]   | Total facility power                                         |
+  | 6     | `regd_signal`       | [-1, 1]  | Grid regulation signal (signed)                              |
+  | 7     | `lmp_norm`          | [0, 1]   | Locational marginal price                                    |
+  | 8     | `grid_load_norm`    | [0, 1]   | Regional grid load stress indicator                          |
+  | 9     | `is_spike`          | {0, 1}   | GenAI serving spike flag                                     |
+  | 10    | `prev_throttle`     | [0, 1]   | Previous DVFS throttle                                       |
+  | 11    | `prev_pump_speed`   | [0, 1]   | Previous pump speed                                          |
+  | 12    | `pue_norm`          | [0, 2]   | Current Power Usage Effectiveness                            |
+  | 13    | `T_amb_norm`        | [0, 1]   | Ambient temperature                                          |
+  | 14    | `freq_dev_norm`     | [-1, 1]  | Normalised grid frequency deviation (swing equation)         |
+  | 15    | `v_pcc_pu`          | [0, 1.1] | PCC voltage in per-unit (Thévenin model)                    |
+  | 16    | `backlog_norm`      | [0, 2]   | Deferred batch queue depth / p_flex_max (Little's Law queue) |
+  | 17    | `committed_mw_norm` | [0, 1]   | Current DR commitment / committed_mw_max                     |
 
 ### 5.3. The NeurIPS Evaluation Metric: The Tracking Reward
 
@@ -254,15 +254,15 @@ where:
 
 #### Term-by-term breakdown
 
-| # | Term | Coefficient | What it measures | Why it matters |
-|---|------|-------------|-----------------|----------------|
-| 1 | Throughput | $\alpha = 1.0$ | Fraction of max IT capacity actually committed ($u_{\text{thr}} \in [0,1]$) | Maximising revenue — the agent earns more for accepting more DFS workload |
-| 2 | RegD tracking | $\beta = 2.0$ | Normalised absolute error between the FERC-requested power change and what the DC actually delivered | The primary ancillary-service obligation — missing this is penalised twice as hard as raw throughput gains |
-| 3 | Thermal overrun | $\gamma = 5.0$ | Degrees above the warning threshold $T_{\text{warn}} = 33°$C for the hotter of the two cooling zones | Linear ramp long before the hard 35 °C trip; $\gamma$ is large enough to dominate at +1 °C overshoot |
-| 4 | BESS SoC | $\delta_{\text{soc}} = 0.5$ | Binary flag: 1 if the battery state-of-charge falls below $\text{SOC}_{\min} + 2\%$ (12%) | Flat per-tick penalty prevents the BESS from being stranded near empty when a RegD ramp arrives |
-| 5 | Frequency deviation | $\delta_f = 2.0$ | Frequency excursion beyond the ±0.2 Hz NERC dead-band | Proportional penalty that steepens as the grid approaches the ±0.5 Hz trip threshold |
-| 6 | Voltage deviation | $\delta_v = 5.0$ | One-sided penalty for PCC voltage outside [0.95, 1.05] pu | Voltage violations are fast and dangerous; the large coefficient forces early corrective action |
-| 7 | SLA backlog | $\delta_q = 2.0$ | FIFO queue depth normalised by peak flexible capacity $P_{\text{flex,max}}$ | Deferred batch jobs accumulate in queue; this term penalises latency and incentivises draining the queue |
+| # | Term                | Coefficient                   | What it measures                                                                                        | Why it matters                                                                                              |
+| - | ------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 1 | Throughput          | $\alpha = 1.0$              | Fraction of max IT capacity actually committed ($u_{\text{thr}} \in [0,1]$)                           | Maximising revenue — the agent earns more for accepting more DFS workload                                  |
+| 2 | RegD tracking       | $\beta = 2.0$               | Normalised absolute error between the FERC-requested power change and what the DC actually delivered    | The primary ancillary-service obligation — missing this is penalised twice as hard as raw throughput gains |
+| 3 | Thermal overrun     | $\gamma = 5.0$              | Degrees above the warning threshold $T_{\text{warn}} = 33°$C for the hotter of the two cooling zones | Linear ramp long before the hard 35 °C trip; $\gamma$ is large enough to dominate at +1 °C overshoot    |
+| 4 | BESS SoC            | $\delta_{\text{soc}} = 0.5$ | Binary flag: 1 if the battery state-of-charge falls below $\text{SOC}_{\min} + 2\%$ (12%)             | Flat per-tick penalty prevents the BESS from being stranded near empty when a RegD ramp arrives             |
+| 5 | Frequency deviation | $\delta_f = 2.0$            | Frequency excursion beyond the ±0.2 Hz NERC dead-band                                                  | Proportional penalty that steepens as the grid approaches the ±0.5 Hz trip threshold                       |
+| 6 | Voltage deviation   | $\delta_v = 5.0$            | One-sided penalty for PCC voltage outside [0.95, 1.05] pu                                               | Voltage violations are fast and dangerous; the large coefficient forces early corrective action             |
+| 7 | SLA backlog         | $\delta_q = 2.0$            | FIFO queue depth normalised by peak flexible capacity $P_{\text{flex,max}}$                           | Deferred batch jobs accumulate in queue; this term penalises latency and incentivises draining the queue    |
 
 #### Core tension: why the agent must balance throughput vs. tracking
 
@@ -294,14 +294,15 @@ where $P_{\text{flex,served}} = \min\!\left(Q_{\text{backlog}},\ P_{\text{flex,m
 
 #### Cumulative reward scale (per 24-hour episode)
 
-| Agent | Typical range | Notes |
-|-------|--------------|-------|
-| Random policy | −15,000 to −5,000 | Frequent thermal & voltage trips |
-| Rule-based (threshold control) | −2,000 to +500 | No backlog awareness |
-| PPO (trained, 5 M steps) | +2,000 to +5,000 | Learns lever hierarchy |
-| Adversarial scenario C | −5,000 to −1,000 | High ambient temp + price spike |
+| Agent                          | Typical range       | Notes                            |
+| ------------------------------ | ------------------- | -------------------------------- |
+| Random policy                  | −15,000 to −5,000 | Frequent thermal & voltage trips |
+| Rule-based (threshold control) | −2,000 to +500     | No backlog awareness             |
+| PPO (trained, 5 M steps)       | +2,000 to +5,000    | Learns lever hierarchy           |
+| Adversarial scenario C         | −5,000 to −1,000  | High ambient temp + price spike  |
 
 **Termination** (episode ends immediately):
+
 - Thermal fault: $T_A > 35°$C or $T_B > 35°$C
 - Frequency fault: $|f - f_{\text{nom}}| > 0.5$ Hz (UFLS / over-frequency trip)
 - Voltage fault: $v_{\text{pcc}} < 0.90$ pu (under-voltage relay)
@@ -310,19 +311,18 @@ Episode truncates at 17,280 ticks (24 hours at 5 s).
 
 ## 6. Physics Engines
 
-> **C2G-Bench exposes exactly two Gymnasium environments** — `C2GFastEnv` and `C2GMacroEnv` — both registered under `gym.make()`. Everything below is *not* an environment: the six physics engines are internal simulation components with no `reset()/step()` or `observation_space/action_space` API. They are called exclusively by the two environments and are never exposed to an RL agent directly. If you want to interact with a physics engine in isolation (e.g. for unit testing or analysis), instantiate it directly from `c2g_env.physics.*`.
-
+> **DC2Grid exposes exactly two Gymnasium environments** — `C2GFastEnv` and `C2GMacroEnv` — both registered under `gym.make()`. Everything below is *not* an environment: the six physics engines are internal simulation components with no `reset()/step()` or `observation_space/action_space` API. They are called exclusively by the two environments and are never exposed to an RL agent directly. If you want to interact with a physics engine in isolation (e.g. for unit testing or analysis), instantiate it directly from `c2g_env.physics.*`.
 
 Six independent physics/data modules, all with exact-exponential or analytical solutions (unconditionally stable):
 
-| Simulator | File | Description |
-|-----------|------|-------------|
-| **Workload Orchestrator** | `workload.py` | Fuses Alibaba batch (2023), DLRM (2025), and GenAI (2026) traces into P_base + P_flex at 5-min resolution. FIFO queue model: unserved batch work defers rather than drops; exposes `backlog_kw` and `avg_delay_steps` (Little's Law) per step |
-| **Thermal Twin** | `thermal.py` | Exact exponential ODE integration for dual-zone cooling (Zone A: HPE Cray EX liquid, Zone B: HPE ProLiant air) |
-| **Electrical Chain** | `electrical.py` | Non-linear UPS/PDU/XFMR loss curves + PUE calculation |
-| **BESS** | `bess.py` | 15 MWh / 5 MW Li-ion NMC (pure-Python backend + optional PySAM) with C-rate η, SOC derating, capacity fade |
-| **Macro-Grid** | `macro_grid.py` | AR(1) RegD signal + LMP proxy; calibrated for 6 global markets |
-| **Weather** | `weather.py` | NOAA ISD-Lite real data or calibrated synthetic (6 climate profiles) |
+| Simulator                       | File              | Description                                                                                                                                                                                                                                       |
+| ------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Workload Orchestrator** | `workload.py`   | Fuses Alibaba batch (2023), DLRM (2025), and GenAI (2026) traces into P_base + P_flex at 5-min resolution. FIFO queue model: unserved batch work defers rather than drops; exposes `backlog_kw` and `avg_delay_steps` (Little's Law) per step |
+| **Thermal Twin**          | `thermal.py`    | Exact exponential ODE integration for dual-zone cooling (Zone A: HPE Cray EX liquid, Zone B: HPE ProLiant air)                                                                                                                                    |
+| **Electrical Chain**      | `electrical.py` | Non-linear UPS/PDU/XFMR loss curves + PUE calculation                                                                                                                                                                                             |
+| **BESS**                  | `bess.py`       | 15 MWh / 5 MW Li-ion NMC (pure-Python backend + optional PySAM) with C-rate η, SOC derating, capacity fade                                                                                                                                       |
+| **Macro-Grid**            | `macro_grid.py` | AR(1) RegD signal + LMP proxy; calibrated for 6 global markets                                                                                                                                                                                    |
+| **Weather**               | `weather.py`    | NOAA ISD-Lite real data or calibrated synthetic (6 climate profiles)                                                                                                                                                                              |
 
 ---
 
@@ -330,12 +330,11 @@ Six independent physics/data modules, all with exact-exponential or analytical s
 
 ### Real Datasets
 
-| Dataset | Source | Markets/Zones | Resolution | Files |
-|---------|--------|--------------|------------|-------|
-| **Workload traces** | Alibaba cluster traces | batch, DLRM, GenAI, spot | 5-min | 4 CSVs |
-| **Energy load** | EIA, SMARD.de, AEMO | NYISO (11 zones), PJM, CAISO, ERCOT, ENTSO-E DE, AEMO NSW | 5-min (resampled) | 16 CSVs |
-| **Weather** | NOAA ISD-Lite | NYC, DCA, SJC, DFW, FRA, BKT | Hourly | 7 CSVs |
-
+| Dataset                   | Source                 | Markets/Zones                                             | Resolution        | Files   |
+| ------------------------- | ---------------------- | --------------------------------------------------------- | ----------------- | ------- |
+| **Workload traces** | Alibaba cluster traces | batch, DLRM, GenAI, spot                                  | 5-min             | 4 CSVs  |
+| **Energy load**     | EIA, SMARD.de, AEMO    | NYISO (11 zones), PJM, CAISO, ERCOT, ENTSO-E DE, AEMO NSW | 5-min (resampled) | 16 CSVs |
+| **Weather**         | NOAA ISD-Lite          | NYC, DCA, SJC, DFW, FRA, BKT                              | Hourly            | 7 CSVs  |
 
 ### 7.1. Workload Traces — Deep Dive
 
@@ -344,11 +343,11 @@ Each trace has a distinct statistical character, hardware zone assignment, and r
 
 #### Trace Summary
 
-| File | Source | Duration | Zone | Role | Controllable? |
-|:---|:---|:---:|:---|:---|:---|
-| `batch_v2023.csv` | [Alibaba GPU v2023 (`openb_pod_list_default.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-pod-v2023) | 33 days | A (GPU liquid-cooled) | `P_flex` — schedulable batch jobs | ✅ DVFS throttle `action[0]` defers work into FIFO queue |
-| `dlrm_v2025.csv`  | [Alibaba GPU v2025 (`disaggregated_DLRM_trace.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-gpu-v2025) | 30 days | B (CPU air-cooled) | `P_base` — rigid DLRM inference serving | ❌ Must be served regardless of grid state |
-| `genai_v2026.csv` | [Alibaba v2026 GenAI (`qps.csv` and `pod_gpu_duty_cycle_anon.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2026-GenAI) | 1 day (tiled) | A (GPU liquid-cooled) | `P_base` — rigid GenAI inference, spike-prone | ❌ Must be served; spikes set `obs[9]=1` |
+| File                | Source                                                                                                                                               |   Duration   | Zone                  | Role                                             | Controllable?                                              |
+| :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: | :-------------------- | :----------------------------------------------- | :--------------------------------------------------------- |
+| `batch_v2023.csv` | [Alibaba GPU v2023 (`openb_pod_list_default.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-pod-v2023)                      |    33 days    | A (GPU liquid-cooled) | `P_flex` — schedulable batch jobs             | ✅ DVFS throttle `action[0]` defers work into FIFO queue |
+| `dlrm_v2025.csv`  | [Alibaba GPU v2025 (`disaggregated_DLRM_trace.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-gpu-v2025)                    |    30 days    | B (CPU air-cooled)    | `P_base` — rigid DLRM inference serving       | ❌ Must be served regardless of grid state                 |
+| `genai_v2026.csv` | [Alibaba v2026 GenAI (`qps.csv` and `pod_gpu_duty_cycle_anon.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2026-GenAI) | 1 day (tiled) | A (GPU liquid-cooled) | `P_base` — rigid GenAI inference, spike-prone | ❌ Must be served; spikes set `obs[9]=1`                 |
 
 > **`spot_v2026.csv`** is bundled but excluded from the current release — it requires an
 > arrival-based preemptible scheduler not yet implemented.
@@ -363,22 +362,24 @@ Each trace has a distinct statistical character, hardware zone assignment, and r
 All three utilisation signals are translated to rack-level electrical power via the
 **non-linear server power model** (Fan et al., ISCA 2007):
 
-$$P_{server}(u) = N_{racks} \times \bigl[ P_{idle} + (P_{max} - P_{idle}) \cdot u^{\alpha} \bigr]$$
+$$
+P_{server}(u) = N_{racks} \times \bigl[ P_{idle} + (P_{max} - P_{idle}) \cdot u^{\alpha} \bigr]
+$$
 
-| Stream | Racks | $P_{idle}$ | $P_{max}$ | $\alpha$ | Utilisation normaliser |
-|---|---|---|---|---|---|
-| Batch (Zone A flex) | 1 200 | 8 kW/rack | 25 kW/rack | 1.4 (GPU superlinear) | `gpu_milli_request / 12 620` |
-| GenAI (Zone A base) | 800 | 8 kW/rack | 25 kW/rack | 1.4 | `avg_gpu_duty_cycle / 100` |
-| DLRM (Zone B base) | 2 500 | 4 kW/rack | 16 kW/rack | 1.2 (CPU inference) | `active_gpu_count / 227` |
+| Stream              | Racks | $P_{idle}$ | $P_{max}$ | $\alpha$            | Utilisation normaliser         |
+| ------------------- | ----- | ------------ | ----------- | --------------------- | ------------------------------ |
+| Batch (Zone A flex) | 1 200 | 8 kW/rack    | 25 kW/rack  | 1.4 (GPU superlinear) | `gpu_milli_request / 12 620` |
+| GenAI (Zone A base) | 800   | 8 kW/rack    | 25 kW/rack  | 1.4                   | `avg_gpu_duty_cycle / 100`   |
+| DLRM (Zone B base)  | 2 500 | 4 kW/rack    | 16 kW/rack  | 1.2 (CPU inference)   | `active_gpu_count / 227`     |
 
 **Resulting power envelope** (30-day mean at default scenario):
 
-| Stream | Mean power | Max power | Share of total IT |
-|---|---|---|---|
-| DLRM P_base (Zone B) | ~21.7 MW | 40.0 MW | 56% |
-| Batch P_flex (Zone A) | ~10.1 MW | 30.0 MW | 26% |
-| GenAI P_base (Zone A) | ~6.8 MW | 8.3 MW | 18% |
-| **Total IT** | **~38.5 MW** | — | 100% |
+| Stream                | Mean power         | Max power | Share of total IT |
+| --------------------- | ------------------ | --------- | ----------------- |
+| DLRM P_base (Zone B)  | ~21.7 MW           | 40.0 MW   | 56%               |
+| Batch P_flex (Zone A) | ~10.1 MW           | 30.0 MW   | 26%               |
+| GenAI P_base (Zone A) | ~6.8 MW            | 8.3 MW    | 18%               |
+| **Total IT**    | **~38.5 MW** | —        | 100%              |
 
 74% of IT power is rigid (`P_base`) — the agent's primary controllable lever is
 batch throttling which covers only the remaining 26%.
@@ -467,23 +468,22 @@ commit compute to clear the queue; it has real headroom to throttle for grid reg
 
 See [`notebooks/11_workload_deep_dive.ipynb`](notebooks/11_workload_deep_dive.ipynb) for full interactive analysis.
 
-
 ### 6 Global Energy Markets
 
-| Market Key | Region | Grid Operator | Energy Source | Weather Station |
-|-----------|--------|---------------|---------------|-----------------|
-| `nyiso_nyc` | New York City | NYISO | NYISO OASIS | NYC (Central Park) |
-| `pjm_dom` | Northern Virginia | PJM | EIA API | DCA (Reagan Natl) |
-| `caiso_pgae` | Bay Area / San Jose | CAISO | EIA API | SJC (Mineta Intl) |
-| `ercot_north` | Dallas–Fort Worth | ERCOT | EIA API | DFW (DFW Intl) |
-| `entso_de` | Frankfurt, Germany | ENTSO-E / EPEX | SMARD.de | FRA (Frankfurt) |
-| `aemo_nsw` | Sydney, Australia | AEMO / NEM | AEMO CSVs | BKT (Bankstown) |
+| Market Key      | Region              | Grid Operator  | Energy Source | Weather Station    |
+| --------------- | ------------------- | -------------- | ------------- | ------------------ |
+| `nyiso_nyc`   | New York City       | NYISO          | NYISO OASIS   | NYC (Central Park) |
+| `pjm_dom`     | Northern Virginia   | PJM            | EIA API       | DCA (Reagan Natl)  |
+| `caiso_pgae`  | Bay Area / San Jose | CAISO          | EIA API       | SJC (Mineta Intl)  |
+| `ercot_north` | Dallas–Fort Worth  | ERCOT          | EIA API       | DFW (DFW Intl)     |
+| `entso_de`    | Frankfurt, Germany  | ENTSO-E / EPEX | SMARD.de      | FRA (Frankfurt)    |
+| `aemo_nsw`    | Sydney, Australia   | AEMO / NEM     | AEMO CSVs     | BKT (Bankstown)    |
 
 ---
 
 ## 8. Evaluation Scenarios
 
-C2G-Bench ships four progressively harder 24-hour scenarios (17,280 ticks at 5 s each). Every scenario is fully deterministic when a fixed seed is set and can be combined with any of the six energy markets via a single Hydra override.
+DC2Grid ships four progressively harder 24-hour scenarios (17,280 ticks at 5 s each). Every scenario is fully deterministic when a fixed seed is set and can be combined with any of the six energy markets via a single Hydra override.
 
 ```bash
 # Run any scenario × any market
@@ -494,16 +494,16 @@ uv run python baselines/train_ppo.py scenario=scenario_b market=ercot_north
 
 All scenarios share the same underlying simulator stack and reward weights:
 
-| Parameter | Value | Meaning |
-|-----------|-------|---------|
-| Episode length | 17,280 ticks | 24 h × 3,600 s h⁻¹ ÷ 5 s tick⁻¹ |
-| IT capacity | 250 MW | Rigid (GenAI/DLRM) + flexible (Alibaba batch) |
-| BESS | 15 MWh / 5 MW | NMC Li-ion, C-rate derating + capacity fade |
-| Cooling zones | Zone A (liquid, HPE Cray EX) · Zone B (air, HPE ProLiant) | |
-| $T_{\text{safe}}$ | 35 °C | Silicon hard limit → immediate termination |
-| $T_{\text{warn}}$ | 33 °C | Soft threshold → thermal penalty begins |
-| Frequency UFLS | ±0.5 Hz | Under/over-frequency relay → termination |
-| Voltage UV relay | 0.90 pu | Under-voltage → termination |
+| Parameter           | Value                                                      | Meaning                                       |
+| ------------------- | ---------------------------------------------------------- | --------------------------------------------- |
+| Episode length      | 17,280 ticks                                               | 24 h × 3,600 s h⁻¹ ÷ 5 s tick⁻¹         |
+| IT capacity         | 250 MW                                                     | Rigid (GenAI/DLRM) + flexible (Alibaba batch) |
+| BESS                | 15 MWh / 5 MW                                              | NMC Li-ion, C-rate derating + capacity fade   |
+| Cooling zones       | Zone A (liquid, HPE Cray EX) · Zone B (air, HPE ProLiant) |                                               |
+| $T_{\text{safe}}$ | 35 °C                                                     | Silicon hard limit → immediate termination   |
+| $T_{\text{warn}}$ | 33 °C                                                     | Soft threshold → thermal penalty begins      |
+| Frequency UFLS      | ±0.5 Hz                                                   | Under/over-frequency relay → termination     |
+| Voltage UV relay    | 0.90 pu                                                    | Under-voltage → termination                  |
 
 ---
 
@@ -513,15 +513,15 @@ All scenarios share the same underlying simulator stack and reward weights:
 
 The entry-level scenario. Ambient temperature is comfortable (25 °C, NYISO NYC summer), BESS starts at 50 % SOC, and the regulation signal has standard amplitude. No faults are injected. This is the recommended starting point for algorithm development and ablation studies.
 
-| Parameter | Value |
-|-----------|-------|
-| Market | NYISO NYC |
+| Parameter                  | Value                   |
+| -------------------------- | ----------------------- |
+| Market                     | NYISO NYC               |
 | Ambient $T_{\text{amb}}$ | 25 °C (weather-driven) |
-| Committed MW (max) | 30 MW |
-| BESS SOC₀ | 50 % |
-| GenAI spike scale | 1.0× (nominal) |
-| Grid stress scale | 1.0× (nominal) |
-| Cooling fault | None |
+| Committed MW (max)         | 30 MW                   |
+| BESS SOC₀                 | 50 %                    |
+| GenAI spike scale          | 1.0× (nominal)         |
+| Grid stress scale          | 1.0× (nominal)         |
+| Cooling fault              | None                    |
 
 **Primary challenge:** Learning the basic DVFS ↔ cooling ↔ BESS synergy to track the regulation signal while keeping temperatures below $T_{\text{warn}}$.
 
@@ -535,15 +535,15 @@ The entry-level scenario. Ambient temperature is comfortable (25 °C, NYISO NYC 
 
 This scenario models a **Northern Virginia (PJM DOM)** summer day when a new GPT-class model goes viral. GenAI serving load spikes to **1.8× nominal**, consuming headroom that the agent would otherwise use for regulation. At the same time, the grid issues a sustained under-frequency signal, demanding active discharge. The agent must resolve the conflict between IT throughput and grid support.
 
-| Parameter | Value |
-|-----------|-------|
-| Market | PJM DOM |
+| Parameter                  | Value           |
+| -------------------------- | --------------- |
+| Market                     | PJM DOM         |
 | Ambient $T_{\text{amb}}$ | 30 °C (static) |
-| Committed MW (max) | 40 MW |
-| BESS SOC₀ | 55 % |
-| GenAI spike scale | **1.8×** |
-| Grid stress scale | **1.5×** |
-| Cooling fault | None |
+| Committed MW (max)         | 40 MW           |
+| BESS SOC₀                 | 55 %            |
+| GenAI spike scale          | **1.8×** |
+| Grid stress scale          | **1.5×** |
+| Cooling fault              | None            |
 
 **Primary challenge:** IT vs. grid conflict. The GenAI rigid load is non-throttleable, so the agent must use BESS discharge and batch-job throttling simultaneously — but throttling reduces throughput reward $\alpha \cdot u_{\text{thr}}$, and over-discharging depletes the BESS.
 
@@ -557,15 +557,15 @@ This scenario models a **Northern Virginia (PJM DOM)** summer day when a new GPT
 
 This scenario targets **ERCOT North (DFW)** during a peak-summer heat wave. The 40 °C ambient temperature drives the cooling COP down by ≈ 30 %, meaning the pump must work harder to achieve the same heat rejection. The committed MW is raised to 30 MW, increasing the power swings the agent must track. GenAI load is nominal, but the thermal margin to $T_{\text{safe}}$ is extremely thin.
 
-| Parameter | Value |
-|-----------|-------|
-| Market | ERCOT North |
+| Parameter                  | Value                     |
+| -------------------------- | ------------------------- |
+| Market                     | ERCOT North               |
 | Ambient $T_{\text{amb}}$ | **40 °C** (static) |
-| Committed MW (max) | **60 MW** |
-| BESS SOC₀ | 60 % |
-| GenAI spike scale | 1.0× (nominal) |
-| Grid stress scale | 1.3× |
-| Cooling fault | None |
+| Committed MW (max)         | **60 MW**           |
+| BESS SOC₀                 | 60 %                      |
+| GenAI spike scale          | 1.0× (nominal)           |
+| Grid stress scale          | 1.3×                     |
+| Cooling fault              | None                      |
 
 **Primary challenge:** Thermal constraint binding. The thermal penalty $\gamma \cdot (T - T_{\text{warn}})^{+}$ dominates the reward signal. The agent must learn aggressive pump-speed scheduling and accept reduced throughput to keep temperatures in the safe band.
 
@@ -579,15 +579,15 @@ This scenario targets **ERCOT North (DFW)** during a peak-summer heat wave. The 
 
 This scenario represents a compounding failure in **AEMO NSW**. The BESS begins at only **15 % SOC** (near the 10 % hard floor), leaving almost no discharge capacity for regulation. A simulated CDU pump degradation reduces cooling efficiency to **60 % of nominal**, tightening the thermal margin. GenAI and grid stress are both elevated. The agent must simultaneously ration the BESS, compensate for degraded cooling, and track the regulation signal — with essentially no buffer.
 
-| Parameter | Value |
-|-----------|-------|
-| Market | AEMO NSW |
-| Ambient $T_{\text{amb}}$ | 32 °C (static) |
-| Committed MW (max) | 40 MW |
-| BESS SOC₀ | **15 %** |
-| GenAI spike scale | 1.2× |
-| Grid stress scale | 1.2× |
-| Cooling fault | **Pump degradation (60 % efficiency)** |
+| Parameter                  | Value                                        |
+| -------------------------- | -------------------------------------------- |
+| Market                     | AEMO NSW                                     |
+| Ambient $T_{\text{amb}}$ | 32 °C (static)                              |
+| Committed MW (max)         | 40 MW                                        |
+| BESS SOC₀                 | **15 %**                               |
+| GenAI spike scale          | 1.2×                                        |
+| Grid stress scale          | 1.2×                                        |
+| Cooling fault              | **Pump degradation (60 % efficiency)** |
 
 **Primary challenge:** Resource scarcity under compound failure. The BESS SOC penalty $\delta_{\text{soc}}$ activates immediately. The agent must switch to DVFS-only regulation while the pump fault is active, and carefully trickle-charge the BESS when the regulation signal allows.
 
@@ -599,12 +599,12 @@ This scenario represents a compounding failure in **AEMO NSW**. The BESS begins 
 
 All four scenarios can be combined with all six markets, yielding **24 distinct evaluation configurations**. Market selection changes the LMP profile, weather driver, and grid-stress statistics, while scenario selection changes the hardware stress and initial conditions:
 
-| | `nyiso_nyc` | `pjm_dom` | `caiso_pgae` | `ercot_north` | `entso_de` | `aemo_nsw` |
-|-|:-----------:|:---------:|:------------:|:-------------:|:----------:|:----------:|
-| `default` | ★ default | | | | | |
-| `scenario_a` | | ★ default | | | | |
-| `scenario_b` | | | | ★ default | | |
-| `scenario_c` | | | | | | ★ default |
+|                | `nyiso_nyc` | `pjm_dom` | `caiso_pgae` | `ercot_north` | `entso_de` | `aemo_nsw` |
+| -------------- | :-----------: | :---------: | :------------: | :-------------: | :----------: | :----------: |
+| `default`    |  ★ default  |            |                |                |              |              |
+| `scenario_a` |              | ★ default |                |                |              |              |
+| `scenario_b` |              |            |                |   ★ default   |              |              |
+| `scenario_c` |              |            |                |                |              |  ★ default  |
 
 ★ = default market for that scenario. Any other cell is a valid cross-market stress test.
 
@@ -618,7 +618,7 @@ uv run python baselines/train_ppo.py scenario=scenario_b market=entso_de experim
 ## 9. Repository Structure
 
 ```
-C2G-Macro/
+dc2grid/
 ├── pyproject.toml                       # uv/hatchling build + all dependencies
 ├── uv.lock                              # Reproducible dependency lock
 ├── README.md
@@ -751,8 +751,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ### Clone & install
 
 ```bash
-git clone <repo-url>
-cd C2G-Macro
+git clone https://github.com/HewlettPackard/dc2grid.git
+cd dc2grid
 uv sync
 uv sync --extra dev   # pytest, ruff, mypy
 ```
@@ -815,31 +815,31 @@ MAX_PARALLEL=16 bash scripts/run_sweep.sh
 
 The sweep runs in 25 phases:
 
-| Phase | Jobs | What runs |
-|-------|------|-----------|
-| 1 | 24 | Rule-Based + Random evaluation only (no training, ~5 min) |
-| 2 | 12 | PPO training (300k steps) + evaluation |
-| 3 | 12 | SAC training (200k steps) + evaluation |
-| 4 | 12 | Macro Rule-Based evaluation |
-| 5 | 12 | PPO-Macro training (100k steps) + evaluation |
-| 6 | 12 | HRL sequential training (300k + 100k) + evaluation |
-| 7 | 36 | Bang-Bang, PID, MPC evaluation (no training) |
-| 8 | 24 | MPC-Macro & MILP evaluation (no training) |
-| 9 | 12 | PPO-Lagrangian training (300k) + evaluation |
-| 10 | 12 | CBF-PPO training (300k) + evaluation |
-| 11 | 12 | HJ-PPO training (300k) + evaluation |
-| 12 | 12 | MPC-SF-PPO training (300k) + evaluation |
-| 13 | 12 | CPO training (300k) + evaluation |
-| 14 | 12 | Shield-Reward-Shaping training (300k) + evaluation |
-| 15 | 12 | HA-C2G neuro-symbolic training (300k) + evaluation |
-| 16 | 12 | CBM-Only ablation training (300k) |
-| 19 | 12 | CBM+Gate ablation training (300k) |
-| 20 | 12 | CBM+Shield ablation training (300k) |
-| 21 | 1 | HA Benchmark evaluation (11 metrics, 5 episodes) |
-| 22 | 1 | Summary table + LaTeX rows |
-| 23 | 1 | Multi-seed HA benchmark (10 seeds × 5 episodes) |
-| 24 | 1 | Statistical analysis (CIs + significance tests) |
-| 25 | 1 | Failure-case analysis |
+| Phase | Jobs | What runs                                                 |
+| ----- | ---- | --------------------------------------------------------- |
+| 1     | 24   | Rule-Based + Random evaluation only (no training, ~5 min) |
+| 2     | 12   | PPO training (300k steps) + evaluation                    |
+| 3     | 12   | SAC training (200k steps) + evaluation                    |
+| 4     | 12   | Macro Rule-Based evaluation                               |
+| 5     | 12   | PPO-Macro training (100k steps) + evaluation              |
+| 6     | 12   | HRL sequential training (300k + 100k) + evaluation        |
+| 7     | 36   | Bang-Bang, PID, MPC evaluation (no training)              |
+| 8     | 24   | MPC-Macro & MILP evaluation (no training)                 |
+| 9     | 12   | PPO-Lagrangian training (300k) + evaluation               |
+| 10    | 12   | CBF-PPO training (300k) + evaluation                      |
+| 11    | 12   | HJ-PPO training (300k) + evaluation                       |
+| 12    | 12   | MPC-SF-PPO training (300k) + evaluation                   |
+| 13    | 12   | CPO training (300k) + evaluation                          |
+| 14    | 12   | Shield-Reward-Shaping training (300k) + evaluation        |
+| 15    | 12   | HA-C2G neuro-symbolic training (300k) + evaluation        |
+| 16    | 12   | CBM-Only ablation training (300k)                         |
+| 19    | 12   | CBM+Gate ablation training (300k)                         |
+| 20    | 12   | CBM+Shield ablation training (300k)                       |
+| 21    | 1    | HA Benchmark evaluation (11 metrics, 5 episodes)          |
+| 22    | 1    | Summary table + LaTeX rows                                |
+| 23    | 1    | Multi-seed HA benchmark (10 seeds × 5 episodes)          |
+| 24    | 1    | Statistical analysis (CIs + significance tests)           |
+| 25    | 1    | Failure-case analysis                                     |
 
 Results are written to `results/sweep_results.csv` (one row per run, upserted on re-runs) and `results/sweep_summary.csv` (mean ± std across seeds).
 
@@ -849,9 +849,11 @@ Use the evaluation runners when you want targeted experiments instead of the ful
 The `--fixed-action` setting allows granular control experiments by pinning selected actuators to analyst-chosen setpoints.
 
 Unless --output path provided, results saved by default at:
+
 ```
 evaluation/results/{algo}_{scenario}_{agent_type}_{ablation}.csv
 ```
+
 e.g. `ppo_scenario_b_hardware_BESS_0.5.csv` stores evals for hardware PPO agent with fixed BESS ablation. Here `agent_type` denotes the transition-logging and output suffix for the evaluated controller, and can be `hardware`, `macro`, or `hardware_ha`.
 
 ---
@@ -892,17 +894,17 @@ SAC agents automatically load the model from `trained_models/<algo>_<scenario>_s
 
 **Agents used in the paper:**
 
-| Agent | Type | Description |
-|-------|------|-------------|
-| `random` | hardware | Uniform random baseline (lower bound) |
-| `bang_bang` | hardware | Hysteresis on/off controller |
-| `pid` | hardware | Multi-loop PID with anti-windup |
-| `rule_based` | hardware | Threshold heuristic controller (`baselines/rule_based_mpc.py`) |
-| `sac` | hardware | Trained SAC low-level controller (Phase 1) |
-| `rule_macro` | macro | Rule-based macro bidding controller |
-| `sac_macro` | macro | Trained SAC macro controller (Phase 2) |
-| `llm_policy_macro` | macro | LLM macro controller (Qwen3-32B, ICRL) |
-| `<macro>+<hardware>` | combo | Macro agent paired with hardware agent, e.g. `rule_macro+sac`, `llm_policy_macro+pid` |
+| Agent                  | Type     | Description                                                                               |
+| ---------------------- | -------- | ----------------------------------------------------------------------------------------- |
+| `random`             | hardware | Uniform random baseline (lower bound)                                                     |
+| `bang_bang`          | hardware | Hysteresis on/off controller                                                              |
+| `pid`                | hardware | Multi-loop PID with anti-windup                                                           |
+| `rule_based`         | hardware | Threshold heuristic controller (`baselines/rule_based_mpc.py`)                          |
+| `sac`                | hardware | Trained SAC low-level controller (Phase 1)                                                |
+| `rule_macro`         | macro    | Rule-based macro bidding controller                                                       |
+| `sac_macro`          | macro    | Trained SAC macro controller (Phase 2)                                                    |
+| `llm_policy_macro`   | macro    | LLM macro controller (Qwen3-32B, ICRL)                                                    |
+| `<macro>+<hardware>` | combo    | Macro agent paired with hardware agent, e.g. `rule_macro+sac`, `llm_policy_macro+pid` |
 
 **Fixed-action ablations (Appendix M):**
 
@@ -926,50 +928,50 @@ Action bounds: `throttle_batch ∈ [0, 1]`, `pump_speed_A ∈ [0, 1]`, `hvac_eff
 
 **Key CLI arguments:**
 
-| Argument | Default | Description |
-|----------|---------|-------------|
-| `--agents` | `rule_based bang_bang pid random` | One or more agent names (see table above) |
-| `--scenarios` | all 4 | Subset of `default scenario_a scenario_b scenario_c` |
-| `--n_episodes` | `5` | Episodes per agent × scenario combination |
-| `--seed` | `100` | Starting RNG seed; episode `i` uses `seed + i` |
-| `--hw-model-dir` | `None` | Model directory for the hardware/inner SAC agent |
-| `--macro-model-dir` | `None` | Model directory for the macro-level SAC agent |
-| `--output` | auto-generated | Output CSV path; defaults to `evaluation/results/<algo>_<scenario>_<agent_type>_<ablation>.csv` |
-| `--record_transitions` / `--no-record_transitions` | disabled | Write per-step state/action/reward traces to `runs/<agent>_<scenario>_<type>/episode*.csv` |
-| `--append` | `False` | Append rows to an existing CSV instead of overwriting |
-| `--fixed-action <name>=<value>` | none | Pin an actuator to a fixed setpoint (repeatable) |
-| `--llm-api-base` | `http://localhost:8000/v1` | vLLM / OpenAI-compatible server URL |
-| `--llm-template-path` | `conf/chat_templates/run_benchmark_rbc+ICRL.yaml` | YAML prompt templates for LLM agents |
-| `--llm-max-new-tokens` | `8192` | Maximum tokens per LLM generation step |
-| `--llm-temperature` | `0.0` | Sampling temperature (0 = greedy) |
-| `--llm-no-thinking` | off | Disable `<think>` reasoning blocks |
-| `--llm-context-num-steps` | `10` | ICRL rolling buffer size in past steps (paper uses 5; 0 = disabled) |
-| `--llm-context-stride` | `1` | Store every *K*-th step in the ICRL buffer |
-| `--llm-icrl-mode` | `autonomous` | ICRL instruction mode: `autonomous` (paper default), `preset`, or `exploit` |
+| Argument                                               | Default                                             | Description                                                                                       |
+| ------------------------------------------------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `--agents`                                           | `rule_based bang_bang pid random`                 | One or more agent names (see table above)                                                         |
+| `--scenarios`                                        | all 4                                               | Subset of `default scenario_a scenario_b scenario_c`                                            |
+| `--n_episodes`                                       | `5`                                               | Episodes per agent × scenario combination                                                        |
+| `--seed`                                             | `100`                                             | Starting RNG seed; episode `i` uses `seed + i`                                                |
+| `--hw-model-dir`                                     | `None`                                            | Model directory for the hardware/inner SAC agent                                                  |
+| `--macro-model-dir`                                  | `None`                                            | Model directory for the macro-level SAC agent                                                     |
+| `--output`                                           | auto-generated                                      | Output CSV path; defaults to `evaluation/results/<algo>_<scenario>_<agent_type>_<ablation>.csv` |
+| `--record_transitions` / `--no-record_transitions` | disabled                                            | Write per-step state/action/reward traces to `runs/<agent>_<scenario>_<type>/episode*.csv`      |
+| `--append`                                           | `False`                                           | Append rows to an existing CSV instead of overwriting                                             |
+| `--fixed-action <name>=<value>`                      | none                                                | Pin an actuator to a fixed setpoint (repeatable)                                                  |
+| `--llm-api-base`                                     | `http://localhost:8000/v1`                        | vLLM / OpenAI-compatible server URL                                                               |
+| `--llm-template-path`                                | `conf/chat_templates/run_benchmark_rbc+ICRL.yaml` | YAML prompt templates for LLM agents                                                              |
+| `--llm-max-new-tokens`                               | `8192`                                            | Maximum tokens per LLM generation step                                                            |
+| `--llm-temperature`                                  | `0.0`                                             | Sampling temperature (0 = greedy)                                                                 |
+| `--llm-no-thinking`                                  | off                                                 | Disable `<think>` reasoning blocks                                                              |
+| `--llm-context-num-steps`                            | `10`                                              | ICRL rolling buffer size in past steps (paper uses 5; 0 = disabled)                               |
+| `--llm-context-stride`                               | `1`                                               | Store every *K*-th step in the ICRL buffer                                                      |
+| `--llm-icrl-mode`                                    | `autonomous`                                      | ICRL instruction mode: `autonomous` (paper default), `preset`, or `exploit`                 |
 
 **Output metrics:**
 
 For hardware agents, each row in the output CSV contains:
 
-| Column | Description |
-|--------|-------------|
-| `mean_reward` | Mean step reward over the episode |
-| `total_reward` | Sum of step rewards |
-| `tracking_rmse` | RMSE of `ΔP_demanded − ΔP_actual` (kW) |
-| `thermal_viol_rate` | Fraction of ticks with temperature > T_warn (33 °C) |
-| `throughput_ratio` | Mean `p_flex_served / p_flex_nom` |
-| `bess_degradation` | Cumulative capacity fade × 10⁴ |
-| `episode_length` | Ticks completed (< 17 280 indicates early termination) |
-| `survival_rate` | Fraction of episodes surviving to 24 h |
+| Column                | Description                                            |
+| --------------------- | ------------------------------------------------------ |
+| `mean_reward`       | Mean step reward over the episode                      |
+| `total_reward`      | Sum of step rewards                                    |
+| `tracking_rmse`     | RMSE of `ΔP_demanded − ΔP_actual` (kW)            |
+| `thermal_viol_rate` | Fraction of ticks with temperature > T_warn (33 °C)   |
+| `throughput_ratio`  | Mean `p_flex_served / p_flex_nom`                    |
+| `bess_degradation`  | Cumulative capacity fade × 10⁴                       |
+| `episode_length`    | Ticks completed (< 17 280 indicates early termination) |
+| `survival_rate`     | Fraction of episodes surviving to 24 h                 |
 
 For macro agents, additional columns include:
 
-| Column | Description |
-|--------|-------------|
+| Column                  | Description                                  |
+| ----------------------- | -------------------------------------------- |
 | `bid_acceptance_rate` | Fraction of 15-min bids accepted by the grid |
-| `total_reg_revenue` | Cumulative regulation revenue (USD) |
-| `mean_perf_score` | Mean FERC performance score |
-| `mean_committed_mw` | Mean accepted MW commitment per interval |
+| `total_reg_revenue`   | Cumulative regulation revenue (USD)          |
+| `mean_perf_score`     | Mean FERC performance score                  |
+| `mean_committed_mw`   | Mean accepted MW commitment per interval     |
 
 For hierarchical combo agents (`macro+hardware`), results are split into `*_macro.csv` and `*_hardware.csv` automatically, with a separate hardware-schema row for the inner controller enabling direct comparison with standalone hardware results.
 
@@ -977,14 +979,14 @@ When `--record_transitions` is enabled, per-step logs are written under `runs/<a
 
 #### Multiple facility capacities (50 / 100 / 250 / 500 MW)
 
-C2G-Bench ships with **capacity-generalization profiles** so any agent or experiment can be evaluated on data centers of different nameplate sizes without retraining. Profiles live under `conf/plant_profiles/` and override the plant sizing (rack counts, transformer rating, thermal masses, cooling coefficients, BESS energy/power, and market commitments). Extensive quantities scale linearly with capacity; intensive quantities (per-rack power, COP, C/K time constants, SOC bounds, setpoints) are unchanged, so the thermal margin to the fixed 35 °C limit is identical across sizes.
+DC2Grid ships with **capacity-generalization profiles** so any agent or experiment can be evaluated on data centers of different nameplate sizes without retraining. Profiles live under `conf/plant_profiles/` and override the plant sizing (rack counts, transformer rating, thermal masses, cooling coefficients, BESS energy/power, and market commitments). Extensive quantities scale linearly with capacity; intensive quantities (per-rack power, COP, C/K time constants, SOC bounds, setpoints) are unchanged, so the thermal margin to the fixed 35 °C limit is identical across sizes.
 
-| Profile | Nameplate | Scale | `committed_mw_max` | Zone A × B racks | BESS (`E_NOM_MWH` / `P_MAX_MW`) |
-|---------|-----------|-------|--------------------|------------------|---------------------------------|
-| `plant_50mw` | 50 MW | 0.2× | 6.0 | 240+160 × 500 | 3.0 / 1.0 |
-| `plant_100mw` | 100 MW | 0.4× | 12.0 | 480+320 × 1000 | 6.0 / 2.0 |
-| `none` *(default)* | 250 MW | 1.0× | 30.0 | built-in (150 MW A + 100 MW B) | 15.0 / 5.0 |
-| `plant_500mw` | 500 MW | 2.0× | 60.0 | 2400+1600 × 5000 | 30.0 / 10.0 |
+| Profile                | Nameplate | Scale | `committed_mw_max` | Zone A × B racks              | BESS (`E_NOM_MWH` / `P_MAX_MW`) |
+| ---------------------- | --------- | ----- | -------------------- | ------------------------------ | ----------------------------------- |
+| `plant_50mw`         | 50 MW     | 0.2× | 6.0                  | 240+160 × 500                 | 3.0 / 1.0                           |
+| `plant_100mw`        | 100 MW    | 0.4× | 12.0                 | 480+320 × 1000                | 6.0 / 2.0                           |
+| `none` *(default)* | 250 MW    | 1.0× | 30.0                 | built-in (150 MW A + 100 MW B) | 15.0 / 5.0                          |
+| `plant_500mw`        | 500 MW    | 2.0× | 60.0                 | 2400+1600 × 5000              | 30.0 / 10.0                         |
 
 `none` = the built-in 250 MW facility (no override). Profile names are discovered automatically from `conf/plant_profiles/*.yaml`.
 
@@ -1077,9 +1079,9 @@ uv run evaluation/plot_episode_traces.py \
 - **PDF**: `figures/<algo>_<scenario>_<agent_type>[__ABLATION_SUFFIX].pdf`
 
 Each figure contains one subplot per state/reward column, shows the **mean** line (solid) with a **99% confidence band** (shaded area) computed across all matching episodes.
+
 - State variables (blue), with 0–1 reference bounds shown as dashed lines
 - Cumulative reward components (red)
-
 
 ### Download real-world data (optional — CSVs are bundled)
 
@@ -1119,26 +1121,26 @@ uv run jupyter lab notebooks/
 
 ## 11. High-Assurance Safety Controllers
 
-C2G-Bench provides a comprehensive **3-tier high-assurance (HA) safety framework** for grid-interactive data center control. All tiers enforce the same **5 hard constraints (C1–C5)** and are evaluated with an **11-metric set** (6 standard + 5 HA-specific).
+DC2Grid provides a comprehensive **3-tier high-assurance (HA) safety framework** for grid-interactive data center control. All tiers enforce the same **5 hard constraints (C1–C5)** and are evaluated with an **11-metric set** (6 standard + 5 HA-specific).
 
 ### Hard Constraints
 
-| ID | Constraint | Threshold | Physical Meaning |
-|----|-----------|-----------|-----------------|
-| C1 | $T_A < T_{\text{safe}}$ | 35 °C (margin 1 °C) | Server room A thermal limit |
-| C2 | $T_B < T_{\text{safe}}$ | 35 °C (margin 1 °C) | Server room B thermal limit |
-| C3 | SOC ∈ [SOC_min, SOC_max] | [0.10, 0.95] (guard 0.03) | BESS operational envelope |
-| C4 | $|\Delta f| < 0.5$ Hz | ±0.4 Hz trigger | UFLS / over-frequency protection |
-| C5 | $V_{\text{pcc}} > 0.90$ pu | 0.92 pu trigger | Under-voltage relay threshold |
+| ID | Constraint                   | Threshold                 | Physical Meaning                 |
+| -- | ---------------------------- | ------------------------- | -------------------------------- |
+| C1 | $T_A < T_{\text{safe}}$    | 35 °C (margin 1 °C)     | Server room A thermal limit      |
+| C2 | $T_B < T_{\text{safe}}$    | 35 °C (margin 1 °C)     | Server room B thermal limit      |
+| C3 | SOC ∈ [SOC_min, SOC_max]    | [0.10, 0.95] (guard 0.03) | BESS operational envelope        |
+| C4 | $|\Delta f| < 0.5$ Hz      | ±0.4 Hz trigger          | UFLS / over-frequency protection |
+| C5 | $V_{\text{pcc}} > 0.90$ pu | 0.92 pu trigger           | Under-voltage relay threshold    |
 
 ### Tier 1 — Hard-Guarantee Methods (provable safety via optimisation)
 
-| Method | Shield | Permissiveness | Cost | File |
-|--------|--------|---------------|------|------|
-| **Simplex** [Sha 2001] | O(1) analytic worst-case bounds | Conservative | Negligible | `baselines/safety/safety_shield.py` |
-| **CBF** [Ames 2019] | QP projection into barrier-safe set | Moderate | Low | `baselines/safety/cbf_shield.py` |
-| **HJ Reachability** | Offline BRS + runtime override | Moderate | Offline high, runtime low | `baselines/safety/hj_shield.py` |
-| **MPC Safety Filter** | Receding-horizon constrained NLP | Most permissive | Highest online | `baselines/safety/mpc_safety_filter.py` |
+| Method                       | Shield                              | Permissiveness  | Cost                      | File                                      |
+| ---------------------------- | ----------------------------------- | --------------- | ------------------------- | ----------------------------------------- |
+| **Simplex** [Sha 2001] | O(1) analytic worst-case bounds     | Conservative    | Negligible                | `baselines/safety/safety_shield.py`     |
+| **CBF** [Ames 2019]    | QP projection into barrier-safe set | Moderate        | Low                       | `baselines/safety/cbf_shield.py`        |
+| **HJ Reachability**    | Offline BRS + runtime override      | Moderate        | Offline high, runtime low | `baselines/safety/hj_shield.py`         |
+| **MPC Safety Filter**  | Receding-horizon constrained NLP    | Most permissive | Highest online            | `baselines/safety/mpc_safety_filter.py` |
 
 #### Simplex Shield — Three Usage Modes
 
@@ -1175,11 +1177,11 @@ uv run python baselines/safety/train_mpcsf_ppo.py scenario=default
 
 ### Tier 2 — Constrained RL (soft constraint satisfaction during training)
 
-| Method | Mechanism | File |
-|--------|-----------|------|
-| **PPO-Lagrangian** | Adaptive Lagrange multipliers for 3 cost types | `baselines/safety/train_ppo_lagrangian.py` |
-| **CPO** [Achiam 2017] | Trust-region with conjugate gradient + line search | `baselines/safety/train_cpo.py` |
-| **Shield Reward Shaping** | Fixed quadratic distance-to-boundary penalties | `baselines/safety/train_shield_reward_shaping.py` |
+| Method                          | Mechanism                                          | File                                                |
+| ------------------------------- | -------------------------------------------------- | --------------------------------------------------- |
+| **PPO-Lagrangian**        | Adaptive Lagrange multipliers for 3 cost types     | `baselines/safety/train_ppo_lagrangian.py`        |
+| **CPO** [Achiam 2017]     | Trust-region with conjugate gradient + line search | `baselines/safety/train_cpo.py`                   |
+| **Shield Reward Shaping** | Fixed quadratic distance-to-boundary penalties     | `baselines/safety/train_shield_reward_shaping.py` |
 
 ### Tier 3 — Neuro-Symbolic HA-C2G Architecture
 
@@ -1191,30 +1193,30 @@ The full **HA-C2G** pipeline is a 3-layer neuro-symbolic architecture:
 
 **Ablation studies** isolate each layer's contribution:
 
-| Variant | CBM | Gate | Shield | File |
-|---------|:---:|:----:|:------:|------|
-| **HA-C2G (full)** | ✅ | ✅ | ✅ | `baselines/safety/train_ha_c2g.py` |
-| CBM-Only | ✅ | ❌ | ❌ | `baselines/safety/train_cbm_only.py` |
-| CBM+Gate | ✅ | ✅ | ❌ | `baselines/safety/train_cbm_gate.py` |
-| CBM+Shield | ✅ | ❌ | ✅ | `baselines/safety/train_cbm_shield.py` |
+| Variant                 | CBM | Gate | Shield | File                                     |
+| ----------------------- | :-: | :--: | :----: | ---------------------------------------- |
+| **HA-C2G (full)** | ✅ |  ✅  |   ✅   | `baselines/safety/train_ha_c2g.py`     |
+| CBM-Only                | ✅ |  ❌  |   ❌   | `baselines/safety/train_cbm_only.py`   |
+| CBM+Gate                | ✅ |  ✅  |   ❌   | `baselines/safety/train_cbm_gate.py`   |
+| CBM+Shield              | ✅ |  ❌  |   ✅   | `baselines/safety/train_cbm_shield.py` |
 
 **Proof trees** (`baselines/safety/proof_tree.py`) generate per-timestep hierarchical audit logs documenting which safety rules passed/failed and the sensor readings grounding each decision.
 
 ### HA Evaluation Metrics (11-D)
 
-| Category | Metric | Description |
-|----------|--------|-------------|
-| Standard | `mean_reward` | Mean episode reward |
-| Standard | `tracking_rmse` | RegD tracking RMSE |
-| Standard | `thermal_viol_rate` | Fraction of ticks with thermal violation |
-| Standard | `throughput_ratio` | Fraction of max IT capacity served |
-| Standard | `bess_degradation` | Battery capacity fade over episode |
-| Standard | `survival_rate` | Fraction of episodes surviving to 24 h |
-| HA | `hard_violation_rate` | Rate of C1–C5 constraint violations |
-| HA | `shield_intervention_rate` | How often the shield overrides the agent |
-| HA | `constraint_margin` | Mean distance from nearest constraint boundary |
-| HA | `worst_case_margin` | Minimum margin across all constraints |
-| HA | `computational_overhead_ms` | Per-step shield compute time |
+| Category | Metric                        | Description                                    |
+| -------- | ----------------------------- | ---------------------------------------------- |
+| Standard | `mean_reward`               | Mean episode reward                            |
+| Standard | `tracking_rmse`             | RegD tracking RMSE                             |
+| Standard | `thermal_viol_rate`         | Fraction of ticks with thermal violation       |
+| Standard | `throughput_ratio`          | Fraction of max IT capacity served             |
+| Standard | `bess_degradation`          | Battery capacity fade over episode             |
+| Standard | `survival_rate`             | Fraction of episodes surviving to 24 h         |
+| HA       | `hard_violation_rate`       | Rate of C1–C5 constraint violations           |
+| HA       | `shield_intervention_rate`  | How often the shield overrides the agent       |
+| HA       | `constraint_margin`         | Mean distance from nearest constraint boundary |
+| HA       | `worst_case_margin`         | Minimum margin across all constraints          |
+| HA       | `computational_overhead_ms` | Per-step shield compute time                   |
 
 ### Evaluation & Analysis Tools
 
@@ -1237,10 +1239,12 @@ uv run evaluation/statistical_analysis.py
 ## 12. Strategic Value
 
 ### For the Energy System
+
 - **Renewable Integration:** Data centers absorb excess wind/solar, preventing curtailment.
 - **Grid Stability:** The DC acts as a "shock absorber" for the transmission grid, reducing reliance on fossil-fuel peaker plants.
 
 ### For AI Research (NeurIPS 2026)
+
 - **Cyber-Physical Benchmark:** The first high-fidelity, multi-market testbed for hierarchical RL on real infrastructure physics.
 - **Six Global Markets:** NYISO, PJM, CAISO, ERCOT, ENTSO-E, AEMO — largest DC hubs on Earth.
 - **DOE Genesis Alignment:** 250 MW–1 GW scale matches the US national AI infrastructure program.
@@ -1250,9 +1254,9 @@ uv run evaluation/statistical_analysis.py
 ## 13. Citation
 
 ```bibtex
-@inproceedings{c2gbench2026,
-  title     = {{C2G-Bench}: A Cyber-Physical Benchmark for Grid-Interactive
-               Hyperscale Data Centres},
+@inproceedings{dc2grid2026,
+  title     = {{DC2Grid}: Multi-Objective Hierarchical {RL} Benchmark for Grid-Interactive
+               Data Centers that Relieve Power System Stress},
   author    = {Anonymous},
   booktitle = {NeurIPS 2026 Datasets and Benchmarks Track},
   year      = {2026},
@@ -1444,7 +1448,7 @@ python -m c2g_env.experiments.thermal_sensitivity_cross_scenario
 
 We also trained and evaluated a PPO macro agent on the default scenario, paired with the same frozen RL low-level controller. Its tracking, revenue, and safety are broadly comparable to SAC, with no thermal violations under either algorithm, which suggests that the staged 2-Phase (Sec. 7, Main paper) result does not appear to hinge on a single choice of macro learner.
 
-| Configuration | Agent | RMSE ↓ (kW) | Regulation Revenue ↑ ($) | Macro Reward ↑ | Low-Level Reward ↑ | Thermal Violations ↓ | BESS Degradation ↓ ($\times 10^{-4}$) |
-|---|---|---:|---:|---:|---:|---:|---:|
-| RL Phase 2: RL macro + frozen RL low-level | SAC | 780 ± 26 | 8,550 ± 553 | 0.94 ± 0.13 | 0.85 ± 0.13 | 0.0 ± 0.0 | 18.38 ± 1.74 |
-| RL Phase 2: RL macro + frozen RL low-level | PPO | 745 ± 34 | 7,345 ± 688 | 0.92 ± 0.13 | 0.81 ± 0.17 | 0.0 ± 0.0 | 21.22 ± 2.25 |
+| Configuration                              | Agent | RMSE ↓ (kW) | Regulation Revenue ↑ ($) | Macro Reward ↑ | Low-Level Reward ↑ | Thermal Violations ↓ | BESS Degradation ↓ ($\times 10^{-4}$) |              |              |            |               |
+| ------------------------------------------ | ----- | -----------: | -----------------------------------------------------------------------------------------------------------------------------------: | -----------: | -----------: | ---------: | ------------: |
+| RL Phase 2: RL macro + frozen RL low-level | SAC   |    780 ± 26 |                                                                                                                         8,550 ± 553 | 0.94 ± 0.13 | 0.85 ± 0.13 | 0.0 ± 0.0 | 18.38 ± 1.74 |
+| RL Phase 2: RL macro + frozen RL low-level | PPO   |    745 ± 34 |                                                                                                                         7,345 ± 688 | 0.92 ± 0.13 | 0.81 ± 0.17 | 0.0 ± 0.0 | 21.22 ± 2.25 |
