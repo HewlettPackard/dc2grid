@@ -25,9 +25,13 @@ regulation response, and computes:
     reg_mileage_mw   Σ |ΔP_act_t - ΔP_act_{t-1}|
     perf_ratio       1 - Σ|err| / Σ|ΔP_dem|
   Guardrails
+    agent_ticks, baseline_ticks, paired_ticks (episode and comparison lengths)
     ramp_max_mw_min  max |dA/dt|
     rebound_pct      Σ_{not S} (A - B)+ / Σ_S (B - A)+
     throughput_ratio, backlog_mean_mw
+
+Pass ``--trace-dir`` to retain compressed hardware and macro traces, including
+observed versus applied commitments, actuator state, and settlement components.
 
 Usage
 -----
@@ -60,6 +64,18 @@ STRESS_QUANTILE = 0.90
 F_DEADBAND_HZ = 0.2
 T_CRIT_ONE_SIDED_95 = {2: 2.920, 3: 2.353, 4: 2.132, 5: 2.015, 6: 1.943, 7: 1.895, 8: 1.860, 9: 1.833}
 RELIEF_KEYS = ("dP_stress_mw", "LFR_pct", "SPDR_pct", "LWSR_pct", "LWCF_pct")
+TRACE_INFO_FIELDS = (
+    "tick", "bess_actual_kw", "bess_soc", "flex_reduction_kw", "cool_delta_kw",
+    "temp_A", "temp_B", "p_cooling_mw", "p_flex_nom_kw", "p_flex_served_kw",
+    "pump_speed_A", "hvac_effort", "bess_dispatch", "thermal_warning",
+    "thermal_fault", "freq_fault", "voltage_fault", "terminated", "truncated",
+    "reward_throughput", "reward_tracking", "reward_thermal", "reward_soc",
+    "reward_freq", "reward_volt", "reward_backlog",
+)
+METRIC_TRACE_COLUMNS = (
+    "p_fac_mw", "load_norm", "f_dev_hz", "dp_act_kw", "dp_dem_kw",
+    "err_kw", "throttle", "backlog_kw", "lmp", "load_mw",
+)
 
 
 def _market_config(market: str) -> str:
@@ -107,13 +123,17 @@ def _bias_regd(grid, day_load: np.ndarray, beta: float) -> None:
 def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
                  macro: str = "rule_macro", macro_model_dir: str | None = None,
                  config_path: str | None = None, start_day: int | None = None,
-                 regd_bias: float = 0.0) -> pd.DataFrame:
+                 regd_bias: float = 0.0, trace_dir: str | None = None) -> pd.DataFrame:
     import torch
     torch.set_num_threads(1)
     import run_benchmark as rb
+
     from baselines.rule_based_macro import RuleBasedMacroController
+    from c2g_env.env_high_level import _SUBSTEPS
+    from c2g_env.obs_indices import Fast as _F
 
     inner_fn = None
+    ctrl = None
     if hw != "none":
         inner_env = rb._make_env(scenario=scenario)
         inner_env.reset(seed=0)
@@ -134,11 +154,16 @@ def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
             "throttle": float(info["throttle_batch"]),
             "backlog_kw": float(info["backlog_kw"]),
             "lmp": float(info["lmp"]),
+            "regd_observed": float(pre_obs[_F.REGD]),
+            "committed_observed_mw": float(pre_obs[_F.COMMITTED] * env._committed_max_mw),
+            "committed_actual_mw": float(env._fast_env.committed_mw),
+            **{key: info[key] for key in TRACE_INFO_FIELDS},
         })
 
     env = rb._make_macro_env(scenario=scenario, inner_action_fn=inner_fn, sub_step_callback=cb,
                              config_path=config_path)
     obs, _ = env.reset(seed=seed)
+    initial_hardware_obs = env._last_hw_obs.tolist()
     if start_day is not None:
         day_load = _align_calendar(env._fast_env, start_day)
         if regd_bias:
@@ -150,22 +175,77 @@ def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
     else:
         agent = rb.load_sb3_agent(macro, scenario, seed, macro_model_dir)
     revenue, done = 0.0, False
+    macro_rows = []
     while not done:
         a, _ = agent.predict(obs, deterministic=True)
         obs, _, term, trunc, info = env.step(a)
         revenue += float(info.get("regulation_revenue", 0.0))
+        macro_rows.append({
+            **{key: value for key, value in info.items() if key != "last_inner_info"},
+            "duration_hours": info["sub_steps_run"] * env._fast_env._dt / 3600.0,
+            "settlement_hours": _SUBSTEPS * env._fast_env._dt / 3600.0,
+            "terminated": term,
+            "truncated": trunc,
+        })
         done = term or trunc
 
     g = env._fast_env._grid
     df = pd.DataFrame(rows)
+    macro_df = pd.DataFrame(macro_rows)
     df["load_mw"] = df["load_norm"] * float(np.max(g._load_mw))
     df.attrs.update(
         load_median=float(g._load_median), lmp_base=float(g.lmp_base_usd),
         lmp_slope=float(g.lmp_slope), dt_s=float(env._fast_env._dt),
         c_max=float(getattr(env, "_committed_max_mw", 30.0)),
         revenue_usd=revenue,
+        diagnostics=_episode_diagnostics(df, macro_df, float(env._fast_env._dt)),
     )
-    return df
+    if trace_dir is not None:
+        directory = Path(trace_dir)
+        directory.mkdir(parents=True, exist_ok=False)
+        df.to_csv(directory / "hardware.csv.gz", index=False, compression="gzip")
+        macro_df.to_csv(directory / "macro.csv.gz", index=False, compression="gzip")
+        context = {
+            "scenario": scenario, "seed": seed, "start_day": start_day,
+            "regd_bias": regd_bias, "macro": macro, "hardware": hw,
+            "initial_hardware_observation": initial_hardware_obs,
+            "hardware_checkpoint": getattr(ctrl, "checkpoint", None),
+            "macro_checkpoint": getattr(agent, "checkpoint", None),
+            "hardware_steps": len(df), "macro_steps": len(macro_df),
+            "terminated": bool(term), "truncated": bool(trunc),
+            "metric_context": {key: value for key, value in df.attrs.items() if key != "diagnostics"},
+            "diagnostics": df.attrs["diagnostics"],
+        }
+        (directory / "episode.json").write_text(
+            json.dumps(context, indent=2, allow_nan=False), encoding="utf-8",
+        )
+    return df.loc[:, list(METRIC_TRACE_COLUMNS)]
+
+
+def _episode_diagnostics(hardware, macro, dt_s):
+    hours = macro["duration_hours"].to_numpy()
+    before_discount = float(
+        (macro["rate"] * macro["committed_mw"] * macro["settlement_hours"]).sum()
+    )
+    return {
+        "mean_committed_mw": float(np.average(macro["committed_mw"], weights=hours)),
+        "committed_mwh": float((macro["committed_mw"] * hours).sum()),
+        "mean_paid_perf_score": float(np.average(macro["perf_score"], weights=hours)),
+        "bid_acceptance_fraction": float(macro["bid_accepted"].mean()),
+        "revenue_before_discount_usd": before_discount,
+        "tracking_discount_usd": before_discount - float(macro["regulation_revenue"].sum()),
+        "bess_discharge_mwh": float(hardware["bess_actual_kw"].clip(lower=0).sum() * dt_s / 3.6e6),
+        "bess_charge_mwh": float(-hardware["bess_actual_kw"].clip(upper=0).sum() * dt_s / 3.6e6),
+        "soc_min": float(hardware["bess_soc"].min()),
+        "soc_final": float(hardware["bess_soc"].iloc[-1]),
+        "temp_A_max": float(hardware["temp_A"].max()),
+        "temp_B_max": float(hardware["temp_B"].max()),
+        "thermal_warning_fraction": float(hardware["thermal_warning"].mean()),
+        "regd_clipping_fraction": float(hardware["regd_observed"].abs().ge(1.0).mean()),
+        "commitment_observation_mae_mw": float(
+            (hardware["committed_actual_mw"] - hardware["committed_observed_mw"]).abs().mean()
+        ),
+    }
 
 
 def _lmp(load_mw, a) -> np.ndarray:
@@ -174,7 +254,8 @@ def _lmp(load_mw, a) -> np.ndarray:
 
 
 def _metrics(A: pd.DataFrame, B: pd.DataFrame) -> dict[str, float]:
-    n = min(len(A), len(B))
+    agent_ticks, baseline_ticks = len(A), len(B)
+    n = min(agent_ticks, baseline_ticks)
     A, B, at = A.iloc[:n], B.iloc[:n], A.attrs
     L = A["load_mw"].to_numpy()
     a, b = A["p_fac_mw"].to_numpy(), B["p_fac_mw"].to_numpy()
@@ -188,6 +269,9 @@ def _metrics(A: pd.DataFrame, B: pd.DataFrame) -> dict[str, float]:
     act, dem, err = A["dp_act_kw"].to_numpy(), A["dp_dem_kw"].to_numpy(), A["err_kw"].to_numpy()
     lw = (w * dP).sum() / w.sum() if w.sum() > 0 else float("nan")
     return {
+        "agent_ticks": agent_ticks,
+        "baseline_ticks": baseline_ticks,
+        "paired_ticks": n,
         "dP_mean_mw": dP.mean(),
         "dP_stress_mw": dP[S].mean(),
         "LFR_pct": 100 * dP[S].sum() / b[S].sum(),
@@ -236,6 +320,7 @@ def main() -> None:
     p.add_argument("--seed", type=int, default=100)
     p.add_argument("--workers", type=int, default=min(75, os.cpu_count() or 1))
     p.add_argument("--output", default="evaluation/results/grid_relief")
+    p.add_argument("--trace-dir", help="Save per-rollout hardware/macro CSVs and checkpoint identities.")
     args = p.parse_args()
 
     ctrls = ["none"] + args.hw
@@ -247,7 +332,10 @@ def main() -> None:
 
     def _job(sc, m, d, b, h, s):
         macro, hw = h.split("+", 1) if "+" in h else ("rule_macro", h)
-        return (hw, sc, s, args.hw_model_dir, macro, args.macro_model_dir, cfgs[m], d, b)
+        trace_dir = None if args.trace_dir is None else str(
+            Path(args.trace_dir) / f"{sc}_{m}_d{d}_b{b:g}_{h}_s{s}"
+        )
+        return (hw, sc, s, args.hw_model_dir, macro, args.macro_model_dir, cfgs[m], d, b, trace_dir)
 
     jobs = {(*c, h, s): _job(*c, h, s) for c in combos for h in ctrls for s in seeds}
     print(f"Running {len(jobs)} episodes on {args.workers} workers ...", flush=True)
@@ -263,7 +351,8 @@ def main() -> None:
             for s in seeds:
                 per_ep.append({"scenario": sc, "market": m, "day": "legacy" if d is None else d,
                                "regd_bias": b, "hw": h, "seed": s,
-                               **_metrics(traces[(sc, m, d, b, h, s)], traces[(sc, m, d, b, "none", s)])})
+                               **_metrics(traces[(sc, m, d, b, h, s)], traces[(sc, m, d, b, "none", s)]),
+                               **traces[(sc, m, d, b, h, s)].attrs["diagnostics"]})
     per_ep_df = pd.DataFrame(per_ep)
     keys = ["scenario", "market", "day", "regd_bias", "hw"]
     agg = per_ep_df.drop(columns="seed").groupby(keys, sort=False).agg(["mean", "std"])
@@ -290,6 +379,8 @@ def main() -> None:
             "regd_bias_definition": "r_t + beta * clip((L_t - mean_day) / (max_day - mean_day), -1, 1); "
                                     "evaluation-only patch, env code unchanged",
             "hw_model_dir": args.hw_model_dir, "macro_model_dir": args.macro_model_dir,
+            "trace_dir": args.trace_dir,
+            "diagnostic_fields": list(next(iter(traces.values())).attrs["diagnostics"]),
             "stress_quantile": STRESS_QUANTILE, "sig_test": f"one-sided t > {t_crit}",
             "baseline": "rule_macro, no inner controller",
             "market_override": "global.grid_market (scenario grid_market is ignored by the env)"}

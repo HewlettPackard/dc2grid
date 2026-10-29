@@ -648,8 +648,8 @@ class TestCapacityContracts:
         finally:
             env.close()
 
-    @pytest.mark.parametrize("config_id", ["nominal", "low_inertia", "combined_adverse"])
-    def test_capacity_thermal_transitions_preserve_relative_tracking(self, config_id):
+    @pytest.mark.parametrize("param", ["nominal", "C_A", "fault_factor"])
+    def test_capacity_thermal_transitions_preserve_relative_tracking(self, param):
         from c2g_env.experiments.thermal_sensitivity_cross_scenario import (
             _explicit_configurations, _rescale_thermal_grid, load_config,
         )
@@ -659,7 +659,7 @@ class TestCapacityContracts:
         for profile in available_plant_profiles():
             plant = load_plant_profile(profile)
             grid = _rescale_thermal_grid(base, plant) if plant else base
-            config = next(item for item in _explicit_configurations(grid) if item["id"] == config_id)
+            config = next(item for item in _explicit_configurations(grid) if item["param"] == param)
             env = C2GFastEnv(plant_overrides=plant, thermal_overrides=config["overrides"])
             try:
                 env.reset(seed=100)

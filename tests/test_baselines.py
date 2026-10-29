@@ -163,7 +163,9 @@ class TestRuleBasedController:
 
 class TestBenchmarkImport:
     @pytest.mark.parametrize("profile", available_plant_profiles())
-    @pytest.mark.parametrize("scenario", ["default", "scenario_a", "scenario_b", "scenario_c"])
+    @pytest.mark.parametrize(
+        "scenario", ["default", "scenario_a", "scenario_b", "scenario_c"],
+    )
     def test_rule_factory_uses_effective_plant_limits(self, profile, scenario):
         from evaluation.run_benchmark import _make_inner_controller
 
@@ -603,6 +605,57 @@ class TestTrainImports:
 
 
 class TestExperimentIdentity:
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    def test_thermal_grid_is_one_at_a_time(self, profile):
+        from c2g_env.experiments import thermal_sensitivity_cross_scenario as runner
+
+        cfg = runner.load_config()
+        plant = load_plant_profile(profile)
+        grid = runner._rescale_thermal_grid(cfg, plant) if plant else cfg
+        overrides = {
+            config["id"]: config["overrides"]
+            for config in runner._explicit_configurations(grid)
+        }
+
+        assert len(overrides) == 33
+        assert {len(values) for values in overrides.values()} == {0, 1}
+        assert set(cfg["cross_scenario"]["validation_configs"]) <= overrides.keys()
+
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    @pytest.mark.parametrize("scenario", ["default", "scenario_a", "scenario_b", "scenario_c"])
+    @pytest.mark.parametrize("config_id", ["nominal", "fault_factor=0.4", "T_amb=35.0"])
+    def test_thermal_grid_preserves_scenario_settings(self, profile, scenario, config_id):
+        from c2g_env.experiments import thermal_sensitivity_cross_scenario as runner
+
+        cfg = runner.load_config()
+        plant = load_plant_profile(profile)
+        grid = runner._rescale_thermal_grid(cfg, plant) if plant else cfg
+        config = next(
+            item for item in runner._explicit_configurations(grid)
+            if item["id"] == config_id
+        )
+        env = runner.C2GMacroEnv(
+            scenario=scenario, plant_overrides=plant,
+            thermal_overrides=config["overrides"],
+        )
+        try:
+            env.reset(seed=cfg["cross_scenario"]["seeds"][0])
+            fast = env._fast_env
+            expected_fault = fast._scfg.get("cooling_fault_factor", 1.0)
+            assert fast._thermal.fault_factor == config["overrides"].get(
+                "fault_factor", expected_fault,
+            )
+            assert fast._thermal.T_amb == config["overrides"].get(
+                "T_amb", fast._scfg["T_amb"],
+            )
+            assert fast._bess.soc_fraction == pytest.approx(fast._scfg["bess_soc_init"])
+            controller = runner._make_hardware_controller("rule_based", env, None)
+            assert controller.bess_gain == pytest.approx(
+                fast._committed_mw_max / fast._bess.P_MAX_MW,
+            )
+        finally:
+            env.close()
+
     def test_capacity_sweep_controller_matrix(self):
         from c2g_env.experiments import thermal_sensitivity_cross_scenario as runner
 
@@ -641,11 +694,24 @@ class TestExperimentIdentity:
         config["value"] = 31.0
         runner.main()
         assert len(creations) == 3
+        argv.extend(["--hardware-observation-protocol", "historical_zero"])
+        runner.main()
+        runner.main()
+        assert len(creations) == 4
         with path.open(newline="", encoding="utf-8") as handle:
             rows = list(csv.DictReader(handle))
-        assert len(rows) == 3
-        assert len({row["episode_id"] for row in rows}) == 3
-        assert [float(row["facility_capacity_mw"]) for row in rows] == [50.0, 500.0, 500.0]
+        assert len(rows) == 4
+        assert len({row["episode_id"] for row in rows}) == 4
+        assert [float(row["facility_capacity_mw"]) for row in rows] == [
+            50.0, 500.0, 500.0, 500.0,
+        ]
+        assert [row["hardware_observation_protocol"] for row in rows] == [
+            "carry_forward", "carry_forward", "carry_forward", "historical_zero",
+        ]
+        assert all(
+            json.loads(row["run_config"])["hardware_observation_protocol"]
+            == row["hardware_observation_protocol"] for row in rows
+        )
         assert set(runner._CALLBACK_METRIC_FIELDS).issubset(rows[0])
         assert "workload/mean_throughput_ratio" in rows[0]
         assert "workload/served_work_ratio" in rows[0]
@@ -653,7 +719,7 @@ class TestExperimentIdentity:
         damaged = Path(rows[0]["recording_dir"]) / "hardware.jsonl.gz"
         damaged.write_bytes(damaged.read_bytes() + b"damage")
         assert rows[0]["episode_id"] not in runner._completed_keys(path)
-        assert len(runner._completed_keys(path)) == 2
+        assert len(runner._completed_keys(path)) == 3
 
     def test_interrupted_recording_is_not_completed(self, monkeypatch, tmp_path):
         from c2g_env.experiments import thermal_sensitivity_cross_scenario as runner
@@ -665,9 +731,12 @@ class TestExperimentIdentity:
         config = {"id": "probe", "param": "nominal", "value": 0.0, "overrides": {}, "aliases": ["probe"]}
         context = {"run_id": "run", "episode_id": "episode"}
         with pytest.raises(RuntimeError, match="test interruption"):
-            runner._run_episode(config, "default", 100, "rule_based", None,
-                                runner.RuleBasedMacroController(), "rule_macro", record_dir=tmp_path,
-                                episode_context=context, run_config={})
+            runner._run_episode(
+                config, "default", 100, "rule_based", None,
+                runner.RuleBasedMacroController(), "rule_macro", record_dir=tmp_path,
+                episode_context=context,
+                run_config={"hardware_observation_protocol": "carry_forward"},
+            )
         assert len(list(tmp_path.rglob("hardware.jsonl.gz"))) == 1
         assert not list(tmp_path.rglob("manifest.json"))
 
@@ -688,9 +757,12 @@ class TestExperimentIdentity:
 
         monkeypatch.setattr(runner, "C2GMacroEnv", short_macro)
         config = {"id": "nominal", "param": "nominal", "value": 0.0, "overrides": {}, "aliases": ["nominal"]}
-        row = runner._run_episode(config, "default", 100, "rule_based", None,
-                                  runner.RuleBasedMacroController(), "rule_macro", record_dir=tmp_path,
-                                  episode_context={"run_id": "run", "episode_id": "episode"}, run_config={})
+        row = runner._run_episode(
+            config, "default", 100, "rule_based", None,
+            runner.RuleBasedMacroController(), "rule_macro", record_dir=tmp_path,
+            episode_context={"run_id": "run", "episode_id": "episode"},
+            run_config={"hardware_observation_protocol": "carry_forward"},
+        )
         with gzip.open(Path(row["recording_dir"]) / "hardware.jsonl.gz", "rt", encoding="utf-8") as handle:
             reset, *records = [json.loads(line) for line in handle]
         assert reset["event"] == "reset"
@@ -785,12 +857,18 @@ class TestExperimentIdentity:
             {"thermal": {"C_A": 5400.0}, "plant": "small"}
         )
 
-    @pytest.mark.parametrize("field", ["plant_profile", "plant_overrides", "macro_controller", "hardware_checkpoint", "macro_checkpoint", "source_id"])
+    @pytest.mark.parametrize("field", [
+        "plant_profile", "plant_overrides", "macro_controller",
+        "hardware_checkpoint", "macro_checkpoint", "source_id",
+        "hardware_observation_protocol",
+    ])
     def test_run_identity_distinguishes_conditions(self, field):
         from c2g_env.experiments.identity import configuration_id
 
         reference = {"plant_profile": "plant_50mw", "plant_overrides": {}, "macro_controller": "rule_macro",
-                     "hardware_checkpoint": None, "macro_checkpoint": None, "source_id": "original"}
+                     "hardware_checkpoint": None, "macro_checkpoint": None,
+                     "source_id": "original",
+                     "hardware_observation_protocol": "carry_forward"}
         changed = {**reference, field: "changed"}
         assert configuration_id(reference) != configuration_id(changed)
 
@@ -844,9 +922,9 @@ class TestCapacitySweepLauncher:
         plan = sweep._build_plan(tmp_path, cfg, available_plant_profiles(), cfg["cross_scenario"]["controller_pairs"])
 
         assert plan["worker_count"] == len(plan["workers"]) == 8
-        assert plan["total_episodes"] == 5760
-        assert set(plan["episodes_per_capacity"].values()) == {1440}
-        assert {worker["episodes"] for worker in plan["workers"]} == {720}
+        assert plan["total_episodes"] == 5280
+        assert set(plan["episodes_per_capacity"].values()) == {1320}
+        assert {worker["episodes"] for worker in plan["workers"]} == {660}
         assert {(worker["macro"], worker["hardware"]) for worker in plan["workers"]} == {
             ("rule_macro", "rule_based"), ("rule_macro", "sac"),
         }
@@ -865,7 +943,7 @@ class TestCapacitySweepLauncher:
             assert stage == "full"
             artifacts.mkdir(parents=True)
             future = Future()
-            future.set_result([{"profile": profile, "macro": pair[0], "hardware": pair[1], "episodes": 720}])
+            future.set_result([{"profile": profile, "macro": pair[0], "hardware": pair[1], "episodes": 660}])
             return future
 
         executor = Mock()
@@ -881,7 +959,7 @@ class TestCapacitySweepLauncher:
         assert pool.call_args.kwargs["mp_context"].get_start_method() == "spawn"
         assert executor.submit.call_count == len(status) == 8
         assert len({call.args[2] for call in executor.submit.call_args_list}) == 8
-        assert sum(item["episodes"] for item in status) == 5760
+        assert sum(item["episodes"] for item in status) == 5280
         assert json.loads((tmp_path / "status.json").read_text(encoding="utf-8")) == status
         for worker in plan["workers"]:
             result = json.loads((Path(worker["artifacts"]) / "status.json").read_text(encoding="utf-8"))
@@ -928,6 +1006,29 @@ class TestCapacitySweepLauncher:
         assert {call[call.index("--macro-controller") + 1] for call in calls} == {"rule_macro"}
         assert {call[call.index("--controllers") + 1] for call in calls} == {"rule_based", "sac"}
 
+    @pytest.mark.parametrize("stage", ["screen", "full"])
+    @pytest.mark.parametrize("scenarios", [["default"], ["default", "scenario_b"]])
+    def test_slice_forwards_selected_scenarios(self, sweep, monkeypatch, tmp_path, stage, scenarios):
+        from unittest.mock import Mock
+
+        cfg = sweep.runner.load_config()
+        cfg["cross_scenario"]["scenarios"] = scenarios
+        expected = scenarios[:1] if stage == "screen" else scenarios
+
+        def run_slice():
+            arguments = sys.argv
+            assert arguments.count("--scenarios") == 1
+            start = arguments.index("--scenarios") + 1
+            stop = start + len(expected)
+            assert arguments[start:stop] == expected
+            assert stop == len(arguments) or arguments[stop].startswith("--")
+            path = Path(arguments[arguments.index("--out") + 1])
+            path.write_text("completed\nTrue\n", encoding="utf-8")
+
+        monkeypatch.setattr(sweep.runner, "main", run_slice)
+        monkeypatch.setattr(sweep, "verify_episode", Mock(return_value={}))
+        sweep._run_slice(tmp_path, tmp_path, "none", ("rule_macro", "sac"), stage, cfg)
+
     def test_preflight_covers_both_pairs_at_extreme_capacities(self, sweep, monkeypatch, tmp_path):
         from unittest.mock import Mock
 
@@ -953,29 +1054,173 @@ class TestCapacitySweepLauncher:
         assert result["preflight"]["verified_episodes"] == 8
         assert result["scaling_checks"] == ["checked"]
 
+    @pytest.mark.parametrize("profile", [None, "plant_50mw"])
+    @pytest.mark.parametrize("scenarios", [None, ["default"]])
     @pytest.mark.parametrize("hardware", ["rule_based", "sac"])
-    def test_cli_selects_one_capacity_and_pair(self, sweep, monkeypatch, tmp_path, hardware):
+    def test_cli_selects_capacity_pair_and_scenarios(self, sweep, monkeypatch, tmp_path, hardware, scenarios, profile):
         from unittest.mock import Mock
 
         preflight = {"verified_episodes": 2, "estimated_upper_storage_gib": 1.0, "available_gib": 10.0}
         monkeypatch.setattr(sweep, "_preflight", Mock(return_value={"preflight": preflight, "scaling_checks": []}))
         dispatch = Mock()
         monkeypatch.setattr(sweep, "_run_workers", dispatch)
-        monkeypatch.setattr(sys, "argv", ["capacity_sweep", "--artifacts", str(tmp_path), "--plant-profile", "plant_50mw",
-                                         "--controller-pair", f"rule_macro+{hardware}", "--preflight-only"])
+        arguments = ["capacity_sweep", "--artifacts", str(tmp_path),
+                     "--controller-pair", f"rule_macro+{hardware}", "--preflight-only"]
+        if profile:
+            arguments.extend(["--plant-profile", profile])
+        if scenarios:
+            arguments.extend(["--scenarios", *scenarios])
+        monkeypatch.setattr(sys, "argv", arguments)
 
         assert sweep.main() == 0
         plan = json.loads((tmp_path / "plan.json").read_text(encoding="utf-8"))
+        profiles = [profile] if profile else available_plant_profiles()
+        selected = scenarios or sweep.runner.load_config()["cross_scenario"]["scenarios"]
+        episodes = 165 if scenarios else 660
         assert plan["controller_pairs"] == [["rule_macro", hardware]]
-        assert plan["worker_count"] == 1
-        assert plan["total_episodes"] == 720
+        assert plan["configuration"]["cross_scenario"]["scenarios"] == selected
+        assert plan["worker_count"] == len(profiles)
+        assert [worker["profile"] for worker in plan["workers"]] == profiles
+        assert set(plan["episodes_per_capacity"].values()) == {episodes}
+        assert plan["total_episodes"] == episodes * len(profiles)
+        assert sweep._preflight.call_args.args[2]["cross_scenario"]["scenarios"] == selected
         dispatch.assert_not_called()
+
+    def test_cli_rejects_unknown_scenario(self, sweep, monkeypatch):
+        monkeypatch.setattr(sys, "argv", ["capacity_sweep", "--scenarios", "not_a_scenario"])
+        with pytest.raises(SystemExit) as error:
+            sweep.main()
+        assert error.value.code == 2
 
     def test_cli_rejects_sac_macro_pair(self, sweep, monkeypatch):
         monkeypatch.setattr(sys, "argv", ["capacity_sweep", "--controller-pair", "sac_macro+sac"])
         with pytest.raises(SystemExit) as error:
             sweep.main()
         assert error.value.code == 2
+
+
+class TestHistoricalSweepObservations:
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    @pytest.mark.parametrize("protocol", ["carry_forward", "historical_zero"])
+    def test_controller_inputs_and_physical_states(
+        self, monkeypatch, tmp_path, profile, protocol,
+    ):
+        from unittest.mock import Mock
+
+        from c2g_env.experiments import thermal_sensitivity_cross_scenario as runner
+        sweep = pytest.importorskip("copilot.helpers.run_capacity_thermal_logged")
+        monkeypatch.setattr("c2g_env.env_high_level._SUBSTEPS", 3)
+        real_macro = runner.C2GMacroEnv
+
+        def short_macro(**kwargs):
+            env = real_macro(**kwargs)
+            env._episode_macro_ticks = 2
+            env._fast_env._episode_ticks = 6
+            return env
+
+        monkeypatch.setattr(runner, "C2GMacroEnv", short_macro)
+        hardware = Mock()
+        hardware.predict.return_value = (np.array([1.0, 0.7, 0.7, 0.0]), None)
+        macro = Mock(wraps=runner.RuleBasedMacroController())
+        config = runner._select_configurations(runner.load_config(), ["nominal"])[0]
+        row = runner._run_episode(
+            config, "default", 100, "sac", hardware, macro, "rule_macro",
+            load_plant_profile(profile), record_dir=tmp_path,
+            episode_context={"run_id": "test", "episode_id": "test"},
+            run_config={"hardware_observation_protocol": protocol},
+        )
+        directory = Path(row["recording_dir"])
+        reset, *records = sweep._read_records(directory / "hardware.jsonl.gz")
+        assert row["fast_steps"] == hardware.predict.call_count == 6
+        assert row["macro_steps"] == macro.predict.call_count == 2
+        assert row["hardware_observation_protocol"] == protocol
+        previous = reset["observation"]
+        for index, record in enumerate(records):
+            np.testing.assert_array_equal(record["state"], previous)
+            supplied = hardware.predict.call_args_list[index].args[0]
+            expected = record["state"]
+            if protocol == "historical_zero" and index in (0, 3):
+                expected = np.zeros(18)
+                assert supplied.dtype == np.float64
+            np.testing.assert_array_equal(supplied, expected)
+            np.testing.assert_array_equal(
+                record["info"]["sweep"]["controller_observation"], expected,
+            )
+            assert record["hardware_observation_protocol"] == protocol
+            previous = record["observation"]
+        _, *macro_records = sweep._read_records(directory / "macro.jsonl.gz")
+        for call, record in zip(macro.predict.call_args_list, macro_records):
+            np.testing.assert_array_equal(call.args[0], record["state"])
+            assert np.any(call.args[0])
+        manifest = json.loads((directory / "manifest.json").read_text())
+        sweep._verify_controller_observations(records, manifest)
+        records[0]["info"]["sweep"]["controller_observation"] = [2.0] * 18
+        with pytest.raises(AssertionError):
+            sweep._verify_controller_observations(records, manifest)
+
+    def test_rejects_unknown_protocol(self):
+        from c2g_env.experiments import thermal_sensitivity_cross_scenario as runner
+
+        with pytest.raises(ValueError, match="Unknown hardware observation protocol"):
+            runner._controller_observation(np.ones(18), "unknown", True)
+
+    def test_nominal_plan_and_arguments(self, monkeypatch, tmp_path):
+        from unittest.mock import Mock
+
+        sweep = pytest.importorskip("copilot.helpers.run_capacity_thermal_logged")
+        preflight = {
+            "verified_episodes": 2, "estimated_upper_storage_gib": 1.0,
+            "available_gib": 10.0,
+        }
+        monkeypatch.setattr(
+            sweep, "_preflight",
+            Mock(return_value={"preflight": preflight, "scaling_checks": []}),
+        )
+        monkeypatch.setattr(sys, "argv", [
+            "capacity_sweep", "--artifacts", str(tmp_path),
+            "--plant-profile", "none", "--controller-pair", "rule_macro+sac",
+            "--scenarios", "default", "--configs", "nominal",
+            "--hardware-observation-protocol", "historical_zero", "--preflight-only",
+        ])
+        assert sweep.main() == 0
+        plan = json.loads((tmp_path / "plan.json").read_text())
+        assert plan["worker_count"] == 1
+        assert plan["total_episodes"] == 5
+        cfg = plan["configuration"]
+        assert (
+            cfg["cross_scenario"]["hardware_observation_protocol"] == "historical_zero"
+        )
+
+        def run_slice():
+            arguments = sys.argv
+            assert arguments[arguments.index("--configs") + 1] == "nominal"
+            start = arguments.index("--hardware-observation-protocol")
+            assert arguments[start + 1] == "historical_zero"
+            path = Path(arguments[arguments.index("--out") + 1])
+            path.write_text("completed\nTrue\n", encoding="utf-8")
+
+        monkeypatch.setattr(sweep.runner, "main", run_slice)
+        sweep._run_slice(tmp_path, tmp_path, "none", ("rule_macro", "sac"), "full", cfg)
+
+    def test_rejects_unknown_configuration(self, tmp_path):
+        sweep = pytest.importorskip("copilot.helpers.run_capacity_thermal_logged")
+        cfg = sweep.runner.load_config()
+        cfg["cross_scenario"]["configs"] = ["missing"]
+        with pytest.raises(ValueError, match="Unknown thermal configuration IDs"):
+            sweep._build_plan(tmp_path, cfg, ["none"], [["rule_macro", "sac"]])
+
+    def test_recorded_comparison_detects_numerical_changes(self):
+        replay = pytest.importorskip("copilot.helpers.compare_nominal_replay")
+        assert replay._recorded_values_comparison([[0.0, 1.0]], [[0.0, 1.0]]) == {
+            "matches": True, "values_checked": 2, "max_absolute_difference": 0.0,
+        }
+        changed = replay._recorded_values_comparison([[0.0, 1.0]], [[0.0, 1.1]])
+        assert not changed["matches"]
+        assert changed["max_absolute_difference"] == pytest.approx(0.1)
+        with pytest.raises(ValueError, match="Trace shapes differ"):
+            replay._recorded_values_comparison([[0.0]], [[0.0, 1.0]])
+        with pytest.raises(ValueError, match="finite"):
+            replay._recorded_values_comparison([[0.0]], [[float("nan")]])
 
 
 class TestConditionAnalysis:

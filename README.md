@@ -129,7 +129,7 @@ M_{\text{macro}} = (\mathcal{S}_M,\, \mathcal{A}_M,\, P_M,\, R_M,\, \gamma_M,\, 
 | $\mathcal{S}_M \subset \mathbb{R}^{19}$ | Aggregated sub-step states: component-wise means + SOC endpoint + extrema + market context                                                                                          |
 | $\mathcal{A}_M = [0,1]^2$               | 2-D: `bid_mw_norm` (MW capacity to offer), `bid_price_norm` (asking price)                                                                                                      |
 | $P_M$                                   | $K$ applications of the lower-level transition $P$                                                                                                                              |
-| $R_M$                                   | $\lambda_{\text{rev}} \times \text{regulation revenue} + \bar{r}_K - \lambda_{\text{elec}} \times \text{electricity cost} - \lambda_{\text{churn}} \times |\Delta\text{bid\_mw}|$ |
+| $R_M$                                   | $\lambda_{\text{rev}} \times \text{regulation revenue} + \bar{r}_K - \lambda_{\text{elec}} \times \text{electricity cost} - \lambda_{\text{churn}} \times \lvert\Delta\text{bid\_mw}\rvert$ |
 | $\gamma_M = \gamma^K$                   | $0.99^{180} \approx 0.163$ effective discount per macro step                                                                                                                      |
 | $T_M = 96$                              | Macro steps per episode (24 h $\div$ 15 min)                                                                                                                                      |
 
@@ -175,6 +175,7 @@ Grid operators (PJM, ERCOT, etc.) clear ancillary-service markets in **15-minute
   | 16    | `backlog_norm_mean`   | [0, 2]   | Mean batch queue depth / p_flex_max             |
   | 17    | `rmcp_norm`           | [0, 5]   | Grid's posted RMCP / rmcp_max                   |
   | 18    | `reg_need_norm`       | [0, 5]   | Grid's residual regulation need / committed_max |
+
 - **Reward:** $R_{\text{macro}} = \lambda_{\text{rev}} \times \text{regulation\_revenue} / 1000 + \bar{r}_K - \lambda_{\text{elec}} \times \text{electricity\_cost} / 1000 - \lambda_{\text{churn}} \times |\text{bid\_mw\_now} - \text{bid\_mw\_prev}|$
   - $\lambda_{\text{rev}} = 1.0$, $\lambda_{\text{elec}} = 0.5$, $\lambda_{\text{churn}} = 0.05$ (all in `c2g_env/config.yaml`)
 
@@ -199,7 +200,9 @@ The optimal policy learns this hierarchy: use BESS first (fast, free), borrow th
 | **BESS**               | `action[3]` | [-1, 1] | Charge (−) / discharge (+) the 15 MWh battery                              |
 
 - **Action Space (4-D, continuous):** `[throttle_batch, pump_speed_A, hvac_effort, bess_dispatch]`
-- **Observation Space (18-D, normalised):** | Index | Name                  | Range    | Description                                                  |
+- **Observation Space (18-D, normalised):**
+
+  | Index | Name                  | Range    | Description                                                  |
   | ----- | --------------------- | -------- | ------------------------------------------------------------ |
   | 0     | `temp_A_norm`       | [0, 2]   | Zone A (liquid-cooled GPU) temperature / T_safe              |
   | 1     | `temp_B_norm`       | [0, 2]   | Zone B (air-cooled CPU) temperature / T_safe                 |
@@ -255,7 +258,7 @@ where:
 #### Term-by-term breakdown
 
 | # | Term                | Coefficient                   | What it measures                                                                                        | Why it matters                                                                                              |
-| - | ------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| --- | ------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | 1 | Throughput          | $\alpha = 1.0$              | Fraction of max IT capacity actually committed ($u_{\text{thr}} \in [0,1]$)                           | Maximising revenue — the agent earns more for accepting more DFS workload                                  |
 | 2 | RegD tracking       | $\beta = 2.0$               | Normalised absolute error between the FERC-requested power change and what the DC actually delivered    | The primary ancillary-service obligation — missing this is penalised twice as hard as raw throughput gains |
 | 3 | Thermal overrun     | $\gamma = 5.0$              | Degrees above the warning threshold $T_{\text{warn}} = 33°$C for the hotter of the two cooling zones | Linear ramp long before the hard 35 °C trip; $\gamma$ is large enough to dominate at +1 °C overshoot    |
@@ -311,7 +314,7 @@ Episode truncates at 17,280 ticks (24 hours at 5 s).
 
 ## 6. Physics Engines
 
-> **DC2Grid exposes exactly two Gymnasium environments** — `C2GFastEnv` and `C2GMacroEnv` — both registered under `gym.make()`. Everything below is *not* an environment: the six physics engines are internal simulation components with no `reset()/step()` or `observation_space/action_space` API. They are called exclusively by the two environments and are never exposed to an RL agent directly. If you want to interact with a physics engine in isolation (e.g. for unit testing or analysis), instantiate it directly from `c2g_env.physics.*`.
+> **DC2Grid exposes two Gymnasium environment classes**, `C2GFastEnv` and `C2GMacroEnv`. Import them from `c2g_env` and instantiate them; the package does not register environment IDs for `gym.make()`. The six physics/data modules below are internal simulation components, not standalone Gymnasium environments. They can also be instantiated from `c2g_env.physics.*` for unit testing or analysis.
 
 Six independent physics/data modules, all with exact-exponential or analytical solutions (unconditionally stable):
 
@@ -345,7 +348,7 @@ Each trace has a distinct statistical character, hardware zone assignment, and r
 
 | File                | Source                                                                                                                                               |   Duration   | Zone                  | Role                                             | Controllable?                                              |
 | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: | :-------------------- | :----------------------------------------------- | :--------------------------------------------------------- |
-| `batch_v2023.csv` | [Alibaba GPU v2023 (`openb_pod_list_default.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-pod-v2023)                      |    33 days    | A (GPU liquid-cooled) | `P_flex` — schedulable batch jobs             | ✅ DVFS throttle `action[0]` defers work into FIFO queue |
+| `batch_v2023.csv` | [Alibaba GPU v2023 (`openb_pod_list_default.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-gpu-v2023)                      |    33 days    | A (GPU liquid-cooled) | `P_flex` — schedulable batch jobs             | ✅ DVFS throttle `action[0]` defers work into FIFO queue |
 | `dlrm_v2025.csv`  | [Alibaba GPU v2025 (`disaggregated_DLRM_trace.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-gpu-v2025)                    |    30 days    | B (CPU air-cooled)    | `P_base` — rigid DLRM inference serving       | ❌ Must be served regardless of grid state                 |
 | `genai_v2026.csv` | [Alibaba v2026 GenAI (`qps.csv` and `pod_gpu_duty_cycle_anon.csv`)](https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2026-GenAI) | 1 day (tiled) | A (GPU liquid-cooled) | `P_base` — rigid GenAI inference, spike-prone | ❌ Must be served; spikes set `obs[9]=1`                 |
 
@@ -424,7 +427,7 @@ batch throttling which covers only the remaining 26%.
   Ticks where `avg_gpu_duty_cycle > P75 = 12.19%` are flagged as **spikes** (`obs[9] = 1`).
   GenAI runs on the same Zone A GPU racks as batch but with strict SLA priority.
 - **Agent implication:** Spikes increase Zone A temperature rapidly (liquid cooling response time τ ≈ 13 min).
-  The safety shield terminates episodes if `T_A > 35°C`. During spikes the agent must reduce batch load
+  The environment terminates episodes if `T_A > 35°C`. During spikes the agent must reduce batch load
   (`action[0]`) and possibly increase pump speed (`action[1]`) to prevent thermal fault.
 
 <p align="center">
@@ -630,7 +633,9 @@ dc2grid/
 │   ├── config.yaml                      # Centralised env configuration
 │   ├── experiments/
 │   │   ├── __init__.py                  # Exports ActionAblationFastEnv
-│   │   └── action_ablation_env.py       # C2GFastEnv subclass for action-level ablation studies
+│   │   ├── action_ablation_env.py       # C2GFastEnv subclass for action-level ablation studies
+│   │   ├── thermal_sensitivity.py       # Reduced thermal-model harness and grid expansion
+│   │   └── thermal_sensitivity_cross_scenario.py  # Standalone full-environment thermal sweep
 │   └── physics/
 │       ├── workload.py                  # Alibaba trace fusion (batch/DLRM/GenAI)
 │       ├── thermal.py                   # Exact-exponential ODEs, dual-zone cooling
@@ -647,10 +652,9 @@ dc2grid/
 │
 ├── conf/                                # Hydra configuration tree
 │   ├── config.yaml                      # Top-level defaults (scenario, algo, market, logging)
-│   ├── algo/                            # 19 algo configs: ppo, sac, ppo_macro, sac_macro, cpo,
-│   │                                    #   ppo_lagrangian, cbf_ppo, hj_ppo, mpcsf_ppo, ha_c2g,
-│   │                                    #   cbm_only, cbm_gate, cbm_shield, rule_macro_ppo, pid,
-│   │                                    #   mpc_fast, mpc_macro, milp, shield_reward_shaping
+│   ├── algo/                            # 10 algo configs: ppo, sac, ppo_macro, cpo,
+│   │                                    #   ppo_lagrangian, rule_macro_ppo, pid,
+│   │                                    #   mpc_fast, mpc_macro, milp
 │   ├── scenario/                        # default, scenario_a, scenario_b, scenario_c
 │   ├── market/                          # nyiso_nyc, pjm_dom, caiso_pgae, ercot_north, entso_de, aemo_nsw
 │   └── logging/                         # tensorboard.yaml
@@ -665,31 +669,28 @@ dc2grid/
 │   ├── bang_bang.py                     # Bang-bang / hysteresis controller (floor baseline)
 │   ├── pid_controller.py                # Multi-loop PID controller with anti-windup
 │   │
-│   │  # ── RL Training Scripts ─────────────────────────────────────────────
+│   │  # ── RL Training and LLM Control ─────────────────────────────────────
 │   ├── train_sac.py                     # SB3 SAC (off-policy, auto entropy)
 │   ├── train_hierarchical.py            # Two-phase sequential HRL pipeline (PPO inner)
 │   ├── train_hierarchical_sac.py        # Two-phase HRL with SAC inner policy
 │   ├── train_rule_macro_sac.py          # Rule-based macro + SAC inner policy
 │   ├── train_lowsac_highrandom.py       # SAC lower + random macro (ablation)
-│   ├── train_llm_agents.py              # LLM-guided agent training
+│   ├── train_llm_agents.py              # LLM runtime control and prompt utilities
 │   │
-│   └── safety/                          # HA safety methods + shielded training scripts (see §11)
+│   └── safety/                          # Constrained RL training (see §11)
+│       ├── train_cpo.py                 # Constraint-aware PPO updates
+│       └── train_ppo_lagrangian.py      # Adaptive constraint penalties
 │
 ├── evaluation/                          # Benchmark auditing & analysis
 │   ├── run_benchmark.py                 # Standard benchmark: runs agents on all 4 scenarios
 │   │                                    # Outputs: per-episode CSVs with cumulative power metrics
-│   ├── run_ha_benchmark.py              # HA safety benchmark: 11-metric evaluation set
-│   │                                    # Same cumulative power metrics as run_benchmark.py
 │   ├── generate_plots.py                # Publication-ready PDF/PNG figures
-│   ├── generate_ha_plots.py             # HA-specific: Pareto frontier, radar, violin plots
 │   ├── plot_episode_traces.py           # Per-episode trace analysis with ablation filtering
-│   ├── failure_analysis.py              # Failure-case categorisation for HA benchmark
 │   └── statistical_analysis.py          # Bootstrap CIs, Welch's t-test, Cohen's d, LaTeX tables
 │
-├── scripts/                             # Data download & training utilities
+├── scripts/                             # Data download utilities
 │   ├── download_weather.py              # Open-Meteo ERA5 → 6 weather CSVs
-│   ├── download_energy.py               # EIA + SMARD + AEMO → 5 energy CSVs
-│   └── run_sweep.sh                     # Full training sweep (25 phases, ~270 jobs)
+│   └── download_energy.py               # EIA + SMARD + AEMO → 5 energy CSVs
 │
 ├── preprocessing/                       # Raw → processed data pipelines
 │   ├── workload_traces/                 # process_v2023.py, process_v2025.py, process_v2026_genai.py
@@ -709,26 +710,21 @@ dc2grid/
 │   ├── 10_baselines_visualization.ipynb # Baseline agent comparison & visualisation
 │   └── 11_workload_deep_dive.ipynb      # Workload queue dynamics & trace statistics
 │
-├── tests/                               # 531 tests (pytest)
-│   ├── test_workload.py                 # 24 tests
-│   ├── test_thermal.py                  # 32 tests
-│   ├── test_electrical.py               # 27 tests
-│   ├── test_macro_grid.py               # 30 tests
-│   ├── test_weather.py                  # 23 tests
-│   ├── test_gym_api.py                  # 72 tests (API compliance both envs)
-│   ├── test_baselines.py                # 18 tests
-│   ├── test_new_baselines.py            # 50 tests (classical + gradient-free baselines)
-│   ├── test_frequency_voltage.py        # 31 tests (freq/voltage safety signals)
-│   ├── test_hierarchical.py             # 22 tests (HRL, macro agents)
-│   ├── test_safety_shield.py            # 24 tests (Simplex shield, wrappers)
-│   ├── test_ha_safety.py                # 70 tests (3-tier HA safety methods)
-│   ├── test_critical_bug_fixes.py       # 50 tests (regression tests)
-│   ├── test_ablation.py                 # 18 tests (action ablation env)
-│   ├── test_readme_smoke.py             # 13 tests (README code snippet validation)
-│   ├── test_datalogging.py              # 7 tests (transition logging schema + 5 smoke tests)
-│                                        #   Hardware vs macro column validation
-│                                        #   5 CLI smoke tests: rule_macro, rule_based,
-│                                        #   rule_based+BESS_ablation, ha_rule_based (variants)
+├── tests/                               # pytest suite
+│   ├── test_workload.py                 # Workload traces and queue dynamics
+│   ├── test_thermal.py                  # Thermal physics
+│   ├── test_electrical.py               # Electrical chain and BESS
+│   ├── test_macro_grid.py               # Grid signals and market behavior
+│   ├── test_weather.py                  # Weather inputs
+│   ├── test_gym_api.py                  # API compliance for both environments
+│   ├── test_baselines.py                # Controllers, capacity profiles, and thermal sweeps
+│   ├── test_new_baselines.py            # Classical controllers and constrained RL
+│   ├── test_frequency_voltage.py        # Frequency and voltage safety signals
+│   ├── test_hierarchical.py             # HRL and macro agents
+│   ├── test_critical_bug_fixes.py        # Regression tests
+│   ├── test_ablation.py                 # Action ablation environment
+│   ├── test_readme_smoke.py             # Training command smoke tests
+│   └── test_datalogging.py              # Transition schemas and CLI smoke tests
 │
 └── figures/                             # Root-level figures (TensorBoard screenshot, etc.)
 ```
@@ -759,7 +755,6 @@ uv sync --extra dev   # pytest, ruff, mypy
 
 ```bash
 uv run pytest tests/ -q
-# 531 passed
 ```
 
 ### Train a single agent
@@ -782,71 +777,21 @@ uv run python baselines/train_ppo.py --multirun \
 # Hierarchical RL — sequential two-phase pipeline
 uv run python baselines/train_hierarchical.py
 
-# Safety-shielded PPO (provable constraint satisfaction)
-uv run python baselines/safety/train_shielded_ppo.py scenario=default
+# Constrained RL: PPO-Lagrangian
+uv run python baselines/safety/train_ppo_lagrangian.py --config-path "$(pwd)/conf" \
+    algo=ppo_lagrangian scenario=default
 
-# Constrained RL — PPO-Lagrangian
-uv run python baselines/safety/train_ppo_lagrangian.py scenario=default
-
-# CPO — Constrained Policy Optimization
-uv run python baselines/safety/train_cpo.py scenario=default
-
-# CBF-shielded PPO (QP-based action projection)
-uv run python baselines/safety/train_cbf_ppo.py scenario=default
-
-# Full HA-C2G neuro-symbolic 3-layer architecture
-uv run python baselines/safety/train_ha_c2g.py scenario=default
+# CPO: Constrained Policy Optimization
+uv run python baselines/safety/train_cpo.py --config-path "$(pwd)/conf" \
+    algo=cpo scenario=default
 ```
 
-### Run the full benchmark sweep
+### Run benchmark evaluation
 
-```bash
-# Dry-run first — prints all 48 jobs without executing anything:
-bash scripts/run_sweep.sh --dry-run
-
-# Full sweep (default: 4 parallel jobs):
-bash scripts/run_sweep.sh
-
-# Use more parallelism (208 cores available — 16 is safe):
-MAX_PARALLEL=16 bash scripts/run_sweep.sh
-```
-
-The sweep runs in 25 phases:
-
-| Phase | Jobs | What runs                                                 |
-| ----- | ---- | --------------------------------------------------------- |
-| 1     | 24   | Rule-Based + Random evaluation only (no training, ~5 min) |
-| 2     | 12   | PPO training (300k steps) + evaluation                    |
-| 3     | 12   | SAC training (200k steps) + evaluation                    |
-| 4     | 12   | Macro Rule-Based evaluation                               |
-| 5     | 12   | PPO-Macro training (100k steps) + evaluation              |
-| 6     | 12   | HRL sequential training (300k + 100k) + evaluation        |
-| 7     | 36   | Bang-Bang, PID, MPC evaluation (no training)              |
-| 8     | 24   | MPC-Macro & MILP evaluation (no training)                 |
-| 9     | 12   | PPO-Lagrangian training (300k) + evaluation               |
-| 10    | 12   | CBF-PPO training (300k) + evaluation                      |
-| 11    | 12   | HJ-PPO training (300k) + evaluation                       |
-| 12    | 12   | MPC-SF-PPO training (300k) + evaluation                   |
-| 13    | 12   | CPO training (300k) + evaluation                          |
-| 14    | 12   | Shield-Reward-Shaping training (300k) + evaluation        |
-| 15    | 12   | HA-C2G neuro-symbolic training (300k) + evaluation        |
-| 16    | 12   | CBM-Only ablation training (300k)                         |
-| 19    | 12   | CBM+Gate ablation training (300k)                         |
-| 20    | 12   | CBM+Shield ablation training (300k)                       |
-| 21    | 1    | HA Benchmark evaluation (11 metrics, 5 episodes)          |
-| 22    | 1    | Summary table + LaTeX rows                                |
-| 23    | 1    | Multi-seed HA benchmark (10 seeds × 5 episodes)          |
-| 24    | 1    | Statistical analysis (CIs + significance tests)           |
-| 25    | 1    | Failure-case analysis                                     |
-
-The sweep produces a per-run results CSV (one row per run, upserted on re-runs) and a summary CSV (mean and standard deviation across seeds). Output destinations are defined in [scripts/run_sweep.sh](scripts/run_sweep.sh).
-
-### Run benchmark evaluation directly
-
-Use the evaluation runners when you want targeted experiments instead of the full sweep.
+Use the benchmark runner to evaluate trained agents and classical controllers.
 The `--fixed-action` setting allows granular control experiments by pinning selected actuators to analyst-chosen setpoints.
 
-Unless `--output` is provided, the benchmark runner generates a CSV destination using the algorithm, scenario, controller type, and any fixed-action ablation. For example, a hardware PPO evaluation in `scenario_b` with BESS fixed at `0.5` receives an ablation-tagged CSV. Here `agent_type` denotes the transition-logging and output suffix for the evaluated controller, and can be `hardware`, `macro`, or `hardware_ha`.
+Unless `--output` is provided, the benchmark runner generates a CSV destination using the algorithm, scenario, controller type, and any fixed-action ablation. For example, a hardware PPO evaluation in `scenario_b` with BESS fixed at `0.5` receives an ablation-tagged CSV. Here `agent_type` denotes the transition-logging and output suffix for the evaluated controller, either `hardware` or `macro`.
 
 ---
 
@@ -998,7 +943,7 @@ uv run evaluation/run_benchmark.py --agents sac_macro+sac \
 
 `--plant_profile` accepts `none` (default), `plant_50mw`, `plant_100mw`, `plant_500mw`, or `all`. When `all` is used, every row in the output CSV carries a `plant_profile` column so results can be grouped by capacity.
 
-**Thermal-sensitivity sweep at a chosen capacity** — the cross-scenario thermal runner takes `--plant-profile` (extensive sweep values are automatically rescaled to match the selected size):
+**Thermal-sensitivity sweep at a chosen capacity**: use the standalone [thermal_sensitivity_cross_scenario.py](c2g_env/experiments/thermal_sensitivity_cross_scenario.py) runner. It takes `--plant-profile` and automatically rescales extensive thermal sweep values to the selected size:
 
 Set `THERMAL_RESULTS_CSV` to a new output CSV destination for the selected capacity before running this example.
 
@@ -1028,44 +973,11 @@ The thermal runner records complete hardware and macro transitions in separate c
 
 Recording schema 3 also exports all `C2GMetricsCallback` hardware-episode metrics as named CSV columns and under `hardware.episode_metrics` in the JSON summary. These include reward components, temperatures, tracking RMSE, PUE, power, SOC, action means and standard deviations, backlog, and fault indicators. In the sweep, `ep/length` counts recorded hardware steps and `ep/survived` requires the configured hardware horizon without termination, rather than the callback's legacy 288-tick cutoff. `reward/mean_throughput` is the mean throughput reward component; `workload/mean_throughput_ratio` is the mean reported batch throttle; `workload/served_work_ratio` is total served flexible work divided by arrivals. Choose a fresh output path when moving from an older CSV schema.
 
-The matched-pair workflow is configured by `thermal_sensitivity.cross_scenario.controller_pairs`: rule macro with rule hardware, and SAC macro with SAC hardware. The existing launch helper performs nominal/adverse validation at the smallest and largest capacities, recomputes metrics from raw records, and estimates storage before the full grid. Its `--plant-profile` option limits a worker to one capacity and runs validation once for that capacity. Give parallel workers separate `--artifacts` directories and non-overlapping capacity assignments. Keep source and configuration files unchanged during a running sweep.
-
 Default benchmark CSV names include non-default profile selections. Hydra sweep subdirectories include the job number so different conditions with the same seed do not collide within a sweep.
 
 **Condition-aware analysis.** Statistical summaries and comparisons retain `plant_profile`, `facility_capacity_mw`, `config_id`, and structured `thermal_overrides` when those columns are present. Baselines are matched within a condition. The statistical CLI writes separate LaTeX tables for multiple conditions, with condition metadata alongside them. Direct table generation requires an explicit condition when the input contains several.
 
 The plot generator writes result sets into directories identified by condition, each containing a JSON metadata file. Direct plotting helpers reject mixed conditions; CSVs without condition columns retain the legacy output layout. These changes do not add new metrics or convert the thermal summary schema into the ordinary benchmark plotting schema.
-
-#### High-assurance benchmark runner
-
-```bash
-uv run evaluation/run_ha_benchmark.py --agents simplex_ppo cbf_ppo hj_ppo
-uv run evaluation/run_ha_benchmark.py --agents ha_c2g --scenarios default scenario_c --n_episodes 5
-uv run evaluation/run_ha_benchmark.py --agents cbf_ppo --record_transitions
-uv run evaluation/run_ha_benchmark.py --agents cbf_ppo --no-record_transitions
-uv run evaluation/run_ha_benchmark.py --fixed-action bess_dispatch=0.0
-uv run evaluation/run_ha_benchmark.py \
-  --fixed-action hvac_effort=0.9 \
-  --fixed-action bess_dispatch=0.0
-```
-
-Key options:
-
-- `--agents`: HA agents to evaluate
-- `--scenarios`: scenarios to run
-- `--n_episodes`: number of episodes per agent/scenario
-- `--seed`: starting seed
-- `--model_dir`: optional override for trained model directory
-- `--output`: output CSV path
-- `--record_transitions` / `--no-record_transitions`: enable or disable per-step transition logging
-- `--fixed-action action=value`: assign a fixed value to an action
-
-Notes:
-
-- These settings allow granular experimentation and control for high-assurance studies as well: you can evaluate whether a safety method still works when specific actuators are pinned to fixed operating points.
-- The same continuous low-level action ranges apply here: `throttle_batch ∈ [0, 1]`, `pump_speed_A ∈ [0, 1]`, `hvac_effort ∈ [0, 1]`, and `bess_dispatch ∈ [-1, 1]`.
-- Fixed-action overrides are applied inside the low-level environment before dynamics are applied.
-- When enabled, transition logs are written to per-episode CSVs grouped by agent, scenario, and high-assurance controller type.
 
 #### Plotting episode traces and statistics
 
@@ -1101,7 +1013,7 @@ uv run python scripts/download_energy.py  --year 2024
 
 ### Monitor training with TensorBoard
 
-All training scripts log scalar metrics (episode reward, episode length, thermal/tracking/SOC penalties, shield interventions) to TensorBoard within the Hydra output directory. Set `TENSORBOARD_LOG_DIR` to the output root to compare runs, or to one run's event-log directory to inspect it separately.
+Training scripts with TensorBoard logging enabled record scalar metrics such as episode reward, episode length, and thermal/tracking/SOC penalties within the Hydra output directory. Set `TENSORBOARD_LOG_DIR` to the output root to compare runs, or to one run's event-log directory to inspect it separately.
 
 ```bash
 uv run tensorboard --logdir "${TENSORBOARD_LOG_DIR:?Set TENSORBOARD_LOG_DIR to the logs to inspect}"
@@ -1124,119 +1036,23 @@ uv run jupyter lab notebooks/
 
 ---
 
-## 11. High-Assurance Safety Controllers
+## 11. Constrained Reinforcement Learning
 
-DC2Grid provides a comprehensive **3-tier high-assurance (HA) safety framework** for grid-interactive data center control. All tiers enforce the same **5 hard constraints (C1–C5)** and are evaluated with an **11-metric set** (6 standard + 5 HA-specific).
+DC2Grid includes two constrained-RL baselines that apply penalties for thermal, battery state-of-charge, and frequency constraint costs during training. These methods aim to reduce expected violations; they do not provide a hard safety guarantee.
 
-### Hard Constraints
+| Method | Mechanism | Training script |
+| ------ | --------- | --------------- |
+| **PPO-Lagrangian** | Adaptive Lagrange multipliers for three constraint costs | [train_ppo_lagrangian.py](baselines/safety/train_ppo_lagrangian.py) |
+| **CPO** | Constraint-aware policy updates with cost budgets | [train_cpo.py](baselines/safety/train_cpo.py) |
 
-| ID | Constraint                   | Threshold                 | Physical Meaning                 |
-| -- | ---------------------------- | ------------------------- | -------------------------------- |
-| C1 | $T_A < T_{\text{safe}}$    | 35 °C (margin 1 °C)     | Server room A thermal limit      |
-| C2 | $T_B < T_{\text{safe}}$    | 35 °C (margin 1 °C)     | Server room B thermal limit      |
-| C3 | SOC ∈ [SOC_min, SOC_max]    | [0.10, 0.95] (guard 0.03) | BESS operational envelope        |
-| C4 | $|\Delta f| < 0.5$ Hz      | ±0.4 Hz trigger          | UFLS / over-frequency protection |
-| C5 | $V_{\text{pcc}} > 0.90$ pu | 0.92 pu trigger           | Under-voltage relay threshold    |
-
-### Tier 1 — Hard-Guarantee Methods (provable safety via optimisation)
-
-| Method                       | Shield                              | Permissiveness  | Cost                      | File                                      |
-| ---------------------------- | ----------------------------------- | --------------- | ------------------------- | ----------------------------------------- |
-| **Simplex** [Sha 2001] | O(1) analytic worst-case bounds     | Conservative    | Negligible                | `baselines/safety/safety_shield.py`     |
-| **CBF** [Ames 2019]    | QP projection into barrier-safe set | Moderate        | Low                       | `baselines/safety/cbf_shield.py`        |
-| **HJ Reachability**    | Offline BRS + runtime override      | Moderate        | Offline high, runtime low | `baselines/safety/hj_shield.py`         |
-| **MPC Safety Filter**  | Receding-horizon constrained NLP    | Most permissive | Highest online            | `baselines/safety/mpc_safety_filter.py` |
-
-#### Simplex Shield — Three Usage Modes
-
-```python
-# 1. Standalone filter — works with ANY agent
-from baselines.safety.safety_shield import SafetyShield
-shield = SafetyShield()
-safe_action, was_modified, info = shield.filter(raw_action, obs)
-
-# 2. Gymnasium wrapper — agent trains inside safe manifold
-from baselines.safety.safety_shield import ShieldedEnv
-env = ShieldedEnv(C2GFastEnv(scenario="default"))
-
-# 3. SB3-compatible agent wrapper — for evaluation
-from baselines.safety.safety_shield import ShieldedAgent
-safe_agent = ShieldedAgent(trained_agent, env)
-```
-
-#### Training with Tier 1 Shields
+Run these commands from the repository root. The explicit `--config-path` points the nested training scripts to the tracked [configuration directory](conf/), and `algo` selects the corresponding training settings:
 
 ```bash
-# Simplex-shielded PPO
-uv run python baselines/safety/train_shielded_ppo.py scenario=default experiment.seed=42
+uv run python baselines/safety/train_ppo_lagrangian.py --config-path "$(pwd)/conf" \
+    algo=ppo_lagrangian scenario=default
 
-# CBF-shielded PPO (QP-based, more permissive than Simplex)
-uv run python baselines/safety/train_cbf_ppo.py scenario=default
-
-# HJ reachability-shielded PPO (offline BRS computation)
-uv run python baselines/safety/train_hj_ppo.py scenario=default
-
-# MPC safety filter PPO (receding-horizon, most permissive)
-uv run python baselines/safety/train_mpcsf_ppo.py scenario=default
-```
-
-### Tier 2 — Constrained RL (soft constraint satisfaction during training)
-
-| Method                          | Mechanism                                          | File                                                |
-| ------------------------------- | -------------------------------------------------- | --------------------------------------------------- |
-| **PPO-Lagrangian**        | Adaptive Lagrange multipliers for 3 cost types     | `baselines/safety/train_ppo_lagrangian.py`        |
-| **CPO** [Achiam 2017]     | Trust-region with conjugate gradient + line search | `baselines/safety/train_cpo.py`                   |
-| **Shield Reward Shaping** | Fixed quadratic distance-to-boundary penalties     | `baselines/safety/train_shield_reward_shaping.py` |
-
-### Tier 3 — Neuro-Symbolic HA-C2G Architecture
-
-The full **HA-C2G** pipeline is a 3-layer neuro-symbolic architecture:
-
-1. **Layer 1 — Concept Bottleneck Model** (`baselines/safety/concept_bottleneck.py`): Maps raw 17-D obs → ~10 interpretable safety concepts (thermal margins, SOC health, etc.)
-2. **Layer 2 — Safe Projection Gate** (`baselines/safety/safe_projection.py`): Concept-guided differentiable projection that blends policy actions toward safe priors based on learned pass-through gates; applied consistently during training and evaluation for `ha_c2g` and `cbm_gate`
-3. **Layer 3 — Physics Rule Shield**: In-the-loop Simplex shield with shield-penalty reward
-
-**Ablation studies** isolate each layer's contribution:
-
-| Variant                 | CBM | Gate | Shield | File                                     |
-| ----------------------- | :-: | :--: | :----: | ---------------------------------------- |
-| **HA-C2G (full)** | ✅ |  ✅  |   ✅   | `baselines/safety/train_ha_c2g.py`     |
-| CBM-Only                | ✅ |  ❌  |   ❌   | `baselines/safety/train_cbm_only.py`   |
-| CBM+Gate                | ✅ |  ✅  |   ❌   | `baselines/safety/train_cbm_gate.py`   |
-| CBM+Shield              | ✅ |  ❌  |   ✅   | `baselines/safety/train_cbm_shield.py` |
-
-**Proof trees** (`baselines/safety/proof_tree.py`) generate per-timestep hierarchical audit logs documenting which safety rules passed/failed and the sensor readings grounding each decision.
-
-### HA Evaluation Metrics (11-D)
-
-| Category | Metric                        | Description                                    |
-| -------- | ----------------------------- | ---------------------------------------------- |
-| Standard | `mean_reward`               | Mean episode reward                            |
-| Standard | `tracking_rmse`             | RegD tracking RMSE                             |
-| Standard | `thermal_viol_rate`         | Fraction of ticks with thermal violation       |
-| Standard | `throughput_ratio`          | Fraction of max IT capacity served             |
-| Standard | `bess_degradation`          | Battery capacity fade over episode             |
-| Standard | `survival_rate`             | Fraction of episodes surviving to 24 h         |
-| HA       | `hard_violation_rate`       | Rate of C1–C5 constraint violations           |
-| HA       | `shield_intervention_rate`  | How often the shield overrides the agent       |
-| HA       | `constraint_margin`         | Mean distance from nearest constraint boundary |
-| HA       | `worst_case_margin`         | Minimum margin across all constraints          |
-| HA       | `computational_overhead_ms` | Per-step shield compute time                   |
-
-### Evaluation & Analysis Tools
-
-```bash
-# HA benchmark evaluation (11 metrics across all HA agents)
-uv run evaluation/run_ha_benchmark.py --agents simplex_ppo cbf_ppo hj_ppo mpcsf_ppo ha_c2g
-
-# HA-specific plots (Pareto frontier, radar, violin, LaTeX table)
-uv run evaluation/generate_ha_plots.py
-
-# Failure-case analysis (where/why/how often agents fail)
-uv run evaluation/failure_analysis.py
-
-# Statistical analysis (bootstrap CIs, Welch's t-test, Cohen's d)
-uv run evaluation/statistical_analysis.py
+uv run python baselines/safety/train_cpo.py --config-path "$(pwd)/conf" \
+    algo=cpo scenario=default
 ```
 
 ---
@@ -1431,29 +1247,37 @@ All figures are generated by the notebooks in `notebooks/` and can be reproduced
 ## Thermal Sensitivity Tests
 
 We test whether the benchmark's thermal-safety results depend on permissive aggregate thermal assumptions by sweeping the plant's uncalibrated thermal coefficients while holding the safety anchors fixed (warning at 33 °C,
-termination at 35 °C). The study varies 11 `ThermalTwin` coefficients one at a time, plus four named coupled cases, over physically grounded grids annotated
-against ASHRAE, NIST, and vendor references (HPE, CoolIT, Vertiv). It runs a 288-run reduced open/closed-loop harness and a 2,880-episode full-environment
-cross-scenario evaluation (36 unique plant configurations × 4 scenarios × 5 seeds × 4 hardware controllers: bang-bang, PID, rule-based, and a frozen SAC
-checkpoint).
+termination at 35 °C). The current grid varies 11 `ThermalTwin` coefficients one at a time on top of each scenario's settings, without named coupled cases,
+over physically grounded grids annotated against ASHRAE, NIST, and vendor references (HPE, CoolIT, Vertiv). After deduplication, it contains 33 configurations:
+one scenario baseline and 32 single-parameter overrides. Selecting all four benchmark scenarios and five seeds gives 660 episodes per capacity and hardware controller,
+or 2,640 episodes per capacity for all four hardware controllers (bang-bang, PID, rule-based, and frozen SAC).
 
-Across the study, controller failures were confined to configurations in which the cooling was already provisioned below a not-recommended threshold, that is,
+The existing result tables describe an earlier 288-run reduced open/closed-loop harness and 2,880-episode full-environment study that also included named
+coupled cases. They have not been recomputed for the OAT-only grid.
+
+Across the earlier study, controller failures were confined to configurations in which the cooling was already provisioned below a not-recommended threshold, that is,
 plants in which the bare model crosses 35 °C under maximum cooling at continuous nameplate load. Under nominal or ordinary cooling assumptions we observed no thermal or SLA fault from any controller. This supports that the safety margins reported are a property of the modeled plant rather than permissive coefficients.
 
-See the full writeup, including the annotated parameter grids, provenance, and
-result tables: [`c2g_env/experiments/thermal_sensitivity.md`](c2g_env/experiments/thermal_sensitivity.md).
+The standalone full-environment runner is [thermal_sensitivity_cross_scenario.py](c2g_env/experiments/thermal_sensitivity_cross_scenario.py). It loads the thermal grid and default scenario, seed, and controller selections from [conf/experiments.yaml](conf/experiments.yaml), runs the episodes, writes results and runtime recordings, and resumes completed runs. No separate launcher or prior execution of the reduced [thermal_sensitivity.py](c2g_env/experiments/thermal_sensitivity.py) harness is required.
 
-Reproduce with:
+This checkpoint-free example uses rule-based macro and hardware controllers. Set `THERMAL_RESULTS_CSV` to a new output CSV destination, then run from the repository root:
 
-```powershell
-python -m c2g_env.experiments.thermal_sensitivity
-python -m c2g_env.experiments.thermal_sensitivity_cross_scenario
+```bash
+uv run python -m c2g_env.experiments.thermal_sensitivity_cross_scenario \
+    --macro-controller rule_macro \
+    --controllers rule_based \
+    --out "${THERMAL_RESULTS_CSV:?Set THERMAL_RESULTS_CSV to a new output CSV}"
 ```
+
+Each invocation handles one capacity, selected with `--plant-profile` (default `none`, the built-in facility). Use a separate output CSV for each capacity. Omitting `--scenarios`, `--seeds`, and `--configs` uses the configured scenario and seed lists and the full thermal grid. Selecting SAC controllers requires their configured checkpoints.
+
+Use a fresh output prefix for this grid; existing results retain their original coupled-case episodes.
 
 ## PPO vs SAC
 
 We also trained and evaluated a PPO macro agent on the default scenario, paired with the same frozen RL low-level controller. Its tracking, revenue, and safety are broadly comparable to SAC, with no thermal violations under either algorithm, which suggests that the staged 2-Phase (Sec. 7, Main paper) result does not appear to hinge on a single choice of macro learner.
 
-| Configuration                              | Agent | RMSE ↓ (kW) | Regulation Revenue ↑ ($) | Macro Reward ↑ | Low-Level Reward ↑ | Thermal Violations ↓ | BESS Degradation ↓ ($\times 10^{-4}$) |              |              |            |               |
+| Configuration                              | Agent | RMSE ↓ (kW) | Regulation Revenue ↑ ($) | Macro Reward ↑ | Low-Level Reward ↑ | Thermal Violations ↓ | BESS Degradation ↓ ($\times 10^{-4}$) |
 | ------------------------------------------ | ----- | -----------: | -----------------------------------------------------------------------------------------------------------------------------------: | -----------: | -----------: | ---------: | ------------: |
 | RL Phase 2: RL macro + frozen RL low-level | SAC   |    780 ± 26 |                                                                                                                         8,550 ± 553 | 0.94 ± 0.13 | 0.85 ± 0.13 | 0.0 ± 0.0 | 18.38 ± 1.74 |
 | RL Phase 2: RL macro + frozen RL low-level | PPO   |    745 ± 34 |                                                                                                                         7,345 ± 688 | 0.92 ± 0.13 | 0.81 ± 0.17 | 0.0 ± 0.0 | 21.22 ± 2.25 |

@@ -45,6 +45,7 @@ from c2g_env.thermal_limits import T_WARN
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _DEFAULT_OUT = _REPO_ROOT / "copilot" / "artifacts" / "thermal_sensitivity_cross_scenario.csv"
 _FAULT_KEYS = ("thermal_fault", "freq_fault", "voltage_fault", "soc_fault", "sla_fault")
+_HARDWARE_OBSERVATION_PROTOCOLS = ("carry_forward", "historical_zero")
 # Thermal terms proportional to facility size; the rest are intensive and
 # stay fixed when the nameplate changes.
 _EXTENSIVE_THERMAL_KEYS = ("C_A", "C_B", "K_liq", "K_air", "K_env_A", "K_env_B")
@@ -54,6 +55,7 @@ _FIELDS = (
     "recording_dir", "runtime_summary",
     "config_id", "config_aliases", "param", "value", "thermal_overrides",
     "scenario", "seed", "macro_controller", "hardware_controller",
+    "hardware_observation_protocol",
     "completed", "terminated", "truncated", "termination_reason",
     "fast_steps", "macro_steps", "thermal_warning_steps", "thermal_warning_fraction",
     "temp_A_max", "temp_B_max", "temp_max", "return", "elapsed_seconds",
@@ -106,6 +108,25 @@ def _rescale_thermal_grid(cfg: dict[str, Any], plant: dict[str, Any]) -> dict[st
         for case, overrides in cfg.get("coupled_cases", {}).items()
     }
     return scaled
+
+
+def _select_configurations(cfg, config_ids):
+    configs = _explicit_configurations(cfg)
+    if config_ids is None:
+        return configs
+    selected = set(config_ids)
+    unknown = selected - {config["id"] for config in configs}
+    if unknown:
+        raise ValueError(f"Unknown thermal configuration IDs: {sorted(unknown)}")
+    return [config for config in configs if config["id"] in selected]
+
+
+def _controller_observation(observation, protocol, interval_start):
+    if protocol == "carry_forward":
+        return observation
+    if protocol == "historical_zero":
+        return np.zeros(observation.shape) if interval_start else observation
+    raise ValueError(f"Unknown hardware observation protocol: {protocol}")
 
 
 def _make_hardware_controller(name: str, env: C2GMacroEnv, sac_model: Any) -> Any:
@@ -202,7 +223,8 @@ def _finalize_recording(recording_dir, context, run_config, initial, hardware_su
     files = {name: {"sha256": file_fingerprint(recording_dir / name)["sha256"], "bytes": (recording_dir / name).stat().st_size}
              for name in ("hardware.jsonl.gz", "macro.jsonl.gz", "summary.json")}
     manifest = {
-        "schema_version": 3, "completed": True, "identity": context, "run_config": run_config,
+        "schema_version": 4, "completed": True,
+        "identity": context, "run_config": run_config,
         "initial_state": initial, "files": files,
         "observation_columns": {"hardware": C2GTransitionLoggerCallback.STATE_NAMES, "macro": C2GTransitionLoggerCallback.STATE_NAMES_MACRO},
         "action_columns": {"hardware": C2GTransitionLoggerCallback.ACTION_NAMES, "macro": C2GTransitionLoggerCallback.ACTION_NAMES_MACRO},
@@ -218,6 +240,13 @@ def _finalize_recording(recording_dir, context, run_config, initial, hardware_su
             "served_work_ratio": "Total served flexible work divided by total arrivals in the workload model's kW-equivalent tick units.",
             "net_revenue": "Reported regulation revenue minus reported electricity cost; existing environment accounting is unchanged.",
             "missing_values": "Absent scalar fields are omitted; unavailable fault summaries are null, not zero.",
+            "controller_observation": (
+                "Hardware info.sweep.controller_observation records the input "
+                "supplied to the controller; state retains the physical "
+                "pre-step observation. historical_zero supplies a float64 "
+                "zero vector only at the first hardware step of each macro "
+                "interval. Macro observations are unchanged."
+            ),
         },
     }
     (recording_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, allow_nan=False), encoding="utf-8")
@@ -230,6 +259,7 @@ def _run_episode(
     plant_overrides: dict[str, Any] | None = None,
     *, record_dir: Path, episode_context: dict, run_config: dict,
 ) -> dict[str, Any]:
+    protocol = run_config["hardware_observation_protocol"]
     env = C2GMacroEnv(scenario=scenario, thermal_overrides=config["overrides"], plant_overrides=plant_overrides)
     recording_dir = record_dir / episode_context["episode_id"][:16] / uuid4().hex
     started = time.perf_counter()
@@ -237,7 +267,11 @@ def _run_episode(
         stack.callback(env.close)
         obs, reset_info = env.reset(seed=seed)
         fast_env = env._fast_env
-        context = {**episode_context, "facility_capacity_mw": fast_env._facility_cap_kw / 1_000.0}
+        context = {
+            **episode_context,
+            "facility_capacity_mw": fast_env._facility_cap_kw / 1_000.0,
+            "hardware_observation_protocol": protocol,
+        }
         initial = _initial_runtime_state(fast_env)
         hardware_log = C2GTransitionLoggerCallback(runtime_path=recording_dir / "hardware.jsonl.gz", experiment_context=context)
         stack.callback(hardware_log.close)
@@ -246,14 +280,28 @@ def _run_episode(
         hardware_log.record_runtime_reset(env._last_hw_obs, env._last_hw_reset_info, initial)
         macro_log.record_runtime_reset(obs, reset_info, initial)
         controller = _make_hardware_controller(hardware, env, sac_model)
-        env._inner_action_fn = _predict_fn(controller)
+        predict_controller = _predict_fn(controller)
+        controller_observation = env._last_hw_obs
+
+        def predict(inner_obs, macro_action):
+            nonlocal controller_observation
+            controller_observation = _controller_observation(
+                inner_obs, protocol, fast_env._tick == macro_start_tick,
+            )
+            return predict_controller(controller_observation, macro_action)
+
+        env._inner_action_fn = predict
         macro_steps = 0
         episode_buffer = _make_episode_buffer()
 
         def collect(pre, action, post, reward, _done, info):
             _accumulate_step(episode_buffer, reward, info)
+            recorded_info = {
+                **info, "sweep": {"controller_observation": controller_observation},
+            }
             hardware_log.record_runtime_transition(
-                pre, action, post, reward, info["terminated"], info["truncated"], info,
+                pre, action, post, reward, info["terminated"], info["truncated"],
+                recorded_info,
                 hardware_step=info["tick"], macro_step=macro_steps + 1, duration_seconds=fast_env._dt,
             )
 
@@ -262,6 +310,7 @@ def _run_episode(
         while not (terminated or truncated):
             action, _ = macro_controller.predict(obs, deterministic=True)
             pre = obs
+            macro_start_tick = fast_env._tick
             obs, reward, terminated, truncated, last_info = env.step(action)
             macro_steps += 1
             macro_log.record_runtime_transition(
@@ -278,6 +327,7 @@ def _run_episode(
         )
     row = _episode_summary(config, scenario, seed, hardware, macro_name, env, hardware_summary, macro_summary,
                            last_info, time.perf_counter() - started)
+    row["hardware_observation_protocol"] = protocol
     runtime = _finalize_recording(recording_dir, context, run_config, initial, hardware_summary, macro_summary, row)
     row["recording_dir"] = str(recording_dir.resolve())
     row["runtime_summary"] = json.dumps(runtime, allow_nan=False)
@@ -335,6 +385,11 @@ def main() -> None:
     parser.add_argument("--controllers", nargs="+")
     parser.add_argument("--configs", nargs="+")
     parser.add_argument(
+        "--hardware-observation-protocol",
+        choices=_HARDWARE_OBSERVATION_PROTOCOLS,
+        help="Hardware input at macro boundaries; default from the configuration.",
+    )
+    parser.add_argument(
         "--plant-profile",
         default="none",
         choices=available_plant_profiles(),
@@ -360,15 +415,17 @@ def main() -> None:
 
     cfg = load_config(args.config)
     run_cfg = cfg["cross_scenario"]
+    protocol = (
+        args.hardware_observation_protocol or run_cfg["hardware_observation_protocol"]
+    )
+    if protocol not in _HARDWARE_OBSERVATION_PROTOCOLS:
+        parser.error(f"Unknown hardware observation protocol: {protocol}")
     torch.set_num_threads(int(run_cfg["torch_num_threads"]))
     device = yaml.safe_load((_REPO_ROOT / "conf" / "config.yaml").read_text(encoding="utf-8"))["device"]
     plant_overrides = load_plant_profile(args.plant_profile)
     if plant_overrides:
         cfg = _rescale_thermal_grid(cfg, plant_overrides)
-    configs = _explicit_configurations(cfg)
-    if args.configs:
-        selected = set(args.configs)
-        configs = [config for config in configs if config["id"] in selected]
+    configs = _select_configurations(cfg, args.configs)
     scenarios = args.scenarios or run_cfg["scenarios"]
     seeds = args.seeds or run_cfg["seeds"]
     controllers = args.controllers or run_cfg["hardware_controllers"]
@@ -392,10 +449,11 @@ def main() -> None:
         macro_controller = RuleBasedMacroController()
 
     run_config = {
-        "schema_version": 3,
+        "schema_version": 4,
         "plant_profile": args.plant_profile,
         "plant_overrides": plant_overrides,
         "macro_controller": macro_name,
+        "hardware_observation_protocol": protocol,
         "hardware_checkpoint": hardware_checkpoint,
         "macro_checkpoint": macro_checkpoint,
         "environment": yaml.safe_load((_REPO_ROOT / "c2g_env" / "config.yaml").read_text(encoding="utf-8")),
@@ -424,7 +482,8 @@ def main() -> None:
     print(
         f"Running {len(pending)} episodes ({len(configs)} unique plant configs, "
         f"{len(scenarios)} scenarios, {len(seeds)} seeds, {len(controllers)} controllers) "
-        f"on plant profile '{args.plant_profile}' with macro '{macro_name}'"
+        f"on plant profile '{args.plant_profile}' with macro '{macro_name}' "
+        f"and hardware observations '{protocol}'"
     )
 
     write_header = not args.out.exists()
