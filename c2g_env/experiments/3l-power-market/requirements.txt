@@ -1,0 +1,2 @@
+assume-framework==0.6.0
+mango-agents==2.1.5

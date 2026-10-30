@@ -1,0 +1,19 @@
+c2g:
+  config: c2g_env/config.yaml
+  scenario: default
+  plant_overrides: {}
+  thermal_overrides: {}
+three_l:
+  root: site-packages/3L_Grid
+  config: data/network/cfgs/cfg_base.json
+simulation:
+  seed: 0
+  warmup_hours: 48
+  scoring_hours: 48
+controllers:
+  inner: rule_based
+  model_dir: null
+reward:
+  cost_scale_eur: 1000
+  terminal_backlog_eur_per_work_mwh: 1000
+  terminal_soc_eur_per_mwh: 1000
