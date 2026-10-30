@@ -13,8 +13,7 @@ name: plant_50mw
 description: "50 MW facility (0.2x default) — capacity-generalization test"
 
 plant:
-  # Capacity-scaled market commitments (0.2x default)
-  committed_mw_max: 6.0
+  # Capacity-scaled standing DR commitment (0.2x default)
   dr_baseline_mw:   1.0
   n_racks_a_flex: 240
   n_racks_a_base: 160

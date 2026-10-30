@@ -20,12 +20,14 @@ from __future__ import annotations
 import argparse
 import csv
 import itertools
+import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 import numpy as np
 from numpy.typing import NDArray
+from c2g_env.experiments.identity import CONDITION_COLUMNS, configuration_id, result_condition
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -49,6 +51,7 @@ class MetricSummary:
     max_val: float
     n_seeds: int
     ci_level: float = 0.95
+    condition: dict[str, Any] = field(default_factory=dict)
 
     @property
     def ci_half_width(self) -> float:
@@ -162,6 +165,7 @@ class PairwiseComparison:
     effect_label: str      # "negligible", "small", "medium", "large"
     alpha: float = 0.05
     higher_is_better: bool = True  # for interpreting the sign
+    condition: dict[str, Any] = field(default_factory=dict)
 
 
 def cohens_d(a: NDArray, b: NDArray) -> float:
@@ -279,11 +283,11 @@ def load_multiseed_csv(path: Path) -> list[dict[str, Any]]:
 
 def group_by_agent_scenario(
     rows: list[dict[str, Any]],
-) -> dict[tuple[str, str], list[dict[str, Any]]]:
-    """Group rows by (agent, scenario)."""
-    groups: dict[tuple[str, str], list[dict[str, Any]]] = {}
+) -> dict[tuple[str, str, str], list[dict[str, Any]]]:
+    """Group rows by (agent, scenario, capacity/thermal condition identity)."""
+    groups: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
     for row in rows:
-        key = (str(row["agent"]), str(row["scenario"]))
+        key = (str(row["agent"]), str(row["scenario"]), configuration_id(result_condition(row)))
         groups.setdefault(key, []).append(row)
     return groups
 
@@ -300,16 +304,18 @@ def compute_all_summaries(
         # Auto-detect numeric columns
         sample = rows[0]
         metrics = [k for k, v in sample.items()
-                   if isinstance(v, (int, float)) and k not in ("seed", "n_episodes")]
+                   if isinstance(v, (int, float)) and k not in ("seed", "n_episodes", "value")
+                   and k not in CONDITION_COLUMNS]
 
     summaries = []
-    for (agent, scenario), group_rows in sorted(groups.items()):
+    for (agent, scenario, _condition_id), group_rows in sorted(groups.items()):
         for metric in metrics:
             values = np.array([r[metric] for r in group_rows if metric in r])
             if len(values) == 0:
                 continue
             s = summarise_metric(values, metric, agent, scenario, confidence,
                                 use_bootstrap=use_bootstrap)
+            s.condition = result_condition(group_rows[0])
             summaries.append(s)
     return summaries
 
@@ -326,29 +332,24 @@ def compute_pairwise_comparisons(
         metrics = HA_KEY_METRICS
 
     comparisons = []
-    scenarios = sorted(set(str(r["scenario"]) for r in rows))
-    agents = sorted(set(str(r["agent"]) for r in rows))
-
-    for scenario in scenarios:
-        baseline_rows = groups.get((baseline, scenario), [])
+    ordered_groups = sorted(groups.items(), key=lambda item: (item[0][1], item[0][2], item[0][0]))
+    for (agent, scenario, condition_id), agent_rows in ordered_groups:
+        if agent == baseline:
+            continue
+        baseline_rows = groups.get((baseline, scenario, condition_id), [])
         if not baseline_rows:
             continue
-        for agent in agents:
-            if agent == baseline:
+        for metric in metrics:
+            vals_base = np.array([r[metric] for r in baseline_rows if metric in r])
+            vals_agent = np.array([r[metric] for r in agent_rows if metric in r])
+            if len(vals_base) < 2 or len(vals_agent) < 2:
                 continue
-            agent_rows = groups.get((agent, scenario), [])
-            if not agent_rows:
-                continue
-            for metric in metrics:
-                vals_base = np.array([r[metric] for r in baseline_rows if metric in r])
-                vals_agent = np.array([r[metric] for r in agent_rows if metric in r])
-                if len(vals_base) < 2 or len(vals_agent) < 2:
-                    continue
-                higher_better = metric not in LOWER_IS_BETTER
-                comp = pairwise_test(
-                    vals_base, vals_agent, metric, scenario,
-                    baseline, agent, alpha, higher_better)
-                comparisons.append(comp)
+            higher_better = metric not in LOWER_IS_BETTER
+            comp = pairwise_test(
+                vals_base, vals_agent, metric, scenario,
+                baseline, agent, alpha, higher_better)
+            comp.condition = result_condition(agent_rows[0])
+            comparisons.append(comp)
     return comparisons
 
 
@@ -387,6 +388,7 @@ def generate_latex_table(
     scenario: str = "default",
     caption: str = "High-assurance benchmark results",
     label: str = "tab:ha_benchmark",
+    condition: dict[str, Any] | None = None,
 ) -> str:
     """
     Generate a publication-ready LaTeX table.
@@ -398,6 +400,12 @@ def generate_latex_table(
 
     # Filter to scenario
     sums = [s for s in summaries if s.scenario == scenario]
+    conditions = {configuration_id(summary.condition): summary.condition for summary in sums}
+    if condition is None and len(conditions) > 1:
+        raise ValueError("Multiple capacity/thermal conditions; select a condition explicitly.")
+    if condition is None:
+        condition = next(iter(conditions.values()), {})
+    sums = [summary for summary in sums if summary.condition == condition]
     agents = sorted(set(s.agent for s in sums))
 
     # Build lookup: (agent, metric) → MetricSummary
@@ -409,7 +417,7 @@ def generate_latex_table(
     comp_lookup: dict[tuple[str, str], PairwiseComparison] = {}
     if comparisons:
         for c in comparisons:
-            if c.scenario == scenario:
+            if c.scenario == scenario and c.condition == condition:
                 comp_lookup[(c.agent_b, c.metric)] = c
 
     # Find best agent per metric
@@ -519,13 +527,16 @@ def print_summary_report(
     if metrics is None:
         metrics = HA_KEY_METRICS
 
-    scenarios = sorted(set(s.scenario for s in summaries))
-    for scenario in scenarios:
+    conditions = {(summary.scenario, configuration_id(summary.condition)): summary.condition
+                  for summary in summaries}
+    for (scenario, _condition_id), condition in sorted(conditions.items()):
         print(f"\n{'='*80}")
         print(f"  Scenario: {scenario}")
+        if condition:
+            print(f"  Condition: {json.dumps(condition, sort_keys=True)}")
         print(f"{'='*80}")
 
-        sums = [s for s in summaries if s.scenario == scenario]
+        sums = [s for s in summaries if s.scenario == scenario and s.condition == condition]
         agents = sorted(set(s.agent for s in sums))
 
         for metric in metrics:
@@ -541,6 +552,7 @@ def print_summary_report(
                 comp = next(
                     (c for c in comparisons
                      if c.scenario == scenario
+                     and c.condition == condition
                      and c.metric == metric
                      and c.agent_b == agent),
                     None,
@@ -587,13 +599,22 @@ if __name__ == "__main__":
     print_summary_report(summaries, comparisons)
 
     if args.latex:
-        latex = generate_latex_table(
-            summaries, comparisons, scenario=args.scenario,
-            caption=f"HA benchmark results ({args.scenario}), {args.confidence*100:.0f}\\% CIs",
-        )
+        conditions = {configuration_id(summary.condition): summary.condition for summary in summaries
+                      if summary.scenario == args.scenario}
         args.latex.parent.mkdir(parents=True, exist_ok=True)
-        args.latex.write_text(latex)
-        print(f"\nLaTeX table → {args.latex}")
+        for condition_id, condition in conditions.items():
+            output = args.latex
+            if len(conditions) > 1:
+                output = args.latex.with_name(f"{args.latex.stem}_{condition_id[:12]}{args.latex.suffix}")
+            latex = generate_latex_table(
+                summaries, comparisons, scenario=args.scenario, condition=condition,
+                caption=f"HA benchmark results ({args.scenario}), {args.confidence*100:.0f}\\% CIs",
+                label="tab:ha_benchmark" + (f"_{condition_id[:12]}" if condition else ""),
+            )
+            output.write_text(latex, encoding="utf-8")
+            if condition:
+                output.with_suffix(".condition.json").write_text(json.dumps(condition, indent=2), encoding="utf-8")
+            print(f"\nLaTeX table: {output}")
 
     # Print significant findings
     sig_comps = [c for c in comparisons if c.significant]
@@ -611,4 +632,5 @@ if __name__ == "__main__":
                 f"  {c.agent_b:20s} {c.metric:30s}  "
                 f"Δ={c.delta:+.4f}  p={c.p_value:.4f}  "
                 f"d={c.effect_size:+.2f}  {better_worse}"
+                f"  condition={json.dumps(c.condition, sort_keys=True)}"
             )

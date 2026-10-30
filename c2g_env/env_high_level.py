@@ -141,14 +141,10 @@ class C2GMacroEnv(gym.Env):
         self._lambda_churn = float(hs_cfg.get("lambda_churn", 0.05))
 
         # DR baseline (standing contract for rejected bids)
-        self._dr_baseline_mw = float(self._scfg.get("dr_baseline_mw", 5.0))
         self._dr_rate_usd_mw = float(self._scfg.get("dr_rate_usd_mw", 5.0))
 
         self._inner_action_fn = inner_action_fn
         self._sub_step_callback = sub_step_callback
-
-        committed_max_mw = float(self._scfg["committed_mw_max"])
-        self._committed_max_mw = float(committed_max_mw)
 
         # --- Spaces ------------------------------------------------------
         # [0] bid_mw_norm, [1] bid_price_norm
@@ -197,6 +193,9 @@ class C2GMacroEnv(gym.Env):
                 plant_overrides=_plant_overrides,
             )
 
+        self._committed_max_mw = self._fast_env._committed_mw_max
+        self._dr_baseline_mw = self._fast_env._dr_baseline_mw
+
         # Episode tracking
         self._macro_tick        = 0
         self._prev_bid_mw_norm  = 0.5
@@ -221,7 +220,10 @@ class C2GMacroEnv(gym.Env):
         Reset both the outer macro environment and the inner FastEnv.
         """
         super().reset(seed=seed)
-        inner_obs, _ = self._fast_env.reset(seed=seed, options=options)
+        inner_obs, inner_info = self._fast_env.reset(seed=seed, options=options)
+        self._last_hw_reset_info = inner_info
+        self._committed_max_mw = self._fast_env._committed_mw_max
+        self._dr_baseline_mw = self._fast_env._dr_baseline_mw
 
         self._macro_tick         = 0
         self._prev_bid_mw_norm   = 0.5
@@ -368,6 +370,7 @@ class C2GMacroEnv(gym.Env):
             sub_obs_list, sub_infos,
             T_safe=T_safe,
             committed_mw=committed_mw,
+            tracking_floor_kw=self._fast_env._macro_tracking_floor_kw,
             bid_mw_norm=bid_mw_norm,
             bid_price_norm=bid_price_norm,
             rmcp_norm=rmcp_norm,
@@ -380,7 +383,9 @@ class C2GMacroEnv(gym.Env):
         hours = _SUBSTEPS * self._fast_env._dt / 3600.0  # 0.25 h for 15-min
 
         # Tracking performance score [0, 1]
-        tracking_err_norm = float(np.mean(track_errs)) / max(committed_mw * 1_000, 1)
+        tracking_err_norm = float(np.mean(track_errs)) / max(
+            committed_mw * 1_000, self._fast_env._macro_tracking_floor_kw
+        )
         perf_score = max(0.0, 1.0 - tracking_err_norm)
 
         # Regulation revenue: rate × MW × performance × hours
@@ -462,6 +467,7 @@ class C2GMacroEnv(gym.Env):
         *,
         T_safe: float,
         committed_mw: float,
+        tracking_floor_kw: float,
         bid_mw_norm: float,
         bid_price_norm: float,
         rmcp_norm: float,
@@ -480,6 +486,8 @@ class C2GMacroEnv(gym.Env):
             Thermal safety limit (°C).
         committed_mw : float
             Current grid commitment [MW].
+        tracking_floor_kw : float
+            Capacity-scaled minimum tracking denominator [kW].
         bid_mw_norm, bid_price_norm : float
             Previous bid action (normalised).
         rmcp_norm, reg_need_norm : float
@@ -513,7 +521,7 @@ class C2GMacroEnv(gym.Env):
             float(np.mean(regd_abs)),                          # 5  regd_mean
             min(mean_lmp / 200.0, 1.0),                        # 6  lmp_norm
             float(np.mean(buf[:, 8])),                         # 7  grid_load_mean
-            float(np.mean(track_errs)) / max(committed_mw * 1_000, 1),  # 8
+            float(np.mean(track_errs)) / max(committed_mw * 1_000, tracking_floor_kw),  # 8
             float(spike_any),                                  # 9
             max(0.0, (T_safe - max(temp_As)) / T_safe),       # 10 headroom_A
             max(0.0, (T_safe - max(temp_Bs)) / T_safe),       # 11 headroom_B

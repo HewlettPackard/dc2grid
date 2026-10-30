@@ -21,6 +21,7 @@ Usage
 """
 from __future__ import annotations
 import argparse
+import json
 from pathlib import Path
 
 import numpy as np
@@ -29,6 +30,7 @@ import matplotlib
 matplotlib.use("Agg")          # headless rendering (cluster / CI)
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
+from c2g_env.experiments.identity import configuration_id, group_conditions
 
 # ── aesthetics ─────────────────────────────────────────────────────────────
 SCENARIO_LABELS = {
@@ -52,6 +54,11 @@ def _palette(agents: list[str]) -> list[str]:
     return [AGENT_COLORS.get(a, "#888888") for a in agents]
 
 
+def _require_single_condition(df: pd.DataFrame) -> None:
+    if len(group_conditions(df.to_dict(orient="records"))) > 1:
+        raise ValueError("Multiple capacity/thermal conditions; select one condition or use generate_all().")
+
+
 # ── individual plot helpers ─────────────────────────────────────────────────
 
 def plot_metric_grouped_bar(
@@ -63,6 +70,7 @@ def plot_metric_grouped_bar(
     lower_is_better: bool = False,
     ylim     : tuple | None = None,
 ) -> None:
+    _require_single_condition(df)
     scenarios = list(SCENARIO_LABELS.keys())
     scenarios = [s for s in scenarios if s in df["scenario"].unique()]
     agents    = sorted(df["agent"].unique(), key=lambda a: list(AGENT_COLORS).index(a)
@@ -99,6 +107,7 @@ def plot_metric_grouped_bar(
 
 
 def plot_reward_heatmap(df: pd.DataFrame, outpath: Path) -> None:
+    _require_single_condition(df)
     scenarios = [s for s in SCENARIO_LABELS if s in df["scenario"].unique()]
     agents    = sorted(df["agent"].unique(), key=lambda a: list(AGENT_COLORS).index(a)
                        if a in AGENT_COLORS else 99)
@@ -145,6 +154,7 @@ def plot_radar(df: pd.DataFrame, scenario: str, outpath: Path) -> None:
     sub = df[df["scenario"] == scenario]
     if sub.empty:
         return
+    _require_single_condition(sub)
 
     agents = sorted(sub["agent"].unique(), key=lambda a: list(AGENT_COLORS).index(a)
                     if a in AGENT_COLORS else 99)
@@ -192,19 +202,8 @@ def plot_radar(df: pd.DataFrame, scenario: str, outpath: Path) -> None:
 
 # ── main ────────────────────────────────────────────────────────────────────
 
-def generate_all(csv_path: Path, outdir: Path) -> None:
-    if not csv_path.exists():
-        print(f"ERROR: Results CSV not found at {csv_path}")
-        print("Run:  python evaluation/run_benchmark.py  first.")
-        return
-
-    df = pd.read_csv(csv_path)
-    # Ensure survival_rate column (older runs may call it 'survived')
-    if "survival_rate" not in df.columns and "survived" in df.columns:
-        df["survival_rate"] = df["survived"]
-
+def _generate_condition_plots(df: pd.DataFrame, outdir: Path) -> None:
     outdir.mkdir(parents=True, exist_ok=True)
-    print(f"Generating plots from {csv_path}  →  {outdir}/")
 
     plot_reward_heatmap(
         df, outdir / "fig_reward_heatmap.png"
@@ -236,6 +235,26 @@ def generate_all(csv_path: Path, outdir: Path) -> None:
         plot_radar(df, sc, outdir / f"fig_radar_{sc}.png")
 
     print("\nAll figures saved.")
+
+
+def generate_all(csv_path: Path, outdir: Path) -> None:
+    if not csv_path.exists():
+        print(f"ERROR: Results CSV not found at {csv_path}")
+        print("Run:  python evaluation/run_benchmark.py  first.")
+        return
+
+    df = pd.read_csv(csv_path)
+    if "survival_rate" not in df.columns and "survived" in df.columns:
+        df["survival_rate"] = df["survived"]
+
+    for condition, rows in group_conditions(df.to_dict(orient="records")):
+        target = outdir
+        if condition:
+            target = outdir / f"condition_{configuration_id(condition)[:12]}"
+            target.mkdir(parents=True, exist_ok=True)
+            (target / "condition.json").write_text(json.dumps(condition, indent=2), encoding="utf-8")
+        print(f"Generating plots from {csv_path}: {target}/")
+        _generate_condition_plots(pd.DataFrame(rows), target)
 
 
 if __name__ == "__main__":

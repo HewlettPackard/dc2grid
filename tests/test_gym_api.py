@@ -28,6 +28,7 @@ import numpy as np
 import pytest
 
 from c2g_env import C2GFastEnv, C2GMacroEnv
+from c2g_env.plant_profiles import available_plant_profiles, load_plant_profile
 
 
 # ==========================================================================
@@ -245,6 +246,19 @@ class TestFastEnvStep:
             _, _, _, _, info = fast_env.step(fast_env.action_space.sample())
             soc = info["bess_soc"]
             assert 0.0 <= soc <= 1.0, f"SOC out of range: {soc}"
+
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    @pytest.mark.parametrize("dispatch", [-1.0, -0.1, 0.1, 1.0])
+    def test_bess_dispatch_uses_plant_rating(self, profile, dispatch):
+        env = C2GFastEnv(plant_overrides=load_plant_profile(profile))
+        try:
+            env.reset(seed=0)
+            action = np.array([1.0, 0.7, 0.7, dispatch], dtype=np.float32)
+            *_, info = env.step(action)
+            expected_kw = dispatch * env._bess.P_MAX_MW * 1_000.0
+            assert info["bess_actual_kw"] == pytest.approx(expected_kw, rel=1e-6)
+        finally:
+            env.close()
 
     def test_step_tracking_err_nonneg(self, fast_env):
         fast_env.reset(seed=8)
@@ -594,3 +608,158 @@ class TestHierarchicalConsistency:
         env.step(np.array([0.5, 0.2], dtype=np.float32))
         # Should be called 180 times (once per sub-step @ 5 s for 15 min)
         assert len(call_count) == 180
+
+
+class TestCapacityContracts:
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    @pytest.mark.parametrize("scenario", ["default", "scenario_a", "scenario_b", "scenario_c"])
+    def test_commitment_caps_scale_without_changing_market(self, profile, scenario):
+        reference = C2GFastEnv(scenario=scenario)
+        plant = load_plant_profile(profile)
+        env = C2GFastEnv(scenario=scenario, plant_overrides=plant)
+        try:
+            reference.reset(seed=0)
+            env.reset(seed=0)
+            scale = env._facility_cap_kw / reference._facility_cap_kw
+            assert env._grid._market == reference._grid._market
+            assert env._grid._load_median == reference._grid._load_median
+            assert env._grid.step_rmcp() == reference._grid.step_rmcp()
+            assert env._committed_mw_max == pytest.approx(reference._committed_mw_max * scale)
+            assert env._dr_baseline_mw == (plant or {}).get("dr_baseline_mw", reference._dr_baseline_mw)
+            env.committed_mw = 2.0 * reference._committed_mw_max * scale
+            assert env.committed_mw == pytest.approx(reference._committed_mw_max * scale)
+        finally:
+            env.close()
+            reference.close()
+
+    @pytest.mark.parametrize("cap_mw", [20.0, 70.0])
+    def test_explicit_commitment_cap_overrides_scaling(self, cap_mw):
+        plant = load_plant_profile("plant_500mw")
+        assert plant is not None
+        plant["committed_mw_max"] = cap_mw
+        env = C2GFastEnv(scenario="scenario_a", plant_overrides=plant)
+        try:
+            env.reset(seed=0)
+            assert env._committed_mw_max == cap_mw
+            env.committed_mw = cap_mw + 1.0
+            assert env.committed_mw == cap_mw
+            env.reset(seed=0, options={"scenario": "scenario_b"})
+            assert env._committed_mw_max == cap_mw
+        finally:
+            env.close()
+
+    @pytest.mark.parametrize("param", ["nominal", "C_A", "fault_factor"])
+    def test_capacity_thermal_transitions_preserve_relative_tracking(self, param):
+        from c2g_env.experiments.thermal_sensitivity_cross_scenario import (
+            _explicit_configurations, _rescale_thermal_grid, load_config,
+        )
+
+        reference = None
+        base = load_config(None)
+        for profile in available_plant_profiles():
+            plant = load_plant_profile(profile)
+            grid = _rescale_thermal_grid(base, plant) if plant else base
+            config = next(item for item in _explicit_configurations(grid) if item["param"] == param)
+            env = C2GFastEnv(plant_overrides=plant, thermal_overrides=config["overrides"])
+            try:
+                env.reset(seed=100)
+                obs, _, _, _, info = env.step(np.array([1.0, 0.7, 0.7, 0.1], dtype=np.float32))
+                normalized = np.append(obs[:6], [
+                    info["reward_tracking"], info["bess_actual_kw"] / env._facility_cap_kw,
+                ])
+                if reference is None:
+                    reference = normalized
+                np.testing.assert_allclose(normalized, reference, rtol=1e-6, atol=1e-7)
+            finally:
+                env.close()
+
+    def test_rule_wrapper_aggregates_after_capacity_scaled_window(self):
+        from c2g_env.train_envs.rule_macro_wrapped import RuleMacroWrappedEnv
+
+        fast = C2GFastEnv(plant_overrides=load_plant_profile("plant_50mw"))
+        env = RuleMacroWrappedEnv(fast)
+        try:
+            env.reset(seed=0)
+            for _ in range(181):
+                _, reward, _, _, _ = env.step(np.array([1.0, 1.0, 0.7, 0.0], dtype=np.float32))
+            assert math.isfinite(reward)
+            assert env._committed_max_mw == fast._committed_mw_max
+        finally:
+            env.close()
+
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    def test_macro_tracking_floor_scales_with_capacity(self, monkeypatch, profile):
+        monkeypatch.setattr("c2g_env.env_high_level._SUBSTEPS", 1)
+        env = C2GMacroEnv(plant_overrides=load_plant_profile(profile))
+        try:
+            env.reset(seed=0)
+            monkeypatch.setattr(env._fast_env._grid, "clear_bid", lambda price, quantity: {
+                "accepted": True,
+                "accepted_mw": quantity,
+                "accept_prob": 1.0,
+                "clearing_price": 10.0,
+            })
+            obs, _, _, _, info = env.step(np.array([0.0, 0.0], dtype=np.float32))
+            floor_kw = env._fast_env._facility_cap_kw / 250_000.0
+            expected = info["mean_tracking_err"] / floor_kw
+            assert env._fast_env._macro_tracking_floor_kw == pytest.approx(floor_kw)
+            assert obs[8] == pytest.approx(expected)
+            assert info["perf_score"] == pytest.approx(max(0.0, 1.0 - expected))
+        finally:
+            env.close()
+
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    @pytest.mark.parametrize("scenario", ["default", "scenario_a", "scenario_b", "scenario_c"])
+    @pytest.mark.parametrize("accepted", [False, True])
+    def test_macro_contract_matches_executed_commitment(self, monkeypatch, profile, scenario, accepted):
+        monkeypatch.setattr("c2g_env.env_high_level._SUBSTEPS", 1)
+        env = C2GMacroEnv(scenario=scenario, plant_overrides=load_plant_profile(profile))
+        try:
+            env.reset(seed=0)
+            fast = env._fast_env
+            monkeypatch.setattr(fast._grid, "clear_bid", lambda price, quantity: {
+                "accepted": accepted,
+                "accepted_mw": quantity if accepted else 0.0,
+                "accept_prob": float(accepted),
+                "clearing_price": 10.0,
+            })
+            action = np.array([0.8, 0.0], dtype=np.float32)
+            *_, info = env.step(action)
+            expected = float(action[0]) * fast._committed_mw_max if accepted else fast._dr_baseline_mw
+            assert env._committed_max_mw == fast._committed_mw_max
+            assert env._dr_baseline_mw == fast._dr_baseline_mw
+            assert info["committed_mw"] == pytest.approx(expected)
+            assert fast.committed_mw == pytest.approx(expected)
+        finally:
+            env.close()
+
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    def test_macro_limits_follow_scenario_reset(self, profile):
+        env = C2GMacroEnv(plant_overrides=load_plant_profile(profile))
+        try:
+            env.reset(seed=0, options={"scenario": "scenario_b"})
+            scale = env._fast_env._facility_cap_kw / 250_000.0
+            assert env._committed_max_mw == pytest.approx(60.0 * scale)
+            assert env._committed_max_mw == env._fast_env._committed_mw_max
+            assert env._dr_baseline_mw == env._fast_env._dr_baseline_mw
+            env.reset(seed=0, options={"scenario": "default"})
+            assert env._committed_max_mw == pytest.approx(30.0 * scale)
+        finally:
+            env.close()
+
+    @pytest.mark.parametrize("profile", available_plant_profiles())
+    def test_rule_wrapper_limits_follow_scenario_reset(self, profile):
+        from c2g_env.train_envs.rule_macro_wrapped import RuleMacroWrappedEnv
+
+        fast = C2GFastEnv(plant_overrides=load_plant_profile(profile))
+        env = RuleMacroWrappedEnv(fast)
+        try:
+            env.reset(seed=0, options={"scenario": "scenario_b"})
+            scale = fast._facility_cap_kw / 250_000.0
+            assert env._committed_max_mw == pytest.approx(60.0 * scale)
+            assert env._committed_max_mw == fast._committed_mw_max
+            assert env._dr_baseline_mw == fast._dr_baseline_mw
+            env.reset(seed=0, options={"scenario": "default"})
+            assert env._committed_max_mw == pytest.approx(30.0 * scale)
+        finally:
+            env.close()

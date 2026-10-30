@@ -16,8 +16,7 @@ name: plant_500mw
 description: "500 MW facility (2.0x default) — upper-bound capacity-generalization test"
 
 plant:
-  # Capacity-scaled market commitments (2.0x default)
-  committed_mw_max: 60.0
+  # Capacity-scaled standing DR commitment (2.0x default)
   dr_baseline_mw:   10.0
   n_racks_a_flex: 2400
   n_racks_a_base: 1600

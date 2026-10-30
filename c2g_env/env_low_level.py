@@ -202,6 +202,10 @@ class C2GFastEnv(gym.Env):
         self._rcfg   = full_cfg["reward"]
         self._scfg   = full_cfg[scenario]
         self._scenario = scenario
+        for key in ("tracking_floor_fraction", "macro_tracking_floor_fraction"):
+            fraction = float(self._rcfg[key])
+            if not np.isfinite(fraction) or fraction <= 0.0:
+                raise ValueError(f"reward.{key} must be finite and positive")
         self._thermal_overrides = {
             str(key): float(value) for key, value in (thermal_overrides or {}).items()
         }
@@ -311,7 +315,6 @@ class C2GFastEnv(gym.Env):
         plant = self._plant_overrides or scfg.get("plant") or {}
         # Re-derive capacity-scaled market commitments (survives a per-episode
         # scenario override via options).
-        self._committed_mw_max = float(plant.get("committed_mw_max", scfg["committed_mw_max"]))
         self._dr_baseline_mw   = float(plant.get("dr_baseline_mw", scfg["dr_baseline_mw"]))
         self._workload = WorkloadOrchestrator(
             trace_dir=gcfg["trace_dir"], dt_seconds=self._dt, seed=rng_seed,
@@ -362,6 +365,12 @@ class C2GFastEnv(gym.Env):
             self._elec.n_racks_A * self._elec.p_max_rack_A_kw
             + self._elec.n_racks_B * self._elec.p_max_rack_B_kw
         )
+        self._committed_mw_max = float(plant.get(
+            "committed_mw_max",
+            float(scfg["committed_mw_max"]) * self._facility_cap_kw / _FACILITY_CAP_KW,
+        ))
+        self._tracking_floor_kw = self._facility_cap_kw * float(self._rcfg["tracking_floor_fraction"])
+        self._macro_tracking_floor_kw = self._facility_cap_kw * float(self._rcfg["macro_tracking_floor_fraction"])
         self._grid = MacroGridSignal(
             energy_dir=gcfg["energy_dir"],
             zone=gcfg["nyiso_zone"],
@@ -436,7 +445,7 @@ class C2GFastEnv(gym.Env):
         # Scale BESS dispatch to MW.
         # Positive = discharge (DC injects power back to grid side).
         # Negative = charge    (DC draws more from grid).
-        bess_mw = bess_dispatch * getattr(BESSModel, "P_MAX_MW", 50.0)
+        bess_mw = bess_dispatch * getattr(self._bess, "P_MAX_MW", 50.0)
 
         # -----------------------------------------------------------------
         # 1. Workload  → IT power by zone
@@ -566,10 +575,8 @@ class C2GFastEnv(gym.Env):
             w.backlog_kw / self._workload.p_flex_max_kw
         )
 
-        # Keep the tracking term bounded when committed_mw is zero.
-        # In that regime there is effectively nothing committed to track,
-        # so use a 100 kW floor to avoid divide-by-zero and pathological spikes.
-        norm_kw = max(self._committed_mw * 1_000.0, 100.0)
+        # Scale the zero-commitment safeguard with the effective IT nameplate.
+        norm_kw = max(self._committed_mw * 1_000.0, self._tracking_floor_kw)
 
         r_throughput =  alpha * throttle_batch
         r_tracking   = -beta  * (tracking_err_kw / norm_kw)
@@ -616,6 +623,9 @@ class C2GFastEnv(gym.Env):
             "bess_soc":              bess_out["soc_fraction"],
             "p_facility_mw":         elec["p_facility_mw"],
             "p_total_it_mw":         elec["p_total_it_mw"],
+            "p_cooling_mw":          elec["p_cooling_mw"],
+            "p_flex_nom_kw":         w.p_flex_nom_kw,
+            "p_flex_served_kw":      w.p_flex_kw,
             "pue":                   elec["pue_dynamic"],
             "tracking_err_kw":       tracking_err_kw,
             "delta_p_actual_kw":     delta_p_actual_kw,
@@ -642,6 +652,10 @@ class C2GFastEnv(gym.Env):
             "freq_fault":            freq_fault,
             "voltage_fault":         voltage_fault,
             "terminated":            terminated,
+            "truncated":             truncated,
+            "thermal_warning":       bool(thermal_pen > 0.0),
+            "freq_warning":          bool(freq_pen > 0.0),
+            "voltage_warning":       bool(volt_pen > 0.0),
             "f_grid_hz":             f_grid_hz,
             "f_nom_hz":              f_nom,
             "freq_dev_hz":           f_grid_hz - f_nom,

@@ -20,7 +20,7 @@
 #     it is an economic axis, not a thermal-safety axis. COP_base (Zone B air)
 #     IS included because it sets the capacity-limited cooling ceiling.
 #
-# Keys under `nominal`, `sweep`, and `adverse_corner` are EXACT ThermalTwin
+# Keys under `nominal` and `sweep` are EXACT ThermalTwin
 # attribute names (c2g_env/physics/thermal.py); they are applied via setattr.
 # ==============================================================================
 
@@ -68,31 +68,6 @@ thermal_sensitivity:
     fault_factor: [1.0, 0.8, 0.6, 0.4]         # architecture/stress cases
     T_amb:       [25.0, 30.0, 35.0, 40.0]      # nominal to Thermal Squeeze
 
-  # Coupled cases complement the OAT rows. The shared fault_factor reflects
-  # the current ThermalTwin implementation; separate liquid/air factors are a
-  # future model refinement.
-  coupled_cases:
-    low_inertia:
-      C_A: 13500.0
-      C_B: 5000.0
-
-    weak_cooling:
-      K_liq: 25.1
-      K_air: 10.0
-
-    partial_outage:
-      fault_factor: 0.8
-
-    combined_adverse:
-      C_A: 13500.0
-      C_B: 5000.0
-      K_liq: 25.1
-      K_air: 10.0
-      T_supply_A: 32.0
-      T_supply_B: 27.0
-      COP_base: 2.5
-      T_amb: 40.0
-
   # Run controls.
   run:
     horizon_ticks:        17280     # 24 h at 5 s per tick (full settling)
@@ -109,8 +84,16 @@ thermal_sensitivity:
   # fixed to isolate low-level thermal robustness and matches SAC Phase-1
   # training/evaluation. The same frozen SAC checkpoint is used in every
   # scenario; this is an out-of-distribution policy test, not retraining.
+  # Apply only one-at-a-time thermal changes on top of each scenario, retaining
+  # its defaults for all other parameters.
   cross_scenario:
-    scenarios: [default, scenario_a, scenario_b, scenario_c]
+    torch_num_threads: 1
+    hardware_observation_protocol: carry_forward
+    controller_pairs:
+      - [rule_macro, rule_based]
+      - [rule_macro, sac]
+    validation_configs: [nominal, "fault_factor=0.4"]
+    scenarios: [default]
     seeds: [100, 101, 102, 103, 104]
     macro_controller: rule_macro
     hardware_controllers: [bang_bang, pid, rule_based, sac]
