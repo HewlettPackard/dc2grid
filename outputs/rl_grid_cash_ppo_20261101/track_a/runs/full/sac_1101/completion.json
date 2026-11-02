@@ -1,0 +1,101 @@
+{
+  "status": "completed",
+  "registration_id": "01e35bd5cd23cfde1c6a1026aeb15e7cedbc94cacc919f3f1c5869207e65c91b",
+  "algorithm": "sac",
+  "seed": 1101,
+  "stage": "full",
+  "num_timesteps": 552960,
+  "optimizer_updates": {
+    "actor": 551936,
+    "critic": 552192,
+    "critic_only": 256
+  },
+  "sb3_update_counter_not_optimizer_count_for_ppo": 552192,
+  "training_episodes": 32,
+  "final_checkpoint": {
+    "timesteps": 552960,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/full/sac_1101/step_552960.zip",
+    "sha256": "3f91c32ff6797d417c37c9a0edbe3cb99d98ebed99d21c0c7bc1b3e4905d247b",
+    "optimizer_updates": {
+      "actor": 551936,
+      "critic": 552192,
+      "critic_only": 256
+    },
+    "selected_for_primary_evaluation": true
+  },
+  "training_prefixes": [
+    {
+      "condition": {
+        "start_day": 102,
+        "regd_load_bias": 0.0,
+        "seed": 1724169684,
+        "curriculum_cycle": 1,
+        "curriculum_position": 2
+      },
+      "steps": 0,
+      "done": false,
+      "service": null,
+      "not_a_complete_episode": true
+    },
+    {
+      "condition": {
+        "start_day": 168,
+        "regd_load_bias": 0.25,
+        "seed": 541763090,
+        "curriculum_cycle": 1,
+        "curriculum_position": 3
+      },
+      "steps": 0,
+      "done": false,
+      "service": null,
+      "not_a_complete_episode": true
+    },
+    {
+      "condition": {
+        "start_day": 225,
+        "regd_load_bias": 0.5,
+        "seed": 482939010,
+        "curriculum_cycle": 1,
+        "curriculum_position": 4
+      },
+      "steps": 0,
+      "done": false,
+      "service": null,
+      "not_a_complete_episode": true
+    },
+    {
+      "condition": {
+        "start_day": 297,
+        "regd_load_bias": 0.0,
+        "seed": 1777516325,
+        "curriculum_cycle": 1,
+        "curriculum_position": 5
+      },
+      "steps": 0,
+      "done": false,
+      "service": null,
+      "not_a_complete_episode": true
+    }
+  ],
+  "full_transition_diagnostics": [
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/full/sac_1101/worker_0_transitions.npz",
+      "transitions": 138240
+    },
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/full/sac_1101/worker_1_transitions.npz",
+      "transitions": 138240
+    },
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/full/sac_1101/worker_2_transitions.npz",
+      "transitions": 138240
+    },
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/full/sac_1101/worker_3_transitions.npz",
+      "transitions": 138240
+    }
+  ],
+  "elapsed_seconds": 2471.867853186006,
+  "no_recovery_in_original_reward_training": true,
+  "recovery_required_in_every_evaluation": true
+}

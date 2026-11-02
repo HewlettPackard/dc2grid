@@ -1,0 +1,76 @@
+{
+  "purpose": "Preserve the verified union-SAC code, models, and results before new grid-relief/economics and PPO experiments.",
+  "captured_date_utc": "2026-11-01",
+  "source_commit": "053b52752e9f9e926d12fe3cb65e836b73637081",
+  "source_tree": "f52fe6ef08f6de9bfda031edadcde00f5a1e37d7",
+  "source_branch": "improve/rl-state-local-20261101",
+  "existing_results_tag": "results/table2-union-verified-20261101",
+  "snapshot_tag": "baseline/pre-economics-ppo-20261101",
+  "worktree_clean_before_snapshot": true,
+  "experiment_code_changed_during_snapshot": false,
+  "git_tracked_union_checkpoint_archives": 16,
+  "git_tracked_final_union_checkpoints": 8,
+  "final_union_checkpoint_step": 552960,
+  "bulk_verification": {
+    "inventory": "outputs/rl_value_conditioning_20261101/reports/result_inventory.json",
+    "inventory_sha256": "195ff0cab160ff88aa8ba6d3f0adefa2d7eecc3e683f0b95a9f884b7dcb6450b",
+    "paths_rehashed": 24074,
+    "bytes_rehashed": 38685313944,
+    "mismatches": 0,
+    "workers": 4,
+    "bulk_files_remain_on_disk_not_all_in_git": true,
+    "checksums_are_not_a_backup": true
+  },
+  "artifacts": [
+    {
+      "path": "outputs/rl_value_conditioning_20261101/reports/completion_receipt.json",
+      "sha256": "d806437841c78cf31ffc488855a2bba365ccd70bb04b0bbb3f80de60d67ab25e"
+    },
+    {
+      "path": "outputs/rl_value_conditioning_20261101/reports/final_report.json",
+      "sha256": "0a8b0bc3664d69e667b545a21d46f19770052ff2cd9452dfa0de4ec3c1d272ba"
+    },
+    {
+      "path": "outputs/rl_value_conditioning_20261101/reports/final_episode_metrics.csv",
+      "sha256": "503cf401223796e3a48b76380e326a243af24c5a4d6602a80763a69f1a1d62e3"
+    },
+    {
+      "path": "outputs/rl_value_conditioning_20261101/publication/camera_ready.tex",
+      "sha256": "74bd12e836ef03c6df769ddee0ff01a66aea988de7f3c2d482c7728a43e02c72"
+    },
+    {
+      "path": "outputs/rl_value_conditioning_20261101/publication/camera_ready_table2_union_updated.zip",
+      "sha256": "94c8709158cef546dde4333ec569e26800d06ab07468ba125db68358a2991137"
+    },
+    {
+      "path": "outputs/rl_value_conditioning_20261101/publication/build/table2_preview.pdf",
+      "sha256": "3d138b67223c0d9eea1cb190960ad1da2229eaa1648f38f2cb7590a716dce15b"
+    },
+    {
+      "path": "outputs/rl_value_conditioning_20261101/publication/build/section_preview.pdf",
+      "sha256": "a3575c7492a4b8e57c27d5aee5f6b757d701dfe62d99d1696a59557e7726fb3e"
+    },
+    {
+      "path": "outputs/rl_value_conditioning_20261101/publication/validation_receipt.json",
+      "sha256": "6ac54ee31755d76f1785f393fc8b8306490907b4f72d9eb9f446418a58da90c1"
+    },
+    {
+      "path": "NIPS26_Data_Center_Energy_Grid_Benchmark.zip",
+      "sha256": "2f616b2f3b2d65e848be7246954011c59f897ea5fa365b3de15fc424509fcc2c"
+    }
+  ],
+  "earlier_repository_inventory": {
+    "path": "snapshots/table2-baseline-20261101/manifest.json",
+    "sha256": "2af6b25bdae07051c3a5b9e8415e28ada1807ee3e3f18f57801da669488dbf75",
+    "bulk_entries_rehashed_in_this_snapshot": false
+  },
+  "scientific_status": {
+    "latest_campaign_improved_sac_tracking_and_throughput": true,
+    "latest_campaign_established_best_grid_relief_and_cash": false,
+    "new_learned_high_level_policy_promoted": false,
+    "previous_peak_and_six_date_evaluation_panels_consumed": true,
+    "dev_b_consumed": true,
+    "final_b_consumed": true,
+    "new_experiments_require_a_separate_protocol": true
+  }
+}

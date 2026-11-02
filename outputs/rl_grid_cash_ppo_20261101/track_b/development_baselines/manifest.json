@@ -1,0 +1,158 @@
+{
+  "registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+  "implementation_commit": "755b871ff700a047ee75d73818e7710538de9e3e",
+  "group": "baselines",
+  "role": "consumed_development_only",
+  "policies": [
+    {
+      "id": "analytic",
+      "family": "analytic",
+      "kind": "scripted",
+      "mode": "zero"
+    },
+    {
+      "id": "constant_one",
+      "family": "constant_one",
+      "kind": "scripted",
+      "mode": "one"
+    },
+    {
+      "id": "greedy_budget",
+      "family": "greedy_budget",
+      "kind": "scripted",
+      "mode": "greedy"
+    },
+    {
+      "id": "margin_ten",
+      "family": "margin_ten",
+      "kind": "scripted",
+      "mode": "margin",
+      "threshold_usd_mwh": 10.0
+    }
+  ],
+  "missing_training_slots": [],
+  "cells": [
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    }
+  ],
+  "expected_episodes": 96,
+  "manifest_id": "fecee9f83d2b5abcee6f440473a1df5b243b862bfd053f4159492c3d11d8e134"
+}

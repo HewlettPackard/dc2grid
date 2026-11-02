@@ -1,0 +1,16 @@
+{
+  "warmup_transitions": 1024,
+  "critic_only_updates": 256,
+  "actor_unchanged": {
+    "body": "f158d7e2f73f1e286f35f22c918ceb8d24d3e9695969c300d7508b5fd53734a8",
+    "mean": "ece0ce4139e72f392973207b5339e1edd5095cc638bbb7295a1d8d6538cb2f62",
+    "log_std": [
+      -4.605170249938965,
+      -4.605170249938965,
+      -4.605170249938965
+    ]
+  },
+  "actor_optimizer_state_empty": true,
+  "ppo_calibration_uses_each_on_policy_warmup_rollout": true,
+  "sac_calibration_uses_the_complete_warmup_replay": false
+}

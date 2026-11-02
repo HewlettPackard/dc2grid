@@ -1,0 +1,218 @@
+{
+  "registration_id": "f40f33958d29a83906e0fb71e0b926da23129fce7967b278d69e44e5503b95f4",
+  "implementation_commit": "5901eda8e2f0ad4b36fd9f2b958c0e5e5429b079",
+  "role": "consumed_development_only",
+  "planned_episodes": 144,
+  "policies": [
+    {
+      "id": "analytic_control",
+      "family": "cooling_first",
+      "hardware": "cooling_first",
+      "macro": "full_residual",
+      "track": "control"
+    },
+    {
+      "id": "offset_half_mw",
+      "family": "offset_half_mw",
+      "hardware": "constant_residual",
+      "macro": "full_residual",
+      "track": "economic_dispatch",
+      "residual": [
+        0,
+        0,
+        0.5
+      ],
+      "positive_regd_only": false,
+      "learned": false
+    },
+    {
+      "id": "offset_one_mw",
+      "family": "offset_one_mw",
+      "hardware": "constant_residual",
+      "macro": "full_residual",
+      "track": "economic_dispatch",
+      "residual": [
+        0,
+        0,
+        1
+      ],
+      "positive_regd_only": false,
+      "learned": false
+    },
+    {
+      "id": "inventory_probe",
+      "family": "inventory_probe",
+      "hardware": "constant_residual",
+      "macro": "full_residual",
+      "track": "boundary_diagnostic",
+      "residual": [
+        0,
+        1,
+        0
+      ],
+      "positive_regd_only": false,
+      "learned": false
+    },
+    {
+      "id": "offset_one_inventory",
+      "family": "offset_one_inventory",
+      "hardware": "constant_residual",
+      "macro": "full_residual",
+      "track": "economic_dispatch",
+      "residual": [
+        0,
+        1,
+        1
+      ],
+      "positive_regd_only": false,
+      "learned": false
+    },
+    {
+      "id": "positive_regd_offset",
+      "family": "positive_regd_offset",
+      "hardware": "constant_residual",
+      "macro": "full_residual",
+      "track": "economic_dispatch",
+      "residual": [
+        0,
+        0,
+        1
+      ],
+      "positive_regd_only": true,
+      "learned": false
+    }
+  ],
+  "cells": [
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    }
+  ],
+  "cpus": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+  ],
+  "model_training": false
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "macro_steps": 512,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/smoke/ppo_1200/step_512.zip",
+    "sha256": "b7a70daf55786fd315abbc8114a939019d557a5bb5e04850a6861823313458ea",
+    "optimizer_updates": {
+      "actor": 40,
+      "critic": 296,
+      "critic_only": 256
+    }
+  }
+]

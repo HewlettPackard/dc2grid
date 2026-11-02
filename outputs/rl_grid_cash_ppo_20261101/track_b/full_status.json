@@ -1,0 +1,113 @@
+{
+  "registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+  "implementation_commit": "755b871ff700a047ee75d73818e7710538de9e3e",
+  "stage": "full",
+  "state": "finished",
+  "jobs": [
+    {
+      "algorithm": "ppo",
+      "seed": 1200,
+      "cpus": [
+        40,
+        41,
+        42
+      ],
+      "pid": 1713798,
+      "state": "completed",
+      "device": "cpu",
+      "exit_code": 0
+    },
+    {
+      "algorithm": "ppo",
+      "seed": 1201,
+      "cpus": [
+        43,
+        44,
+        45
+      ],
+      "pid": 1713799,
+      "state": "completed",
+      "device": "cpu",
+      "exit_code": 0
+    },
+    {
+      "algorithm": "ppo",
+      "seed": 1202,
+      "cpus": [
+        46,
+        47,
+        48
+      ],
+      "pid": 1713800,
+      "state": "completed",
+      "device": "cpu",
+      "exit_code": 0
+    },
+    {
+      "algorithm": "ppo",
+      "seed": 1203,
+      "cpus": [
+        49,
+        50,
+        51
+      ],
+      "pid": 1713801,
+      "state": "completed",
+      "device": "cpu",
+      "exit_code": 0
+    },
+    {
+      "algorithm": "sac",
+      "seed": 1200,
+      "cpus": [
+        52,
+        53,
+        54
+      ],
+      "pid": 1713802,
+      "state": "completed",
+      "device": "cpu",
+      "exit_code": 0
+    },
+    {
+      "algorithm": "sac",
+      "seed": 1201,
+      "cpus": [
+        55,
+        56,
+        57
+      ],
+      "pid": 1713803,
+      "state": "completed",
+      "device": "cpu",
+      "exit_code": 0
+    },
+    {
+      "algorithm": "sac",
+      "seed": 1202,
+      "cpus": [
+        58,
+        59,
+        60
+      ],
+      "pid": 1713804,
+      "state": "completed",
+      "device": "cpu",
+      "exit_code": 0
+    },
+    {
+      "algorithm": "sac",
+      "seed": 1203,
+      "cpus": [
+        61,
+        62,
+        63
+      ],
+      "pid": 1713805,
+      "state": "completed",
+      "device": "cpu",
+      "exit_code": 0
+    }
+  ],
+  "updated_unix": 1793562294.880976
+}

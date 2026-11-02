@@ -1,0 +1,71 @@
+{
+  "status": "completed",
+  "registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+  "algorithm": "ppo",
+  "seed": 1200,
+  "stage": "smoke",
+  "macro_transitions": 512,
+  "optimizer_updates": {
+    "actor": 40,
+    "critic": 296,
+    "critic_only": 256
+  },
+  "training_episodes": 4,
+  "final_checkpoint": {
+    "macro_steps": 512,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/smoke/ppo_1200/step_512.zip",
+    "sha256": "b7a70daf55786fd315abbc8114a939019d557a5bb5e04850a6861823313458ea",
+    "optimizer_updates": {
+      "actor": 40,
+      "critic": 296,
+      "critic_only": 256
+    }
+  },
+  "all_macro_transitions": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/smoke/ppo_1200/all_macro_transitions.npz",
+    "sha256": "05fc0bad0a6a7d29a592f81835be8730cedd194388c40c4b5fed70b05045cf4c",
+    "transitions": 512,
+    "partial": false,
+    "model_timesteps": 512
+  },
+  "training_prefixes": [
+    {
+      "condition": {
+        "start_day": 36,
+        "regd_load_bias": 0.25,
+        "seed": 2672047802,
+        "curriculum_cycle": 0,
+        "curriculum_position": 4
+      },
+      "condition_role": "training_only",
+      "decisions": 64,
+      "service_fast_steps": 11520,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 13.609868310359992,
+      "reward_sum": 0.13609868310359993,
+      "credit_mwh": 16.917758606340765,
+      "cashflow_26h_usd": null
+    },
+    {
+      "condition": {
+        "start_day": 283,
+        "regd_load_bias": 0.5,
+        "seed": 724647429,
+        "curriculum_cycle": 0,
+        "curriculum_position": 5
+      },
+      "condition_role": "training_only",
+      "decisions": 64,
+      "service_fast_steps": 11520,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 12.715868257629669,
+      "reward_sum": 0.1271586825762967,
+      "credit_mwh": 15.8670415919923,
+      "cashflow_26h_usd": null
+    }
+  ],
+  "elapsed_seconds": 11.723952305008424,
+  "physical_service_and_recovery_are_in_the_task": true
+}

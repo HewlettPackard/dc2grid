@@ -1,0 +1,71 @@
+{
+  "status": "completed",
+  "registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+  "algorithm": "sac",
+  "seed": 1200,
+  "stage": "full",
+  "macro_transitions": 24576,
+  "optimizer_updates": {
+    "actor": 24320,
+    "critic": 24576,
+    "critic_only": 256
+  },
+  "training_episodes": 256,
+  "final_checkpoint": {
+    "macro_steps": 24576,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1200/step_24576.zip",
+    "sha256": "34e3ecc9137bd18cfa37d6a53150dda171f214f71b8cf0922a9b201a93d11a3a",
+    "optimizer_updates": {
+      "actor": 24320,
+      "critic": 24576,
+      "critic_only": 256
+    }
+  },
+  "all_macro_transitions": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1200/all_macro_transitions.npz",
+    "sha256": "b4d5f03226c11f21d40e086c7303854d7775700242f0ef16300c39b6159015ac",
+    "transitions": 24576,
+    "partial": false,
+    "model_timesteps": 24576
+  },
+  "training_prefixes": [
+    {
+      "condition": {
+        "start_day": 251,
+        "regd_load_bias": 0.0,
+        "seed": 962791460,
+        "curriculum_cycle": 8,
+        "curriculum_position": 16
+      },
+      "condition_role": "training_only",
+      "decisions": 0,
+      "service_fast_steps": 0,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 0.0,
+      "reward_sum": 0.0,
+      "credit_mwh": 0.0,
+      "cashflow_26h_usd": null
+    },
+    {
+      "condition": {
+        "start_day": 102,
+        "regd_load_bias": 0.25,
+        "seed": 1799320105,
+        "curriculum_cycle": 8,
+        "curriculum_position": 17
+      },
+      "condition_role": "training_only",
+      "decisions": 0,
+      "service_fast_steps": 0,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 0.0,
+      "reward_sum": 0.0,
+      "credit_mwh": 0.0,
+      "cashflow_26h_usd": null
+    }
+  ],
+  "elapsed_seconds": 755.1791687719815,
+  "physical_service_and_recovery_are_in_the_task": true
+}

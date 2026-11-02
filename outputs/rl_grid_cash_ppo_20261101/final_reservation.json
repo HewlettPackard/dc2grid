@@ -1,0 +1,319 @@
+{
+  "schema": "grid-cash-calendar-combination-reservation-v1",
+  "created_utc": "2026-11-01T19:01:57.201386+00:00",
+  "days": [
+    33,
+    91,
+    126,
+    165,
+    277,
+    325
+  ],
+  "tiers": {
+    "277": "p75_tail_not_p90",
+    "33": "p75_tail_not_p90",
+    "325": "middle",
+    "165": "middle",
+    "126": "low",
+    "91": "low"
+  },
+  "cells": [
+    {
+      "start_day": 33,
+      "seed": 3795400676,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 33,
+      "seed": 3795400676,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 33,
+      "seed": 4159160859,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 33,
+      "seed": 4159160859,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 33,
+      "seed": 1647195192,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 33,
+      "seed": 1647195192,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 91,
+      "seed": 570113033,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 91,
+      "seed": 570113033,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 91,
+      "seed": 3957565938,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 91,
+      "seed": 3957565938,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 91,
+      "seed": 2623199997,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 91,
+      "seed": 2623199997,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 126,
+      "seed": 3419571797,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 126,
+      "seed": 3419571797,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 126,
+      "seed": 3709470158,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 126,
+      "seed": 3709470158,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 126,
+      "seed": 1734583033,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 126,
+      "seed": 1734583033,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 165,
+      "seed": 3721694315,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 165,
+      "seed": 3721694315,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 165,
+      "seed": 435986785,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 165,
+      "seed": 435986785,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 165,
+      "seed": 1224096739,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 165,
+      "seed": 1224096739,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 277,
+      "seed": 420290435,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 277,
+      "seed": 420290435,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 277,
+      "seed": 271012307,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 277,
+      "seed": 271012307,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 277,
+      "seed": 1448474891,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 277,
+      "seed": 1448474891,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 325,
+      "seed": 2844978885,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 325,
+      "seed": 2844978885,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 325,
+      "seed": 3226498605,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 325,
+      "seed": 3226498605,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 325,
+      "seed": 2420867450,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 325,
+      "seed": 2420867450,
+      "regd_load_bias": 0.5
+    }
+  ],
+  "load_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/data/processed/energy/NYC.csv",
+  "load_sha256": "db33c788d440f5ba4aa0d4b968a409d428107b92c87c49ecee0c1823e5069203",
+  "consumed_days_before_reservation": [
+    0,
+    12,
+    16,
+    19,
+    20,
+    24,
+    30,
+    36,
+    38,
+    40,
+    50,
+    52,
+    60,
+    72,
+    80,
+    81,
+    96,
+    98,
+    100,
+    102,
+    104,
+    115,
+    120,
+    130,
+    137,
+    140,
+    147,
+    149,
+    152,
+    157,
+    160,
+    168,
+    178,
+    180,
+    184,
+    186,
+    188,
+    190,
+    192,
+    194,
+    196,
+    198,
+    200,
+    204,
+    207,
+    209,
+    210,
+    218,
+    220,
+    225,
+    226,
+    227,
+    232,
+    236,
+    240,
+    243,
+    246,
+    248,
+    249,
+    250,
+    251,
+    254,
+    256,
+    260,
+    263,
+    271,
+    279,
+    280,
+    283,
+    297,
+    300,
+    303,
+    305,
+    314,
+    316,
+    320,
+    323,
+    332,
+    337,
+    340,
+    345,
+    349,
+    356
+  ],
+  "inherited_invalid_26h_starts": [
+    10,
+    70,
+    174,
+    223,
+    230,
+    231,
+    266,
+    281,
+    319,
+    362,
+    363,
+    364
+  ],
+  "eligible_starts_before_reservation": 149,
+  "daily_peak_quantiles_mw": {
+    "p25": 5592.6387,
+    "p75": 6760.3115,
+    "p90": 8042.601960000004
+  },
+  "selection_seed": 202611013,
+  "closed_26h_windows_separated_by_at_least_two_start_days": true,
+  "distinct_noise_streams_across_dates": true,
+  "both_tracks_must_lock_models_before_any_opening": true,
+  "global_opening_file": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/final_opening_grid_cash.json",
+  "no_policy_outcomes_opened_at_reservation": true,
+  "scope": "Audited dc2grid studies, not every outside study",
+  "not_an_unseen_workload_phase_test": true,
+  "not_a_p90_tail_holdout": true,
+  "reservation_id": "8186f8d25d367090c11fbc8e56d121d80b177ccd2b733c7cb47a51e81d42a360"
+}

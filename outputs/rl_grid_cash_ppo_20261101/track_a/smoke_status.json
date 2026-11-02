@@ -1,0 +1,39 @@
+{
+  "registration_id": "01e35bd5cd23cfde1c6a1026aeb15e7cedbc94cacc919f3f1c5869207e65c91b",
+  "implementation_commit": "de64f675dc8368df613830622898a7cb2ec3c629",
+  "stage": "smoke",
+  "state": "finished",
+  "jobs": [
+    {
+      "algorithm": "ppo",
+      "seed": 1100,
+      "gpu": 0,
+      "cpus": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "pid": 1692015,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "algorithm": "sac",
+      "seed": 1100,
+      "gpu": 4,
+      "cpus": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "pid": 1692016,
+      "state": "completed",
+      "exit_code": 0
+    }
+  ],
+  "updated_unix": 1793559811.5063908
+}

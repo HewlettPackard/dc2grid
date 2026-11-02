@@ -1,0 +1,42 @@
+[
+  {
+    "macro_steps": 512,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1201/step_512.zip",
+    "sha256": "0636ed48ced23801eacb04b25480b7a89accbf081cfdce9fb2fb37d3f2e69a26",
+    "optimizer_updates": {
+      "actor": 256,
+      "critic": 512,
+      "critic_only": 256
+    }
+  },
+  {
+    "macro_steps": 3072,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1201/step_3072.zip",
+    "sha256": "c22db3d4e59dbce4c3ea8f3e91b10fbd2308c6e02c7a7b5de26c98fdac791e59",
+    "optimizer_updates": {
+      "actor": 2816,
+      "critic": 3072,
+      "critic_only": 256
+    }
+  },
+  {
+    "macro_steps": 12288,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1201/step_12288.zip",
+    "sha256": "611c3ba9b3f32d7b4196938f40b52fb70da8a8e7fe17972f61ffc65972d145b2",
+    "optimizer_updates": {
+      "actor": 12032,
+      "critic": 12288,
+      "critic_only": 256
+    }
+  },
+  {
+    "macro_steps": 24576,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1201/step_24576.zip",
+    "sha256": "764d60aa9b35f6631ff0fe6dc9078a4dd44f5fdff51ef24fb8255963c9571ec4",
+    "optimizer_updates": {
+      "actor": 24320,
+      "critic": 24576,
+      "critic_only": 256
+    }
+  }
+]

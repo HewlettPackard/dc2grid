@@ -1,0 +1,221 @@
+{
+  "registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+  "implementation_commit": "755b871ff700a047ee75d73818e7710538de9e3e",
+  "group": "full",
+  "role": "consumed_development_only",
+  "policies": [
+    {
+      "id": "economic_ppo_1200",
+      "family": "economic_ppo",
+      "kind": "learned",
+      "algorithm": "ppo",
+      "training_seed": 1200,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/ppo_1200/step_24576.zip",
+        "sha256": "546242d0a468dee03631006fde33aa09896a725e47f1e044ba363f142899c2e4"
+      }
+    },
+    {
+      "id": "economic_ppo_1201",
+      "family": "economic_ppo",
+      "kind": "learned",
+      "algorithm": "ppo",
+      "training_seed": 1201,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/ppo_1201/step_24576.zip",
+        "sha256": "8ba58c0f923f11a9e14af0112272c740237b428e5cc79c15e0028a81473dca40"
+      }
+    },
+    {
+      "id": "economic_ppo_1202",
+      "family": "economic_ppo",
+      "kind": "learned",
+      "algorithm": "ppo",
+      "training_seed": 1202,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/ppo_1202/step_24576.zip",
+        "sha256": "15c2e3e30158a09267c0883471f7d78040c58c80b15c50c8ec3d718b6c52c58c"
+      }
+    },
+    {
+      "id": "economic_ppo_1203",
+      "family": "economic_ppo",
+      "kind": "learned",
+      "algorithm": "ppo",
+      "training_seed": 1203,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/ppo_1203/step_24576.zip",
+        "sha256": "9292143208786c46476221daed18725f342cf076fbd10e2a27317d75971a31c8"
+      }
+    },
+    {
+      "id": "economic_sac_1200",
+      "family": "economic_sac",
+      "kind": "learned",
+      "algorithm": "sac",
+      "training_seed": 1200,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1200/step_24576.zip",
+        "sha256": "34e3ecc9137bd18cfa37d6a53150dda171f214f71b8cf0922a9b201a93d11a3a"
+      }
+    },
+    {
+      "id": "economic_sac_1201",
+      "family": "economic_sac",
+      "kind": "learned",
+      "algorithm": "sac",
+      "training_seed": 1201,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1201/step_24576.zip",
+        "sha256": "764d60aa9b35f6631ff0fe6dc9078a4dd44f5fdff51ef24fb8255963c9571ec4"
+      }
+    },
+    {
+      "id": "economic_sac_1202",
+      "family": "economic_sac",
+      "kind": "learned",
+      "algorithm": "sac",
+      "training_seed": 1202,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1202/step_24576.zip",
+        "sha256": "acd8fa913036bff5316e484b020714b849449a77754bbb41163970e89eb1359c"
+      }
+    },
+    {
+      "id": "economic_sac_1203",
+      "family": "economic_sac",
+      "kind": "learned",
+      "algorithm": "sac",
+      "training_seed": 1203,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1203/step_24576.zip",
+        "sha256": "7c889bddc58432c1c074e24dd8760c8b4d40046a3c600ff25394a87aa17ec2f6"
+      }
+    }
+  ],
+  "missing_training_slots": [],
+  "cells": [
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    }
+  ],
+  "expected_episodes": 192,
+  "manifest_id": "c9b97304335d6f95ee1dbfc1e7e9f7affdef89723c63e9838c93658c74128b57"
+}

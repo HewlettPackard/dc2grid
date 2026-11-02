@@ -1,0 +1,746 @@
+{
+  "registration_id": "01e35bd5cd23cfde1c6a1026aeb15e7cedbc94cacc919f3f1c5869207e65c91b",
+  "role": "consumed_development_only",
+  "per_model": {
+    "rule__native_ppo_1100": {
+      "cases": 24,
+      "qualified_cells": 0,
+      "complete_cells": 24,
+      "all_qualified": false,
+      "disqualification_reasons": [
+        "service_or_physical_gate_failure"
+      ],
+      "rmse_kw": 324.6714205388883,
+      "case_rmse_p75_p90_kw": [
+        337.9505686706031,
+        359.0563550197347
+      ],
+      "biased_relief_mw": 5.676882582544876,
+      "cash_usd": -101154.84209043863,
+      "battery_26h_mwh": 12.003656378869925,
+      "rmse_change_vs_own_bc_by_bias_kw": {
+        "0.0": 281.5436933376702,
+        "0.5": 274.3504434368521
+      },
+      "tracking_noninferior": false,
+      "individual_cases_worse_than_bc": [
+        "d24_s93001_b0",
+        "d24_s93001_b0p5",
+        "d24_s93002_b0",
+        "d24_s93002_b0p5",
+        "d137_s93001_b0",
+        "d137_s93001_b0p5",
+        "d137_s93002_b0",
+        "d137_s93002_b0p5",
+        "d152_s93001_b0",
+        "d152_s93001_b0p5",
+        "d152_s93002_b0",
+        "d152_s93002_b0p5",
+        "d188_s93001_b0",
+        "d188_s93001_b0p5",
+        "d188_s93002_b0",
+        "d188_s93002_b0p5",
+        "d303_s93001_b0",
+        "d303_s93001_b0p5",
+        "d303_s93002_b0",
+        "d303_s93002_b0p5",
+        "d345_s93001_b0",
+        "d345_s93001_b0p5",
+        "d345_s93002_b0",
+        "d345_s93002_b0p5"
+      ]
+    },
+    "rule__native_ppo_1101": {
+      "cases": 24,
+      "qualified_cells": 0,
+      "complete_cells": 24,
+      "all_qualified": false,
+      "disqualification_reasons": [
+        "service_or_physical_gate_failure"
+      ],
+      "rmse_kw": 338.99713202739207,
+      "case_rmse_p75_p90_kw": [
+        423.711875788156,
+        548.4309686607851
+      ],
+      "biased_relief_mw": 5.064605914706871,
+      "cash_usd": -101544.47166784068,
+      "battery_26h_mwh": 11.965697639749132,
+      "rmse_change_vs_own_bc_by_bias_kw": {
+        "0.0": 289.05697227445364,
+        "0.5": 280.6281544663526
+      },
+      "tracking_noninferior": false,
+      "individual_cases_worse_than_bc": [
+        "d24_s93001_b0",
+        "d24_s93001_b0p5",
+        "d24_s93002_b0",
+        "d24_s93002_b0p5",
+        "d137_s93001_b0",
+        "d137_s93001_b0p5",
+        "d137_s93002_b0",
+        "d137_s93002_b0p5",
+        "d152_s93001_b0",
+        "d152_s93001_b0p5",
+        "d152_s93002_b0",
+        "d152_s93002_b0p5",
+        "d188_s93001_b0",
+        "d188_s93001_b0p5",
+        "d188_s93002_b0",
+        "d188_s93002_b0p5",
+        "d303_s93001_b0",
+        "d303_s93001_b0p5",
+        "d303_s93002_b0",
+        "d303_s93002_b0p5",
+        "d345_s93001_b0",
+        "d345_s93001_b0p5",
+        "d345_s93002_b0",
+        "d345_s93002_b0p5"
+      ]
+    },
+    "rule__native_ppo_1102": {
+      "cases": 24,
+      "qualified_cells": 0,
+      "complete_cells": 24,
+      "all_qualified": false,
+      "disqualification_reasons": [
+        "service_or_physical_gate_failure"
+      ],
+      "rmse_kw": 1616.5559209082828,
+      "case_rmse_p75_p90_kw": [
+        1709.8016663584874,
+        1753.8278496756723
+      ],
+      "biased_relief_mw": 7.390143833788639,
+      "cash_usd": -100497.77606272452,
+      "battery_26h_mwh": 12.009269763120892,
+      "rmse_change_vs_own_bc_by_bias_kw": {
+        "0.0": 1479.1120058020895,
+        "0.5": 1604.1343452928213
+      },
+      "tracking_noninferior": false,
+      "individual_cases_worse_than_bc": [
+        "d24_s93001_b0",
+        "d24_s93001_b0p5",
+        "d24_s93002_b0",
+        "d24_s93002_b0p5",
+        "d137_s93001_b0",
+        "d137_s93001_b0p5",
+        "d137_s93002_b0",
+        "d137_s93002_b0p5",
+        "d152_s93001_b0",
+        "d152_s93001_b0p5",
+        "d152_s93002_b0",
+        "d152_s93002_b0p5",
+        "d188_s93001_b0",
+        "d188_s93001_b0p5",
+        "d188_s93002_b0",
+        "d188_s93002_b0p5",
+        "d303_s93001_b0",
+        "d303_s93001_b0p5",
+        "d303_s93002_b0",
+        "d303_s93002_b0p5",
+        "d345_s93001_b0",
+        "d345_s93001_b0p5",
+        "d345_s93002_b0",
+        "d345_s93002_b0p5"
+      ]
+    },
+    "rule__native_ppo_1103": {
+      "cases": 24,
+      "qualified_cells": 0,
+      "complete_cells": 24,
+      "all_qualified": false,
+      "disqualification_reasons": [
+        "service_or_physical_gate_failure"
+      ],
+      "rmse_kw": 485.9082625934518,
+      "case_rmse_p75_p90_kw": [
+        511.2276116088782,
+        625.9595098983932
+      ],
+      "biased_relief_mw": 5.619925968678284,
+      "cash_usd": -101053.69181716128,
+      "battery_26h_mwh": 11.792087872428075,
+      "rmse_change_vs_own_bc_by_bias_kw": {
+        "0.0": 382.80410605884026,
+        "0.5": 469.0579699834594
+      },
+      "tracking_noninferior": false,
+      "individual_cases_worse_than_bc": [
+        "d24_s93001_b0",
+        "d24_s93001_b0p5",
+        "d24_s93002_b0",
+        "d24_s93002_b0p5",
+        "d137_s93001_b0",
+        "d137_s93001_b0p5",
+        "d137_s93002_b0",
+        "d137_s93002_b0p5",
+        "d152_s93001_b0",
+        "d152_s93001_b0p5",
+        "d152_s93002_b0",
+        "d152_s93002_b0p5",
+        "d188_s93001_b0",
+        "d188_s93001_b0p5",
+        "d188_s93002_b0",
+        "d188_s93002_b0p5",
+        "d303_s93001_b0",
+        "d303_s93001_b0p5",
+        "d303_s93002_b0",
+        "d303_s93002_b0p5",
+        "d345_s93001_b0",
+        "d345_s93001_b0p5",
+        "d345_s93002_b0",
+        "d345_s93002_b0p5"
+      ]
+    },
+    "rule__native_sac_1100": {
+      "cases": 24,
+      "qualified_cells": 18,
+      "complete_cells": 24,
+      "all_qualified": false,
+      "disqualification_reasons": [
+        "service_or_physical_gate_failure"
+      ],
+      "rmse_kw": 1663.462182947338,
+      "case_rmse_p75_p90_kw": [
+        1938.2861295227087,
+        2344.422772032013
+      ],
+      "biased_relief_mw": 4.580539293559972,
+      "cash_usd": -102131.42308668811,
+      "battery_26h_mwh": 27.086824558508642,
+      "rmse_change_vs_own_bc_by_bias_kw": {
+        "0.0": 1691.3074181051868,
+        "0.5": 1542.1682434862357
+      },
+      "tracking_noninferior": false,
+      "individual_cases_worse_than_bc": [
+        "d24_s93001_b0",
+        "d24_s93001_b0p5",
+        "d24_s93002_b0",
+        "d24_s93002_b0p5",
+        "d137_s93001_b0",
+        "d137_s93001_b0p5",
+        "d137_s93002_b0",
+        "d137_s93002_b0p5",
+        "d152_s93001_b0",
+        "d152_s93001_b0p5",
+        "d152_s93002_b0",
+        "d152_s93002_b0p5",
+        "d188_s93001_b0",
+        "d188_s93001_b0p5",
+        "d188_s93002_b0",
+        "d188_s93002_b0p5",
+        "d303_s93001_b0",
+        "d303_s93001_b0p5",
+        "d303_s93002_b0",
+        "d303_s93002_b0p5",
+        "d345_s93001_b0",
+        "d345_s93001_b0p5",
+        "d345_s93002_b0",
+        "d345_s93002_b0p5"
+      ]
+    },
+    "rule__native_sac_1101": {
+      "cases": 24,
+      "qualified_cells": 22,
+      "complete_cells": 24,
+      "all_qualified": false,
+      "disqualification_reasons": [
+        "service_or_physical_gate_failure"
+      ],
+      "rmse_kw": 964.4366192827362,
+      "case_rmse_p75_p90_kw": [
+        1114.6916597283862,
+        1586.2473116507442
+      ],
+      "biased_relief_mw": 5.838195268091314,
+      "cash_usd": -101461.64544711907,
+      "battery_26h_mwh": 34.65745675394326,
+      "rmse_change_vs_own_bc_by_bias_kw": {
+        "0.0": 820.056360111585,
+        "0.5": 1000.5077411399096
+      },
+      "tracking_noninferior": false,
+      "individual_cases_worse_than_bc": [
+        "d24_s93001_b0",
+        "d24_s93001_b0p5",
+        "d24_s93002_b0",
+        "d24_s93002_b0p5",
+        "d137_s93001_b0",
+        "d137_s93001_b0p5",
+        "d137_s93002_b0",
+        "d137_s93002_b0p5",
+        "d152_s93001_b0",
+        "d152_s93001_b0p5",
+        "d152_s93002_b0",
+        "d152_s93002_b0p5",
+        "d188_s93001_b0",
+        "d188_s93001_b0p5",
+        "d188_s93002_b0",
+        "d188_s93002_b0p5",
+        "d303_s93001_b0",
+        "d303_s93001_b0p5",
+        "d303_s93002_b0",
+        "d303_s93002_b0p5",
+        "d345_s93001_b0",
+        "d345_s93001_b0p5",
+        "d345_s93002_b0",
+        "d345_s93002_b0p5"
+      ]
+    },
+    "rule__native_sac_1102": {
+      "cases": 24,
+      "qualified_cells": 24,
+      "complete_cells": 24,
+      "all_qualified": true,
+      "disqualification_reasons": [],
+      "rmse_kw": 1485.3591734734862,
+      "case_rmse_p75_p90_kw": [
+        1711.8565481150276,
+        1985.2669572393934
+      ],
+      "biased_relief_mw": 6.5222410030264095,
+      "cash_usd": -101226.09003974863,
+      "battery_26h_mwh": 46.80620533345339,
+      "rmse_change_vs_own_bc_by_bias_kw": {
+        "0.0": 1354.0967229088706,
+        "0.5": 1466.7561333164467
+      },
+      "tracking_noninferior": false,
+      "individual_cases_worse_than_bc": [
+        "d24_s93001_b0",
+        "d24_s93001_b0p5",
+        "d24_s93002_b0",
+        "d24_s93002_b0p5",
+        "d137_s93001_b0",
+        "d137_s93001_b0p5",
+        "d137_s93002_b0",
+        "d137_s93002_b0p5",
+        "d152_s93001_b0",
+        "d152_s93001_b0p5",
+        "d152_s93002_b0",
+        "d152_s93002_b0p5",
+        "d188_s93001_b0",
+        "d188_s93001_b0p5",
+        "d188_s93002_b0",
+        "d188_s93002_b0p5",
+        "d303_s93001_b0",
+        "d303_s93001_b0p5",
+        "d303_s93002_b0",
+        "d303_s93002_b0p5",
+        "d345_s93001_b0",
+        "d345_s93001_b0p5",
+        "d345_s93002_b0",
+        "d345_s93002_b0p5"
+      ]
+    },
+    "rule__native_sac_1103": {
+      "cases": 24,
+      "qualified_cells": 24,
+      "complete_cells": 24,
+      "all_qualified": true,
+      "disqualification_reasons": [],
+      "rmse_kw": 1566.039170133331,
+      "case_rmse_p75_p90_kw": [
+        2092.0805733254083,
+        2270.2175291907643
+      ],
+      "biased_relief_mw": 5.215062643926385,
+      "cash_usd": -101377.45742652705,
+      "battery_26h_mwh": 48.41318355633094,
+      "rmse_change_vs_own_bc_by_bias_kw": {
+        "0.0": 1413.1496654792656,
+        "0.5": 1598.9742256427926
+      },
+      "tracking_noninferior": false,
+      "individual_cases_worse_than_bc": [
+        "d24_s93001_b0",
+        "d24_s93001_b0p5",
+        "d24_s93002_b0",
+        "d24_s93002_b0p5",
+        "d137_s93001_b0",
+        "d137_s93001_b0p5",
+        "d137_s93002_b0",
+        "d137_s93002_b0p5",
+        "d152_s93001_b0",
+        "d152_s93001_b0p5",
+        "d152_s93002_b0",
+        "d152_s93002_b0p5",
+        "d188_s93001_b0",
+        "d188_s93001_b0p5",
+        "d188_s93002_b0",
+        "d188_s93002_b0p5",
+        "d303_s93001_b0",
+        "d303_s93001_b0p5",
+        "d303_s93002_b0",
+        "d303_s93002_b0p5",
+        "d345_s93001_b0",
+        "d345_s93001_b0p5",
+        "d345_s93002_b0",
+        "d345_s93002_b0p5"
+      ]
+    }
+  },
+  "frozen_families": {
+    "bang_bang": {
+      "model_count": 1,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 1126.6045617475017,
+          "cash_usd": -101454.14064852505,
+          "facility_relief_mw": 2.3173493321370437,
+          "pcc_relief_mw": 1.9212101184991275
+        },
+        "0.0": {
+          "rmse_kw": 888.5790275381158,
+          "cash_usd": -101909.10220525466,
+          "facility_relief_mw": -0.12825677464815946,
+          "pcc_relief_mw": -0.9046618268408029
+        },
+        "0.5": {
+          "rmse_kw": 1364.6300959568873,
+          "cash_usd": -100999.17909179542,
+          "facility_relief_mw": 4.762955438922247,
+          "pcc_relief_mw": 4.747082063839058
+        }
+      }
+    },
+    "bc_only": {
+      "model_count": 4,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 58.94722268543641,
+          "cash_usd": -101001.77685332083,
+          "facility_relief_mw": 2.524739894259026,
+          "pcc_relief_mw": 2.5233440442163233
+        },
+        "0.0": {
+          "rmse_kw": 48.028724610203945,
+          "cash_usd": -101609.52950867597,
+          "facility_relief_mw": -0.39799056617135026,
+          "pcc_relief_mw": -0.39944787275630017
+        },
+        "0.5": {
+          "rmse_kw": 69.86572076066885,
+          "cash_usd": -100394.0241979657,
+          "facility_relief_mw": 5.4474703546894006,
+          "pcc_relief_mw": 5.446135961188947
+        }
+      }
+    },
+    "cooling_first": {
+      "model_count": 1,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 0.1332383441178139,
+          "cash_usd": -100976.11643351393,
+          "facility_relief_mw": 2.536053132503509,
+          "pcc_relief_mw": 2.536053132503509
+        },
+        "0.0": {
+          "rmse_kw": 0.09206218093808648,
+          "cash_usd": -101585.86835788378,
+          "facility_relief_mw": -0.3885971713065371,
+          "pcc_relief_mw": -0.3885971713065371
+        },
+        "0.5": {
+          "rmse_kw": 0.1744145072975413,
+          "cash_usd": -100366.36450914414,
+          "facility_relief_mw": 5.460703436313555,
+          "pcc_relief_mw": 5.460703436313555
+        }
+      }
+    },
+    "guided_sac": {
+      "model_count": 4,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 193.3920452559863,
+          "cash_usd": -100988.98930249305,
+          "facility_relief_mw": 2.570469941388968,
+          "pcc_relief_mw": 2.562399012134702
+        },
+        "0.0": {
+          "rmse_kw": 180.3508634494151,
+          "cash_usd": -101595.44980563979,
+          "facility_relief_mw": -0.3317327589194046,
+          "pcc_relief_mw": -0.3417147049685272
+        },
+        "0.5": {
+          "rmse_kw": 206.43322706255742,
+          "cash_usd": -100382.52879934634,
+          "facility_relief_mw": 5.47267264169734,
+          "pcc_relief_mw": 5.46651272923793
+        }
+      }
+    },
+    "nominal": {
+      "model_count": 1,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 4236.954495425443,
+          "cash_usd": -103477.06992230292,
+          "facility_relief_mw": 0.0,
+          "pcc_relief_mw": 0.0
+        },
+        "0.0": {
+          "rmse_kw": 2954.6106578490453,
+          "cash_usd": -102851.96924389778,
+          "facility_relief_mw": 0.0,
+          "pcc_relief_mw": 0.0
+        },
+        "0.5": {
+          "rmse_kw": 5519.298333001842,
+          "cash_usd": -104102.17060070806,
+          "facility_relief_mw": 0.0,
+          "pcc_relief_mw": 0.0
+        }
+      }
+    },
+    "old_sac": {
+      "model_count": 1,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 418.3206528277317,
+          "cash_usd": -101171.27740790484,
+          "facility_relief_mw": 2.6643480052744213,
+          "pcc_relief_mw": 2.4871319531969163
+        },
+        "0.0": {
+          "rmse_kw": 367.5523081882284,
+          "cash_usd": -101696.72925899255,
+          "facility_relief_mw": -0.05406331186020963,
+          "pcc_relief_mw": -0.3397024268235785
+        },
+        "0.5": {
+          "rmse_kw": 469.088997467235,
+          "cash_usd": -100645.82555681712,
+          "facility_relief_mw": 5.382759322409053,
+          "pcc_relief_mw": 5.313966333217411
+        }
+      }
+    },
+    "pid": {
+      "model_count": 1,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 425.45676497911217,
+          "cash_usd": -101151.67073422835,
+          "facility_relief_mw": 2.5837127157816595,
+          "pcc_relief_mw": 2.4870291222679115
+        },
+        "0.0": {
+          "rmse_kw": 82.53217842145936,
+          "cash_usd": -101612.33119468683,
+          "facility_relief_mw": -0.014714818172693425,
+          "pcc_relief_mw": -0.3880234939668632
+        },
+        "0.5": {
+          "rmse_kw": 768.381351536765,
+          "cash_usd": -100691.01027376986,
+          "facility_relief_mw": 5.182140249736012,
+          "pcc_relief_mw": 5.3620817385026855
+        }
+      }
+    },
+    "rule_hardware": {
+      "model_count": 1,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 545.1355872136593,
+          "cash_usd": -101353.91789649485,
+          "facility_relief_mw": 2.3872721948830264,
+          "pcc_relief_mw": 2.219199915029528
+        },
+        "0.0": {
+          "rmse_kw": 340.1717518695557,
+          "cash_usd": -101690.76832367752,
+          "facility_relief_mw": -0.009401209089271279,
+          "pcc_relief_mw": -0.49008557181048323
+        },
+        "0.5": {
+          "rmse_kw": 750.099422557763,
+          "cash_usd": -101017.06746931217,
+          "facility_relief_mw": 4.7839455988553246,
+          "pcc_relief_mw": 4.92848540186954
+        }
+      }
+    },
+    "union_conditioned": {
+      "model_count": 4,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 63.163859849606844,
+          "cash_usd": -101009.49482880397,
+          "facility_relief_mw": 2.5183274277162275,
+          "pcc_relief_mw": 2.5169308708389426
+        },
+        "0.0": {
+          "rmse_kw": 52.35282335440161,
+          "cash_usd": -101617.28871422086,
+          "facility_relief_mw": -0.40498293118675516,
+          "pcc_relief_mw": -0.40680594450329527
+        },
+        "0.5": {
+          "rmse_kw": 73.97489634481208,
+          "cash_usd": -100401.70094338706,
+          "facility_relief_mw": 5.44163778661921,
+          "pcc_relief_mw": 5.440667686181182
+        }
+      }
+    },
+    "union_original": {
+      "model_count": 4,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 63.25894598254289,
+          "cash_usd": -101010.31717912325,
+          "facility_relief_mw": 2.5160077064997908,
+          "pcc_relief_mw": 2.514108622612625
+        },
+        "0.0": {
+          "rmse_kw": 52.39644273640909,
+          "cash_usd": -101618.41337599426,
+          "facility_relief_mw": -0.4081099643054566,
+          "pcc_relief_mw": -0.4100476368512545
+        },
+        "0.5": {
+          "rmse_kw": 74.12144922867668,
+          "cash_usd": -100402.22098225221,
+          "facility_relief_mw": 5.440125377305038,
+          "pcc_relief_mw": 5.438264882076504
+        }
+      }
+    }
+  },
+  "learned_families": {
+    "native_ppo": {
+      "model_count": 4,
+      "all_qualified": false,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 691.5331840170038,
+          "cash_usd": -101062.6954095413,
+          "facility_relief_mw": 2.8890845657087945,
+          "pcc_relief_mw": 2.94757718109644
+        },
+        "0.0": {
+          "rmse_kw": 656.1579189784673,
+          "cash_usd": -101691.0011791087,
+          "facility_relief_mw": -0.15972044351207762,
+          "pcc_relief_mw": -0.0968670203992274
+        },
+        "0.5": {
+          "rmse_kw": 726.9084490555402,
+          "cash_usd": -100434.38963997387,
+          "facility_relief_mw": 5.937889574929668,
+          "pcc_relief_mw": 5.992021382592108
+        }
+      }
+    },
+    "native_sac": {
+      "model_count": 4,
+      "all_qualified": false,
+      "complete_cohort": true,
+      "strata": {
+        "all": {
+          "rmse_kw": 1419.824286459223,
+          "cash_usd": -101549.15400002072,
+          "facility_relief_mw": 2.4653625584112633,
+          "pcc_relief_mw": 2.3675895744088002
+        },
+        "0.0": {
+          "rmse_kw": 1367.681266261431,
+          "cash_usd": -102191.95142404684,
+          "facility_relief_mw": -0.608284435328494,
+          "pcc_relief_mw": -0.6444761644857899
+        },
+        "0.5": {
+          "rmse_kw": 1471.9673066570151,
+          "cash_usd": -100906.35657599456,
+          "facility_relief_mw": 5.539009552151021,
+          "pcc_relief_mw": 5.379655313303391
+        }
+      }
+    }
+  },
+  "missing_training_slots": [],
+  "decisions": {
+    "ppo": {
+      "all_four_final_models_evaluated": true,
+      "all_four_noninferior_to_own_bc": false,
+      "joint_improvement": false,
+      "contrasts_vs_frozen_family_envelope": {
+        "all": {
+          "cash_usd": -86.57897602736193,
+          "facility_relief_mw": 0.22473656043437318,
+          "pcc_relief_mw": 0.3851781689617382
+        },
+        "0.0": {
+          "cash_usd": -105.13282122492092,
+          "facility_relief_mw": -0.15972044351207762,
+          "pcc_relief_mw": -0.0968670203992274
+        },
+        "0.5": {
+          "cash_usd": -68.02513082973019,
+          "facility_relief_mw": 0.4652169332323277,
+          "pcc_relief_mw": 0.5255086533541773
+        }
+      }
+    },
+    "sac": {
+      "all_four_final_models_evaluated": true,
+      "all_four_noninferior_to_own_bc": false,
+      "joint_improvement": false,
+      "contrasts_vs_frozen_family_envelope": {
+        "all": {
+          "cash_usd": -573.0375665067841,
+          "facility_relief_mw": -0.198985446863158,
+          "pcc_relief_mw": -0.19480943772590154
+        },
+        "0.0": {
+          "cash_usd": -606.0830661630607,
+          "facility_relief_mw": -0.608284435328494,
+          "pcc_relief_mw": -0.6444761644857899
+        },
+        "0.5": {
+          "cash_usd": -539.9920668504201,
+          "facility_relief_mw": 0.06633691045368106,
+          "pcc_relief_mw": -0.08685741593453944
+        }
+      }
+    }
+  },
+  "raw_primary_checks": 144000,
+  "final_data_not_opened": true,
+  "analysis_correction": {
+    "reason": "Match BC by family/macro/seed, not the full__ prefix",
+    "registered_source_unchanged": true,
+    "original_error": "KeyError: rule__bc_only_1100",
+    "producer": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/reports/finish_low.py",
+    "producer_sha256": "d6e61ecb164d638dad63f7658947026ef5fc6e31fb0e03982452fb363a9ce866"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "actor_body_sha256": "04969bf777ced361db414803cd9115188b0e5d0c2af32cb3010eab27372dd754",
+  "actor_mean_sha256": "0b9845efca7ad8af960432387f7e34ac5c4e1428b57515ebe419f0891ef1c5b4",
+  "teacher_body_sha256": "04969bf777ced361db414803cd9115188b0e5d0c2af32cb3010eab27372dd754",
+  "teacher_mean_sha256": "0b9845efca7ad8af960432387f7e34ac5c4e1428b57515ebe419f0891ef1c5b4",
+  "initial_log_std": [
+    -4.605170249938965,
+    -4.605170249938965,
+    -4.605170249938965
+  ],
+  "physical_distribution_matches_only_at_initialization": true,
+  "ppo_critic_not_copied_from_sac_q_functions": true
+}

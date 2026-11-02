@@ -1,0 +1,448 @@
+{
+  "registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+  "episodes": 96,
+  "raw_primary_checks": 19296,
+  "families": {
+    "analytic": {
+      "model_count": 1,
+      "policy_case_count": 24,
+      "qualified_policy_cases": 24,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "minimum_service_ratio": 0.999998852394135,
+      "strata": {
+        "all": {
+          "case_count": 24,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 3.2137003783116427,
+              "sd": 4.093640315417316
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 3.2137003783116427,
+              "sd": 4.093640315417316
+            },
+            "cashflow_26h_usd": {
+              "mean": -97808.19106386346,
+              "sd": 24656.800016150388
+            },
+            "tracking_rmse_kw": {
+              "mean": 0.1466841974295314,
+              "sd": 0.05839861541758361
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.010606597474663809,
+              "sd": 0.036085650602140945
+            },
+            "regulation_revenue_usd": {
+              "mean": 10044.545216608858,
+              "sd": 1688.9723431275706
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 2.3656036612395233,
+              "sd": 4.5029266731748665
+            }
+          }
+        },
+        "0.0": {
+          "case_count": 12,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": -0.3552457619011468,
+              "sd": 1.7416900864396443
+            },
+            "stress_pcc_relief_mw": {
+              "mean": -0.3552457619011468,
+              "sd": 1.7416900864396443
+            },
+            "cashflow_26h_usd": {
+              "mean": -98445.93968672323,
+              "sd": 25343.125823855167
+            },
+            "tracking_rmse_kw": {
+              "mean": 0.108957230627711,
+              "sd": 0.02802130149834671
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.0,
+              "sd": 0.0
+            },
+            "regulation_revenue_usd": {
+              "mean": 10044.546870233999,
+              "sd": 1726.9319595681666
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": -1.579031579686216,
+              "sd": 2.0126024202838657
+            }
+          }
+        },
+        "0.5": {
+          "case_count": 12,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 6.782646518524431,
+              "sd": 2.0530715030999436
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 6.782646518524431,
+              "sd": 2.0530715030999436
+            },
+            "cashflow_26h_usd": {
+              "mean": -97170.44244100367,
+              "sd": 25060.38788558122
+            },
+            "tracking_rmse_kw": {
+              "mean": 0.18441116423135173,
+              "sd": 0.05692280036077546
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.021213194949327618,
+              "sd": 0.04977221594970633
+            },
+            "regulation_revenue_usd": {
+              "mean": 10044.543562983717,
+              "sd": 1726.931075155714
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 6.3102389021652625,
+              "sd": 2.0966690555481913
+            }
+          }
+        }
+      },
+      "no_survivor_only_mean": true
+    },
+    "constant_one": {
+      "model_count": 1,
+      "policy_case_count": 24,
+      "qualified_policy_cases": 24,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "minimum_service_ratio": 0.9302280056407126,
+      "strata": {
+        "all": {
+          "case_count": 24,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 4.213700508258044,
+              "sd": 4.093640340449222
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 4.213700508258044,
+              "sd": 4.093640340449222
+            },
+            "cashflow_26h_usd": {
+              "mean": -97538.36484378543,
+              "sd": 24501.27206605313
+            },
+            "tracking_rmse_kw": {
+              "mean": 1000.0001351701852,
+              "sd": 0.0004004756652341963
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.0,
+              "sd": 0.0
+            },
+            "regulation_revenue_usd": {
+              "mean": 9389.002646368564,
+              "sd": 1601.9087273746343
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 3.3656236485594113,
+              "sd": 4.502920950068225
+            }
+          }
+        },
+        "0.0": {
+          "case_count": 12,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 0.6447543674102111,
+              "sd": 1.741690130509576
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 0.6447543674102111,
+              "sd": 1.741690130509576
+            },
+            "cashflow_26h_usd": {
+              "mean": -98176.11514025934,
+              "sd": 25183.103524471724
+            },
+            "tracking_rmse_kw": {
+              "mean": 1000.0001702398484,
+              "sd": 0.0004110713261890231
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.0,
+              "sd": 0.0
+            },
+            "regulation_revenue_usd": {
+              "mean": 9389.002622648217,
+              "sd": 1637.911173062571
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": -0.5790114511600374,
+              "sd": 2.0125869813254202
+            }
+          }
+        },
+        "0.5": {
+          "case_count": 12,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 7.7826466491058754,
+              "sd": 2.053071567665512
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 7.7826466491058754,
+              "sd": 2.053071567665512
+            },
+            "cashflow_26h_usd": {
+              "mean": -96900.61454731152,
+              "sd": 24902.257127922527
+            },
+            "tracking_rmse_kw": {
+              "mean": 1000.0001001005221,
+              "sd": 0.00040457208664225784
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.0,
+              "sd": 0.0
+            },
+            "regulation_revenue_usd": {
+              "mean": 9389.00267008891,
+              "sd": 1637.91117003063
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 7.3102587482788595,
+              "sd": 2.0966587551067186
+            }
+          }
+        }
+      },
+      "no_survivor_only_mean": true
+    },
+    "greedy_budget": {
+      "model_count": 1,
+      "policy_case_count": 24,
+      "qualified_policy_cases": 24,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "minimum_service_ratio": 0.9200516114261297,
+      "strata": {
+        "all": {
+          "case_count": 24,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 4.450345534792723,
+              "sd": 4.109670271543423
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 4.450345534792723,
+              "sd": 4.109670271543423
+            },
+            "cashflow_26h_usd": {
+              "mean": -97479.24427781421,
+              "sd": 24447.62739846356
+            },
+            "tracking_rmse_kw": {
+              "mean": 1209.6906540672214,
+              "sd": 43.42537637902957
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.0,
+              "sd": 0.0
+            },
+            "regulation_revenue_usd": {
+              "mean": 9241.588138275825,
+              "sd": 1553.9198098010788
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 3.6282963493348084,
+              "sd": 4.509078674071958
+            }
+          }
+        },
+        "0.0": {
+          "case_count": 12,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 0.8813996902872708,
+              "sd": 1.7688999552457056
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 0.8813996902872708,
+              "sd": 1.7688999552457056
+            },
+            "cashflow_26h_usd": {
+              "mean": -98116.99457611574,
+              "sd": 25127.918187663872
+            },
+            "tracking_rmse_kw": {
+              "mean": 1209.690647797199,
+              "sd": 44.40134650420215
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.0,
+              "sd": 0.0
+            },
+            "regulation_revenue_usd": {
+              "mean": 9241.58813829305,
+              "sd": 1588.843716640709
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": -0.3163322692660131,
+              "sd": 2.0236168788937023
+            }
+          }
+        },
+        "0.5": {
+          "case_count": 12,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 8.019291379298176,
+              "sd": 2.0963149461055917
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 8.019291379298176,
+              "sd": 2.0963149461055917
+            },
+            "cashflow_26h_usd": {
+              "mean": -96841.49397951267,
+              "sd": 24847.704772341036
+            },
+            "tracking_rmse_kw": {
+              "mean": 1209.6906603372443,
+              "sd": 44.40135228176085
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.0,
+              "sd": 0.0
+            },
+            "regulation_revenue_usd": {
+              "mean": 9241.588138258601,
+              "sd": 1588.843716690217
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 7.57292496793563,
+              "sd": 2.113670326059575
+            }
+          }
+        }
+      },
+      "no_survivor_only_mean": true
+    },
+    "margin_ten": {
+      "model_count": 1,
+      "policy_case_count": 24,
+      "qualified_policy_cases": 24,
+      "all_qualified": true,
+      "complete_cohort": true,
+      "minimum_service_ratio": 0.9200516114255223,
+      "strata": {
+        "all": {
+          "case_count": 24,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 4.2477841107354894,
+              "sd": 4.180931078733866
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 4.2477841107354894,
+              "sd": 4.180931078733866
+            },
+            "cashflow_26h_usd": {
+              "mean": -97372.0499837321,
+              "sd": 24465.646622460794
+            },
+            "tracking_rmse_kw": {
+              "mean": 1937.7853649737083,
+              "sd": 330.67096685562956
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.00094214147167838,
+              "sd": 0.0033976829705070336
+            },
+            "regulation_revenue_usd": {
+              "mean": 9440.72681774209,
+              "sd": 1408.4441035248994
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 3.1193190137962574,
+              "sd": 4.629154823250673
+            }
+          }
+        },
+        "0.0": {
+          "case_count": 12,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 0.6788382258776479,
+              "sd": 1.9138251116353096
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 0.6788382258776479,
+              "sd": 1.9138251116353096
+            },
+            "cashflow_26h_usd": {
+              "mean": -98009.79930569483,
+              "sd": 25146.240763056652
+            },
+            "tracking_rmse_kw": {
+              "mean": 1937.7860807839177,
+              "sd": 338.10296457246864
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.0,
+              "sd": 0.0
+            },
+            "regulation_revenue_usd": {
+              "mean": 9440.727425076333,
+              "sd": 1440.0980119656667
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": -0.8253158184442478,
+              "sd": 2.2577825292181717
+            }
+          }
+        },
+        "0.5": {
+          "case_count": 12,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 7.816729995593331,
+              "sd": 2.2574575828812464
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 7.816729995593331,
+              "sd": 2.2574575828812464
+            },
+            "cashflow_26h_usd": {
+              "mean": -96734.30066176935,
+              "sd": 24866.24553426567
+            },
+            "tracking_rmse_kw": {
+              "mean": 1937.7846491634984,
+              "sd": 338.1024414684965
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 0.00188428294335676,
+              "sd": 0.0047118285082423566
+            },
+            "regulation_revenue_usd": {
+              "mean": 9440.726210407849,
+              "sd": 1440.0989583608593
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 7.063953846036763,
+              "sd": 2.399845718721053
+            }
+          }
+        }
+      },
+      "no_survivor_only_mean": true
+    }
+  },
+  "role": "consumed_development_only"
+}

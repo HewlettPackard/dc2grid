@@ -1,0 +1,13 @@
+[
+  {
+    "timesteps": 4096,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/smoke/ppo_1100/step_4096.zip",
+    "sha256": "d533ff64bef5755d09adbf033d4f5bf2a94fbab39b1cc33490ba7047e7aaf0fb",
+    "optimizer_updates": {
+      "actor": 6,
+      "critic": 262,
+      "critic_only": 256
+    },
+    "selected_for_primary_evaluation": true
+  }
+]

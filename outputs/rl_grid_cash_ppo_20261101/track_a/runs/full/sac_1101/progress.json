@@ -1,0 +1,11 @@
+{
+  "timesteps": 552960,
+  "optimizer_updates": {
+    "actor": 551936,
+    "critic": 552192,
+    "critic_only": 256
+  },
+  "training_episodes": 32,
+  "elapsed_seconds": 2471.869862004998,
+  "state": "completed"
+}

@@ -1,0 +1,201 @@
+{
+  "status": "completed",
+  "registration_id": "01e35bd5cd23cfde1c6a1026aeb15e7cedbc94cacc919f3f1c5869207e65c91b",
+  "algorithm": "ppo",
+  "seed": 1100,
+  "stage": "smoke",
+  "num_timesteps": 4096,
+  "optimizer_updates": {
+    "actor": 6,
+    "critic": 262,
+    "critic_only": 256
+  },
+  "sb3_update_counter_not_optimizer_count_for_ppo": 134,
+  "training_episodes": 0,
+  "final_checkpoint": {
+    "timesteps": 4096,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/smoke/ppo_1100/step_4096.zip",
+    "sha256": "d533ff64bef5755d09adbf033d4f5bf2a94fbab39b1cc33490ba7047e7aaf0fb",
+    "optimizer_updates": {
+      "actor": 6,
+      "critic": 262,
+      "critic_only": 256
+    },
+    "selected_for_primary_evaluation": true
+  },
+  "training_prefixes": [
+    {
+      "condition": {
+        "start_day": 98,
+        "regd_load_bias": 0.0,
+        "seed": 121599606,
+        "curriculum_cycle": 0,
+        "curriculum_position": 0
+      },
+      "steps": 1024,
+      "done": false,
+      "service": {
+        "initial_backlog_kwh": 0.0,
+        "steps": 1024,
+        "hours": 1.4222222222222176,
+        "electricity_usd": 4103.717593918751,
+        "nominal_electricity_usd": 4072.45819787781,
+        "grid_energy_mwh": 146.56134263995568,
+        "facility_energy_mwh": 146.56715832309538,
+        "battery_throughput_mwh": 0.05811999572647943,
+        "work_arrived_kwh": 3687.1153320934386,
+        "work_served_kwh": 3687.1153320934386,
+        "backlog_kwh": 0.0,
+        "backlog_exposure_kwh_hours": 0.0,
+        "max_backlog_kwh": 0.0,
+        "thermal_warning_ticks": 0,
+        "error_squared": 50673670.6037658,
+        "normalized_error_squared": 0.9282931757080422,
+        "signed_regd_sum": -28.85697860091531,
+        "requested_energy_mwh": -1.065156353111579,
+        "lmp_hours": 39.82222222222244,
+        "work_conservation_error_kwh": 0.0,
+        "tracking_rmse_kw": 222.4545042227512,
+        "normalized_rmse": 0.030108741328763396,
+        "thermal_warning_fraction": 0.0,
+        "time_weighted_lmp_usd_mwh": 28.000000000000245
+      },
+      "not_a_complete_episode": true
+    },
+    {
+      "condition": {
+        "start_day": 305,
+        "regd_load_bias": 0.25,
+        "seed": 2018762033,
+        "curriculum_cycle": 0,
+        "curriculum_position": 1
+      },
+      "steps": 1024,
+      "done": false,
+      "service": {
+        "initial_backlog_kwh": 0.0,
+        "steps": 1024,
+        "hours": 1.4222222222222176,
+        "electricity_usd": 4092.015639545366,
+        "nominal_electricity_usd": 4000.1079942521196,
+        "grid_energy_mwh": 146.14341569804853,
+        "facility_energy_mwh": 146.15095790712778,
+        "battery_throughput_mwh": 0.05938871246245174,
+        "work_arrived_kwh": 2357.542624013145,
+        "work_served_kwh": 2357.542624013145,
+        "backlog_kwh": 0.0,
+        "backlog_exposure_kwh_hours": 0.0,
+        "max_backlog_kwh": 0.0,
+        "thermal_warning_ticks": 0,
+        "error_squared": 54426875.45996126,
+        "normalized_error_squared": 0.7735034883308931,
+        "signed_regd_sum": -162.86857011784986,
+        "requested_energy_mwh": -3.1942836220349022,
+        "lmp_hours": 39.82222222222244,
+        "work_conservation_error_kwh": 0.0,
+        "tracking_rmse_kw": 230.54553902942564,
+        "normalized_rmse": 0.027484077214327895,
+        "thermal_warning_fraction": 0.0,
+        "time_weighted_lmp_usd_mwh": 28.000000000000245
+      },
+      "not_a_complete_episode": true
+    },
+    {
+      "condition": {
+        "start_day": 356,
+        "regd_load_bias": 0.5,
+        "seed": 1270229694,
+        "curriculum_cycle": 0,
+        "curriculum_position": 2
+      },
+      "steps": 1024,
+      "done": false,
+      "service": {
+        "initial_backlog_kwh": 0.0,
+        "steps": 1024,
+        "hours": 1.4222222222222176,
+        "electricity_usd": 4546.844633551164,
+        "nominal_electricity_usd": 4413.603003006667,
+        "grid_energy_mwh": 162.38730834111317,
+        "facility_energy_mwh": 162.39175873309122,
+        "battery_throughput_mwh": 0.05718306907349162,
+        "work_arrived_kwh": 0.0,
+        "work_served_kwh": 0.0,
+        "backlog_kwh": 0.0,
+        "backlog_exposure_kwh_hours": 0.0,
+        "max_backlog_kwh": 0.0,
+        "thermal_warning_ticks": 0,
+        "error_squared": 52942982.87778895,
+        "normalized_error_squared": 0.6467519695420486,
+        "signed_regd_sum": -228.36872535701042,
+        "requested_energy_mwh": -4.6666389325748945,
+        "lmp_hours": 39.82222222222244,
+        "work_conservation_error_kwh": 0.0,
+        "tracking_rmse_kw": 227.38102760914504,
+        "normalized_rmse": 0.02513152841066191,
+        "thermal_warning_fraction": 0.0,
+        "time_weighted_lmp_usd_mwh": 28.000000000000245
+      },
+      "not_a_complete_episode": true
+    },
+    {
+      "condition": {
+        "start_day": 102,
+        "regd_load_bias": 0.0,
+        "seed": 1270403555,
+        "curriculum_cycle": 0,
+        "curriculum_position": 3
+      },
+      "steps": 1024,
+      "done": false,
+      "service": {
+        "initial_backlog_kwh": 0.0,
+        "steps": 1024,
+        "hours": 1.4222222222222176,
+        "electricity_usd": 5203.751512840261,
+        "nominal_electricity_usd": 5265.501356467167,
+        "grid_energy_mwh": 185.8482683157236,
+        "facility_energy_mwh": 185.8502347139332,
+        "battery_throughput_mwh": 0.05750371060437621,
+        "work_arrived_kwh": 330.2447897282085,
+        "work_served_kwh": 330.2447897282085,
+        "backlog_kwh": 0.0,
+        "backlog_exposure_kwh_hours": 0.0,
+        "max_backlog_kwh": 0.0,
+        "thermal_warning_ticks": 0,
+        "error_squared": 77563203.8458971,
+        "normalized_error_squared": 1.9065375676242045,
+        "signed_regd_sum": 191.42187564420988,
+        "requested_energy_mwh": 2.3811233850663407,
+        "lmp_hours": 39.82222222222244,
+        "work_conservation_error_kwh": 0.0,
+        "tracking_rmse_kw": 275.21866988952416,
+        "normalized_rmse": 0.043149195744335865,
+        "thermal_warning_fraction": 0.0,
+        "time_weighted_lmp_usd_mwh": 28.000000000000245
+      },
+      "not_a_complete_episode": true
+    }
+  ],
+  "full_transition_diagnostics": [
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/smoke/ppo_1100/worker_0_transitions.npz",
+      "transitions": 1024
+    },
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/smoke/ppo_1100/worker_1_transitions.npz",
+      "transitions": 1024
+    },
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/smoke/ppo_1100/worker_2_transitions.npz",
+      "transitions": 1024
+    },
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_a/runs/smoke/ppo_1100/worker_3_transitions.npz",
+      "transitions": 1024
+    }
+  ],
+  "elapsed_seconds": 5.792737733980175,
+  "no_recovery_in_original_reward_training": true,
+  "recovery_required_in_every_evaluation": true
+}
