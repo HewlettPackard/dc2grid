@@ -1,0 +1,1042 @@
+{
+  "schema": "dc2grid-pid-semantics-replay-v1",
+  "archive_root_label": "/workspace/IBM/temp/dc2grid-repos/dc2grid",
+  "original_head": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+  "source_identity_files": [
+    "baselines/__init__.py",
+    "baselines/_hydra_compat.py",
+    "baselines/bang_bang.py",
+    "baselines/macro_metrics_callback.py",
+    "baselines/metrics_callback.py",
+    "baselines/milp_dispatch.py",
+    "baselines/mpc_fast.py",
+    "baselines/mpc_macro.py",
+    "baselines/pid_controller.py",
+    "baselines/rule_based_macro.py",
+    "baselines/rule_based_mpc.py",
+    "baselines/sac_provenance.py",
+    "baselines/safety/train_cpo.py",
+    "baselines/safety/train_ppo_lagrangian.py",
+    "baselines/train_corrected_sac.py",
+    "baselines/train_hierarchical.py",
+    "baselines/train_hierarchical_sac.py",
+    "baselines/train_llm_agents.py",
+    "baselines/train_lowsac_highrandom.py",
+    "baselines/train_ppo.py",
+    "baselines/train_ppo_macro.py",
+    "baselines/train_rule_macro_ppo.py",
+    "baselines/train_rule_macro_sac.py",
+    "baselines/train_sac.py",
+    "c2g_env/__init__.py",
+    "c2g_env/env_high_level.py",
+    "c2g_env/env_low_level.py",
+    "c2g_env/experiments/__init__.py",
+    "c2g_env/experiments/action_ablation_env.py",
+    "c2g_env/experiments/analyze_thermal_cross_scenario.py",
+    "c2g_env/experiments/identity.py",
+    "c2g_env/experiments/thermal_sensitivity.py",
+    "c2g_env/experiments/thermal_sensitivity_cross_scenario.py",
+    "c2g_env/obs_indices.py",
+    "c2g_env/physics/__init__.py",
+    "c2g_env/physics/bess.py",
+    "c2g_env/physics/electrical.py",
+    "c2g_env/physics/macro_grid.py",
+    "c2g_env/physics/thermal.py",
+    "c2g_env/physics/weather.py",
+    "c2g_env/physics/workload.py",
+    "c2g_env/plant_profiles.py",
+    "c2g_env/replay.py",
+    "c2g_env/semantics.py",
+    "c2g_env/thermal_limits.py",
+    "c2g_env/train_envs/__init__.py",
+    "c2g_env/train_envs/fixed_action_wrapper.py",
+    "c2g_env/train_envs/rule_macro_wrapped.py",
+    "evaluation/__init__.py",
+    "evaluation/failure_analysis.py",
+    "evaluation/generate_plots.py",
+    "evaluation/grid_relief.py",
+    "evaluation/plot_episode_traces.py",
+    "evaluation/run_benchmark.py",
+    "evaluation/run_sachigh_saclow_benchmark.py",
+    "evaluation/statistical_analysis.py",
+    "evaluation/vis_reward.py",
+    "evaluation/vis_runbenchmark.py",
+    "scripts/download_energy.py",
+    "scripts/download_weather.py",
+    "scripts/retrain_corrected_sac.py"
+  ],
+  "runtime_modules": {
+    "baselines": "baselines/__init__.py",
+    "baselines.bang_bang": "baselines/bang_bang.py",
+    "baselines.metrics_callback": "baselines/metrics_callback.py",
+    "baselines.milp_dispatch": "baselines/milp_dispatch.py",
+    "baselines.mpc_fast": "baselines/mpc_fast.py",
+    "baselines.mpc_macro": "baselines/mpc_macro.py",
+    "baselines.pid_controller": "baselines/pid_controller.py",
+    "baselines.rule_based_macro": "baselines/rule_based_macro.py",
+    "baselines.rule_based_mpc": "baselines/rule_based_mpc.py",
+    "baselines.train_llm_agents": "baselines/train_llm_agents.py",
+    "c2g_env": "c2g_env/__init__.py",
+    "c2g_env.env_high_level": "c2g_env/env_high_level.py",
+    "c2g_env.env_low_level": "c2g_env/env_low_level.py",
+    "c2g_env.experiments": "c2g_env/experiments/__init__.py",
+    "c2g_env.experiments.action_ablation_env": "c2g_env/experiments/action_ablation_env.py",
+    "c2g_env.experiments.identity": "c2g_env/experiments/identity.py",
+    "c2g_env.obs_indices": "c2g_env/obs_indices.py",
+    "c2g_env.physics": "c2g_env/physics/__init__.py",
+    "c2g_env.physics.bess": "c2g_env/physics/bess.py",
+    "c2g_env.physics.electrical": "c2g_env/physics/electrical.py",
+    "c2g_env.physics.macro_grid": "c2g_env/physics/macro_grid.py",
+    "c2g_env.physics.thermal": "c2g_env/physics/thermal.py",
+    "c2g_env.physics.weather": "c2g_env/physics/weather.py",
+    "c2g_env.physics.workload": "c2g_env/physics/workload.py",
+    "c2g_env.plant_profiles": "c2g_env/plant_profiles.py",
+    "c2g_env.replay": "c2g_env/replay.py",
+    "c2g_env.semantics": "c2g_env/semantics.py",
+    "c2g_env.thermal_limits": "c2g_env/thermal_limits.py",
+    "evaluation": "evaluation/__init__.py",
+    "evaluation.grid_relief": "evaluation/grid_relief.py",
+    "run_benchmark": "evaluation/run_benchmark.py"
+  },
+  "files": {
+    "baselines/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/_hydra_compat.py": {
+      "sha256": "06d8bc3d4247e7fa18da9a2276b2028ad14449204789b97914a76a631f3d673f",
+      "bytes": 2558,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/bang_bang.py": {
+      "sha256": "f97345bd5723885a1df5d5f826920c9f3f148bec8ba476d0a59cb5f4d2f2119d",
+      "bytes": 4920,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/macro_metrics_callback.py": {
+      "sha256": "7a57eed1522136f22343ed0a1d3d9786aa1f4ed66aeb548db0b0cdfcfabd3cbe",
+      "bytes": 3209,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/metrics_callback.py": {
+      "sha256": "25cd72161485764ee34e462a8590eddf1bda20d38c3c8e7ad598f0cc5ea34aaf",
+      "bytes": 41814,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/milp_dispatch.py": {
+      "sha256": "90305c1cafeb3a365c6f6ae31beeac0230a497099b7c338cad317b0114ee6e7b",
+      "bytes": 6491,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/mpc_fast.py": {
+      "sha256": "1995e3ed79a4f71df9b5fe5c51c0d9b33610c3010b4c1c20ba0f6130170dfdc6",
+      "bytes": 8396,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/mpc_macro.py": {
+      "sha256": "1945a5dd23e9166d2bff1fa0e7b4b838c282d2a3dd6adde6af905e0e728a4a72",
+      "bytes": 6585,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/pid_controller.py": {
+      "sha256": "420a38c6098e653ecf5b40fbf6201542512be19f2b7b4c52e0cd1ccb80db3d1d",
+      "bytes": 7152,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/rule_based_macro.py": {
+      "sha256": "42dc8bc42245556d23e41019fed400fc2d3dfafdc34fe61b0574011571d9bdc3",
+      "bytes": 3813,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/rule_based_mpc.py": {
+      "sha256": "342c978a0ee52acbebe3cb51b53ec6c1945d7bfda20eea77c4dcb8d01f662524",
+      "bytes": 8378,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/sac_provenance.py": {
+      "sha256": "0e94b3cd4b2b95b4a692384b169421c62b258c5d93e53730c1bfa795d4faf08d",
+      "bytes": 933,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/safety/train_cpo.py": {
+      "sha256": "e14342d480e54ff300e925883feb4d29a742d9c229eb10776f347977da602243",
+      "bytes": 9356,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/safety/train_ppo_lagrangian.py": {
+      "sha256": "dd4a1eaa637b0476a0fad0ecc60d84b1f94843ffdc8b38ed372c4d1c7d088765",
+      "bytes": 8214,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_corrected_sac.py": {
+      "sha256": "5ad016cf6b03c1091baaae80558581f5f09370d19661940ca3288f6a5dc1d327",
+      "bytes": 22519,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_hierarchical.py": {
+      "sha256": "49d57bdd1ab127297fc4e8999feae71585bbe0071807697bdbdb751b758d1395",
+      "bytes": 9561,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_hierarchical_sac.py": {
+      "sha256": "f0812638916980ce9ace95b30bbb78cb2026c24912a819cd7a0adad39788e34b",
+      "bytes": 10497,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_llm_agents.py": {
+      "sha256": "465ab7e1cb1a4f13e33aba3e659d070d88c789d54a177915f6679b0bbdbc4c56",
+      "bytes": 34167,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_lowsac_highrandom.py": {
+      "sha256": "69c17606dc5f6ce917cec581f4e3979f58a57ec70ce295d5b644fbbecb0852ec",
+      "bytes": 6754,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_ppo.py": {
+      "sha256": "7b7ac6c9223a372d083ab229f32b1391d3981ac0da886248bcce5ab4ffc27720",
+      "bytes": 6322,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_ppo_macro.py": {
+      "sha256": "7d34cf545b5d728d3d2d747e16499e8927cdcaa30df92b7be76e513d93ce417c",
+      "bytes": 7365,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_rule_macro_ppo.py": {
+      "sha256": "d368122ac78366bb411ae56fad1ff63718f2782a8cc50164cd64e4faceb92a94",
+      "bytes": 7880,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_rule_macro_sac.py": {
+      "sha256": "7980548b4f4ed28fc13833f59db3f0847631b02a50d1fbd57c5f291b42c7668a",
+      "bytes": 7341,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "baselines/train_sac.py": {
+      "sha256": "4ef86d7f7199419e75019ea0144b6f54ee7d39176ff427260e32e574865eb027",
+      "bytes": 5486,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/__init__.py": {
+      "sha256": "8d0bd53367b910a3e2bf04d86f388ffcf5068957d9a931d81cd1b240ea366905",
+      "bytes": 502,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/config.yaml": {
+      "sha256": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6",
+      "bytes": 11680,
+      "tracked": true,
+      "roles": [
+        "native_environment_configuration"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/env_high_level.py": {
+      "sha256": "6c5034698fdd011168d99b5e2fd99b13d2825c4af37eaab563fa6acf75381842",
+      "bytes": 30453,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/env_low_level.py": {
+      "sha256": "5af3087eebdb5576280a3c4bcdd3f410d67eb5d01c2a67c7f07c0c1197f2a1bc",
+      "bytes": 44720,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/experiments/__init__.py": {
+      "sha256": "b340890df4770fbd38a80a5b7707f6d925362c2658b16e9de0898d6395046a1c",
+      "bytes": 358,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/experiments/action_ablation_env.py": {
+      "sha256": "5b4ae4bb55bb7aa73359302a5e0c2631849c8d0d0c51d60b4109d446f4f04822",
+      "bytes": 5739,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/experiments/analyze_thermal_cross_scenario.py": {
+      "sha256": "af9670dc2c0e39076db332ce645d3dcf61c5bccdeca6566ae9952b8c7d0ac7a5",
+      "bytes": 10946,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/experiments/identity.py": {
+      "sha256": "e847618db0f2c837c38a3cad13cafba8ffac5201c02b74ff61f5a26c99090d03",
+      "bytes": 3793,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/experiments/thermal_sensitivity.py": {
+      "sha256": "b3a0e07be94813a2ca478bf843495712566082ab728f85859692434d946dff22",
+      "bytes": 18152,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/experiments/thermal_sensitivity_cross_scenario.py": {
+      "sha256": "7ca88e2fec68a63c4395a62aea8bd3eb7367984af24f9b072330462045630a82",
+      "bytes": 26633,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/obs_indices.py": {
+      "sha256": "881e9a8107d5b2645d3e11a3089fb2334e1e946d6a949221dc1b5bec5ee3ec10",
+      "bytes": 2236,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/physics/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/physics/bess.py": {
+      "sha256": "7f8621c4db624a559b3e16b982ce4c74cde58e1bc5fca403338fe8121b2a9ad0",
+      "bytes": 13597,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/physics/electrical.py": {
+      "sha256": "8bb8869bcbab04c25dd3eb2054fcc5a818f9c26b90179a1f2d0e72dfe77bcee1",
+      "bytes": 18033,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/physics/macro_grid.py": {
+      "sha256": "ffadb41d1883481deeb7dff9d13506b8cd3c16dd747aa8fb740cb18261b2994d",
+      "bytes": 32944,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/physics/thermal.py": {
+      "sha256": "7d81bd173f5442fde8c3661763031eda03d3cdbdffd886181436eee9ef388729",
+      "bytes": 14240,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/physics/weather.py": {
+      "sha256": "f00a81fa6560bcc4bfe6fdfd14bcaa1065d5d2325f7ec25b1b16dfb71d01d59d",
+      "bytes": 17840,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/physics/workload.py": {
+      "sha256": "00ec3849157e73b9bd5fe5cd25286463d7c5b0ff82dc72ffb515f4ef7927dddc",
+      "bytes": 15476,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/plant_profiles.py": {
+      "sha256": "22832db868807586840d92ec207c41a455fbd06f8ba8c1562ef6c95281ba264d",
+      "bytes": 1158,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/replay.py": {
+      "sha256": "c09bb0514ef14a0398c5daf76c79b60f65dc42c4b333ca54adbcaa37106bfe77",
+      "bytes": 1534,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/semantics.py": {
+      "sha256": "9a7525a4e7b63b463cbd0862e9a3ddecb3740744e258b84bea358167231f4aae",
+      "bytes": 403,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/thermal_limits.py": {
+      "sha256": "c86f2b5136a01d432c43e9226e07df41e843f49951dc6978a1eb606ea0923650",
+      "bytes": 2313,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/train_envs/__init__.py": {
+      "sha256": "063980296c2ccfb8b2424f7a1a23b29eb6da0391518c9d430f7fd658c89ba7c9",
+      "bytes": 198,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/train_envs/fixed_action_wrapper.py": {
+      "sha256": "e30accf10ca495ee46bf4f8b71596b210d4c4e2a4152d9da1d7df5718291ce27",
+      "bytes": 2467,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "c2g_env/train_envs/rule_macro_wrapped.py": {
+      "sha256": "18df35431e3b44ab39a60ca8bad8313dccddc60a5b6963cb10c2ff3d94310566",
+      "bytes": 7861,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "data/processed/energy/NYC.csv": {
+      "sha256": "db33c788d440f5ba4aa0d4b968a409d428107b92c87c49ecee0c1823e5069203",
+      "bytes": 3159458,
+      "tracked": true,
+      "roles": [
+        "scientific_data"
+      ],
+      "required_for_replay": true
+    },
+    "data/processed/weather/NYC.csv": {
+      "sha256": "0a32b8fe345d6f5df1654b88c4d3f6664e32db1c231d3dea0083d2b0a22a8c46",
+      "bytes": 581193,
+      "tracked": true,
+      "roles": [
+        "scientific_data"
+      ],
+      "required_for_replay": true
+    },
+    "data/processed/workload_traces/batch_v2023.csv": {
+      "sha256": "52a5430a998a43a4eea0183ccee82dd88e02a6097cb49e3b17deb38fdb5daae9",
+      "bytes": 130593,
+      "tracked": true,
+      "roles": [
+        "scientific_data"
+      ],
+      "required_for_replay": true
+    },
+    "data/processed/workload_traces/dlrm_v2025.csv": {
+      "sha256": "e6336e6d67cbeef8fabd652c7d04279dfc6a41c7a93a500b8c5330d8699bf63e",
+      "bytes": 205906,
+      "tracked": true,
+      "roles": [
+        "scientific_data"
+      ],
+      "required_for_replay": true
+    },
+    "data/processed/workload_traces/genai_v2026.csv": {
+      "sha256": "8fa72a4f2b343ffda2742c8d656ea1107b8bdc9088f3c7eba4b1a2f7608aecf8",
+      "bytes": 9467,
+      "tracked": true,
+      "roles": [
+        "scientific_data"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/failure_analysis.py": {
+      "sha256": "4711574c1a3250b59bf493fe3906e8d0e4e3429307d23340c966c4082d04eaf7",
+      "bytes": 23860,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/generate_plots.py": {
+      "sha256": "fa75edfd23a4944968ec4c3eb57b93e913b728e776a1d66687112f07b26a97f0",
+      "bytes": 10410,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/grid_relief.py": {
+      "sha256": "2c8ad2c0c6f86f8351b267a402fe2809d8f51df379a531c549aca1806d64b2bc",
+      "bytes": 27617,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/plot_episode_traces.py": {
+      "sha256": "f51c8d02aa2472cf914461c6df27d935aadd83b76899db4eb2b0b152b906fb84",
+      "bytes": 16484,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/run_benchmark.py": {
+      "sha256": "c6f86fd32af0ff3ec6cdff569c5674fecd963fc132c32193da1c6d22216c455a",
+      "bytes": 54966,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member",
+        "native_runtime_import"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/run_sachigh_saclow_benchmark.py": {
+      "sha256": "5ec6cc671d8d2d828ac8c693c6990dbc90acc60c32c584b335ad4c07204440f3",
+      "bytes": 18001,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/statistical_analysis.py": {
+      "sha256": "41d47d45d9f889213f40f6eae2ced717cdbfcb5d61de707aeaf978a61dabe2dc",
+      "bytes": 23789,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/vis_reward.py": {
+      "sha256": "347a1976e44820e43aa0054be2b5db6f1beef57a03497acffd1e79f674df344a",
+      "bytes": 1936,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "evaluation/vis_runbenchmark.py": {
+      "sha256": "1bb5c3402933412e04f7b9ccecd0fd54738e4bac6ecdc22ce5d7a3c79008df46",
+      "bytes": 1918,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "outputs/pid_comparison_extract_20261102/diagnostics/probe_pid_relief_semantics.py": {
+      "sha256": "66daa3d7925fbc56ed41dd109a9a0a3f9be005e39877ab5769039d075f368c49",
+      "bytes": 5855,
+      "tracked": true,
+      "roles": [
+        "unchanged_archived_probe"
+      ],
+      "required_for_replay": true
+    },
+    "outputs/pid_comparison_extract_20261102/reports/pid_semantics_reproduction.json": {
+      "sha256": "b336fc5c14a9775620f2250601a4d79908920c13275b7b616606cdb9b8699baf",
+      "bytes": 34609,
+      "tracked": true,
+      "roles": [
+        "consumed_30_pair_report"
+      ],
+      "required_for_replay": true
+    },
+    "outputs/pid_comparison_extract_20261102/reports/pid_semantics_trace_inventory.csv": {
+      "sha256": "a471d6f76c32e0cc1ee89c3bf83fa01fd5da56efdeaa2f15e88a633dc71688ee",
+      "bytes": 42941,
+      "tracked": true,
+      "roles": [
+        "optional_archival_raw_trace_provenance"
+      ],
+      "required_for_replay": false
+    },
+    "scripts/download_energy.py": {
+      "sha256": "2496cc2981e211d7026cf07bb0312baa7e4c8a3a31231ee80aaa0866a437da9a",
+      "bytes": 12498,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "scripts/download_weather.py": {
+      "sha256": "e12f96739c411e2b742afd3d1621677a322db98cb400943aac86a8eb2acd507f",
+      "bytes": 5435,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    },
+    "scripts/retrain_corrected_sac.py": {
+      "sha256": "26aff123a567c4a7fd81793f7d8b61c2b36f7d2ca5c77360b96f3fa5977e7ebc",
+      "bytes": 11817,
+      "tracked": true,
+      "roles": [
+        "native_source_id_member"
+      ],
+      "required_for_replay": true
+    }
+  },
+  "data_directories": {
+    "trace_dir": "data/processed/workload_traces",
+    "energy_dir": "data/processed/energy",
+    "weather_dir": "data/processed/weather"
+  },
+  "original_run_count": 60,
+  "original_pair_count": 30,
+  "allowed_requests": [
+    {
+      "mode": "legacy_v0",
+      "day": 207,
+      "seed": 100
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 207,
+      "seed": 101
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 207,
+      "seed": 102
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 207,
+      "seed": 103
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 207,
+      "seed": 104
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 248,
+      "seed": 100
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 248,
+      "seed": 101
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 248,
+      "seed": 102
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 248,
+      "seed": 103
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 248,
+      "seed": 104
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 249,
+      "seed": 100
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 249,
+      "seed": 101
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 249,
+      "seed": 102
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 249,
+      "seed": 103
+    },
+    {
+      "mode": "legacy_v0",
+      "day": 249,
+      "seed": 104
+    },
+    {
+      "mode": "physical_v1",
+      "day": 207,
+      "seed": 100
+    },
+    {
+      "mode": "physical_v1",
+      "day": 207,
+      "seed": 101
+    },
+    {
+      "mode": "physical_v1",
+      "day": 207,
+      "seed": 102
+    },
+    {
+      "mode": "physical_v1",
+      "day": 207,
+      "seed": 103
+    },
+    {
+      "mode": "physical_v1",
+      "day": 207,
+      "seed": 104
+    },
+    {
+      "mode": "physical_v1",
+      "day": 248,
+      "seed": 100
+    },
+    {
+      "mode": "physical_v1",
+      "day": 248,
+      "seed": 101
+    },
+    {
+      "mode": "physical_v1",
+      "day": 248,
+      "seed": 102
+    },
+    {
+      "mode": "physical_v1",
+      "day": 248,
+      "seed": 103
+    },
+    {
+      "mode": "physical_v1",
+      "day": 248,
+      "seed": 104
+    },
+    {
+      "mode": "physical_v1",
+      "day": 249,
+      "seed": 100
+    },
+    {
+      "mode": "physical_v1",
+      "day": 249,
+      "seed": 101
+    },
+    {
+      "mode": "physical_v1",
+      "day": 249,
+      "seed": 102
+    },
+    {
+      "mode": "physical_v1",
+      "day": 249,
+      "seed": 103
+    },
+    {
+      "mode": "physical_v1",
+      "day": 249,
+      "seed": 104
+    }
+  ],
+  "representatives": [
+    {
+      "request": {
+        "mode": "legacy_v0",
+        "day": 207,
+        "seed": 100
+      },
+      "expected_full_components": {
+        "mode": "legacy_v0",
+        "day": 207,
+        "seed": 100,
+        "agent_ticks": 17280,
+        "baseline_ticks": 17280,
+        "reported_formula_relief_mw": 8.268034860731056,
+        "stress_cooling_relief_mw": 8.242616215531307,
+        "stress_other_facility_relief_mw": 0.025418645199748596,
+        "stress_nominal_facility_mw": 84.12991915740665,
+        "stress_actual_facility_mw": 75.86188429667558,
+        "stress_demanded_response_mw": 8.88671690385719,
+        "stress_true_metered_error_mw": -0.6186820431261337,
+        "stress_battery_discharge_mw": 0.0,
+        "stress_observed_regd": 0.5369336170315657,
+        "stress_actual_commitment_mw": 16.137931244126683,
+        "stress_observed_commitment_mw": 16.137931034482758,
+        "stress_hvac_effort": 0.5400197870943738,
+        "stress_pump_speed": 0.5400197870943738,
+        "stress_temp_A": 30.975240586938316,
+        "stress_temp_B": 21.757840483503138,
+        "stress_mean_grid_load_mw": 10036.390993005889,
+        "stress_tick_count": 1740
+      },
+      "expected_native_qualified": true,
+      "expected_trajectory_ticks": {
+        "pid": 17280,
+        "none": 17280
+      },
+      "recovery_expected": false
+    },
+    {
+      "request": {
+        "mode": "physical_v1",
+        "day": 207,
+        "seed": 100
+      },
+      "expected_full_components": {
+        "mode": "physical_v1",
+        "day": 207,
+        "seed": 100,
+        "agent_ticks": 17280,
+        "baseline_ticks": 17280,
+        "reported_formula_relief_mw": 3.208615293152879,
+        "stress_cooling_relief_mw": 3.1969407398391887,
+        "stress_other_facility_relief_mw": 0.011674553313689958,
+        "stress_nominal_facility_mw": 96.0282145577979,
+        "stress_actual_facility_mw": 92.81959926464502,
+        "stress_demanded_response_mw": 2.9876350520977435,
+        "stress_true_metered_error_mw": 0.03200735103456324,
+        "stress_battery_discharge_mw": -0.1889728900205709,
+        "stress_observed_regd": 0.25032279202104263,
+        "stress_actual_commitment_mw": 10.89655183512589,
+        "stress_observed_commitment_mw": 10.89655172413793,
+        "stress_hvac_effort": 0.6377676719392853,
+        "stress_pump_speed": 0.6377676719392853,
+        "stress_temp_A": 30.750711511099983,
+        "stress_temp_B": 23.298078169128395,
+        "stress_mean_grid_load_mw": 10032.572477011494,
+        "stress_tick_count": 1740
+      },
+      "expected_native_qualified": true,
+      "expected_trajectory_ticks": {
+        "pid": 17280,
+        "none": 17280
+      },
+      "recovery_expected": false
+    }
+  ],
+  "observed_environment_versions": {
+    "torch": "2.6.0+cu124",
+    "numpy": "2.4.4",
+    "PyYAML": "6.0.3",
+    "gymnasium": "1.2.3",
+    "pandas": "3.1.0",
+    "stable_baselines3": "2.7.1",
+    "scipy": "1.17.1",
+    "tqdm": "4.70.1"
+  },
+  "formula_check": {
+    "component_assignment_ASTs_identical": true,
+    "trace_reader_AST_identical": true,
+    "archived_probe_imported_or_executed": false
+  },
+  "native_api_contract": {
+    "_market_config": "market='nyiso_nyc'; explicit new-output directory; mode",
+    "_run_episode": {
+      "hardware": [
+        "pid",
+        "none"
+      ],
+      "scenario": "default",
+      "model_dir": null,
+      "macro": "rule_macro",
+      "regd_bias": 0.5,
+      "trace_dir": "explicit per-hardware path inside new output",
+      "config_path": "native-generated YAML with three rebased data paths",
+      "simulation_mode": "exact requested archived mode"
+    },
+    "_metrics": "Unchanged completion and physical paired-exogenous validation"
+  },
+  "scope_and_limitations": [
+    "Original probe main/episode are not safe portable entrypoints: they bootstrap an absolute original PROJECT and use global OUT. They are never imported, executed, patched, or redirected.",
+    "Native _run_episode has explicit config_path/trace_dir arguments, so exact reuse is possible without changing any source function.",
+    "The original legacy_v0 evaluator internally calls its existing _align_calendar and _bias_regd hook. This native hook replaces the grid instance's RegD method as part of the archived legacy semantics; the adapter adds no monkeypatch. Removing it would not reproduce the archived diagnostic. A literal ban on even this unchanged native internal behavior would make legacy replay impossible.",
+    "Native source_id hashes ALL Python files in c2g_env, baselines, evaluation and scripts: all 61 original files are required, not only the 31 runtime imports. Install release helpers elsewhere.",
+    "Q2/Q3 diagnose service-only 24-hour PID/reference pairs, not 26-hour tracking recovery/service-floor qualification.",
+    "Same mode/day/seed labels across modes do not imply identical realized weather/workload/load/RegD trajectories. This is observed power balance, not an isolated-change causal attribution.",
+    "No archived raw traces, session paths, original paper files, trained models, external API calls, or new panels are required.",
+    "No trajectories were run while generating this inventory."
+  ]
+}

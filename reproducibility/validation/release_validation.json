@@ -1,0 +1,1797 @@
+{
+  "schema": "dc2grid-public-release-validation-v1",
+  "role": "software_portability_and_evidence_integrity_not_new_paper_results",
+  "pytest_cases_passed": 108,
+  "pytest_subtests_passed": 77,
+  "failed_or_skipped_tests": 0,
+  "pytest_XML_case_count": 185,
+  "ruff_E_F_I_passed_for_new_public_tooling": true,
+  "numeric_tables": {
+    "tables": 12,
+    "parts": 13,
+    "rows": 118,
+    "numeric_entries": 1026,
+    "main_comparison_cells": 528,
+    "all_13_source_JSON_hashes_checked": true,
+    "original_archive_or_datasets_required": false,
+    "PDF_layout_regeneration_claimed": false
+  },
+  "frozen_replays": {
+    "fixed_cases": 36,
+    "verified": 36,
+    "original_disqualified_cases_faithfully_reproduced": 5,
+    "no_policy_weights_or_gates_changed": true,
+    "source_model_and_data_hashes_checked_before_and_after": true,
+    "private_original_commit_unavailable_in_checkout": true,
+    "packaging_error_resolution": {
+      "preexecution_failures_retained": 11,
+      "cause": "Hash-required metadata-extraction source was omitted from the first package",
+      "fix": "Included the exact attested build_metadata.py; no algorithm or evaluator changed",
+      "simulation_steps_executed_by_failed_attempts": 0,
+      "scientific_failed_episodes_rerolled": false
+    },
+    "cases": [
+      {
+        "kind": "economic",
+        "case_id": "confirmation/script_zero:calendar:d7_s207829280_b0p5",
+        "cell": {
+          "start_day": 7,
+          "seed": 207829280,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "original_consumed_record": {
+          "recorded_path": "outputs/camera_ready_confirmation_20261102/evaluation/calendar/script_zero/d7_s207829280_b0p5/episode.json",
+          "checkout_relative": "outputs/camera_ready_confirmation_20261102/evaluation/calendar/script_zero/d7_s207829280_b0p5/episode.json",
+          "sha256": "1013fc06d9c29feb453966bba178746d24aa3ba4f687fecbb263476597ff58aa",
+          "historical_flat_schema": false
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "c97ac44ca23e9e6c09ac878d13e83ba54eb5361a5185f57524d80f5da0d49743"
+      },
+      {
+        "kind": "economic",
+        "case_id": "confirmation/script_f100_always:calendar:d7_s207829280_b0p5",
+        "cell": {
+          "start_day": 7,
+          "seed": 207829280,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "original_consumed_record": {
+          "recorded_path": "outputs/camera_ready_confirmation_20261102/evaluation/calendar/script_f100_always/d7_s207829280_b0p5/episode.json",
+          "checkout_relative": "outputs/camera_ready_confirmation_20261102/evaluation/calendar/script_f100_always/d7_s207829280_b0p5/episode.json",
+          "sha256": "3dc3c17a92b92ef44fb15faa80ab35d5848a1d10c27cf37588ee4edba470086a",
+          "historical_flat_schema": false
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "c74129defb510f86a268e34507a44ca830947cde4628f2933ed51a4f552bb28d"
+      },
+      {
+        "kind": "economic",
+        "case_id": "absolute/economic_sac_1200:development:d24_s93001_b0p5",
+        "cell": {
+          "start_day": 24,
+          "seed": 93001,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "original_consumed_record": {
+          "recorded_path": "outputs/rl_grid_cash_ppo_20261101/track_b/development_full/economic_sac_1200/d24_s93001_b0p5/episode.json",
+          "checkout_relative": "outputs/rl_grid_cash_ppo_20261101/track_b/development_full/economic_sac_1200/d24_s93001_b0p5/episode.json",
+          "sha256": "eed80791c839f30f933072b83c0cb1e27261fa31d3f943f4c558b63fb535c344",
+          "historical_flat_schema": true
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "69ac268be959ef3320eb928e42c60dbfd8e3e72f76c377c207f83a9061f1f76a"
+      },
+      {
+        "kind": "economic",
+        "case_id": "fractional/fraction_sac_1200:development:d24_s93001_b0p5",
+        "cell": {
+          "start_day": 24,
+          "seed": 93001,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "original_consumed_record": {
+          "recorded_path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/development/fraction_sac_1200/d24_s93001_b0p5/episode.json",
+          "checkout_relative": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/development/fraction_sac_1200/d24_s93001_b0p5/episode.json",
+          "sha256": "92b3a6f10d6900f5bb5bea9f36758b8e25d97ded477e5648e6f701e396e1aa3e",
+          "historical_flat_schema": true
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "dfd00f5753b1655a5b8e4a5195e17735f8888ca872ef1d71a9887ab99a1a961a"
+      },
+      {
+        "kind": "economic",
+        "case_id": "fractional/potential_sac_1200:development:d24_s93001_b0p5",
+        "cell": {
+          "start_day": 24,
+          "seed": 93001,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "original_consumed_record": {
+          "recorded_path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/development/potential_sac_1200/d24_s93001_b0p5/episode.json",
+          "checkout_relative": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/development/potential_sac_1200/d24_s93001_b0p5/episode.json",
+          "sha256": "fb1d1ed20eb98a579704d8a98ba0c2c0046b80abcb5b354fdf083396b59ee650",
+          "historical_flat_schema": true
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "db91e4be61d127321c02b052c4e31333b467e85f8cd2d2a9674256ddafcc60b9"
+      },
+      {
+        "kind": "economic",
+        "case_id": "confirmation/model__fraction_sac_1200:calendar:d7_s207829280_b0p5",
+        "cell": {
+          "start_day": 7,
+          "seed": 207829280,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "original_consumed_record": {
+          "recorded_path": "outputs/camera_ready_confirmation_20261102/evaluation/calendar/model__fraction_sac_1200/d7_s207829280_b0p5/episode.json",
+          "checkout_relative": "outputs/camera_ready_confirmation_20261102/evaluation/calendar/model__fraction_sac_1200/d7_s207829280_b0p5/episode.json",
+          "sha256": "5bdc542067abfa7cf6823f1b424e9557730740eb739b964953e33e405351e4f8",
+          "historical_flat_schema": false
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "322617fd82c91de21a0101ca0a8b154e9d05745aa0ea183b2ae468ec032eb277"
+      },
+      {
+        "kind": "economic",
+        "case_id": "confirmation/model__potential_sac_1200:calendar:d7_s207829280_b0p5",
+        "cell": {
+          "start_day": 7,
+          "seed": 207829280,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "original_consumed_record": {
+          "recorded_path": "outputs/camera_ready_confirmation_20261102/evaluation/calendar/model__potential_sac_1200/d7_s207829280_b0p5/episode.json",
+          "checkout_relative": "outputs/camera_ready_confirmation_20261102/evaluation/calendar/model__potential_sac_1200/d7_s207829280_b0p5/episode.json",
+          "sha256": "be4f683d719085eb4395cc49d349f8a1fc3872575edeec19977551d78de7b343",
+          "historical_flat_schema": false
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "34a66381fb2f9238be968c7f7bb84a33a9f45dd098ce08e5d9e7936aba7c5031"
+      },
+      {
+        "kind": "economic",
+        "case_id": "pid/pid_native:calendar:d7_s207829280_b0p5",
+        "cell": {
+          "start_day": 7,
+          "seed": 207829280,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "original_consumed_record": {
+          "recorded_path": "outputs/pid_comparison_extract_20261102/evaluation/calendar/pid_native/d7_s207829280_b0p5/episode.json",
+          "checkout_relative": "outputs/pid_comparison_extract_20261102/evaluation/calendar/pid_native/d7_s207829280_b0p5/episode.json",
+          "sha256": "8e74054b33b5f0e1b1e9ae7f4e4ae15d8a349535363c52d09b38ed47fdefdaf2",
+          "historical_flat_schema": true
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "292362154d8cc85cfebad34b108bfe97332a07bcb3c80b1fca4ae2617b7f9327"
+      },
+      {
+        "kind": "economic",
+        "case_id": "pid/pid_full_work:calendar:d7_s207829280_b0p5",
+        "cell": {
+          "start_day": 7,
+          "seed": 207829280,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "original_consumed_record": {
+          "recorded_path": "outputs/pid_comparison_extract_20261102/evaluation/calendar/pid_full_work/d7_s207829280_b0p5/episode.json",
+          "checkout_relative": "outputs/pid_comparison_extract_20261102/evaluation/calendar/pid_full_work/d7_s207829280_b0p5/episode.json",
+          "sha256": "2e1e375ec25cb1a07c38d309872c1d7e5d72bc6ef45d17784c5eb850b9622261",
+          "historical_flat_schema": true
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "5e3fddaee65d40f6393868580e14368d983ac0ca66b748bce0de03056bbadd2d"
+      },
+      {
+        "kind": "economic",
+        "case_id": "pid/pid_native:calendar:d107_s3002708602_b0",
+        "cell": {
+          "start_day": 107,
+          "seed": 3002708602,
+          "regd_load_bias": 0.0
+        },
+        "verified": true,
+        "publication_qualified": false,
+        "original_consumed_record": {
+          "recorded_path": "outputs/pid_comparison_extract_20261102/evaluation/calendar/pid_native/d107_s3002708602_b0/episode.json",
+          "checkout_relative": "outputs/pid_comparison_extract_20261102/evaluation/calendar/pid_native/d107_s3002708602_b0/episode.json",
+          "sha256": "a3e58d7d2099ce5b3ac7edfc27675223deadb10d12cef386bc1723ced82d736f",
+          "historical_flat_schema": true
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "fa5aa41997aef9b80b092f43c91cbd70bc82e62c403ef18493d5e2e7de43f606"
+      },
+      {
+        "kind": "economic",
+        "case_id": "pid/pid_full_work:calendar:d107_s3002708602_b0",
+        "cell": {
+          "start_day": 107,
+          "seed": 3002708602,
+          "regd_load_bias": 0.0
+        },
+        "verified": true,
+        "publication_qualified": false,
+        "original_consumed_record": {
+          "recorded_path": "outputs/pid_comparison_extract_20261102/evaluation/calendar/pid_full_work/d107_s3002708602_b0/episode.json",
+          "checkout_relative": "outputs/pid_comparison_extract_20261102/evaluation/calendar/pid_full_work/d107_s3002708602_b0/episode.json",
+          "sha256": "03d7260176ebca1f6904425d4cb72874712df40b40213021f88790b888677fb4",
+          "historical_flat_schema": true
+        },
+        "recorded_manifest_id": "ba8374aabbcdffab1c2e33cfc99afdf32fa829bc566bb803e0d6f2d3f810f92b",
+        "input_dependency_counts": {
+          "sources": 66,
+          "configs": 2,
+          "protocols": 4,
+          "data": 5,
+          "models": 24
+        },
+        "private_full_receipt_sha256": "4fd7f6b4201d8f4e389af6e2b2e8f727ebeea1943a7efe37560b469467651207"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__rule_hardware"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": null,
+          "delivered_service_gate": null,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 740.6884823073568,
+          "service_prefix_rmse_kw": 740.6884823073568,
+          "stress_facility_relief_mw": 2.75334545736865,
+          "LFR_pct": 2.867225502470895,
+          "SPDR_pct": 0.02702468301558093,
+          "LWSR_pct": 0.021743184685738447,
+          "LWCF_pct": 6.601932603890261,
+          "cashflow_26h_usd": -185674.90545913362,
+          "cashflow_closed_recovery_usd": -185674.90545913362,
+          "regulation_revenue_usd": 10729.447283080162,
+          "battery_throughput_26h_mwh": 32.153656928514444,
+          "service_battery_throughput_mwh": 29.19734856902723,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.30902448338864946,
+          "service_terminal_temp_A_C": 30.60389532042524,
+          "service_terminal_temp_B_C": 22.82182849585296,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_00/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "f39661afe23ff52e0c1611de4ef3434960507d00f6ef7ad7639a56d16a4cb607"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__pid"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": null,
+          "delivered_service_gate": null,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 814.9494991326783,
+          "service_prefix_rmse_kw": 814.9494991326783,
+          "stress_facility_relief_mw": 3.208615293152879,
+          "LFR_pct": 3.3413255759552443,
+          "SPDR_pct": 0.03149325522677841,
+          "LWSR_pct": 0.02625848668265448,
+          "LWCF_pct": 7.972924015714272,
+          "cashflow_26h_usd": -184883.15926769373,
+          "cashflow_closed_recovery_usd": -184883.15926769373,
+          "regulation_revenue_usd": 10783.50557079213,
+          "battery_throughput_26h_mwh": 30.024774695727114,
+          "service_battery_throughput_mwh": 26.378733303468913,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.264483783208648,
+          "service_terminal_temp_A_C": 30.604131053130736,
+          "service_terminal_temp_B_C": 22.822454564772823,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_01/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "5e34d88d19ba6ac3ab29afd8f9050383d98677f545c23a8eea0fa25d99b9a928"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__bang_bang"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": null,
+          "delivered_service_gate": null,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 1291.1713675852484,
+          "service_prefix_rmse_kw": 1291.1713675852484,
+          "stress_facility_relief_mw": 2.973374418634259,
+          "LFR_pct": 3.0963549955879173,
+          "SPDR_pct": 0.029184315006741738,
+          "LWSR_pct": 0.025681494149113224,
+          "LWCF_pct": 7.797730460839774,
+          "cashflow_26h_usd": -185208.72130105324,
+          "cashflow_closed_recovery_usd": -185208.72130105324,
+          "regulation_revenue_usd": 10632.394031594558,
+          "battery_throughput_26h_mwh": 41.499585703661346,
+          "service_battery_throughput_mwh": 41.43524151215153,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5044262296997151,
+          "service_terminal_temp_A_C": 30.60906819966914,
+          "service_terminal_temp_B_C": 22.822887237554795,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_02/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "103914362988ba6777c5e56088d511a34aa89f937236abff29f139e5fa4c4add"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__old_sac"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": null,
+          "delivered_service_gate": null,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 327.64424075812826,
+          "service_prefix_rmse_kw": 327.64424075812826,
+          "stress_facility_relief_mw": 3.2872327478709606,
+          "LFR_pct": 3.423194696484153,
+          "SPDR_pct": 0.03226490260127039,
+          "LWSR_pct": 0.03283357070551364,
+          "LWCF_pct": 9.969331727428358,
+          "cashflow_26h_usd": -184107.14498555992,
+          "cashflow_closed_recovery_usd": -184107.14498555992,
+          "regulation_revenue_usd": 10932.738234773282,
+          "battery_throughput_26h_mwh": 29.616280925467102,
+          "service_battery_throughput_mwh": 26.012091894526172,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.7479903997053692,
+          "service_terminal_temp_A_C": 30.53053883515371,
+          "service_terminal_temp_B_C": 22.813066077483352,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945673,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": -1.8189894035458565e-12
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_03/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "dfd70d2a0c68fcc94836fbbc2e57399387396f8819cb49d9b5df40d747836d82"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__cooling_first"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": null,
+          "delivered_service_gate": null,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 0.1060329532176399,
+          "service_prefix_rmse_kw": 0.1060329532176399,
+          "stress_facility_relief_mw": 2.9876355713720915,
+          "LFR_pct": 3.1112059982890545,
+          "SPDR_pct": 0.029324291314889075,
+          "LWSR_pct": 0.03159953271981924,
+          "LWCF_pct": 9.594637967983878,
+          "cashflow_26h_usd": -184298.06256533472,
+          "cashflow_closed_recovery_usd": -184298.06256533472,
+          "regulation_revenue_usd": 11089.483805468684,
+          "battery_throughput_26h_mwh": 0.0,
+          "service_battery_throughput_mwh": 0.0,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5,
+          "service_terminal_temp_A_C": 30.605932294783372,
+          "service_terminal_temp_B_C": 22.814800782189593,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_04/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "cf055e872420cf382bb17e4b9bc1d3fcc3a77d04ee8168c23ff0a844c1ef6654"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__bc_only_1100"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": null,
+          "delivered_service_gate": null,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 63.56333862161679,
+          "service_prefix_rmse_kw": 63.56333862161679,
+          "stress_facility_relief_mw": 2.9694931711243218,
+          "LFR_pct": 3.09231321731701,
+          "SPDR_pct": 0.029146219720376437,
+          "LWSR_pct": 0.03133962026179421,
+          "LWCF_pct": 9.51572015738743,
+          "cashflow_26h_usd": -184368.51641066512,
+          "cashflow_closed_recovery_usd": -184368.51641066512,
+          "regulation_revenue_usd": 11060.194427837694,
+          "battery_throughput_26h_mwh": 0.0700333697928322,
+          "service_battery_throughput_mwh": 0.0377527148359351,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5022204721120521,
+          "service_terminal_temp_A_C": 30.60598029997062,
+          "service_terminal_temp_B_C": 22.812753277205797,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_05/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "f6c29036482b9eda50c8d156bf24ae67aa6ab9c01c953a833a74186f893322fa"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__guided_sac_1100"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": null,
+          "delivered_service_gate": null,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 80.02663928678909,
+          "service_prefix_rmse_kw": 80.02663928678909,
+          "stress_facility_relief_mw": 3.0227565562591407,
+          "LFR_pct": 3.1477796085022387,
+          "SPDR_pct": 0.029669011401221645,
+          "LWSR_pct": 0.031951908735552315,
+          "LWCF_pct": 9.701630698842804,
+          "cashflow_26h_usd": -184282.82886883282,
+          "cashflow_closed_recovery_usd": -184282.82886883282,
+          "regulation_revenue_usd": 11049.794843462965,
+          "battery_throughput_26h_mwh": 0.10254429280757907,
+          "service_battery_throughput_mwh": 0.06892116243640585,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.4978275958183546,
+          "service_terminal_temp_A_C": 30.606369689490197,
+          "service_terminal_temp_B_C": 22.81366935780871,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_06/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "2299d0fc7fec5d69940509292f3d5acca48712b3b620a363b352efe04ddaed6c"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_original_1100"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": 1.167219829686714,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 65.94174702135298,
+          "service_prefix_rmse_kw": 65.94174702135298,
+          "stress_facility_relief_mw": 2.97010601496862,
+          "LFR_pct": 3.092951408755975,
+          "SPDR_pct": 0.029152234915667638,
+          "LWSR_pct": 0.03133930410745668,
+          "LWCF_pct": 9.515624162727082,
+          "cashflow_26h_usd": -184372.0304077634,
+          "cashflow_closed_recovery_usd": -184372.0304077634,
+          "regulation_revenue_usd": 11058.874762885924,
+          "battery_throughput_26h_mwh": 0.19578948182364309,
+          "service_battery_throughput_mwh": 0.10260082657138508,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5064104428409262,
+          "service_terminal_temp_A_C": 30.60596545403348,
+          "service_terminal_temp_B_C": 22.81272863756783,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_07/episode/episode.json",
+        "original_registration_id": "29d05fc79d7db9ad61964b9c25a9c6222d70ebfcf7c4f30248706d35da46430b",
+        "private_full_receipt_sha256": "2c0c0be83bd9538e363769e3e34d3f332c53a64b174781067356d1e19ada81f0"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_conditioned_1100"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": 1.167045551231054,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 67.83997301889332,
+          "service_prefix_rmse_kw": 67.83997301889332,
+          "stress_facility_relief_mw": 2.9666421511940753,
+          "LFR_pct": 3.0893442774659725,
+          "SPDR_pct": 0.02911823634121861,
+          "LWSR_pct": 0.03128364417601253,
+          "LWCF_pct": 9.498724011187992,
+          "cashflow_26h_usd": -184381.94190291577,
+          "cashflow_closed_recovery_usd": -184381.94190291577,
+          "regulation_revenue_usd": 11056.19498935818,
+          "battery_throughput_26h_mwh": 0.13934284552103948,
+          "service_battery_throughput_mwh": 0.0735993985500601,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5045224348678985,
+          "service_terminal_temp_A_C": 30.606043631071714,
+          "service_terminal_temp_B_C": 22.812881528070044,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_08/episode/episode.json",
+        "original_registration_id": "29d05fc79d7db9ad61964b9c25a9c6222d70ebfcf7c4f30248706d35da46430b",
+        "private_full_receipt_sha256": "8d68ef5dc06ddc190d3fa99092f9a8da08ae3d1977823750f0a247bc8d803bb0"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__rule_hardware"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.968416405060873,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 775.9243125736795,
+          "service_prefix_rmse_kw": 775.9243125736795,
+          "stress_facility_relief_mw": 4.081336401021686,
+          "LFR_pct": 4.250142960395451,
+          "SPDR_pct": 0.040059202241542455,
+          "LWSR_pct": 0.022520703099224434,
+          "LWCF_pct": 6.838012287630657,
+          "cashflow_26h_usd": -180658.27053146556,
+          "cashflow_closed_recovery_usd": -180658.27053146556,
+          "regulation_revenue_usd": 15926.148158801743,
+          "battery_throughput_26h_mwh": 35.42777676057434,
+          "service_battery_throughput_mwh": 34.287009039942916,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.4262992415253912,
+          "service_terminal_temp_A_C": 30.604885700659903,
+          "service_terminal_temp_B_C": 22.82335780557137,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_09/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "bdfcbb044abcc336bd83d7f5bcfb5103b287af4f8f16aafdd9f3a3fb200dbca4"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__pid"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.9773777546719484,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 821.3017290905361,
+          "service_prefix_rmse_kw": 821.3017290905361,
+          "stress_facility_relief_mw": 4.656652278885445,
+          "LFR_pct": 4.849254253376416,
+          "SPDR_pct": 0.04570605240031533,
+          "LWSR_pct": 0.02832009744794993,
+          "LWCF_pct": 8.59889557989192,
+          "cashflow_26h_usd": -179543.41459691775,
+          "cashflow_closed_recovery_usd": -179543.41459691775,
+          "regulation_revenue_usd": 16119.52805713608,
+          "battery_throughput_26h_mwh": 32.9208577150287,
+          "service_battery_throughput_mwh": 31.613461495399328,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.415534507759083,
+          "service_terminal_temp_A_C": 30.60558341166312,
+          "service_terminal_temp_B_C": 22.825327900245256,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_10/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "0314d3dce7642c2205475d69a1fc4d5d1f23a00175b2c8012646ea51ef45891b"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__bang_bang"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.9651838870285052,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 1166.8385452461268,
+          "service_prefix_rmse_kw": 1166.8385452461268,
+          "stress_facility_relief_mw": 4.270657038326938,
+          "LFR_pct": 4.447294014569536,
+          "SPDR_pct": 0.041917425370714134,
+          "LWSR_pct": 0.02619777926145459,
+          "LWCF_pct": 7.954491283384102,
+          "cashflow_26h_usd": -180087.1691139059,
+          "cashflow_closed_recovery_usd": -180087.1691139059,
+          "regulation_revenue_usd": 15917.998704065529,
+          "battery_throughput_26h_mwh": 41.499585703661346,
+          "service_battery_throughput_mwh": 41.43524151215153,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5044262296997151,
+          "service_terminal_temp_A_C": 30.430983270086568,
+          "service_terminal_temp_B_C": 22.822860670750757,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_11/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "5bf08904bb63cadcb7ada243b63fb6eec694a93cc1c7aae2e081340e016d67e6"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__old_sac"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.9770493328605929,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 775.7471930834324,
+          "service_prefix_rmse_kw": 775.7471930834324,
+          "stress_facility_relief_mw": 5.639902981042337,
+          "LFR_pct": 5.873172803444936,
+          "SPDR_pct": 0.05535687136294275,
+          "LWSR_pct": 0.03483999267851168,
+          "LWCF_pct": 10.57854619311727,
+          "cashflow_26h_usd": -178839.2564514475,
+          "cashflow_closed_recovery_usd": -178839.2564514475,
+          "regulation_revenue_usd": 16100.17216156951,
+          "battery_throughput_26h_mwh": 31.022946843474614,
+          "service_battery_throughput_mwh": 26.468330140960983,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.8134252448678899,
+          "service_terminal_temp_A_C": 30.78669895972233,
+          "service_terminal_temp_B_C": 22.749290948179933,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945693,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": -2.1827872842550278e-11
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_12/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "2eb32218b4e6a02b86930a1ceb9c950cda4d9300f91217d8c1e1290b551016a5"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__cooling_first"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.999999564764959,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 0.11150061760436245,
+          "service_prefix_rmse_kw": 0.11150061760436245,
+          "stress_facility_relief_mw": 4.44599256124864,
+          "LFR_pct": 4.629881521511228,
+          "SPDR_pct": 0.043638381568073606,
+          "LWSR_pct": 0.032135762205638414,
+          "LWCF_pct": 9.757454545995053,
+          "cashflow_26h_usd": -179049.30105650844,
+          "cashflow_closed_recovery_usd": -179049.30105650844,
+          "regulation_revenue_usd": 16491.759328879656,
+          "battery_throughput_26h_mwh": 0.23658227159118433,
+          "service_battery_throughput_mwh": 0.23658183813758027,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.500000029790625,
+          "service_terminal_temp_A_C": 30.605932294783372,
+          "service_terminal_temp_B_C": 22.81757730536135,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_13/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "c9d5f5a872a61cf6c0fce25dd0f93309494926b68242a4b21636332a98ce6c26"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__bc_only_1100"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.9778233067340215,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 502.477560239565,
+          "service_prefix_rmse_kw": 502.477560239565,
+          "stress_facility_relief_mw": 4.9372102424458175,
+          "LFR_pct": 5.141416265189631,
+          "SPDR_pct": 0.04845978968105672,
+          "LWSR_pct": 0.036980781775975434,
+          "LWCF_pct": 11.228558854319978,
+          "cashflow_26h_usd": -178685.08889803424,
+          "cashflow_closed_recovery_usd": -178685.08889803424,
+          "regulation_revenue_usd": 16082.622453056696,
+          "battery_throughput_26h_mwh": 0.04040748377641031,
+          "service_battery_throughput_mwh": 0.03472978249192227,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5003904592172874,
+          "service_terminal_temp_A_C": 30.605920125390167,
+          "service_terminal_temp_B_C": 22.823845619395303,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_14/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "2fec2b7ddf3b56753e09481761e03d56abf51479db41e18df2f60c390ef6481e"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__guided_sac_1100"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.9764746910974264,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 532.941089686993,
+          "service_prefix_rmse_kw": 532.941089686993,
+          "stress_facility_relief_mw": 4.99217078903223,
+          "LFR_pct": 5.198650013457785,
+          "SPDR_pct": 0.04899923936975665,
+          "LWSR_pct": 0.037436694685354016,
+          "LWCF_pct": 11.36698872760966,
+          "cashflow_26h_usd": -178636.72163188097,
+          "cashflow_closed_recovery_usd": -178636.72163188097,
+          "regulation_revenue_usd": 16057.510847234329,
+          "battery_throughput_26h_mwh": 0.22642245894399451,
+          "service_battery_throughput_mwh": 0.1291987246109383,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.49371862744262324,
+          "service_terminal_temp_A_C": 30.60578177240998,
+          "service_terminal_temp_B_C": 22.823297431987164,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_15/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "c3f12d785a6948471bb9940f02b09f79063b9b8823b56fb0116d33d999473985"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_original_1100"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.9784812553828062,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 489.4888902733634,
+          "service_prefix_rmse_kw": 489.4888902733634,
+          "stress_facility_relief_mw": 4.922219746395241,
+          "LFR_pct": 5.125805753092111,
+          "SPDR_pct": 0.048312654710060264,
+          "LWSR_pct": 0.03682797528018234,
+          "LWCF_pct": 11.18216187056422,
+          "cashflow_26h_usd": -178698.6552311306,
+          "cashflow_closed_recovery_usd": -178698.6552311306,
+          "regulation_revenue_usd": 16094.680213641504,
+          "battery_throughput_26h_mwh": 0.1330296620726585,
+          "service_battery_throughput_mwh": 0.07188904823528393,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5042058341884866,
+          "service_terminal_temp_A_C": 30.605614674031933,
+          "service_terminal_temp_B_C": 22.822477148611156,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_16/episode/episode.json",
+        "original_registration_id": "29d05fc79d7db9ad61964b9c25a9c6222d70ebfcf7c4f30248706d35da46430b",
+        "private_full_receipt_sha256": "1cdb737f103a7a28d0f9d5d20dcaf8495049771310944c2809e249b2f65ff23a"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_conditioned_1100"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 100,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.9776477908138649,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 514.3435532838812,
+          "service_prefix_rmse_kw": 514.3435532838812,
+          "stress_facility_relief_mw": 4.952574277080768,
+          "LFR_pct": 5.157415765654885,
+          "SPDR_pct": 0.04861059101429979,
+          "LWSR_pct": 0.03705242272748824,
+          "LWCF_pct": 11.250311359318768,
+          "cashflow_26h_usd": -178678.9040734626,
+          "cashflow_closed_recovery_usd": -178678.9040734626,
+          "regulation_revenue_usd": 16078.018060407821,
+          "battery_throughput_26h_mwh": 0.0695317075070406,
+          "service_battery_throughput_mwh": 0.0662248709963426,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.49978620232827126,
+          "service_terminal_temp_A_C": 30.60623718249813,
+          "service_terminal_temp_B_C": 22.8236150207047,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_17/episode/episode.json",
+        "original_registration_id": "29d05fc79d7db9ad61964b9c25a9c6222d70ebfcf7c4f30248706d35da46430b",
+        "private_full_receipt_sha256": "39ed712bf96fc2b3026baa4ead6ce14b85ca8a86d8ecd862ad70415cd07cef51"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_original_1100"
+        },
+        "cell": {
+          "start_day": 12,
+          "seed": 94001,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": 0.9445535841471633,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 30.43468515230379,
+          "service_prefix_rmse_kw": 30.43468515230379,
+          "stress_facility_relief_mw": 5.99859112567581,
+          "LFR_pct": 4.452606348352906,
+          "SPDR_pct": 0.09711454979361815,
+          "LWSR_pct": 0.08692488843403645,
+          "LWCF_pct": 17.205516016716583,
+          "cashflow_26h_usd": -100526.44568109998,
+          "cashflow_closed_recovery_usd": -100526.44568109998,
+          "regulation_revenue_usd": 5603.648959992464,
+          "battery_throughput_26h_mwh": 0.13102759462263835,
+          "service_battery_throughput_mwh": 0.07635239428944045,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5037611017937341,
+          "service_terminal_temp_A_C": 30.22812417343392,
+          "service_terminal_temp_B_C": 24.4413835427511,
+          "service_work_arrived_kwh": 11107.97189280706,
+          "service_work_served_kwh": 11107.97189280706,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_18/episode/episode.json",
+        "original_registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "private_full_receipt_sha256": "eb4c10073f672140337ae5fa2ceb5a14d848183259923c88acfa69cad7d43a2d"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_original_1100"
+        },
+        "cell": {
+          "start_day": 12,
+          "seed": 94001,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.9955193473534831,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 87.36784200920283,
+          "service_prefix_rmse_kw": 87.36784200920283,
+          "stress_facility_relief_mw": 11.062018835255342,
+          "LFR_pct": 8.211063941436453,
+          "SPDR_pct": 0.17908921553197482,
+          "LWSR_pct": 0.1270662839347843,
+          "LWCF_pct": 25.150920787015252,
+          "cashflow_26h_usd": -96308.2336431,
+          "cashflow_closed_recovery_usd": -96308.2336431,
+          "regulation_revenue_usd": 9503.861096625278,
+          "battery_throughput_26h_mwh": 0.1607476196432904,
+          "service_battery_throughput_mwh": 0.08419890122281218,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5052658963787536,
+          "service_terminal_temp_A_C": 30.228106693630494,
+          "service_terminal_temp_B_C": 24.387367935834877,
+          "service_work_arrived_kwh": 11107.97189280706,
+          "service_work_served_kwh": 11107.97189280706,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_19/episode/episode.json",
+        "original_registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "private_full_receipt_sha256": "6f0bca74695b9ba4cab94b63738b29fa4b5ca86dbc4139395f973f6a1335b710"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_conditioned_1100"
+        },
+        "cell": {
+          "start_day": 12,
+          "seed": 94001,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": false,
+          "delivered_service_ratio": 0.9445249334891649,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 30.789353011508734,
+          "service_prefix_rmse_kw": 30.789353011508734,
+          "stress_facility_relief_mw": 6.002074492145452,
+          "LFR_pct": 4.455191965430552,
+          "SPDR_pct": 0.09717094396341203,
+          "LWSR_pct": 0.08704366551482502,
+          "LWCF_pct": 17.229026210433748,
+          "cashflow_26h_usd": -100523.49381464807,
+          "cashflow_closed_recovery_usd": -100523.49381464807,
+          "regulation_revenue_usd": 5603.320663240327,
+          "battery_throughput_26h_mwh": 0.1799870684949889,
+          "service_battery_throughput_mwh": 0.10206324317389073,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5053604101865425,
+          "service_terminal_temp_A_C": 30.228076332061153,
+          "service_terminal_temp_B_C": 24.44171869011934,
+          "service_work_arrived_kwh": 11107.97189280706,
+          "service_work_served_kwh": 11107.97189280706,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_20/episode/episode.json",
+        "original_registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "private_full_receipt_sha256": "e880c8cc2b4a775eafb21140142b026009d01a0080af700ccf377f767578d616"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_conditioned_1100"
+        },
+        "cell": {
+          "start_day": 12,
+          "seed": 94001,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": true,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": true,
+          "floor_enforced": true,
+          "delivered_service_ratio": 0.9953247454875929,
+          "delivered_service_gate": true,
+          "publication_qualified": true,
+          "tracking_rmse_kw": 90.22040812853811,
+          "service_prefix_rmse_kw": 90.22040812853811,
+          "stress_facility_relief_mw": 11.054077901063744,
+          "LFR_pct": 8.205169581702211,
+          "SPDR_pct": 0.17896065530294758,
+          "LWSR_pct": 0.1271353085219236,
+          "LWCF_pct": 25.164583199023678,
+          "cashflow_26h_usd": -96309.0967150048,
+          "cashflow_closed_recovery_usd": -96309.0967150048,
+          "regulation_revenue_usd": 9501.808095295777,
+          "battery_throughput_26h_mwh": 0.16052629808998803,
+          "service_battery_throughput_mwh": 0.08976684220963085,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.5048675739993714,
+          "service_terminal_temp_A_C": 30.228099158306783,
+          "service_terminal_temp_B_C": 24.387684733375394,
+          "service_work_arrived_kwh": 11107.97189280706,
+          "service_work_served_kwh": 11107.97189280706,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_21/episode/episode.json",
+        "original_registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "private_full_receipt_sha256": "4477701a60c05bf5f1419bd2274730214eb3bceccfe26473da8bf774fcf1ef80"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__pid"
+        },
+        "cell": {
+          "start_day": 207,
+          "seed": 104,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": false,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": false,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": false,
+          "floor_enforced": false,
+          "delivered_service_ratio": null,
+          "delivered_service_gate": null,
+          "publication_qualified": false,
+          "tracking_rmse_kw": 713.3264040406805,
+          "service_prefix_rmse_kw": 713.3264040406805,
+          "stress_facility_relief_mw": 5.9492976096314925,
+          "LFR_pct": 6.195364182316128,
+          "SPDR_pct": 0.05839364676719446,
+          "LWSR_pct": 0.03738337415425387,
+          "LWCF_pct": 11.350798893516146,
+          "cashflow_26h_usd": -181646.11462803412,
+          "cashflow_closed_recovery_usd": -181646.11462803412,
+          "regulation_revenue_usd": 12615.103722893364,
+          "battery_throughput_26h_mwh": 27.58561964409668,
+          "service_battery_throughput_mwh": 22.712285238359815,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.18525390915960702,
+          "service_terminal_temp_A_C": 30.60769620796572,
+          "service_terminal_temp_B_C": 22.828008052083977,
+          "service_work_arrived_kwh": 15850.873310945672,
+          "service_work_served_kwh": 15850.873310945672,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_22/episode/episode.json",
+        "original_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "private_full_receipt_sha256": "a7dfd2df45cf60e140832d174dfbdba434dd13a823e4e2f01ca90094060c8e2e"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__pid"
+        },
+        "cell": {
+          "start_day": 314,
+          "seed": 94002,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": false,
+        "actual_metrics": {
+          "complete": true,
+          "complete_26h": true,
+          "service_steps": 17280,
+          "recovery_steps": 1440,
+          "service_checks": {
+            "complete": true,
+            "terminal_soc": false,
+            "terminal_work": true,
+            "thermal_warnings": true
+          },
+          "recovery_closed": true,
+          "physical_gate_qualified": false,
+          "floor_enforced": false,
+          "delivered_service_ratio": 0.908888294465554,
+          "delivered_service_gate": true,
+          "publication_qualified": false,
+          "tracking_rmse_kw": 710.3292109112173,
+          "service_prefix_rmse_kw": 710.3292109112173,
+          "stress_facility_relief_mw": 7.578182641118606,
+          "LFR_pct": 5.790740265247216,
+          "SPDR_pct": 0.13992414306467743,
+          "LWSR_pct": null,
+          "LWCF_pct": null,
+          "cashflow_26h_usd": -91539.45091655287,
+          "cashflow_closed_recovery_usd": -91539.45091655287,
+          "regulation_revenue_usd": 5914.135122839632,
+          "battery_throughput_26h_mwh": 34.811305255862734,
+          "service_battery_throughput_mwh": 29.386535518518823,
+          "thermal_warning_fraction": 0.0,
+          "service_terminal_soc": 0.14966791370930316,
+          "service_terminal_temp_A_C": 30.41847772379789,
+          "service_terminal_temp_B_C": 25.76107591432138,
+          "service_work_arrived_kwh": 80721.28512332108,
+          "service_work_served_kwh": 80721.28512332108,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_23/episode/episode.json",
+        "original_registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "private_full_receipt_sha256": "e802f68c8afd950837a6e274fca147fea338d4c2919ea096c8d259279281b72b"
+      },
+      {
+        "kind": "tracking",
+        "policy_spec": {
+          "snapshot": "state_fixed_reference_kl_1103_final_dev",
+          "policy_id": "fixed_reference_kl_1103_step_69120"
+        },
+        "cell": {
+          "start_day": 137,
+          "seed": 93002,
+          "regd_load_bias": 0.5
+        },
+        "verified": true,
+        "publication_qualified": false,
+        "actual_metrics": {
+          "complete": false,
+          "complete_26h": false,
+          "service_steps": 6630,
+          "recovery_steps": 0,
+          "service_checks": {
+            "complete": false,
+            "terminal_soc": true,
+            "terminal_work": true,
+            "thermal_warnings": false
+          },
+          "recovery_closed": false,
+          "physical_gate_qualified": false,
+          "floor_enforced": false,
+          "delivered_service_ratio": 0.3762926645494336,
+          "delivered_service_gate": false,
+          "publication_qualified": false,
+          "tracking_rmse_kw": null,
+          "service_prefix_rmse_kw": 10534.15800915504,
+          "stress_facility_relief_mw": null,
+          "LFR_pct": null,
+          "SPDR_pct": null,
+          "LWSR_pct": null,
+          "LWCF_pct": null,
+          "cashflow_26h_usd": null,
+          "cashflow_closed_recovery_usd": null,
+          "regulation_revenue_usd": 623.3083355217515,
+          "battery_throughput_26h_mwh": null,
+          "service_battery_throughput_mwh": 3.047995858308334,
+          "thermal_warning_fraction": 0.02473604826546003,
+          "service_terminal_soc": 0.6960943058145634,
+          "service_terminal_temp_A_C": 31.711383503538347,
+          "service_terminal_temp_B_C": 35.00900333940493,
+          "service_work_arrived_kwh": 7556.455930394363,
+          "service_work_served_kwh": 7556.455930394363,
+          "service_backlog_kwh": 0.0,
+          "service_work_conservation_error_kwh": 0.0
+        },
+        "source_episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid-publication-20261102/replay_checks/tracking_24/episode/episode.json",
+        "original_registration_id": "60d89d2a1cadf9b810843826530f3f229b914291629cb19e3717326f4d3e75cd",
+        "private_full_receipt_sha256": "ccf86b48f08ce8d038f1667117d96eab9179dcf0698467898eaf79218569dce5"
+      }
+    ]
+  },
+  "PID_semantics_pairs": [
+    {
+      "request": {
+        "mode": "legacy_v0",
+        "day": 207,
+        "seed": 100
+      },
+      "verified": true,
+      "original_source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+      "actual_components": {
+        "mode": "legacy_v0",
+        "day": 207,
+        "seed": 100,
+        "agent_ticks": 17280,
+        "baseline_ticks": 17280,
+        "reported_formula_relief_mw": 8.268034860731056,
+        "stress_cooling_relief_mw": 8.242616215531307,
+        "stress_other_facility_relief_mw": 0.025418645199748596,
+        "stress_nominal_facility_mw": 84.12991915740665,
+        "stress_actual_facility_mw": 75.86188429667558,
+        "stress_demanded_response_mw": 8.88671690385719,
+        "stress_true_metered_error_mw": -0.6186820431261337,
+        "stress_battery_discharge_mw": 0.0,
+        "stress_observed_regd": 0.5369336170315657,
+        "stress_actual_commitment_mw": 16.137931244126683,
+        "stress_observed_commitment_mw": 16.137931034482758,
+        "stress_hvac_effort": 0.5400197870943738,
+        "stress_pump_speed": 0.5400197870943738,
+        "stress_temp_A": 30.975240586938316,
+        "stress_temp_B": 21.757840483503138,
+        "stress_mean_grid_load_mw": 10036.390993005889,
+        "stress_tick_count": 1740
+      },
+      "recovery_performed": false,
+      "adapter_monkeypatching": false,
+      "original_native_legacy_hook_unchanged": true,
+      "private_full_receipt_sha256": "3ab012d4c66f411a9fda2374550310a229fed071baae55e2fd2a9a81cf6102dd"
+    },
+    {
+      "request": {
+        "mode": "physical_v1",
+        "day": 207,
+        "seed": 100
+      },
+      "verified": true,
+      "original_source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+      "actual_components": {
+        "mode": "physical_v1",
+        "day": 207,
+        "seed": 100,
+        "agent_ticks": 17280,
+        "baseline_ticks": 17280,
+        "reported_formula_relief_mw": 3.208615293152879,
+        "stress_cooling_relief_mw": 3.1969407398391887,
+        "stress_other_facility_relief_mw": 0.011674553313689958,
+        "stress_nominal_facility_mw": 96.0282145577979,
+        "stress_actual_facility_mw": 92.81959926464502,
+        "stress_demanded_response_mw": 2.9876350520977435,
+        "stress_true_metered_error_mw": 0.03200735103456324,
+        "stress_battery_discharge_mw": -0.1889728900205709,
+        "stress_observed_regd": 0.25032279202104263,
+        "stress_actual_commitment_mw": 10.89655183512589,
+        "stress_observed_commitment_mw": 10.89655172413793,
+        "stress_hvac_effort": 0.6377676719392853,
+        "stress_pump_speed": 0.6377676719392853,
+        "stress_temp_A": 30.750711511099983,
+        "stress_temp_B": 23.298078169128395,
+        "stress_mean_grid_load_mw": 10032.572477011494,
+        "stress_tick_count": 1740
+      },
+      "recovery_performed": false,
+      "adapter_monkeypatching": false,
+      "original_native_legacy_hook_unchanged": false,
+      "private_full_receipt_sha256": "982f20d0bffb86b1ca1ec7ed18a964651c433abbf28a01ecd3f610b9598f797d"
+    }
+  ],
+  "artifact_readback": {
+    "role": "local_complete_archive_readback_and_restoration_not_remote_availability",
+    "artifact_manifest_sha256": "fd81435eed14800a67d7a7ffbd7aa023a06ff167c0c8eb34cc1dc90de557fe7e",
+    "compressed_parts": 82,
+    "all_parts_below_1900000000_bytes": true,
+    "total_compressed_bytes": 144476055506,
+    "verified_unique_payloads": 84691,
+    "verified_logical_files": 84700,
+    "bundle_sha256s_independently_read_back": true,
+    "every_decompressed_payload_sha256_verified": true,
+    "every_declared_destination_materialized_as_verified_bytes": true,
+    "preserved_originally_unhashed_interrupted_prefixes": 11,
+    "empty_files_preserved": 5,
+    "interrupted_prefixes_not_relabelled_complete": true,
+    "raw_archive_uploaded": false,
+    "OneDrive_urls_pending_author": true
+  },
+  "remaining_declared_limits": [
+    "Archival Q1 remains reported-only except the separately reproduced PID relief pair.",
+    "Missing historical execution commits remain null; content fingerprints are preserved.",
+    "Input datasets are excluded from public Git and must be lawfully supplied locally.",
+    "Large evidence is local and verified; OneDrive URLs and upload permission remain the author's later responsibility.",
+    "No new project, model or dataset blanket license is granted."
+  ]
+}

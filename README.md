@@ -1,5 +1,18 @@
 # DC2Grid: Hierarchical AI Orchestration for Grid-Interactive Hyperscale Data Centers
 
+> **Frozen grid-relief comparison release (2026-11-02).**
+> Start with the [reproducibility guide](REPRODUCIBILITY.md), the
+> [table/row provenance](provenance/table_row_provenance.json), and the
+> [nine-page comparison PDF](outputs/pid_comparison_extract_20261102/publication/pid_progress_comparison.pdf).
+> This review branch has a clean, independent history: it does not include
+> original paper archives, full manuscripts, private reviewer notes, or input
+> datasets. Tracking and economic tasks retain separate code and criteria.
+> Exact processed inputs must be supplied locally; large original evidence is
+> prepared separately, with OneDrive links pending the author's upload.
+> The historical project overview below can mention resources or old workflows
+> that are intentionally not distributed in this release. Use the guide's
+> verified entrypoints, not those old registration/manuscript workflows.
+
 ![DC2Grid Architecture](figures/dc2grid_architecture.png)
 
 ---
@@ -7,10 +20,11 @@
 ## Camera-ready simulation contract
 
 New environments default to **`physical_v1`**. The previously released behavior
-is available explicitly as **`legacy_v0`**. Historical tables and bundled
-checkpoints describe the legacy task; they are not results for the corrected
-task. Do not mix the two modes in one performance comparison or replace paper
-numbers without rerunning the complete registered evaluation.
+is available explicitly as **`legacy_v0`**. The original upstream historical
+tables/checkpoints describe the legacy task. This comparison release separately
+identifies its corrected `physical_v1` checkpoints and its archival legacy
+results in the provenance catalog. Do not mix the two modes in one performance
+comparison or replace paper numbers without the corresponding evaluation.
 
 The architectural descriptions below predate this correction. Where their
 tracking, throughput, timing, or settlement formulas differ, this section

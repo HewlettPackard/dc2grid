@@ -1,0 +1,8 @@
+{
+  "operation": "JSON formatting only; sorted keys and compact separators",
+  "local_manifest_sha256": "fd81435eed14800a67d7a7ffbd7aa023a06ff167c0c8eb34cc1dc90de557fe7e",
+  "public_manifest_sha256": "c4231928b743b5a909d259ccc3166c9e2e3b2e1824c950b51d848d3ab8916e01",
+  "semantic_objects_identical": true,
+  "scientific_payload_hashes_and_destinations_unchanged": true,
+  "public_raw_availability_claimed": false
+}

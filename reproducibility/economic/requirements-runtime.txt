@@ -1,0 +1,10 @@
+# Python 3.11; CPU inference. Install only in a clean release environment.
+numpy==2.4.4
+pandas==3.1.0
+scipy==1.17.1
+PyYAML==6.0.3
+torch==2.6.0
+stable-baselines3==2.7.1
+gymnasium==1.2.3
+cloudpickle==3.1.2
+matplotlib==3.11.2

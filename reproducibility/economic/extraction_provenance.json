@@ -1,0 +1,46 @@
+{
+  "role": "release_reevaluation_of_consumed_cases_not_preregistered_opening",
+  "source_commit": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "read_only_extraction": true,
+  "simulator_episodes_run": 0,
+  "source_reports_and_manifests": [
+    {
+      "recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/development_full/manifest.json",
+      "checkout_relative": "outputs/rl_grid_cash_ppo_20261101/track_b/development_full/manifest.json",
+      "sha256": "bb132387a051b9119bd505b70c75f556a9f0fe80dc5b6b114aa97122e834f608",
+      "bytes": 5743
+    },
+    {
+      "recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/development_baselines/manifest.json",
+      "checkout_relative": "outputs/rl_grid_cash_ppo_20261101/track_b/development_baselines/manifest.json",
+      "sha256": "ce6054b57a48640b2ade9bf0f4ca23035406675ce29dbe4f0d45f403c5f9967c",
+      "bytes": 2973
+    },
+    {
+      "recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/development/manifest.json",
+      "checkout_relative": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/development/manifest.json",
+      "sha256": "a0254a016952ead0e05b7c134a8e20a7f326dfd5ed3b92b64c74315c94d814ab",
+      "bytes": 9388
+    },
+    {
+      "recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/reports/development_cases.json",
+      "checkout_relative": "outputs/camera_ready_confirmation_20261102/reports/development_cases.json",
+      "sha256": "a12bd998bed9b93ca48302f003205720dfd94b67395252444c3b1a3d525b5952",
+      "bytes": 6055625
+    },
+    {
+      "recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/reports/final_cases.json",
+      "checkout_relative": "outputs/camera_ready_confirmation_20261102/reports/final_cases.json",
+      "sha256": "0b80222d6190d3345721505c86f3abf7c33e7fb1f802481142e6b4757d9331ac",
+      "bytes": 24754192
+    },
+    {
+      "recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/pid_comparison_extract_20261102/reports/pid_cases.json",
+      "checkout_relative": "outputs/pid_comparison_extract_20261102/reports/pid_cases.json",
+      "sha256": "eb31bc86f75101bc292f57597d42221a69b84ab17e7a8edfd6fd61f93d3951eb",
+      "bytes": 1110157
+    }
+  ],
+  "sources_not_individually_registered": [],
+  "these_historical_reports_are_not_replay_runtime_dependencies": true
+}

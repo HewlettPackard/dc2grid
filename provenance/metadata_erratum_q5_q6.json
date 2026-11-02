@@ -1,0 +1,31 @@
+{
+  "schema": "dc2grid-pid-metadata-erratum-v1",
+  "id": "Q5_Q6_HISTORICAL_FULL_RESIDUAL_FLOOR",
+  "source_repository_head": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "scope": "Metadata clarification only; original PDF, source reports, scientific values and admission outcomes are unchanged.",
+  "applies_to": {
+    "Q5": "Full-residual side of all five hardware-matched contrasts",
+    "Q6": "The first five historical low-level rows",
+    "families": ["pid", "old_sac", "bc_only", "guided_sac", "union_conditioned"]
+  },
+  "clarification": "These full-residual source counts already enforce physical/recovery qualification AND the recorded 90% actual paid-service/capacity floor. The assembler's generic historical physical/recovery label is incomplete. Rule-macro counts do not enforce that floor.",
+  "source_evidence": [
+    {
+      "path": "outputs/rl_value_conditioning_20261101/reports/final_episode_metrics.json",
+      "sha256": "bc0a50f08bc03b3b66f7abc2e6f050545b929776d8e73c504d191bc3046c64af",
+      "selector": {"panel": "regression", "macro": "full_residual", "family_in": ["pid", "old_sac", "bc_only", "guided_sac", "union_conditioned"]},
+      "assertions": ["floor_enforced == true", "qualified == (physical_gate_qualified and delivered_service_gate)", "delivered_service_ratio >= 0.9"]
+    },
+    {
+      "path": "outputs/rl_value_conditioning_20261101/reports/final_report.json",
+      "sha256": "0a8b0bc3664d69e667b545a21d46f19770052ff2cd9452dfa0de4ec3c1d272ba",
+      "pointer": "/qualification_counts_by_definition",
+      "definition": "physical_recovery_and_capacity"
+    }
+  ],
+  "unchanged_counts": {"pid": [30, 30], "old_sac": [30, 30], "bc_only": [120, 120], "guided_sac": [120, 120], "union_conditioned": [120, 120]},
+  "count_scope": "Both biases; 30 cases per checkpoint. Printed means remain beta0.5, 15 complete date/noise cases with checkpoints averaged within case.",
+  "not_a_new_uniform_admission_test": true,
+  "no_survivor_filter_or_retuning": true,
+  "numeric_changes": 0
+}

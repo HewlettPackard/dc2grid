@@ -1,0 +1,147 @@
+OPTIONAL Q2/Q3 PID SEMANTICS REPLAY
+
+This adds a separate service-only diagnostic entrypoint. Existing tracking
+adapter/inventory files are unchanged. Ship these optional files alongside
+tracking_release.py:
+  pid_semantics_replay.py
+  pid_semantics_inventory.json
+  test_pid_semantics_replay.py
+  PID_INTERFACE.txt
+  pid_semantics_findings.json
+
+The original archived probe remains byte-preserved:
+  outputs/pid_comparison_extract_20261102/diagnostics/probe_pid_relief_semantics.py
+  SHA256 66daa3d7925fbc56ed41dd109a9a0a3f9be005e39877ab5769039d075f368c49
+The exact scalar targets come from:
+  outputs/pid_comparison_extract_20261102/reports/pid_semantics_reproduction.json
+  SHA256 b336fc5c14a9775620f2250601a4d79908920c13275b7b616606cdb9b8699baf
+
+Public API
+----------
+  from pathlib import Path
+  from reproducibility.tracking.pid_semantics_replay import evaluate_pid_pair
+
+  receipt = evaluate_pid_pair(
+      Path("/absolute/path/to/NEW_CHECKOUT"),
+      {"mode": "legacy_v0", "day": 207, "seed": 100},
+      Path("replay_checks/pid_legacy_d207_s100"),
+  )
+  assert receipt["verified"]
+
+Repeat with mode="physical_v1" and a distinct output directory. Each call starts
+a fresh isolated CPU process, running exactly two original trajectories:
+native PID and native fixed-setpoint reference ("none"), both under rule_macro,
+default scenario and bias 0.5. Output must be a NEW directory INSIDE the new
+checkout. It cannot be the original checkout or an external symlink.
+
+Only the already-consumed Cartesian product is admitted:
+  mode: legacy_v0 / physical_v1
+  day: 207 / 248 / 249
+  seed: 100 / 101 / 102 / 103 / 104
+That is the original 30 pairs / 60 trajectories. No new date/noise/bias/macro,
+policy, plant, controller gain, semantic-mismatch, or other override is accepted.
+There is deliberately no command to launch a new panel.
+
+Safe native reuse and limitations
+--------------------------------
+The archived probe is NEVER imported, executed, or patched. Its global PROJECT
+and OUT therefore cannot redirect imports or write to a historical session path.
+Instead the adapter directly calls unchanged evaluation.grid_relief APIs:
+  _market_config("nyiso_nyc", explicit_runtime_directory, mode)
+  _run_episode(..., config_path=..., trace_dir=..., simulation_mode=mode)
+  _metrics(agent_frame, reference_frame)
+
+The original trace-reader and all component-summary assignment ASTs are checked
+for exact equality against the byte-verified archived probe. This retains the
+original pandas default CSV reading, top-decile masks, signed battery term,
+power-component arithmetic, observation/commitment fields and mode-specific
+native metric validation. No source function is monkeypatched.
+
+Important inherited behavior: native legacy_v0 _run_episode itself calls its
+original _align_calendar and _bias_regd hook. That existing hook replaces the
+grid instance's RegD method as part of the archived legacy semantics. The adapter
+does not add or modify it. Removing it would change the experiment. If "no
+monkeypatching" is intended to prohibit even this unchanged native internal
+legacy behavior, exact legacy replay is impossible under that stronger reading;
+do not replace it with a different bias/physics implementation.
+
+The native source_id covers ALL Python files beneath c2g_env/, baselines/,
+evaluation/ and scripts/, not merely code imported in the PID branch:
+  source_id af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7
+All 61 original Python files must be present and unchanged; 31 are in the static
+runtime import closure. There are 69 required files total: those sources,
+c2g_env/config.yaml, five scientific CSVs, archived probe, and archived report.
+The inventory also records the original raw-trace CSV inventory as OPTIONAL.
+No historical session directory or original raw trajectories are required.
+DO NOT install new release helpers inside the four source_id trees: added files
+also change the native identity. Use reproducibility/tracking/ instead.
+
+The native-generated YAML is retained under output/runtime/native/. A separate
+runtime YAML changes only the three data-directory values to the verified new
+checkout paths. All physical/scenario/reward parameters remain native.
+Missing or changed data block execution before synthetic fallbacks can activate.
+Source/data/report/probe hashes are checked before import and again after replay.
+
+Use Python 3.11. Runtime imports need numpy, pandas, torch, gymnasium,
+stable-baselines3, PyYAML, scipy and tqdm (plus their ordinary dependencies).
+The inventory records the observed source-environment versions. No SAC model,
+training corpus, LLM/external API request, original paper, or manuscript is used.
+
+Validation semantics
+--------------------
+These are 24-hour service-only diagnostic pairs. Each native trajectory must
+complete 17280 hardware steps and 96 macro steps, truncate normally, and not
+terminate. The unchanged native _metrics qualification and physical-mode paired
+exogenous equality checks remain in force. There is NO two-hour recovery and no
+invented 26-hour tracking SOC/backlog/90%-service-floor qualification.
+
+Every reported per-case component is compared, not just mean relief. Floats use
+atol=1e-9, rtol=1e-9; identities, counts, flags and missing/extra fields are exact.
+Three power balances are independently checked with absolute tolerance 1e-8 MW:
+  relief = cooling relief + other-facility relief
+  relief = nominal facility - actual facility
+  relief = demanded response - signed battery discharge + true metered error
+Negative battery discharge means charging; it must not be clipped to zero.
+
+Do not treat the modes as identical realized exogenous inputs merely because
+day/seed labels match. Their calendar, workload, weather and signal semantics
+are intentionally those of the original diagnostic. The results are observed
+power-balance reproduction, not individual-change causal attribution.
+
+Parent commands (from NEW_CHECKOUT/reproducibility/tracking)
+----------------------------------------------------------
+Read-only tests; no episodes:
+  DC2GRID_RELEASE_ROOT=../.. python -B -m unittest -v test_tracking_release test_pid_semantics_replay
+  ruff check --no-cache --select E,F,I pid_semantics_replay.py build_pid_semantics_inventory.py test_pid_semantics_replay.py
+
+Read-only preflights:
+  python -B pid_semantics_replay.py inspect --root ../.. --mode legacy_v0 --day 207 --seed 100
+  python -B pid_semantics_replay.py inspect --root ../.. --mode physical_v1 --day 207 --seed 100
+
+Actual parent-run original-pair replays:
+  python -B pid_semantics_replay.py evaluate --root ../.. --mode legacy_v0 --day 207 --seed 100 --output replay_checks/pid_legacy_d207_s100
+  python -B pid_semantics_replay.py evaluate --root ../.. --mode physical_v1 --day 207 --seed 100 --output replay_checks/pid_physical_d207_s100
+
+Each output contains pid/ and none/ native episode.json/hardware.csv.gz/macro.csv.gz,
+runtime configurations/log, and pid_release_receipt.json (or explicit failure).
+Source/global paths are never redirected in the archived probe.
+
+Day 207 / seed 100 representative values (MW unless indicated)
+-------------------------------------------------------------
+                                     legacy_v0             physical_v1
+  reported formula relief       8.268034860731056      3.208615293152879
+  cooling relief                8.242616215531307      3.1969407398391887
+  other facility relief         0.025418645199748596   0.011674553313689958
+  nominal facility             84.12991915740665      96.0282145577979
+  actual facility              75.86188429667558      92.81959926464502
+  demanded response             8.88671690385719       2.9876350520977435
+  true metered error           -0.6186820431261337     0.03200735103456324
+  signed battery discharge      0.0                   -0.1889728900205709
+  native qualified              True                   True
+  stress ticks                  1740                   1740
+The full records, including observed RegD/commitments, actuator effort,
+temperatures and mean stress load, are in pid_semantics_inventory.json.
+
+This sub-agent ran only static/unit/archived-receipt checks. No diagnostic
+trajectories were executed locally; parent new-checkout numerical verification
+remains necessary.

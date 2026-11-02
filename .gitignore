@@ -59,3 +59,11 @@ misc
 copilot
 runs
 3L_Grid
+
+# Local reproduction inputs, outputs, and author-managed download locations
+/data/
+/replay_checks/
+/repro-results/
+/.repro-cache/
+/reproducibility/evidence/
+/artifact_locations.json

@@ -1,0 +1,29 @@
+{
+  "archive_relative_path_root": "reproducibility/evidence/pid_relief_attribution_20261102",
+  "case_pairs": 30,
+  "derived_artifact_not_original_frozen_inventory": true,
+  "evidence_availability_metadata": "reproducibility/raw_evidence_availability.json",
+  "no_original_source_model_or_registration_bytes_modified": true,
+  "original_inventory_relative_path": "outputs/pid_comparison_extract_20261102/reports/pid_semantics_trace_inventory.csv",
+  "original_inventory_sha256": "a471d6f76c32e0cc1ee89c3bf83fa01fd5da56efdeaa2f15e88a633dc71688ee",
+  "public_companion_relative_path": "outputs/pid_comparison_extract_20261102/reports/pid_semantics_trace_inventory.public.csv",
+  "public_companion_sha256": "4a4695872ccc0a5c6c94d0e1b72e1bbba16d282c5429b5aa01b29f7ef3b46524",
+  "recorded_payload_bytes": 135287929,
+  "rows": 180,
+  "runtime_dependency_status": "Original CSV is written by the import helper and linked from README; no tracked executable reads it.",
+  "schema_version": 1,
+  "source_commit": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "source_hashes_are_recorded_not_fresh_raw_payload_verification": true,
+  "trace_triplets": 60,
+  "transformed_fields": [
+    "path"
+  ],
+  "unchanged_fields": [
+    "mode",
+    "day",
+    "seed",
+    "hardware",
+    "bytes",
+    "sha256"
+  ]
+}

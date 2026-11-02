@@ -1,0 +1,69 @@
+{
+  "schema": "dc2grid-user-supplied-input-data-v1",
+  "redistributed_in_public_git": false,
+  "automatic_download": false,
+  "permissions": "Obtain lawful access and follow provider terms; this release grants no dataset redistribution permission.",
+  "hashes_identify_processed_bytes_not_a_license": true,
+  "files": [
+    {
+      "path": "data/processed/energy/NYC.csv",
+      "sha256": "db33c788d440f5ba4aa0d4b968a409d428107b92c87c49ecee0c1823e5069203",
+      "bytes": 3159458,
+      "provider": "New York Independent System Operator",
+      "source": "https://www.nyiso.com/load-data",
+      "usage_note": "Recorded NYC/NYISO 2023 load replay; exact processed bytes are required.",
+      "redistribution_license": "not_established_in_this_release",
+      "acquisition_timestamp": null,
+      "source_version_exact_acquisition_proof": null,
+      "missing_acquisition_metadata_not_invented": true
+    },
+    {
+      "path": "data/processed/weather/NYC.csv",
+      "sha256": "0a32b8fe345d6f5df1654b88c4d3f6664e32db1c231d3dea0083d2b0a22a8c46",
+      "bytes": 581193,
+      "provider": "NOAA National Centers for Environmental Information",
+      "source": "https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database",
+      "usage_note": "Recorded 2024 NYC weather is calendar-matched to 2023 load, not contemporaneous weather.",
+      "redistribution_license": "not_established_in_this_release",
+      "acquisition_timestamp": null,
+      "source_version_exact_acquisition_proof": null,
+      "missing_acquisition_metadata_not_invented": true
+    },
+    {
+      "path": "data/processed/workload_traces/batch_v2023.csv",
+      "sha256": "52a5430a998a43a4eea0183ccee82dd88e02a6097cb49e3b17deb38fdb5daae9",
+      "bytes": 130593,
+      "provider": "Alibaba Cluster Trace Program",
+      "source": "https://github.com/alibaba/clusterdata/tree/master/cluster-trace-gpu-v2023",
+      "usage_note": "Processed aggregate workload; raw identifiers are not a policy input.",
+      "redistribution_license": "not_established_in_this_release",
+      "acquisition_timestamp": null,
+      "source_version_exact_acquisition_proof": null,
+      "missing_acquisition_metadata_not_invented": true
+    },
+    {
+      "path": "data/processed/workload_traces/dlrm_v2025.csv",
+      "sha256": "e6336e6d67cbeef8fabd652c7d04279dfc6a41c7a93a500b8c5330d8699bf63e",
+      "bytes": 205906,
+      "provider": "Alibaba Cluster Trace Program",
+      "source": "https://github.com/alibaba/clusterdata/tree/master/cluster-trace-gpu-v2025",
+      "usage_note": "Processed aggregate workload; version-specific source terms apply.",
+      "redistribution_license": "not_established_in_this_release",
+      "acquisition_timestamp": null,
+      "source_version_exact_acquisition_proof": null,
+      "missing_acquisition_metadata_not_invented": true
+    },
+    {
+      "path": "data/processed/workload_traces/genai_v2026.csv",
+      "sha256": "8fa72a4f2b343ffda2742c8d656ea1107b8bdc9088f3c7eba4b1a2f7608aecf8",
+      "bytes": 9467,
+      "provider": "Alibaba Cluster Trace Program",
+      "source": "https://github.com/alibaba/clusterdata/tree/master/cluster-trace-v2026-GenAI",
+      "usage_note": "Processed aggregate GenTD26 workload; version-specific source terms apply.",
+      "redistribution_license": "not_established_in_this_release",
+      "acquisition_timestamp": null,
+      "source_version_exact_acquisition_proof": null,
+      "missing_acquisition_metadata_not_invented": true
+    }
+  ]
+}

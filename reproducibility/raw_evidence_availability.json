@@ -1,0 +1,18 @@
+{
+  "delivery": "Compressed local multipart evidence, for later user-managed OneDrive upload",
+  "github_raw_archive_upload": false,
+  "no_download_availability_claim": true,
+  "onedrive_folder_url": null,
+  "onedrive_urls_status": "pending_user_upload",
+  "package_id": "dc2grid-required-raw-evidence-20261102",
+  "package_status": "pending_parent_full_bundle_assembly_and_verification",
+  "part_size_limit_bytes_exclusive": 1900000000,
+  "parts": [],
+  "pid_numeric_inventory": "outputs/pid_comparison_extract_20261102/reports/pid_semantics_trace_inventory.public.csv",
+  "pid_numeric_inventory_sha256": "4a4695872ccc0a5c6c94d0e1b72e1bbba16d282c5429b5aa01b29f7ef3b46524",
+  "recommended_split_target_bytes": 1800000000,
+  "schema_version": 1,
+  "scope": "Required numeric evidence only; optional replay/intermediates, operational logs, manuscripts, author attachments, private reviews and unrelated session content are excluded.",
+  "source_commit": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "user_must_fill_urls_after_upload": true
+}

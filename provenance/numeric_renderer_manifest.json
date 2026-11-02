@@ -1,0 +1,76 @@
+{
+  "schema": "dc2grid-new-numeric-table-renderer-v1",
+  "entrypoint": "provenance/rebuild_numeric_tables.py",
+  "companion_validator": "provenance/validate_table_provenance.py",
+  "runtime": "Python 3.9+ standard library only",
+  "rebuild_command": "python3 -B provenance/rebuild_numeric_tables.py --root . --check-source-hashes",
+  "validate_command": "python3 -B provenance/validate_table_provenance.py --root . --tex provenance/numeric_tables/pid_numeric_tables.tex --check-source-hashes",
+  "metadata_inputs": [
+    "provenance/table_row_provenance.json",
+    "provenance/controller_protocol_provenance.json",
+    "provenance/provenance_acceptance.json"
+  ],
+  "numeric_input_manifest": "provenance/validator_manifest.json#/required_inputs",
+  "numeric_input_count": 13,
+  "numeric_input_bytes": 44706186,
+  "public_outputs": [
+    "provenance/numeric_tables/pid_numeric_tables.csv",
+    "provenance/numeric_tables/pid_numeric_tables.html",
+    "provenance/numeric_tables/pid_numeric_tables.tex",
+    "provenance/numeric_tables/pid_numeric_tables.metadata.json"
+  ],
+  "coverage": {
+    "numbered_tables": 12,
+    "table_parts": 13,
+    "data_rows": 118,
+    "numeric_entries_per_view": 1026,
+    "main_comparison_cells": 528,
+    "PID_reproduction_metric_rows": 9,
+    "SD_entries": 180,
+    "pass_planned_pairs": 95
+  },
+  "view_contract": {
+    "CSV": "One row per mapped data row. c1_value/c1_sd through c7_value/c7_sd and qualified/planned preserve printed precision. Unit, mean-case count, fixed-policy count, source refs and gate metadata are separate fields.",
+    "HTML": "New static numeric tables, units, SDs, existing pass/planned columns and explicit gate metadata; no external resources.",
+    "TeX": "New table fragment with 13 tabular parts and fresh technical labels. It can be included with booktabs and graphicx; no TeX/PDF compiler is run.",
+    "Q5": "The five original numeric columns are retained. The separate gate metadata preserves both rule/full-residual pass counts; only full-residual enforces the recorded 90% paid-service floor.",
+    "Q6": "The five historical low-level full-residual rows already include the 90% floor. Economic rows retain their source-study physical/recovery/service gates. No new admission test is imposed.",
+    "archival_Q1": "Numeric reported values only; no original table_tex body or manuscript label strings are emitted. Only the narrow PID relief mean/SD have a separately recorded reproduction.",
+    "new_PID": "Diagnostic means retain all complete cases including qualification failures."
+  },
+  "validation": {
+    "before_output_write": "Bind numeric values to source reports, parse the newly generated TeX with the exhaustive validator, recompute approved scalar-case aggregates, and round-trip CSV/HTML numeric fields.",
+    "source_hash_mode": "--check-source-hashes checks the 13 original numeric JSON byte digests; normalized derivatives need separately recorded transformation receipts.",
+    "generated_TeX_hash": "Derived output hash only. Historical original TeX digest is retained as provenance, not enforced as a layout/byte target.",
+    "four_earlier_absolute_economic_Q6_rows": "Report-bound values/counts/cash references; archived per-episode traces are not a renderer dependency."
+  },
+  "frozen_view": {
+    "filename": "pid_progress_comparison.pdf",
+    "pages": 9,
+    "sha256": "2c31e19948811377bbf68594698573c1aac9498c97f499452861c9330655a595",
+    "role": "Existing approved frozen PDF, preserved separately",
+    "renderer_reads_or_writes_PDF": false,
+    "layout_or_byte_regeneration_claimed": false
+  },
+  "excluded_dependencies": [
+    "Original paper ZIP, manuscript source, original TeX or manuscript prose",
+    "Original comparison_data.json and its table_tex field",
+    "Original build_comparison_pdf.py, make_document(data) or archive-reading assemble()",
+    "Input datasets, simulator/runtime evaluator/trainer code or checkpoint archives",
+    "Raw archived episodes, private session evidence, attachments or live artifact URLs"
+  ],
+  "scope": {
+    "public_input_datasets": "excluded",
+    "raw_evidence": "local_compressed_parts_for_later_user_OneDrive_upload",
+    "public_artifact_url_status": "pending",
+    "public_artifact_urls": [],
+    "Git_export": "strict_orphan_no_existing_parent_ancestry",
+    "Git_or_upload_actions_by_renderer": false
+  },
+  "output_safety": {
+    "public_locators": "Repository-relative; --public-output-dir changes the declared prefix",
+    "physical_destination": "--output-dir can place generated deliverables outside a read-only evidence tree without serializing that machine-local path",
+    "overwrite": "Existing different generated files require --overwrite; fixed source reports/PDF are never output targets",
+    "metadata_erratum": "provenance/metadata_erratum_q5_q6.json"
+  }
+}

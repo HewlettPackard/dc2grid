@@ -1,0 +1,1434 @@
+{
+  "schema": "dc2grid-economic-frozen-policy-catalog-v1",
+  "role": "release_reevaluation_of_consumed_cases_not_preregistered_opening",
+  "policies": {
+    "absolute/analytic": {
+      "policy_key": "absolute/analytic",
+      "backend": "absolute",
+      "policy": {
+        "id": "analytic",
+        "family": "analytic",
+        "kind": "scripted",
+        "mode": "zero"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/constant_one": {
+      "policy_key": "absolute/constant_one",
+      "backend": "absolute",
+      "policy": {
+        "id": "constant_one",
+        "family": "constant_one",
+        "kind": "scripted",
+        "mode": "one"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/economic_ppo_1200": {
+      "policy_key": "absolute/economic_ppo_1200",
+      "backend": "absolute",
+      "policy": {
+        "id": "economic_ppo_1200",
+        "family": "economic_ppo",
+        "kind": "learned",
+        "algorithm": "ppo",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/ppo_1200/step_24576.zip",
+          "sha256": "546242d0a468dee03631006fde33aa09896a725e47f1e044ba363f142899c2e4"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/economic_ppo_1201": {
+      "policy_key": "absolute/economic_ppo_1201",
+      "backend": "absolute",
+      "policy": {
+        "id": "economic_ppo_1201",
+        "family": "economic_ppo",
+        "kind": "learned",
+        "algorithm": "ppo",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/ppo_1201/step_24576.zip",
+          "sha256": "8ba58c0f923f11a9e14af0112272c740237b428e5cc79c15e0028a81473dca40"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/economic_ppo_1202": {
+      "policy_key": "absolute/economic_ppo_1202",
+      "backend": "absolute",
+      "policy": {
+        "id": "economic_ppo_1202",
+        "family": "economic_ppo",
+        "kind": "learned",
+        "algorithm": "ppo",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/ppo_1202/step_24576.zip",
+          "sha256": "15c2e3e30158a09267c0883471f7d78040c58c80b15c50c8ec3d718b6c52c58c"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/economic_ppo_1203": {
+      "policy_key": "absolute/economic_ppo_1203",
+      "backend": "absolute",
+      "policy": {
+        "id": "economic_ppo_1203",
+        "family": "economic_ppo",
+        "kind": "learned",
+        "algorithm": "ppo",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/ppo_1203/step_24576.zip",
+          "sha256": "9292143208786c46476221daed18725f342cf076fbd10e2a27317d75971a31c8"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/economic_sac_1200": {
+      "policy_key": "absolute/economic_sac_1200",
+      "backend": "absolute",
+      "policy": {
+        "id": "economic_sac_1200",
+        "family": "economic_sac",
+        "kind": "learned",
+        "algorithm": "sac",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1200/step_24576.zip",
+          "sha256": "34e3ecc9137bd18cfa37d6a53150dda171f214f71b8cf0922a9b201a93d11a3a"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/economic_sac_1201": {
+      "policy_key": "absolute/economic_sac_1201",
+      "backend": "absolute",
+      "policy": {
+        "id": "economic_sac_1201",
+        "family": "economic_sac",
+        "kind": "learned",
+        "algorithm": "sac",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1201/step_24576.zip",
+          "sha256": "764d60aa9b35f6631ff0fe6dc9078a4dd44f5fdff51ef24fb8255963c9571ec4"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/economic_sac_1202": {
+      "policy_key": "absolute/economic_sac_1202",
+      "backend": "absolute",
+      "policy": {
+        "id": "economic_sac_1202",
+        "family": "economic_sac",
+        "kind": "learned",
+        "algorithm": "sac",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1202/step_24576.zip",
+          "sha256": "acd8fa913036bff5316e484b020714b849449a77754bbb41163970e89eb1359c"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/economic_sac_1203": {
+      "policy_key": "absolute/economic_sac_1203",
+      "backend": "absolute",
+      "policy": {
+        "id": "economic_sac_1203",
+        "family": "economic_sac",
+        "kind": "learned",
+        "algorithm": "sac",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/runs/full/sac_1203/step_24576.zip",
+          "sha256": "7c889bddc58432c1c074e24dd8760c8b4d40046a3c600ff25394a87aa17ec2f6"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/greedy_budget": {
+      "policy_key": "absolute/greedy_budget",
+      "backend": "absolute",
+      "policy": {
+        "id": "greedy_budget",
+        "family": "greedy_budget",
+        "kind": "scripted",
+        "mode": "greedy"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "absolute/margin_ten": {
+      "policy_key": "absolute/margin_ten",
+      "backend": "absolute",
+      "policy": {
+        "id": "margin_ten",
+        "family": "margin_ten",
+        "kind": "scripted",
+        "mode": "margin",
+        "threshold_usd_mwh": 10.0
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b/registration.json",
+      "protocol_registration_id": "b21902870b3f91d4c3f741e75384c7e6a41f4c8a0fc50c71ba1db2099560c706",
+      "action_space_comparison": "absolute_0_to_6MW_not_fraction_coordinates",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__fraction_ppo_1200": {
+      "policy_key": "confirmation/model__fraction_ppo_1200",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__fraction_ppo_1200",
+        "family": "fraction_ppo",
+        "variant": "fraction",
+        "algorithm": "ppo",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1200/step_24576.zip",
+          "sha256": "941b71b3c436d9a975850883486d4418cb6b27557f3dbbdded7a6e5948cbbff1"
+        },
+        "source_policy_id": "fraction_ppo_1200",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__fraction_ppo_1201": {
+      "policy_key": "confirmation/model__fraction_ppo_1201",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__fraction_ppo_1201",
+        "family": "fraction_ppo",
+        "variant": "fraction",
+        "algorithm": "ppo",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1201/step_24576.zip",
+          "sha256": "088d9aba826704e60ae9bc7c4c9fdca1793c286a384abd18e03ff0a1119a8b4e"
+        },
+        "source_policy_id": "fraction_ppo_1201",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__fraction_ppo_1202": {
+      "policy_key": "confirmation/model__fraction_ppo_1202",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__fraction_ppo_1202",
+        "family": "fraction_ppo",
+        "variant": "fraction",
+        "algorithm": "ppo",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1202/step_24576.zip",
+          "sha256": "8a4b0f544c45dcaab5bfacf784a7faadb9b626219f09c47ae02bc5fc3cfc549c"
+        },
+        "source_policy_id": "fraction_ppo_1202",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__fraction_ppo_1203": {
+      "policy_key": "confirmation/model__fraction_ppo_1203",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__fraction_ppo_1203",
+        "family": "fraction_ppo",
+        "variant": "fraction",
+        "algorithm": "ppo",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1203/step_24576.zip",
+          "sha256": "9e1d5ac4d48d460a69cb50c3883f0c3549b17b895955336fb9a7f5350e1cb6ac"
+        },
+        "source_policy_id": "fraction_ppo_1203",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__fraction_sac_1200": {
+      "policy_key": "confirmation/model__fraction_sac_1200",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__fraction_sac_1200",
+        "family": "fraction_sac",
+        "variant": "fraction",
+        "algorithm": "sac",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1200/step_24576.zip",
+          "sha256": "536a44dce895d9dfc966f66d2250da85ae249e89601b6e64f097d9f31384e7d3"
+        },
+        "source_policy_id": "fraction_sac_1200",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__fraction_sac_1201": {
+      "policy_key": "confirmation/model__fraction_sac_1201",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__fraction_sac_1201",
+        "family": "fraction_sac",
+        "variant": "fraction",
+        "algorithm": "sac",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1201/step_24576.zip",
+          "sha256": "51997238a0dc434b8ff25b4d84aba29fad5640cf3983dc1691ee9668f6b3e349"
+        },
+        "source_policy_id": "fraction_sac_1201",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__fraction_sac_1202": {
+      "policy_key": "confirmation/model__fraction_sac_1202",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__fraction_sac_1202",
+        "family": "fraction_sac",
+        "variant": "fraction",
+        "algorithm": "sac",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1202/step_24576.zip",
+          "sha256": "376ef243d56ab52c964aa07b588a794791e58c0e7372fd24d57bb5ad67824624"
+        },
+        "source_policy_id": "fraction_sac_1202",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__fraction_sac_1203": {
+      "policy_key": "confirmation/model__fraction_sac_1203",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__fraction_sac_1203",
+        "family": "fraction_sac",
+        "variant": "fraction",
+        "algorithm": "sac",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1203/step_24576.zip",
+          "sha256": "926d2db1a684a36173f75e6b739e54b720323ed5c15cad244be89778fd62061a"
+        },
+        "source_policy_id": "fraction_sac_1203",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__potential_ppo_1200": {
+      "policy_key": "confirmation/model__potential_ppo_1200",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__potential_ppo_1200",
+        "family": "potential_ppo",
+        "variant": "potential",
+        "algorithm": "ppo",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1200/step_24576.zip",
+          "sha256": "0a843ff88e0a1593ce7f6869070b5339f6640a53476d28c6149a14bb422fe057"
+        },
+        "source_policy_id": "potential_ppo_1200",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__potential_ppo_1201": {
+      "policy_key": "confirmation/model__potential_ppo_1201",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__potential_ppo_1201",
+        "family": "potential_ppo",
+        "variant": "potential",
+        "algorithm": "ppo",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1201/step_24576.zip",
+          "sha256": "730de5e8596aa6c45bec1aa805a130e914df00a5ae5d3191bc67f7d0cabfc61b"
+        },
+        "source_policy_id": "potential_ppo_1201",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__potential_ppo_1202": {
+      "policy_key": "confirmation/model__potential_ppo_1202",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__potential_ppo_1202",
+        "family": "potential_ppo",
+        "variant": "potential",
+        "algorithm": "ppo",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1202/step_24576.zip",
+          "sha256": "9acb4c0720a8c574ba767619197dafd02b5396790f94fca7918e9767d9a8592d"
+        },
+        "source_policy_id": "potential_ppo_1202",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__potential_ppo_1203": {
+      "policy_key": "confirmation/model__potential_ppo_1203",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__potential_ppo_1203",
+        "family": "potential_ppo",
+        "variant": "potential",
+        "algorithm": "ppo",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1203/step_24576.zip",
+          "sha256": "fedffd1609f29dc9ce4d7859a91ae87df892429fb567c1668ef72f461d9274f4"
+        },
+        "source_policy_id": "potential_ppo_1203",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__potential_sac_1200": {
+      "policy_key": "confirmation/model__potential_sac_1200",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__potential_sac_1200",
+        "family": "potential_sac",
+        "variant": "potential",
+        "algorithm": "sac",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1200/step_24576.zip",
+          "sha256": "d112e71db4b412096e0469be73060fb045c7937d6e39acea4308257b854ebcce"
+        },
+        "source_policy_id": "potential_sac_1200",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__potential_sac_1201": {
+      "policy_key": "confirmation/model__potential_sac_1201",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__potential_sac_1201",
+        "family": "potential_sac",
+        "variant": "potential",
+        "algorithm": "sac",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1201/step_24576.zip",
+          "sha256": "805ec4e5ee151020b7085e3f1190e0df0bf40b57c933fabb087f35fd49816935"
+        },
+        "source_policy_id": "potential_sac_1201",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__potential_sac_1202": {
+      "policy_key": "confirmation/model__potential_sac_1202",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__potential_sac_1202",
+        "family": "potential_sac",
+        "variant": "potential",
+        "algorithm": "sac",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1202/step_24576.zip",
+          "sha256": "02e683bbc1c90993e810dc89c6a14f7c6a00aa67838a004a74572265d159fc0f"
+        },
+        "source_policy_id": "potential_sac_1202",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/model__potential_sac_1203": {
+      "policy_key": "confirmation/model__potential_sac_1203",
+      "backend": "confirmation",
+      "policy": {
+        "id": "model__potential_sac_1203",
+        "family": "potential_sac",
+        "variant": "potential",
+        "algorithm": "sac",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1203/step_24576.zip",
+          "sha256": "4be3932fe90db5363865d01a2303ce63bcc587d65875eeed6153b0992c786f0c"
+        },
+        "source_policy_id": "potential_sac_1203",
+        "kind": "neural",
+        "training_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_credit_one": {
+      "policy_key": "confirmation/script_credit_one",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_credit_one",
+        "family": "script_credit_one",
+        "kind": "scripted",
+        "mode": "credit",
+        "fraction": 1.0,
+        "threshold_credit_mwh": 1.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_deadline_margin10": {
+      "policy_key": "confirmation/script_deadline_margin10",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_deadline_margin10",
+        "family": "script_deadline_margin10",
+        "kind": "scripted",
+        "mode": "deadline_margin",
+        "fraction": 1.0,
+        "threshold_usd_mwh": 10.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f025_always": {
+      "policy_key": "confirmation/script_f025_always",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f025_always",
+        "family": "script_f025_always",
+        "kind": "scripted",
+        "mode": "constant",
+        "fraction": 0.25,
+        "threshold_usd_mwh": null,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f025_margin_00": {
+      "policy_key": "confirmation/script_f025_margin_00",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f025_margin_00",
+        "family": "script_f025_margin_00",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.25,
+        "threshold_usd_mwh": 0.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f025_margin_05": {
+      "policy_key": "confirmation/script_f025_margin_05",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f025_margin_05",
+        "family": "script_f025_margin_05",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.25,
+        "threshold_usd_mwh": 5.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f025_margin_10": {
+      "policy_key": "confirmation/script_f025_margin_10",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f025_margin_10",
+        "family": "script_f025_margin_10",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.25,
+        "threshold_usd_mwh": 10.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f025_margin_15": {
+      "policy_key": "confirmation/script_f025_margin_15",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f025_margin_15",
+        "family": "script_f025_margin_15",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.25,
+        "threshold_usd_mwh": 15.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f025_margin_20": {
+      "policy_key": "confirmation/script_f025_margin_20",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f025_margin_20",
+        "family": "script_f025_margin_20",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.25,
+        "threshold_usd_mwh": 20.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f050_always": {
+      "policy_key": "confirmation/script_f050_always",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f050_always",
+        "family": "script_f050_always",
+        "kind": "scripted",
+        "mode": "constant",
+        "fraction": 0.5,
+        "threshold_usd_mwh": null,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f050_margin_00": {
+      "policy_key": "confirmation/script_f050_margin_00",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f050_margin_00",
+        "family": "script_f050_margin_00",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.5,
+        "threshold_usd_mwh": 0.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f050_margin_05": {
+      "policy_key": "confirmation/script_f050_margin_05",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f050_margin_05",
+        "family": "script_f050_margin_05",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.5,
+        "threshold_usd_mwh": 5.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f050_margin_10": {
+      "policy_key": "confirmation/script_f050_margin_10",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f050_margin_10",
+        "family": "script_f050_margin_10",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.5,
+        "threshold_usd_mwh": 10.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f050_margin_15": {
+      "policy_key": "confirmation/script_f050_margin_15",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f050_margin_15",
+        "family": "script_f050_margin_15",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.5,
+        "threshold_usd_mwh": 15.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f050_margin_20": {
+      "policy_key": "confirmation/script_f050_margin_20",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f050_margin_20",
+        "family": "script_f050_margin_20",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.5,
+        "threshold_usd_mwh": 20.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f075_always": {
+      "policy_key": "confirmation/script_f075_always",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f075_always",
+        "family": "script_f075_always",
+        "kind": "scripted",
+        "mode": "constant",
+        "fraction": 0.75,
+        "threshold_usd_mwh": null,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f075_margin_00": {
+      "policy_key": "confirmation/script_f075_margin_00",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f075_margin_00",
+        "family": "script_f075_margin_00",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.75,
+        "threshold_usd_mwh": 0.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f075_margin_05": {
+      "policy_key": "confirmation/script_f075_margin_05",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f075_margin_05",
+        "family": "script_f075_margin_05",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.75,
+        "threshold_usd_mwh": 5.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f075_margin_10": {
+      "policy_key": "confirmation/script_f075_margin_10",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f075_margin_10",
+        "family": "script_f075_margin_10",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.75,
+        "threshold_usd_mwh": 10.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f075_margin_15": {
+      "policy_key": "confirmation/script_f075_margin_15",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f075_margin_15",
+        "family": "script_f075_margin_15",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.75,
+        "threshold_usd_mwh": 15.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f075_margin_20": {
+      "policy_key": "confirmation/script_f075_margin_20",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f075_margin_20",
+        "family": "script_f075_margin_20",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 0.75,
+        "threshold_usd_mwh": 20.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f100_always": {
+      "policy_key": "confirmation/script_f100_always",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f100_always",
+        "family": "script_f100_always",
+        "kind": "scripted",
+        "mode": "constant",
+        "fraction": 1.0,
+        "threshold_usd_mwh": null,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f100_margin_00": {
+      "policy_key": "confirmation/script_f100_margin_00",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f100_margin_00",
+        "family": "script_f100_margin_00",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 1.0,
+        "threshold_usd_mwh": 0.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f100_margin_05": {
+      "policy_key": "confirmation/script_f100_margin_05",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f100_margin_05",
+        "family": "script_f100_margin_05",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 1.0,
+        "threshold_usd_mwh": 5.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f100_margin_10": {
+      "policy_key": "confirmation/script_f100_margin_10",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f100_margin_10",
+        "family": "script_f100_margin_10",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 1.0,
+        "threshold_usd_mwh": 10.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f100_margin_15": {
+      "policy_key": "confirmation/script_f100_margin_15",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f100_margin_15",
+        "family": "script_f100_margin_15",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 1.0,
+        "threshold_usd_mwh": 15.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_f100_margin_20": {
+      "policy_key": "confirmation/script_f100_margin_20",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_f100_margin_20",
+        "family": "script_f100_margin_20",
+        "kind": "scripted",
+        "mode": "margin",
+        "fraction": 1.0,
+        "threshold_usd_mwh": 20.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "confirmation/script_zero": {
+      "policy_key": "confirmation/script_zero",
+      "backend": "confirmation",
+      "policy": {
+        "id": "script_zero",
+        "family": "script_zero",
+        "kind": "scripted",
+        "mode": "constant",
+        "fraction": 0.0,
+        "training_seed": null
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/registration.json",
+      "protocol_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/fraction_ppo_1200": {
+      "policy_key": "fractional/fraction_ppo_1200",
+      "backend": "fractional",
+      "policy": {
+        "id": "fraction_ppo_1200",
+        "family": "fraction_ppo",
+        "variant": "fraction",
+        "algorithm": "ppo",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1200/step_24576.zip",
+          "sha256": "941b71b3c436d9a975850883486d4418cb6b27557f3dbbdded7a6e5948cbbff1"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/fraction_ppo_1201": {
+      "policy_key": "fractional/fraction_ppo_1201",
+      "backend": "fractional",
+      "policy": {
+        "id": "fraction_ppo_1201",
+        "family": "fraction_ppo",
+        "variant": "fraction",
+        "algorithm": "ppo",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1201/step_24576.zip",
+          "sha256": "088d9aba826704e60ae9bc7c4c9fdca1793c286a384abd18e03ff0a1119a8b4e"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/fraction_ppo_1202": {
+      "policy_key": "fractional/fraction_ppo_1202",
+      "backend": "fractional",
+      "policy": {
+        "id": "fraction_ppo_1202",
+        "family": "fraction_ppo",
+        "variant": "fraction",
+        "algorithm": "ppo",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1202/step_24576.zip",
+          "sha256": "8a4b0f544c45dcaab5bfacf784a7faadb9b626219f09c47ae02bc5fc3cfc549c"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/fraction_ppo_1203": {
+      "policy_key": "fractional/fraction_ppo_1203",
+      "backend": "fractional",
+      "policy": {
+        "id": "fraction_ppo_1203",
+        "family": "fraction_ppo",
+        "variant": "fraction",
+        "algorithm": "ppo",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1203/step_24576.zip",
+          "sha256": "9e1d5ac4d48d460a69cb50c3883f0c3549b17b895955336fb9a7f5350e1cb6ac"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/fraction_sac_1200": {
+      "policy_key": "fractional/fraction_sac_1200",
+      "backend": "fractional",
+      "policy": {
+        "id": "fraction_sac_1200",
+        "family": "fraction_sac",
+        "variant": "fraction",
+        "algorithm": "sac",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1200/step_24576.zip",
+          "sha256": "536a44dce895d9dfc966f66d2250da85ae249e89601b6e64f097d9f31384e7d3"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/fraction_sac_1201": {
+      "policy_key": "fractional/fraction_sac_1201",
+      "backend": "fractional",
+      "policy": {
+        "id": "fraction_sac_1201",
+        "family": "fraction_sac",
+        "variant": "fraction",
+        "algorithm": "sac",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1201/step_24576.zip",
+          "sha256": "51997238a0dc434b8ff25b4d84aba29fad5640cf3983dc1691ee9668f6b3e349"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/fraction_sac_1202": {
+      "policy_key": "fractional/fraction_sac_1202",
+      "backend": "fractional",
+      "policy": {
+        "id": "fraction_sac_1202",
+        "family": "fraction_sac",
+        "variant": "fraction",
+        "algorithm": "sac",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1202/step_24576.zip",
+          "sha256": "376ef243d56ab52c964aa07b588a794791e58c0e7372fd24d57bb5ad67824624"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/fraction_sac_1203": {
+      "policy_key": "fractional/fraction_sac_1203",
+      "backend": "fractional",
+      "policy": {
+        "id": "fraction_sac_1203",
+        "family": "fraction_sac",
+        "variant": "fraction",
+        "algorithm": "sac",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1203/step_24576.zip",
+          "sha256": "926d2db1a684a36173f75e6b739e54b720323ed5c15cad244be89778fd62061a"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/potential_ppo_1200": {
+      "policy_key": "fractional/potential_ppo_1200",
+      "backend": "fractional",
+      "policy": {
+        "id": "potential_ppo_1200",
+        "family": "potential_ppo",
+        "variant": "potential",
+        "algorithm": "ppo",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1200/step_24576.zip",
+          "sha256": "0a843ff88e0a1593ce7f6869070b5339f6640a53476d28c6149a14bb422fe057"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/potential_ppo_1201": {
+      "policy_key": "fractional/potential_ppo_1201",
+      "backend": "fractional",
+      "policy": {
+        "id": "potential_ppo_1201",
+        "family": "potential_ppo",
+        "variant": "potential",
+        "algorithm": "ppo",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1201/step_24576.zip",
+          "sha256": "730de5e8596aa6c45bec1aa805a130e914df00a5ae5d3191bc67f7d0cabfc61b"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/potential_ppo_1202": {
+      "policy_key": "fractional/potential_ppo_1202",
+      "backend": "fractional",
+      "policy": {
+        "id": "potential_ppo_1202",
+        "family": "potential_ppo",
+        "variant": "potential",
+        "algorithm": "ppo",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1202/step_24576.zip",
+          "sha256": "9acb4c0720a8c574ba767619197dafd02b5396790f94fca7918e9767d9a8592d"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/potential_ppo_1203": {
+      "policy_key": "fractional/potential_ppo_1203",
+      "backend": "fractional",
+      "policy": {
+        "id": "potential_ppo_1203",
+        "family": "potential_ppo",
+        "variant": "potential",
+        "algorithm": "ppo",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1203/step_24576.zip",
+          "sha256": "fedffd1609f29dc9ce4d7859a91ae87df892429fb567c1668ef72f461d9274f4"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/potential_sac_1200": {
+      "policy_key": "fractional/potential_sac_1200",
+      "backend": "fractional",
+      "policy": {
+        "id": "potential_sac_1200",
+        "family": "potential_sac",
+        "variant": "potential",
+        "algorithm": "sac",
+        "training_seed": 1200,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1200/step_24576.zip",
+          "sha256": "d112e71db4b412096e0469be73060fb045c7937d6e39acea4308257b854ebcce"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/potential_sac_1201": {
+      "policy_key": "fractional/potential_sac_1201",
+      "backend": "fractional",
+      "policy": {
+        "id": "potential_sac_1201",
+        "family": "potential_sac",
+        "variant": "potential",
+        "algorithm": "sac",
+        "training_seed": 1201,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1201/step_24576.zip",
+          "sha256": "805ec4e5ee151020b7085e3f1190e0df0bf40b57c933fabb087f35fd49816935"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/potential_sac_1202": {
+      "policy_key": "fractional/potential_sac_1202",
+      "backend": "fractional",
+      "policy": {
+        "id": "potential_sac_1202",
+        "family": "potential_sac",
+        "variant": "potential",
+        "algorithm": "sac",
+        "training_seed": 1202,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1202/step_24576.zip",
+          "sha256": "02e683bbc1c90993e810dc89c6a14f7c6a00aa67838a004a74572265d159fc0f"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "fractional/potential_sac_1203": {
+      "policy_key": "fractional/potential_sac_1203",
+      "backend": "fractional",
+      "policy": {
+        "id": "potential_sac_1203",
+        "family": "potential_sac",
+        "variant": "potential",
+        "algorithm": "sac",
+        "training_seed": 1203,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1203/step_24576.zip",
+          "sha256": "4be3932fe90db5363865d01a2303ce63bcc587d65875eeed6153b0992c786f0c"
+        }
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/registration.json",
+      "protocol_registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+      "action_space_comparison": "same_native_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "pid/pid_full_work": {
+      "policy_key": "pid/pid_full_work",
+      "backend": "pid",
+      "policy": {
+        "id": "pid_full_work",
+        "family": "pid_full_work",
+        "hardware": "pid",
+        "macro": "full_residual",
+        "full_work": true,
+        "label": "PID (full work; throttle fixed at 1)"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/pid_comparison_extract_20261102/registration.json",
+      "protocol_registration_id": "1dec2bf9a59d35dcc93fec46ff952f3d38b5d4d70db55c3ae184341d42cff51b",
+      "action_space_comparison": "end_to_end_four_actuator_reference_not_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    },
+    "pid/pid_native": {
+      "policy_key": "pid/pid_native",
+      "backend": "pid",
+      "policy": {
+        "id": "pid_native",
+        "family": "pid_native",
+        "hardware": "pid",
+        "macro": "full_residual",
+        "full_work": false,
+        "label": "PID (native four-actuator controller)"
+      },
+      "protocol_recorded_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/pid_comparison_extract_20261102/registration.json",
+      "protocol_registration_id": "1dec2bf9a59d35dcc93fec46ff952f3d38b5d4d70db55c3ae184341d42cff51b",
+      "action_space_comparison": "end_to_end_four_actuator_reference_not_fraction_action_space",
+      "potential_active_at_deployment": false,
+      "macro_tracking_floor_kw": 100.0
+    }
+  }
+}

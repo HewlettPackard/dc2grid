@@ -1,0 +1,177 @@
+TRACKING SNAPSHOT REPLAY ADAPTER
+
+Installation
+------------
+Keep tracking_release.py and inventory.json adjacent, for example:
+  <NEW_CHECKOUT>/reproducibility/tracking/tracking_release.py
+  <NEW_CHECKOUT>/reproducibility/tracking/inventory.json
+
+The adapter is self-contained and compatible with the parent's separate
+reproducibility.runtime.verify_files(root) preflight. It never uses the original
+checkout as a fallback. Preserve the ORIGINAL RELATIVE PATHS of required files
+listed in inventory.json. The parent owns copying/publication selection.
+files[*].required_by_some_supported_replay distinguishes runtime/authorization
+inputs from optional representative episode receipts. Per-case prepare() returns
+the exact verified_inputs for a smaller selected replay.
+
+All 37 runtime Python modules, 25 listed checkpoints, both configuration files,
+and the five scientific CSV inputs are tracked in original HEAD
+34e015461a4c7e6a4fc1df8b61a72af92fc2db7a. Ten representative episode receipts
+are external small artifacts; archived summaries already contain their metrics.
+Original raw compressed traces are optional to new physics replay, and their
+original hashes/tracked status are separately retained in representatives.
+
+Runtime
+-------
+Use Python 3.11 with NumPy 2.4.4, torch 2.6.0 (CPU or CUDA build; execution is
+CPU-only), stable-baselines3 2.7.1, Gymnasium 1.2.3 and cloudpickle 3.1.2.
+Pandas, PyYAML and Matplotlib are also needed; the observed source environment
+used pandas 3.1.0, PyYAML 6.0.3 and Matplotlib 3.11.2. These versions and the
+checkpoint-recorded environment are in inventory.json. Missing dependencies
+or incompatible model-runtime versions are explicit blockers, not fallbacks.
+No training corpus, replay buffer, training-time reference actor/potential,
+paper ZIP, manuscript, AAAI-demo input or GPU is needed.
+
+Callable interface
+------------------
+  from pathlib import Path
+  from reproducibility.tracking.tracking_release import evaluate
+
+  receipt = evaluate(
+      Path("/absolute/path/to/NEW_CHECKOUT"),
+      {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_conditioned_1100",
+      },
+      {"start_day": 12, "seed": 94001, "regd_load_bias": 0.5},
+      Path("replay_checks/conditioned_rule_d12"),
+  )
+  assert receipt["verified"]
+
+output may be absolute or relative to root, must lie INSIDE the new checkout,
+and must not exist. Each evaluate() call launches an independent -I -B CPU
+process, isolating the frozen generic module names common/evaluate/study/panel.
+No monkeypatching is used. It calls unchanged evaluate.run_case (Table2) or
+panel.evaluate_case (state/union), never a panel/training orchestration API.
+
+No caller policy, checkpoint, macro, gate, physics or config override is allowed:
+policy_spec has exactly snapshot and policy_id. The policy/cell must already
+occur exactly once in the fingerprinted consumed snapshot and its locked
+manifest. For Final-B, original/shared locks, candidate lock and registration
+identities are checked, and unchanged panel.final_lock(original_protocol) is
+called before actor loading. Original-policy membership is validated BEFORE
+resolved filesystem paths are supplied to the single-case API. No new panel
+is opened, and archival registrations/selection files are never edited.
+
+Frozen environments accept a YAML filename rather than a mapping. The adapter
+copies the verified config in memory, rebases ONLY global.energy_dir,
+global.weather_dir and global.trace_dir, and saves the derivative under
+output/runtime/environment.yaml. It preserves all physics/reward/gate values.
+All five input CSV hashes are required; missing real inputs cannot silently
+activate synthetic fallbacks. Escaping/absolute-original symlinks are rejected.
+
+Outputs
+-------
+  output/episode/episode.json        unchanged evaluator's persisted receipt
+  output/episode/hardware.csv.gz     actual service trace, including failures
+  output/episode/macro.csv.gz        original macro actions and settlement
+  output/episode/recovery.csv.gz     only when original recovery is performed
+  output/runtime/environment.yaml   path-only derived runtime configuration
+  output/runtime/execution_protocol.json
+  output/runtime/request.json
+  output/runtime/worker.log
+  output/release_receipt.json        hashes, origins, scalars and comparison
+  output/release_failure.json        explicit runtime/verification blocker, if any
+
+Inputs are rehashed after evaluation. Comparison uses exact booleans, None and
+integer step counts; float tolerance is atol=1e-6 (USD fields 1e-5), rtol=1e-9.
+Compressed trace hashes and elapsed wall time are not compared, because gzip
+metadata and timing may vary. Source/model/config/data byte hashes are exact.
+A reproduced physical/gate FAILURE is a successful replay of a failure:
+receipt.verified=True can coexist with publication_qualified=False.
+
+Identity and gates that must not be changed
+-------------------------------------------
+  old_sac == original selected corrected/retrained SAC, seed 1007,
+             best_model.zip, checkpoint step 250002, not final_model.zip.
+             SHA256 5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024
+  Guided SAC selected steps by seed 1100..1103: 4096 / 8192 / 4096 / 4096.
+  BC is the exact per-seed initializer, not an RL checkpoint.
+  Both Union families use mandatory step_552960.zip, not early-best checkpoints.
+  First state-local pilot final step_69120 models are NON-PROMOTED diagnostics;
+    their failures are retained and cannot be relabelled as admitted Final-B.
+  Warm SAC non-admitted slots cannot be silently replaced by BC/other models.
+
+  rule macro: original RuleBasedMacroController, including 80%-RMCP ask.
+  full_residual macro: original FullResidualMacro, zero ask, with its exact
+    float32 nextafter-to-zero action rounding; do NOT replace by exact residual.
+  Older table2 and Final-B policy IDs use full_residual__, whereas readiness
+    snapshots may use full__. There is no implicit alias; use the archived ID.
+
+  Analytic/BC/Guided/state/Union deployment fixes throttle_batch=1; history actors
+    have 24 causal features and 3 actions, no teacher/rescue/projection/potential.
+  Historical Rule/PID/Bang-bang/corrected-SAC retain their native FOUR controls
+    and their original service/backlog gates. Do NOT impose another family's
+    full-work wrapper on these comparator rows.
+  All families retain 24h service + fixed 2h physical recovery when healthy;
+    thermal termination does not become a time limit and gets no recovery.
+  Original episode.qualified means physical/recovery qualification.
+  Full-residual non-nominal PUBLICATION qualification additionally requires
+    actual delivered capacity-service ratio >=0.90. The adapter uses the
+    unchanged reports/analyze_final.capacity_floor() for this calculation.
+  Rule-macro capacity ratio is diagnostic, NOT an additional quota.
+
+Exact commands (run from a fresh release checkout with the chosen Python 3.11)
+-----------------------------------------------------------------------------
+Static unit tests, no rollout:
+  cd reproducibility/tracking
+  python -B -m unittest -v test_tracking_release
+
+Read-only checkout/source/model/receipt tests, still no rollout:
+  DC2GRID_RELEASE_ROOT=../.. python -B -m unittest -v test_tracking_release
+
+Optional installed repository linter:
+  ruff check --no-cache --select E,F,I tracking_release.py test_tracking_release.py build_inventory.py
+
+List representative already-consumed requests:
+  python -B tracking_release.py list
+
+Read-only preflight of a Final-B case:
+  python -B tracking_release.py inspect --root ../.. --snapshot value_final_B --policy rule__union_conditioned_1100 --day 12 --seed 94001 --bias 0.5
+
+Parent-run numerical replay from NEW checkout (not run by this sub-agent):
+  python -B tracking_release.py evaluate --root ../.. --snapshot value_final_B --policy rule__union_conditioned_1100 --day 12 --seed 94001 --bias 0.5 --output replay_checks/conditioned_rule_d12
+  python -B tracking_release.py evaluate --root ../.. --snapshot table2_regression --policy rule__pid --day 207 --seed 104 --bias 0.5 --output replay_checks/pid_soc_failure
+  python -B tracking_release.py evaluate --root ../.. --snapshot state_fixed_reference_kl_1103_final_dev --policy fixed_reference_kl_1103_step_69120 --day 137 --seed 93002 --bias 0.5 --output replay_checks/state_thermal_failure
+
+Representative expected scalars
+------------------------------
+Every example's complete scalar/gate record is in inventory.json:
+representatives[*].metrics. Selected examples:
+  Final-B conditioned Union, RULE, day12 seed94001 bias0.5:
+    tracking_rmse_kw = 30.789353011508734
+    stress_facility_relief_mw = 6.002074492145452
+    complete_26h=True, publication_qualified=True
+  Final-B original Union, RULE, same cell:
+    tracking_rmse_kw = 30.43468515230379
+    stress_facility_relief_mw = 5.99859112567581
+    complete_26h=True, publication_qualified=True
+  Final-B conditioned Union, FULL RESIDUAL, same cell:
+    tracking_rmse_kw = 90.22040812853811
+    stress_facility_relief_mw = 11.054077901063744
+    complete_26h=True, publication_qualified=True
+  Consumed peak PID, RULE, day207 seed104 bias0.5:
+    tracking_rmse_kw = 713.3264040406805
+    stress_facility_relief_mw = 5.9492976096314925
+    complete_26h=True, terminal_soc=False, publication_qualified=False
+  Fixed-reference pilot seed1103 step69120, day137 seed93002 bias0.5:
+    complete=False, complete_26h=False, thermal_warnings=False
+    tracking_rmse_kw=None (service_prefix_rmse_kw is retained)
+    stress_facility_relief_mw=None, recovery_steps=0
+    publication_qualified=False
+
+Inventory generation is historical read-only tooling, not a release requirement:
+build_inventory.py reads original HEAD34e01546 and records original byte hashes.
+Do not regenerate it against a filtered/new-public-ancestry checkout. Ship the
+original generated inventory instead. No original-source changes, model loads,
+rollouts, training or new evaluation panels were performed by this sub-agent.

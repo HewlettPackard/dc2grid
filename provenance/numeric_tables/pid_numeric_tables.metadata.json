@@ -1,0 +1,3539 @@
+{
+  "schema": "dc2grid-numeric-table-rebuild-v1",
+  "entrypoint": "provenance/rebuild_numeric_tables.py",
+  "source_repository_head": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "numbered_tables": 12,
+  "table_parts": 13,
+  "rows": 118,
+  "numeric_entries_per_view": 1026,
+  "main_comparison_cells": 528,
+  "csv_numeric_fields": "c1_value/c1_sd through c7_value/c7_sd, then qualified/planned; metadata fields are not extra table cells",
+  "source_inputs": [
+    {
+      "alias": "comparison_values",
+      "path": "outputs/pid_comparison_extract_20261102/publication/comparison_values.json",
+      "observed_sha256": "d74e385e5f1d1ac6d56e3629161f7e2b92642f14d5f3bbef803f872a56a865fe",
+      "recorded_source_sha256": "d74e385e5f1d1ac6d56e3629161f7e2b92642f14d5f3bbef803f872a56a865fe",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "confirmation",
+      "path": "outputs/camera_ready_confirmation_20261102/reports/final_report.json",
+      "observed_sha256": "750997bf9c9bd8db73234649189d02a446bb3dd5e76cd549a655b2c8c94bb6c0",
+      "recorded_source_sha256": "750997bf9c9bd8db73234649189d02a446bb3dd5e76cd549a655b2c8c94bb6c0",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "confirmation_development_cases",
+      "path": "outputs/camera_ready_confirmation_20261102/reports/development_cases.json",
+      "observed_sha256": "a12bd998bed9b93ca48302f003205720dfd94b67395252444c3b1a3d525b5952",
+      "recorded_source_sha256": "a12bd998bed9b93ca48302f003205720dfd94b67395252444c3b1a3d525b5952",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "confirmation_final_cases",
+      "path": "outputs/camera_ready_confirmation_20261102/reports/final_cases.json",
+      "observed_sha256": "0b80222d6190d3345721505c86f3abf7c33e7fb1f802481142e6b4757d9331ac",
+      "recorded_source_sha256": "0b80222d6190d3345721505c86f3abf7c33e7fb1f802481142e6b4757d9331ac",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "earlier_economic",
+      "path": "outputs/rl_grid_cash_ppo_20261101/reports/original_peak_regression.json",
+      "observed_sha256": "84ffb94eb40661f8319b5a0eafefe6f68ffe1b9bf8e9b5b7445c0958edd66a2a",
+      "recorded_source_sha256": "84ffb94eb40661f8319b5a0eafefe6f68ffe1b9bf8e9b5b7445c0958edd66a2a",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "economic_original_peak",
+      "path": "outputs/camera_ready_confirmation_20261102/reports/development_report.json",
+      "observed_sha256": "e1668e0980b94153a0af6088dc77e71c21a58315c8b1d754f33906b27873833c",
+      "recorded_source_sha256": "e1668e0980b94153a0af6088dc77e71c21a58315c8b1d754f33906b27873833c",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "low_case_records",
+      "path": "outputs/rl_value_conditioning_20261101/reports/final_episode_metrics.json",
+      "observed_sha256": "bc0a50f08bc03b3b66f7abc2e6f050545b929776d8e73c504d191bc3046c64af",
+      "recorded_source_sha256": "bc0a50f08bc03b3b66f7abc2e6f050545b929776d8e73c504d191bc3046c64af",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "low_tracking",
+      "path": "outputs/rl_value_conditioning_20261101/reports/final_report.json",
+      "observed_sha256": "0a8b0bc3664d69e667b545a21d46f19770052ff2cd9452dfa0de4ec3c1d272ba",
+      "recorded_source_sha256": "0a8b0bc3664d69e667b545a21d46f19770052ff2cd9452dfa0de4ec3c1d272ba",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "pid_audit_supplement",
+      "path": "outputs/pid_comparison_extract_20261102/reports/pid_audit_supplement.json",
+      "observed_sha256": "d61ed3d5a4e2fb7c852f5c5e0f6f001a710219947ae0f6e403a2515a1e786499",
+      "recorded_source_sha256": "d61ed3d5a4e2fb7c852f5c5e0f6f001a710219947ae0f6e403a2515a1e786499",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "pid_cases",
+      "path": "outputs/pid_comparison_extract_20261102/reports/pid_cases.json",
+      "observed_sha256": "eb31bc86f75101bc292f57597d42221a69b84ab17e7a8edfd6fd61f93d3951eb",
+      "recorded_source_sha256": "eb31bc86f75101bc292f57597d42221a69b84ab17e7a8edfd6fd61f93d3951eb",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "pid_report",
+      "path": "outputs/pid_comparison_extract_20261102/reports/pid_report.json",
+      "observed_sha256": "b2b4a23f5d204be6ee5419e04110760a683defd2dabb5dc622474c99e178e2d5",
+      "recorded_source_sha256": "b2b4a23f5d204be6ee5419e04110760a683defd2dabb5dc622474c99e178e2d5",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "pid_reproduction",
+      "path": "outputs/pid_comparison_extract_20261102/reports/pid_semantics_reproduction.json",
+      "observed_sha256": "b336fc5c14a9775620f2250601a4d79908920c13275b7b616606cdb9b8699baf",
+      "recorded_source_sha256": "b336fc5c14a9775620f2250601a4d79908920c13275b7b616606cdb9b8699baf",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "reproduction_values",
+      "path": "outputs/pid_comparison_extract_20261102/publication/pid_reproduction_values.json",
+      "observed_sha256": "4a7938ae1868772df91df3f141af3092e28442e243ccd52e72ae1c352a75c4af",
+      "recorded_source_sha256": "4a7938ae1868772df91df3f141af3092e28442e243ccd52e72ae1c352a75c4af",
+      "byte_identical_to_recorded": true
+    }
+  ],
+  "outputs": {
+    "csv": {
+      "path": "provenance/numeric_tables/pid_numeric_tables.csv",
+      "sha256": "96dda720ada72a4f997649e7d867157393dca4e49fe5f40a3cf7a1e94d251b83"
+    },
+    "html": {
+      "path": "provenance/numeric_tables/pid_numeric_tables.html",
+      "sha256": "44322c880b2817f0e46f45c217dceddc74cd41b10089c13ed0f1a7073b109ee6"
+    },
+    "tex": {
+      "path": "provenance/numeric_tables/pid_numeric_tables.tex",
+      "sha256": "34b1ffdb5b5baa0e80ca4c73c02570c7727e3818e3c7141e3fdce7e8ad4b6125"
+    }
+  },
+  "validation": {
+    "status": "passed",
+    "counts": {
+      "PID_cases": 440,
+      "PID_metric_mean_SD_pairs": 96,
+      "PID_resource_aggregate_rows": 8,
+      "SD_cells": 144,
+      "TeX_numeric_entries": 1026,
+      "TeX_rows": 118,
+      "approved_input_files": 14,
+      "archival_reported_pairs": 36,
+      "confirmation_metric_mean_caseSD_pairs": 3968,
+      "declared_checkpoint_identities": 41,
+      "earlier_economic_report_bound_rows": 4,
+      "gate_rows": 87,
+      "identical_peak_PID_pairs": 60,
+      "low_aggregate_rows": 23,
+      "low_metric_mean_SD_pairs": 414,
+      "macro_only_numeric_cells": 25,
+      "main_value_cells": 528,
+      "paired_confirmation_cells": 220,
+      "recorded_source_byte_hashes_compared": 13,
+      "reproduction_mode_metric_means": 18,
+      "reproduction_numeric_cells": 27,
+      "resource_numeric_cells": 40,
+      "source_byte_hash_mismatches": 0
+    },
+    "numeric_source_byte_hashes_enforced": true
+  },
+  "frozen_pdf_view": {
+    "sha256": "2c31e19948811377bbf68594698573c1aac9498c97f499452861c9330655a595",
+    "pages": 9,
+    "read_or_written": false,
+    "regenerated": false,
+    "layout_or_byte_regeneration_claimed": false
+  },
+  "input_datasets_required_or_read": false,
+  "original_TeX_or_comparison_data_blob_read": false,
+  "paper_prose_in_outputs": false,
+  "scope": {
+    "public_Git_input_datasets": "excluded",
+    "export_ancestry": "strict_orphan_required",
+    "raw_evidence": "local_compressed_parts_for_later_user_OneDrive_upload",
+    "public_artifact_url_status": "pending",
+    "public_artifact_urls": []
+  },
+  "gate_erratum": {
+    "id": "Q5_Q6_HISTORICAL_FULL_RESIDUAL_FLOOR",
+    "Q5": "Rule side excludes the paid-service floor; full-residual side includes the 90% floor. Paired source gate counts are retained below.",
+    "Q6": "The first five historical low-level full-residual rows already include the 90% floor, as do the economic source rows.",
+    "new_admission_test": false,
+    "scientific_value_changes": 0
+  },
+  "row_metadata": [
+    {
+      "id": "T2a.rule_hardware",
+      "family": "rule_hardware",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/9"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2a.pid",
+      "family": "pid",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          26,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2a.bang_bang",
+      "family": "bang_bang",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/0"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2a.old_sac",
+      "family": "old_sac",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/6"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2a.cooling_first",
+      "family": "cooling_first",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/2"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2a.bc_only",
+      "family": "bc_only",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/1"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2a.guided_sac",
+      "family": "guided_sac",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/4"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2a.union_conditioned",
+      "family": "union_conditioned",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/10"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2a.union_original",
+      "family": "union_original",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/11"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2b.rule_hardware",
+      "family": "rule_hardware",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/9",
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2b.pid",
+      "family": "pid",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          26,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/7",
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2b.bang_bang",
+      "family": "bang_bang",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/0",
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2b.old_sac",
+      "family": "old_sac",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/6",
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2b.cooling_first",
+      "family": "cooling_first",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/2",
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2b.bc_only",
+      "family": "bc_only",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/1",
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2b.guided_sac",
+      "family": "guided_sac",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/4",
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2b.union_conditioned",
+      "family": "union_conditioned",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/10",
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "T2b.union_original",
+      "family": "union_original",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/11",
+        "low_tracking#/aggregates/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q1.facility_relief",
+      "family": "",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "provenance/table_row_provenance.json#/tables/2/rows/0"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": null,
+      "evidence_status": "reported_legacy"
+    },
+    {
+      "id": "Q1.LFR",
+      "family": "",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "provenance/table_row_provenance.json#/tables/2/rows/1"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": null,
+      "evidence_status": "reported_legacy"
+    },
+    {
+      "id": "Q1.SPDR",
+      "family": "",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "provenance/table_row_provenance.json#/tables/2/rows/2"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": null,
+      "evidence_status": "reported_legacy"
+    },
+    {
+      "id": "Q1.LWSR",
+      "family": "",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "provenance/table_row_provenance.json#/tables/2/rows/3"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": null,
+      "evidence_status": "reported_legacy"
+    },
+    {
+      "id": "Q1.LWCF",
+      "family": "",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "provenance/table_row_provenance.json#/tables/2/rows/4"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": null,
+      "evidence_status": "reported_legacy"
+    },
+    {
+      "id": "Q1.regulation_revenue_change",
+      "family": "",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "provenance/table_row_provenance.json#/tables/2/rows/5"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": null,
+      "evidence_status": "reported_legacy"
+    },
+    {
+      "id": "Q1.throughput_reward_change",
+      "family": "",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "provenance/table_row_provenance.json#/tables/2/rows/6"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": null,
+      "evidence_status": "reported_legacy"
+    },
+    {
+      "id": "Q1.SOC_reward_change",
+      "family": "",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "provenance/table_row_provenance.json#/tables/2/rows/7"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": null,
+      "evidence_status": "reported_legacy"
+    },
+    {
+      "id": "Q1.thermal_reward_change",
+      "family": "",
+      "panel": "original_peaks",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "provenance/table_row_provenance.json#/tables/2/rows/8"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": null,
+      "evidence_status": "reported_legacy"
+    },
+    {
+      "id": "Q2.observed_regd",
+      "family": "pid",
+      "panel": "pid_mode_reproduction",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_reproduction#/summary/legacy_v0/stress_observed_regd",
+        "pid_reproduction#/summary/physical_v1/stress_observed_regd"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q2.commitment",
+      "family": "pid",
+      "panel": "pid_mode_reproduction",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_reproduction#/summary/legacy_v0/stress_actual_commitment_mw",
+        "pid_reproduction#/summary/physical_v1/stress_actual_commitment_mw"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q2.requested_response",
+      "family": "pid",
+      "panel": "pid_mode_reproduction",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_reproduction#/summary/legacy_v0/stress_demanded_response_mw",
+        "pid_reproduction#/summary/physical_v1/stress_demanded_response_mw"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q2.nominal_facility",
+      "family": "pid",
+      "panel": "pid_mode_reproduction",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_reproduction#/summary/legacy_v0/stress_nominal_facility_mw",
+        "pid_reproduction#/summary/physical_v1/stress_nominal_facility_mw"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q2.PID_facility",
+      "family": "pid",
+      "panel": "pid_mode_reproduction",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_reproduction#/summary/legacy_v0/stress_actual_facility_mw",
+        "pid_reproduction#/summary/physical_v1/stress_actual_facility_mw"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q2.hvac_effort",
+      "family": "pid",
+      "panel": "pid_mode_reproduction",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_reproduction#/summary/legacy_v0/stress_hvac_effort",
+        "pid_reproduction#/summary/physical_v1/stress_hvac_effort"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q3.cooling_relief",
+      "family": "pid",
+      "panel": "pid_mode_reproduction",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_reproduction#/summary/legacy_v0/stress_cooling_relief_mw",
+        "pid_reproduction#/summary/physical_v1/stress_cooling_relief_mw"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q3.other_facility_relief",
+      "family": "pid",
+      "panel": "pid_mode_reproduction",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_reproduction#/summary/legacy_v0/stress_other_facility_relief_mw",
+        "pid_reproduction#/summary/physical_v1/stress_other_facility_relief_mw"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q3.total_facility_relief",
+      "family": "pid",
+      "panel": "pid_mode_reproduction",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": null,
+        "physical_recovery_enforced": false,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": null,
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_reproduction#/summary/legacy_v0/reported_formula_relief_mw",
+        "pid_reproduction#/summary/physical_v1/reported_formula_relief_mw"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q4.rule_hardware",
+      "family": "rule_hardware",
+      "panel": "final_b",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          34,
+          36
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/35",
+        "low_tracking#/aggregates/33"
+      ],
+      "mean_cases_per_policy": 18,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q4.pid",
+      "family": "pid",
+      "panel": "final_b",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          34,
+          36
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/33",
+        "low_tracking#/aggregates/33"
+      ],
+      "mean_cases_per_policy": 18,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q4.bang_bang",
+      "family": "bang_bang",
+      "panel": "final_b",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          28,
+          36
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/26",
+        "low_tracking#/aggregates/33"
+      ],
+      "mean_cases_per_policy": 18,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q4.old_sac",
+      "family": "old_sac",
+      "panel": "final_b",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          36,
+          36
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/32",
+        "low_tracking#/aggregates/33"
+      ],
+      "mean_cases_per_policy": 18,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q4.cooling_first",
+      "family": "cooling_first",
+      "panel": "final_b",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          36,
+          36
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/28",
+        "low_tracking#/aggregates/33"
+      ],
+      "mean_cases_per_policy": 18,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q4.bc_only",
+      "family": "bc_only",
+      "panel": "final_b",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          144,
+          144
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/27",
+        "low_tracking#/aggregates/33"
+      ],
+      "mean_cases_per_policy": 18,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q4.guided_sac",
+      "family": "guided_sac",
+      "panel": "final_b",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          144,
+          144
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/30",
+        "low_tracking#/aggregates/33"
+      ],
+      "mean_cases_per_policy": 18,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q4.union_conditioned",
+      "family": "union_conditioned",
+      "panel": "final_b",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          144,
+          144
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/36",
+        "low_tracking#/aggregates/33"
+      ],
+      "mean_cases_per_policy": 18,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q4.union_original",
+      "family": "union_original",
+      "panel": "final_b",
+      "macro": "rule",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_rule",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": false,
+        "paid_service_floor": null,
+        "qualified_planned": [
+          144,
+          144
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/37",
+        "low_tracking#/aggregates/33"
+      ],
+      "mean_cases_per_policy": 18,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q5.pid",
+      "family": "pid",
+      "panel": "original_peaks",
+      "macro": "rule|full_residual",
+      "bias": 0.5,
+      "gates": {
+        "rule": {
+          "source_gate_id": "historical_rule",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": false,
+          "paid_service_floor": null,
+          "qualified_planned": [
+            26,
+            30
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        },
+        "full_residual": {
+          "source_gate_id": "historical_full_residual",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": true,
+          "paid_service_floor": 0.9,
+          "qualified_planned": [
+            30,
+            30
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        }
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/7",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q5.old_sac",
+      "family": "old_sac",
+      "panel": "original_peaks",
+      "macro": "rule|full_residual",
+      "bias": 0.5,
+      "gates": {
+        "rule": {
+          "source_gate_id": "historical_rule",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": false,
+          "paid_service_floor": null,
+          "qualified_planned": [
+            30,
+            30
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        },
+        "full_residual": {
+          "source_gate_id": "historical_full_residual",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": true,
+          "paid_service_floor": 0.9,
+          "qualified_planned": [
+            30,
+            30
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        }
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/6",
+        "low_tracking#/aggregates/19"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q5.bc_only",
+      "family": "bc_only",
+      "panel": "original_peaks",
+      "macro": "rule|full_residual",
+      "bias": 0.5,
+      "gates": {
+        "rule": {
+          "source_gate_id": "historical_rule",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": false,
+          "paid_service_floor": null,
+          "qualified_planned": [
+            120,
+            120
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        },
+        "full_residual": {
+          "source_gate_id": "historical_full_residual",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": true,
+          "paid_service_floor": 0.9,
+          "qualified_planned": [
+            120,
+            120
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        }
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/1",
+        "low_tracking#/aggregates/14"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q5.guided_sac",
+      "family": "guided_sac",
+      "panel": "original_peaks",
+      "macro": "rule|full_residual",
+      "bias": 0.5,
+      "gates": {
+        "rule": {
+          "source_gate_id": "historical_rule",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": false,
+          "paid_service_floor": null,
+          "qualified_planned": [
+            120,
+            120
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        },
+        "full_residual": {
+          "source_gate_id": "historical_full_residual",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": true,
+          "paid_service_floor": 0.9,
+          "qualified_planned": [
+            120,
+            120
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        }
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/4",
+        "low_tracking#/aggregates/17"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q5.union_conditioned",
+      "family": "union_conditioned",
+      "panel": "original_peaks",
+      "macro": "rule|full_residual",
+      "bias": 0.5,
+      "gates": {
+        "rule": {
+          "source_gate_id": "historical_rule",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": false,
+          "paid_service_floor": null,
+          "qualified_planned": [
+            120,
+            120
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        },
+        "full_residual": {
+          "source_gate_id": "historical_full_residual",
+          "physical_recovery_enforced": true,
+          "paid_service_floor_enforced": true,
+          "paid_service_floor": 0.9,
+          "qualified_planned": [
+            120,
+            120
+          ],
+          "biases": [
+            0.0,
+            0.5
+          ],
+          "new_admission_test": false
+        }
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/10",
+        "low_tracking#/aggregates/23"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.pid",
+      "family": "pid",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_full_residual",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/20",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.old_sac",
+      "family": "old_sac",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_full_residual",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/19",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.bc_only",
+      "family": "bc_only",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_full_residual",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/14",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.guided_sac",
+      "family": "guided_sac",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_full_residual",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/17",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.union_conditioned",
+      "family": "union_conditioned",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "historical_full_residual",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "low_tracking#/aggregates/23",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.economic_ppo",
+      "family": "economic_ppo",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "earlier_economic#/families/economic_ppo/strata/0.5",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.economic_sac",
+      "family": "economic_sac",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "earlier_economic#/families/economic_sac/strata/0.5",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.greedy_budget",
+      "family": "greedy_budget",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "earlier_economic#/families/greedy_budget/strata/0.5",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.margin_ten",
+      "family": "margin_ten",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "earlier_economic#/families/margin_ten/strata/0.5",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.script_zero",
+      "family": "script_zero",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "economic_original_peak#/summary/regression/0.5/families/script_zero",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.script_f100_always",
+      "family": "script_f100_always",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "economic_original_peak#/summary/regression/0.5/families/script_f100_always",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.script_deadline_margin10",
+      "family": "script_deadline_margin10",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "economic_original_peak#/summary/regression/0.5/families/script_deadline_margin10",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.script_credit_one",
+      "family": "script_credit_one",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "economic_original_peak#/summary/regression/0.5/families/script_credit_one",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.script_f050_margin_20",
+      "family": "script_f050_margin_20",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "economic_original_peak#/summary/regression/0.5/families/script_f050_margin_20",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.fraction_ppo",
+      "family": "fraction_ppo",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "economic_original_peak#/summary/regression/0.5/families/fraction_ppo",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.fraction_sac",
+      "family": "fraction_sac",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "economic_original_peak#/summary/regression/0.5/families/fraction_sac",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.potential_ppo",
+      "family": "potential_ppo",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "economic_original_peak#/summary/regression/0.5/families/potential_ppo",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q6.potential_sac",
+      "family": "potential_sac",
+      "panel": "original_peaks",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0,
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "economic_original_peak#/summary/regression/0.5/families/potential_sac",
+        "low_tracking#/aggregates/20"
+      ],
+      "mean_cases_per_policy": 15,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.pid_native",
+      "family": "pid_native",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          56,
+          80
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_report#/summary/calendar/0.5/pid_native",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.pid_full_work",
+      "family": "pid_full_work",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          56,
+          80
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_report#/summary/calendar/0.5/pid_full_work",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.script_zero",
+      "family": "script_zero",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          80,
+          80
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.5/families/script_zero",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.script_f100_always",
+      "family": "script_f100_always",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          80,
+          80
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.5/families/script_f100_always",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.script_deadline_margin10",
+      "family": "script_deadline_margin10",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          80,
+          80
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.5/families/script_deadline_margin10",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.script_credit_one",
+      "family": "script_credit_one",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          80,
+          80
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.5/families/script_credit_one",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.fraction_ppo",
+      "family": "fraction_ppo",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          320,
+          320
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.5/families/fraction_ppo",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.fraction_sac",
+      "family": "fraction_sac",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          320,
+          320
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.5/families/fraction_sac",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.potential_ppo",
+      "family": "potential_ppo",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          320,
+          320
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.5/families/potential_ppo",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q7.potential_sac",
+      "family": "potential_sac",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          320,
+          320
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.5/families/potential_sac",
+        "pid_report#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.pid_native",
+      "family": "pid_native",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          68,
+          80
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_report#/summary/calendar/0.0/pid_native",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.pid_full_work",
+      "family": "pid_full_work",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          68,
+          80
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_report#/summary/calendar/0.0/pid_full_work",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.script_zero",
+      "family": "script_zero",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          80,
+          80
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.0/families/script_zero",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.script_f100_always",
+      "family": "script_f100_always",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          80,
+          80
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.0/families/script_f100_always",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.script_deadline_margin10",
+      "family": "script_deadline_margin10",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          80,
+          80
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.0/families/script_deadline_margin10",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.script_credit_one",
+      "family": "script_credit_one",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          80,
+          80
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.0/families/script_credit_one",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.fraction_ppo",
+      "family": "fraction_ppo",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          320,
+          320
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.0/families/fraction_ppo",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.fraction_sac",
+      "family": "fraction_sac",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          320,
+          320
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.0/families/fraction_sac",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.potential_ppo",
+      "family": "potential_ppo",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          320,
+          320
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.0/families/potential_ppo",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q8.potential_sac",
+      "family": "potential_sac",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          320,
+          320
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/calendar/0.0/families/potential_sac",
+        "pid_report#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.pid_native",
+      "family": "pid_native",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          27,
+          30
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_report#/summary/peak_noise/0.5/pid_native",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.pid_full_work",
+      "family": "pid_full_work",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          27,
+          30
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_report#/summary/peak_noise/0.5/pid_full_work",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.script_zero",
+      "family": "script_zero",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.5/families/script_zero",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.script_f100_always",
+      "family": "script_f100_always",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.5/families/script_f100_always",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.script_deadline_margin10",
+      "family": "script_deadline_margin10",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.5/families/script_deadline_margin10",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.script_credit_one",
+      "family": "script_credit_one",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.5/families/script_credit_one",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.script_f050_margin_20",
+      "family": "script_f050_margin_20",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.5/families/script_f050_margin_20",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.fraction_ppo",
+      "family": "fraction_ppo",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.5/families/fraction_ppo",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.fraction_sac",
+      "family": "fraction_sac",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.5/families/fraction_sac",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.potential_ppo",
+      "family": "potential_ppo",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.5/families/potential_ppo",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q9.potential_sac",
+      "family": "potential_sac",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.5/families/potential_sac",
+        "pid_report#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.pid_native",
+      "family": "pid_native",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          26,
+          30
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_report#/summary/peak_noise/0.0/pid_native",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.pid_full_work",
+      "family": "pid_full_work",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          26,
+          30
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_report#/summary/peak_noise/0.0/pid_full_work",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.script_zero",
+      "family": "script_zero",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.0/families/script_zero",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.script_f100_always",
+      "family": "script_f100_always",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.0/families/script_f100_always",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.script_deadline_margin10",
+      "family": "script_deadline_margin10",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.0/families/script_deadline_margin10",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.script_credit_one",
+      "family": "script_credit_one",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.0/families/script_credit_one",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.script_f050_margin_20",
+      "family": "script_f050_margin_20",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          30,
+          30
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.0/families/script_f050_margin_20",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.fraction_ppo",
+      "family": "fraction_ppo",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.0/families/fraction_ppo",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.fraction_sac",
+      "family": "fraction_sac",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.0/families/fraction_sac",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.potential_ppo",
+      "family": "potential_ppo",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.0/families/potential_ppo",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q10.potential_sac",
+      "family": "potential_sac",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "economic",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          120,
+          120
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "confirmation#/summary/peak_noise/0.0/families/potential_sac",
+        "pid_report#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 4,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q11.calendar0.pid_native",
+      "family": "pid_native",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          68,
+          80
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_audit_supplement#/summary/calendar/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q11.calendar0.pid_full_work",
+      "family": "pid_full_work",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          68,
+          80
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_audit_supplement#/summary/calendar/0.0/pid_full_work"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q11.calendar05.pid_native",
+      "family": "pid_native",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          56,
+          80
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_audit_supplement#/summary/calendar/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q11.calendar05.pid_full_work",
+      "family": "pid_full_work",
+      "panel": "calendar",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          56,
+          80
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_audit_supplement#/summary/calendar/0.5/pid_full_work"
+      ],
+      "mean_cases_per_policy": 80,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q11.peak0.pid_native",
+      "family": "pid_native",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          26,
+          30
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_audit_supplement#/summary/peak_noise/0.0/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q11.peak0.pid_full_work",
+      "family": "pid_full_work",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.0,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          26,
+          30
+        ],
+        "biases": [
+          0.0
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_audit_supplement#/summary/peak_noise/0.0/pid_full_work"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q11.peak05.pid_native",
+      "family": "pid_native",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          27,
+          30
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_audit_supplement#/summary/peak_noise/0.5/pid_native"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    },
+    {
+      "id": "Q11.peak05.pid_full_work",
+      "family": "pid_full_work",
+      "panel": "peak_noise",
+      "macro": "full_residual",
+      "bias": 0.5,
+      "gates": {
+        "source_gate_id": "new_pid",
+        "physical_recovery_enforced": true,
+        "paid_service_floor_enforced": true,
+        "paid_service_floor": 0.9,
+        "qualified_planned": [
+          27,
+          30
+        ],
+        "biases": [
+          0.5
+        ],
+        "new_admission_test": false
+      },
+      "source_refs": [
+        "pid_audit_supplement#/summary/peak_noise/0.5/pid_full_work"
+      ],
+      "mean_cases_per_policy": 30,
+      "fixed_policy_count": 1,
+      "evidence_status": "complete_cases_including_qualification_failures"
+    }
+  ],
+  "limits": [
+    "Q1 is frozen reported numeric evidence; only the narrow PID relief pair has a separate recorded reproduction.",
+    "Four earlier absolute-economic Q6 rows are bound to approved aggregate reports; archived episode/trace JSON is not required or recomputed.",
+    "Checkpoint digests are declared identities here; checkpoint archives and runtime implementations are not read.",
+    "The approved nine-page PDF is a frozen view; numeric table TeX does not regenerate its layout or original document bytes.",
+    "Changed source-byte digests need a separately documented release transformation; scientific-value validation does not replace that receipt."
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "dc2grid-portable-provenance-validator-manifest-v1",
+  "runtime": "Python 3.9+ standard library only",
+  "entrypoint_filename": "validate_table_provenance.py",
+  "test_filename": "test_validate_table_provenance.py",
+  "metadata_filenames": ["table_row_provenance.json", "controller_protocol_provenance.json", "provenance_acceptance.json"],
+  "scope": "All 118 data rows and 1,026 printed numeric entries, with independent aggregation of approved low-level, confirmation/development, PID and PID-reproduction scalar case records.",
+  "source_path_base": "Repository root passed through --root; never a private session directory",
+  "required_inputs": {
+    "comparison_values": "outputs/pid_comparison_extract_20261102/publication/comparison_values.json",
+    "reproduction_values": "outputs/pid_comparison_extract_20261102/publication/pid_reproduction_values.json",
+    "low_tracking": "outputs/rl_value_conditioning_20261101/reports/final_report.json",
+    "earlier_economic": "outputs/rl_grid_cash_ppo_20261101/reports/original_peak_regression.json",
+    "economic_original_peak": "outputs/camera_ready_confirmation_20261102/reports/development_report.json",
+    "confirmation": "outputs/camera_ready_confirmation_20261102/reports/final_report.json",
+    "pid_report": "outputs/pid_comparison_extract_20261102/reports/pid_report.json",
+    "pid_audit_supplement": "outputs/pid_comparison_extract_20261102/reports/pid_audit_supplement.json",
+    "pid_reproduction": "outputs/pid_comparison_extract_20261102/reports/pid_semantics_reproduction.json",
+    "low_case_records": "outputs/rl_value_conditioning_20261101/reports/final_episode_metrics.json",
+    "confirmation_development_cases": "outputs/camera_ready_confirmation_20261102/reports/development_cases.json",
+    "confirmation_final_cases": "outputs/camera_ready_confirmation_20261102/reports/final_cases.json",
+    "pid_cases": "outputs/pid_comparison_extract_20261102/reports/pid_cases.json"
+  },
+  "required_generated_inputs": {
+    "tex": {
+      "CLI_argument": "--tex",
+      "path": null,
+      "origin": "New approved renderer output; never copy the original TeX",
+      "original_locator_fallback": false
+    }
+  },
+  "numeric_input_projection": {
+    "path": "artifacts/table_input_projection.json",
+    "input_count": 13,
+    "total_bytes": 44706186,
+    "originally_Git_tracked_count": 13,
+    "bulk_non_Git_bytes": 0,
+    "evidence": "Confirmed by the artifact-closure auditor",
+    "publication_authorization_owner": "parent final scope/export process, not numeric validation"
+  },
+  "tex_locator_note": "Pass required --tex with the NEW numeric table TeX locator. Original TeX is neither required nor copied. The historical original TeX SHA256 remains metadata only; numeric-view bytes/layout intentionally differ.",
+  "CLI": {
+    "required": "--root <clean-export-root> --tex <repository-relative-approved-generated-TeX>",
+    "optional_input_map": "--input-map <repository-relative-JSON>",
+    "input_map_schema": "Plain JSON object from approved alias to repository-relative locator; no URLs, absolute paths, traversal, extra aliases or external symlinks",
+    "optional_metadata_dir": "--metadata-dir <directory-containing-provenance-JSON>",
+    "strict_original_bytes": "--check-source-hashes",
+    "output": "JSON on stdout; exit 0 only on complete pass, exit 1 on validation failure, exit 2 on CLI usage errors including missing --tex",
+    "writes_or_network": false
+  },
+  "hash_contract": {
+    "recorded_source_sha256": "Preserved original scientific-source digest, never overwritten by path normalization",
+    "observed_sha256": "Digest of the actual approved input bytes used by this invocation",
+    "default": "Validate scientific values, cohorts, source bindings, labels, emphasis and aggregations; report both byte digests and their equality.",
+    "strict_mode": "Fail on any recorded numeric JSON source byte-hash mismatch. There are 13 such input files; generated TeX is checked numerically, not against original document bytes.",
+    "generated_TeX": "Record its derived SHA256; preserve the historical original TeX digest separately without enforcing byte/layout identity.",
+    "normalized_derivatives": "Locator-only normalized reports may differ in bytes. Preserve original hashes, record derived hashes and the release transformation separately; numeric validation is not a replacement for a transformation receipt.",
+    "execution_commit_nulls": "Explicit null execution commits for corrected SAC, BC, Guided SAC and PID mode reproduction are required and retained."
+  },
+  "tests": {
+    "command_from_validator_directory": "python3 -B -m unittest -q test_validate_table_provenance test_rebuild_numeric_tables",
+    "optional_integration_root_environment": "DC2GRID_RELEASE_ROOT",
+    "integration_TeX": "Fresh numeric-only TeX is generated in memory from the 13 approved result JSON inputs; no original TeX is read",
+    "optional_strict_original_byte_hash_environment": "DC2GRID_CHECK_SOURCE_HASHES=1",
+    "no_test_scratch_files": true
+  },
+  "explicit_non_dependencies": [
+    "Original paper ZIP or full manuscript",
+    "Original comparison_data.json blob containing manuscript table_tex",
+    "Original build_comparison_pdf.py or comparison_data.py execution",
+    "Private session files or private trace inventories",
+    "Runtime evaluator/trainer implementations",
+    "Checkpoint archives",
+    "Archived per-episode JSON and raw trace CSV/gzip",
+    "Old registration/authorization files",
+    "PDF readers, TeX executables or third-party Python packages",
+    "Network access or live public artifact URLs"
+  ],
+  "aggregation_limits": {
+    "archive_Q1": "Frozen reported numeric means/SDs in the row map; only the narrow recorded legacy PID relief reproduction is cross-checked.",
+    "Q6_earlier_absolute_economic_four_rows": "Report-bound values/counts/cash references are verified, but their archived individual episode traces are deliberately not required or recomputed.",
+    "PDF": "The original approved nine-page PDF is retained as a frozen view. Numeric-only table generation does not regenerate the PDF or original layout/TeX bytes."
+  },
+  "large_artifact_delivery": {
+    "mode": "local_compressed_parts",
+    "intended_host": "OneDrive",
+    "public_artifact_url_status": "pending",
+    "publication_authorization_owner": "parent final scope/export process",
+    "public_artifact_urls": [],
+    "validator_downloads_artifacts": false,
+    "instruction": "Supply the approved scalar reports at the declared relative locations, or use a relative input map. Missing local inputs cause a failure, never an assumed successful online fetch."
+  },
+  "final_public_scope": {
+    "numeric_renderer_manifest": "provenance/numeric_renderer_manifest.json",
+    "input_datasets_in_public_Git": "excluded",
+    "raw_evidence": "local_compressed_parts_for_later_user_OneDrive_upload",
+    "Git_export": "strict_orphan_no_existing_parent_ancestry"
+  }
+}
