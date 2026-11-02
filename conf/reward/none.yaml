@@ -1,0 +1,6 @@
+# conf/reward/none.yaml
+# Default reward weights — no override applied.
+# Selected by default; the env reads c2g_env/config.yaml [reward] unchanged.
+name: none
+suffix: ""
+overrides: null

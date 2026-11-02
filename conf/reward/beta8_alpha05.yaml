@@ -1,0 +1,8 @@
+# conf/reward/beta8_alpha05.yaml
+# Tracking-weight sensitivity: beta 2 -> 8 and throughput alpha 1 -> 0.5
+# (beta/alpha ratio 16 vs. the default 2). Other weights unchanged.
+name: beta8_alpha05
+suffix: "_beta8_alpha05"
+overrides:
+  alpha: 0.5
+  beta: 8.0

@@ -190,6 +190,7 @@ class C2GFastEnv(gym.Env):
         config_path: str | Path | None = None,
         thermal_overrides: Mapping[str, float] | None = None,
         plant_overrides: Mapping[str, float] | None = None,
+        reward_overrides: Mapping[str, float] | None = None,
         **kwargs: Any,
     ) -> None:
         super().__init__()
@@ -199,9 +200,21 @@ class C2GFastEnv(gym.Env):
             full_cfg = yaml.safe_load(fh)
 
         self._gcfg   = full_cfg["global"]
-        self._rcfg   = full_cfg["reward"]
+        self._rcfg   = dict(full_cfg["reward"])
         self._scfg   = full_cfg[scenario]
         self._scenario = scenario
+        self._reward_overrides = {
+            str(key): float(value) for key, value in dict(reward_overrides or {}).items()
+        }
+        unknown_reward_keys = set(self._reward_overrides) - set(self._rcfg)
+        if unknown_reward_keys:
+            raise ValueError(
+                f"Unknown reward override key(s): {sorted(unknown_reward_keys)}"
+            )
+        for key, value in self._reward_overrides.items():
+            if not np.isfinite(value):
+                raise ValueError(f"reward override {key} must be finite, got {value}")
+        self._rcfg.update(self._reward_overrides)
         for key in ("tracking_floor_fraction", "macro_tracking_floor_fraction"):
             fraction = float(self._rcfg[key])
             if not np.isfinite(fraction) or fraction <= 0.0:

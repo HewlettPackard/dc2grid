@@ -23,12 +23,13 @@ defaults:
   - algo: rule_macro_ppo
   - market: nyiso_nyc
   - plant_profiles: none
+  - reward: none
   - logging: tensorboard
   - _self_
 
 # Experiment identity — used to name output directories
 experiment:
-  name: "${algo.name}_${scenario.name}"
+  name: "${algo.name}_${scenario.name}${reward.suffix}"
   seed: 100
   market: "${scenario.grid_market}"  # logged for tracking
 

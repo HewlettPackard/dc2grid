@@ -1,0 +1,7 @@
+# conf/reward/beta8.yaml
+# Tracking-weight sensitivity: beta 2 -> 8, all other weights at
+# c2g_env/config.yaml [reward] defaults (alpha = 1 remains the unit reference).
+name: beta8
+suffix: "_beta8"
+overrides:
+  beta: 8.0

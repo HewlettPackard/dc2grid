@@ -42,12 +42,25 @@ def plant_overrides_from_cfg(cfg) -> dict | None:
     it to a plain dict for the env's ``plant_overrides`` kwarg. Returns None for
     the default ``none`` profile (built-in 250 MW facility).
     """
+    return _group_block_from_cfg(cfg, "plant_profiles", "plant")
+
+
+def reward_overrides_from_cfg(cfg) -> dict | None:
+    """Return the reward-weight override dict from a Hydra cfg, or None.
+
+    Reads the selected ``reward`` group's ``overrides`` block for the env's
+    ``reward_overrides`` kwarg. Returns None for the default ``none`` group.
+    """
+    return _group_block_from_cfg(cfg, "reward", "overrides")
+
+
+def _group_block_from_cfg(cfg, group: str, block: str) -> dict | None:
     from omegaconf import OmegaConf
 
-    pp = cfg.get("plant_profiles") if hasattr(cfg, "get") else None
-    if not pp:
+    node = cfg.get(group) if hasattr(cfg, "get") else None
+    if not node:
         return None
-    plant = pp.get("plant")
-    if not plant:
+    values = node.get(block)
+    if not values:
         return None
-    return OmegaConf.to_container(plant, resolve=True)
+    return OmegaConf.to_container(values, resolve=True)

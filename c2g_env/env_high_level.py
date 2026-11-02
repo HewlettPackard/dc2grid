@@ -178,6 +178,7 @@ class C2GMacroEnv(gym.Env):
         _fixed_action_values = kwargs.pop("fixed_action_values", None)
         _thermal_overrides = kwargs.pop("thermal_overrides", None)
         _plant_overrides = kwargs.pop("plant_overrides", None)
+        _reward_overrides = kwargs.pop("reward_overrides", None)
         if _fixed_action_values:
             from c2g_env.experiments.action_ablation_env import ActionAblationFastEnv
             self._fast_env = ActionAblationFastEnv(
@@ -185,12 +186,14 @@ class C2GMacroEnv(gym.Env):
                 fixed_action_values=_fixed_action_values,
                 thermal_overrides=_thermal_overrides,
                 plant_overrides=_plant_overrides,
+                reward_overrides=_reward_overrides,
             )
         else:
             self._fast_env = C2GFastEnv(
                 scenario=scenario, config_path=cfg_path,
                 thermal_overrides=_thermal_overrides,
                 plant_overrides=_plant_overrides,
+                reward_overrides=_reward_overrides,
             )
 
         self._committed_max_mw = self._fast_env._committed_mw_max
