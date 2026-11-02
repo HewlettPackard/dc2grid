@@ -1,5 +1,13 @@
 # Grid relief, economics, and PPO follow-up
 
+## Completed research
+
+See [the final verified results](reports/FINAL_RESULTS.md). The strongest learned
+economic SAC improves both relief and cash on matched original peak dates,
+while explicitly trading regulation accuracy. The original low-level PPO/SAC
+comparison did not produce a BC-noninferior replacement. All earlier outcomes
+and the unopened calendar reservation remain preserved.
+
 The completed union-SAC results were committed and independently snapshotted
 before this study; see the
 [baseline receipt](../../snapshots/pre-economics-ppo-20261101/README.md).
