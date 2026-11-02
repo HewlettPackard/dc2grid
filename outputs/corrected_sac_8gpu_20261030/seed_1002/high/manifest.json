@@ -1,0 +1,22 @@
+{
+  "stage": "high",
+  "seed": 1002,
+  "device": "cuda:0",
+  "visible_gpu": "2",
+  "n_envs": 6,
+  "protocol_id": "03df24f39c4f8d2bab2e40d7000d85f97e44bd2b0f9050423ee1066e9dfaf4df",
+  "source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+  "simulation_mode": "physical_v1",
+  "inner_checkpoint": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1002/low/best_model/best_model.zip",
+    "sha256": "05659cc0113af7193ce4d6af5d7b156d77386df8ecf7b7118c8d59dfcc843b0b"
+  },
+  "budgets": {
+    "timesteps": 20000,
+    "learning_starts": 1000,
+    "gamma": 0.99,
+    "eval_freq": 4000,
+    "checkpoint_freq": 4000,
+    "status_freq": 200
+  }
+}

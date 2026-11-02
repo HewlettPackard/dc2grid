@@ -1,0 +1,435 @@
+{
+  "policy_id": "old_low_1001",
+  "cell": {
+    "id": "d248_s100_b0",
+    "start_day": 248,
+    "seed": 100,
+    "regd_load_bias": 0.0
+  },
+  "status": "complete",
+  "complete": true,
+  "constraint_qualified": false,
+  "prior_selection_qualified": true,
+  "diagnostic_only": false,
+  "expected_ticks": 17280,
+  "observed_ticks": 17280,
+  "dt_seconds": 5.0,
+  "committed_max_mw": 30.0,
+  "tracking_rmse_kw": 2059.2030244927155,
+  "normalized_rmse": 0.16563490489605856,
+  "hardware_mean_reward": -0.35368136655946464,
+  "observed_hardware_metrics": {
+    "steps": 17280,
+    "fast_steps": 17280,
+    "reward_sum": -6111.614014147549,
+    "error_sq_sum": 73272679420.26149,
+    "work_arrived_kwh": 41468.88316291474,
+    "work_served_kwh": 41468.88316291474,
+    "thermal_warning_ticks": 0,
+    "regulation_revenue": 11158.931039781135,
+    "electricity_cost": 218836.975177427,
+    "facility_relief_kwh": -30652.43629538823,
+    "terminal_soc": 0.10210209404094572,
+    "terminal_backlog_kwh": 0.0,
+    "terminated": false,
+    "truncated": true,
+    "expected_ticks": 17280,
+    "condition": {
+      "id": "d248_s100_b0",
+      "start_day": 248,
+      "seed": 100,
+      "regd_load_bias": 0.0
+    },
+    "complete": true,
+    "qualified": false,
+    "mean_step_reward": -0.35368136655946464,
+    "tracking_rmse_kw": 2059.2030244927155,
+    "thermal_warning_fraction": 0.0,
+    "work_conservation_error_kwh": 0.0
+  },
+  "observed_energy_metrics": {
+    "duration_hours": 24.0,
+    "electricity_cost_usd": 218836.97517742717,
+    "grid_import_mwh": 2469.0987395146185,
+    "facility_energy_mwh": 2474.06279434379,
+    "battery_net_discharge_mwh": 4.964054829171673,
+    "battery_discharge_mwh": 18.585260607343294,
+    "battery_charge_mwh": 13.621205778171618,
+    "battery_throughput_mwh": 32.206466385514915,
+    "backlog_exposure_kwh_hours": 0.016367911339256434,
+    "max_backlog_kwh": 6.021410341002143,
+    "work_arrived_kwh": 41468.88316291492,
+    "work_served_kwh": 41468.88316291492,
+    "thermal_warning_ticks": 0,
+    "lmp_min_usd_mwh": 52.791995799999995,
+    "lmp_max_usd_mwh": 118.42008580000001,
+    "lmp_time_weighted_mean_usd_mwh": 88.35583719187501,
+    "battery_charge_electricity_cost_usd": 956.1955374118528,
+    "battery_discharge_avoided_electricity_cost_usd": 1694.2425939695067,
+    "battery_charge_energy_weighted_price_usd_mwh": 70.19903766112867,
+    "battery_discharge_energy_weighted_price_usd_mwh": 91.16055081305063
+  },
+  "revenue_usd": 11158.931039781135,
+  "electricity_cost_usd": 218836.97517742717,
+  "revenue_before_tracking_discount_usd": 12404.854605023369,
+  "tracking_discount_usd": 1245.923565242234,
+  "mean_committed_mw": 13.968750145286322,
+  "mean_paid_performance": 0.8804459320425021,
+  "stress_threshold_mw": 10261.161,
+  "annual_load_median_mw": 5406.2229,
+  "battery_throughput_mwh": 32.206466385514915,
+  "battery_age_fraction_delta": 0.0021470977590343217,
+  "initial": {
+    "tick": 0,
+    "soc": 0.5,
+    "nominal_stored_mwh": 7.5,
+    "usable_energy_property_mwh": 7.5,
+    "bess_capacity_mwh": 15.0,
+    "bess_age_fraction": 0.0,
+    "backlog_kwh": 0.0,
+    "temp_A": 30.0,
+    "temp_B": 30.0,
+    "reference_temp_A": 30.0,
+    "reference_temp_B": 30.0
+  },
+  "terminal": {
+    "tick": 17280,
+    "soc": 0.10210209404094572,
+    "nominal_stored_mwh": 1.531531410614186,
+    "usable_energy_property_mwh": 1.530873741082262,
+    "bess_capacity_mwh": 15.0,
+    "bess_age_fraction": 0.0021470977590343217,
+    "backlog_kwh": 0.0,
+    "temp_A": 30.587937464912038,
+    "temp_B": 23.151278484030264,
+    "reference_temp_A": 30.552762568660576,
+    "reference_temp_B": 23.200810123522796
+  },
+  "reward_components": {
+    "reward_throughput": 0.021490922037165693,
+    "reward_tracking": -0.239108135914996,
+    "reward_thermal": 0.0,
+    "reward_soc": -0.13605324074074074,
+    "reward_freq": 0.0,
+    "reward_volt": 0.0,
+    "reward_backlog": -1.0911940892837623e-05
+  },
+  "recovery": {
+    "performed": true,
+    "complete": true,
+    "extension": {
+      "service_ticks": 17280,
+      "recovery_ticks": 1440,
+      "state_digest_before": "b1bd40a72d8659cf2f471704fe132202bfbcb67d1988a881aafd2771a85111c9",
+      "state_digest_after": "b1bd40a72d8659cf2f471704fe132202bfbcb67d1988a881aafd2771a85111c9",
+      "state_preserved": true,
+      "service_replay_prefix_preserved": true,
+      "bias_normalization_uses_service_period_only": true
+    },
+    "expected_ticks": 1440,
+    "observed_ticks": 1440,
+    "terminated": false,
+    "truncated": true,
+    "terminal": {
+      "tick": 18720,
+      "soc": 0.5000000000007884,
+      "nominal_stored_mwh": 7.500000000011825,
+      "usable_energy_property_mwh": 7.496163146874472,
+      "bess_capacity_mwh": 15.0,
+      "bess_age_fraction": 0.002557902091564928,
+      "backlog_kwh": 0.0,
+      "temp_A": 30.618868609967798,
+      "temp_B": 23.12375975763355,
+      "reference_temp_A": 30.618823845200893,
+      "reference_temp_B": 23.12378099935001
+    },
+    "soc_error": 7.883693697863237e-13,
+    "nominal_stored_energy_error_mwh": 1.1825207479887467e-11,
+    "usable_energy_property_change_mwh": -0.0038368531255281724,
+    "backlog_kwh": 0.0,
+    "temperature_A_minus_reference_C": 4.4764766904847875e-05,
+    "temperature_B_minus_reference_C": -2.12417164604517e-05,
+    "soc_closed": true,
+    "work_closed": true,
+    "thermal_A_closed": true,
+    "thermal_B_closed": true,
+    "closed": true,
+    "irreversible_age_not_reset_or_monetized_as_stored_energy": true,
+    "observed_energy_metrics": {
+      "duration_hours": 2.0,
+      "electricity_cost_usd": 14604.168975377012,
+      "grid_import_mwh": 210.44455526773874,
+      "facility_energy_mwh": 204.2824902797796,
+      "battery_net_discharge_mwh": -6.162064987959136,
+      "battery_discharge_mwh": 0.0,
+      "battery_charge_mwh": 6.162064987959136,
+      "battery_throughput_mwh": 6.162064987959136,
+      "backlog_exposure_kwh_hours": 0.0,
+      "max_backlog_kwh": 0.0,
+      "work_arrived_kwh": 3164.968307583495,
+      "work_served_kwh": 3164.968307583495,
+      "thermal_warning_ticks": 0,
+      "lmp_min_usd_mwh": 63.716267800000004,
+      "lmp_max_usd_mwh": 76.5227926,
+      "lmp_time_weighted_mean_usd_mwh": 69.327435025,
+      "battery_charge_electricity_cost_usd": 442.3239968390095,
+      "battery_discharge_avoided_electricity_cost_usd": 0.0,
+      "battery_charge_energy_weighted_price_usd_mwh": 71.78178057247436,
+      "battery_discharge_energy_weighted_price_usd_mwh": null
+    },
+    "total_observed_energy_metrics": {
+      "duration_hours": 26.0,
+      "electricity_cost_usd": 233441.1441528042,
+      "grid_import_mwh": 2679.543294782357,
+      "facility_energy_mwh": 2678.3452846235696,
+      "battery_net_discharge_mwh": -1.1980101587874625,
+      "battery_discharge_mwh": 18.585260607343294,
+      "battery_charge_mwh": 19.783270766130755,
+      "battery_throughput_mwh": 38.36853137347404,
+      "backlog_exposure_kwh_hours": 0.016367911339256434,
+      "max_backlog_kwh": 6.021410341002143,
+      "work_arrived_kwh": 44633.85147049841,
+      "work_served_kwh": 44633.85147049841,
+      "thermal_warning_ticks": 0,
+      "lmp_min_usd_mwh": 52.791995799999995,
+      "lmp_max_usd_mwh": 118.42008580000001,
+      "lmp_time_weighted_mean_usd_mwh": 86.89211394826924,
+      "battery_charge_electricity_cost_usd": 1398.5195342508623,
+      "battery_discharge_avoided_electricity_cost_usd": 1694.2425939695067,
+      "battery_charge_energy_weighted_price_usd_mwh": 70.69202816781682,
+      "battery_discharge_energy_weighted_price_usd_mwh": 91.16055081305063
+    },
+    "regulation_revenue_usd": 0.0,
+    "total_battery_age_fraction_delta": 0.002557902091564928,
+    "work_conservation_error_kwh": 0.0
+  },
+  "overall_qualified": false,
+  "service_replay_check": {
+    "verified": false,
+    "reason": "Fresh policy inference, not validation replay"
+  },
+  "registration_id": "e3a4bf8b73e8822de3098d81628457cac9484c558b6419f66303bc7622174bde",
+  "reset_info": {
+    "simulation_mode": "physical_v1",
+    "start_day": 248,
+    "regd_load_bias": 0.0,
+    "episode_ticks": 17280,
+    "grid_market": "nyiso_nyc",
+    "weather_source": "real:NYC.csv:calendar_climatology_2024"
+  },
+  "policy": {
+    "id": "old_low_1001",
+    "group": "old_low",
+    "base_seed": 1001,
+    "stream": null,
+    "hardware": "sac",
+    "macro": "rule_macro",
+    "hardware_checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/best_model/best_model.zip",
+      "sha256": "c73a5137b29ca3f238c5d41980f100db85ad61f51778e05ca232ec151a78293f"
+    },
+    "macro_checkpoint": null,
+    "available": true,
+    "prior_selection_qualified": true,
+    "diagnostic_only": false,
+    "unavailable_reason": null,
+    "matched_rule_id": null,
+    "parent_selected_low_id": null,
+    "selection_provenance": {
+      "selection_rule": "highest_mean_step_reward_among_fully_qualified_original_checkpoints",
+      "qualification_basis": "four_original_validation_cells",
+      "simulation_mode": "physical_v1",
+      "protocol_id": "03df24f39c4f8d2bab2e40d7000d85f97e44bd2b0f9050423ee1066e9dfaf4df",
+      "source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+      "expected_checkpoint_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/best_model/best_model.zip",
+      "expected_selection_receipt_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/best_model/selection.json",
+      "fallback_to_final_weights": false,
+      "manifest_inner_checkpoint": null,
+      "saved_c2g_context_inner_checkpoint": null,
+      "training_state": "completed",
+      "manifest": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/manifest.json",
+        "sha256": "747668cfbde52e908ea51cbcffcd89bd4e92ef29b6882ea65fe20bd362e1b9cd"
+      },
+      "status": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/status.json",
+        "sha256": "b11816701894c9138f0e0d15abe4f4b688feae4068d071a390adcbd3e8c9a17f"
+      },
+      "selection_receipt": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/best_model/selection.json",
+        "sha256": "bd2db53999336162ebee9d40788e419353795aa9ec4c08bdbdadf7dbfcf82c2a"
+      },
+      "qualified_validation_checkpoints": 4,
+      "validation_history": [
+        {
+          "receipt": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/validation/step_250002.json",
+            "sha256": "806b312b9ff25a88aee4af98436788dab29e0d0c2b27dfc6ac0b4d88630894d4"
+          },
+          "timesteps": 250002,
+          "all_cells_qualified": true,
+          "qualified_count": 4,
+          "selection_score": -0.03108427894855194
+        },
+        {
+          "receipt": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/validation/step_500004.json",
+            "sha256": "71de17dad8640d1993140aa74aa40ce3d3cd5ae8cc71ec018a9653f646286f22"
+          },
+          "timesteps": 500004,
+          "all_cells_qualified": true,
+          "qualified_count": 4,
+          "selection_score": -0.016452897353370733
+        },
+        {
+          "receipt": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/validation/step_750006.json",
+            "sha256": "31d117953ac6a1cf15532afa8176504010371c30755f7148c910e79fed9ba70f"
+          },
+          "timesteps": 750006,
+          "all_cells_qualified": true,
+          "qualified_count": 4,
+          "selection_score": -0.0446515517302155
+        },
+        {
+          "receipt": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/validation/step_1000008.json",
+            "sha256": "db95e7c444144e59c642a1e1637f33998fe570fb7dce7ec735b984dc9ce438d7"
+          },
+          "timesteps": 1000008,
+          "all_cells_qualified": false,
+          "qualified_count": 2,
+          "selection_score": -0.2361750290003638
+        },
+        {
+          "receipt": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/validation/step_1250010.json",
+            "sha256": "e2574e164f107aec556ee89ca6e9701aed93ae052417b21e5daf5e331b7a2305"
+          },
+          "timesteps": 1250010,
+          "all_cells_qualified": false,
+          "qualified_count": 2,
+          "selection_score": -0.39007289326170197
+        },
+        {
+          "receipt": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/validation/step_1500012.json",
+            "sha256": "8f9cc7aeec9269dc043b15a06c0dec1d9c077b715efc140d13ad3e7895012375"
+          },
+          "timesteps": 1500012,
+          "all_cells_qualified": true,
+          "qualified_count": 4,
+          "selection_score": -0.6009510749751721
+        },
+        {
+          "receipt": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/validation/step_1750014.json",
+            "sha256": "9f4997e5310f50ee99d6fcd10768006e2e86765831c206e9e270717531240716"
+          },
+          "timesteps": 1750014,
+          "all_cells_qualified": false,
+          "qualified_count": 0,
+          "selection_score": -0.9728375463690431
+        },
+        {
+          "receipt": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/validation/step_2000016.json",
+            "sha256": "f9773733d43dd1f2b9a29aab39b34bb3bdedc92cbc152b380028bd7c560e5a2b"
+          },
+          "timesteps": 2000016,
+          "all_cells_qualified": false,
+          "qualified_count": 0,
+          "selection_score": -1.4015705180723004
+        }
+      ],
+      "selection_status": "best_fully_qualified_checkpoint",
+      "selected_timesteps": 500004,
+      "selected_optimizer_updates": 489984,
+      "selected_score": -0.016452897353370733,
+      "selected_validation": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/validation/step_500004.json",
+        "sha256": "71de17dad8640d1993140aa74aa40ce3d3cd5ae8cc71ec018a9653f646286f22"
+      },
+      "selected_cell_qualification": [
+        {
+          "condition": {
+            "start_day": 196,
+            "regd_load_bias": 0.0,
+            "seed": 90001
+          },
+          "complete": true,
+          "qualified": true,
+          "failure_reasons": [],
+          "terminal_soc": 0.21366192830505493,
+          "terminal_backlog_kwh": 0.0,
+          "thermal_warning_fraction": 0.0
+        },
+        {
+          "condition": {
+            "start_day": 196,
+            "regd_load_bias": 0.5,
+            "seed": 90002
+          },
+          "complete": true,
+          "qualified": true,
+          "failure_reasons": [],
+          "terminal_soc": 0.5001912016791982,
+          "terminal_backlog_kwh": 0.0,
+          "thermal_warning_fraction": 0.0
+        },
+        {
+          "condition": {
+            "start_day": 256,
+            "regd_load_bias": 0.0,
+            "seed": 90003
+          },
+          "complete": true,
+          "qualified": true,
+          "failure_reasons": [],
+          "terminal_soc": 0.7950439112644668,
+          "terminal_backlog_kwh": 0.0,
+          "thermal_warning_fraction": 0.0
+        },
+        {
+          "condition": {
+            "start_day": 256,
+            "regd_load_bias": 0.5,
+            "seed": 90004
+          },
+          "complete": true,
+          "qualified": true,
+          "failure_reasons": [],
+          "terminal_soc": 0.6395687866109327,
+          "terminal_backlog_kwh": 0.0,
+          "thermal_warning_fraction": 0.0
+        }
+      ],
+      "checkpoint_metadata": {
+        "zip_member": "data",
+        "zip_data_sha256": "2b035b6aef9a0a428aababd954bd9a883b5f54fce83639303092b21238d96824",
+        "num_timesteps": 500004,
+        "optimizer_updates": 489984,
+        "saved_seed": 1001,
+        "simulation_mode": "physical_v1",
+        "decoded_serialized_objects": false
+      },
+      "saved_source_snapshot": {
+        "archive": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/source/source_f04ad498081d199f70600c9b3315fe4a2f9a8301fe24abe865477823f65ff832.zip",
+          "sha256": "d66cacce7c484d952f511d882446ec190c281dd31f34d4d07284ffe3f7ae4144"
+        },
+        "source_id": "f04ad498081d199f70600c9b3315fe4a2f9a8301fe24abe865477823f65ff832",
+        "python_source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+        "member_count": 93
+      },
+      "frozen_inner_hash_verified": false
+    },
+    "checkpoint_available": true,
+    "matched_validation_qualified_cells": 8
+  },
+  "trace_hashes": {
+    "hardware.csv.gz": "c49628a7c3781bb596371d4ccd6559efcd7ae8cc36a2be1f8eab4ce5bbd2f6d5",
+    "macro.csv.gz": "73c952c52b0744a725b1ab4352620fc2d69103b5cae8f51a238fde11395f4617",
+    "recovery.csv.gz": "dcd6d06df0d1314f78420cf0313090ae9b2635243e6759372b76734386d2ed09"
+  }
+}

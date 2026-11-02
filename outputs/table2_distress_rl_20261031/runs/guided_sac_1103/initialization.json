@@ -1,0 +1,30 @@
+{
+  "actor": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+  "critic": "7f51b92af8c980719cf549a6c4f17ec3cba2b97a6e84a4c84be9ed9563b58399",
+  "critic_target": "7f51b92af8c980719cf549a6c4f17ec3cba2b97a6e84a4c84be9ed9563b58399",
+  "initialization": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1103/best_bc.zip",
+    "sha256": "17b9357e8f04a6814bc8685bfafd394a454e606ea9a982a8ea2b18c0859ce9ed"
+  },
+  "corpus": {
+    "corpus_sha256": "25b91845ea4c62e20b0fed4cd81459874a32bc9470bd48b42e77a9a446402f06",
+    "internal_validation_days": [
+      50,
+      115,
+      184,
+      227,
+      283,
+      356
+    ],
+    "internal_validation_is_training_support_not_the_external_panel": true,
+    "physical_teacher_transitions": 1555200
+  },
+  "warmup_replay": {
+    "observations": "aaac4a5ed61968dd3b2f388b3ab4c55e0e5d25ad5b04688c495755ae292b57c5",
+    "next_observations": "2e7552c05ea99dea4eea10b6866ad4e906a9cffb08fdf97769da9f79bb77412e",
+    "actions": "f8f9add06fbd9efa8133abc35495b381ff8667c8ff80ceee46119390944bb3cc",
+    "rewards": "9ee243fba62aba035d77f45cb2b656eeb1d6bc36482cdba3edcfc999ca8f6b2c",
+    "dones": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+  },
+  "warmup_transitions": 1024
+}

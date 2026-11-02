@@ -1,0 +1,16 @@
+hw:
+  - rule_based
+  - sac
+  - sac_macro+sac
+hw_model_dir: trained_models\BestCheckpoints\sac_default_s100
+macro_model_dir: trained_models\BestCheckpoints\sac_macro_default_s100
+scenarios: [default]
+markets: [nyiso_nyc]
+start_days: [207, 248, 249]
+regd_load_bias: [0.0, 0.05, 0.1, 0.25, 0.5]
+n_episodes: 5
+seed: 100
+workers: 4
+sac_macro_rule:
+  hw: [sac_macro+rule_based]
+  regd_load_bias: [0.0, 0.25, 0.5]

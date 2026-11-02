@@ -1,0 +1,321 @@
+{
+  "review_id": "accounting_review_20261031_final",
+  "scope": "physical/electrical/BESS accounting + env_high_level settlement contract. Excludes candidate inventory, parent driver implementation, per-cell constraint qualification, prior-checkpoint eligibility.",
+  "basis": "Read c2g_env/physics/{electrical,bess,thermal,macro_grid}.py, env_low_level.py, env_high_level.py, evaluation/grid_relief.py. Two CPU-only probes (CUDA_VISIBLE_DEVICES='', repo .venv), day 196 seed 90001, scenario default, physical_v1. No new rollouts in this revision.",
+  "source_integrity": {
+    "frozen_pilot_vs_live": "md5 identical for all 7 accounting files (electrical, bess, thermal, macro_grid, semantics, env_low_level, env_high_level)",
+    "implication": "probe results transfer to a driver built on outputs/online_stability_pilot_20261031/source"
+  },
+  "verified_identities": [
+    {
+      "id": "V1",
+      "claim": "P_fac = IT_A + IT_B + chiller + HVAC + pump + conversion_loss + aux",
+      "status": "EXACT",
+      "evidence": "max abs error 5.684e-14 MW over 1440 fast steps",
+      "condition": "aux supplied as INDEPENDENT constant 2.0 MW (_elec.p_lighting_mw 0.5 + p_network_mw 1.5); aux is NOT in info and must never be taken as residual or the test is vacuous"
+    },
+    {
+      "id": "V2",
+      "claim": "P_grid = P_fac - P_bess_actual",
+      "status": "EXACT",
+      "evidence": "max abs error 0.0; p_grid_import_mw logged directly"
+    },
+    {
+      "id": "V3",
+      "claim": "grid_relief = facility_relief + delta_BESS",
+      "status": "EXACT by construction",
+      "evidence": "reference_elec carries no BESS, so P_grid_ref == P_ref_fac"
+    },
+    {
+      "id": "V4",
+      "claim": "nominal [1,.7,.7,0] IS the internal counterfactual",
+      "status": "EXACT",
+      "evidence": "facility_relief_kw == 0.0 identically for inner_action_fn=None defaults (_DEFAULT_THROTTLE/PUMP/HVAC/BESS = 1.0/0.7/0.7/0.0)"
+    },
+    {
+      "id": "V5",
+      "claim": "p_reference_mw is path-independent across controllers",
+      "status": "VERIFIED",
+      "evidence": "0.0 MW max diff between (1.0,0.7,0.7,0.0) and (0.0,0.15,0.0,1.0); reference IT reads exogenous trace indices, cooling pinned at float32(0.7), only coupling is exogenous T_amb",
+      "importance": "load-bearing for every relief comparison; it holds"
+    },
+    {
+      "id": "V6",
+      "claim": "regulation_revenue == rate * hours * max(0, committed_mw - mean_tracking_err_kw/1000)",
+      "status": "EXACT",
+      "evidence": "max abs error 8.88e-16 USD",
+      "note": "equals gross - tracking_discount, which you already report; marginal revenue per MW committed is exactly rate*hours"
+    },
+    {
+      "id": "V7",
+      "claim": "macro electricity_cost == sum(lmp * p_grid_import_mw * duration_hours)",
+      "status": "EXACT",
+      "evidence": "recompute matched logged value to all digits (1921.68926555946 USD on sample macro step); units $/MWh * MW * h = $"
+    },
+    {
+      "id": "V8",
+      "claim": "work queue balance: sum(arrived) - sum(served) - backlog_final*dt/3600 == 0",
+      "status": "EXACT",
+      "evidence": "residual 0.0 kWh"
+    },
+    {
+      "id": "V9",
+      "claim": "matched bias counterparts share identical exogenous streams",
+      "status": "VERIFIED",
+      "evidence": "SeedSequence(seed).spawn(4) -> independent _regd/_market/_bid/_frequency streams; bias 0 vs 0.5 at same seed gave bit-identical LMP, grid_load_mw, rmcp_usd; only RegD shifts (mean 0.0723 -> 0.0963, 0% clipping in sampled window)"
+    },
+    {
+      "id": "V10",
+      "claim": "BESS terminal accounting is loss-consistent",
+      "status": "VERIFIED",
+      "evidence": "discharge drains E/eta from SOC, charge banks E*eta; actual_power recompute at SOC rails preserves energy balance; losses land in SOC only, never double-charged to grid import"
+    }
+  ],
+  "withdrawn": [
+    {
+      "id": "W1",
+      "was": "B1 - reference breakdown discarded; patch private _reference_elec and hardcode 35.0/1.05",
+      "withdrawn_because": "parent logs actual electrical + all cooling components for EVERY trajectory including nominal and decomposes B_actual - A_actual. Hardcoding was additionally invalid: _REFERENCE_COOLING = float(np.float32(0.7)) is float32-cast to match the float32 inner action, so reference HVAC and pump are NOT exactly 35.0 and 1.05 MW. Component values must come from logged nominal diagnostics, never constants.",
+      "status": "RESOLVED by parent design"
+    },
+    {
+      "id": "W2",
+      "was": "N2 - idle-floor 'phantom deferral / phantom credit'",
+      "withdrawn_because": "physical_v1 delta_p_actual_kw = (reference p_facility - actual p_facility)*1000 + bess_actual_kw, i.e. physical reference minus actual, NOT legacy (1-throttle)*arrivals. When Zone A clips at the 16 MW floor the metric correctly reports ZERO marginal relief. I did not quantify a current-branch counterexample and withdraw the term.",
+      "residual_observation_only": "day 196 Zone A ran 16.0004-29.46 MW against a 16.0 MW idle floor (2000 racks x 8 kW) on a 150 MW nameplate, so Zone-A throttle headroom is ~13.5 MW and that lever saturates. Context for reading component decomposition and backlog_final; no action required.",
+      "status": "WITHDRAWN"
+    },
+    {
+      "id": "W3",
+      "was": "N1 - subtract C*dT/COP thermal debt from facility relief to form net relief",
+      "withdrawn_because": "not an identity. K_env envelope exchange (0.5 MW/degC per zone) removes or adds heat independently; COP_air varies with ambient and setpoint (measured 2.996, not the 3.5 base); exponential integrator makes recovery path- and time-dependent; IT->thermal and thermal->electrical boundaries differ. C*dT/COP is at best an order-of-magnitude indicator and must not be arithmetic-combined with relief MWh.",
+      "replacement": "report dT_A_final and dT_B_final as RAW state deltas (already planned). If a magnitude indicator is wanted, label C*dT strictly as stored sensible heat in MJ at the thermal-mass boundary, explicitly not convertible to recovery electricity.",
+      "status": "WITHDRAWN as identity; retained only as labeling caveat"
+    },
+    {
+      "id": "W4",
+      "was": "B4 - avoided_cost_usd / dLMP price-suppression double count",
+      "withdrawn_because": "parent excludes these metrics entirely.",
+      "residual_note": "evaluation/grid_relief.py:_legacy_metrics computes avoided_cost_usd and dLMP_stress_usd_mwh by default; if any CSV is produced through that path, drop the columns rather than leaving them unlabeled.",
+      "status": "RESOLVED by parent design"
+    },
+    {
+      "id": "W5",
+      "was": "N4 - stress mask may be DC load",
+      "withdrawn_because": "parent confirms mask is full planned EXOGENOUS grid load. Matches evaluation/grid_relief.py:316 with stress_threshold_mw precomputed full-day from g._calendar_load_mw[:episode_ticks] at line 236 (path-independent).",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "W6",
+      "was": "B3 severity - settlement as artifact / perf_score cosmetic",
+      "withdrawn_because": "settlement is a price x quantity x performance proxy with a reported gross - tracking_discount identity and no ISO profit claim. Downgraded to the single narrow caveat C3 below.",
+      "status": "DOWNGRADED"
+    },
+    {
+      "id": "W7",
+      "was": "B2 remedy - drop the entire cell on any early termination",
+      "withdrawn_because": "parent retains failed cells as unscorable without dropping other full pairs and excludes survivor-only cohort means, which is a better policy. Reduced to assertion A5.",
+      "status": "SUPERSEDED by parent policy"
+    }
+  ],
+  "open_findings": [
+    {
+      "id": "F1",
+      "severity": "Non-Blocking",
+      "title": "BESS sizing constants are a factor-of-10 trap",
+      "detail": "Active backend is _SimpleBESSModel (PYSAM_ACTIVE=False): E_NOM_MWH=15.0, P_MAX_MW=5.0. The bess.py module docstring and _PySAMBESSModel advertise 150 MWh / 50 MW. Logged soc_final / bess_soc is a FRACTION, not MWh.",
+      "impact": "nominal stored MWh computed with 150.0 would be 10x wrong, and the SOC term already dominates the day's regulation revenue.",
+      "fix": "nominal_stored_MWh = soc_fraction * env._fast_env._bess.E_NOM_MWH read at runtime from the instantiated model; assert E_NOM_MWH == 15.0 and P_MAX_MW == 5.0 in the driver preamble."
+    },
+    {
+      "id": "F2",
+      "severity": "Non-Blocking",
+      "title": "Grid-relief energy must use NET BESS, not discharge alone",
+      "detail": "integral(P_ref - P_grid) = facility_relief_mwh + (bess_discharge_mwh - bess_charge_mwh). Existing CSV schema carries both columns.",
+      "impact": "using discharge alone overstates grid relief by the full charge energy.",
+      "fix": "assert |grid_relief_mwh - (facility_relief_mwh + bess_discharge_mwh - bess_charge_mwh)| < 1e-6 MWh."
+    },
+    {
+      "id": "F3",
+      "severity": "Non-Blocking",
+      "title": "Three stale-definition traps in cooling and sign conventions",
+      "detail": [
+        "ThermalTwin.p_cool_nominal_mw returns 36.5 MW (pump at PUMP_NOM_SPEED=1.0) but the actual reference applies float32(0.7) to BOTH hvac and pump, drawing ~36.05 MW. In physical_v1 the p_cool_nominal_mw path is dead code; do not describe the reference as 'pump at nominal 1.0'.",
+        "cool_delta_kw has two definitions: physical mode = p_cooling - p_cooling_ref (INCLUDES the Zone-A chiller); legacy mode = p_hvac + p_pump - p_cool_nominal (EXCLUDES it). Use only the physical value and label it as chiller-inclusive.",
+        "macro_grid.step() docstring says delta_p_kw positive = 'increase consumption'; env_low_level uses the opposite convention (positive RegD = reduce draw). The field is unused by the env, so this is a doc bug only - do not inherit the sign from the docstring."
+      ],
+      "impact": "mislabeled cooling baseline or inverted sign in the narrative.",
+      "fix": "take all cooling components from logged nominal-trajectory diagnostics; state the physical-mode definitions in the report."
+    }
+  ],
+  "caveats_required_in_report": [
+    {
+      "id": "C1",
+      "text": "Cash flow is Delta(regulation revenue) - Delta(grid-import energy cost) BEFORE recovery, degradation and service valuation. It is NOT profit. Measured scale on day 196: regulation revenue 5.62 USD per 15-min macro step vs electricity cost 1921.69 USD per macro step (~540 USD/day vs ~184k USD/day), so the metric is dominated by the energy term, not by regulation."
+    },
+    {
+      "id": "C2",
+      "text": "The cash-flow number is not comparable across candidates with differing terminal SOC. All candidates start at SOC 0.50 (7.5 MWh nominal); a candidate ending at SOC_MIN 0.10 has liquidated 6.0 MWh it never purchased in-episode, which at the day's LMP band exceeds the entire day's regulation revenue by one to two orders of magnitude. Place Delta(nominal stored MWh) = (soc_final - 0.50) * 15.0 adjacent to the cash figure, not in a footnote. No recharge price need be invented: the model itself defines eta_charge = max(0.70, 0.97 - 0.008*C_rate^2 - 0.010*(SOC-0.5)^2) with C_rate = |P|/15, so restoring X MWh of SOC requires X/eta_charge of grid import (~3-4% overhead at low C-rate). That is model-derived, not assumed."
+    },
+    {
+      "id": "C3",
+      "text": "perf_score / mean_paid_perf_score are NOT comparable across candidates. The denominator is max(committed_mw*1000, 100 kW) - the agent's own commitment. Measured: macro floor is 100 kW, so the floor binds only below 0.1 MW and every run sits in the linear regime. A rejected bid (committed = dr_baseline 5 MW) and an accepted 30 MW bid divide the same physical error by 5000 vs 30000 kW. Use absolute mean_tracking_err in kW for cross-candidate tracking comparison; keep perf_score only inside the gross - tracking_discount identity for a single trajectory."
+    },
+    {
+      "id": "C4",
+      "text": "When decomposing Delta(revenue) between a high-macro and rule-macro arm on the same hardware, separate the rate change from the quantity change: rate is the cleared RMCP when the bid is accepted and the fixed dr_rate_usd_mw = 5.0 USD/MW-h when rejected. Report bid_acceptance_fraction alongside. Because marginal revenue per MW committed is exactly rate*hours (V6), the quantity term can move without any change in delivered relief."
+    },
+    {
+      "id": "C5",
+      "text": "Benchmark market payouts are a price/quantity/performance proxy and are not real ISO economics: no capability/mileage split, no two-settlement energy, probabilistic sigmoid clearing. State this once; do not equate to ISO revenue."
+    },
+    {
+      "id": "C6",
+      "text": "Terminal temperature deltas, terminal backlog and terminal SOC are real unpriced end-state differences between candidates. Relief MWh is therefore not a net-energy claim. Report the four end-state terms as raw quantities at their own boundaries; do not form a single 'net relief' scalar by subtracting across boundaries (see W3)."
+    },
+    {
+      "id": "C7",
+      "text": "Zone A operated 16.00-29.46 MW against a 16.0 MW idle floor on day 196, so Zone-A throttle headroom is ~13.5 MW and relief from that lever saturates. Facility power ranged 128.5-141.8 MW with cooling at ~36 MW nominal, i.e. these days are cooling-dominated. Useful context for reading component relief; not a defect."
+    },
+    {
+      "id": "C8",
+      "text": "Even at bias 0, RegD has non-zero mean (measured 0.0723 over the sampled window) because the energy-neutrality correction in _step_regd is windowed and the bias term is applied after it with a +/-1 clip. Report regd_clipping_fraction per cell; if non-trivial at bias 0.5 the bias is no longer a clean additive shift."
+    },
+    {
+      "id": "C9",
+      "text": "bess _age_frac resets to 0 on every reset() and reaches 1.0 only at 15,000 MWh throughput. It is a soft RL penalty, not calibrated SoH. Report Delta(age_frac) as a raw diagnostic; do not attach a dollar value or extrapolate lifetime."
+    }
+  ],
+  "assertions": [
+    {
+      "id": "A1",
+      "test": "P_fac - (p_it_A_mw + p_it_B_mw + p_chiller_mw + p_hvac_mw + p_pump_mw + p_conversion_loss_mw + 2.0) == 0",
+      "tol": "1e-9 MW",
+      "note": "aux pinned independently from _elec.p_lighting_mw + p_network_mw; p_chiller_mw and p_conversion_loss_mw exist ONLY in the physical-mode info branch"
+    },
+    {
+      "id": "A2",
+      "test": "p_grid_import_mw - (p_facility_mw - bess_actual_kw/1000) == 0",
+      "tol": "1e-9 MW"
+    },
+    {
+      "id": "A3",
+      "test": "FREE CROSS-CHECK validating the whole B_actual - A_actual approach: nominal_trajectory.p_facility_mw[t] == any_candidate.p_reference_mw[t], bitwise, for all t",
+      "tol": "exact",
+      "note": "follows from V4 + V5; confirms the logged nominal trajectory IS the internal counterfactual without touching any private field. Run this first - if it fails, the decomposition baseline is wrong."
+    },
+    {
+      "id": "A4",
+      "test": "facility_relief_kw - 1000 * sum over components of (nominal_component - candidate_component) == 0, with Delta(aux) identically 0",
+      "tol": "1e-6 kW"
+    },
+    {
+      "id": "A5",
+      "test": "per trajectory: agent_ticks == 17280 and terminated == False",
+      "tol": "exact",
+      "note": "episode_ticks = 17280 (24 h at 5 s), 96 macro steps. Truncated trajectories have short-horizon sums for facility_relief_mwh, revenue, cost and work; mark unscorable per parent policy and never aggregate mixed horizons into a mean or CI. Thermal is the live trip risk: T_safe = 35.0 degC and Zone B sits ~27.9 degC under nominal (~7 degC headroom); an aggressive (0.0,0.15,0.0,1.0) probe reached 35.018 degC within 6 macro steps. Frequency trip is NOT a practical risk: H=6.0, D=1.5, f_noise_std=0.005, load_median=5406.2 MW; max-bid with do-nothing levers completed all 96 macro steps with f in [59.924, 60.081] against +/-0.5 Hz limits."
+    },
+    {
+      "id": "A6",
+      "test": "regulation_revenue == rate * settlement_hours * max(0, committed_mw - mean_tracking_err/1000); equivalently revenue_before_discount_usd - tracking_discount_usd",
+      "tol": "1e-9 USD"
+    },
+    {
+      "id": "A7",
+      "test": "electricity_cost == sum(lmp * p_grid_import_mw * duration_hours) over substeps",
+      "tol": "1e-9 USD"
+    },
+    {
+      "id": "A8",
+      "test": "sum(work_arrived_kwh) - sum(work_served_kwh) - backlog_final_kw*dt/3600 == 0",
+      "tol": "1e-9 kWh"
+    },
+    {
+      "id": "A9",
+      "test": "grid_relief_mwh == facility_relief_mwh + bess_discharge_mwh - bess_charge_mwh",
+      "tol": "1e-6 MWh"
+    },
+    {
+      "id": "A10",
+      "test": "within a cell, stress_threshold_mw, max_t(L+B) and sum_S(B) are bit-identical across all 12 candidates",
+      "tol": "exact",
+      "note": "holds because L is exogenous and B is the path-independent nominal (V5). Preserve the full-day threshold precompute; do not recompute the 0.90 quantile on a truncated window."
+    },
+    {
+      "id": "A11",
+      "test": "bias 0 vs bias 0.5 at the SAME seed: lmp, grid_load_mw, rmcp_usd bit-identical",
+      "tol": "exact",
+      "note": "pairing must be (day, seed, bias=0) <-> (day, seed, bias=0.5). 90002/90004 are independent replicates, not bias counterparts. Assert this explicitly - the shorthand is ambiguous."
+    },
+    {
+      "id": "A12",
+      "test": "nominal arm run with inner_action_fn=None yields facility_relief_kw identically 0.0",
+      "tol": "exact"
+    },
+    {
+      "id": "A13",
+      "test": "paper-style ratio metrics (SPDR_pct, LFR_pct, LWSR_pct, LWCF_pct) are emitted ONLY for vs-nominal comparisons; candidate-vs-candidate rows carry absolute MW / MWh / USD only",
+      "tol": "structural",
+      "note": "ratio denominators are path-independent only when B is the nominal counterfactual; substituting PID/rule/bang as B makes them path-dependent and non-comparable"
+    }
+  ],
+  "measured_constants": {
+    "episode_ticks": 17280,
+    "macro_steps_per_episode": 96,
+    "dt_seconds": 5.0,
+    "macro_substeps": 180,
+    "aux_mw_constant": 2.0,
+    "facility_cap_kw": 250000.0,
+    "macro_tracking_floor_kw": 100.0,
+    "committed_max_mw": 30.0,
+    "dr_baseline_mw": 5.0,
+    "dr_rate_usd_mw_h": 5.0,
+    "bess_backend": "_SimpleBESSModel",
+    "bess_E_NOM_MWH": 15.0,
+    "bess_P_MAX_MW": 5.0,
+    "bess_SOC_INIT": 0.5,
+    "bess_SOC_MIN": 0.1,
+    "bess_SOC_MAX": 0.95,
+    "T_safe_degC": 35.0,
+    "zone_A_idle_floor_mw": 16.0,
+    "zone_A_ceiling_mw": 150.0,
+    "zone_B_idle_floor_mw": 10.0,
+    "zone_B_ceiling_mw": 100.0,
+    "C_A_MJ_per_degC": 27000.0,
+    "C_B_MJ_per_degC": 10000.0,
+    "K_env_A_MW_per_degC": 0.5,
+    "K_env_B_MW_per_degC": 0.5,
+    "COP_liq_at_design": 30.0,
+    "COP_air_measured_day196": 2.996,
+    "H_inertia": 6.0,
+    "D_damping": 1.5,
+    "f_noise_std_hz": 0.005,
+    "load_median_mw": 5406.2229,
+    "lmp_base_usd_nyiso_nyc": 28.0,
+    "lmp_slope_usd_per_gw_nyiso_nyc": 18.0,
+    "observed_day196": {
+      "p_facility_mw_range": [
+        128.474,
+        141.761
+      ],
+      "p_it_A_mw_range": [
+        16.0004,
+        29.458
+      ],
+      "p_it_B_mw_range": [
+        61.691,
+        63.431
+      ],
+      "reg_revenue_usd_per_macro_step_sample": 5.6216,
+      "electricity_cost_usd_per_macro_step_sample": 1921.689
+    }
+  },
+  "no_blocking_issues_remaining": true,
+  "summary": "With the parent's four corrections applied, no blocking accounting issues remain. All five intended identities (P_fac, P_grid, grid_relief = facility_relief + dBESS, settlement linearity, queue balance) verified exact, and the nominal-as-counterfactual property (V4+V5) is confirmed exact and path-independent, which validates the B_actual - A_actual decomposition design. Three non-blocking findings (F1-F3) and nine required caveats (C1-C9) remain; assertion A3 is the single highest-value free check to run first.",
+  "parent_adoption": {
+    "same_nominal_baseline": "All headline relief ratios reference explicitly executed [1,.7,.7,0] nominal hardware; component differences use its actual logs.",
+    "no_future_cost_claim": "Cashflow is before recovery and degradation valuation; temperature/SOC/work debt remain separate. Observed LMP extrema are not bounds on future recharge prices.",
+    "signal_caveat": "Synthetic RegD is not guaranteed window-neutral; same-seed bias uses the exact clipped definition. No generator changes in this matrix.",
+    "missingness": "Unscorable pairs retained; valid full pairs are not discarded because another policy failed; no survivor-only cohort claims."
+  }
+}

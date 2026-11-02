@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "recorded_cases": 4,
+  "physical_macro_decisions": 7,
+  "padding_steps": 1,
+  "hidden_extra_rollouts": 0,
+  "only_training_calendar_fixtures_used": true
+}

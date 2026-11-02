@@ -1,0 +1,14 @@
+# @package _global_
+# Market preset: pjm_dom
+# PJM Northern Virginia — Data Center Alley
+# Overrides grid_market and weather_market for any scenario.
+# Usage:  python train_ppo.py market=pjm_dom
+# Sweep:  python train_ppo.py --multirun market=nyiso_nyc,pjm_dom,caiso_pgae,ercot_north,entso_de,aemo_nsw
+market:
+  id: pjm_dom
+  description: "PJM Northern Virginia — Data Center Alley"
+
+# These are written into the env config at runtime
+env_overrides:
+  grid_market: pjm_dom
+  weather_market: pjm_dom

@@ -1,0 +1,277 @@
+{
+  "policy": {
+    "id": "full_residual__guided_sac_1103",
+    "family": "guided_sac",
+    "hardware": "history_sac",
+    "available": true,
+    "training_seed": 1103,
+    "selection": {
+      "timesteps": 4096,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip",
+        "sha256": "0cf65bada29818b690e6e7bc59a40c35351d096f6cb1a58b1aa88fd035ba200d"
+      },
+      "learning_diagnostics": {
+        "q_gradient_norm": 0.6573691964149475,
+        "bc_gradient_norm": 0.01995200105011463,
+        "weighted_bc_gradient_norm": 1.676618218421936,
+        "latent_policy_std_mean": [
+          0.000979582080617547,
+          0.0009749677847139537,
+          0.0009887971682474017
+        ],
+        "native_local_linearized_std_mean": [
+          0.0003799188125412911,
+          0.0004037550534121692,
+          0.000988517887890339
+        ],
+        "fixed_initial_training_batch": true,
+        "stochastic_BC_also_penalizes_action_variance": true
+      },
+      "qualified": true,
+      "qualified_cells": 24,
+      "rmse_kw": 213.27988122439356,
+      "biased_facility_relief_mw": 5.943288753449123,
+      "mean_cashflow_26h_usd": -125360.06319678626,
+      "eligible": true
+    },
+    "native_completion": {
+      "status": "completed",
+      "variant": "guided_sac",
+      "seed": 1103,
+      "online_transitions": 153600,
+      "sac_actor_updates": 152576,
+      "critic_updates": 152832,
+      "selected": {
+        "timesteps": 4096,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip",
+          "sha256": "0cf65bada29818b690e6e7bc59a40c35351d096f6cb1a58b1aa88fd035ba200d"
+        },
+        "learning_diagnostics": {
+          "q_gradient_norm": 0.6573691964149475,
+          "bc_gradient_norm": 0.01995200105011463,
+          "weighted_bc_gradient_norm": 1.676618218421936,
+          "latent_policy_std_mean": [
+            0.000979582080617547,
+            0.0009749677847139537,
+            0.0009887971682474017
+          ],
+          "native_local_linearized_std_mean": [
+            0.0003799188125412911,
+            0.0004037550534121692,
+            0.000988517887890339
+          ],
+          "fixed_initial_training_batch": true,
+          "stochastic_BC_also_penalizes_action_variance": true
+        },
+        "qualified": true,
+        "qualified_cells": 24,
+        "rmse_kw": 213.27988122439356,
+        "biased_facility_relief_mw": 5.943288753449123,
+        "mean_cashflow_26h_usd": -125360.06319678626,
+        "eligible": true
+      },
+      "smoke_only": false,
+      "registration_unchanged": true,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "code_hashes": {
+        "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+        "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+        "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+        "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+        "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+        "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+        "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+        "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+        "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+        "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+        "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+        "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+        "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+        "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+      }
+    },
+    "selection_sha256": "789f254be7b3279fc9b8ac0afbf6e564ab29acf9fe05b9565164d1c49bf92d2f",
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip",
+      "sha256": "0cf65bada29818b690e6e7bc59a40c35351d096f6cb1a58b1aa88fd035ba200d"
+    },
+    "macro": "full_residual"
+  },
+  "cell": {
+    "start_day": 192,
+    "regd_load_bias": 0.0,
+    "seed": 91001
+  },
+  "reset_info": {
+    "simulation_mode": "physical_v1",
+    "start_day": 192,
+    "regd_load_bias": 0.0,
+    "episode_ticks": 17280,
+    "grid_market": "nyiso_nyc",
+    "weather_source": "real:NYC.csv:calendar_climatology_2024"
+  },
+  "complete": true,
+  "service_checks": {
+    "complete": true,
+    "terminal_soc": true,
+    "terminal_work": true,
+    "thermal_warnings": true
+  },
+  "qualified": true,
+  "initial": {
+    "tick": 0,
+    "soc": 0.5,
+    "nominal_stored_mwh": 7.5,
+    "usable_energy_property_mwh": 7.5,
+    "bess_age_fraction": 0.0,
+    "backlog_kwh": 0.0,
+    "temp_A": 30.0,
+    "temp_B": 30.0,
+    "reference_temp_A": 30.0,
+    "reference_temp_B": 30.0
+  },
+  "service_terminal": {
+    "tick": 17280,
+    "soc": 0.5634006675468815,
+    "nominal_stored_mwh": 8.451010013203222,
+    "usable_energy_property_mwh": 8.450894458672563,
+    "bess_age_fraction": 6.83672901104999e-05,
+    "backlog_kwh": 0.0,
+    "temp_A": 30.61597161549809,
+    "temp_B": 25.16211849724387,
+    "reference_temp_A": 30.616120974655697,
+    "reference_temp_B": 25.815589181846427
+  },
+  "service": {
+    "initial_backlog_kwh": 0.0,
+    "steps": 17280,
+    "hours": 24.000000000003432,
+    "electricity_usd": 229300.4617237419,
+    "nominal_electricity_usd": 228881.87417358137,
+    "grid_energy_mwh": 3199.7629180813115,
+    "facility_energy_mwh": 3198.7811079196713,
+    "battery_throughput_mwh": 1.0255093516574925,
+    "work_arrived_kwh": 11107.97189280706,
+    "work_served_kwh": 11107.97189280706,
+    "backlog_kwh": 0.0,
+    "backlog_exposure_kwh_hours": 0.0,
+    "max_backlog_kwh": 0.0,
+    "thermal_warning_ticks": 0,
+    "error_squared": 552215547.9307517,
+    "normalized_error_squared": 2.1005833422334113,
+    "signed_regd_sum": -198.4482346214052,
+    "requested_energy_mwh": -4.480825306048463,
+    "lmp_hours": 1720.1933257499331,
+    "work_conservation_error_kwh": 0.0,
+    "tracking_rmse_kw": 178.7649805835293,
+    "normalized_rmse": 0.011025494819230472,
+    "thermal_warning_fraction": 0.0,
+    "time_weighted_lmp_usd_mwh": 71.67472190623697
+  },
+  "recovery": {
+    "performed": true,
+    "complete": true,
+    "ledger": {
+      "initial_backlog_kwh": 0.0,
+      "steps": 1440,
+      "hours": 1.9999999999999933,
+      "electricity_usd": 14479.92920316879,
+      "nominal_electricity_usd": 14538.078512072836,
+      "grid_energy_mwh": 255.29026903439495,
+      "facility_energy_mwh": 256.2118927474214,
+      "battery_throughput_mwh": 0.9216237130264419,
+      "work_arrived_kwh": 623.3739215449399,
+      "work_served_kwh": 623.3739215449399,
+      "backlog_kwh": 0.0,
+      "backlog_exposure_kwh_hours": 0.0,
+      "max_backlog_kwh": 0.0,
+      "thermal_warning_ticks": 0,
+      "error_squared": 3312859565.5837445,
+      "normalized_error_squared": 331285.95655837504,
+      "signed_regd_sum": -381.51851239201875,
+      "requested_energy_mwh": 0.0,
+      "lmp_hours": 113.53723205000064,
+      "work_conservation_error_kwh": 0.0,
+      "tracking_rmse_kw": 1516.77187491866,
+      "normalized_rmse": 15.167718749186612,
+      "thermal_warning_fraction": 0.0,
+      "time_weighted_lmp_usd_mwh": 56.76861602500051
+    },
+    "extension": {
+      "service_ticks": 17280,
+      "recovery_ticks": 1440,
+      "state_digest_before": "463c62371131bd4a98971250927c608f3381fb2b9c6ce5be4f738890da1248ed",
+      "state_digest_after": "463c62371131bd4a98971250927c608f3381fb2b9c6ce5be4f738890da1248ed",
+      "state_preserved": true,
+      "service_replay_prefix_preserved": true
+    },
+    "soc_error": -1.577432628963038e-11,
+    "backlog_kwh": 0.0,
+    "temperature_A_minus_reference_C": -1.900795325582294e-07,
+    "temperature_B_minus_reference_C": -0.00028024186394759454,
+    "usable_energy_property_change_mwh": -0.0001947135430775404,
+    "soc_closed": true,
+    "work_closed": true,
+    "thermal_A_closed": true,
+    "thermal_B_closed": true,
+    "closed": true
+  },
+  "grid": {
+    "stress_threshold_mw": 9174.26,
+    "stress_facility_relief_mw": -0.397521808881742,
+    "LFR_pct": -0.30021507361355376,
+    "SPDR_pct": -0.004185492684266856,
+    "LWCF_pct": -0.8781562354837903,
+    "LWSR_pct": -0.0031055601147459075,
+    "actual_facility_boundary_peak_reduction_mw": -7.585315232352514,
+    "stress_pcc_relief_mw": -0.41715004814206474,
+    "actual_pcc_boundary_peak_reduction_mw": -7.623947982863683,
+    "max_temperature_A_C": 30.900631105930774,
+    "max_temperature_B_C": 29.979950951855272,
+    "max_A_reference_heat_excess_gj": 0.0042892675097157,
+    "max_B_reference_heat_excess_gj": 8.793774734583586,
+    "fraction_temp_B_above_32C": 0.0,
+    "hvac_rail_fraction": 0.0,
+    "stress_requested_mw": -0.6095256093749686,
+    "stress_battery_discharge_mw": -0.019628239260322748,
+    "service_facility_energy_relief_mwh": -2.92895840960335,
+    "negative_relief_outside_stress_mwh": 35.9515987064418
+  },
+  "regulation_revenue_usd": 14880.131348335175,
+  "committed_mw_hours": 393.4641644358635,
+  "performance_weighted_mw_hours": 390.38898754873026,
+  "cashflow_26h_usd": -228900.2595785755,
+  "cash_vs_nominal_26h_usd": 14519.693107078687,
+  "elapsed_seconds": 7.081182383990381,
+  "code_hashes": {
+    "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+    "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+    "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+    "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+    "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+    "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+    "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+    "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+    "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+    "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+    "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+    "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+    "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+    "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35",
+    "final_study.py": "42e3c5740f12716b0a28242a1b5db2fe5cfaac7d22d30eccdd25dac8e1789fed"
+  },
+  "cashflow_closed_recovery_usd": -228900.2595785755,
+  "trace_hashes": {
+    "hardware.csv.gz": "bd023d88e169122dad710e5a153513861720a7dcdd7b0654cce26c9a65b35215",
+    "macro.csv.gz": "76df52817210cdd033a068e8c74015fe372f2b5bcc17533dfb98c947221780e3",
+    "recovery.csv.gz": "52a17649eb526f9f3c070c484eac89e20ce1c2d77a56ce3ceefbe96734f789a1"
+  }
+}

@@ -1,0 +1,1931 @@
+{
+  "state": "completed",
+  "updated_unix": 1793430751.99769,
+  "registration_id": "e3a4bf8b73e8822de3098d81628457cac9484c558b6419f66303bc7622174bde",
+  "planned_policy_cells": 600,
+  "executable_policy_cells": 480,
+  "completed_tasks": 480,
+  "runtime_failures": 0,
+  "outcomes": {
+    "nominal__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s101_b0/episode.json"
+    },
+    "nominal__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s101_b0p5/episode.json"
+    },
+    "nominal__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s102_b0/episode.json"
+    },
+    "nominal__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s103_b0p5/episode.json"
+    },
+    "nominal__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s100_b0p5/episode.json"
+    },
+    "nominal__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s102_b0p5/episode.json"
+    },
+    "nominal__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s100_b0/episode.json"
+    },
+    "nominal__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s103_b0/episode.json"
+    },
+    "nominal__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s104_b0/episode.json"
+    },
+    "nominal__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d207_s104_b0p5/episode.json"
+    },
+    "nominal__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s100_b0p5/episode.json"
+    },
+    "nominal__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s100_b0/episode.json"
+    },
+    "nominal__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s101_b0p5/episode.json"
+    },
+    "nominal__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s101_b0/episode.json"
+    },
+    "nominal__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s102_b0/episode.json"
+    },
+    "nominal__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s102_b0p5/episode.json"
+    },
+    "nominal__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s103_b0/episode.json"
+    },
+    "nominal__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s104_b0/episode.json"
+    },
+    "nominal__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s100_b0p5/episode.json"
+    },
+    "nominal__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s100_b0/episode.json"
+    },
+    "nominal__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s103_b0p5/episode.json"
+    },
+    "nominal__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d248_s104_b0p5/episode.json"
+    },
+    "nominal__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s101_b0/episode.json"
+    },
+    "nominal__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s101_b0p5/episode.json"
+    },
+    "nominal__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s102_b0/episode.json"
+    },
+    "nominal__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s103_b0/episode.json"
+    },
+    "nominal__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s102_b0p5/episode.json"
+    },
+    "nominal__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s103_b0p5/episode.json"
+    },
+    "nominal__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s104_b0/episode.json"
+    },
+    "nominal__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/nominal/d249_s104_b0p5/episode.json"
+    },
+    "pid__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s100_b0/episode.json"
+    },
+    "pid__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s100_b0p5/episode.json"
+    },
+    "pid__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s101_b0/episode.json"
+    },
+    "pid__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s101_b0p5/episode.json"
+    },
+    "pid__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s102_b0/episode.json"
+    },
+    "pid__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s102_b0p5/episode.json"
+    },
+    "pid__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s103_b0/episode.json"
+    },
+    "pid__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s103_b0p5/episode.json"
+    },
+    "pid__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s104_b0/episode.json"
+    },
+    "pid__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d207_s104_b0p5/episode.json"
+    },
+    "pid__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s100_b0/episode.json"
+    },
+    "pid__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s100_b0p5/episode.json"
+    },
+    "pid__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s101_b0/episode.json"
+    },
+    "pid__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s101_b0p5/episode.json"
+    },
+    "pid__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s102_b0/episode.json"
+    },
+    "pid__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s102_b0p5/episode.json"
+    },
+    "pid__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s103_b0/episode.json"
+    },
+    "pid__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s103_b0p5/episode.json"
+    },
+    "pid__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s104_b0/episode.json"
+    },
+    "pid__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d248_s104_b0p5/episode.json"
+    },
+    "pid__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s100_b0/episode.json"
+    },
+    "pid__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s100_b0p5/episode.json"
+    },
+    "pid__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s101_b0/episode.json"
+    },
+    "pid__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s101_b0p5/episode.json"
+    },
+    "pid__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s102_b0/episode.json"
+    },
+    "pid__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s102_b0p5/episode.json"
+    },
+    "pid__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s103_b0/episode.json"
+    },
+    "pid__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s103_b0p5/episode.json"
+    },
+    "pid__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s104_b0/episode.json"
+    },
+    "pid__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/pid/d249_s104_b0p5/episode.json"
+    },
+    "rule_hardware__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s100_b0/episode.json"
+    },
+    "rule_hardware__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s100_b0p5/episode.json"
+    },
+    "rule_hardware__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s101_b0/episode.json"
+    },
+    "rule_hardware__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s101_b0p5/episode.json"
+    },
+    "rule_hardware__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s102_b0/episode.json"
+    },
+    "rule_hardware__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s102_b0p5/episode.json"
+    },
+    "rule_hardware__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s103_b0/episode.json"
+    },
+    "rule_hardware__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s104_b0/episode.json"
+    },
+    "rule_hardware__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s103_b0p5/episode.json"
+    },
+    "rule_hardware__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d207_s104_b0p5/episode.json"
+    },
+    "rule_hardware__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s100_b0/episode.json"
+    },
+    "rule_hardware__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s100_b0p5/episode.json"
+    },
+    "rule_hardware__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s101_b0/episode.json"
+    },
+    "rule_hardware__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s101_b0p5/episode.json"
+    },
+    "rule_hardware__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s102_b0/episode.json"
+    },
+    "rule_hardware__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s103_b0/episode.json"
+    },
+    "rule_hardware__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s102_b0p5/episode.json"
+    },
+    "rule_hardware__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s103_b0p5/episode.json"
+    },
+    "rule_hardware__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s104_b0/episode.json"
+    },
+    "rule_hardware__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s100_b0/episode.json"
+    },
+    "rule_hardware__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s100_b0p5/episode.json"
+    },
+    "rule_hardware__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s101_b0/episode.json"
+    },
+    "rule_hardware__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s101_b0p5/episode.json"
+    },
+    "rule_hardware__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s102_b0/episode.json"
+    },
+    "rule_hardware__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s102_b0p5/episode.json"
+    },
+    "rule_hardware__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d248_s104_b0p5/episode.json"
+    },
+    "rule_hardware__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s103_b0/episode.json"
+    },
+    "rule_hardware__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s103_b0p5/episode.json"
+    },
+    "rule_hardware__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s104_b0/episode.json"
+    },
+    "rule_hardware__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/rule_hardware/d249_s104_b0p5/episode.json"
+    },
+    "bang_bang__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s100_b0/episode.json"
+    },
+    "bang_bang__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s100_b0p5/episode.json"
+    },
+    "bang_bang__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s101_b0/episode.json"
+    },
+    "bang_bang__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s102_b0/episode.json"
+    },
+    "bang_bang__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s102_b0p5/episode.json"
+    },
+    "bang_bang__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s103_b0/episode.json"
+    },
+    "bang_bang__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s101_b0p5/episode.json"
+    },
+    "bang_bang__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s103_b0p5/episode.json"
+    },
+    "bang_bang__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s104_b0/episode.json"
+    },
+    "bang_bang__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d207_s104_b0p5/episode.json"
+    },
+    "bang_bang__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s100_b0/episode.json"
+    },
+    "bang_bang__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s100_b0p5/episode.json"
+    },
+    "bang_bang__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s101_b0/episode.json"
+    },
+    "bang_bang__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s101_b0p5/episode.json"
+    },
+    "bang_bang__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s102_b0p5/episode.json"
+    },
+    "bang_bang__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s103_b0/episode.json"
+    },
+    "bang_bang__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s103_b0p5/episode.json"
+    },
+    "bang_bang__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s104_b0/episode.json"
+    },
+    "bang_bang__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s102_b0/episode.json"
+    },
+    "bang_bang__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d248_s104_b0p5/episode.json"
+    },
+    "bang_bang__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s100_b0p5/episode.json"
+    },
+    "bang_bang__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s100_b0/episode.json"
+    },
+    "bang_bang__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s101_b0p5/episode.json"
+    },
+    "bang_bang__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s101_b0/episode.json"
+    },
+    "bang_bang__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s102_b0/episode.json"
+    },
+    "bang_bang__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s102_b0p5/episode.json"
+    },
+    "bang_bang__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s103_b0p5/episode.json"
+    },
+    "bang_bang__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s104_b0/episode.json"
+    },
+    "bang_bang__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s104_b0p5/episode.json"
+    },
+    "bang_bang__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/bang_bang/d249_s103_b0/episode.json"
+    },
+    "old_low_1001__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s100_b0/episode.json"
+    },
+    "old_low_1001__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s100_b0p5/episode.json"
+    },
+    "old_low_1001__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s101_b0/episode.json"
+    },
+    "old_low_1001__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s101_b0p5/episode.json"
+    },
+    "old_low_1001__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s102_b0/episode.json"
+    },
+    "old_low_1001__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s102_b0p5/episode.json"
+    },
+    "old_low_1001__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s103_b0/episode.json"
+    },
+    "old_low_1001__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s104_b0/episode.json"
+    },
+    "old_low_1001__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s104_b0p5/episode.json"
+    },
+    "old_low_1001__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s100_b0/episode.json"
+    },
+    "old_low_1001__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s100_b0p5/episode.json"
+    },
+    "old_low_1001__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d207_s103_b0p5/episode.json"
+    },
+    "old_low_1001__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s101_b0/episode.json"
+    },
+    "old_low_1001__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s101_b0p5/episode.json"
+    },
+    "old_low_1001__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s102_b0/episode.json"
+    },
+    "old_low_1001__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s102_b0p5/episode.json"
+    },
+    "old_low_1001__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s103_b0/episode.json"
+    },
+    "old_low_1001__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s103_b0p5/episode.json"
+    },
+    "old_low_1001__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s104_b0/episode.json"
+    },
+    "old_low_1001__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s100_b0/episode.json"
+    },
+    "old_low_1001__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s100_b0p5/episode.json"
+    },
+    "old_low_1001__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s101_b0/episode.json"
+    },
+    "old_low_1001__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d248_s104_b0p5/episode.json"
+    },
+    "old_low_1001__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s101_b0p5/episode.json"
+    },
+    "old_low_1001__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s102_b0/episode.json"
+    },
+    "old_low_1001__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s102_b0p5/episode.json"
+    },
+    "old_low_1001__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s103_b0p5/episode.json"
+    },
+    "old_low_1001__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s103_b0/episode.json"
+    },
+    "old_low_1001__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s104_b0/episode.json"
+    },
+    "old_low_1001__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1001/d249_s104_b0p5/episode.json"
+    },
+    "old_low_1002__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s100_b0p5/episode.json"
+    },
+    "old_low_1002__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s101_b0/episode.json"
+    },
+    "old_low_1002__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s101_b0p5/episode.json"
+    },
+    "old_low_1002__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s102_b0/episode.json"
+    },
+    "old_low_1002__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s103_b0/episode.json"
+    },
+    "old_low_1002__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s102_b0p5/episode.json"
+    },
+    "old_low_1002__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s103_b0p5/episode.json"
+    },
+    "old_low_1002__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s100_b0/episode.json"
+    },
+    "old_low_1002__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s104_b0/episode.json"
+    },
+    "old_low_1002__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d207_s104_b0p5/episode.json"
+    },
+    "old_low_1002__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s100_b0/episode.json"
+    },
+    "old_low_1002__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s100_b0p5/episode.json"
+    },
+    "old_low_1002__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s101_b0/episode.json"
+    },
+    "old_low_1002__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s101_b0p5/episode.json"
+    },
+    "old_low_1002__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s102_b0/episode.json"
+    },
+    "old_low_1002__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s103_b0/episode.json"
+    },
+    "old_low_1002__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s102_b0p5/episode.json"
+    },
+    "old_low_1002__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s103_b0p5/episode.json"
+    },
+    "old_low_1002__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s104_b0/episode.json"
+    },
+    "old_low_1002__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d248_s104_b0p5/episode.json"
+    },
+    "old_low_1002__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s100_b0/episode.json"
+    },
+    "old_low_1002__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s101_b0/episode.json"
+    },
+    "old_low_1002__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s100_b0p5/episode.json"
+    },
+    "old_low_1002__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s101_b0p5/episode.json"
+    },
+    "old_low_1002__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s102_b0p5/episode.json"
+    },
+    "old_low_1002__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s103_b0/episode.json"
+    },
+    "old_low_1002__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s103_b0p5/episode.json"
+    },
+    "old_low_1002__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s104_b0/episode.json"
+    },
+    "old_low_1002__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s104_b0p5/episode.json"
+    },
+    "old_low_1003__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s100_b0/episode.json"
+    },
+    "old_low_1002__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1002/d249_s102_b0/episode.json"
+    },
+    "old_low_1003__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s100_b0p5/episode.json"
+    },
+    "old_low_1003__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s101_b0/episode.json"
+    },
+    "old_low_1003__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s101_b0p5/episode.json"
+    },
+    "old_low_1003__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s102_b0/episode.json"
+    },
+    "old_low_1003__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s102_b0p5/episode.json"
+    },
+    "old_low_1003__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s103_b0/episode.json"
+    },
+    "old_low_1003__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s103_b0p5/episode.json"
+    },
+    "old_low_1003__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s104_b0/episode.json"
+    },
+    "old_low_1003__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d207_s104_b0p5/episode.json"
+    },
+    "old_low_1003__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s100_b0/episode.json"
+    },
+    "old_low_1003__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s100_b0p5/episode.json"
+    },
+    "old_low_1003__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s101_b0/episode.json"
+    },
+    "old_low_1003__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s101_b0p5/episode.json"
+    },
+    "old_low_1003__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s102_b0/episode.json"
+    },
+    "old_low_1003__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s102_b0p5/episode.json"
+    },
+    "old_low_1003__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s103_b0/episode.json"
+    },
+    "old_low_1003__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s103_b0p5/episode.json"
+    },
+    "old_low_1003__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s104_b0/episode.json"
+    },
+    "old_low_1003__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d248_s104_b0p5/episode.json"
+    },
+    "old_low_1003__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s100_b0/episode.json"
+    },
+    "old_low_1003__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s100_b0p5/episode.json"
+    },
+    "old_low_1003__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s101_b0/episode.json"
+    },
+    "old_low_1003__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s101_b0p5/episode.json"
+    },
+    "old_low_1003__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s102_b0/episode.json"
+    },
+    "old_low_1003__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s102_b0p5/episode.json"
+    },
+    "old_low_1003__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s103_b0/episode.json"
+    },
+    "old_low_1003__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s103_b0p5/episode.json"
+    },
+    "old_low_1003__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s104_b0/episode.json"
+    },
+    "old_low_1003__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1003/d249_s104_b0p5/episode.json"
+    },
+    "old_low_1004__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s100_b0/episode.json"
+    },
+    "old_low_1004__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s100_b0p5/episode.json"
+    },
+    "old_low_1004__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s101_b0/episode.json"
+    },
+    "old_low_1004__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s101_b0p5/episode.json"
+    },
+    "old_low_1004__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s102_b0/episode.json"
+    },
+    "old_low_1004__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s103_b0/episode.json"
+    },
+    "old_low_1004__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s102_b0p5/episode.json"
+    },
+    "old_low_1004__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s103_b0p5/episode.json"
+    },
+    "old_low_1004__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s104_b0/episode.json"
+    },
+    "old_low_1004__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d207_s104_b0p5/episode.json"
+    },
+    "old_low_1004__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s100_b0/episode.json"
+    },
+    "old_low_1004__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s100_b0p5/episode.json"
+    },
+    "old_low_1004__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s101_b0/episode.json"
+    },
+    "old_low_1004__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s101_b0p5/episode.json"
+    },
+    "old_low_1004__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s102_b0p5/episode.json"
+    },
+    "old_low_1004__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s102_b0/episode.json"
+    },
+    "old_low_1004__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s103_b0/episode.json"
+    },
+    "old_low_1004__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s103_b0p5/episode.json"
+    },
+    "old_low_1004__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s104_b0/episode.json"
+    },
+    "old_low_1004__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d248_s104_b0p5/episode.json"
+    },
+    "old_low_1004__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s100_b0/episode.json"
+    },
+    "old_low_1004__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s100_b0p5/episode.json"
+    },
+    "old_low_1004__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s101_b0/episode.json"
+    },
+    "old_low_1004__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s101_b0p5/episode.json"
+    },
+    "old_low_1004__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s102_b0/episode.json"
+    },
+    "old_low_1004__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s102_b0p5/episode.json"
+    },
+    "old_low_1004__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s103_b0/episode.json"
+    },
+    "old_low_1004__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s103_b0p5/episode.json"
+    },
+    "old_low_1004__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s104_b0p5/episode.json"
+    },
+    "old_low_1004__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1004/d249_s104_b0/episode.json"
+    },
+    "old_low_1005__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s100_b0/episode.json"
+    },
+    "old_low_1005__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s100_b0p5/episode.json"
+    },
+    "old_low_1005__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s101_b0/episode.json"
+    },
+    "old_low_1005__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s101_b0p5/episode.json"
+    },
+    "old_low_1005__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s102_b0/episode.json"
+    },
+    "old_low_1005__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s102_b0p5/episode.json"
+    },
+    "old_low_1005__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s103_b0/episode.json"
+    },
+    "old_low_1005__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s103_b0p5/episode.json"
+    },
+    "old_low_1005__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s104_b0/episode.json"
+    },
+    "old_low_1005__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d207_s104_b0p5/episode.json"
+    },
+    "old_low_1005__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s100_b0/episode.json"
+    },
+    "old_low_1005__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s100_b0p5/episode.json"
+    },
+    "old_low_1005__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s101_b0/episode.json"
+    },
+    "old_low_1005__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s101_b0p5/episode.json"
+    },
+    "old_low_1005__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s102_b0/episode.json"
+    },
+    "old_low_1005__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s103_b0/episode.json"
+    },
+    "old_low_1005__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s102_b0p5/episode.json"
+    },
+    "old_low_1005__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s103_b0p5/episode.json"
+    },
+    "old_low_1005__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s104_b0/episode.json"
+    },
+    "old_low_1005__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d248_s104_b0p5/episode.json"
+    },
+    "old_low_1005__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s100_b0/episode.json"
+    },
+    "old_low_1005__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s100_b0p5/episode.json"
+    },
+    "old_low_1005__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s101_b0/episode.json"
+    },
+    "old_low_1005__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s101_b0p5/episode.json"
+    },
+    "old_low_1005__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s102_b0/episode.json"
+    },
+    "old_low_1005__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s102_b0p5/episode.json"
+    },
+    "old_low_1005__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s103_b0/episode.json"
+    },
+    "old_low_1005__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s103_b0p5/episode.json"
+    },
+    "old_low_1005__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s104_b0/episode.json"
+    },
+    "old_low_1005__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1005/d249_s104_b0p5/episode.json"
+    },
+    "old_low_1006__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s100_b0/episode.json"
+    },
+    "old_low_1006__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s100_b0p5/episode.json"
+    },
+    "old_low_1006__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s101_b0/episode.json"
+    },
+    "old_low_1006__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s101_b0p5/episode.json"
+    },
+    "old_low_1006__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s102_b0/episode.json"
+    },
+    "old_low_1006__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s102_b0p5/episode.json"
+    },
+    "old_low_1006__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s103_b0/episode.json"
+    },
+    "old_low_1006__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s103_b0p5/episode.json"
+    },
+    "old_low_1006__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s104_b0/episode.json"
+    },
+    "old_low_1006__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d207_s104_b0p5/episode.json"
+    },
+    "old_low_1006__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s100_b0/episode.json"
+    },
+    "old_low_1006__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s100_b0p5/episode.json"
+    },
+    "old_low_1006__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s101_b0/episode.json"
+    },
+    "old_low_1006__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s101_b0p5/episode.json"
+    },
+    "old_low_1006__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s102_b0/episode.json"
+    },
+    "old_low_1006__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s102_b0p5/episode.json"
+    },
+    "old_low_1006__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s103_b0/episode.json"
+    },
+    "old_low_1006__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s103_b0p5/episode.json"
+    },
+    "old_low_1006__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s104_b0/episode.json"
+    },
+    "old_low_1006__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d248_s104_b0p5/episode.json"
+    },
+    "old_low_1006__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s100_b0/episode.json"
+    },
+    "old_low_1006__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s100_b0p5/episode.json"
+    },
+    "old_low_1006__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s101_b0/episode.json"
+    },
+    "old_low_1006__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s101_b0p5/episode.json"
+    },
+    "old_low_1006__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s102_b0/episode.json"
+    },
+    "old_low_1006__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s102_b0p5/episode.json"
+    },
+    "old_low_1006__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s103_b0/episode.json"
+    },
+    "old_low_1006__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s103_b0p5/episode.json"
+    },
+    "old_low_1006__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s104_b0/episode.json"
+    },
+    "old_low_1006__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1006/d249_s104_b0p5/episode.json"
+    },
+    "old_low_1007__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s100_b0/episode.json"
+    },
+    "old_low_1007__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s100_b0p5/episode.json"
+    },
+    "old_low_1007__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s101_b0/episode.json"
+    },
+    "old_low_1007__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s101_b0p5/episode.json"
+    },
+    "old_low_1007__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s102_b0/episode.json"
+    },
+    "old_low_1007__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s102_b0p5/episode.json"
+    },
+    "old_low_1007__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s103_b0/episode.json"
+    },
+    "old_low_1007__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s103_b0p5/episode.json"
+    },
+    "old_low_1007__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s104_b0/episode.json"
+    },
+    "old_low_1007__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d207_s104_b0p5/episode.json"
+    },
+    "old_low_1007__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s100_b0/episode.json"
+    },
+    "old_low_1007__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s100_b0p5/episode.json"
+    },
+    "old_low_1007__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s101_b0/episode.json"
+    },
+    "old_low_1007__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s101_b0p5/episode.json"
+    },
+    "old_low_1007__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s102_b0p5/episode.json"
+    },
+    "old_low_1007__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s102_b0/episode.json"
+    },
+    "old_low_1007__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s103_b0/episode.json"
+    },
+    "old_low_1007__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s103_b0p5/episode.json"
+    },
+    "old_low_1007__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s104_b0/episode.json"
+    },
+    "old_low_1007__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d248_s104_b0p5/episode.json"
+    },
+    "old_low_1007__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s100_b0/episode.json"
+    },
+    "old_low_1007__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s100_b0p5/episode.json"
+    },
+    "old_low_1007__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s101_b0/episode.json"
+    },
+    "old_low_1007__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s101_b0p5/episode.json"
+    },
+    "old_low_1007__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s102_b0/episode.json"
+    },
+    "old_low_1007__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s102_b0p5/episode.json"
+    },
+    "old_low_1007__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s103_b0/episode.json"
+    },
+    "old_low_1007__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s103_b0p5/episode.json"
+    },
+    "old_low_1007__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s104_b0/episode.json"
+    },
+    "old_low_1007__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_low_1007/d249_s104_b0p5/episode.json"
+    },
+    "old_pair_1001__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s100_b0/episode.json"
+    },
+    "old_pair_1001__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s100_b0p5/episode.json"
+    },
+    "old_pair_1001__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s101_b0/episode.json"
+    },
+    "old_pair_1001__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s101_b0p5/episode.json"
+    },
+    "old_pair_1001__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s102_b0/episode.json"
+    },
+    "old_pair_1001__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s102_b0p5/episode.json"
+    },
+    "old_pair_1001__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s103_b0/episode.json"
+    },
+    "old_pair_1001__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s103_b0p5/episode.json"
+    },
+    "old_pair_1001__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s104_b0p5/episode.json"
+    },
+    "old_pair_1001__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d207_s104_b0/episode.json"
+    },
+    "old_pair_1001__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s100_b0/episode.json"
+    },
+    "old_pair_1001__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s100_b0p5/episode.json"
+    },
+    "old_pair_1001__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s101_b0/episode.json"
+    },
+    "old_pair_1001__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s101_b0p5/episode.json"
+    },
+    "old_pair_1001__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s102_b0/episode.json"
+    },
+    "old_pair_1001__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s102_b0p5/episode.json"
+    },
+    "old_pair_1001__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s103_b0/episode.json"
+    },
+    "old_pair_1001__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s103_b0p5/episode.json"
+    },
+    "old_pair_1001__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s104_b0/episode.json"
+    },
+    "old_pair_1001__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d248_s104_b0p5/episode.json"
+    },
+    "old_pair_1001__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s100_b0/episode.json"
+    },
+    "old_pair_1001__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s100_b0p5/episode.json"
+    },
+    "old_pair_1001__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s101_b0/episode.json"
+    },
+    "old_pair_1001__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s101_b0p5/episode.json"
+    },
+    "old_pair_1001__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s102_b0/episode.json"
+    },
+    "old_pair_1001__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s102_b0p5/episode.json"
+    },
+    "old_pair_1001__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s103_b0/episode.json"
+    },
+    "old_pair_1001__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s103_b0p5/episode.json"
+    },
+    "old_pair_1001__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s104_b0p5/episode.json"
+    },
+    "old_pair_1001__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1001/d249_s104_b0/episode.json"
+    },
+    "old_pair_1003__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s100_b0/episode.json"
+    },
+    "old_pair_1003__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s100_b0p5/episode.json"
+    },
+    "old_pair_1003__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s101_b0/episode.json"
+    },
+    "old_pair_1003__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s101_b0p5/episode.json"
+    },
+    "old_pair_1003__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s102_b0/episode.json"
+    },
+    "old_pair_1003__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s102_b0p5/episode.json"
+    },
+    "old_pair_1003__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s103_b0/episode.json"
+    },
+    "old_pair_1003__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s103_b0p5/episode.json"
+    },
+    "old_pair_1003__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s104_b0/episode.json"
+    },
+    "old_pair_1003__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d207_s104_b0p5/episode.json"
+    },
+    "old_pair_1003__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s100_b0/episode.json"
+    },
+    "old_pair_1003__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s100_b0p5/episode.json"
+    },
+    "old_pair_1003__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s101_b0/episode.json"
+    },
+    "old_pair_1003__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s101_b0p5/episode.json"
+    },
+    "old_pair_1003__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s102_b0/episode.json"
+    },
+    "old_pair_1003__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s102_b0p5/episode.json"
+    },
+    "old_pair_1003__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s103_b0/episode.json"
+    },
+    "old_pair_1003__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s103_b0p5/episode.json"
+    },
+    "old_pair_1003__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s104_b0/episode.json"
+    },
+    "old_pair_1003__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d248_s104_b0p5/episode.json"
+    },
+    "old_pair_1003__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s100_b0/episode.json"
+    },
+    "old_pair_1003__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s100_b0p5/episode.json"
+    },
+    "old_pair_1003__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s101_b0/episode.json"
+    },
+    "old_pair_1003__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s101_b0p5/episode.json"
+    },
+    "old_pair_1003__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s102_b0/episode.json"
+    },
+    "old_pair_1003__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s102_b0p5/episode.json"
+    },
+    "old_pair_1003__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s103_b0/episode.json"
+    },
+    "old_pair_1003__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s103_b0p5/episode.json"
+    },
+    "old_pair_1003__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s104_b0/episode.json"
+    },
+    "old_pair_1003__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1003/d249_s104_b0p5/episode.json"
+    },
+    "old_pair_1004__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s100_b0/episode.json"
+    },
+    "old_pair_1004__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s100_b0p5/episode.json"
+    },
+    "old_pair_1004__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s101_b0/episode.json"
+    },
+    "old_pair_1004__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s101_b0p5/episode.json"
+    },
+    "old_pair_1004__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s102_b0/episode.json"
+    },
+    "old_pair_1004__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s102_b0p5/episode.json"
+    },
+    "old_pair_1004__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s103_b0/episode.json"
+    },
+    "old_pair_1004__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s103_b0p5/episode.json"
+    },
+    "old_pair_1004__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s104_b0/episode.json"
+    },
+    "old_pair_1004__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d207_s104_b0p5/episode.json"
+    },
+    "old_pair_1004__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s100_b0/episode.json"
+    },
+    "old_pair_1004__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s100_b0p5/episode.json"
+    },
+    "old_pair_1004__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s101_b0/episode.json"
+    },
+    "old_pair_1004__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s101_b0p5/episode.json"
+    },
+    "old_pair_1004__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s102_b0/episode.json"
+    },
+    "old_pair_1004__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s102_b0p5/episode.json"
+    },
+    "old_pair_1004__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s103_b0/episode.json"
+    },
+    "old_pair_1004__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s103_b0p5/episode.json"
+    },
+    "old_pair_1004__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s104_b0/episode.json"
+    },
+    "old_pair_1004__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d248_s104_b0p5/episode.json"
+    },
+    "old_pair_1004__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s100_b0/episode.json"
+    },
+    "old_pair_1004__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s100_b0p5/episode.json"
+    },
+    "old_pair_1004__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s101_b0/episode.json"
+    },
+    "old_pair_1004__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s101_b0p5/episode.json"
+    },
+    "old_pair_1004__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s102_b0/episode.json"
+    },
+    "old_pair_1004__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s102_b0p5/episode.json"
+    },
+    "old_pair_1004__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s103_b0/episode.json"
+    },
+    "old_pair_1004__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s103_b0p5/episode.json"
+    },
+    "old_pair_1004__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s104_b0/episode.json"
+    },
+    "old_pair_1004__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1004/d249_s104_b0p5/episode.json"
+    },
+    "old_pair_1006__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s100_b0/episode.json"
+    },
+    "old_pair_1006__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s100_b0p5/episode.json"
+    },
+    "old_pair_1006__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s101_b0p5/episode.json"
+    },
+    "old_pair_1006__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s101_b0/episode.json"
+    },
+    "old_pair_1006__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s102_b0/episode.json"
+    },
+    "old_pair_1006__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s102_b0p5/episode.json"
+    },
+    "old_pair_1006__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s103_b0/episode.json"
+    },
+    "old_pair_1006__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s103_b0p5/episode.json"
+    },
+    "old_pair_1006__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s104_b0/episode.json"
+    },
+    "old_pair_1006__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d207_s104_b0p5/episode.json"
+    },
+    "old_pair_1006__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s100_b0/episode.json"
+    },
+    "old_pair_1006__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s100_b0p5/episode.json"
+    },
+    "old_pair_1006__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s101_b0/episode.json"
+    },
+    "old_pair_1006__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s101_b0p5/episode.json"
+    },
+    "old_pair_1006__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s102_b0/episode.json"
+    },
+    "old_pair_1006__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s102_b0p5/episode.json"
+    },
+    "old_pair_1006__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s103_b0/episode.json"
+    },
+    "old_pair_1006__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s103_b0p5/episode.json"
+    },
+    "old_pair_1006__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s104_b0p5/episode.json"
+    },
+    "old_pair_1006__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d248_s104_b0/episode.json"
+    },
+    "old_pair_1006__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s100_b0/episode.json"
+    },
+    "old_pair_1006__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s100_b0p5/episode.json"
+    },
+    "old_pair_1006__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s101_b0/episode.json"
+    },
+    "old_pair_1006__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s101_b0p5/episode.json"
+    },
+    "old_pair_1006__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s102_b0/episode.json"
+    },
+    "old_pair_1006__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s102_b0p5/episode.json"
+    },
+    "old_pair_1006__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s103_b0/episode.json"
+    },
+    "old_pair_1006__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s103_b0p5/episode.json"
+    },
+    "old_pair_1006__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s104_b0/episode.json"
+    },
+    "old_pair_1006__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1006/d249_s104_b0p5/episode.json"
+    },
+    "old_pair_1007__d207_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s100_b0/episode.json"
+    },
+    "old_pair_1007__d207_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s100_b0p5/episode.json"
+    },
+    "old_pair_1007__d207_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s101_b0/episode.json"
+    },
+    "old_pair_1007__d207_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s101_b0p5/episode.json"
+    },
+    "old_pair_1007__d207_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s102_b0/episode.json"
+    },
+    "old_pair_1007__d207_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s102_b0p5/episode.json"
+    },
+    "old_pair_1007__d207_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s103_b0/episode.json"
+    },
+    "old_pair_1007__d207_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s104_b0/episode.json"
+    },
+    "old_pair_1007__d207_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s103_b0p5/episode.json"
+    },
+    "old_pair_1007__d207_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d207_s104_b0p5/episode.json"
+    },
+    "old_pair_1007__d248_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s100_b0/episode.json"
+    },
+    "old_pair_1007__d248_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s100_b0p5/episode.json"
+    },
+    "old_pair_1007__d248_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s101_b0/episode.json"
+    },
+    "old_pair_1007__d248_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s101_b0p5/episode.json"
+    },
+    "old_pair_1007__d248_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s102_b0/episode.json"
+    },
+    "old_pair_1007__d248_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s102_b0p5/episode.json"
+    },
+    "old_pair_1007__d248_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s103_b0/episode.json"
+    },
+    "old_pair_1007__d248_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s103_b0p5/episode.json"
+    },
+    "old_pair_1007__d248_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s104_b0/episode.json"
+    },
+    "old_pair_1007__d248_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d248_s104_b0p5/episode.json"
+    },
+    "old_pair_1007__d249_s100_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s100_b0/episode.json"
+    },
+    "old_pair_1007__d249_s100_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s100_b0p5/episode.json"
+    },
+    "old_pair_1007__d249_s101_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s101_b0/episode.json"
+    },
+    "old_pair_1007__d249_s101_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s101_b0p5/episode.json"
+    },
+    "old_pair_1007__d249_s102_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s102_b0/episode.json"
+    },
+    "old_pair_1007__d249_s102_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s102_b0p5/episode.json"
+    },
+    "old_pair_1007__d249_s103_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s103_b0/episode.json"
+    },
+    "old_pair_1007__d249_s103_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s103_b0p5/episode.json"
+    },
+    "old_pair_1007__d249_s104_b0": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s104_b0/episode.json"
+    },
+    "old_pair_1007__d249_s104_b0p5": {
+      "status": "recorded",
+      "episode": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/heldout/traces/old_pair_1007/d249_s104_b0p5/episode.json"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "table2-four-adversarial-review-closeout-v1",
+  "training_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+  "candidate_lock_id": "7c36b6b64f2ce862d71c1fcba903446a3879cc3eb1030cd09fcb6ddb3828e7c1",
+  "final_registration_id": "a0a2c83ce80927bb3774dd9a6a8c276d92736ed5c9a6ffe6d23d612fa5d4a340",
+  "reviewers": [
+    {
+      "agent_id": "9ff2080c-5e2f-4932-a576-c33bcc10f322",
+      "role": "Adversarial evidence and publication review",
+      "verified_scope": "Metric definitions, case and training-seed aggregation, paired revenue, BC comparisons and manuscript claim boundaries."
+    },
+    {
+      "agent_id": "99b45b80-1298-4ffb-abe8-592be2e210e1",
+      "role": "Adversarial physical control and outcome review",
+      "verified_scope": "Causal control authority, actual facility-versus-BESS attribution, work conservation, hard-case thermal and SOC outcomes, recovery."
+    },
+    {
+      "agent_id": "d66d0f94-95f2-49fe-b792-0a7ba00f5390",
+      "role": "Adversarial SAC implementation and learning review",
+      "verified_scope": "SAC update counts and pairing, optimizer/checkpoint invariants, early selection, late degradation, and exact BC-initializer contrasts."
+    },
+    {
+      "agent_id": "297f4e43-2a12-4fe5-9ac9-3da74dfbc61f",
+      "role": "Adversarial data and provenance review",
+      "verified_scope": "Date/seed separation, actual training exposure, hash chain, model lock, complete case inventory and one-shot final evaluation."
+    }
+  ],
+  "verified_counts": {
+    "native_completed_sac_fits": 8,
+    "online_transitions": 1228800,
+    "actor_updates": 1220608,
+    "critic_updates": 1222656,
+    "training_complete_episodes": 64,
+    "training_prefixes": 32,
+    "regression_episodes": 840,
+    "sealed_episodes": 1008,
+    "final_runtime_failures": 0,
+    "final_complete_and_recovery_closed": 1848,
+    "retained_service_soc_gate_failures": 7,
+    "planned_final_slots": 2376,
+    "non_admitted_slots": 528,
+    "raw_final_scalar_or_array_checks": 591360
+  },
+  "implemented_guard_resolutions": [
+    "Strict native action bounds and named observation/checkpoint contracts.",
+    "Original training dates enforced for fixed and curriculum cases.",
+    "Configured service horizon restored before every training reset.",
+    "True finite-task endpoints and exact update/transition bookkeeping.",
+    "Separate BC-only results and unchanged actor during critic calibration.",
+    "Post-update checkpoint selection with all development cases retained.",
+    "Physical and economic recovery, independent of the service SOC gate.",
+    "Model/data/source hashes checked before and after training and final evaluation.",
+    "Explicit unavailable seed slots and no survivor-only method mean.",
+    "Nonmutating gradient/std telemetry and immediate calibration logging."
+  ],
+  "claims_explicitly_rejected_or_narrowed": [
+    "No iid t-tests, confidence intervals, or statistical equivalence claims.",
+    "No causal explanation of critic/actor drift inferred from Q magnitude alone.",
+    "No claim that the online RL phase beats its BC initializer on tracking.",
+    "No global dominance, accredited capacity, emissions, or business-profit claim.",
+    "No change of primary measurement boundary or main panel to favor a result.",
+    "Original peak dates remain consumed regression evidence.",
+    "Fresh calendar cases do not imply unseen workload phases.",
+    "Thermal state closure is real, but constant HVAC draw does not price excursion depth.",
+    "The analytic tracking outlier is finite actuator saturation, not a hidden power credit."
+  ],
+  "outcome": "Verified controller-pipeline improvements over legacy comparators, with stronger analytic/BC baselines and all tradeoffs retained.",
+  "scope_limit": "Adversarial review and tests are evidence, not a guarantee that every possible defect or deployment risk is absent.",
+  "no_new_policy_rollouts_by_reviewers": true,
+  "no_checkpoint_changes_after_final_registration": true
+}

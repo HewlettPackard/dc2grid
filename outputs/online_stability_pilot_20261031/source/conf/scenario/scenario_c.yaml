@@ -1,0 +1,20 @@
+# conf/scenario/scenario_c.yaml
+# Hydra scenario config for C2G-Bench.
+# All fields here mirror c2g_env/config.yaml [scenario_c] for Hydra composition.
+name: scenario_c
+env_id: scenario_c
+description: "Battery Drain — 32°C, AEMO NSW, low SOC + cooling fault"
+
+# Market / weather
+grid_market:    aemo_nsw
+weather_market: aemo_nsw
+weather_driven: false
+
+# Physics overrides
+T_amb: 32.0
+committed_mw: 20.0
+bess_soc_init: 0.15
+cooling_fault: true
+cooling_fault_factor: 0.6
+genai_spike_scale: 1.2
+grid_stress_scale: 1.2

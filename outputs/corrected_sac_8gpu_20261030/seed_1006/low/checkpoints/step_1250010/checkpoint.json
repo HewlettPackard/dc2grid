@@ -1,0 +1,30 @@
+{
+  "stage": "low",
+  "seed": 1006,
+  "device": "cuda:0",
+  "visible_gpu": "6",
+  "n_envs": 6,
+  "protocol_id": "03df24f39c4f8d2bab2e40d7000d85f97e44bd2b0f9050423ee1066e9dfaf4df",
+  "source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+  "simulation_mode": "physical_v1",
+  "inner_checkpoint": null,
+  "budgets": {
+    "timesteps": 2000000,
+    "learning_starts": 10000,
+    "gamma": 0.99,
+    "eval_freq": 250000,
+    "checkpoint_freq": 250000,
+    "status_freq": 5000
+  },
+  "timesteps": 1250010,
+  "optimizer_updates": 1239984,
+  "model": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1250010/model.zip",
+    "sha256": "04da448efa11187f99bb4a11c4dc810e6a5e8e2103a2acd3cf45912f2bd13ffa"
+  },
+  "replay_buffer": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1250010/replay_buffer.pkl",
+    "sha256": "101ec4996ee0d68188605b0e656c198b8cf70b82f15886f13d610633b12ea42c"
+  },
+  "resume_scope": "optimizer/replay retained; episode/RNG continuation is not bit-exact"
+}

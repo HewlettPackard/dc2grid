@@ -1,0 +1,59 @@
+{
+  "task_schema": "cash-constrained-quantity-macro-v1",
+  "simulation_mode": "physical_v1",
+  "variant": "reserve_potential",
+  "kappa": 0.0003,
+  "training_seed": 5000,
+  "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+  "hardware_checkpoint": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip",
+    "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024"
+  },
+  "extra_observation_features": [
+    "remaining_service_fraction",
+    "current_signed_regd",
+    "last_window_signed_regd_mean",
+    "signed_requested_mwh_over_bess_capacity",
+    "centered_cash_in_10000_usd",
+    "thermal_warning_budget_used",
+    "backlog_fraction_of_arrived_work",
+    "performance_weighted_capacity_ratio",
+    "maximum_accepted_capacity_fraction"
+  ],
+  "device": "cuda:0",
+  "visible_gpu": "4",
+  "macro_decision_seconds": 900,
+  "hardware_decision_seconds": 5,
+  "recovery_seconds": 7200,
+  "finite_task_gamma": 1.0,
+  "state": "training",
+  "pid": 882728,
+  "updated_unix": 1793475248.360239,
+  "elapsed_seconds": 1318.2316290399904,
+  "macro_transitions": 20480,
+  "critic_updates": 19968,
+  "calibration_updates": 512,
+  "normal_sac_updates": 19456,
+  "service_fast_steps": 3686400,
+  "recovery_fast_steps": 305280,
+  "completed_training_episodes": 212,
+  "torch_threads": 1,
+  "cpu_affinity": [
+    103
+  ],
+  "losses": {
+    "train/learning_rate": 0.0003,
+    "train/n_updates": 19968.0,
+    "train/ent_coef": 9.999999717180685e-10,
+    "train/actor_loss": 0.1308481520973146,
+    "train/critic_loss": 0.0018193644764323835
+  },
+  "action_statistics": {
+    "count": 20480,
+    "min": 1.609325408935547e-05,
+    "max": 1.0,
+    "mean": 0.9563729841530175,
+    "std": 0.13708898897305993
+  },
+  "best_qualified_cash": -122405.89934988494
+}

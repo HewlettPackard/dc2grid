@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "scope": "small isolated lifecycle fixture, not an efficacy fit",
+  "clean_terminal_status": "completed",
+  "caller_protocol_unchanged": true,
+  "macro_transitions": 16,
+  "normal_sac_updates": 8,
+  "critic_only_updates": 4,
+  "sealed_policy_evaluations": 0
+}

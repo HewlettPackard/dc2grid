@@ -1,0 +1,907 @@
+{
+  "config_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/environment.yaml",
+  "service_gate": {
+    "min_terminal_soc": 0.2,
+    "max_backlog_fraction": 0.01,
+    "max_thermal_warning_fraction": 0.01,
+    "score": "mean_step_reward",
+    "require_all_validation_cells": true,
+    "required_episode_ticks": 17280,
+    "require_complete_truncation_without_termination": true,
+    "work_conservation_absolute_error_kwh_strictly_below": 0.0001,
+    "backlog_tolerance_kwh": 1e-06,
+    "prior_validation_cell_count": 4,
+    "matched_validation_cell_count": 8
+  },
+  "recovery": {
+    "duration_seconds": 7200,
+    "throttle": 1.0,
+    "pump": 0.7,
+    "hvac": 0.7,
+    "committed_mw": 0.0,
+    "regulation_revenue_usd": 0.0,
+    "soc_tolerance": 1e-06,
+    "backlog_tolerance_kwh": 1e-06,
+    "temperature_tolerance_C": 0.1,
+    "work_conservation_tolerance_kwh": 0.0001,
+    "soc_target": "episode_initial_soc",
+    "temperature_target": "continuing_nominal_reference_trajectory",
+    "fixed_duration_even_if_closed_early": true,
+    "terminate_on_existing_physical_faults": true,
+    "wear_price_model": "USD per MWh of absolute AC battery throughput",
+    "wear_prices_usd_per_mwh": [
+      0.0,
+      5.0,
+      10.0,
+      25.0,
+      50.0
+    ]
+  },
+  "hardware_reference": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip",
+    "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024"
+  },
+  "normalization": {
+    "cash_prefix_bound_usd": 2824000,
+    "import_abs_mw": 400.0,
+    "nominal_abs_mw": 400.0,
+    "lmp_abs_usd_mwh": 118.42008580000001,
+    "ambient_abs_C": 60.0,
+    "formula": "ceil_to_1000(24h*500USD/MWh*30MW + 26h*LMPmax*(400MW+400MW))",
+    "derivation": {
+      "it_nameplate_A_mw": 150.0,
+      "it_nameplate_B_mw": 100.0,
+      "first_fault_temperature_overshoot_A_C": 0.03888888888888889,
+      "first_fault_temperature_overshoot_B_C": 0.08,
+      "reference_A_equilibrium_upper_C": 36.6,
+      "temperature_A_bound_C": 40.0,
+      "ups_input_upper_mw_by_zone": [
+        170.95360824742266,
+        115.50000000000001
+      ],
+      "chiller_A_upper_mw": 11.666666666666666,
+      "derived_import_absolute_upper_mw": 360.82027491408934,
+      "UPS_proof": "x in [.01,1]; x+k(1-x)^2+k0 increasing for k<.5",
+      "scope": "All permitted prefixes including the first fault step; no continuation after faults"
+    }
+  },
+  "train_days": [
+    16,
+    19,
+    30,
+    36,
+    50,
+    52,
+    81,
+    98,
+    102,
+    115,
+    130,
+    157,
+    168,
+    178,
+    184,
+    194,
+    204,
+    209,
+    225,
+    227,
+    243,
+    251,
+    271,
+    279,
+    283,
+    297,
+    305,
+    323,
+    332,
+    356
+  ],
+  "train_biases": [
+    0.0,
+    0.25,
+    0.5
+  ],
+  "development_cells": [
+    {
+      "start_day": 38,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 38,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 38,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 38,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 104,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 104,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 104,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 104,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 147,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 147,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 147,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 147,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 192,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 192,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 192,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 192,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 232,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 232,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 232,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 232,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 316,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 316,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 316,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 316,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    }
+  ],
+  "sealed_cells": [
+    {
+      "start_day": 72,
+      "regd_load_bias": 0.0,
+      "seed": 92001
+    },
+    {
+      "start_day": 72,
+      "regd_load_bias": 0.5,
+      "seed": 92001
+    },
+    {
+      "start_day": 72,
+      "regd_load_bias": 0.0,
+      "seed": 92002
+    },
+    {
+      "start_day": 72,
+      "regd_load_bias": 0.5,
+      "seed": 92002
+    },
+    {
+      "start_day": 72,
+      "regd_load_bias": 0.0,
+      "seed": 92003
+    },
+    {
+      "start_day": 72,
+      "regd_load_bias": 0.5,
+      "seed": 92003
+    },
+    {
+      "start_day": 149,
+      "regd_load_bias": 0.0,
+      "seed": 92001
+    },
+    {
+      "start_day": 149,
+      "regd_load_bias": 0.5,
+      "seed": 92001
+    },
+    {
+      "start_day": 149,
+      "regd_load_bias": 0.0,
+      "seed": 92002
+    },
+    {
+      "start_day": 149,
+      "regd_load_bias": 0.5,
+      "seed": 92002
+    },
+    {
+      "start_day": 149,
+      "regd_load_bias": 0.0,
+      "seed": 92003
+    },
+    {
+      "start_day": 149,
+      "regd_load_bias": 0.5,
+      "seed": 92003
+    },
+    {
+      "start_day": 186,
+      "regd_load_bias": 0.0,
+      "seed": 92001
+    },
+    {
+      "start_day": 186,
+      "regd_load_bias": 0.5,
+      "seed": 92001
+    },
+    {
+      "start_day": 186,
+      "regd_load_bias": 0.0,
+      "seed": 92002
+    },
+    {
+      "start_day": 186,
+      "regd_load_bias": 0.5,
+      "seed": 92002
+    },
+    {
+      "start_day": 186,
+      "regd_load_bias": 0.0,
+      "seed": 92003
+    },
+    {
+      "start_day": 186,
+      "regd_load_bias": 0.5,
+      "seed": 92003
+    },
+    {
+      "start_day": 254,
+      "regd_load_bias": 0.0,
+      "seed": 92001
+    },
+    {
+      "start_day": 254,
+      "regd_load_bias": 0.5,
+      "seed": 92001
+    },
+    {
+      "start_day": 254,
+      "regd_load_bias": 0.0,
+      "seed": 92002
+    },
+    {
+      "start_day": 254,
+      "regd_load_bias": 0.5,
+      "seed": 92002
+    },
+    {
+      "start_day": 254,
+      "regd_load_bias": 0.0,
+      "seed": 92003
+    },
+    {
+      "start_day": 254,
+      "regd_load_bias": 0.5,
+      "seed": 92003
+    },
+    {
+      "start_day": 337,
+      "regd_load_bias": 0.0,
+      "seed": 92001
+    },
+    {
+      "start_day": 337,
+      "regd_load_bias": 0.5,
+      "seed": 92001
+    },
+    {
+      "start_day": 337,
+      "regd_load_bias": 0.0,
+      "seed": 92002
+    },
+    {
+      "start_day": 337,
+      "regd_load_bias": 0.5,
+      "seed": 92002
+    },
+    {
+      "start_day": 337,
+      "regd_load_bias": 0.0,
+      "seed": 92003
+    },
+    {
+      "start_day": 337,
+      "regd_load_bias": 0.5,
+      "seed": 92003
+    },
+    {
+      "start_day": 349,
+      "regd_load_bias": 0.0,
+      "seed": 92001
+    },
+    {
+      "start_day": 349,
+      "regd_load_bias": 0.5,
+      "seed": 92001
+    },
+    {
+      "start_day": 349,
+      "regd_load_bias": 0.0,
+      "seed": 92002
+    },
+    {
+      "start_day": 349,
+      "regd_load_bias": 0.5,
+      "seed": 92002
+    },
+    {
+      "start_day": 349,
+      "regd_load_bias": 0.0,
+      "seed": 92003
+    },
+    {
+      "start_day": 349,
+      "regd_load_bias": 0.5,
+      "seed": 92003
+    }
+  ],
+  "schema": "table2-standalone-demonstration-initialized-sac-v1",
+  "registered_utc": "2026-10-31T21:48:46.123897+00:00",
+  "phase": "development_training_only",
+  "final_evaluation_requires_separate_locked_registration": true,
+  "implementation_revision": 1,
+  "feature_contract": {
+    "id": "native18-own-command4-request-ema900s-clock-v1",
+    "dimension": 24,
+    "source": "original low observations, own previously executed action and clock",
+    "analytic_observer_or_projection": false,
+    "action": "pump_hvac_bess_full_work"
+  },
+  "variants": [
+    "warm_sac",
+    "guided_sac"
+  ],
+  "seeds": [
+    1100,
+    1101,
+    1102,
+    1103
+  ],
+  "initializers": {
+    "1100": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1100/best_bc.zip",
+      "sha256": "040f12daee07d1d11f35f96b630bd9e2be3a1838feee317a5ea494419239f175"
+    },
+    "1101": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1101/best_bc.zip",
+      "sha256": "a37aece4596854f0c827442fb2a8db947396a0606e544b0637e0372f6818a0fe"
+    },
+    "1102": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1102/best_bc.zip",
+      "sha256": "310639f3904a50975e79cd61c11e5bb24a5f86a5259efbcb8082c1ee6322ec57"
+    },
+    "1103": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1103/best_bc.zip",
+      "sha256": "17b9357e8f04a6814bc8685bfafd394a454e606ea9a982a8ea2b18c0859ce9ed"
+    }
+  },
+  "corpus_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/demonstrations_v1",
+  "n_envs": 4,
+  "threads_per_process": 1,
+  "cpu_groups": [
+    [
+      39,
+      40,
+      42,
+      60,
+      41
+    ],
+    [
+      122,
+      57,
+      113,
+      110,
+      119
+    ],
+    [
+      89,
+      101,
+      71,
+      118,
+      120
+    ],
+    [
+      84,
+      85,
+      19,
+      80,
+      112
+    ],
+    [
+      75,
+      108,
+      86,
+      51,
+      81
+    ],
+    [
+      91,
+      47,
+      52,
+      69,
+      78
+    ],
+    [
+      50,
+      66,
+      53,
+      123,
+      126
+    ],
+    [
+      1,
+      77,
+      79,
+      82,
+      73
+    ]
+  ],
+  "gpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "total_timesteps": 153600,
+  "milestones": [
+    4096,
+    8192,
+    16384,
+    32768,
+    65536,
+    153600
+  ],
+  "learning_starts": 1024,
+  "critic_calibration_updates": 256,
+  "bc_initial_gradient_ratio": 1.0,
+  "reward": "unchanged physical_v1 low-level seven-component reward",
+  "finite_endpoint": "24-hour task is a true terminal; no timeout bootstrap",
+  "training_recovery_scope": "evaluation only; physical 24h+2h closure retained",
+  "selection": {
+    "all_development_cells_must_qualify": true,
+    "rmse_must_be_below_old_sac_kw": 448.32986784615144,
+    "biased_relief_must_be_at_least_old_sac_mw": 5.710236761746028,
+    "closed_cash_must_be_at_least_pid_usd": -125531.10202374612,
+    "score": "maximize biased mean facility relief; tie-break by lower RMSE",
+    "per_training_seed": true,
+    "bc_only_is_not_an_RL_checkpoint": true,
+    "retain_all_failed_runs_and_cells": true
+  },
+  "algorithm": {
+    "learning_rate": 0.0001,
+    "buffer_size": 200000,
+    "batch_size": 256,
+    "tau": 0.005,
+    "gamma": 0.99,
+    "ent_coef": 1e-05,
+    "train_freq": 16,
+    "gradient_steps": -1
+  },
+  "architecture": [
+    128,
+    128
+  ],
+  "demonstration_teacher": "causal_cooling_first; not the historical SAC reference",
+  "initializer_selection": {
+    "training_loss": "MSE of SB3-scaled actions",
+    "selection_loss": "sum of native-unit action MSEs",
+    "validation_subset": "fixed 65536 training-support rows, seeded per BC fit",
+    "paired_arms": "same exact selected initializer for a given training seed",
+    "no_posthoc_reselection": true,
+    "producer_code": "Each bc_v1 fit has its own immutable source/manifest snapshot; the new loader's label-bound assertions are a forward guard."
+  },
+  "online_exposure": {
+    "if_no_early_termination": "8 complete service episodes plus 4 prefixes; 12 dates, cycle zero only",
+    "early_physical_failures": "can produce additional resets and cycles",
+    "actual_support": "report episode journals and final prefixes per fit",
+    "shared_external_data": "the fixed training-only demonstration corpus"
+  },
+  "supplemental_metrics": [
+    "24h modeled system maximum reduction at facility and PCC boundaries",
+    "26h closed cashflow and battery throughput",
+    "thermal warnings, peak temperatures and reference-relative heat debt",
+    "per-date and per-training-seed paired differences"
+  ],
+  "input_hashes": {
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/development_baselines_v1/summary.json": "964c387d1481947d3804b6f1a700621282da887065449d4bc7b445b843433522",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_development_v1/summary.json": "177e9d9b66306d9ce8573a42fb95e17586443e54a5c9527c26519122c52566d9",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/reports/comparator_metrics.json": "7de5c8bf53077bc3b892c60ec6f285b43ab88e152e155ae05278d04a2bfdce14",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/demonstrations_v1/summary.json": "25b91845ea4c62e20b0fed4cd81459874a32bc9470bd48b42e77a9a446402f06",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/demonstrations_v1/manifest.json": "4cc353ecaa6b10773c095c19015b68482e8b695b54ba84b166e9db70c289e0b9",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/macro_task.py": "b85f5955c71f5230717f0951decc7177f8399bb23e0383d5be3e402f1f5695e1",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/recovery_ops.py": "45395520fd57814fac7551c0c0e19382f921f25b3e6add2592cbc1762fc8a069",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/study_common.py": "134dd05407f5c82873d4ebd3fc8161d8b439faf49fd88025213e9b1ca95b3e7c",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/prepare.py": "c7facafb75f3b5ea46303b6bfba131c615a98c14fffe49b753280a9dac657f39",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/environment.yaml": "fefc727951679cd3d2b724f046d67786c204250f6ab14d63aabe4277ac9fe5b8",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1100/best_bc.zip": "040f12daee07d1d11f35f96b630bd9e2be3a1838feee317a5ea494419239f175",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1101/best_bc.zip": "a37aece4596854f0c827442fb2a8db947396a0606e544b0637e0372f6818a0fe",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1102/best_bc.zip": "310639f3904a50975e79cd61c11e5bb24a5f86a5259efbcb8082c1ee6322ec57",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1103/best_bc.zip": "17b9357e8f04a6814bc8685bfafd394a454e606ea9a982a8ea2b18c0859ce9ed",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1100/result.json": "2c80ab8a22c08bf6355acc54cf9413747c00080463002f0a22fb1067c0b3bc34",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1100/selection.json": "65767c1dd7a7990c88faff41bc3c6f3f726d9c2a4b0dc4ba4165652779464686",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1100/manifest.json": "418f0fd56f69f9f293014b3514c19676b17a45acc731c3ca4769b7bf334744eb",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1101/result.json": "e83808cd96ea7e3124168d22a35526ce5041cde88907cb621cdc91644c0810f9",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1101/selection.json": "ecf95a26b1c9707d253bd4ce554d170fb7e71fdbd6784206ec6e863bddc0dd97",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1101/manifest.json": "b2744585adfdbbcf38c1cbf06c88ce78817f126f9f51321b192ffff95b9603b7",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1102/result.json": "1b1b442e7019d4925597c1f40f873df65eb7c87e6b35e78bfad5a86756e51462",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1102/selection.json": "de50bfd35ef1d2c1b3e06f6c3d0c8ba7d4d5aca80e587415055fca2cb8b9ea92",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1102/manifest.json": "eef0b8b82b6a621ce1bd4026711b517ae146f4eef9b8928c75b192f899d21d7b",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1103/result.json": "23764d9363f103f4ae5cf5b405dd71cc63c14f4b97fe3dedde150e2aedf8e207",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1103/selection.json": "e874a7c13d482b374d4837fdc4ea0cf89e320e619886067515eba3c8f5abe86a",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1103/manifest.json": "e79305b8c8d2b31b312f0b79dfb41fa3cc085518f24f419e5533c0e92a95103f"
+  },
+  "code_hashes": {
+    "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+    "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+    "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+    "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+    "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+    "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+    "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+    "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+    "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+    "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+    "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+    "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+    "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+    "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+  },
+  "frozen_physics": {
+    "physics_source_files": {
+      "c2g_env/__init__.py": "8d0bd53367b910a3e2bf04d86f388ffcf5068957d9a931d81cd1b240ea366905",
+      "c2g_env/config.yaml": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6",
+      "c2g_env/env_high_level.py": "6c5034698fdd011168d99b5e2fd99b13d2825c4af37eaab563fa6acf75381842",
+      "c2g_env/env_low_level.py": "5af3087eebdb5576280a3c4bcdd3f410d67eb5d01c2a67c7f07c0c1197f2a1bc",
+      "c2g_env/experiments/__init__.py": "b340890df4770fbd38a80a5b7707f6d925362c2658b16e9de0898d6395046a1c",
+      "c2g_env/experiments/action_ablation_env.py": "5b4ae4bb55bb7aa73359302a5e0c2631849c8d0d0c51d60b4109d446f4f04822",
+      "c2g_env/experiments/analyze_thermal_cross_scenario.py": "af9670dc2c0e39076db332ce645d3dcf61c5bccdeca6566ae9952b8c7d0ac7a5",
+      "c2g_env/experiments/identity.py": "e847618db0f2c837c38a3cad13cafba8ffac5201c02b74ff61f5a26c99090d03",
+      "c2g_env/experiments/thermal_sensitivity.py": "b3a0e07be94813a2ca478bf843495712566082ab728f85859692434d946dff22",
+      "c2g_env/experiments/thermal_sensitivity_cross_scenario.py": "7ca88e2fec68a63c4395a62aea8bd3eb7367984af24f9b072330462045630a82",
+      "c2g_env/obs_indices.py": "881e9a8107d5b2645d3e11a3089fb2334e1e946d6a949221dc1b5bec5ee3ec10",
+      "c2g_env/physics/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "c2g_env/physics/bess.py": "7f8621c4db624a559b3e16b982ce4c74cde58e1bc5fca403338fe8121b2a9ad0",
+      "c2g_env/physics/electrical.py": "8bb8869bcbab04c25dd3eb2054fcc5a818f9c26b90179a1f2d0e72dfe77bcee1",
+      "c2g_env/physics/macro_grid.py": "ffadb41d1883481deeb7dff9d13506b8cd3c16dd747aa8fb740cb18261b2994d",
+      "c2g_env/physics/thermal.py": "7d81bd173f5442fde8c3661763031eda03d3cdbdffd886181436eee9ef388729",
+      "c2g_env/physics/weather.py": "f00a81fa6560bcc4bfe6fdfd14bcaa1065d5d2325f7ec25b1b16dfb71d01d59d",
+      "c2g_env/physics/workload.py": "00ec3849157e73b9bd5fe5cd25286463d7c5b0ff82dc72ffb515f4ef7927dddc",
+      "c2g_env/plant_profiles.py": "22832db868807586840d92ec207c41a455fbd06f8ba8c1562ef6c95281ba264d",
+      "c2g_env/replay.py": "c09bb0514ef14a0398c5daf76c79b60f65dc42c4b333ca54adbcaa37106bfe77",
+      "c2g_env/semantics.py": "9a7525a4e7b63b463cbd0862e9a3ddecb3740744e258b84bea358167231f4aae",
+      "c2g_env/thermal_limits.py": "c86f2b5136a01d432c43e9226e07df41e843f49951dc6978a1eb606ea0923650",
+      "c2g_env/train_envs/__init__.py": "063980296c2ccfb8b2424f7a1a23b29eb6da0391518c9d430f7fd658c89ba7c9",
+      "c2g_env/train_envs/fixed_action_wrapper.py": "e30accf10ca495ee46bf4f8b71596b210d4c4e2a4152d9da1d7df5718291ce27",
+      "c2g_env/train_envs/rule_macro_wrapped.py": "18df35431e3b44ab39a60ca8bad8313dccddc60a5b6963cb10c2ff3d94310566",
+      "baselines/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "baselines/_hydra_compat.py": "06d8bc3d4247e7fa18da9a2276b2028ad14449204789b97914a76a631f3d673f",
+      "baselines/bang_bang.py": "f97345bd5723885a1df5d5f826920c9f3f148bec8ba476d0a59cb5f4d2f2119d",
+      "baselines/macro_metrics_callback.py": "7a57eed1522136f22343ed0a1d3d9786aa1f4ed66aeb548db0b0cdfcfabd3cbe",
+      "baselines/metrics_callback.py": "25cd72161485764ee34e462a8590eddf1bda20d38c3c8e7ad598f0cc5ea34aaf",
+      "baselines/milp_dispatch.py": "90305c1cafeb3a365c6f6ae31beeac0230a497099b7c338cad317b0114ee6e7b",
+      "baselines/mpc_fast.py": "1995e3ed79a4f71df9b5fe5c51c0d9b33610c3010b4c1c20ba0f6130170dfdc6",
+      "baselines/mpc_macro.py": "1945a5dd23e9166d2bff1fa0e7b4b838c282d2a3dd6adde6af905e0e728a4a72",
+      "baselines/online_stability.py": "093c95a1b45981b281d1e2795235d9ffcc7f7d91cf35d834a66757b45892a50d",
+      "baselines/pid_controller.py": "420a38c6098e653ecf5b40fbf6201542512be19f2b7b4c52e0cd1ccb80db3d1d",
+      "baselines/rule_based_macro.py": "42dc8bc42245556d23e41019fed400fc2d3dfafdc34fe61b0574011571d9bdc3",
+      "baselines/rule_based_mpc.py": "342c978a0ee52acbebe3cb51b53ec6c1945d7bfda20eea77c4dcb8d01f662524",
+      "baselines/sac_provenance.py": "0e94b3cd4b2b95b4a692384b169421c62b258c5d93e53730c1bfa795d4faf08d",
+      "baselines/safety/train_cpo.py": "e14342d480e54ff300e925883feb4d29a742d9c229eb10776f347977da602243",
+      "baselines/safety/train_ppo_lagrangian.py": "dd4a1eaa637b0476a0fad0ecc60d84b1f94843ffdc8b38ed372c4d1c7d088765",
+      "baselines/train_corrected_sac.py": "5ad016cf6b03c1091baaae80558581f5f09370d19661940ca3288f6a5dc1d327",
+      "baselines/train_hierarchical.py": "49d57bdd1ab127297fc4e8999feae71585bbe0071807697bdbdb751b758d1395",
+      "baselines/train_hierarchical_sac.py": "f0812638916980ce9ace95b30bbb78cb2026c24912a819cd7a0adad39788e34b",
+      "baselines/train_llm_agents.py": "465ab7e1cb1a4f13e33aba3e659d070d88c789d54a177915f6679b0bbdbc4c56",
+      "baselines/train_lowsac_highrandom.py": "69c17606dc5f6ce917cec581f4e3979f58a57ec70ce295d5b644fbbecb0852ec",
+      "baselines/train_ppo.py": "7b7ac6c9223a372d083ab229f32b1391d3981ac0da886248bcce5ab4ffc27720",
+      "baselines/train_ppo_macro.py": "7d34cf545b5d728d3d2d747e16499e8927cdcaa30df92b7be76e513d93ce417c",
+      "baselines/train_rule_macro_ppo.py": "d368122ac78366bb411ae56fad1ff63718f2782a8cc50164cd64e4faceb92a94",
+      "baselines/train_rule_macro_sac.py": "7980548b4f4ed28fc13833f59db3f0847631b02a50d1fbd57c5f291b42c7668a",
+      "baselines/train_sac.py": "4ef86d7f7199419e75019ea0144b6f54ee7d39176ff427260e32e574865eb027",
+      "evaluation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evaluation/failure_analysis.py": "4711574c1a3250b59bf493fe3906e8d0e4e3429307d23340c966c4082d04eaf7",
+      "evaluation/generate_plots.py": "fa75edfd23a4944968ec4c3eb57b93e913b728e776a1d66687112f07b26a97f0",
+      "evaluation/grid_relief.py": "2c8ad2c0c6f86f8351b267a402fe2809d8f51df379a531c549aca1806d64b2bc",
+      "evaluation/plot_episode_traces.py": "f51c8d02aa2472cf914461c6df27d935aadd83b76899db4eb2b0b152b906fb84",
+      "evaluation/run_benchmark.py": "c6f86fd32af0ff3ec6cdff569c5674fecd963fc132c32193da1c6d22216c455a",
+      "evaluation/run_sachigh_saclow_benchmark.py": "5ec6cc671d8d2d828ac8c693c6990dbc90acc60c32c584b335ad4c07204440f3",
+      "evaluation/statistical_analysis.py": "41d47d45d9f889213f40f6eae2ced717cdbfcb5d61de707aeaf978a61dabe2dc",
+      "evaluation/vis_reward.py": "347a1976e44820e43aa0054be2b5db6f1beef57a03497acffd1e79f674df344a",
+      "evaluation/vis_runbenchmark.py": "1bb5c3402933412e04f7b9ccecd0fd54738e4bac6ecdc22ce5d7a3c79008df46",
+      "scripts/download_energy.py": "2496cc2981e211d7026cf07bb0312baa7e4c8a3a31231ee80aaa0866a437da9a",
+      "scripts/download_weather.py": "e12f96739c411e2b742afd3d1621677a322db98cb400943aac86a8eb2acd507f",
+      "scripts/launch_online_stability.py": "fd20b0fc932bb3ea16ff7e8e24527a4fd6154e51ffe94ef67935c90d2b73da1d",
+      "scripts/retrain_corrected_sac.py": "26aff123a567c4a7fd81793f7d8b61c2b36f7d2ca5c77360b96f3fa5977e7ebc",
+      "conf/algo/cpo.yaml": "7d9de3309346c3e637a47497264f2952ed781cab30e4a758dddcc498187be713",
+      "conf/algo/milp.yaml": "e1da331a4f2ed8ac0ebd0489121e535bdd43ed5a689161fb6a333b2c9f44f37d",
+      "conf/algo/mpc_fast.yaml": "34fb5bcd65f174f5f0c4be99ffc1a70ff124078d4988195dd142c70cc2dae6fb",
+      "conf/algo/mpc_macro.yaml": "ef8d778ebe59ac574de0c04cce70b83f032653dab1a7a6c2dc409a50f6b61ae2",
+      "conf/algo/pid.yaml": "8b92bc884b96a8e02bb80f4be61ffb734d1762b71da21f9a117d58c6e0928095",
+      "conf/algo/ppo.yaml": "83449f7d5a65217a50428b15d6f7a357fee892cab12c728906b50878e2ba780e",
+      "conf/algo/ppo_lagrangian.yaml": "eb151e085ea5d98a7246d1c9c617f3fab04a6fc641ccf69cb894452702f0e8ff",
+      "conf/algo/ppo_macro.yaml": "dda5e5751d131ed001646f6ea8e7b2c8f438b63d3fd45c53c64f6d6124e2e630",
+      "conf/algo/rule_macro_ppo.yaml": "7eda6dc6d80241b1094b99ab55d2aca4c4078b29bcce7f5b13cf5daf195b9cc0",
+      "conf/algo/sac.yaml": "438824073c8b546736b6dfa19a295a9fd32f946cfeed594d896c57b4f5ad644b",
+      "conf/chat_templates/run_benchmark_rbc+ICRL.yaml": "bda03ce1a377be8aef2992841eb6b6e2eddff72a69cd282358d53b4bda11bef1",
+      "conf/chat_templates/run_benchmark_rbc.yaml": "cbbac5fd7c9853448fc4c0bf68145cd9db99794cd6b1e7899dc1b03e51b74241",
+      "conf/config.yaml": "a3ffc2834f5d8b4d7a260a85b47a5490c371a43b52770a7d129b64d010f59aa7",
+      "conf/experiments.yaml": "176632f7fe504f8485c87d5d4d5cd09670a3143103111840920f8300de7d9e7a",
+      "conf/grid_relief_graded.yaml": "feb6630f741b676d51fd8a7fa00130db2a75a863dffd1fa95e2fa3353f263bc1",
+      "conf/logging/tensorboard.yaml": "50a263c65910a20656e631c943706c5eb64855ca7d764e72ee988c4849c88ef7",
+      "conf/market/aemo_nsw.yaml": "e94b4f5b11cdd525bf9df548540af63e3e2fc2158d9f2022cc492ddb7f823f11",
+      "conf/market/caiso_pgae.yaml": "1cd2fc3594c857930139a0f032fe049681833f9b24922a8993ee5e864fa53143",
+      "conf/market/entso_de.yaml": "ea41a785bfe4012f0fd9d083c2bd43f73a4e4f2fa843cc182022d03016419600",
+      "conf/market/ercot_north.yaml": "5833f8b8a4d68c56460509fdb1c548307d0dbc4e1cbe206b56a1b5e9ae512473",
+      "conf/market/nyiso_nyc.yaml": "060ae502277cb821e6f5b4bffa29915b8e682cd7160b3d3994f8b9975368f5ef",
+      "conf/market/pjm_dom.yaml": "15a2b1088861fbd174c1469334de18c9cb743341c03cea44704eb2ca71ad7092",
+      "conf/plant_profiles/none.yaml": "25452e216da80961e53bb949007b97bcf587a7bc836c7745067a68df784542ea",
+      "conf/plant_profiles/plant_100mw.yaml": "e4af62eceadd72d460dac392930b84265c0e3070753dc76f6230410782b5c91f",
+      "conf/plant_profiles/plant_500mw.yaml": "f836371307cb22292ba602dabdd14890b0f59839779c544b61a51ba5ddc017d5",
+      "conf/plant_profiles/plant_50mw.yaml": "c747cb0ec305a40ecb39ed4b5c5f30aa0a081e0eb996c56dc63ae02af68cd4af",
+      "conf/retraining/corrected_sac.yaml": "abcca3f5c1b1ed9e162a96aeb506bd2f406602be7905e0d4bb9e48a0212f0fa6",
+      "conf/scenario/default.yaml": "6e2a84bbe063143203240eda4eb501429468e0c0f17a0165cc15ef446846052b",
+      "conf/scenario/scenario_a.yaml": "72a2a1c118e54479689e20ac4d50c6a9b17636052fdd2f9d1d9acc8e07576ff3",
+      "conf/scenario/scenario_b.yaml": "4510f0f6f9bbf022f2afa71295e7fbbb81f879539d595693b7676633fa28358a",
+      "conf/scenario/scenario_c.yaml": "ae869e94f4caace24792a665cf4abfa913e053ffc8928357e250d8e3f92e45bb"
+    },
+    "data_files": {
+      "data/processed/energy/NYC.csv": "db33c788d440f5ba4aa0d4b968a409d428107b92c87c49ecee0c1823e5069203",
+      "data/processed/weather/NYC.csv": "0a32b8fe345d6f5df1654b88c4d3f6664e32db1c231d3dea0083d2b0a22a8c46",
+      "data/processed/workload_traces/batch_v2023.csv": "52a5430a998a43a4eea0183ccee82dd88e02a6097cb49e3b17deb38fdb5daae9",
+      "data/processed/workload_traces/dlrm_v2025.csv": "e6336e6d67cbeef8fabd652c7d04279dfc6a41c7a93a500b8c5330d8699bf63e",
+      "data/processed/workload_traces/genai_v2026.csv": "8fa72a4f2b343ffda2742c8d656ea1107b8bdc9088f3c7eba4b1a2f7608aecf8"
+    },
+    "prior_registration": "e3a4bf8b73e8822de3098d81628457cac9484c558b6419f66303bc7622174bde",
+    "hardware": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip",
+      "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024"
+    }
+  },
+  "python": "3.11.12",
+  "reporting": {
+    "primary_boundary": "facility, excluding battery exchange",
+    "revenue_contrast": "same controller: beta0.5 versus beta0",
+    "all_four_training_seeds": true,
+    "uncertainty": "descriptive; crossed date/noise/training seeds disclosed",
+    "old_sac": "frozen historical selected checkpoint; not a data-matched algorithm ablation",
+    "analytic_inverter": "required non-RL comparator",
+    "bc_only": "required supervised comparator",
+    "no_automatic_RL_superiority_claim": true,
+    "both_variants_reported": true,
+    "no_posthoc_variant_selection": true,
+    "development_selection": "best eligible of six post-update milestones",
+    "gate_scopes": {
+      "relief": "12 biased development cases",
+      "rmse_and_cash": "24 development cases, both biases",
+      "pid_cash_reference": "24 complete cases, including one gate failure"
+    },
+    "rl_increment_reference": "each seed's exact BC-only initializer",
+    "dominance_checks": [
+      "versus analytic controller",
+      "versus paired BC-only initializer"
+    ],
+    "regression_panel": "original peak dates are consumed, descriptive regression evidence",
+    "sealed_panel": "six unseen calendar combinations, balanced low/medium/high load; not six peak days or unseen workload phases",
+    "disposition": {
+      "no_eligible_fit": "No qualifying SAC improvement; retain all failures and never relabel BC as RL or relax gates after evaluation.",
+      "eligible_but_dominated": "Report improvement relative to the named legacy references; no RL advantage over the dominating analytic/BC comparator.",
+      "eligible_nondominated": "Report the measured tradeoff and paired BC increment; no generic RL superiority claim."
+    }
+  },
+  "registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+  "workers": 4,
+  "evaluation_cpus": [
+    40,
+    42,
+    60,
+    41
+  ],
+  "policies": [
+    {
+      "id": "warm_sac_1100_step_16384",
+      "hardware": "history_sac",
+      "macro": "rule",
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/warm_sac_1100/step_16384.zip",
+        "sha256": "63097cd800b647b75342c8ca2a7019e1bed25f4aa1b1f42b31adc1856000f2d1"
+      }
+    }
+  ],
+  "cells": [
+    {
+      "start_day": 38,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 38,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 38,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 38,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 104,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 104,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 104,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 104,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 147,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 147,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 147,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 147,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 192,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 192,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 192,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 192,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 232,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 232,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 232,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 232,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    },
+    {
+      "start_day": 316,
+      "regd_load_bias": 0.0,
+      "seed": 91001
+    },
+    {
+      "start_day": 316,
+      "regd_load_bias": 0.5,
+      "seed": 91001
+    },
+    {
+      "start_day": 316,
+      "regd_load_bias": 0.0,
+      "seed": 91002
+    },
+    {
+      "start_day": 316,
+      "regd_load_bias": 0.5,
+      "seed": 91002
+    }
+  ]
+}

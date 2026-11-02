@@ -1,0 +1,47 @@
+{
+  "stage": "high",
+  "seed": 1000,
+  "device": "cuda:0",
+  "visible_gpu": "1",
+  "n_envs": 6,
+  "protocol_id": "c031a1bdfbb9d4ae55e3bea99be806b7690e9b8358d0216c40cd89a92d0ebf6f",
+  "source_id": "adc8c4d2622ffa435236c7a610191da3b4b5d4d7155290c1b6a3ddaa5ede5c67",
+  "simulation_mode": "physical_v1",
+  "inner_checkpoint": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_pilot_20261030/seed_1000/low/best_model/best_model.zip",
+    "sha256": "ee76e4389ff83cae7db3cb0a6dd09bf6d36f9d4d97bc15c12fa9df77e21f0df0"
+  },
+  "budgets": {
+    "timesteps": 288,
+    "learning_starts": 36,
+    "gamma": 0.99,
+    "eval_freq": 289,
+    "checkpoint_freq": 144,
+    "status_freq": 36
+  },
+  "state": "completed",
+  "updated_at": "2026-10-30T21:30:02.626051+00:00",
+  "pid": 135093,
+  "timesteps": 288,
+  "optimizer_updates": 288,
+  "training_fast_steps": 51840,
+  "completed_training_episodes": 0,
+  "elapsed_seconds": 20.976803061999817,
+  "transitions_per_second": 13.729451487377581,
+  "validation_seconds": 11.786390520999703,
+  "validation_calls": 1,
+  "cpu_affinity": [
+    7
+  ],
+  "torch_threads": 1,
+  "best_qualified_score": -1.408410503947764,
+  "losses": {
+    "train/learning_rate": 0.0003,
+    "train/n_updates": 288.0,
+    "train/ent_coef": 0.9241305912534395,
+    "train/actor_loss": -1.2847882956266403,
+    "train/critic_loss": 0.3835515696555376,
+    "train/ent_coef_loss": -0.2628078004345298
+  },
+  "qualified_checkpoint": true
+}

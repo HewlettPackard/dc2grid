@@ -1,0 +1,33 @@
+{
+  "registration_id": "e3a4bf8b73e8822de3098d81628457cac9484c558b6419f66303bc7622174bde",
+  "stage": "heldout",
+  "planned_policy_cells": 600,
+  "recorded_rollouts": 480,
+  "unavailable_policy_cells": 120,
+  "runtime_failures": 0,
+  "service_complete": 480,
+  "service_qualified": 412,
+  "recovery_complete": 480,
+  "recovery_closed": 480,
+  "overall_qualified": 412,
+  "exact_development_service_replays": 0,
+  "comparison_records": 1380,
+  "complete_service_pairs": 1080,
+  "closed_recovery_pairs": 1080,
+  "observed_recovery_residual_cases": 480,
+  "max_abs_observed_recovery_soc_error": 2.8284374842257876e-11,
+  "max_abs_observed_recovery_temperature_A_error_C": 0.0020992983977983215,
+  "max_abs_observed_recovery_temperature_B_error_C": 0.00021756755868196365,
+  "new_training_steps": 0,
+  "interpretation": [
+    "Selected frozen checkpoints, not from-scratch algorithm comparisons.",
+    "Unavailable, nonqualified, incomplete and unclosed cells are retained.",
+    "SPDR is a stress-average proxy, not actual maximum-load reduction.",
+    "Weather is calendar-matched 2024 climatology with 2023 grid load.",
+    "Recovery uses continuing proxy LMP, not real realized ISO prices.",
+    "Recovery is next-day 00:00-02:00; prices are measured, not assumed flat.",
+    "Finite-tolerance closure does not erase degradation or workload latency.",
+    "Wear sensitivity assumes an AC-throughput price, not calibrated wear.",
+    "Standard deviations describe evaluation cases, not training uncertainty."
+  ]
+}

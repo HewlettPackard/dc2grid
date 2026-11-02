@@ -1,0 +1,11 @@
+{
+  "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+  "allowed": true,
+  "fully_qualified_constant_baselines": [
+    "fraction_0.95",
+    "fraction_0.98",
+    "fraction_1"
+  ],
+  "baseline_summary_sha256": "f8acdc852f343f3bc26b9e68ddd6d320cee250d4be09686d048b67c02bd334fb",
+  "reason": "Full-development joint feasibility demonstrated"
+}

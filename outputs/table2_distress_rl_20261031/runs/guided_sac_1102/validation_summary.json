@@ -1,0 +1,179 @@
+[
+  {
+    "timesteps": 4096,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_4096.zip",
+      "sha256": "30a942428ae2918649d19faed5bf13e2149b2ff460cbb0de7d2e585a71627a01"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 1.9035420417785645,
+      "bc_gradient_norm": 0.014288250356912613,
+      "weighted_bc_gradient_norm": 2.534888505935669,
+      "latent_policy_std_mean": [
+        0.0009148110402747989,
+        0.0009221027139574289,
+        0.0009456282714381814
+      ],
+      "native_local_linearized_std_mean": [
+        0.000354841526132077,
+        0.00038469547871500254,
+        0.0009456105763092637
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 208.8325108109416,
+    "biased_facility_relief_mw": 6.088989453617163,
+    "mean_cashflow_26h_usd": -125290.64445087813,
+    "eligible": true
+  },
+  {
+    "timesteps": 8192,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_8192.zip",
+      "sha256": "7656d8652ccc1f535e29478a132a2166dbb6b6646d19889d95dedb081abd7bfe"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 3.8414855003356934,
+      "bc_gradient_norm": 0.013139834627509117,
+      "weighted_bc_gradient_norm": 2.3311474323272705,
+      "latent_policy_std_mean": [
+        0.0003363612631801516,
+        0.0003987455856986344,
+        0.00035366142401471734
+      ],
+      "native_local_linearized_std_mean": [
+        0.0001308007340412587,
+        0.00016624582349322736,
+        0.00035364172072149813
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 595.0653673975617,
+    "biased_facility_relief_mw": 6.043607081050204,
+    "mean_cashflow_26h_usd": -125516.41602692644,
+    "eligible": false
+  },
+  {
+    "timesteps": 16384,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_16384.zip",
+      "sha256": "3ac4ffd7957f45286692d257fd9ac7dd721d00894a3588a8d067c6646f9e70bd"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 4.343295097351074,
+      "bc_gradient_norm": 0.010431650094687939,
+      "weighted_bc_gradient_norm": 1.8506864309310913,
+      "latent_policy_std_mean": [
+        0.0002843012916855514,
+        0.00033804040867835283,
+        0.00028983253287151456
+      ],
+      "native_local_linearized_std_mean": [
+        0.00011027469008695334,
+        0.00013646279694512486,
+        0.0002897627418860793
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 794.7046107678528,
+    "biased_facility_relief_mw": 5.943951384839177,
+    "mean_cashflow_26h_usd": -125518.42968944238,
+    "eligible": false
+  },
+  {
+    "timesteps": 32768,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_32768.zip",
+      "sha256": "fd43ddfb06c7afdd53684a45a3c8f52e9a8cfa71955b5a84c090b4d4817f1506"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 2.648879051208496,
+      "bc_gradient_norm": 0.01743740774691105,
+      "weighted_bc_gradient_norm": 3.09358286857605,
+      "latent_policy_std_mean": [
+        0.00025506867677904665,
+        0.00027039326960220933,
+        0.00017190429207403213
+      ],
+      "native_local_linearized_std_mean": [
+        9.869314089883119e-05,
+        0.00010659882536856458,
+        0.0001718846324365586
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 442.7065055368377,
+    "biased_facility_relief_mw": 5.963813896690031,
+    "mean_cashflow_26h_usd": -125573.02496050969,
+    "eligible": false
+  },
+  {
+    "timesteps": 65536,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_65536.zip",
+      "sha256": "15d7e098fb246c932aae91a3ba8f249708b3500751f5351771cfafaa5fd59eb5"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 5.4413042068481445,
+      "bc_gradient_norm": 0.03325895220041275,
+      "weighted_bc_gradient_norm": 5.90049409866333,
+      "latent_policy_std_mean": [
+        0.00022533221635967493,
+        0.00027477412368170917,
+        0.00017352642316836864
+      ],
+      "native_local_linearized_std_mean": [
+        8.789465937297791e-05,
+        0.00011199469736311585,
+        0.00017347892571706325
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 1018.0816562840668,
+    "biased_facility_relief_mw": 6.422016257597704,
+    "mean_cashflow_26h_usd": -125603.39923464037,
+    "eligible": false
+  },
+  {
+    "timesteps": 153600,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_153600.zip",
+      "sha256": "92654089692e1d7b62fc3ca1f7fbc5921ae37331f25b7bb7be02d7bafb2ed1aa"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 1.9527713060379028,
+      "bc_gradient_norm": 0.01663212478160858,
+      "weighted_bc_gradient_norm": 2.950716972351074,
+      "latent_policy_std_mean": [
+        0.00029396527679637074,
+        0.0003362183924764395,
+        0.00022663280833512545
+      ],
+      "native_local_linearized_std_mean": [
+        0.00011419462680350989,
+        0.0001349121448583901,
+        0.00022660807007923722
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "eligible": false,
+    "qualified": false,
+    "reason": "incomplete"
+  }
+]

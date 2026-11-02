@@ -1,0 +1,37 @@
+# conf/plant_profiles/plant_500mw.yaml
+# Plant capacity profile — 500 MW facility (2.0x the 250 MW default).
+# Canonical Hydra-side definition of the plant sizing used by the
+# capacity-generalization experiments. Mirrors c2g_env/config.yaml
+# [plant_500mw] (the runtime source the env reads via scenario name).
+#
+# Nameplate = (n_racks_a_flex + n_racks_a_base) x 75 kW + n_racks_b x 40 kW
+#           = 4000 x 75 kW (300 MW, Zone A) + 5000 x 40 kW (200 MW, Zone B).
+#
+# Upper-bound design point: 500 MW is the top of the realistic single-substation
+# range for frontier AI campuses. Extensive quantities scale linearly with
+# capacity; intensive quantities (per-rack power, COP, C/K time constant, SOC
+# bounds, setpoints) are unchanged, so the thermal margin to the fixed 35 degC
+# limit is identical to the default plant.
+name: plant_500mw
+description: "500 MW facility (2.0x default) — upper-bound capacity-generalization test"
+
+plant:
+  # Capacity-scaled standing DR commitment (2.0x default)
+  dr_baseline_mw:   10.0
+  n_racks_a_flex: 2400
+  n_racks_a_base: 1600
+  n_racks_b:      5000
+  S_xfmr_mva:     600.0
+  p_iron_mw:      0.30
+  p_lighting_mw:  1.0
+  p_network_mw:   3.0
+  C_A:            54000.0
+  C_B:            20000.0
+  K_liq:          70.0
+  K_air:          26.0
+  K_env_A:        1.0
+  K_env_B:        1.0
+  max_hvac_mw:    100.0
+  P_PUMP_MAX_MW:  3.0
+  E_NOM_MWH:      30.0
+  P_MAX_MW:       10.0

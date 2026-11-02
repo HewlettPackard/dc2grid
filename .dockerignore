@@ -1,0 +1,52 @@
+# Version control
+.git/
+.gitignore
+
+# Python caches / build artifacts
+__pycache__/
+*.py[oc]
+*.egg-info/
+.eggs/
+build/
+dist/
+wheels/
+
+# Virtual environments (rebuilt inside the image)
+.venv/
+.history/
+
+# Training / experiment outputs (large, regenerated at run time)
+outputs/
+multirun/
+tensorboard/
+logs/
+results/sweep_results.csv
+results/sweep_summary.csv
+trained_models/
+best_model/
+checkpoints/
+final_model.zip
+vec_normalize.pkl
+episode_metrics.csv
+out.txt
+
+# Notebooks
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# LaTeX build artifacts
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+
+# Docker
+Dockerfile
+.dockerignore

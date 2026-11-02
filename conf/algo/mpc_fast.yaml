@@ -1,0 +1,6 @@
+name: mpc_fast
+
+horizon: 24        # 24 × 5s = 2 minutes look-ahead
+replan_every: 1    # re-solve every step (receding horizon)
+max_iter: 50       # SLSQP iterations per solve
+T_amb: 25.0        # assumed ambient temperature (°C)

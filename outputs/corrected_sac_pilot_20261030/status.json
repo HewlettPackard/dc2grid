@@ -1,0 +1,47 @@
+{
+  "state": "completed",
+  "supervisor_pid": 131887,
+  "updated_unix": 1793395683.623297,
+  "jobs": [
+    {
+      "seed": 1000,
+      "gpu": 0,
+      "cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "stage": "low",
+      "state": "completed",
+      "pid": 131939,
+      "command": [
+        "/workspace/IBM/temp/dc2grid-repos/dc2grid/.venv/bin/python",
+        "-m",
+        "baselines.train_corrected_sac",
+        "--protocol",
+        "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_pilot_20261030/protocol.yaml",
+        "--stage",
+        "low",
+        "--seed",
+        "1000",
+        "--output",
+        "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_pilot_20261030/seed_1000/low",
+        "--device",
+        "cuda:0",
+        "--cpus",
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "returncode": 0
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "macro_transitions": 16,
+  "score": -8998.006378736289,
+  "qualified_cells": 4,
+  "checkpoint_sha256": "9f3dbbdaf312d4e93f92c03fbc675644de2d121bb530d41c6bbf1d9c20a1409b",
+  "source_validation": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/smoke/full_lifecycle/run/validation/step_16/summary.json",
+  "selection_uses_sealed_test": false
+}

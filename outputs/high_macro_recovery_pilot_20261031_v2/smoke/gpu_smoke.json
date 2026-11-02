@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "device": "cuda:0",
+  "gpu_name": "NVIDIA H100 80GB HBM3",
+  "visible_gpu": "3",
+  "macro_transitions": 32,
+  "teacher_guided_transitions": 16,
+  "normal_sac_updates": 16,
+  "critic_only_updates": 4,
+  "supervised_bias_updates": 256,
+  "actor_changed_under_SAC": true,
+  "actor_unchanged_during_calibration": true,
+  "zero_timeout_masks": true,
+  "checkpoint_deterministic_parity": true,
+  "hardware_device": "cpu",
+  "hardware_tensor_digest": "461faebfd5f96fad2775e07f3f4d4ecf5ec16a3f2de63684075393d75f81e0d7",
+  "completed_logged_episodes": 16,
+  "initialization": {
+    "kind": "constant_fraction_supervised_bias_initialization",
+    "not_a_state_dependent_selector_or_RL_result": true,
+    "updates": 256,
+    "target_fraction": 0.98,
+    "learned_fraction": 0.9800000190734863,
+    "initial_loss": 3.7865660190582275,
+    "final_loss": 5.684341886080802e-14,
+    "actor_tensor_digest": "690999f65e7ec05d0aeed663886f55c1e7b6119975a5004f90761642ae055db0",
+    "critic_tensor_digest": "3851b38729b5f0516677a286f74b93e8a2d72fcea795a45d3acd02d67af52ec0",
+    "critic_target_tensor_digest": "3851b38729b5f0516677a286f74b93e8a2d72fcea795a45d3acd02d67af52ec0",
+    "sac_actor_optimizer_updates": 0
+  },
+  "calibration": {
+    "critic_only_updates": 4,
+    "actor_unchanged": true,
+    "actor_optimizer_unchanged": true,
+    "mean_loss": 0.2500042838510126,
+    "last_loss": 0.010280906222760677
+  },
+  "no_development_or_sealed_policy_cases_used": true
+}

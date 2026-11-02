@@ -1,0 +1,696 @@
+{
+  "training_registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+  "training_status_sha256": "2376e985bdf73d9e953cf9f85bfe5accf4339fb4ca3e1048af3c41ee73f94ec9",
+  "inventory": [
+    {
+      "id": "nominal",
+      "family": "nominal",
+      "hardware": "none",
+      "available": true,
+      "training_seed": null
+    },
+    {
+      "id": "pid",
+      "family": "pid",
+      "hardware": "pid",
+      "available": true,
+      "training_seed": null
+    },
+    {
+      "id": "rule_hardware",
+      "family": "rule_hardware",
+      "hardware": "rule",
+      "available": true,
+      "training_seed": null
+    },
+    {
+      "id": "bang_bang",
+      "family": "bang_bang",
+      "hardware": "bang_bang",
+      "available": true,
+      "training_seed": null
+    },
+    {
+      "id": "old_sac",
+      "family": "old_sac",
+      "hardware": "old_sac",
+      "available": true,
+      "training_seed": null
+    },
+    {
+      "id": "cooling_first",
+      "family": "cooling_first",
+      "hardware": "cooling_first",
+      "available": true,
+      "training_seed": null
+    },
+    {
+      "id": "bc_only_1100",
+      "family": "bc_only",
+      "hardware": "history_sac",
+      "available": true,
+      "training_seed": 1100,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1100/best_bc.zip",
+        "sha256": "040f12daee07d1d11f35f96b630bd9e2be3a1838feee317a5ea494419239f175"
+      }
+    },
+    {
+      "id": "bc_only_1101",
+      "family": "bc_only",
+      "hardware": "history_sac",
+      "available": true,
+      "training_seed": 1101,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1101/best_bc.zip",
+        "sha256": "a37aece4596854f0c827442fb2a8db947396a0606e544b0637e0372f6818a0fe"
+      }
+    },
+    {
+      "id": "bc_only_1102",
+      "family": "bc_only",
+      "hardware": "history_sac",
+      "available": true,
+      "training_seed": 1102,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1102/best_bc.zip",
+        "sha256": "310639f3904a50975e79cd61c11e5bb24a5f86a5259efbcb8082c1ee6322ec57"
+      }
+    },
+    {
+      "id": "bc_only_1103",
+      "family": "bc_only",
+      "hardware": "history_sac",
+      "available": true,
+      "training_seed": 1103,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1103/best_bc.zip",
+        "sha256": "17b9357e8f04a6814bc8685bfafd394a454e606ea9a982a8ea2b18c0859ce9ed"
+      }
+    },
+    {
+      "id": "warm_sac_1100",
+      "family": "warm_sac",
+      "hardware": "history_sac",
+      "available": false,
+      "training_seed": 1100,
+      "selection": null,
+      "native_completion": {
+        "status": "completed",
+        "variant": "warm_sac",
+        "seed": 1100,
+        "online_transitions": 153600,
+        "sac_actor_updates": 152576,
+        "critic_updates": 152832,
+        "selected": null,
+        "smoke_only": false,
+        "registration_unchanged": true,
+        "feature_contract": {
+          "id": "native18-own-command4-request-ema900s-clock-v1",
+          "dimension": 24,
+          "source": "original low observations, own previously executed action and clock",
+          "analytic_observer_or_projection": false,
+          "action": "pump_hvac_bess_full_work"
+        },
+        "code_hashes": {
+          "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+          "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+          "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+          "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+          "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+          "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+          "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+          "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+          "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+          "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+          "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+          "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+          "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+          "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+        }
+      },
+      "selection_sha256": "2077be5f5f53dd27e1fb8340100e08aa0af08ad94a0c2a81381e63a1b825f54a",
+      "unavailable_reason": "No eligible checkpoint with a completed registered fit; slot retained, never averaged as a successful seed."
+    },
+    {
+      "id": "warm_sac_1101",
+      "family": "warm_sac",
+      "hardware": "history_sac",
+      "available": false,
+      "training_seed": 1101,
+      "selection": null,
+      "native_completion": {
+        "status": "completed",
+        "variant": "warm_sac",
+        "seed": 1101,
+        "online_transitions": 153600,
+        "sac_actor_updates": 152576,
+        "critic_updates": 152832,
+        "selected": null,
+        "smoke_only": false,
+        "registration_unchanged": true,
+        "feature_contract": {
+          "id": "native18-own-command4-request-ema900s-clock-v1",
+          "dimension": 24,
+          "source": "original low observations, own previously executed action and clock",
+          "analytic_observer_or_projection": false,
+          "action": "pump_hvac_bess_full_work"
+        },
+        "code_hashes": {
+          "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+          "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+          "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+          "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+          "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+          "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+          "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+          "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+          "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+          "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+          "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+          "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+          "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+          "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+        }
+      },
+      "selection_sha256": "2077be5f5f53dd27e1fb8340100e08aa0af08ad94a0c2a81381e63a1b825f54a",
+      "unavailable_reason": "No eligible checkpoint with a completed registered fit; slot retained, never averaged as a successful seed."
+    },
+    {
+      "id": "warm_sac_1102",
+      "family": "warm_sac",
+      "hardware": "history_sac",
+      "available": false,
+      "training_seed": 1102,
+      "selection": null,
+      "native_completion": {
+        "status": "completed",
+        "variant": "warm_sac",
+        "seed": 1102,
+        "online_transitions": 153600,
+        "sac_actor_updates": 152576,
+        "critic_updates": 152832,
+        "selected": null,
+        "smoke_only": false,
+        "registration_unchanged": true,
+        "feature_contract": {
+          "id": "native18-own-command4-request-ema900s-clock-v1",
+          "dimension": 24,
+          "source": "original low observations, own previously executed action and clock",
+          "analytic_observer_or_projection": false,
+          "action": "pump_hvac_bess_full_work"
+        },
+        "code_hashes": {
+          "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+          "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+          "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+          "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+          "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+          "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+          "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+          "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+          "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+          "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+          "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+          "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+          "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+          "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+        }
+      },
+      "selection_sha256": "2077be5f5f53dd27e1fb8340100e08aa0af08ad94a0c2a81381e63a1b825f54a",
+      "unavailable_reason": "No eligible checkpoint with a completed registered fit; slot retained, never averaged as a successful seed."
+    },
+    {
+      "id": "warm_sac_1103",
+      "family": "warm_sac",
+      "hardware": "history_sac",
+      "available": false,
+      "training_seed": 1103,
+      "selection": null,
+      "native_completion": {
+        "status": "completed",
+        "variant": "warm_sac",
+        "seed": 1103,
+        "online_transitions": 153600,
+        "sac_actor_updates": 152576,
+        "critic_updates": 152832,
+        "selected": null,
+        "smoke_only": false,
+        "registration_unchanged": true,
+        "feature_contract": {
+          "id": "native18-own-command4-request-ema900s-clock-v1",
+          "dimension": 24,
+          "source": "original low observations, own previously executed action and clock",
+          "analytic_observer_or_projection": false,
+          "action": "pump_hvac_bess_full_work"
+        },
+        "code_hashes": {
+          "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+          "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+          "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+          "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+          "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+          "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+          "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+          "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+          "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+          "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+          "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+          "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+          "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+          "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+        }
+      },
+      "selection_sha256": "2077be5f5f53dd27e1fb8340100e08aa0af08ad94a0c2a81381e63a1b825f54a",
+      "unavailable_reason": "No eligible checkpoint with a completed registered fit; slot retained, never averaged as a successful seed."
+    },
+    {
+      "id": "guided_sac_1100",
+      "family": "guided_sac",
+      "hardware": "history_sac",
+      "available": true,
+      "training_seed": 1100,
+      "selection": {
+        "timesteps": 4096,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1100/step_4096.zip",
+          "sha256": "93a3e235e3ffce409151f9dbabe65ac6b0bebb89e27b714c867fde6b5c381ee1"
+        },
+        "learning_diagnostics": {
+          "q_gradient_norm": 0.9474397897720337,
+          "bc_gradient_norm": 0.0037092005368322134,
+          "weighted_bc_gradient_norm": 2.7005887031555176,
+          "latent_policy_std_mean": [
+            0.0008855636697262526,
+            0.0008654639823362231,
+            0.0008831748273223639
+          ],
+          "native_local_linearized_std_mean": [
+            0.00034384126774966717,
+            0.0003587873070500791,
+            0.0008831741288304329
+          ],
+          "fixed_initial_training_batch": true,
+          "stochastic_BC_also_penalizes_action_variance": true
+        },
+        "qualified": true,
+        "qualified_cells": 24,
+        "rmse_kw": 88.92498721433446,
+        "biased_facility_relief_mw": 6.109016838949117,
+        "mean_cashflow_26h_usd": -125304.58770969832,
+        "eligible": true
+      },
+      "native_completion": {
+        "status": "completed",
+        "variant": "guided_sac",
+        "seed": 1100,
+        "online_transitions": 153600,
+        "sac_actor_updates": 152576,
+        "critic_updates": 152832,
+        "selected": {
+          "timesteps": 4096,
+          "checkpoint": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1100/step_4096.zip",
+            "sha256": "93a3e235e3ffce409151f9dbabe65ac6b0bebb89e27b714c867fde6b5c381ee1"
+          },
+          "learning_diagnostics": {
+            "q_gradient_norm": 0.9474397897720337,
+            "bc_gradient_norm": 0.0037092005368322134,
+            "weighted_bc_gradient_norm": 2.7005887031555176,
+            "latent_policy_std_mean": [
+              0.0008855636697262526,
+              0.0008654639823362231,
+              0.0008831748273223639
+            ],
+            "native_local_linearized_std_mean": [
+              0.00034384126774966717,
+              0.0003587873070500791,
+              0.0008831741288304329
+            ],
+            "fixed_initial_training_batch": true,
+            "stochastic_BC_also_penalizes_action_variance": true
+          },
+          "qualified": true,
+          "qualified_cells": 24,
+          "rmse_kw": 88.92498721433446,
+          "biased_facility_relief_mw": 6.109016838949117,
+          "mean_cashflow_26h_usd": -125304.58770969832,
+          "eligible": true
+        },
+        "smoke_only": false,
+        "registration_unchanged": true,
+        "feature_contract": {
+          "id": "native18-own-command4-request-ema900s-clock-v1",
+          "dimension": 24,
+          "source": "original low observations, own previously executed action and clock",
+          "analytic_observer_or_projection": false,
+          "action": "pump_hvac_bess_full_work"
+        },
+        "code_hashes": {
+          "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+          "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+          "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+          "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+          "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+          "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+          "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+          "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+          "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+          "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+          "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+          "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+          "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+          "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+        }
+      },
+      "selection_sha256": "ee6fcc37bd6fd3dc73b925f6903dcaef561322e1e0f4886d6928a8ecd3896c57",
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1100/step_4096.zip",
+        "sha256": "93a3e235e3ffce409151f9dbabe65ac6b0bebb89e27b714c867fde6b5c381ee1"
+      }
+    },
+    {
+      "id": "guided_sac_1101",
+      "family": "guided_sac",
+      "hardware": "history_sac",
+      "available": true,
+      "training_seed": 1101,
+      "selection": {
+        "timesteps": 8192,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1101/step_8192.zip",
+          "sha256": "53e8992f64507e9098ed12d346e43c0239b66586e9b6163006aaee7eb59dc1e5"
+        },
+        "learning_diagnostics": {
+          "q_gradient_norm": 1.972045660018921,
+          "bc_gradient_norm": 0.010906709358096123,
+          "weighted_bc_gradient_norm": 1.1665897369384766,
+          "latent_policy_std_mean": [
+            0.00045593781396746635,
+            0.0004867071402259171,
+            0.00041402963688597083
+          ],
+          "native_local_linearized_std_mean": [
+            0.00017714408750180155,
+            0.00020190945360809565,
+            0.00041399331530556083
+          ],
+          "fixed_initial_training_batch": true,
+          "stochastic_BC_also_penalizes_action_variance": true
+        },
+        "qualified": true,
+        "qualified_cells": 24,
+        "rmse_kw": 261.6504763765991,
+        "biased_facility_relief_mw": 6.107614459712185,
+        "mean_cashflow_26h_usd": -125343.93268419588,
+        "eligible": true
+      },
+      "native_completion": {
+        "status": "completed",
+        "variant": "guided_sac",
+        "seed": 1101,
+        "online_transitions": 153600,
+        "sac_actor_updates": 152576,
+        "critic_updates": 152832,
+        "selected": {
+          "timesteps": 8192,
+          "checkpoint": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1101/step_8192.zip",
+            "sha256": "53e8992f64507e9098ed12d346e43c0239b66586e9b6163006aaee7eb59dc1e5"
+          },
+          "learning_diagnostics": {
+            "q_gradient_norm": 1.972045660018921,
+            "bc_gradient_norm": 0.010906709358096123,
+            "weighted_bc_gradient_norm": 1.1665897369384766,
+            "latent_policy_std_mean": [
+              0.00045593781396746635,
+              0.0004867071402259171,
+              0.00041402963688597083
+            ],
+            "native_local_linearized_std_mean": [
+              0.00017714408750180155,
+              0.00020190945360809565,
+              0.00041399331530556083
+            ],
+            "fixed_initial_training_batch": true,
+            "stochastic_BC_also_penalizes_action_variance": true
+          },
+          "qualified": true,
+          "qualified_cells": 24,
+          "rmse_kw": 261.6504763765991,
+          "biased_facility_relief_mw": 6.107614459712185,
+          "mean_cashflow_26h_usd": -125343.93268419588,
+          "eligible": true
+        },
+        "smoke_only": false,
+        "registration_unchanged": true,
+        "feature_contract": {
+          "id": "native18-own-command4-request-ema900s-clock-v1",
+          "dimension": 24,
+          "source": "original low observations, own previously executed action and clock",
+          "analytic_observer_or_projection": false,
+          "action": "pump_hvac_bess_full_work"
+        },
+        "code_hashes": {
+          "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+          "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+          "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+          "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+          "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+          "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+          "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+          "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+          "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+          "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+          "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+          "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+          "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+          "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+        }
+      },
+      "selection_sha256": "21401d43ed3592836b33dfda464c1645e1a2691120a450c79115aeca3eb52f76",
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1101/step_8192.zip",
+        "sha256": "53e8992f64507e9098ed12d346e43c0239b66586e9b6163006aaee7eb59dc1e5"
+      }
+    },
+    {
+      "id": "guided_sac_1102",
+      "family": "guided_sac",
+      "hardware": "history_sac",
+      "available": true,
+      "training_seed": 1102,
+      "selection": {
+        "timesteps": 4096,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_4096.zip",
+          "sha256": "30a942428ae2918649d19faed5bf13e2149b2ff460cbb0de7d2e585a71627a01"
+        },
+        "learning_diagnostics": {
+          "q_gradient_norm": 1.9035420417785645,
+          "bc_gradient_norm": 0.014288250356912613,
+          "weighted_bc_gradient_norm": 2.534888505935669,
+          "latent_policy_std_mean": [
+            0.0009148110402747989,
+            0.0009221027139574289,
+            0.0009456282714381814
+          ],
+          "native_local_linearized_std_mean": [
+            0.000354841526132077,
+            0.00038469547871500254,
+            0.0009456105763092637
+          ],
+          "fixed_initial_training_batch": true,
+          "stochastic_BC_also_penalizes_action_variance": true
+        },
+        "qualified": true,
+        "qualified_cells": 24,
+        "rmse_kw": 208.8325108109416,
+        "biased_facility_relief_mw": 6.088989453617163,
+        "mean_cashflow_26h_usd": -125290.64445087813,
+        "eligible": true
+      },
+      "native_completion": {
+        "status": "completed",
+        "variant": "guided_sac",
+        "seed": 1102,
+        "online_transitions": 153600,
+        "sac_actor_updates": 152576,
+        "critic_updates": 152832,
+        "selected": {
+          "timesteps": 4096,
+          "checkpoint": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_4096.zip",
+            "sha256": "30a942428ae2918649d19faed5bf13e2149b2ff460cbb0de7d2e585a71627a01"
+          },
+          "learning_diagnostics": {
+            "q_gradient_norm": 1.9035420417785645,
+            "bc_gradient_norm": 0.014288250356912613,
+            "weighted_bc_gradient_norm": 2.534888505935669,
+            "latent_policy_std_mean": [
+              0.0009148110402747989,
+              0.0009221027139574289,
+              0.0009456282714381814
+            ],
+            "native_local_linearized_std_mean": [
+              0.000354841526132077,
+              0.00038469547871500254,
+              0.0009456105763092637
+            ],
+            "fixed_initial_training_batch": true,
+            "stochastic_BC_also_penalizes_action_variance": true
+          },
+          "qualified": true,
+          "qualified_cells": 24,
+          "rmse_kw": 208.8325108109416,
+          "biased_facility_relief_mw": 6.088989453617163,
+          "mean_cashflow_26h_usd": -125290.64445087813,
+          "eligible": true
+        },
+        "smoke_only": false,
+        "registration_unchanged": true,
+        "feature_contract": {
+          "id": "native18-own-command4-request-ema900s-clock-v1",
+          "dimension": 24,
+          "source": "original low observations, own previously executed action and clock",
+          "analytic_observer_or_projection": false,
+          "action": "pump_hvac_bess_full_work"
+        },
+        "code_hashes": {
+          "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+          "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+          "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+          "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+          "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+          "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+          "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+          "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+          "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+          "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+          "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+          "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+          "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+          "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+        }
+      },
+      "selection_sha256": "74269d846a0d054657dba0a4184831c7adb066765713f9c6a87367767c7ecbce",
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_4096.zip",
+        "sha256": "30a942428ae2918649d19faed5bf13e2149b2ff460cbb0de7d2e585a71627a01"
+      }
+    },
+    {
+      "id": "guided_sac_1103",
+      "family": "guided_sac",
+      "hardware": "history_sac",
+      "available": true,
+      "training_seed": 1103,
+      "selection": {
+        "timesteps": 4096,
+        "checkpoint": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip",
+          "sha256": "0cf65bada29818b690e6e7bc59a40c35351d096f6cb1a58b1aa88fd035ba200d"
+        },
+        "learning_diagnostics": {
+          "q_gradient_norm": 0.6573691964149475,
+          "bc_gradient_norm": 0.01995200105011463,
+          "weighted_bc_gradient_norm": 1.676618218421936,
+          "latent_policy_std_mean": [
+            0.000979582080617547,
+            0.0009749677847139537,
+            0.0009887971682474017
+          ],
+          "native_local_linearized_std_mean": [
+            0.0003799188125412911,
+            0.0004037550534121692,
+            0.000988517887890339
+          ],
+          "fixed_initial_training_batch": true,
+          "stochastic_BC_also_penalizes_action_variance": true
+        },
+        "qualified": true,
+        "qualified_cells": 24,
+        "rmse_kw": 213.27988122439356,
+        "biased_facility_relief_mw": 5.943288753449123,
+        "mean_cashflow_26h_usd": -125360.06319678626,
+        "eligible": true
+      },
+      "native_completion": {
+        "status": "completed",
+        "variant": "guided_sac",
+        "seed": 1103,
+        "online_transitions": 153600,
+        "sac_actor_updates": 152576,
+        "critic_updates": 152832,
+        "selected": {
+          "timesteps": 4096,
+          "checkpoint": {
+            "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip",
+            "sha256": "0cf65bada29818b690e6e7bc59a40c35351d096f6cb1a58b1aa88fd035ba200d"
+          },
+          "learning_diagnostics": {
+            "q_gradient_norm": 0.6573691964149475,
+            "bc_gradient_norm": 0.01995200105011463,
+            "weighted_bc_gradient_norm": 1.676618218421936,
+            "latent_policy_std_mean": [
+              0.000979582080617547,
+              0.0009749677847139537,
+              0.0009887971682474017
+            ],
+            "native_local_linearized_std_mean": [
+              0.0003799188125412911,
+              0.0004037550534121692,
+              0.000988517887890339
+            ],
+            "fixed_initial_training_batch": true,
+            "stochastic_BC_also_penalizes_action_variance": true
+          },
+          "qualified": true,
+          "qualified_cells": 24,
+          "rmse_kw": 213.27988122439356,
+          "biased_facility_relief_mw": 5.943288753449123,
+          "mean_cashflow_26h_usd": -125360.06319678626,
+          "eligible": true
+        },
+        "smoke_only": false,
+        "registration_unchanged": true,
+        "feature_contract": {
+          "id": "native18-own-command4-request-ema900s-clock-v1",
+          "dimension": 24,
+          "source": "original low observations, own previously executed action and clock",
+          "analytic_observer_or_projection": false,
+          "action": "pump_hvac_bess_full_work"
+        },
+        "code_hashes": {
+          "common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+          "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+          "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+          "fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+          "fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+          "sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+          "evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+          "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+          "train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+          "launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+          "prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+          "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+          "test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+          "test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35"
+        }
+      },
+      "selection_sha256": "789f254be7b3279fc9b8ac0afbf6e564ab29acf9fe05b9565164d1c49bf92d2f",
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip",
+        "sha256": "0cf65bada29818b690e6e7bc59a40c35351d096f6cb1a58b1aa88fd035ba200d"
+      }
+    }
+  ],
+  "admitted_per_variant": {
+    "warm_sac": 0,
+    "guided_sac": 4
+  },
+  "both_variants_and_all_seed_slots_retained": true,
+  "selection_uses_development_only": true,
+  "no_selection_from_final_panels": true,
+  "lock_id": "7c36b6b64f2ce862d71c1fcba903446a3879cc3eb1030cd09fcb6ddb3828e7c1"
+}

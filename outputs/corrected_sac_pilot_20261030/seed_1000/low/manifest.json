@@ -1,0 +1,18 @@
+{
+  "stage": "low",
+  "seed": 1000,
+  "device": "cuda:0",
+  "n_envs": 6,
+  "protocol_id": "fc1cb8a5de3267c677e780b24025997990cbb9fd2abc8c830f411c322aafe539",
+  "source_id": "4395e49d2b2afffd7ae1a0dd19fe00c048022cdc825b502066cc87b3bf8e15c4",
+  "simulation_mode": "physical_v1",
+  "inner_checkpoint": null,
+  "budgets": {
+    "timesteps": 12288,
+    "learning_starts": 1536,
+    "gamma": 0.99,
+    "eval_freq": 12289,
+    "checkpoint_freq": 6144,
+    "status_freq": 1536
+  }
+}

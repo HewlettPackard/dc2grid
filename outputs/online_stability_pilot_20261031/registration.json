@@ -1,0 +1,1216 @@
+{
+  "schema": "registered-online-sac-value-state-v1",
+  "output_root": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/online_stability_pilot_20261031",
+  "baseline_campaign": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030",
+  "baseline_source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+  "baseline_source_snapshot": {
+    "source_id": "f04ad498081d199f70600c9b3315fe4a2f9a8301fe24abe865477823f65ff832",
+    "code_revision": "7550013331a865fa45684cb7cd973279312d4678",
+    "local_modifications": [
+      " M baselines/_hydra_compat.py",
+      " M baselines/metrics_callback.py",
+      " M baselines/train_hierarchical_sac.py",
+      " M baselines/train_rule_macro_sac.py",
+      " M baselines/train_sac.py",
+      " M c2g_env/config.yaml",
+      " M c2g_env/env_high_level.py",
+      " M c2g_env/env_low_level.py",
+      " M c2g_env/experiments/identity.py",
+      " M c2g_env/physics/macro_grid.py",
+      " M c2g_env/physics/weather.py",
+      " M c2g_env/physics/workload.py",
+      " M c2g_env/train_envs/rule_macro_wrapped.py",
+      " M conf/config.yaml",
+      " M evaluation/grid_relief.py",
+      " M evaluation/run_benchmark.py",
+      " M evaluation/run_sachigh_saclow_benchmark.py",
+      "?? baselines/macro_metrics_callback.py",
+      "?? baselines/sac_provenance.py",
+      "?? baselines/train_corrected_sac.py",
+      "?? c2g_env/replay.py",
+      "?? c2g_env/semantics.py",
+      "?? conf/retraining/",
+      "?? scripts/retrain_corrected_sac.py"
+    ],
+    "source_archive": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/source/source_f04ad498081d199f70600c9b3315fe4a2f9a8301fe24abe865477823f65ff832.zip"
+  },
+  "protocol_file": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/online_stability_pilot_20261031/protocol.yaml",
+    "sha256": "1f4018a6c6afa93c3163cf5c0dcd3f42cac3dd6762556699c5228d0fe9d94b56"
+  },
+  "pilot_protocol": {
+    "schema": "online-sac-value-state-pilot-v1",
+    "baseline_campaign": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030",
+    "base_seeds": [
+      1000,
+      1001,
+      1006,
+      1007
+    ],
+    "continuation_streams": [
+      0,
+      1,
+      2
+    ],
+    "arms": [
+      "sham",
+      "optimizer_reset",
+      "critic_restore"
+    ],
+    "late_step": 1000008,
+    "donor_step": 500004,
+    "online_transitions": 103680,
+    "critic_calibration_steps": 500,
+    "evaluation_interval": 25920,
+    "checkpoint_interval": 25920,
+    "status_interval": 2592,
+    "threads": 1,
+    "scheduler_seed": 20261031,
+    "maximum_concurrent_runs": 8,
+    "resource_policy": "wait_for_baseline_slot_release",
+    "unchanged": [
+      "physics_and_reward",
+      "observation_and_action_spaces",
+      "train_days_and_biases",
+      "four_fixed_validation_cells",
+      "safety_and_service_qualification",
+      "learning_rate_gamma_tau_batch_size",
+      "update_to_data_ratio"
+    ],
+    "comparison": {
+      "sham": "Late critics, target critics and critic optimizer retained.",
+      "optimizer_reset": "Late critics and target critics retained; fresh critic Adam.",
+      "critic_restore": "Restore 500k critics and target critics; fresh critic Adam.",
+      "common_calibration": "All three arms receive 500 critic-only updates with actor and entropy state frozen.",
+      "online_phase": "Real new environment transitions are added to each arm's replay; normal SAC actor, critic and entropy updates resume.",
+      "streams": "Matched initial replay, sampling seeds and per-worker episode-condition sequences within each base-seed/stream block; realized trajectories can diverge."
+    },
+    "analysis": {
+      "primary_endpoint": "Final-budget fixed-validation tracking and qualification jointly.",
+      "additional": "Raw and normalized RMSE, all seven reward components, commitment, queue saturation/debt, SOC, thermal warnings, online transitions and update counts.",
+      "unit": "Four selected parent policies with three nested continuation streams; not twelve independent from-scratch seeds.",
+      "failure_policy": "Retain every registered run and validation cell. Do not filter failed qualification or rerun failed jobs silently.",
+      "selection": "Best qualified checkpoint is secondary; final-budget outcomes for all registered runs are primary.",
+      "held_out_peak_days": "Never execute days 207, 248 or 249 in this pilot.",
+      "scope": "Exploratory online recovery after degradation, not identification of its original cause or a general safety guarantee."
+    }
+  },
+  "environment_protocol": {
+    "schema": "corrected-sac-v1",
+    "scenario": "default",
+    "simulation_mode": "physical_v1",
+    "seeds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007
+    ],
+    "gpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "cpu_groups": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ],
+      [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52
+      ],
+      [
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    ],
+    "threads": 1,
+    "n_envs": 6,
+    "train_days": [
+      0,
+      20,
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180,
+      190,
+      200,
+      210,
+      220,
+      226,
+      236,
+      240,
+      246,
+      250,
+      260,
+      280,
+      300,
+      320,
+      340
+    ],
+    "train_biases": [
+      0.0,
+      0.25,
+      0.5
+    ],
+    "validation": [
+      {
+        "start_day": 196,
+        "regd_load_bias": 0.0,
+        "seed": 90001
+      },
+      {
+        "start_day": 196,
+        "regd_load_bias": 0.5,
+        "seed": 90002
+      },
+      {
+        "start_day": 256,
+        "regd_load_bias": 0.0,
+        "seed": 90003
+      },
+      {
+        "start_day": 256,
+        "regd_load_bias": 0.5,
+        "seed": 90004
+      }
+    ],
+    "held_out_days": [
+      207,
+      248,
+      249
+    ],
+    "selection": {
+      "min_terminal_soc": 0.2,
+      "max_backlog_fraction": 0.01,
+      "max_thermal_warning_fraction": 0.01,
+      "score": "mean_step_reward",
+      "require_all_validation_cells": true
+    },
+    "algorithm": {
+      "learning_rate": 0.0003,
+      "buffer_size": 500000,
+      "batch_size": 256,
+      "tau": 0.005,
+      "ent_coef": "auto",
+      "net_arch": [
+        256,
+        256
+      ],
+      "train_freq": 8,
+      "gradient_steps": -1
+    },
+    "low": {
+      "timesteps": 2000000,
+      "learning_starts": 10000,
+      "gamma": 0.99,
+      "eval_freq": 250000,
+      "checkpoint_freq": 250000,
+      "status_freq": 5000
+    },
+    "high": {
+      "timesteps": 20000,
+      "learning_starts": 1000,
+      "gamma": 0.99,
+      "eval_freq": 4000,
+      "checkpoint_freq": 4000,
+      "status_freq": 200
+    }
+  },
+  "source_files": {
+    "c2g_env/env_high_level.py": "6c5034698fdd011168d99b5e2fd99b13d2825c4af37eaab563fa6acf75381842",
+    "c2g_env/__init__.py": "8d0bd53367b910a3e2bf04d86f388ffcf5068957d9a931d81cd1b240ea366905",
+    "c2g_env/replay.py": "c09bb0514ef14a0398c5daf76c79b60f65dc42c4b333ca54adbcaa37106bfe77",
+    "c2g_env/plant_profiles.py": "22832db868807586840d92ec207c41a455fbd06f8ba8c1562ef6c95281ba264d",
+    "c2g_env/semantics.py": "9a7525a4e7b63b463cbd0862e9a3ddecb3740744e258b84bea358167231f4aae",
+    "c2g_env/env_low_level.py": "5af3087eebdb5576280a3c4bcdd3f410d67eb5d01c2a67c7f07c0c1197f2a1bc",
+    "c2g_env/thermal_limits.py": "c86f2b5136a01d432c43e9226e07df41e843f49951dc6978a1eb606ea0923650",
+    "c2g_env/obs_indices.py": "881e9a8107d5b2645d3e11a3089fb2334e1e946d6a949221dc1b5bec5ee3ec10",
+    "c2g_env/config.yaml": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6",
+    "c2g_env/experiments/action_ablation_env.py": "5b4ae4bb55bb7aa73359302a5e0c2631849c8d0d0c51d60b4109d446f4f04822",
+    "c2g_env/experiments/__init__.py": "b340890df4770fbd38a80a5b7707f6d925362c2658b16e9de0898d6395046a1c",
+    "c2g_env/experiments/thermal_sensitivity.py": "b3a0e07be94813a2ca478bf843495712566082ab728f85859692434d946dff22",
+    "c2g_env/experiments/analyze_thermal_cross_scenario.py": "af9670dc2c0e39076db332ce645d3dcf61c5bccdeca6566ae9952b8c7d0ac7a5",
+    "c2g_env/experiments/identity.py": "e847618db0f2c837c38a3cad13cafba8ffac5201c02b74ff61f5a26c99090d03",
+    "c2g_env/experiments/thermal_sensitivity_cross_scenario.py": "7ca88e2fec68a63c4395a62aea8bd3eb7367984af24f9b072330462045630a82",
+    "c2g_env/physics/electrical.py": "8bb8869bcbab04c25dd3eb2054fcc5a818f9c26b90179a1f2d0e72dfe77bcee1",
+    "c2g_env/physics/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "c2g_env/physics/weather.py": "f00a81fa6560bcc4bfe6fdfd14bcaa1065d5d2325f7ec25b1b16dfb71d01d59d",
+    "c2g_env/physics/workload.py": "00ec3849157e73b9bd5fe5cd25286463d7c5b0ff82dc72ffb515f4ef7927dddc",
+    "c2g_env/physics/macro_grid.py": "ffadb41d1883481deeb7dff9d13506b8cd3c16dd747aa8fb740cb18261b2994d",
+    "c2g_env/physics/bess.py": "7f8621c4db624a559b3e16b982ce4c74cde58e1bc5fca403338fe8121b2a9ad0",
+    "c2g_env/physics/thermal.py": "7d81bd173f5442fde8c3661763031eda03d3cdbdffd886181436eee9ef388729",
+    "c2g_env/train_envs/__init__.py": "063980296c2ccfb8b2424f7a1a23b29eb6da0391518c9d430f7fd658c89ba7c9",
+    "c2g_env/train_envs/rule_macro_wrapped.py": "18df35431e3b44ab39a60ca8bad8313dccddc60a5b6963cb10c2ff3d94310566",
+    "c2g_env/train_envs/fixed_action_wrapper.py": "e30accf10ca495ee46bf4f8b71596b210d4c4e2a4152d9da1d7df5718291ce27",
+    "baselines/milp_dispatch.py": "90305c1cafeb3a365c6f6ae31beeac0230a497099b7c338cad317b0114ee6e7b",
+    "baselines/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "baselines/train_hierarchical.py": "49d57bdd1ab127297fc4e8999feae71585bbe0071807697bdbdb751b758d1395",
+    "baselines/mpc_macro.py": "1945a5dd23e9166d2bff1fa0e7b4b838c282d2a3dd6adde6af905e0e728a4a72",
+    "baselines/online_stability.py": "093c95a1b45981b281d1e2795235d9ffcc7f7d91cf35d834a66757b45892a50d",
+    "baselines/metrics_callback.py": "25cd72161485764ee34e462a8590eddf1bda20d38c3c8e7ad598f0cc5ea34aaf",
+    "baselines/train_lowsac_highrandom.py": "69c17606dc5f6ce917cec581f4e3979f58a57ec70ce295d5b644fbbecb0852ec",
+    "baselines/macro_metrics_callback.py": "7a57eed1522136f22343ed0a1d3d9786aa1f4ed66aeb548db0b0cdfcfabd3cbe",
+    "baselines/mpc_fast.py": "1995e3ed79a4f71df9b5fe5c51c0d9b33610c3010b4c1c20ba0f6130170dfdc6",
+    "baselines/pid_controller.py": "420a38c6098e653ecf5b40fbf6201542512be19f2b7b4c52e0cd1ccb80db3d1d",
+    "baselines/train_ppo_macro.py": "7d34cf545b5d728d3d2d747e16499e8927cdcaa30df92b7be76e513d93ce417c",
+    "baselines/train_hierarchical_sac.py": "f0812638916980ce9ace95b30bbb78cb2026c24912a819cd7a0adad39788e34b",
+    "baselines/train_corrected_sac.py": "5ad016cf6b03c1091baaae80558581f5f09370d19661940ca3288f6a5dc1d327",
+    "baselines/bang_bang.py": "f97345bd5723885a1df5d5f826920c9f3f148bec8ba476d0a59cb5f4d2f2119d",
+    "baselines/rule_based_macro.py": "42dc8bc42245556d23e41019fed400fc2d3dfafdc34fe61b0574011571d9bdc3",
+    "baselines/sac_provenance.py": "0e94b3cd4b2b95b4a692384b169421c62b258c5d93e53730c1bfa795d4faf08d",
+    "baselines/rule_based_mpc.py": "342c978a0ee52acbebe3cb51b53ec6c1945d7bfda20eea77c4dcb8d01f662524",
+    "baselines/_hydra_compat.py": "06d8bc3d4247e7fa18da9a2276b2028ad14449204789b97914a76a631f3d673f",
+    "baselines/train_sac.py": "4ef86d7f7199419e75019ea0144b6f54ee7d39176ff427260e32e574865eb027",
+    "baselines/train_ppo.py": "7b7ac6c9223a372d083ab229f32b1391d3981ac0da886248bcce5ab4ffc27720",
+    "baselines/train_llm_agents.py": "465ab7e1cb1a4f13e33aba3e659d070d88c789d54a177915f6679b0bbdbc4c56",
+    "baselines/train_rule_macro_ppo.py": "d368122ac78366bb411ae56fad1ff63718f2782a8cc50164cd64e4faceb92a94",
+    "baselines/train_rule_macro_sac.py": "7980548b4f4ed28fc13833f59db3f0847631b02a50d1fbd57c5f291b42c7668a",
+    "baselines/safety/train_cpo.py": "e14342d480e54ff300e925883feb4d29a742d9c229eb10776f347977da602243",
+    "baselines/safety/train_ppo_lagrangian.py": "dd4a1eaa637b0476a0fad0ecc60d84b1f94843ffdc8b38ed372c4d1c7d088765",
+    "evaluation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evaluation/vis_runbenchmark.py": "1bb5c3402933412e04f7b9ccecd0fd54738e4bac6ecdc22ce5d7a3c79008df46",
+    "evaluation/statistical_analysis.py": "41d47d45d9f889213f40f6eae2ced717cdbfcb5d61de707aeaf978a61dabe2dc",
+    "evaluation/run_sachigh_saclow_benchmark.py": "5ec6cc671d8d2d828ac8c693c6990dbc90acc60c32c584b335ad4c07204440f3",
+    "evaluation/run_benchmark.py": "c6f86fd32af0ff3ec6cdff569c5674fecd963fc132c32193da1c6d22216c455a",
+    "evaluation/plot_episode_traces.py": "f51c8d02aa2472cf914461c6df27d935aadd83b76899db4eb2b0b152b906fb84",
+    "evaluation/vis_reward.py": "347a1976e44820e43aa0054be2b5db6f1beef57a03497acffd1e79f674df344a",
+    "evaluation/generate_plots.py": "fa75edfd23a4944968ec4c3eb57b93e913b728e776a1d66687112f07b26a97f0",
+    "evaluation/grid_relief.py": "2c8ad2c0c6f86f8351b267a402fe2809d8f51df379a531c549aca1806d64b2bc",
+    "evaluation/failure_analysis.py": "4711574c1a3250b59bf493fe3906e8d0e4e3429307d23340c966c4082d04eaf7",
+    "scripts/retrain_corrected_sac.py": "26aff123a567c4a7fd81793f7d8b61c2b36f7d2ca5c77360b96f3fa5977e7ebc",
+    "scripts/launch_online_stability.py": "fd20b0fc932bb3ea16ff7e8e24527a4fd6154e51ffe94ef67935c90d2b73da1d",
+    "scripts/download_energy.py": "2496cc2981e211d7026cf07bb0312baa7e4c8a3a31231ee80aaa0866a437da9a",
+    "scripts/download_weather.py": "e12f96739c411e2b742afd3d1621677a322db98cb400943aac86a8eb2acd507f",
+    "conf/grid_relief_graded.yaml": "feb6630f741b676d51fd8a7fa00130db2a75a863dffd1fa95e2fa3353f263bc1",
+    "conf/experiments.yaml": "176632f7fe504f8485c87d5d4d5cd09670a3143103111840920f8300de7d9e7a",
+    "conf/config.yaml": "a3ffc2834f5d8b4d7a260a85b47a5490c371a43b52770a7d129b64d010f59aa7",
+    "conf/chat_templates/run_benchmark_rbc+ICRL.yaml": "bda03ce1a377be8aef2992841eb6b6e2eddff72a69cd282358d53b4bda11bef1",
+    "conf/chat_templates/run_benchmark_rbc.yaml": "cbbac5fd7c9853448fc4c0bf68145cd9db99794cd6b1e7899dc1b03e51b74241",
+    "conf/plant_profiles/plant_500mw.yaml": "f836371307cb22292ba602dabdd14890b0f59839779c544b61a51ba5ddc017d5",
+    "conf/plant_profiles/plant_100mw.yaml": "e4af62eceadd72d460dac392930b84265c0e3070753dc76f6230410782b5c91f",
+    "conf/plant_profiles/none.yaml": "25452e216da80961e53bb949007b97bcf587a7bc836c7745067a68df784542ea",
+    "conf/plant_profiles/plant_50mw.yaml": "c747cb0ec305a40ecb39ed4b5c5f30aa0a081e0eb996c56dc63ae02af68cd4af",
+    "conf/algo/mpc_macro.yaml": "ef8d778ebe59ac574de0c04cce70b83f032653dab1a7a6c2dc409a50f6b61ae2",
+    "conf/algo/sac.yaml": "438824073c8b546736b6dfa19a295a9fd32f946cfeed594d896c57b4f5ad644b",
+    "conf/algo/milp.yaml": "e1da331a4f2ed8ac0ebd0489121e535bdd43ed5a689161fb6a333b2c9f44f37d",
+    "conf/algo/pid.yaml": "8b92bc884b96a8e02bb80f4be61ffb734d1762b71da21f9a117d58c6e0928095",
+    "conf/algo/ppo_lagrangian.yaml": "eb151e085ea5d98a7246d1c9c617f3fab04a6fc641ccf69cb894452702f0e8ff",
+    "conf/algo/cpo.yaml": "7d9de3309346c3e637a47497264f2952ed781cab30e4a758dddcc498187be713",
+    "conf/algo/rule_macro_ppo.yaml": "7eda6dc6d80241b1094b99ab55d2aca4c4078b29bcce7f5b13cf5daf195b9cc0",
+    "conf/algo/ppo_macro.yaml": "dda5e5751d131ed001646f6ea8e7b2c8f438b63d3fd45c53c64f6d6124e2e630",
+    "conf/algo/mpc_fast.yaml": "34fb5bcd65f174f5f0c4be99ffc1a70ff124078d4988195dd142c70cc2dae6fb",
+    "conf/algo/ppo.yaml": "83449f7d5a65217a50428b15d6f7a357fee892cab12c728906b50878e2ba780e",
+    "conf/market/nyiso_nyc.yaml": "060ae502277cb821e6f5b4bffa29915b8e682cd7160b3d3994f8b9975368f5ef",
+    "conf/market/entso_de.yaml": "ea41a785bfe4012f0fd9d083c2bd43f73a4e4f2fa843cc182022d03016419600",
+    "conf/market/aemo_nsw.yaml": "e94b4f5b11cdd525bf9df548540af63e3e2fc2158d9f2022cc492ddb7f823f11",
+    "conf/market/ercot_north.yaml": "5833f8b8a4d68c56460509fdb1c548307d0dbc4e1cbe206b56a1b5e9ae512473",
+    "conf/market/caiso_pgae.yaml": "1cd2fc3594c857930139a0f032fe049681833f9b24922a8993ee5e864fa53143",
+    "conf/market/pjm_dom.yaml": "15a2b1088861fbd174c1469334de18c9cb743341c03cea44704eb2ca71ad7092",
+    "conf/logging/tensorboard.yaml": "50a263c65910a20656e631c943706c5eb64855ca7d764e72ee988c4849c88ef7",
+    "conf/scenario/default.yaml": "6e2a84bbe063143203240eda4eb501429468e0c0f17a0165cc15ef446846052b",
+    "conf/scenario/scenario_b.yaml": "4510f0f6f9bbf022f2afa71295e7fbbb81f879539d595693b7676633fa28358a",
+    "conf/scenario/scenario_a.yaml": "72a2a1c118e54479689e20ac4d50c6a9b17636052fdd2f9d1d9acc8e07576ff3",
+    "conf/scenario/scenario_c.yaml": "ae869e94f4caace24792a665cf4abfa913e053ffc8928357e250d8e3f92e45bb",
+    "conf/retraining/corrected_sac.yaml": "abcca3f5c1b1ed9e162a96aeb506bd2f406602be7905e0d4bb9e48a0212f0fa6",
+    "tests/test_online_stability.py": "d5d09d2a3a07552a871496967369a9c1477cf64e2d061671c7f63dc82b5128d4"
+  },
+  "slots": [
+    {
+      "gpu": 0,
+      "cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "gpu": 1,
+      "cpus": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "gpu": 2,
+      "cpus": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "gpu": 3,
+      "cpus": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "gpu": 4,
+      "cpus": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "gpu": 5,
+      "cpus": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "gpu": 6,
+      "cpus": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52
+      ]
+    },
+    {
+      "gpu": 7,
+      "cpus": [
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "base_1001_stream_2_critic_restore",
+      "base_seed": 1001,
+      "stream": 2,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/model.zip",
+          "sha256": "a453b1ab97edfb561503b6999edabb5d02cac659155c6a05c1ee2eb8b57f0a48"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "757767e288c82349f08c510e0b6f21cdf2c492c24a83ddf9a2d9bf6aff47d7cf"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_500004/model.zip",
+          "sha256": "ba205fe588be36c4066eb2622bd5fcf47e6606bc3eca2705f8cbaa7864d4fc62"
+        }
+      }
+    },
+    {
+      "id": "base_1001_stream_0_critic_restore",
+      "base_seed": 1001,
+      "stream": 0,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/model.zip",
+          "sha256": "a453b1ab97edfb561503b6999edabb5d02cac659155c6a05c1ee2eb8b57f0a48"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "757767e288c82349f08c510e0b6f21cdf2c492c24a83ddf9a2d9bf6aff47d7cf"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_500004/model.zip",
+          "sha256": "ba205fe588be36c4066eb2622bd5fcf47e6606bc3eca2705f8cbaa7864d4fc62"
+        }
+      }
+    },
+    {
+      "id": "base_1006_stream_1_optimizer_reset",
+      "base_seed": 1006,
+      "stream": 1,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/model.zip",
+          "sha256": "234fad687c003fccd3ccdf2593a2276a23e9b7c2ea8d567bf50e97f053d7d95e"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "97ab3fd2d42e02d66c3bf794498401f17fd71827c464b72dce068209a8689701"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_500004/model.zip",
+          "sha256": "e734691a009f8eedc0a80289052b6433e686a54c1ef86bcd951feb337cad6ba4"
+        }
+      }
+    },
+    {
+      "id": "base_1007_stream_1_critic_restore",
+      "base_seed": 1007,
+      "stream": 1,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/model.zip",
+          "sha256": "559e2dd97fecb72704e2dfc2c327950ca1eca69e412d007fe763901827aef80c"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "095a3c3c4987ca5f7662e925596ae217806b9d0bf4919d522f79d877ceb62b10"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_500004/model.zip",
+          "sha256": "5376cf723a93e59dbd20f1a6c44d29d16405410f016bf1033409e2fefa86ce48"
+        }
+      }
+    },
+    {
+      "id": "base_1001_stream_1_optimizer_reset",
+      "base_seed": 1001,
+      "stream": 1,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/model.zip",
+          "sha256": "a453b1ab97edfb561503b6999edabb5d02cac659155c6a05c1ee2eb8b57f0a48"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "757767e288c82349f08c510e0b6f21cdf2c492c24a83ddf9a2d9bf6aff47d7cf"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_500004/model.zip",
+          "sha256": "ba205fe588be36c4066eb2622bd5fcf47e6606bc3eca2705f8cbaa7864d4fc62"
+        }
+      }
+    },
+    {
+      "id": "base_1006_stream_2_critic_restore",
+      "base_seed": 1006,
+      "stream": 2,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/model.zip",
+          "sha256": "234fad687c003fccd3ccdf2593a2276a23e9b7c2ea8d567bf50e97f053d7d95e"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "97ab3fd2d42e02d66c3bf794498401f17fd71827c464b72dce068209a8689701"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_500004/model.zip",
+          "sha256": "e734691a009f8eedc0a80289052b6433e686a54c1ef86bcd951feb337cad6ba4"
+        }
+      }
+    },
+    {
+      "id": "base_1001_stream_1_critic_restore",
+      "base_seed": 1001,
+      "stream": 1,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/model.zip",
+          "sha256": "a453b1ab97edfb561503b6999edabb5d02cac659155c6a05c1ee2eb8b57f0a48"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "757767e288c82349f08c510e0b6f21cdf2c492c24a83ddf9a2d9bf6aff47d7cf"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_500004/model.zip",
+          "sha256": "ba205fe588be36c4066eb2622bd5fcf47e6606bc3eca2705f8cbaa7864d4fc62"
+        }
+      }
+    },
+    {
+      "id": "base_1000_stream_0_sham",
+      "base_seed": 1000,
+      "stream": 0,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/model.zip",
+          "sha256": "156f9cc23a65007e4e300fc63de6ca89e2ab4374bd6c67554348e87731124eb6"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "168af3eb07646a06ba533e3e07dd1ae84e9af88ec3c3f7c6b254c74f224f2834"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_500004/model.zip",
+          "sha256": "f4b599c978a9eb3fd740c5c7daf2003a642741b047a78b54fd471278f3a89ca9"
+        }
+      }
+    },
+    {
+      "id": "base_1006_stream_1_sham",
+      "base_seed": 1006,
+      "stream": 1,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/model.zip",
+          "sha256": "234fad687c003fccd3ccdf2593a2276a23e9b7c2ea8d567bf50e97f053d7d95e"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "97ab3fd2d42e02d66c3bf794498401f17fd71827c464b72dce068209a8689701"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_500004/model.zip",
+          "sha256": "e734691a009f8eedc0a80289052b6433e686a54c1ef86bcd951feb337cad6ba4"
+        }
+      }
+    },
+    {
+      "id": "base_1007_stream_2_sham",
+      "base_seed": 1007,
+      "stream": 2,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/model.zip",
+          "sha256": "559e2dd97fecb72704e2dfc2c327950ca1eca69e412d007fe763901827aef80c"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "095a3c3c4987ca5f7662e925596ae217806b9d0bf4919d522f79d877ceb62b10"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_500004/model.zip",
+          "sha256": "5376cf723a93e59dbd20f1a6c44d29d16405410f016bf1033409e2fefa86ce48"
+        }
+      }
+    },
+    {
+      "id": "base_1001_stream_0_sham",
+      "base_seed": 1001,
+      "stream": 0,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/model.zip",
+          "sha256": "a453b1ab97edfb561503b6999edabb5d02cac659155c6a05c1ee2eb8b57f0a48"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "757767e288c82349f08c510e0b6f21cdf2c492c24a83ddf9a2d9bf6aff47d7cf"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_500004/model.zip",
+          "sha256": "ba205fe588be36c4066eb2622bd5fcf47e6606bc3eca2705f8cbaa7864d4fc62"
+        }
+      }
+    },
+    {
+      "id": "base_1001_stream_2_optimizer_reset",
+      "base_seed": 1001,
+      "stream": 2,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/model.zip",
+          "sha256": "a453b1ab97edfb561503b6999edabb5d02cac659155c6a05c1ee2eb8b57f0a48"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "757767e288c82349f08c510e0b6f21cdf2c492c24a83ddf9a2d9bf6aff47d7cf"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_500004/model.zip",
+          "sha256": "ba205fe588be36c4066eb2622bd5fcf47e6606bc3eca2705f8cbaa7864d4fc62"
+        }
+      }
+    },
+    {
+      "id": "base_1001_stream_0_optimizer_reset",
+      "base_seed": 1001,
+      "stream": 0,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/model.zip",
+          "sha256": "a453b1ab97edfb561503b6999edabb5d02cac659155c6a05c1ee2eb8b57f0a48"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "757767e288c82349f08c510e0b6f21cdf2c492c24a83ddf9a2d9bf6aff47d7cf"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_500004/model.zip",
+          "sha256": "ba205fe588be36c4066eb2622bd5fcf47e6606bc3eca2705f8cbaa7864d4fc62"
+        }
+      }
+    },
+    {
+      "id": "base_1007_stream_1_sham",
+      "base_seed": 1007,
+      "stream": 1,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/model.zip",
+          "sha256": "559e2dd97fecb72704e2dfc2c327950ca1eca69e412d007fe763901827aef80c"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "095a3c3c4987ca5f7662e925596ae217806b9d0bf4919d522f79d877ceb62b10"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_500004/model.zip",
+          "sha256": "5376cf723a93e59dbd20f1a6c44d29d16405410f016bf1033409e2fefa86ce48"
+        }
+      }
+    },
+    {
+      "id": "base_1001_stream_1_sham",
+      "base_seed": 1001,
+      "stream": 1,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/model.zip",
+          "sha256": "a453b1ab97edfb561503b6999edabb5d02cac659155c6a05c1ee2eb8b57f0a48"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "757767e288c82349f08c510e0b6f21cdf2c492c24a83ddf9a2d9bf6aff47d7cf"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_500004/model.zip",
+          "sha256": "ba205fe588be36c4066eb2622bd5fcf47e6606bc3eca2705f8cbaa7864d4fc62"
+        }
+      }
+    },
+    {
+      "id": "base_1006_stream_2_optimizer_reset",
+      "base_seed": 1006,
+      "stream": 2,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/model.zip",
+          "sha256": "234fad687c003fccd3ccdf2593a2276a23e9b7c2ea8d567bf50e97f053d7d95e"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "97ab3fd2d42e02d66c3bf794498401f17fd71827c464b72dce068209a8689701"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_500004/model.zip",
+          "sha256": "e734691a009f8eedc0a80289052b6433e686a54c1ef86bcd951feb337cad6ba4"
+        }
+      }
+    },
+    {
+      "id": "base_1007_stream_0_optimizer_reset",
+      "base_seed": 1007,
+      "stream": 0,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/model.zip",
+          "sha256": "559e2dd97fecb72704e2dfc2c327950ca1eca69e412d007fe763901827aef80c"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "095a3c3c4987ca5f7662e925596ae217806b9d0bf4919d522f79d877ceb62b10"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_500004/model.zip",
+          "sha256": "5376cf723a93e59dbd20f1a6c44d29d16405410f016bf1033409e2fefa86ce48"
+        }
+      }
+    },
+    {
+      "id": "base_1007_stream_2_critic_restore",
+      "base_seed": 1007,
+      "stream": 2,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/model.zip",
+          "sha256": "559e2dd97fecb72704e2dfc2c327950ca1eca69e412d007fe763901827aef80c"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "095a3c3c4987ca5f7662e925596ae217806b9d0bf4919d522f79d877ceb62b10"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_500004/model.zip",
+          "sha256": "5376cf723a93e59dbd20f1a6c44d29d16405410f016bf1033409e2fefa86ce48"
+        }
+      }
+    },
+    {
+      "id": "base_1007_stream_1_optimizer_reset",
+      "base_seed": 1007,
+      "stream": 1,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/model.zip",
+          "sha256": "559e2dd97fecb72704e2dfc2c327950ca1eca69e412d007fe763901827aef80c"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "095a3c3c4987ca5f7662e925596ae217806b9d0bf4919d522f79d877ceb62b10"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_500004/model.zip",
+          "sha256": "5376cf723a93e59dbd20f1a6c44d29d16405410f016bf1033409e2fefa86ce48"
+        }
+      }
+    },
+    {
+      "id": "base_1007_stream_0_sham",
+      "base_seed": 1007,
+      "stream": 0,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/model.zip",
+          "sha256": "559e2dd97fecb72704e2dfc2c327950ca1eca69e412d007fe763901827aef80c"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "095a3c3c4987ca5f7662e925596ae217806b9d0bf4919d522f79d877ceb62b10"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_500004/model.zip",
+          "sha256": "5376cf723a93e59dbd20f1a6c44d29d16405410f016bf1033409e2fefa86ce48"
+        }
+      }
+    },
+    {
+      "id": "base_1000_stream_2_critic_restore",
+      "base_seed": 1000,
+      "stream": 2,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/model.zip",
+          "sha256": "156f9cc23a65007e4e300fc63de6ca89e2ab4374bd6c67554348e87731124eb6"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "168af3eb07646a06ba533e3e07dd1ae84e9af88ec3c3f7c6b254c74f224f2834"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_500004/model.zip",
+          "sha256": "f4b599c978a9eb3fd740c5c7daf2003a642741b047a78b54fd471278f3a89ca9"
+        }
+      }
+    },
+    {
+      "id": "base_1000_stream_0_optimizer_reset",
+      "base_seed": 1000,
+      "stream": 0,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/model.zip",
+          "sha256": "156f9cc23a65007e4e300fc63de6ca89e2ab4374bd6c67554348e87731124eb6"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "168af3eb07646a06ba533e3e07dd1ae84e9af88ec3c3f7c6b254c74f224f2834"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_500004/model.zip",
+          "sha256": "f4b599c978a9eb3fd740c5c7daf2003a642741b047a78b54fd471278f3a89ca9"
+        }
+      }
+    },
+    {
+      "id": "base_1006_stream_1_critic_restore",
+      "base_seed": 1006,
+      "stream": 1,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/model.zip",
+          "sha256": "234fad687c003fccd3ccdf2593a2276a23e9b7c2ea8d567bf50e97f053d7d95e"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "97ab3fd2d42e02d66c3bf794498401f17fd71827c464b72dce068209a8689701"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_500004/model.zip",
+          "sha256": "e734691a009f8eedc0a80289052b6433e686a54c1ef86bcd951feb337cad6ba4"
+        }
+      }
+    },
+    {
+      "id": "base_1006_stream_0_sham",
+      "base_seed": 1006,
+      "stream": 0,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/model.zip",
+          "sha256": "234fad687c003fccd3ccdf2593a2276a23e9b7c2ea8d567bf50e97f053d7d95e"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "97ab3fd2d42e02d66c3bf794498401f17fd71827c464b72dce068209a8689701"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_500004/model.zip",
+          "sha256": "e734691a009f8eedc0a80289052b6433e686a54c1ef86bcd951feb337cad6ba4"
+        }
+      }
+    },
+    {
+      "id": "base_1000_stream_1_sham",
+      "base_seed": 1000,
+      "stream": 1,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/model.zip",
+          "sha256": "156f9cc23a65007e4e300fc63de6ca89e2ab4374bd6c67554348e87731124eb6"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "168af3eb07646a06ba533e3e07dd1ae84e9af88ec3c3f7c6b254c74f224f2834"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_500004/model.zip",
+          "sha256": "f4b599c978a9eb3fd740c5c7daf2003a642741b047a78b54fd471278f3a89ca9"
+        }
+      }
+    },
+    {
+      "id": "base_1000_stream_1_critic_restore",
+      "base_seed": 1000,
+      "stream": 1,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/model.zip",
+          "sha256": "156f9cc23a65007e4e300fc63de6ca89e2ab4374bd6c67554348e87731124eb6"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "168af3eb07646a06ba533e3e07dd1ae84e9af88ec3c3f7c6b254c74f224f2834"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_500004/model.zip",
+          "sha256": "f4b599c978a9eb3fd740c5c7daf2003a642741b047a78b54fd471278f3a89ca9"
+        }
+      }
+    },
+    {
+      "id": "base_1006_stream_0_critic_restore",
+      "base_seed": 1006,
+      "stream": 0,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/model.zip",
+          "sha256": "234fad687c003fccd3ccdf2593a2276a23e9b7c2ea8d567bf50e97f053d7d95e"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "97ab3fd2d42e02d66c3bf794498401f17fd71827c464b72dce068209a8689701"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_500004/model.zip",
+          "sha256": "e734691a009f8eedc0a80289052b6433e686a54c1ef86bcd951feb337cad6ba4"
+        }
+      }
+    },
+    {
+      "id": "base_1007_stream_0_critic_restore",
+      "base_seed": 1007,
+      "stream": 0,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/model.zip",
+          "sha256": "559e2dd97fecb72704e2dfc2c327950ca1eca69e412d007fe763901827aef80c"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "095a3c3c4987ca5f7662e925596ae217806b9d0bf4919d522f79d877ceb62b10"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_500004/model.zip",
+          "sha256": "5376cf723a93e59dbd20f1a6c44d29d16405410f016bf1033409e2fefa86ce48"
+        }
+      }
+    },
+    {
+      "id": "base_1007_stream_2_optimizer_reset",
+      "base_seed": 1007,
+      "stream": 2,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/model.zip",
+          "sha256": "559e2dd97fecb72704e2dfc2c327950ca1eca69e412d007fe763901827aef80c"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "095a3c3c4987ca5f7662e925596ae217806b9d0bf4919d522f79d877ceb62b10"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/checkpoints/step_500004/model.zip",
+          "sha256": "5376cf723a93e59dbd20f1a6c44d29d16405410f016bf1033409e2fefa86ce48"
+        }
+      }
+    },
+    {
+      "id": "base_1000_stream_2_optimizer_reset",
+      "base_seed": 1000,
+      "stream": 2,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/model.zip",
+          "sha256": "156f9cc23a65007e4e300fc63de6ca89e2ab4374bd6c67554348e87731124eb6"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "168af3eb07646a06ba533e3e07dd1ae84e9af88ec3c3f7c6b254c74f224f2834"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_500004/model.zip",
+          "sha256": "f4b599c978a9eb3fd740c5c7daf2003a642741b047a78b54fd471278f3a89ca9"
+        }
+      }
+    },
+    {
+      "id": "base_1000_stream_2_sham",
+      "base_seed": 1000,
+      "stream": 2,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/model.zip",
+          "sha256": "156f9cc23a65007e4e300fc63de6ca89e2ab4374bd6c67554348e87731124eb6"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "168af3eb07646a06ba533e3e07dd1ae84e9af88ec3c3f7c6b254c74f224f2834"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_500004/model.zip",
+          "sha256": "f4b599c978a9eb3fd740c5c7daf2003a642741b047a78b54fd471278f3a89ca9"
+        }
+      }
+    },
+    {
+      "id": "base_1000_stream_0_critic_restore",
+      "base_seed": 1000,
+      "stream": 0,
+      "arm": "critic_restore",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/model.zip",
+          "sha256": "156f9cc23a65007e4e300fc63de6ca89e2ab4374bd6c67554348e87731124eb6"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "168af3eb07646a06ba533e3e07dd1ae84e9af88ec3c3f7c6b254c74f224f2834"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_500004/model.zip",
+          "sha256": "f4b599c978a9eb3fd740c5c7daf2003a642741b047a78b54fd471278f3a89ca9"
+        }
+      }
+    },
+    {
+      "id": "base_1000_stream_1_optimizer_reset",
+      "base_seed": 1000,
+      "stream": 1,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/model.zip",
+          "sha256": "156f9cc23a65007e4e300fc63de6ca89e2ab4374bd6c67554348e87731124eb6"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "168af3eb07646a06ba533e3e07dd1ae84e9af88ec3c3f7c6b254c74f224f2834"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1000/low/checkpoints/step_500004/model.zip",
+          "sha256": "f4b599c978a9eb3fd740c5c7daf2003a642741b047a78b54fd471278f3a89ca9"
+        }
+      }
+    },
+    {
+      "id": "base_1006_stream_2_sham",
+      "base_seed": 1006,
+      "stream": 2,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/model.zip",
+          "sha256": "234fad687c003fccd3ccdf2593a2276a23e9b7c2ea8d567bf50e97f053d7d95e"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "97ab3fd2d42e02d66c3bf794498401f17fd71827c464b72dce068209a8689701"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_500004/model.zip",
+          "sha256": "e734691a009f8eedc0a80289052b6433e686a54c1ef86bcd951feb337cad6ba4"
+        }
+      }
+    },
+    {
+      "id": "base_1001_stream_2_sham",
+      "base_seed": 1001,
+      "stream": 2,
+      "arm": "sham",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/model.zip",
+          "sha256": "a453b1ab97edfb561503b6999edabb5d02cac659155c6a05c1ee2eb8b57f0a48"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "757767e288c82349f08c510e0b6f21cdf2c492c24a83ddf9a2d9bf6aff47d7cf"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/checkpoints/step_500004/model.zip",
+          "sha256": "ba205fe588be36c4066eb2622bd5fcf47e6606bc3eca2705f8cbaa7864d4fc62"
+        }
+      }
+    },
+    {
+      "id": "base_1006_stream_0_optimizer_reset",
+      "base_seed": 1006,
+      "stream": 0,
+      "arm": "optimizer_reset",
+      "inputs": {
+        "late_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/model.zip",
+          "sha256": "234fad687c003fccd3ccdf2593a2276a23e9b7c2ea8d567bf50e97f053d7d95e"
+        },
+        "late_replay": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_1000008/replay_buffer.pkl",
+          "sha256": "97ab3fd2d42e02d66c3bf794498401f17fd71827c464b72dce068209a8689701"
+        },
+        "donor_model": {
+          "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/checkpoints/step_500004/model.zip",
+          "sha256": "e734691a009f8eedc0a80289052b6433e686a54c1ef86bcd951feb337cad6ba4"
+        }
+      }
+    }
+  ],
+  "registered_job_count": 36,
+  "new_online_transitions_planned": 3732480,
+  "attempt_retention": "All registered jobs and validation cells, including failures",
+  "scope": "Nested continuation streams on selected parent checkpoints; no from-scratch or confirmatory population claim",
+  "registration_id": "b647d72ea028950bd04fd09e3e180a343f438359b8a1cf62292ab821721abf1f"
+}

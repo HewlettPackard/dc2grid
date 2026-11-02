@@ -1,0 +1,157 @@
+schema: corrected-sac-v1
+scenario: default
+simulation_mode: physical_v1
+seeds:
+- 1000
+- 1001
+- 1002
+- 1003
+- 1004
+- 1005
+- 1006
+- 1007
+gpus:
+- 0
+- 1
+- 2
+- 3
+- 4
+- 5
+- 6
+- 7
+cpu_groups:
+- - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+- - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+- - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+- - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+- - 32
+  - 33
+  - 34
+  - 35
+  - 36
+  - 37
+  - 38
+- - 39
+  - 40
+  - 41
+  - 42
+  - 43
+  - 44
+  - 45
+- - 46
+  - 47
+  - 48
+  - 49
+  - 50
+  - 51
+  - 52
+- - 53
+  - 54
+  - 55
+  - 56
+  - 57
+  - 58
+  - 59
+threads: 1
+n_envs: 6
+train_days:
+- 0
+- 20
+- 40
+- 60
+- 80
+- 100
+- 120
+- 140
+- 160
+- 180
+- 190
+- 200
+- 210
+- 220
+- 226
+- 236
+- 240
+- 246
+- 250
+- 260
+- 280
+- 300
+- 320
+- 340
+train_biases:
+- 0.0
+- 0.25
+- 0.5
+validation:
+- start_day: 196
+  regd_load_bias: 0.0
+  seed: 90001
+- start_day: 196
+  regd_load_bias: 0.5
+  seed: 90002
+- start_day: 256
+  regd_load_bias: 0.0
+  seed: 90003
+- start_day: 256
+  regd_load_bias: 0.5
+  seed: 90004
+held_out_days:
+- 207
+- 248
+- 249
+selection:
+  min_terminal_soc: 0.2
+  max_backlog_fraction: 0.01
+  max_thermal_warning_fraction: 0.01
+  score: mean_step_reward
+  require_all_validation_cells: true
+algorithm:
+  learning_rate: 0.0003
+  buffer_size: 500000
+  batch_size: 256
+  tau: 0.005
+  ent_coef: auto
+  net_arch:
+  - 256
+  - 256
+  train_freq: 8
+  gradient_steps: -1
+low:
+  timesteps: 2000000
+  learning_starts: 10000
+  gamma: 0.99
+  eval_freq: 250000
+  checkpoint_freq: 250000
+  status_freq: 5000
+high:
+  timesteps: 20000
+  learning_starts: 1000
+  gamma: 0.99
+  eval_freq: 4000
+  checkpoint_freq: 4000
+  status_freq: 200

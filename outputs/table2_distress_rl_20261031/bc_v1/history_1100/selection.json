@@ -1,0 +1,10 @@
+{
+  "supervised_updates": 11000,
+  "training_loss": 9.627297004044522e-07,
+  "action_rmse": [
+    0.00013530583237297833,
+    0.0008788196719251573,
+    0.0010269669583067298
+  ],
+  "linearized_tracking_proxy_kw_not_a_rollout": 44.91421127319336
+}

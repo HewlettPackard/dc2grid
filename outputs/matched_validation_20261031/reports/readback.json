@@ -1,0 +1,78 @@
+{
+  "created_at": "2026-10-31T05:51:04.615356+00:00",
+  "registration_id": "273880f7b4d4f1a9bbe90eb1dfef211df183c3c0d39cd43ddede1e8444013ed9",
+  "planned_policy_cells": 256,
+  "runtime_completed_rollouts": 232,
+  "full_horizon_rollouts": 230,
+  "unavailable_policy_cells": 24,
+  "runtime_errors": 0,
+  "pairwise_records": 492,
+  "incomplete_episodes": [
+    {
+      "policy_id": "old_pair_1002",
+      "cell": {
+        "id": "d196_s90002_b0",
+        "start_day": 196,
+        "regd_load_bias": 0.0,
+        "seed": 90002,
+        "original_validation_cell": false
+      },
+      "observed_ticks": 16293,
+      "terminal": {
+        "soc": 0.2521540734698264,
+        "nominal_stored_mwh": 3.782311102047396,
+        "usable_energy_property_mwh": 3.7809701077728626,
+        "backlog_kwh": 2702.2772626337564,
+        "temp_A": 32.07775370976999,
+        "temp_B": 35.0282084209188,
+        "reference_temp_A": 31.119574727651944,
+        "reference_temp_B": 26.57489609333943
+      }
+    },
+    {
+      "policy_id": "old_pair_1002",
+      "cell": {
+        "id": "d256_s90003_b0p5",
+        "start_day": 256,
+        "regd_load_bias": 0.5,
+        "seed": 90003,
+        "original_validation_cell": false
+      },
+      "observed_ticks": 16609,
+      "terminal": {
+        "soc": 0.2059811726002908,
+        "nominal_stored_mwh": 3.089717589004362,
+        "usable_energy_property_mwh": 3.08840180491835,
+        "backlog_kwh": 1690.555933905694,
+        "temp_A": 31.955075796623564,
+        "temp_B": 35.00786994899951,
+        "reference_temp_A": 30.923854177254007,
+        "reference_temp_B": 26.285450458808384
+      }
+    }
+  ],
+  "interpretation": [
+    "All policy cells retained. Any incomplete member suppresses that policy/contrast aggregate rather than using a shorter prefix.",
+    "Old selected and restored final candidates have different selection histories; no algorithm-level superiority claim.",
+    "Four original cells plus four same-seed bias counterparts; these are validation data, not held-out peak-day tests.",
+    "Cashflow is before recovery/degradation/service valuation; mean terminal inventories do not establish per-cell dominance.",
+    "Mean zero IT/work contribution does not prove no intra-day deferral; the full traces retain workload history.",
+    "Hardware and macro reward scales are separate; primary evidence is physical service, economics and qualification."
+  ],
+  "model_hashes_verified": 25,
+  "original_protected_hashes_verified": 96,
+  "prior_qualified_original_cell_rechecks": 80,
+  "prior_qualified_original_cell_rechecks_passed": 80,
+  "full_horizon_pairs": 462,
+  "restored_parent_pairs_full": 72,
+  "restored_parent_pairs_planned": 96,
+  "held_out_days_executed": [],
+  "adversarial_readback_limits": [
+    "Cashflow before closure is not net profit; macro1006 has positive cash in6/8 but nonnegative terminal energy in3/8 only.",
+    "Macro1006 benefit changes byday/bias; full2x2 andpercelltablesprovided, notan8-independent-sampleclaim.",
+    "Macro1002 sixcompletepairsareconditionalobservations, not evidenceitoutperformsothermacros; twohardthermalfailurespreventfull-cohortaggregate.",
+    "The72fullrestored-parentcomparisonsareseparatefrom62both-constraint-qualifiedcomparisons; no conflationorfiltering.",
+    "SAC1007 andPIDbiasrevenuepenaltiesare descriptivelysimilar, not a significance or equivalence claim.",
+    "No exact recovery-electricity or profit closure is inferred fromtemperature or storedenergy proxies."
+  ]
+}

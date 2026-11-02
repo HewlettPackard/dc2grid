@@ -1,0 +1,33 @@
+{
+  "task_schema": "cash-constrained-quantity-macro-v1",
+  "simulation_mode": "physical_v1",
+  "variant": "cash",
+  "kappa": 0.0,
+  "training_seed": 5000,
+  "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+  "hardware_checkpoint": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip",
+    "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024"
+  },
+  "extra_observation_features": [
+    "remaining_service_fraction",
+    "current_signed_regd",
+    "last_window_signed_regd_mean",
+    "signed_requested_mwh_over_bess_capacity",
+    "centered_cash_in_10000_usd",
+    "thermal_warning_budget_used",
+    "backlog_fraction_of_arrived_work",
+    "performance_weighted_capacity_ratio",
+    "maximum_accepted_capacity_fraction"
+  ],
+  "device": "cuda:0",
+  "visible_gpu": "0",
+  "macro_decision_seconds": 900,
+  "hardware_decision_seconds": 5,
+  "recovery_seconds": 7200,
+  "finite_task_gamma": 1.0,
+  "error_type": "RuntimeError",
+  "error": "Registered macro protocol changed",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/learn.py\", line 432, in train\n    verify_registration(protocol)\n  File \"/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/register.py\", line 150, in verify_registration\n    raise RuntimeError(\"Registered macro protocol changed\")\nRuntimeError: Registered macro protocol changed\n",
+  "macro_transitions": 20480
+}

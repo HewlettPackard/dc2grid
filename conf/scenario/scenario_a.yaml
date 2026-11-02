@@ -1,0 +1,19 @@
+# conf/scenario/scenario_a.yaml
+# Hydra scenario config for C2G-Bench.
+# All fields here mirror c2g_env/config.yaml [scenario_a] for Hydra composition.
+name: scenario_a
+env_id: scenario_a
+description: "GenAI Crisis — 30°C, PJM DOM, 1.8x spikes, 20MW commitment"
+
+# Market / weather
+grid_market:    pjm_dom
+weather_market: pjm_dom
+weather_driven: false
+
+# Physics overrides
+T_amb: 30.0
+committed_mw: 20.0
+bess_soc_init: 0.55
+cooling_fault: false
+genai_spike_scale: 1.8
+grid_stress_scale: 1.5

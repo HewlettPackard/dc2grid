@@ -1,0 +1,203 @@
+{
+  "state": "completed_with_runtime_failures",
+  "pid": 882720,
+  "updated_unix": 1793475327.385302,
+  "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+  "jobs": [
+    {
+      "id": "cash_seed_5000",
+      "variant": "cash",
+      "seed": 5000,
+      "gpu": 0,
+      "cpus": [
+        31,
+        41,
+        42,
+        45,
+        54
+      ],
+      "output": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/cash_seed_5000",
+      "state": "runtime_failure",
+      "started_unix": 1793473889.9999669,
+      "pid": 882724,
+      "gpu_readiness": {
+        "free_mib": 78235,
+        "utilization_percent": 18
+      },
+      "returncode": 1,
+      "qualified_checkpoint": false,
+      "final_macro_transitions": 20480
+    },
+    {
+      "id": "cash_seed_5001",
+      "variant": "cash",
+      "seed": 5001,
+      "gpu": 1,
+      "cpus": [
+        55,
+        57,
+        56,
+        44,
+        113
+      ],
+      "output": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/cash_seed_5001",
+      "state": "runtime_failure",
+      "started_unix": 1793473890.0017493,
+      "pid": 882725,
+      "gpu_readiness": {
+        "free_mib": 81080,
+        "utilization_percent": 0
+      },
+      "returncode": 1,
+      "qualified_checkpoint": false,
+      "final_macro_transitions": 20480
+    },
+    {
+      "id": "cash_seed_5002",
+      "variant": "cash",
+      "seed": 5002,
+      "gpu": 2,
+      "cpus": [
+        114,
+        51,
+        110,
+        77,
+        8
+      ],
+      "output": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/cash_seed_5002",
+      "state": "runtime_failure",
+      "started_unix": 1793473890.0109565,
+      "pid": 882726,
+      "gpu_readiness": {
+        "free_mib": 81080,
+        "utilization_percent": 0
+      },
+      "returncode": 1,
+      "qualified_checkpoint": false,
+      "final_macro_transitions": 20480
+    },
+    {
+      "id": "cash_seed_5003",
+      "variant": "cash",
+      "seed": 5003,
+      "gpu": 3,
+      "cpus": [
+        90,
+        102,
+        101,
+        98,
+        78
+      ],
+      "output": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/cash_seed_5003",
+      "state": "runtime_failure",
+      "started_unix": 1793473890.0128045,
+      "pid": 882727,
+      "gpu_readiness": {
+        "free_mib": 81080,
+        "utilization_percent": 0
+      },
+      "returncode": 1,
+      "qualified_checkpoint": false,
+      "final_macro_transitions": 20480
+    },
+    {
+      "id": "reserve_potential_seed_5000",
+      "variant": "reserve_potential",
+      "seed": 5000,
+      "gpu": 4,
+      "cpus": [
+        103,
+        74,
+        76,
+        92,
+        17
+      ],
+      "output": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/reserve_potential_seed_5000",
+      "state": "runtime_failure",
+      "started_unix": 1793473890.0279555,
+      "pid": 882728,
+      "gpu_readiness": {
+        "free_mib": 81080,
+        "utilization_percent": 0
+      },
+      "returncode": 1,
+      "qualified_checkpoint": false,
+      "final_macro_transitions": 20480
+    },
+    {
+      "id": "reserve_potential_seed_5001",
+      "variant": "reserve_potential",
+      "seed": 5001,
+      "gpu": 5,
+      "cpus": [
+        107,
+        4,
+        117,
+        30,
+        58
+      ],
+      "output": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/reserve_potential_seed_5001",
+      "state": "runtime_failure",
+      "started_unix": 1793473890.0479681,
+      "pid": 882729,
+      "gpu_readiness": {
+        "free_mib": 78231,
+        "utilization_percent": 9
+      },
+      "returncode": 1,
+      "qualified_checkpoint": false,
+      "final_macro_transitions": 20480
+    },
+    {
+      "id": "reserve_potential_seed_5002",
+      "variant": "reserve_potential",
+      "seed": 5002,
+      "gpu": 6,
+      "cpus": [
+        93,
+        20,
+        91,
+        127,
+        1
+      ],
+      "output": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/reserve_potential_seed_5002",
+      "state": "runtime_failure",
+      "started_unix": 1793473890.0589545,
+      "pid": 882730,
+      "gpu_readiness": {
+        "free_mib": 81080,
+        "utilization_percent": 0
+      },
+      "returncode": 1,
+      "qualified_checkpoint": false,
+      "final_macro_transitions": 20480
+    },
+    {
+      "id": "reserve_potential_seed_5003",
+      "variant": "reserve_potential",
+      "seed": 5003,
+      "gpu": 7,
+      "cpus": [
+        6,
+        79,
+        83,
+        116,
+        2
+      ],
+      "output": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/reserve_potential_seed_5003",
+      "state": "runtime_failure",
+      "started_unix": 1793473890.0759404,
+      "pid": 882731,
+      "gpu_readiness": {
+        "free_mib": 81080,
+        "utilization_percent": 0
+      },
+      "returncode": 1,
+      "qualified_checkpoint": false,
+      "final_macro_transitions": 20480
+    }
+  ],
+  "planned_runs": 8,
+  "completed_runs": 0,
+  "runtime_failed_runs": 8
+}

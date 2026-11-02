@@ -1,0 +1,25 @@
+{
+  "macro_transitions": 8,
+  "teacher_fraction": 0.98,
+  "exploration": {
+    "every_local_steps": 20,
+    "uniform_fraction_range": [
+      0.0,
+      1.0
+    ],
+    "staggered_per_worker": true,
+    "warmup_exploration_actions": 52
+  },
+  "exploration_actions": 1,
+  "actions": [
+    0.49455276131629944,
+    0.9800000190734863,
+    0.9800000190734863,
+    0.9800000190734863,
+    0.9800000190734863,
+    0.9800000190734863,
+    0.9800000190734863,
+    0.9800000190734863
+  ],
+  "is_teacher_guided_not_constant_only": true
+}

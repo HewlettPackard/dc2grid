@@ -1,0 +1,13 @@
+{
+  "previous_registration_id": "e0be39a201cc8cca13a427e853acb63bc24fb9c5a68b7121e6c6cf8e173e3cb5",
+  "previous_receipt": "training_smoke/completed.json",
+  "previous_native_status": "completed",
+  "previous_online_transitions": 1152,
+  "previous_actor_updates": 128,
+  "previous_critic_only_updates": 256,
+  "disposition": "Successful earlier-source lifecycle test, superseded as the production launch gate.",
+  "reason": "Adversarial review added authority guards, telemetry and reporting/provenance checks before any production SAC fit.",
+  "retained": true,
+  "replacement_required": "A fresh source-identical training_smoke_v2 must complete before the eight-fit campaign.",
+  "not_a_failed_training_campaign": true
+}

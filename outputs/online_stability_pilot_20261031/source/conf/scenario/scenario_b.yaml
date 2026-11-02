@@ -1,0 +1,19 @@
+# conf/scenario/scenario_b.yaml
+# Hydra scenario config for C2G-Bench.
+# All fields here mirror c2g_env/config.yaml [scenario_b] for Hydra composition.
+name: scenario_b
+env_id: scenario_b
+description: "Thermal Squeeze — 40°C, ERCOT North, 30MW commitment"
+
+# Market / weather
+grid_market:    ercot_north
+weather_market: ercot_north
+weather_driven: false
+
+# Physics overrides
+T_amb: 40.0
+committed_mw: 30.0
+bess_soc_init: 0.6
+cooling_fault: false
+genai_spike_scale: 1.0
+grid_stress_scale: 1.3

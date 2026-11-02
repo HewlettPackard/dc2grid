@@ -1,0 +1,50 @@
+[
+  {
+    "pid": 883056,
+    "affinity": [
+      74
+    ],
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "cuda_initialized": false,
+    "hardware_device": "cpu",
+    "hardware_tensor_digest": "461faebfd5f96fad2775e07f3f4d4ecf5ec16a3f2de63684075393d75f81e0d7",
+    "hardware_load_seconds": 1.075642941010301
+  },
+  {
+    "pid": 883057,
+    "affinity": [
+      76
+    ],
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "cuda_initialized": false,
+    "hardware_device": "cpu",
+    "hardware_tensor_digest": "461faebfd5f96fad2775e07f3f4d4ecf5ec16a3f2de63684075393d75f81e0d7",
+    "hardware_load_seconds": 1.079730170997209
+  },
+  {
+    "pid": 883058,
+    "affinity": [
+      92
+    ],
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "cuda_initialized": false,
+    "hardware_device": "cpu",
+    "hardware_tensor_digest": "461faebfd5f96fad2775e07f3f4d4ecf5ec16a3f2de63684075393d75f81e0d7",
+    "hardware_load_seconds": 1.079330096996273
+  },
+  {
+    "pid": 883059,
+    "affinity": [
+      17
+    ],
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "cuda_initialized": false,
+    "hardware_device": "cpu",
+    "hardware_tensor_digest": "461faebfd5f96fad2775e07f3f4d4ecf5ec16a3f2de63684075393d75f81e0d7",
+    "hardware_load_seconds": 1.0758916499908082
+  }
+]

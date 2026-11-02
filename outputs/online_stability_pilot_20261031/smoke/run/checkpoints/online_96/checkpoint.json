@@ -1,0 +1,27 @@
+{
+  "job_id": "actual_checkpoint_smoke",
+  "base_seed": 1006,
+  "continuation_stream": 0,
+  "arm": "critic_restore",
+  "registration_id": "424924473382f4ef89011bac2476f0cdd6f3c272d3c1e3763ac4d6bb147c1609",
+  "simulation_mode": "physical_v1",
+  "visible_gpu": "",
+  "device": "cpu",
+  "n_envs": 6,
+  "critic_only_calibration_updates": 4,
+  "condition_stream_seed": 594539126,
+  "base_timesteps": 1000008,
+  "new_online_transitions": 96,
+  "timesteps": 1000104,
+  "new_normal_sac_updates": 96,
+  "model": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/online_stability_pilot_20261031/smoke/run/checkpoints/online_96/model.zip",
+    "sha256": "2bd7ec6b5da4492ec728b6ca68368e72cfa0bbbb21736414bd83c2f13b59f2ae"
+  },
+  "replay_buffer": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/online_stability_pilot_20261031/smoke/run/checkpoints/online_96/replay_buffer.pkl",
+    "sha256": "e17ff7338fecaeddf5adbef9cb016f3eb9a25c9cd39abda52c40fc35a20b98e2"
+  },
+  "replay_position": 17,
+  "snapshot_scope": "Mid-run callback snapshots precede current transition insertion; the final snapshot is post-update. No bit-exact simulator resume."
+}

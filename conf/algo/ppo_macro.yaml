@@ -1,0 +1,31 @@
+name: ppo_macro
+
+# Training length — shorter episodes (96 macro ticks = 24 h)
+timesteps: 100_000
+n_envs: 4
+eval_freq: 5_000
+n_eval_episodes: 3
+
+# SB3 PPO hyperparameters (tuned for 2-D macro action)
+learning_rate: 1.0e-4
+n_steps: 256
+batch_size: 64
+n_epochs: 10
+gamma: 0.995
+gae_lambda: 0.95
+clip_range: 0.2
+ent_coef: 0.01
+vf_coef: 0.5
+max_grad_norm: 0.5
+net_arch:
+  pi: [128, 128]
+  vf: [128, 128]
+
+# VecNormalize
+norm_obs: true
+norm_reward: true
+clip_obs: 10.0
+clip_reward: 10.0
+
+# Hierarchical settings
+inner_policy_path: null   # null = use fixed defaults; path to .zip = HRL

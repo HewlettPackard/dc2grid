@@ -1,0 +1,9 @@
+rollout/ep_rew_mean,time/time_elapsed,time/episodes,rollout/ep_len_mean,time/total_timesteps,time/fps,train/actor_loss,train/critic_loss,train/learning_rate,train/n_updates,train/ent_coef
+-0.4999595,0,1,2.0,8,16,,,,,
+-0.4999595,0,2,2.0,8,16,,,,,
+-0.4999595,0,3,2.0,8,16,,,,,
+-0.4999595,0,4,2.0,8,16,,,,,
+-0.2499505,0,5,2.0,16,17,0.021895046811550856,0.3690593117644312,0.0003,8,9.999999717180685e-10
+-0.2499505,0,6,2.0,16,16,,,,,
+-0.2499505,0,7,2.0,16,16,,,,,
+-0.2499505,0,8,2.0,16,16,,,,,

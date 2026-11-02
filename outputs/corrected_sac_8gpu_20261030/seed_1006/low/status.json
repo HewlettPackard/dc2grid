@@ -1,0 +1,44 @@
+{
+  "stage": "low",
+  "seed": 1006,
+  "device": "cuda:0",
+  "visible_gpu": "6",
+  "n_envs": 6,
+  "protocol_id": "03df24f39c4f8d2bab2e40d7000d85f97e44bd2b0f9050423ee1066e9dfaf4df",
+  "source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+  "simulation_mode": "physical_v1",
+  "inner_checkpoint": null,
+  "budgets": {
+    "timesteps": 2000000,
+    "learning_starts": 10000,
+    "gamma": 0.99,
+    "eval_freq": 250000,
+    "checkpoint_freq": 250000,
+    "status_freq": 5000
+  },
+  "state": "completed",
+  "updated_at": "2026-10-31T01:10:17.100863+00:00",
+  "pid": 137748,
+  "timesteps": 2000016,
+  "optimizer_updates": 1990032,
+  "training_fast_steps": 2000016,
+  "completed_training_episodes": 115,
+  "elapsed_seconds": 13100.405599235999,
+  "transitions_per_second": 152.668250219416,
+  "validation_seconds": 496.1497664630024,
+  "validation_calls": 8,
+  "cpu_affinity": [
+    46
+  ],
+  "torch_threads": 1,
+  "best_qualified_score": -0.017952260358904504,
+  "losses": {
+    "train/learning_rate": 0.0003,
+    "train/n_updates": 1990032.0,
+    "train/ent_coef": 0.126382429463168,
+    "train/actor_loss": -117.16230305035909,
+    "train/critic_loss": 1369.298414548238,
+    "train/ent_coef_loss": 0.008236128836870193
+  },
+  "qualified_checkpoint": true
+}

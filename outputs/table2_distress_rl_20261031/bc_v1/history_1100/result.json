@@ -1,0 +1,150 @@
+{
+  "kind": "supervised_only_not_RL",
+  "seed": 1100,
+  "mode": "history",
+  "updates": 12000,
+  "train_rows": 1244160,
+  "internal_validation_rows": 311040,
+  "validation_subset_rows": 65536,
+  "sac_optimizer_states_empty": true,
+  "critic_digest_unchanged": "ef51693fe47d0b18b7bc783b5313dcd69a3a97b1bd29e20618c75bf1206d4c41",
+  "target_digest_unchanged": "ef51693fe47d0b18b7bc783b5313dcd69a3a97b1bd29e20618c75bf1206d4c41",
+  "elapsed_seconds": 12.817335817002458,
+  "validation": [
+    {
+      "supervised_updates": 1000,
+      "training_loss": 3.533907874953002e-05,
+      "action_rmse": [
+        0.0008807564154267311,
+        0.004967448301613331,
+        0.001695835031569004
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 248.14878845214844
+    },
+    {
+      "supervised_updates": 2000,
+      "training_loss": 1.2176866221125238e-05,
+      "action_rmse": [
+        0.0006111830589361489,
+        0.0030714792665094137,
+        0.0013591406168416142
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 154.01206970214844
+    },
+    {
+      "supervised_updates": 3000,
+      "training_loss": 7.844022547942586e-06,
+      "action_rmse": [
+        0.00043239971273578703,
+        0.0023261283058673143,
+        0.0012131670955568552
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 116.97266387939453
+    },
+    {
+      "supervised_updates": 4000,
+      "training_loss": 3.967517386627151e-06,
+      "action_rmse": [
+        0.00032632757211104035,
+        0.0017292703269049525,
+        0.0011407288257032633
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 87.3683853149414
+    },
+    {
+      "supervised_updates": 5000,
+      "training_loss": 3.5781029055215186e-06,
+      "action_rmse": [
+        0.00025334779638797045,
+        0.001604317338205874,
+        0.0010861129267141223
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 81.01889038085938
+    },
+    {
+      "supervised_updates": 6000,
+      "training_loss": 3.428955778872478e-06,
+      "action_rmse": [
+        0.00020513462368398905,
+        0.0013103446690365672,
+        0.0010941234650090337
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 66.27066802978516
+    },
+    {
+      "supervised_updates": 7000,
+      "training_loss": 1.5973322433637804e-06,
+      "action_rmse": [
+        0.00020335130102466792,
+        0.0012675521429628134,
+        0.00109229632653296
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 63.61836242675781
+    },
+    {
+      "supervised_updates": 8000,
+      "training_loss": 1.2634595805138815e-06,
+      "action_rmse": [
+        0.00016555430192966014,
+        0.0011144577292725444,
+        0.0010439581237733364
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 56.636497497558594
+    },
+    {
+      "supervised_updates": 9000,
+      "training_loss": 6.523961474158568e-06,
+      "action_rmse": [
+        0.00028424098854884505,
+        0.001713254489004612,
+        0.0010667730821296573
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 87.15328979492188
+    },
+    {
+      "supervised_updates": 10000,
+      "training_loss": 1.4291754268924706e-06,
+      "action_rmse": [
+        0.0002408989385003224,
+        0.0010626250877976418,
+        0.0010707047767937183
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 54.61022186279297
+    },
+    {
+      "supervised_updates": 11000,
+      "training_loss": 9.627297004044522e-07,
+      "action_rmse": [
+        0.00013530583237297833,
+        0.0008788196719251573,
+        0.0010269669583067298
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 44.91421127319336
+    },
+    {
+      "supervised_updates": 12000,
+      "training_loss": 7.738346425867348e-07,
+      "action_rmse": [
+        0.00013026956003159285,
+        0.0008342972723767161,
+        0.0011357543990015984
+      ],
+      "linearized_tracking_proxy_kw_not_a_rollout": 43.07515335083008
+    }
+  ],
+  "selected_checkpoint": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/bc_v1/history_1100/best_bc.zip",
+    "sha256": "040f12daee07d1d11f35f96b630bd9e2be3a1838feee317a5ea494419239f175"
+  },
+  "corpus_sha256": "25b91845ea4c62e20b0fed4cd81459874a32bc9470bd48b42e77a9a446402f06",
+  "internal_validation_days": [
+    50,
+    115,
+    184,
+    227,
+    283,
+    356
+  ],
+  "internal_validation_is_training_support_not_the_external_panel": true,
+  "physical_teacher_transitions": 1555200
+}

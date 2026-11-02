@@ -1,0 +1,118 @@
+{
+  "passed": true,
+  "code_files": {
+    "baseline.py": "f5ff713669885890b4d73310ebbfbac34dee93a9fb19ae10d7dee35852d2bb42",
+    "evaluate.py": "532748f3315b9005f5adbd991c6717324a68fd88937675a3e9dbbc963ad16419",
+    "gpu_smoke.py": "df223e65ae0ceb42b934af2573110f969d8aae470268ed31b34c99f5e6fe2522",
+    "launch.py": "904a2b814ad411bbebcefd6ed95f44ab4a3dcde433717f594d8d43acb63407dd",
+    "learn.py": "b16916a8ce662cdcd64565cbfba76e4b20865d8aee7a10a59fbdf7acfb1ab5d3",
+    "macro_task.py": "71644f49f5859334fe5969ca8c3ad4e336671324031d7c1d0fe0da2f8b09938f",
+    "prepare.py": "629f7a7c7984d15402ccbc24ef5c9a9a9d44ac290863202d57a65987fae1590e",
+    "recovery_ops.py": "45395520fd57814fac7551c0c0e19382f921f25b3e6add2592cbc1762fc8a069",
+    "register.py": "cde10e4f5bac89297aad615b9e8ed451b52568dcf2e5321cc741bc6999f377ae",
+    "report.py": "58b9148f63ef1ee8d73806c04309c7b7eb5f397ec0e2f4b5f6c6ed532a19779c",
+    "study_common.py": "134dd05407f5c82873d4ebd3fc8161d8b439faf49fd88025213e9b1ca95b3e7c",
+    "test_macro.py": "2fcc60f2c09af8e50879717a1cd3ff7d7a71135d35a575ac3290cb987a187cc7",
+    "vector_smoke.py": "b3f67058c5676df9cdf2d83539ba9f973007d9252f220f656062ec507be0de01",
+    "README.md": "9e6456f662e64e8cfd68a54dd734978282850d3800e45c6d38586b15db8e8306"
+  },
+  "pytest": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junit_sha256": "c5c4113e3fac4f59ee68d214e157bb5476e36fcc59a00a291e62da12c8b89e2b",
+  "gpu_smoke": {
+    "passed": true,
+    "device": "cuda:0",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "visible_gpu": "3",
+    "macro_transitions": 32,
+    "teacher_guided_transitions": 16,
+    "normal_sac_updates": 16,
+    "critic_only_updates": 4,
+    "supervised_bias_updates": 256,
+    "actor_changed_under_SAC": true,
+    "actor_unchanged_during_calibration": true,
+    "zero_timeout_masks": true,
+    "checkpoint_deterministic_parity": true,
+    "hardware_device": "cpu",
+    "hardware_tensor_digest": "461faebfd5f96fad2775e07f3f4d4ecf5ec16a3f2de63684075393d75f81e0d7",
+    "completed_logged_episodes": 16,
+    "initialization": {
+      "kind": "constant_fraction_supervised_bias_initialization",
+      "not_a_state_dependent_selector_or_RL_result": true,
+      "updates": 256,
+      "target_fraction": 0.98,
+      "learned_fraction": 0.9800000190734863,
+      "initial_loss": 3.7865660190582275,
+      "final_loss": 5.684341886080802e-14,
+      "actor_tensor_digest": "690999f65e7ec05d0aeed663886f55c1e7b6119975a5004f90761642ae055db0",
+      "critic_tensor_digest": "3851b38729b5f0516677a286f74b93e8a2d72fcea795a45d3acd02d67af52ec0",
+      "critic_target_tensor_digest": "3851b38729b5f0516677a286f74b93e8a2d72fcea795a45d3acd02d67af52ec0",
+      "sac_actor_optimizer_updates": 0
+    },
+    "calibration": {
+      "critic_only_updates": 4,
+      "actor_unchanged": true,
+      "actor_optimizer_unchanged": true,
+      "mean_loss": 1.7864434719085693,
+      "last_loss": 1.2768312692642212
+    },
+    "no_development_or_sealed_policy_cases_used": true
+  },
+  "vector_smoke": {
+    "passed": true,
+    "recorded_cases": 4,
+    "physical_macro_decisions": 7,
+    "padding_steps": 1,
+    "hidden_extra_rollouts": 0,
+    "only_training_calendar_fixtures_used": true
+  },
+  "entropy_scale_check": {
+    "fixed_entropy_coefficient": 1e-09,
+    "cash_normalization_usd": 2824000,
+    "reference_price": 27.51,
+    "reference_residual_mw": 15.0,
+    "reference_performance": 0.9,
+    "reference_gross_revenue_gradient": 2.1570250149311484e-05,
+    "rows": [
+      {
+        "quantity_fraction": 0.9,
+        "mean_log_density": 1.9089113683809007,
+        "old_alpha_gradient_ratio": 4.106068476392962,
+        "registered_alpha_gradient_ratio": 0.00041060684763929626
+      },
+      {
+        "quantity_fraction": 0.95,
+        "mean_log_density": 2.5462859716147905,
+        "old_alpha_gradient_ratio": 8.767220715615318,
+        "registered_alpha_gradient_ratio": 0.0008767220715615317
+      },
+      {
+        "quantity_fraction": 0.98,
+        "mean_log_density": 3.430355850561913,
+        "old_alpha_gradient_ratio": 22.68877763927253,
+        "registered_alpha_gradient_ratio": 0.002268877763927253
+      },
+      {
+        "quantity_fraction": 0.995,
+        "mean_log_density": 4.800831794060544,
+        "old_alpha_gradient_ratio": 92.23110443925525,
+        "registered_alpha_gradient_ratio": 0.009223110443925524
+      },
+      {
+        "quantity_fraction": 0.999,
+        "mean_log_density": 6.4058930761525605,
+        "old_alpha_gradient_ratio": 463.0005182256898,
+        "registered_alpha_gradient_ratio": 0.04630005182256898
+      }
+    ],
+    "maximum_registered_gradient_ratio": 0.04630005182256898,
+    "limit": 0.05,
+    "interpretation": "Calibration against a representative gross-revenue derivative, not a proof about the full cash gradient near a stationary point. No claim that entropy is negligible for every possible policy/distribution."
+  },
+  "lint": "passed",
+  "frozen_inputs_kept_read_only": true
+}

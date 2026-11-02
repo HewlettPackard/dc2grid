@@ -1,0 +1,14 @@
+# @package _global_
+# Market preset: aemo_nsw
+# AEMO New South Wales Sydney — 5-min FCAS
+# Overrides grid_market and weather_market for any scenario.
+# Usage:  python train_ppo.py market=aemo_nsw
+# Sweep:  python train_ppo.py --multirun market=nyiso_nyc,pjm_dom,caiso_pgae,ercot_north,entso_de,aemo_nsw
+market:
+  id: aemo_nsw
+  description: "AEMO New South Wales Sydney — 5-min FCAS"
+
+# These are written into the env config at runtime
+env_overrides:
+  grid_market: aemo_nsw
+  weather_market: aemo_nsw

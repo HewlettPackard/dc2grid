@@ -1,0 +1,52 @@
+{
+  "unchanged_actor_entropy": {
+    "actor": "b9ffb8a83584264fb344a5c970f158905347c493da4fd48e4021d850863093c9",
+    "actor_optimizer": "f84d0ee8eab2020114c60b3480870bf28c0da0e6e32bef04333593154a10ae5b",
+    "log_alpha": "3a08b5f6d88769000a88fd368d37aa337e635cf3070027bed528bf5d53908bc4",
+    "alpha_optimizer": "3e44efc63982b4a7634f6ccef607a13c3a28869e2ae69af5fe92078e45866810"
+  },
+  "treatment_initial_state": {
+    "actor_and_entropy": {
+      "actor": "b9ffb8a83584264fb344a5c970f158905347c493da4fd48e4021d850863093c9",
+      "actor_optimizer": "f84d0ee8eab2020114c60b3480870bf28c0da0e6e32bef04333593154a10ae5b",
+      "log_alpha": "3a08b5f6d88769000a88fd368d37aa337e635cf3070027bed528bf5d53908bc4",
+      "alpha_optimizer": "3e44efc63982b4a7634f6ccef607a13c3a28869e2ae69af5fe92078e45866810"
+    },
+    "critic": "1294cc1e860207f17f63d95cea0bff8063a3db1115fd27136c75a07c6c24debb",
+    "target": "0561d14a504abec754cf5a9af6e4d4367b8ab9184fd7b3bbb949dbae53985188",
+    "critic_optimizer": "de901b41b31f503c1698f3efe58a90a19dd2cf44a9c010193354bbe9d04b7b65"
+  },
+  "calibration": [
+    {
+      "critic_update": 1,
+      "batch_loss": 0.12249542027711868,
+      "batch_q_mean": -17.515104293823242
+    },
+    {
+      "critic_update": 100,
+      "batch_loss": 0.13990192115306854,
+      "batch_q_mean": -17.34660530090332
+    },
+    {
+      "critic_update": 250,
+      "batch_loss": 0.27289265394210815,
+      "batch_q_mean": -18.158977508544922
+    },
+    {
+      "critic_update": 500,
+      "batch_loss": 0.28841251134872437,
+      "batch_q_mean": -16.541536331176758
+    }
+  ],
+  "calibration_rng": {
+    "numpy": 2504316647,
+    "torch": 2655173002
+  },
+  "online_rng": {
+    "numpy": 3474556823,
+    "torch": 1090946683
+  },
+  "base_timesteps": 1000008,
+  "base_sac_updates": 990000,
+  "initial_replay_position": 1
+}

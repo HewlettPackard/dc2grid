@@ -1,0 +1,176 @@
+{
+  "schema": "matched-validation-policy-inventory-audit-v1",
+  "created_at": "2026-10-31T04:49:46.416506+00:00",
+  "status": "passed",
+  "counts": {
+    "policies": 32,
+    "available_policies": 29,
+    "unavailable_policies": 3,
+    "validation_cells": 8,
+    "original_validation_cells": 4,
+    "matched_bias_counterparts": 4,
+    "planned_available_policy_cell_rollouts": 232,
+    "unavailable_policy_cells": 24,
+    "diagnostic_only_available_finals": 5,
+    "unique_selected_model_archives": 25,
+    "available_frozen_inner_pairings": 6,
+    "trained_macro_manifest_pairings_checked": 7,
+    "original_validation_history_suites": 106,
+    "restored_final_validation_suites": 12,
+    "registered_parent_model_archives": 8,
+    "opaque_registered_replay_hashes": 4,
+    "source_files_and_receipts_hashed": 477,
+    "bytes_hashed": 462300810,
+    "rollouts_executed": 0
+  },
+  "checks": 7386,
+  "negative_validator_tests_passed": [
+    "duplicate_policy_id",
+    "drop_unavailable_candidate",
+    "held_out_cell",
+    "duplicate_cell_id",
+    "wrong_semantics",
+    "incorrect_frozen_inner_hash",
+    "restored_best_instead_of_final",
+    "exclude_unqualified_restored_final",
+    "borrow_earlier_qualification"
+  ],
+  "discrepancies": [],
+  "consumer_instruction": "Consume this inventory without reselecting models. Proceed only if verification.status is passed. Preserve unavailable policy cells and include available diagnostic-only final checkpoints.",
+  "unavailable_candidates": [
+    {
+      "id": "old_low_1000",
+      "reason": "No fully qualified hardware checkpoint selected across 8 validation suites; no final-weight fallback."
+    },
+    {
+      "id": "old_pair_1000",
+      "reason": "Macro not trained: no qualified frozen seed-1000 hardware checkpoint."
+    },
+    {
+      "id": "old_pair_1005",
+      "reason": "No fully qualified macro checkpoint selected across 6 validation suites; no final-weight fallback."
+    }
+  ],
+  "diagnostic_only_available_finals": [
+    "restored_1000_0",
+    "restored_1000_1",
+    "restored_1000_2",
+    "restored_1001_0",
+    "restored_1001_2"
+  ],
+  "frozen_inner_pairings": [
+    {
+      "id": "old_pair_1001",
+      "matched_rule_id": "old_low_1001",
+      "hardware_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/best_model/best_model.zip",
+        "sha256": "c73a5137b29ca3f238c5d41980f100db85ad61f51778e05ca232ec151a78293f"
+      },
+      "macro_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/high/best_model/best_model.zip",
+        "sha256": "854c6fbacb00f4ebc10ecf8db445701918904b339a1f63fab8c9b58224f855c1"
+      },
+      "saved_inner_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1001/low/best_model/best_model.zip",
+        "sha256": "c73a5137b29ca3f238c5d41980f100db85ad61f51778e05ca232ec151a78293f"
+      }
+    },
+    {
+      "id": "old_pair_1002",
+      "matched_rule_id": "old_low_1002",
+      "hardware_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1002/low/best_model/best_model.zip",
+        "sha256": "05659cc0113af7193ce4d6af5d7b156d77386df8ecf7b7118c8d59dfcc843b0b"
+      },
+      "macro_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1002/high/best_model/best_model.zip",
+        "sha256": "76ee2339a483c6504327605dc7ab566f9a4918e75de30a0a912e22be7621dcb1"
+      },
+      "saved_inner_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1002/low/best_model/best_model.zip",
+        "sha256": "05659cc0113af7193ce4d6af5d7b156d77386df8ecf7b7118c8d59dfcc843b0b"
+      }
+    },
+    {
+      "id": "old_pair_1003",
+      "matched_rule_id": "old_low_1003",
+      "hardware_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1003/low/best_model/best_model.zip",
+        "sha256": "f91b672e04ece774cf5bdc953e974a1f04a95b525c3584d7fee1b4849e9300b7"
+      },
+      "macro_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1003/high/best_model/best_model.zip",
+        "sha256": "e66e4d37ae6d83a8eda11eb40303fc4b7096e1d19c50d0ce61b31a522f2a533d"
+      },
+      "saved_inner_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1003/low/best_model/best_model.zip",
+        "sha256": "f91b672e04ece774cf5bdc953e974a1f04a95b525c3584d7fee1b4849e9300b7"
+      }
+    },
+    {
+      "id": "old_pair_1004",
+      "matched_rule_id": "old_low_1004",
+      "hardware_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1004/low/best_model/best_model.zip",
+        "sha256": "f0d94cf67098e5aae3b7957ac1d9fc53e05122b0a74126fa3d2c96c77cff7b25"
+      },
+      "macro_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1004/high/best_model/best_model.zip",
+        "sha256": "b0ae7c1757ef687e9ff0574c67deabae80397bff29b4a3073675e1885c18bc87"
+      },
+      "saved_inner_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1004/low/best_model/best_model.zip",
+        "sha256": "f0d94cf67098e5aae3b7957ac1d9fc53e05122b0a74126fa3d2c96c77cff7b25"
+      }
+    },
+    {
+      "id": "old_pair_1006",
+      "matched_rule_id": "old_low_1006",
+      "hardware_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/best_model/best_model.zip",
+        "sha256": "49874644b8d0ec7e62a744077fafbc97c2cf26ce43481f13e4298bece1fac9c1"
+      },
+      "macro_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/high/best_model/best_model.zip",
+        "sha256": "d857b77f7043b121177c1cd9b6a8ca1e54337fc10a850c1ed56ddfdfa795398f"
+      },
+      "saved_inner_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1006/low/best_model/best_model.zip",
+        "sha256": "49874644b8d0ec7e62a744077fafbc97c2cf26ce43481f13e4298bece1fac9c1"
+      }
+    },
+    {
+      "id": "old_pair_1007",
+      "matched_rule_id": "old_low_1007",
+      "hardware_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip",
+        "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024"
+      },
+      "macro_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/high/best_model/best_model.zip",
+        "sha256": "a1b5e5752d68086565c7c4fec545c80b2c702b50f07fe90ab283379898bdb388"
+      },
+      "saved_inner_checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip",
+        "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024"
+      }
+    }
+  ],
+  "caveats": [
+    "Original candidates are the best qualified checkpoints selected across training; restored candidates are all registered critic_restore final-budget checkpoints. This is a candidate inventory, not evidence of algorithmic superiority.",
+    "The twelve restored candidates are three continuation streams nested within each of four selected parent seeds, not twelve independent from-scratch training seeds.",
+    "Re-evaluations of the four original validation cells are not independent new samples. The four bias counterparts reuse the same day's two seeds; matched comparisons remain dependent within day, seed, parent, and continuation stream.",
+    "Prior qualification is based on the four original cells, not a claim of qualification on the eight-cell matched validation matrix.",
+    "parent_selected_low_id on restored policies identifies a same-seed comparison candidate, not the continuation's actual late-step initial weights.",
+    "Macro and hardware selection_score values are mean reward per their respective decision step and must not be compared directly across control levels."
+  ],
+  "writes": [
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/matched_validation_20261031/policy_inventory.json",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/matched_validation_20261031/policy_inventory_audit.json"
+  ],
+  "read_only_check_command": ".venv/bin/python -B outputs/matched_validation_20261031/build_policy_inventory.py --check",
+  "inventory": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/matched_validation_20261031/policy_inventory.json",
+    "sha256": "558953aca855b1e16f23ffa156eb879be4ac78b2ea1f8b92c6fa2a2b532403b7"
+  }
+}

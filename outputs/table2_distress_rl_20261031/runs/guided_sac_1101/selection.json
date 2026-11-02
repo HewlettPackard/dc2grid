@@ -1,0 +1,43 @@
+{
+  "selected": {
+    "timesteps": 8192,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/guided_sac_1101/step_8192.zip",
+      "sha256": "53e8992f64507e9098ed12d346e43c0239b66586e9b6163006aaee7eb59dc1e5"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 1.972045660018921,
+      "bc_gradient_norm": 0.010906709358096123,
+      "weighted_bc_gradient_norm": 1.1665897369384766,
+      "latent_policy_std_mean": [
+        0.00045593781396746635,
+        0.0004867071402259171,
+        0.00041402963688597083
+      ],
+      "native_local_linearized_std_mean": [
+        0.00017714408750180155,
+        0.00020190945360809565,
+        0.00041399331530556083
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 261.6504763765991,
+    "biased_facility_relief_mw": 6.107614459712185,
+    "mean_cashflow_26h_usd": -125343.93268419588,
+    "eligible": true
+  },
+  "rule": {
+    "all_development_cells_must_qualify": true,
+    "rmse_must_be_below_old_sac_kw": 448.32986784615144,
+    "biased_relief_must_be_at_least_old_sac_mw": 5.710236761746028,
+    "closed_cash_must_be_at_least_pid_usd": -125531.10202374612,
+    "score": "maximize biased mean facility relief; tie-break by lower RMSE",
+    "per_training_seed": true,
+    "bc_only_is_not_an_RL_checkpoint": true,
+    "retain_all_failed_runs_and_cells": true
+  },
+  "all_milestones_retained": true
+}

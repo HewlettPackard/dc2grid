@@ -1,0 +1,12 @@
+name: pid
+
+# PID gains [Kp, Ki, Kd] per loop
+bess_gains: [2.0, 0.05, 0.1]
+pump_gains: [5.0, 0.1, 0.5]
+hvac_gains: [5.0, 0.1, 0.5]
+throttle_gains: [1.0, 0.02, 0.0]
+
+# Setpoints
+T_setpoint_norm: 0.857   # 30°C / 35°C
+soc_target: 0.50
+dt: 5.0

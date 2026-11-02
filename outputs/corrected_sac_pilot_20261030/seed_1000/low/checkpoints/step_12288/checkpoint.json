@@ -1,0 +1,29 @@
+{
+  "stage": "low",
+  "seed": 1000,
+  "device": "cuda:0",
+  "n_envs": 6,
+  "protocol_id": "fc1cb8a5de3267c677e780b24025997990cbb9fd2abc8c830f411c322aafe539",
+  "source_id": "4395e49d2b2afffd7ae1a0dd19fe00c048022cdc825b502066cc87b3bf8e15c4",
+  "simulation_mode": "physical_v1",
+  "inner_checkpoint": null,
+  "budgets": {
+    "timesteps": 12288,
+    "learning_starts": 1536,
+    "gamma": 0.99,
+    "eval_freq": 12289,
+    "checkpoint_freq": 6144,
+    "status_freq": 1536
+  },
+  "timesteps": 12288,
+  "optimizer_updates": 10704,
+  "model": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_pilot_20261030/seed_1000/low/checkpoints/step_12288/model.zip",
+    "sha256": "801c320f235a2da07340a70a6853319823c990c20d42974eaaff4525745586b3"
+  },
+  "replay_buffer": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_pilot_20261030/seed_1000/low/checkpoints/step_12288/replay_buffer.pkl",
+    "sha256": "8d6fe69b3ccd80e9ac857d5e3ba51f317d6cfd493a2749b509838503beff1104"
+  },
+  "resume_scope": "optimizer/replay retained; episode/RNG continuation is not bit-exact"
+}

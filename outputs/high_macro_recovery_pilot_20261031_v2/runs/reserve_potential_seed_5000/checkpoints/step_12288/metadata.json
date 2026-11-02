@@ -1,0 +1,36 @@
+{
+  "task_schema": "cash-constrained-quantity-macro-v1",
+  "simulation_mode": "physical_v1",
+  "variant": "reserve_potential",
+  "kappa": 0.0003,
+  "training_seed": 5000,
+  "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+  "hardware_checkpoint": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip",
+    "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024"
+  },
+  "extra_observation_features": [
+    "remaining_service_fraction",
+    "current_signed_regd",
+    "last_window_signed_regd_mean",
+    "signed_requested_mwh_over_bess_capacity",
+    "centered_cash_in_10000_usd",
+    "thermal_warning_budget_used",
+    "backlog_fraction_of_arrived_work",
+    "performance_weighted_capacity_ratio",
+    "maximum_accepted_capacity_fraction"
+  ],
+  "device": "cuda:0",
+  "visible_gpu": "4",
+  "macro_decision_seconds": 900,
+  "hardware_decision_seconds": 5,
+  "recovery_seconds": 7200,
+  "finite_task_gamma": 1.0,
+  "macro_transitions": 12288,
+  "critic_updates": 11776,
+  "normal_sac_updates": 11264,
+  "after_all_optimizer_updates": true,
+  "model_sha256": "9e4ae03e5810f8d115de1463726ad3356b311b2dac1618c7a6a70ad2dfed4b71",
+  "replay_sha256": "c5b9ad9bbe4935185a0c61ee816b30f9fd904d37aabd4913b08d1787bfedcdbe",
+  "resume_is_not_bit_exact_without_live_environment_state": true
+}

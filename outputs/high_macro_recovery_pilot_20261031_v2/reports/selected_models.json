@@ -1,0 +1,82 @@
+[
+  {
+    "variant": "cash",
+    "seed": 5000,
+    "available": true,
+    "macro_transitions": 8192,
+    "cashflow": -122307.90815282667,
+    "cash_delta_vs_strongest_qualified_baseline": 0.0,
+    "model": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/cash_seed_5000/best_model/model.zip",
+    "model_sha256": "ded459ae278eb3f9708eded8bf11f77370c1f1cc4534cd8f207e550ed4093991"
+  },
+  {
+    "variant": "cash",
+    "seed": 5001,
+    "available": true,
+    "macro_transitions": 20480,
+    "cashflow": -122373.72207999665,
+    "cash_delta_vs_strongest_qualified_baseline": -65.81392716997652,
+    "model": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/cash_seed_5001/best_model/model.zip",
+    "model_sha256": "446e4583eb0be29e78314b9c143cbe5427fbece4a4c6206d61bad65315f1e2f9"
+  },
+  {
+    "variant": "cash",
+    "seed": 5002,
+    "available": true,
+    "macro_transitions": 16384,
+    "cashflow": -122307.9082956413,
+    "cash_delta_vs_strongest_qualified_baseline": -0.00014281463518273085,
+    "model": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/cash_seed_5002/best_model/model.zip",
+    "model_sha256": "cb017a89f39f279e442d947b5fd714ac1a7a4149d8770e6c5e21088699c543fc"
+  },
+  {
+    "variant": "cash",
+    "seed": 5003,
+    "available": true,
+    "macro_transitions": 12288,
+    "cashflow": -122307.90815282667,
+    "cash_delta_vs_strongest_qualified_baseline": 0.0,
+    "model": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/cash_seed_5003/best_model/model.zip",
+    "model_sha256": "27fd8e4bea1c3edee0963c13c5fdb39721abbd3a11b0f64f018e36fa872039e2"
+  },
+  {
+    "variant": "reserve_potential",
+    "seed": 5000,
+    "available": true,
+    "macro_transitions": 8192,
+    "cashflow": -122405.89934988494,
+    "cash_delta_vs_strongest_qualified_baseline": -97.99119705827616,
+    "model": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/reserve_potential_seed_5000/best_model/model.zip",
+    "model_sha256": "7dd14bdb9b893de64e4656fd5fb1ec0a4f5af4c10db116fa870536f047dae220"
+  },
+  {
+    "variant": "reserve_potential",
+    "seed": 5001,
+    "available": true,
+    "macro_transitions": 16384,
+    "cashflow": -122409.06984596355,
+    "cash_delta_vs_strongest_qualified_baseline": -101.16169313687715,
+    "model": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/reserve_potential_seed_5001/best_model/model.zip",
+    "model_sha256": "d22d43e64823301b43841a89a3cd5f1c196c0d4935ce7c1a2180fea53cb9856b"
+  },
+  {
+    "variant": "reserve_potential",
+    "seed": 5002,
+    "available": true,
+    "macro_transitions": 20480,
+    "cashflow": -122307.90815282667,
+    "cash_delta_vs_strongest_qualified_baseline": 0.0,
+    "model": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/reserve_potential_seed_5002/best_model/model.zip",
+    "model_sha256": "c6b70d1e877a05e7be1c4a34a139f5e323dacaa7ef38539887537db770db27ef"
+  },
+  {
+    "variant": "reserve_potential",
+    "seed": 5003,
+    "available": true,
+    "macro_transitions": 12288,
+    "cashflow": -122531.44456543845,
+    "cash_delta_vs_strongest_qualified_baseline": -223.53641261177836,
+    "model": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/reserve_potential_seed_5003/best_model/model.zip",
+    "model_sha256": "b37c212a316c8434fe090d3d29479c135790130c464c82602ce3ddced694b203"
+  }
+]

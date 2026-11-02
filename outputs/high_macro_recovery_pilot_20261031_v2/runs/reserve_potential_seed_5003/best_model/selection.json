@@ -1,0 +1,8 @@
+{
+  "macro_transitions": 12288,
+  "score": -122531.44456543845,
+  "qualified_cells": 24,
+  "checkpoint_sha256": "b37c212a316c8434fe090d3d29479c135790130c464c82602ce3ddced694b203",
+  "source_validation": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/runs/reserve_potential_seed_5003/validation/step_12288/summary.json",
+  "selection_uses_sealed_test": false
+}

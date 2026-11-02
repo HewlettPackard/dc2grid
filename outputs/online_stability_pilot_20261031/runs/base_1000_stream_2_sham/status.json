@@ -1,0 +1,42 @@
+{
+  "job_id": "base_1000_stream_2_sham",
+  "base_seed": 1000,
+  "continuation_stream": 2,
+  "arm": "sham",
+  "registration_id": "b647d72ea028950bd04fd09e3e180a343f438359b8a1cf62292ab821721abf1f",
+  "simulation_mode": "physical_v1",
+  "visible_gpu": "7",
+  "device": "cuda:0",
+  "n_envs": 6,
+  "critic_only_calibration_updates": 500,
+  "condition_stream_seed": 2529879880,
+  "state": "completed",
+  "updated_at": "2026-10-31T02:32:34.183149+00:00",
+  "pid": 316544,
+  "timesteps": 1103688,
+  "optimizer_updates": 1093680,
+  "training_fast_steps": 103680,
+  "completed_training_episodes": 6,
+  "elapsed_seconds": 1040.9857812509981,
+  "transitions_per_second": 99.59790295540517,
+  "validation_seconds": 314.47567623699433,
+  "validation_calls": 5,
+  "cpu_affinity": [
+    53
+  ],
+  "torch_threads": 1,
+  "best_qualified_score": null,
+  "losses": {
+    "train/learning_rate": 0.0003,
+    "train/n_updates": 1093680.0,
+    "train/ent_coef": 0.045421172864735126,
+    "train/actor_loss": 38.623145500818886,
+    "train/critic_loss": 31.878139565388363,
+    "train/ent_coef_loss": 0.10136135232945283
+  },
+  "new_online_transitions": 103680,
+  "new_normal_sac_updates": 103680,
+  "actual_replay_position": 17281,
+  "expected_replay_position": 17281,
+  "qualified_checkpoint": false
+}

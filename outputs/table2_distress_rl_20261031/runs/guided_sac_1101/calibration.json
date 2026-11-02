@@ -1,0 +1,13 @@
+{
+  "critic_updates": 256,
+  "actor_digest_unchanged": "abcda9a10cad7ae6d4da9b58a984c6b9f89caa0fbf666ff384db35f73d52947f",
+  "actor_optimizer_empty": true,
+  "method": "fixed_initial_actor_parameter_gradient_norm_ratio",
+  "target_ratio": 1.0,
+  "q_gradient_norm": 0.1658744364976883,
+  "bc_gradient_norm": 0.00155079725664109,
+  "bc_weight": 106.96074676513672,
+  "gradient_calibration_uses_only_training_demonstrations": true,
+  "fixed_entropy_coefficient": 9.999999747378752e-06,
+  "applied_bc_weight": 106.96074676513672
+}

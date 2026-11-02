@@ -1,0 +1,31 @@
+name: cpo
+
+# Training
+timesteps: 300_000
+n_envs: 4
+eval_freq: 10_000
+n_eval_episodes: 5
+
+# PPO hyperparameters
+learning_rate: 3.0e-4
+n_steps: 512
+batch_size: 128
+n_epochs: 10
+gamma: 0.99
+gae_lambda: 0.95
+clip_range: 0.2
+ent_coef: 0.005
+vf_coef: 0.5
+max_grad_norm: 0.5
+
+# CPO-specific constraint parameters
+lambda_thermal_init: 0.2
+lambda_soc_init: 0.2
+lambda_freq_init: 0.2
+lr_lambda: 0.02            # dual variable learning rate (higher than PPO-Lag)
+lambda_max: 5.0             # cap to prevent reward collapse
+
+# Cost budgets (tighter than PPO-Lagrangian)
+budget_thermal: 0.02       # 2% of steps may exceed T_warn
+budget_soc: 0.05           # 5% of steps may have SOC outside safe band
+budget_freq: 0.02          # 2% of steps may exceed freq threshold

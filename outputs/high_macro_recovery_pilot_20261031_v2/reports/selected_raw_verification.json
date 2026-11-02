@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "registered_study": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+  "raw_26h_episodes": 216,
+  "independent_scalar_checks": 1512,
+  "all_selected_policy_cells_qualified": true,
+  "policy_summaries": [
+    {
+      "policy_id": "full_fraction_baseline",
+      "verified_cases": 24,
+      "physical_trajectories_identical_to_baseline": 24,
+      "mean_quantity_fraction": 1.0
+    },
+    {
+      "policy_id": "cash_seed_5000",
+      "verified_cases": 24,
+      "physical_trajectories_identical_to_baseline": 24,
+      "mean_quantity_fraction": 1.0
+    },
+    {
+      "policy_id": "cash_seed_5001",
+      "verified_cases": 24,
+      "physical_trajectories_identical_to_baseline": 0,
+      "mean_quantity_fraction": 0.9868399497483753
+    },
+    {
+      "policy_id": "cash_seed_5002",
+      "verified_cases": 24,
+      "physical_trajectories_identical_to_baseline": 0,
+      "mean_quantity_fraction": 0.9999999694733156
+    },
+    {
+      "policy_id": "cash_seed_5003",
+      "verified_cases": 24,
+      "physical_trajectories_identical_to_baseline": 24,
+      "mean_quantity_fraction": 1.0
+    },
+    {
+      "policy_id": "reserve_potential_seed_5000",
+      "verified_cases": 24,
+      "physical_trajectories_identical_to_baseline": 0,
+      "mean_quantity_fraction": 0.9806020280553236
+    },
+    {
+      "policy_id": "reserve_potential_seed_5001",
+      "verified_cases": 24,
+      "physical_trajectories_identical_to_baseline": 0,
+      "mean_quantity_fraction": 0.9828896712149596
+    },
+    {
+      "policy_id": "reserve_potential_seed_5002",
+      "verified_cases": 24,
+      "physical_trajectories_identical_to_baseline": 24,
+      "mean_quantity_fraction": 0.99999999997413
+    },
+    {
+      "policy_id": "reserve_potential_seed_5003",
+      "verified_cases": 24,
+      "physical_trajectories_identical_to_baseline": 0,
+      "mean_quantity_fraction": 0.9488355421150724
+    }
+  ],
+  "scope": "Exact on these development cells; not global equivalence.",
+  "sealed_policy_evaluations": 0,
+  "auditor_sha256": "19360a8aec366e2c3ad9b71d83ac25b0fad9b117936e0c2ba6a14361cc14826c"
+}

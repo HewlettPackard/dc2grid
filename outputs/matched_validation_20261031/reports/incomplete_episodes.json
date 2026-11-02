@@ -1,0 +1,44 @@
+[
+  {
+    "policy_id": "old_pair_1002",
+    "cell": {
+      "id": "d196_s90002_b0",
+      "start_day": 196,
+      "regd_load_bias": 0.0,
+      "seed": 90002,
+      "original_validation_cell": false
+    },
+    "observed_ticks": 16293,
+    "terminal": {
+      "soc": 0.2521540734698264,
+      "nominal_stored_mwh": 3.782311102047396,
+      "usable_energy_property_mwh": 3.7809701077728626,
+      "backlog_kwh": 2702.2772626337564,
+      "temp_A": 32.07775370976999,
+      "temp_B": 35.0282084209188,
+      "reference_temp_A": 31.119574727651944,
+      "reference_temp_B": 26.57489609333943
+    }
+  },
+  {
+    "policy_id": "old_pair_1002",
+    "cell": {
+      "id": "d256_s90003_b0p5",
+      "start_day": 256,
+      "regd_load_bias": 0.5,
+      "seed": 90003,
+      "original_validation_cell": false
+    },
+    "observed_ticks": 16609,
+    "terminal": {
+      "soc": 0.2059811726002908,
+      "nominal_stored_mwh": 3.089717589004362,
+      "usable_energy_property_mwh": 3.08840180491835,
+      "backlog_kwh": 1690.555933905694,
+      "temp_A": 31.955075796623564,
+      "temp_B": 35.00786994899951,
+      "reference_temp_A": 30.923854177254007,
+      "reference_temp_B": 26.285450458808384
+    }
+  }
+]

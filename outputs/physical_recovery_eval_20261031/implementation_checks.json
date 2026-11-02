@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "created_utc": "2026-10-31T06:51:39.685316+00:00",
+  "code_files": {
+    "recovery.py": "dd841182ec8e338a6a3f757e2f1740f454216b59c24373a90ba702ee742dde91",
+    "run_evaluation.py": "8935772f1c0f6c25f8db5f63bc394c53376cfb761ece214ac8b840e1ab084f05",
+    "test_recovery.py": "2652fd697a58cbb54c17cb17679c872470f86fefa08c09bb27a7fdae6809fce6",
+    "README.md": "5602dfbe9086e01bd1647cfdfc52c17250f9d6e5b980f6c2a20866ee3958ff71"
+  },
+  "pytest": {
+    "tests": 17,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junit_sha256": "a82dfbb98309e5dee59ccfc91a2244e0ef04a062b86d014968aeeabc2927d202",
+  "full_day_integration_smoke": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/physical_recovery_eval_20261031/smoke/macro1006_d196/episode.json",
+  "training_steps": 0
+}

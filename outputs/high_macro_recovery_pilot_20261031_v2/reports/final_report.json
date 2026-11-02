@@ -1,0 +1,519 @@
+{
+  "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+  "implementation_revision": 2,
+  "invalidated_v1_baseline_registration": "990d33de42fec3c0164aadc703ed696f989f1bc5bd0e8c8f72b76703538f7607",
+  "readback": {
+    "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+    "training_gate": {
+      "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+      "allowed": true,
+      "fully_qualified_constant_baselines": [
+        "fraction_0.95",
+        "fraction_0.98",
+        "fraction_1"
+      ],
+      "baseline_summary_sha256": "f8acdc852f343f3bc26b9e68ddd6d320cee250d4be09686d048b67c02bd334fb",
+      "reason": "Full-development joint feasibility demonstrated"
+    },
+    "planned_training_runs": 8,
+    "recorded_learner_statuses": 8,
+    "completed_learners": 0,
+    "macro_transitions": 163840,
+    "normal_sac_updates": 155648,
+    "critic_only_updates": 4096,
+    "baseline_family": [
+      {
+        "policy_id": "fraction_0.9",
+        "qualified_cells": 23,
+        "all_qualified": false,
+        "cashflow": -123098.73732061079,
+        "delivered_service_ratio": 0.9119694806237306,
+        "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_0.9/summary.json"
+      },
+      {
+        "policy_id": "fraction_0.95",
+        "qualified_cells": 24,
+        "all_qualified": true,
+        "cashflow": -122698.55406827321,
+        "delivered_service_ratio": 0.9457778057024248,
+        "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_0.95/summary.json"
+      },
+      {
+        "policy_id": "fraction_0.98",
+        "qualified_cells": 24,
+        "all_qualified": true,
+        "cashflow": -122462.90478047449,
+        "delivered_service_ratio": 0.9657869588241389,
+        "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_0.98/summary.json"
+      },
+      {
+        "policy_id": "fraction_1",
+        "qualified_cells": 24,
+        "all_qualified": true,
+        "cashflow": -122307.90815282667,
+        "delivered_service_ratio": 0.9789857516961978,
+        "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_1/summary.json"
+      },
+      {
+        "policy_id": "zero_price_capped_rule",
+        "qualified_cells": 19,
+        "all_qualified": false,
+        "cashflow": -122751.10511313034,
+        "delivered_service_ratio": 0.9202684872861498,
+        "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/zero_price_capped_rule/summary.json"
+      }
+    ],
+    "strongest_qualified_baseline": {
+      "policy_id": "fraction_1",
+      "qualified_cells": 24,
+      "all_qualified": true,
+      "cashflow": -122307.90815282667,
+      "delivered_service_ratio": 0.9789857516961978,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_1/summary.json"
+    },
+    "arms": [
+      {
+        "variant": "cash",
+        "planned_training_seeds": 4,
+        "qualified_selected_models": 4,
+        "mean_selected_cashflow": -122324.36167032282,
+        "mean_cash_delta_vs_strongest_baseline": -16.453517496152926
+      },
+      {
+        "variant": "reserve_potential",
+        "planned_training_seeds": 4,
+        "qualified_selected_models": 4,
+        "mean_selected_cashflow": -122413.5804785284,
+        "mean_cash_delta_vs_strongest_baseline": -105.67232570173292
+      }
+    ],
+    "sealed_test_policy_rollouts": 0,
+    "interpretation": [
+      "Development pilot only; the six-date sealed panel is not executed.",
+      "Initial imitation/warmup validate the pipeline, not RL superiority.",
+      "Four independent macro seeds per arm share one frozen hardware policy.",
+      "Missing selected seeds prevent a full-arm mean; no final-weight fallback.",
+      "Both bias conditions and all initial/failed evaluations remain explicit.",
+      "Stress-average relief is not actual maximum-load reduction.",
+      "Closed cash excludes wear/SLA valuation and is not total business profit.",
+      "Market/constant-quantity comparators are not robust physical MPC."
+    ]
+  },
+  "completion_adjudication": {
+    "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+    "classification": "Completed numerical study with a verified terminal provenance-guard false positive",
+    "native_clean_exit_runs": 0,
+    "native_failure_receipts_preserved": 8,
+    "adjudicated_complete_training_and_validation_runs": 8,
+    "macro_transitions": 163840,
+    "normal_sac_updates": 155648,
+    "critic_only_updates": 4096,
+    "supervised_initialization_updates": 2048,
+    "development_rollouts": 1152,
+    "rows": [
+      {
+        "variant": "cash",
+        "seed": 5000,
+        "native_exit_record_preserved": "runtime_failure",
+        "training_and_all_validation_budgets_completed": true,
+        "macro_transitions": 20480,
+        "normal_sac_updates": 19456,
+        "critic_only_updates": 512,
+        "supervised_initialization_updates": 256,
+        "development_rollouts": 144,
+        "only_protocol_delta": [
+          {
+            "path": "algorithm.policy_kwargs.use_sde",
+            "operation": "added",
+            "value": false
+          }
+        ],
+        "effective_sde_setting_matches_registered_default": true,
+        "frozen_hardware_workers_verified": 4,
+        "final_model_sha256": "80152cebc5c9fa5412530052ceccdf53eddf195aaffdd64543794c517d94146d"
+      },
+      {
+        "variant": "cash",
+        "seed": 5001,
+        "native_exit_record_preserved": "runtime_failure",
+        "training_and_all_validation_budgets_completed": true,
+        "macro_transitions": 20480,
+        "normal_sac_updates": 19456,
+        "critic_only_updates": 512,
+        "supervised_initialization_updates": 256,
+        "development_rollouts": 144,
+        "only_protocol_delta": [
+          {
+            "path": "algorithm.policy_kwargs.use_sde",
+            "operation": "added",
+            "value": false
+          }
+        ],
+        "effective_sde_setting_matches_registered_default": true,
+        "frozen_hardware_workers_verified": 4,
+        "final_model_sha256": "446e4583eb0be29e78314b9c143cbe5427fbece4a4c6206d61bad65315f1e2f9"
+      },
+      {
+        "variant": "cash",
+        "seed": 5002,
+        "native_exit_record_preserved": "runtime_failure",
+        "training_and_all_validation_budgets_completed": true,
+        "macro_transitions": 20480,
+        "normal_sac_updates": 19456,
+        "critic_only_updates": 512,
+        "supervised_initialization_updates": 256,
+        "development_rollouts": 144,
+        "only_protocol_delta": [
+          {
+            "path": "algorithm.policy_kwargs.use_sde",
+            "operation": "added",
+            "value": false
+          }
+        ],
+        "effective_sde_setting_matches_registered_default": true,
+        "frozen_hardware_workers_verified": 4,
+        "final_model_sha256": "7129f5ea690801916376c5cb1e24025ed4e72d7089ebf375ef02737404c91db5"
+      },
+      {
+        "variant": "cash",
+        "seed": 5003,
+        "native_exit_record_preserved": "runtime_failure",
+        "training_and_all_validation_budgets_completed": true,
+        "macro_transitions": 20480,
+        "normal_sac_updates": 19456,
+        "critic_only_updates": 512,
+        "supervised_initialization_updates": 256,
+        "development_rollouts": 144,
+        "only_protocol_delta": [
+          {
+            "path": "algorithm.policy_kwargs.use_sde",
+            "operation": "added",
+            "value": false
+          }
+        ],
+        "effective_sde_setting_matches_registered_default": true,
+        "frozen_hardware_workers_verified": 4,
+        "final_model_sha256": "5dbb62f5a8bba69c55604bc81ad1713ed700d47502d12e902aa4e175c1513e14"
+      },
+      {
+        "variant": "reserve_potential",
+        "seed": 5000,
+        "native_exit_record_preserved": "runtime_failure",
+        "training_and_all_validation_budgets_completed": true,
+        "macro_transitions": 20480,
+        "normal_sac_updates": 19456,
+        "critic_only_updates": 512,
+        "supervised_initialization_updates": 256,
+        "development_rollouts": 144,
+        "only_protocol_delta": [
+          {
+            "path": "algorithm.policy_kwargs.use_sde",
+            "operation": "added",
+            "value": false
+          }
+        ],
+        "effective_sde_setting_matches_registered_default": true,
+        "frozen_hardware_workers_verified": 4,
+        "final_model_sha256": "873a86e42d58df2b7d2ae618318a413b0745b7291e6e6790fcc14e8086534e4e"
+      },
+      {
+        "variant": "reserve_potential",
+        "seed": 5001,
+        "native_exit_record_preserved": "runtime_failure",
+        "training_and_all_validation_budgets_completed": true,
+        "macro_transitions": 20480,
+        "normal_sac_updates": 19456,
+        "critic_only_updates": 512,
+        "supervised_initialization_updates": 256,
+        "development_rollouts": 144,
+        "only_protocol_delta": [
+          {
+            "path": "algorithm.policy_kwargs.use_sde",
+            "operation": "added",
+            "value": false
+          }
+        ],
+        "effective_sde_setting_matches_registered_default": true,
+        "frozen_hardware_workers_verified": 4,
+        "final_model_sha256": "baab4cae43a66f34e2d0443f151f0e81b733401619d9c2bd61dba452bcaca2db"
+      },
+      {
+        "variant": "reserve_potential",
+        "seed": 5002,
+        "native_exit_record_preserved": "runtime_failure",
+        "training_and_all_validation_budgets_completed": true,
+        "macro_transitions": 20480,
+        "normal_sac_updates": 19456,
+        "critic_only_updates": 512,
+        "supervised_initialization_updates": 256,
+        "development_rollouts": 144,
+        "only_protocol_delta": [
+          {
+            "path": "algorithm.policy_kwargs.use_sde",
+            "operation": "added",
+            "value": false
+          }
+        ],
+        "effective_sde_setting_matches_registered_default": true,
+        "frozen_hardware_workers_verified": 4,
+        "final_model_sha256": "c6b70d1e877a05e7be1c4a34a139f5e323dacaa7ef38539887537db770db27ef"
+      },
+      {
+        "variant": "reserve_potential",
+        "seed": 5003,
+        "native_exit_record_preserved": "runtime_failure",
+        "training_and_all_validation_budgets_completed": true,
+        "macro_transitions": 20480,
+        "normal_sac_updates": 19456,
+        "critic_only_updates": 512,
+        "supervised_initialization_updates": 256,
+        "development_rollouts": 144,
+        "only_protocol_delta": [
+          {
+            "path": "algorithm.policy_kwargs.use_sde",
+            "operation": "added",
+            "value": false
+          }
+        ],
+        "effective_sde_setting_matches_registered_default": true,
+        "frozen_hardware_workers_verified": 4,
+        "final_model_sha256": "9085cc11e8a7408622b2f2294d21f86b33169ea00a442ce75db6c0b5b58cbffb"
+      }
+    ],
+    "cause": "A shared policy_kwargs dictionary was passed to SB3. Its constructor inserted use_sde=False, the already-effective default. Only the live protocol object changed; registered files, physics and effective algorithm parameters did not. The terminal guard ran after the final optimizer block, model save, validation and worker integrity checks.",
+    "disposition": "Numerical development results may be analyzed with this qualification. Do not relabel native failures as clean exits. No large retraining rerun or sealed evaluation was performed to repair bookkeeping.",
+    "forward_fix": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/learn.py",
+    "sealed_policy_rollouts": 0,
+    "adjudicator_sha256": "3dcd04413f76ef05864ae9ef8c053d1a7cc5852551a80575a06ccbba8bb4d799"
+  },
+  "selected_raw_verification": {
+    "passed": true,
+    "registered_study": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+    "raw_26h_episodes": 216,
+    "independent_scalar_checks": 1512,
+    "all_selected_policy_cells_qualified": true,
+    "policy_summaries": [
+      {
+        "policy_id": "full_fraction_baseline",
+        "verified_cases": 24,
+        "physical_trajectories_identical_to_baseline": 24,
+        "mean_quantity_fraction": 1.0
+      },
+      {
+        "policy_id": "cash_seed_5000",
+        "verified_cases": 24,
+        "physical_trajectories_identical_to_baseline": 24,
+        "mean_quantity_fraction": 1.0
+      },
+      {
+        "policy_id": "cash_seed_5001",
+        "verified_cases": 24,
+        "physical_trajectories_identical_to_baseline": 0,
+        "mean_quantity_fraction": 0.9868399497483753
+      },
+      {
+        "policy_id": "cash_seed_5002",
+        "verified_cases": 24,
+        "physical_trajectories_identical_to_baseline": 0,
+        "mean_quantity_fraction": 0.9999999694733156
+      },
+      {
+        "policy_id": "cash_seed_5003",
+        "verified_cases": 24,
+        "physical_trajectories_identical_to_baseline": 24,
+        "mean_quantity_fraction": 1.0
+      },
+      {
+        "policy_id": "reserve_potential_seed_5000",
+        "verified_cases": 24,
+        "physical_trajectories_identical_to_baseline": 0,
+        "mean_quantity_fraction": 0.9806020280553236
+      },
+      {
+        "policy_id": "reserve_potential_seed_5001",
+        "verified_cases": 24,
+        "physical_trajectories_identical_to_baseline": 0,
+        "mean_quantity_fraction": 0.9828896712149596
+      },
+      {
+        "policy_id": "reserve_potential_seed_5002",
+        "verified_cases": 24,
+        "physical_trajectories_identical_to_baseline": 24,
+        "mean_quantity_fraction": 0.99999999997413
+      },
+      {
+        "policy_id": "reserve_potential_seed_5003",
+        "verified_cases": 24,
+        "physical_trajectories_identical_to_baseline": 0,
+        "mean_quantity_fraction": 0.9488355421150724
+      }
+    ],
+    "scope": "Exact on these development cells; not global equivalence.",
+    "sealed_policy_evaluations": 0,
+    "auditor_sha256": "19360a8aec366e2c3ad9b71d83ac25b0fad9b117936e0c2ba6a14361cc14826c"
+  },
+  "forward_fix_full_lifecycle_smoke": {
+    "passed": true,
+    "scope": "small isolated lifecycle fixture, not an efficacy fit",
+    "clean_terminal_status": "completed",
+    "caller_protocol_unchanged": true,
+    "macro_transitions": 16,
+    "normal_sac_updates": 8,
+    "critic_only_updates": 4,
+    "sealed_policy_evaluations": 0
+  },
+  "execution_summary": {
+    "training_and_all_validation_budgets_completed": 8,
+    "native_clean_exit_runs": 0,
+    "native_terminal_guard_failures_preserved": 8,
+    "forward_fixed_trainer": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/learn.py"
+  },
+  "paired_initialization_checks": [
+    {
+      "seed": 5000,
+      "initial_parameters_matched": true,
+      "all_1024_warmup_actions_matched": true,
+      "uniform_exploration_actions_per_arm": 52
+    },
+    {
+      "seed": 5001,
+      "initial_parameters_matched": true,
+      "all_1024_warmup_actions_matched": true,
+      "uniform_exploration_actions_per_arm": 52
+    },
+    {
+      "seed": 5002,
+      "initial_parameters_matched": true,
+      "all_1024_warmup_actions_matched": true,
+      "uniform_exploration_actions_per_arm": 52
+    },
+    {
+      "seed": 5003,
+      "initial_parameters_matched": true,
+      "all_1024_warmup_actions_matched": true,
+      "uniform_exploration_actions_per_arm": 52
+    }
+  ],
+  "strongest_qualified_nonlearned_macro": {
+    "policy_id": "fraction_1",
+    "qualified_cells": 24,
+    "all_qualified": true,
+    "cashflow": -122307.90815282667,
+    "delivered_service_ratio": 0.9789857516961978,
+    "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_1/summary.json"
+  },
+  "all_final_checkpoints": [
+    {
+      "variant": "cash",
+      "seed": 5000,
+      "macro_transitions": 20480,
+      "status": "recorded",
+      "kind": "SAC",
+      "qualified_cells": 24,
+      "planned_cells": 24,
+      "mean_cashflow": -122307.90815282667,
+      "mean_service_ratio": 0.9789857516961978,
+      "cash_delta_vs_strongest_qualified_baseline": 0.0
+    },
+    {
+      "variant": "cash",
+      "seed": 5001,
+      "macro_transitions": 20480,
+      "status": "recorded",
+      "kind": "SAC",
+      "qualified_cells": 24,
+      "planned_cells": 24,
+      "mean_cashflow": -122373.72207999665,
+      "mean_service_ratio": 0.9702920590059957,
+      "cash_delta_vs_strongest_qualified_baseline": -65.81392716997652
+    },
+    {
+      "variant": "cash",
+      "seed": 5002,
+      "macro_transitions": 20480,
+      "status": "recorded",
+      "kind": "SAC",
+      "qualified_cells": 24,
+      "planned_cells": 24,
+      "mean_cashflow": -122307.91967999248,
+      "mean_service_ratio": 0.9789842743222504,
+      "cash_delta_vs_strongest_qualified_baseline": -0.011527165814186446
+    },
+    {
+      "variant": "cash",
+      "seed": 5003,
+      "macro_transitions": 20480,
+      "status": "recorded",
+      "kind": "SAC",
+      "qualified_cells": 24,
+      "planned_cells": 24,
+      "mean_cashflow": -122307.90815282667,
+      "mean_service_ratio": 0.9789857516961978,
+      "cash_delta_vs_strongest_qualified_baseline": 0.0
+    },
+    {
+      "variant": "reserve_potential",
+      "seed": 5000,
+      "macro_transitions": 20480,
+      "status": "recorded",
+      "kind": "SAC",
+      "qualified_cells": 22,
+      "planned_cells": 24,
+      "mean_cashflow": -122740.16576206563,
+      "mean_service_ratio": 0.9515274037147948,
+      "cash_delta_vs_strongest_qualified_baseline": -432.2576092389645
+    },
+    {
+      "variant": "reserve_potential",
+      "seed": 5001,
+      "macro_transitions": 20480,
+      "status": "recorded",
+      "kind": "SAC",
+      "qualified_cells": 24,
+      "planned_cells": 24,
+      "mean_cashflow": -122412.75890819165,
+      "mean_service_ratio": 0.9654412911687542,
+      "cash_delta_vs_strongest_qualified_baseline": -104.85075536498334
+    },
+    {
+      "variant": "reserve_potential",
+      "seed": 5002,
+      "macro_transitions": 20480,
+      "status": "recorded",
+      "kind": "SAC",
+      "qualified_cells": 24,
+      "planned_cells": 24,
+      "mean_cashflow": -122307.90815282667,
+      "mean_service_ratio": 0.9789857516961978,
+      "cash_delta_vs_strongest_qualified_baseline": 0.0
+    },
+    {
+      "variant": "reserve_potential",
+      "seed": 5003,
+      "macro_transitions": 20480,
+      "status": "recorded",
+      "kind": "SAC",
+      "qualified_cells": 24,
+      "planned_cells": 24,
+      "mean_cashflow": -122685.44488620752,
+      "mean_service_ratio": 0.9448218373954004,
+      "cash_delta_vs_strongest_qualified_baseline": -377.53673338085355
+    }
+  ],
+  "teacher_baseline_cash_gap_usd": -154.9966276478226,
+  "interpretation": [
+    "All budgets completed, but native terminal guard failures are preserved.",
+    "The sole protocol delta was SB3 inserting its already-effective default.",
+    "Separate adjudication verifies numerical validity, not clean native exits.",
+    "Improving on the .98 initializer is not evidence of beating fraction1.",
+    "Returning to the analytic full-residual rule is not a new RL advantage.",
+    "Both learning variants share the same complete-trajectory objective.",
+    "Development selection can be optimistic; the sealed panel is unexecuted.",
+    "The separate one-shot selector study is not pooled with this pilot."
+  ],
+  "source_inputs": {
+    "learning_progress.json": "bb75e889318f8eb083454f922de5e6769ea34d1660be3a51739a6638a0125b09",
+    "selected_models.json": "2551599d1ad7db9108b1fac84a195315cbeaa9cd46cce89430a2062cc4d4ada2",
+    "arm_summary.json": "39cdc2c94ac0b501edd25d12dff637a9751f4de432a1d04879cdc5e7beee83b7"
+  }
+}

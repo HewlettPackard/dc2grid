@@ -1,0 +1,5 @@
+name: mpc_macro
+
+horizon: 8         # 8 × 15min = 2 hours look-ahead
+max_iter: 80       # SLSQP iterations
+T_amb: 25.0        # assumed ambient temperature (°C)

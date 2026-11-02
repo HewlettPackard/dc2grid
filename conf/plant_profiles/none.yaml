@@ -1,0 +1,5 @@
+# conf/plant_profiles/none.yaml
+# Default facility (250 MW) — no capacity override applied.
+# Selected by default; the env falls back to its built-in physics constants.
+name: none
+plant: null

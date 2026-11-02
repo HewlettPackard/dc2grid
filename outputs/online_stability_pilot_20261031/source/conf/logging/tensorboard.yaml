@@ -1,0 +1,4 @@
+# Which logging backends to enable
+tensorboard: true
+csv: true            # per-episode CSV via C2GMetricsCallback
+console_freq: 1     # print summary every N episodes

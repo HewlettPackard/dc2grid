@@ -1,0 +1,34 @@
+{
+  "status": "completed",
+  "variant": "guided_sac",
+  "seed": 1100,
+  "online_transitions": 1152,
+  "sac_actor_updates": 128,
+  "critic_updates": 384,
+  "selected": null,
+  "smoke_only": true,
+  "registration_unchanged": true,
+  "feature_contract": {
+    "id": "native18-own-command4-request-ema900s-clock-v1",
+    "dimension": 24,
+    "source": "original low observations, own previously executed action and clock",
+    "analytic_observer_or_projection": false,
+    "action": "pump_hvac_bess_full_work"
+  },
+  "code_hashes": {
+    "common.py": "16f0c5d530a69859cbc32d173528787c87a2ff41396eda9adc821c6a9b425b15",
+    "controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+    "history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+    "fast_task.py": "bfebfc451873abdb09c93a36d1e74b55483432bfcc1436c5f2354730c0bdafd5",
+    "fit_bc.py": "0d98bcd932d1d1cd386b9073f0058043570ec996b205ca13cbfc0e36fd18485c",
+    "sac_core.py": "8027f3cb2e0753ffad8945efb2bf63baa3656e508339905c9bb5050c9ca84d41",
+    "evaluate.py": "8a7b0fdeff47cc9fb188f7b125dc979bc8280a945d1dc3a1bb87d4606521cfb3",
+    "evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+    "train.py": "a6620fa37fe39f40265b3fc7a5fd165ea8cd6c45776dc455f09dbffb1ea92a3a",
+    "launch_training.py": "08d408151993d44143734b83e0dd8687fadc6d068cf0c26b169c30d3d6192552",
+    "prepare_study.py": "9abe44cf498c38331a53b52124c27a5a8b9966e44f0fbb8eb020a42dca3fe64f",
+    "test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+    "test_learning_contract.py": "a2f1177a662325d86ac61a7eaf93a7dcdfa6cbdf2de95ca7a7511ff7721b05b1",
+    "test_sac_core.py": "ec06c178077008b617b2209fabb22cfa8b0dddb7b10e5b652cbc33fa570d18cd"
+  }
+}

@@ -1,0 +1,14 @@
+# @package _global_
+# Market preset: entso_de
+# ENTSO-E Germany Frankfurt — 30-min FCR-N
+# Overrides grid_market and weather_market for any scenario.
+# Usage:  python train_ppo.py market=entso_de
+# Sweep:  python train_ppo.py --multirun market=nyiso_nyc,pjm_dom,caiso_pgae,ercot_north,entso_de,aemo_nsw
+market:
+  id: entso_de
+  description: "ENTSO-E Germany Frankfurt — 30-min FCR-N"
+
+# These are written into the env config at runtime
+env_overrides:
+  grid_market: entso_de
+  weather_market: entso_de

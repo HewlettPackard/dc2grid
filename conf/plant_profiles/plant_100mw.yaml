@@ -1,0 +1,34 @@
+# conf/plant_profiles/plant_100mw.yaml
+# Plant capacity profile — 100 MW facility (0.4x the 250 MW default).
+# Canonical Hydra-side definition of the plant sizing used by the
+# capacity-generalization experiments. Mirrors c2g_env/config.yaml
+# [plant_100mw] (the runtime source the env reads via scenario name).
+#
+# Nameplate = (n_racks_a_flex + n_racks_a_base) x 75 kW + n_racks_b x 40 kW
+#           = 800 x 75 kW (60 MW, Zone A) + 1000 x 40 kW (40 MW, Zone B).
+#
+# Extensive quantities scale linearly with capacity; intensive quantities
+# (per-rack power, COP, C/K time constant, SOC bounds, setpoints) are unchanged.
+name: plant_100mw
+description: "100 MW facility (0.4x default) — capacity-generalization test"
+
+plant:
+  # Capacity-scaled standing DR commitment (0.4x default)
+  dr_baseline_mw:   2.0
+  n_racks_a_flex: 480
+  n_racks_a_base: 320
+  n_racks_b:      1000
+  S_xfmr_mva:     120.0
+  p_iron_mw:      0.06
+  p_lighting_mw:  0.2
+  p_network_mw:   0.6
+  C_A:            10800.0
+  C_B:            4000.0
+  K_liq:          14.0
+  K_air:          5.2
+  K_env_A:        0.2
+  K_env_B:        0.2
+  max_hvac_mw:    20.0
+  P_PUMP_MAX_MW:  0.6
+  E_NOM_MWH:      6.0
+  P_MAX_MW:       2.0

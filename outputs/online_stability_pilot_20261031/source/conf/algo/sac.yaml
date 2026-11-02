@@ -1,0 +1,18 @@
+name: sac
+
+timesteps: 400_000
+n_envs: 1
+eval_freq: 5_000
+n_eval_episodes: 5
+
+learning_rate: 3.0e-4
+buffer_size: 100_000
+learning_starts: 2_000
+batch_size: 256
+tau: 0.005
+gamma: 0.99
+train_freq: 1
+gradient_steps: 1
+ent_coef: "auto"
+target_update_interval: 1
+net_arch: [256, 256]

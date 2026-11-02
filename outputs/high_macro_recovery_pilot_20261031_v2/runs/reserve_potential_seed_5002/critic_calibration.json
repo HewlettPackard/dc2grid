@@ -1,0 +1,7 @@
+{
+  "critic_only_updates": 512,
+  "actor_unchanged": true,
+  "actor_optimizer_unchanged": true,
+  "mean_loss": 4.747841594987534e-05,
+  "last_loss": 1.9248684111516923e-05
+}

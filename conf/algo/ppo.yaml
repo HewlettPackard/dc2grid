@@ -1,0 +1,28 @@
+name: ppo
+
+# Training length & parallelism
+timesteps: 300_000
+n_envs: 4
+eval_freq: 10_000
+n_eval_episodes: 5
+
+# SB3 PPO hyperparameters
+learning_rate: 3.0e-4
+n_steps: 512
+batch_size: 128
+n_epochs: 10
+gamma: 0.99
+gae_lambda: 0.95
+clip_range: 0.2
+ent_coef: 0.005
+vf_coef: 0.5
+max_grad_norm: 0.5
+net_arch:
+  pi: [256, 256]
+  vf: [256, 256]
+
+# VecNormalize
+norm_obs: true
+norm_reward: true
+clip_obs: 10.0
+clip_reward: 10.0

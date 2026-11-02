@@ -1,0 +1,4 @@
+name: milp
+
+horizon: 8         # 8 × 15min = 2 hours
+T_amb: 25.0

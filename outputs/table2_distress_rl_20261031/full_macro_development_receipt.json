@@ -1,0 +1,7 @@
+{
+  "candidate_lock_id": "7c36b6b64f2ce862d71c1fcba903446a3879cc3eb1030cd09fcb6ddb3828e7c1",
+  "summary_sha256": "90acecda805ba21eba7952927031f17d29cd0dcae9daedddf8a4d157ce6e9b4d",
+  "episodes": 336,
+  "qualified": 335,
+  "no_checkpoint_reselection": true
+}

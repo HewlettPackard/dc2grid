@@ -1,0 +1,131 @@
+global:
+  simulation_mode: physical_v1
+  dt_seconds: 5
+  episode_ticks: 17280
+  start_day: 0
+  regd_load_bias: 0.0
+  T_safe: 35.0
+  trace_dir: /workspace/IBM/temp/dc2grid-repos/dc2grid/data/processed/workload_traces
+  energy_dir: /workspace/IBM/temp/dc2grid-repos/dc2grid/data/processed/energy
+  weather_dir: /workspace/IBM/temp/dc2grid-repos/dc2grid/data/processed/weather
+  grid_market: nyiso_nyc
+  nyiso_zone: NYC
+reward:
+  alpha: 1.0
+  beta: 2.0
+  tracking_floor_fraction: 0.0004
+  macro_tracking_floor_fraction: 4.0e-06
+  gamma_thermal: 5.0
+  T_warn_A: 33.0
+  T_warn_B: 33.0
+  soc_penalty: 0.5
+  delta_freq_penalty: 2.0
+  delta_volt_penalty: 5.0
+  sla_backlog_penalty: 2.0
+handshake:
+  rmcp_max: 100.0
+  sigmoid_k_p: 0.15
+  lambda_rev: 1.0
+  lambda_elec: 0.5
+  lambda_churn: 0.05
+markets:
+  nyiso_nyc:
+    description: "NYISO New York City \u2014 baseline, real load + weather data"
+    grid_market: nyiso_nyc
+    weather_market: nyiso_nyc
+    lmp_currency: USD
+    regulation_product: AGC Secondary Reserve
+  pjm_dom:
+    description: "PJM Northern Virginia (Ashburn) \u2014 Data Center Alley"
+    grid_market: pjm_dom
+    weather_market: pjm_dom
+    lmp_currency: USD
+    regulation_product: RegD (Fast-Response Regulation)
+  caiso_pgae:
+    description: "CAISO Bay Area (San Jose) \u2014 duck curve solar"
+    grid_market: caiso_pgae
+    weather_market: caiso_pgae
+    lmp_currency: USD
+    regulation_product: REGU / REGD
+  ercot_north:
+    description: "ERCOT Dallas\u2013Fort Worth \u2014 isolated grid, extreme events"
+    grid_market: ercot_north
+    weather_market: ercot_north
+    lmp_currency: USD
+    regulation_product: ECRS (Electricity Contingency Reserve)
+  entso_de:
+    description: "ENTSO-E Germany (Frankfurt) \u2014 30-min FCR-N settlement"
+    grid_market: entso_de
+    weather_market: entso_de
+    lmp_currency: EUR
+    regulation_product: "FCR-N (Frequency Containment Reserve \u2014 Normal)"
+  aemo_nsw:
+    description: "AEMO New South Wales (Sydney) \u2014 5-min FCAS dispatch"
+    grid_market: aemo_nsw
+    weather_market: aemo_nsw
+    lmp_currency: AUD
+    regulation_product: Regulation FCAS
+default:
+  name: Default
+  description: Nominal summer operation, moderate grid regulation commitment.
+  grid_market: nyiso_nyc
+  weather_market: nyiso_nyc
+  weather_driven: true
+  T_amb: 25.0
+  committed_mw_max: 30.0
+  bess_soc_init: 0.5
+  cooling_fault: false
+  genai_spike_scale: 1.0
+  grid_stress_scale: 1.0
+  dr_baseline_mw: 5.0
+  dr_rate_usd_mw: 5.0
+scenario_a:
+  name: GenAI Crisis
+  description: 'Simultaneous GenAI inference burst and grid regulation demand-response
+    signal. Tests the DVFS + BESS lever synergy under PJM RegD.
+
+    '
+  grid_market: pjm_dom
+  weather_market: pjm_dom
+  weather_driven: false
+  T_amb: 30.0
+  committed_mw_max: 40.0
+  bess_soc_init: 0.55
+  cooling_fault: false
+  genai_spike_scale: 1.8
+  grid_stress_scale: 1.5
+  dr_baseline_mw: 5.0
+  dr_rate_usd_mw: 5.0
+scenario_b:
+  name: Thermal Squeeze
+  description: "40\xB0C ambient severely degrades CRAH COP. ERCOT committed 30 MW.\
+    \ Tests CDU pump speed lever and thermal battery strategy.\n"
+  grid_market: ercot_north
+  weather_market: ercot_north
+  weather_driven: false
+  T_amb: 40.0
+  committed_mw_max: 60.0
+  bess_soc_init: 0.6
+  cooling_fault: false
+  genai_spike_scale: 1.0
+  grid_stress_scale: 1.3
+  dr_baseline_mw: 5.0
+  dr_rate_usd_mw: 5.0
+scenario_c:
+  name: Battery Drain
+  description: 'Prolonged regulation discharge drains BESS to near SOC_min (10%).
+    Cooling pump fault + AEMO 5-min dispatch. Tests DVFS-only resilience.
+
+    '
+  grid_market: aemo_nsw
+  weather_market: aemo_nsw
+  weather_driven: false
+  T_amb: 32.0
+  committed_mw_max: 40.0
+  bess_soc_init: 0.15
+  cooling_fault: true
+  cooling_fault_factor: 0.6
+  genai_spike_scale: 1.2
+  grid_stress_scale: 1.2
+  dr_baseline_mw: 5.0
+  dr_rate_usd_mw: 5.0

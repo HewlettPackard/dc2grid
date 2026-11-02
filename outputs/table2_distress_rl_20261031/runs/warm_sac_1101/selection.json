@@ -1,0 +1,14 @@
+{
+  "selected": null,
+  "rule": {
+    "all_development_cells_must_qualify": true,
+    "rmse_must_be_below_old_sac_kw": 448.32986784615144,
+    "biased_relief_must_be_at_least_old_sac_mw": 5.710236761746028,
+    "closed_cash_must_be_at_least_pid_usd": -125531.10202374612,
+    "score": "maximize biased mean facility relief; tie-break by lower RMSE",
+    "per_training_seed": true,
+    "bc_only_is_not_an_RL_checkpoint": true,
+    "retain_all_failed_runs_and_cells": true
+  },
+  "all_milestones_retained": true
+}

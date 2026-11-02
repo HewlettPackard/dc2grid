@@ -1,0 +1,19 @@
+# conf/scenario/default.yaml
+# Hydra scenario config for C2G-Bench.
+# All fields here mirror c2g_env/config.yaml [default] for Hydra composition.
+name: default
+env_id: default
+description: "Baseline 250MW DC — 28°C ambient, NYISO NYC, 15MW regulation commitment"
+
+# Market / weather
+grid_market:    nyiso_nyc
+weather_market: nyiso_nyc
+weather_driven: true
+
+# Physics overrides
+T_amb: 25.0
+committed_mw: 15.0
+bess_soc_init: 0.5
+cooling_fault: false
+genai_spike_scale: 1.0
+grid_stress_scale: 1.0

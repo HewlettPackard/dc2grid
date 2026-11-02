@@ -1,0 +1,30 @@
+name: ppo_lagrangian
+
+# Training
+timesteps: 300_000
+n_envs: 4
+eval_freq: 10_000
+n_eval_episodes: 5
+
+# PPO hyperparameters (same as standard PPO)
+learning_rate: 3.0e-4
+n_steps: 512
+batch_size: 128
+n_epochs: 10
+gamma: 0.99
+gae_lambda: 0.95
+clip_range: 0.2
+ent_coef: 0.005
+vf_coef: 0.5
+max_grad_norm: 0.5
+
+# Lagrangian constraint parameters
+lambda_thermal_init: 0.1
+lambda_soc_init: 0.1
+lambda_freq_init: 0.1
+lr_lambda: 0.01        # dual variable learning rate
+
+# Cost budgets (max allowable violation rates)
+budget_thermal: 0.05   # 5% of steps may exceed T_warn
+budget_soc: 0.10       # 10% of steps may have SOC outside safe band
+budget_freq: 0.05      # 5% of steps may exceed freq threshold

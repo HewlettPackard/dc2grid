@@ -1,0 +1,13 @@
+{
+  "kind": "constant_fraction_supervised_bias_initialization",
+  "not_a_state_dependent_selector_or_RL_result": true,
+  "updates": 256,
+  "target_fraction": 0.98,
+  "learned_fraction": 0.9800000190734863,
+  "initial_loss": 3.7865660190582275,
+  "final_loss": 5.684341886080802e-14,
+  "actor_tensor_digest": "64d145f29afabc0354b73de9cb8a57f663e18aab5331350b4b70a8fea74df7b1",
+  "critic_tensor_digest": "b165c10f9a8f94b26f4b2e7111303c99022fa21095212666f1adea809eac0877",
+  "critic_target_tensor_digest": "b165c10f9a8f94b26f4b2e7111303c99022fa21095212666f1adea809eac0877",
+  "sac_actor_optimizer_updates": 0
+}

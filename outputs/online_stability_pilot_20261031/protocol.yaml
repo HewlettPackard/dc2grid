@@ -1,0 +1,39 @@
+schema: online-sac-value-state-pilot-v1
+baseline_campaign: /workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030
+base_seeds: [1000, 1001, 1006, 1007]
+continuation_streams: [0, 1, 2]
+arms: [sham, optimizer_reset, critic_restore]
+late_step: 1000008
+donor_step: 500004
+online_transitions: 103680
+critic_calibration_steps: 500
+evaluation_interval: 25920
+checkpoint_interval: 25920
+status_interval: 2592
+threads: 1
+scheduler_seed: 20261031
+maximum_concurrent_runs: 8
+resource_policy: wait_for_baseline_slot_release
+unchanged:
+  - physics_and_reward
+  - observation_and_action_spaces
+  - train_days_and_biases
+  - four_fixed_validation_cells
+  - safety_and_service_qualification
+  - learning_rate_gamma_tau_batch_size
+  - update_to_data_ratio
+comparison:
+  sham: Late critics, target critics and critic optimizer retained.
+  optimizer_reset: Late critics and target critics retained; fresh critic Adam.
+  critic_restore: Restore 500k critics and target critics; fresh critic Adam.
+  common_calibration: All three arms receive 500 critic-only updates with actor and entropy state frozen.
+  online_phase: Real new environment transitions are added to each arm's replay; normal SAC actor, critic and entropy updates resume.
+  streams: Matched initial replay, sampling seeds and per-worker episode-condition sequences within each base-seed/stream block; realized trajectories can diverge.
+analysis:
+  primary_endpoint: Final-budget fixed-validation tracking and qualification jointly.
+  additional: Raw and normalized RMSE, all seven reward components, commitment, queue saturation/debt, SOC, thermal warnings, online transitions and update counts.
+  unit: Four selected parent policies with three nested continuation streams; not twelve independent from-scratch seeds.
+  failure_policy: Retain every registered run and validation cell. Do not filter failed qualification or rerun failed jobs silently.
+  selection: Best qualified checkpoint is secondary; final-budget outcomes for all registered runs are primary.
+  held_out_peak_days: Never execute days 207, 248 or 249 in this pilot.
+  scope: Exploratory online recovery after degradation, not identification of its original cause or a general safety guarantee.

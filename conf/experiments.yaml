@@ -1,0 +1,102 @@
+# ==============================================================================
+# conf/experiments.yaml — Experiment sweep definitions
+# ==============================================================================
+# Single source of truth for experiment sweep grids read by scripts under
+# c2g_env/experiments/. Values are read at runtime; do not duplicate inline.
+#
+# thermal_sensitivity
+# -------------------
+# Thermal-parameter sensitivity study for reviewer Ask 1 ("are the safety
+# results an artifact of permissive thermal assumptions?").
+#
+# Design (see also rebuttal_ask1.md for the provenance of every range):
+#   * The safety anchors T_warn = 33 degC and T_safe = 35 degC are FIXED
+#     invariants. They are NEVER swept — they are the physical scoring rubric,
+#     shared by the reward, the episode termination, and every controller's own
+#     danger reference.
+#   * Only the uncalibrated PLANT parameters are swept.
+#   * COP_base_liq (Zone A liquid COP) is deliberately excluded: it does not
+#     enter the Zone A temperature update (only the chiller electrical draw), so
+#     it is an economic axis, not a thermal-safety axis. COP_base (Zone B air)
+#     IS included because it sets the capacity-limited cooling ceiling.
+#
+# Keys under `nominal` and `sweep` are EXACT ThermalTwin
+# attribute names (c2g_env/physics/thermal.py); they are applied via setattr.
+# ==============================================================================
+
+thermal_sensitivity:
+
+  # Reference operating point (today's benchmark values). One-at-a-time sweep
+  # rows override a single key at a time relative to this baseline.
+  nominal:
+    C_A:         27000.0   # Zone A thermal capacitance   [MJ/degC]
+    C_B:         10000.0   # Zone B thermal capacitance   [MJ/degC]
+    K_liq:          35.0   # Zone A liquid-loop conductance (full pump) [MW/degC]
+    K_air:          13.0   # Zone B air-side conductance   (full fan)   [MW/degC]
+    K_env_A:         0.5   # Zone A envelope coupling      [MW/degC]
+    K_env_B:         0.5   # Zone B envelope coupling      [MW/degC]
+    T_supply_A:     30.0   # Zone A coolant supply setpoint [degC]
+    T_supply_B:     20.0   # Zone B CRAH supply-air setpoint [degC]
+    COP_base:        3.5   # Zone B air-side base COP (capacity ceiling)
+    fault_factor:    1.0   # Fraction of nominal cooling conductance remaining
+    T_amb:          25.0   # Ambient outdoor temperature   [degC]
+
+  # One-at-a-time (OAT) grid. Each key maps to absolute values to test.
+  # The aggregate C and K values are physically interpreted facility cases,
+  # not intrinsic material-property tolerances. See
+  # c2g_env/experiments/thermal_sensitivity.md for the assumption ledger,
+  # equipment specifications, and derived time constants/approaches.
+  sweep:
+    # Effective inventories spanning approximately 6 to 19 min at nominal K.
+    C_A:         [13500.0, 20250.0, 27000.0, 40500.0]
+    C_B:         [5000.0, 7500.0, 10000.0, 15000.0]
+
+    # K_liq corresponds to 150 MW at effective approaches of approximately
+    # 8, 6, 4.3, and 3 K. K_air corresponds to 100 MW at effective
+    # zone-to-supply differences of approximately 15, 10, 7.7, and 5 K.
+    K_liq:       [18.8, 25.1, 35.0, 50.1]
+    K_air:       [6.7, 10.0, 13.0, 20.0]
+
+    # 0.05 to 0.10 MW/K: code envelope plus infiltration for a large campus.
+    # 0.25 to 0.50 MW/K: ventilation/economizer-inclusive ambient coupling.
+    K_env_A:     [0.05, 0.10, 0.25, 0.50]
+    K_env_B:     [0.05, 0.10, 0.25, 0.50]
+
+    T_supply_A:  [20.0, 27.0, 30.0, 32.0]      # W27/W32 and HPE <=32 degC
+    T_supply_B:  [18.0, 20.0, 24.0, 27.0]      # A1-A4 recommended inlet band
+    COP_base:    [2.5, 3.5, 5.0]               # effective air-plant cases
+    fault_factor: [1.0, 0.8, 0.6, 0.4]         # architecture/stress cases
+    T_amb:       [25.0, 30.0, 35.0, 40.0]      # nominal to Thermal Squeeze
+
+  # Run controls.
+  run:
+    horizon_ticks:        17280     # 24 h at 5 s per tick (full settling)
+    dt_seconds:              5.0
+    seed:                    100
+    open_loop_load:   adversarial   # open-loop probes always use worst-case load
+    closed_loop_load:    workload    # "workload" (real trace) or "adversarial"
+    controllers:      [bang_bang, pid, rule_based]
+    # Worst-case constant IT load used by the "adversarial" driver [MW].
+    adversarial_p_it_A_mw:  150.0    # Zone A nameplate (2000 racks @ 75 kW)
+    adversarial_p_it_B_mw:  100.0    # Zone B nameplate (2500 racks @ 40 kW)
+
+  # Full-environment cross-scenario study. Rule-based macro control is held
+  # fixed to isolate low-level thermal robustness and matches SAC Phase-1
+  # training/evaluation. The same frozen SAC checkpoint is used in every
+  # scenario; this is an out-of-distribution policy test, not retraining.
+  # Apply only one-at-a-time thermal changes on top of each scenario, retaining
+  # its defaults for all other parameters.
+  cross_scenario:
+    torch_num_threads: 1
+    hardware_observation_protocol: carry_forward
+    controller_pairs:
+      - [rule_macro, rule_based]
+      - [rule_macro, sac]
+    validation_configs: [nominal, "fault_factor=0.4"]
+    scenarios: [default]
+    seeds: [100, 101, 102, 103, 104]
+    macro_controller: rule_macro
+    hardware_controllers: [bang_bang, pid, rule_based, sac]
+    sac_model: "trained_models/BestCheckpoints/sac_default_s100/final_model.zip"
+    sac_macro_model: "trained_models/BestCheckpoints/sac_macro_default_s100/final_model.zip"
+    deduplicate_plant_configs: true

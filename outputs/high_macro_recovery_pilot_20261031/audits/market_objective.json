@@ -1,0 +1,44 @@
+{
+  "scope": "Read-only physical_v1; no training/rollouts or frozen edits. No attachment evidence. Paths are repo-relative.",
+  "source_root": "outputs/online_stability_pilot_20261031/source",
+  "evidence": [
+    "c2g_env/physics/macro_grid.py:478-549,572-595; c2g_env/env_high_level.py:260-446,554-718",
+    "c2g_env/env_low_level.py:614-684; c2g_env/physics/bess.py:87-201; baselines/rule_based_macro.py:61-99",
+    "outputs/physical_recovery_eval_20261031/{selection.json,heldout_registration.json,recovery.py}",
+    "outputs/physical_recovery_eval_20261031/heldout/reports/final_report.json and existing old_pair_1006/old_low_1006 macro ledgers"
+  ],
+  "equations": {
+    "offer": "r=clip(r0+beta*(LMP-LMP0)+noise,0,500); R=need0*(1+slope*load_norm)*(1-competitor_fill). Both are exogenous.",
+    "action": "q=Qmax*a0 MW; b=2*rmcp_max*a1 USD/MWh; a0,a1 in [0,1], rmcp_max=100.",
+    "acceptance": "p=sigmoid(0.15*(r-b))*min(1,R/max(q,0.01)); A=1[U<p]. Accepted: c=q,rate=r. Rejected: c=D,rate=d; default DR D=5 MW,d=5 USD/MW-h. No partial clearing.",
+    "settlement": "h=executed_steps*5/3600; e=mean absolute tracking error (kW); F=macro tracking floor (kW). Revenue=rate*c*h*max(0,1-e/max(1000*c,F)); electricity=sum LMP*(Pfacility-Pbess)*dt_hours. Cash=revenue-electricity. Uniform posted clearing, NOT pay-as-bid.",
+    "expected_quantity": "E[c]=D+p*(q-D). For q>=0.01, E[A*q]=sigmoid(0.15*(r-b))*min(q,R).",
+    "old_reward": "Revenue/1000+mean(low_reward)-0.5*electricity/1000-0.05*abs(a0-a0_previous). Dimensionless low rewards and half-weighted electricity do not optimize cash."
+  },
+  "findings": [
+    "For fixed q and price-independent conditional values, V=V_DR+p*(V_q-V_DR): b=0 is optimal if acceptance helps, b=200 if harmful. Intermediate prices randomize admission without a premium. Relative-price fixes conditioning, not economics.",
+    "Oversized bids clear in full. Above R, E[Aq] plateaus but E[c]=D+s*R*(1-D/q) increases with q (s=price sigmoid). Perfect-tracking revenue can rise through extra DR fallback payments. Accepted q=0 cancels DR. These are mechanism edge cases.",
+    "Old rule uses 0.8*r and ignores SOC/R. Repricing gains need no RL. Residual-to-rule is a useful prior, not extra control: high level cannot directly target SOC while low1007 is unchanged.",
+    "SOC penalty is 0.5 only below 0.12; service gate is terminal SOC>=0.20. Four macro1006 failures ended at 0.1274-0.1595, outside the penalty region. Recovery cannot repair that gate. Battery rail=0.10, discharge derates below0.20; a throughout-day0.20 floor would be a NEW constraint.",
+    "Macro observes current r/R but lagged mean LMP, absolute RegD and no remaining time. RegD is not guaranteed interval-neutral. Lower commitment need not monotonically improve frozen-low SOC."
+  ],
+  "algebra_probe": "Affinity {60}, one-thread project Python, no GPU/environment. Frozen functions: r=42.33,R=18,q=24 gives p=0.748692/0.585544/0.375 at b=0/0.8r/r, same clearing rate; q=0 suppresses DR.",
+  "prior_results": "2880 existing rows/comparator confirm macro1006+low1006 vs rule+low1006: commitment6.535/14.877 MW, accepted19.79/60.10%, ask129.25/33.86 vs posted42.33. Development +1003 became heldout -12952 USD after recovery (all30 negative). Repricing is not a demonstrated fix. Low1007's +403USD vs PID coexists with worse actual peak relief1.257 vs1.998MW. Neither comparison identifies new-macro gains.",
+  "required_baselines": [
+    "Original rule+low1007; identical quantity logic with b=0 isolates repricing.",
+    "Development-tuned constant-quantity grid and load rule at b=0, including min(Qmax,R); oversize bids only in labelled ablation.",
+    "Reserve rule: b=0; q=min(q_load,R,q_cap(SOC,thermal,backlog,time)), projected onto common bounds. Development-fit small threshold family with charge/discharge headroom and DR fallback. Zero residual is the RL comparator, same observations/bounds; no safety guarantee."
+  ],
+  "recommended_protocol": [
+    "Quantity-only bounded residual around reserve rule; b=0, frozen low1007/market. Common range D<=q<=min(Qmax,R,q_cap); empty range is infeasible. Removes price withdrawal/oversize tricks. Ablate reward, action mapping and reserve changes separately.",
+    "Maximize paired undiscounted26h cash versus strongest same-low baseline: service revenue minus metered service+fixed2h recovery electricity. Fold recovery into final reward. No added SOC salvage or invented wear/SLA dollars; report throughput, age and latency.",
+    "Require completion, existing service gates, recovery closure, and preregistered noninferiority of committed MW-h, performance-weighted MW-h and biased-stress physical relief versus same-low baseline. Lower RMSE alone cannot excuse withdrawal. Report actual peaks separately.",
+    "Give rule/learner clock and causal signed-demand history equally. Gamma=1; true task end has zero continuation. With recovery folded in, do not bootstrap service timeout into reset. Artificial collection timeouts differ.",
+    "Negative absolute cash can favor early death by avoiding future bills; no dedicated death cost exists. Require learner-side feasibility/failure constraints, not only terminal masks or checkpoint filters. Never revive faults or rank partial cash as a full day.",
+    "Recovery: continuing state, fixed2h, zero service/revenue, initial-SOC and nominal-temperature targets, preserved age/tolerances. Broaden development days/stresses; paired randomness, new disjoint calendar test. Old heldout dates are regression evidence now."
+  ],
+  "open_decisions": [
+    "Before training: specify constrained learning, service margins, reserve family and causal observations. Establish frozen-low feasibility; do not assume a quantity cap guarantees it.",
+    "Proxy-LMP cash is not real ISO/business profit. No algorithm superiority, training-seed robustness or global safety claim."
+  ]
+}

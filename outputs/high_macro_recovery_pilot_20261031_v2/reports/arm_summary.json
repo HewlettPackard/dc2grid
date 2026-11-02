@@ -1,0 +1,16 @@
+[
+  {
+    "variant": "cash",
+    "planned_training_seeds": 4,
+    "qualified_selected_models": 4,
+    "mean_selected_cashflow": -122324.36167032282,
+    "mean_cash_delta_vs_strongest_baseline": -16.453517496152926
+  },
+  {
+    "variant": "reserve_potential",
+    "planned_training_seeds": 4,
+    "qualified_selected_models": 4,
+    "mean_selected_cashflow": -122413.5804785284,
+    "mean_cash_delta_vs_strongest_baseline": -105.67232570173292
+  }
+]

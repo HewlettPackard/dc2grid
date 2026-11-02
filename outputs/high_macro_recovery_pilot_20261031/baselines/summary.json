@@ -1,0 +1,48 @@
+{
+  "registration_id": "990d33de42fec3c0164aadc703ed696f989f1bc5bd0e8c8f72b76703538f7607",
+  "policies": [
+    {
+      "policy_id": "fraction_0.9",
+      "qualified_cells": 4,
+      "all_qualified": false,
+      "cashflow": null,
+      "delivered_service_ratio": 0.9119555380679998,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031/baselines/fraction_0.9/summary.json"
+    },
+    {
+      "policy_id": "fraction_0.95",
+      "qualified_cells": 0,
+      "all_qualified": false,
+      "cashflow": null,
+      "delivered_service_ratio": 0.9456719248496422,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031/baselines/fraction_0.95/summary.json"
+    },
+    {
+      "policy_id": "fraction_0.98",
+      "qualified_cells": 0,
+      "all_qualified": false,
+      "cashflow": null,
+      "delivered_service_ratio": 0.9656669480766381,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031/baselines/fraction_0.98/summary.json"
+    },
+    {
+      "policy_id": "fraction_1",
+      "qualified_cells": 0,
+      "all_qualified": false,
+      "cashflow": null,
+      "delivered_service_ratio": 0.9788562556521333,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031/baselines/fraction_1/summary.json"
+    },
+    {
+      "policy_id": "zero_price_capped_rule",
+      "qualified_cells": 0,
+      "all_qualified": false,
+      "cashflow": null,
+      "delivered_service_ratio": 0.9187090267674418,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031/baselines/zero_price_capped_rule/summary.json"
+    }
+  ],
+  "all_planned_baseline_cases": 120,
+  "new_training_steps": 0,
+  "sealed_policy_evaluations": 0
+}

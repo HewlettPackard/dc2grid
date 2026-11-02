@@ -1,0 +1,16 @@
+{
+  "registration_id": "990d33de42fec3c0164aadc703ed696f989f1bc5bd0e8c8f72b76703538f7607",
+  "status": "INVALIDATED_NEW_BASELINE_PHASE_IMPLEMENTATION_BUG",
+  "reason": "The new persistent MacroQuantityTask reused a C2GMacroEnv after recovery. Recovery extended the fast horizon from17280 to18720 ticks, while the frozen fast reset did not restore that constructor-only field and the macro horizon remained96decisions. Later resets built26h bias normalization but stopped service at24h, falsely classifying ordinary truncation as incomplete service.",
+  "evidence": {
+    "first_fraction_0p9_batch": "First four cases had17280-tick horizons and completed recovery.",
+    "subsequent_cases": "Hardware traces declared18720ticks, stopped after17280, had no physical termination and no fast truncation; macro-level truncation still occurred.",
+    "actual_physical_terminations_in_checked_fraction_0p9_and_0p95": 0,
+    "controller_performance_claim": "None. These apparent feasibility failures are not evidence that controllers are physically infeasible."
+  },
+  "preservation": "All120 attempted baseline records, raw traces, original registered code, tests, logs and the failed training gate remain unchanged.",
+  "full_sac_fits_started": 0,
+  "sealed_test_policy_rollouts": 0,
+  "correction": "Create a separately registered v2 implementation. Restore the configured service horizon before every reset, assert macro/fast service horizon agreement, and add repeated-reset and multi-batch evaluation regressions. Rerun the entire baseline panel under v2; do not salvage or relabel v1 outcomes.",
+  "prior_studies": "The earlier physical_recovery_eval_20261031 runner constructs a fresh environment for every episode, so this reuse defect does not invalidate its prior480rollouts."
+}

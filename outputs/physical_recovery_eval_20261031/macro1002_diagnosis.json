@@ -1,0 +1,414 @@
+{
+  "report_id": "macro1002_existing_validation_thermal_diagnosis",
+  "created_at_utc": "2026-10-31T06:19:10Z",
+  "scope": {
+    "trace_root": "outputs/matched_validation_20261031/traces",
+    "frozen_source_root": "outputs/online_stability_pilot_20261031/source",
+    "failed_policy": "old_pair_1002",
+    "matched_rule_macro_policy": "old_low_1002",
+    "identical_hardware_checkpoint_sha256": "05659cc0113af7193ce4d6af5d7b156d77386df8ecf7b7118c8d59dfcc843b0b",
+    "failed_macro_checkpoint_sha256": "76ee2339a483c6504327605dc7ab566f9a4918e75de30a0a912e22be7621dcb1",
+    "method": "Read-only audit of the four specified existing hardware/macro/episode trace sets, plus arithmetic using the frozen thermal equations. No simulator or model execution, new policy rollout, training, held-out-day test, or model/simulator/report replacement.",
+    "analysis_runtime": {
+      "python": ".venv/bin/python",
+      "cpu_affinity": [49],
+      "OMP_NUM_THREADS": 1,
+      "MKL_NUM_THREADS": 1,
+      "OPENBLAS_NUM_THREADS": 1,
+      "CUDA_VISIBLE_DEVICES": ""
+    },
+    "promotion_disposition": "old_pair_1002 remains excluded because both cells terminate thermally. No survivor-only ranking or promotion is performed."
+  },
+  "diagnosis": {
+    "finding": "The immediate logged mechanism is prolonged near-zero Zone-B HVAC against approximately 64-65 MW of rigid Zone-B IT heat. Its heat-removal deficit reproduces the observed temperature rise. The matched rule macro with the identical hardware checkpoint maintains substantial HVAC, remains safe, and serves all arriving work.",
+    "capability_interpretation": "Evidence supports a failure of the realized hierarchical control envelope/state response, rather than intrinsic Zone-B cooling nameplate insufficiency at these logged loads. This is not a proof that every offered commitment is jointly feasible with thermal, queue, tracking, and SOC obligations.",
+    "causal_status": "The thermal equation explains the logged heating given the recorded actions. The trigger for the policy's persistent action collapse is not causally isolated. Higher accepted commitments and batch-arrival increases precede queue formation, but neither high bids, backlog clipping, low SOC, nor any single training deficiency is established as the sole root cause.",
+    "strong_falsifier": "All thermal-warning ticks and both faults occur after bids are rejected and actual commitment has returned to the 5 MW standing baseline. In the September cell, both policies have the same 5 MW commitment throughout the last 229 ticks, but their actions and thermal states differ sharply."
+  },
+  "time_and_quantity_conventions": {
+    "hardware_tick": "One-based; each tick lasts 5 seconds. The logged timestamp labels the step start; temperature, SOC, and backlog are post-step states. Add 5 seconds to a logged timestamp for its state time.",
+    "macro_tick": "macro.csv.gz is one-based; hardware macro_index is zero-based. A complete macro interval contains 180 hardware ticks, or 15 minutes.",
+    "thresholds_C": {"warning_strictly_above": 33.0, "fault_strictly_above": 35.0},
+    "work_accounting": "Use backlog_work_kwh and work_arrived/served_kwh, not backlog_kw as energy. Flexible IT power includes 9.6 MW idle power, which is not newly arrived useful work.",
+    "battery_accounting": "Positive bess_dispatch means discharge; command +1 is 5 MW here. Initial SOC is 0.5 on 15 MWh. Stored-energy drawdown and net AC discharge differ because of losses."
+  },
+  "matched_input_verification": {
+    "common_horizon_ticks_by_cell": {"d196_s90002_b0": 16293, "d256_s90003_b0p5": 16609},
+    "exactly_equal_in_each_matched_prefix": [
+      "tick", "timestamp", "T_amb", "p_it_B_mw", "work_arrived_kwh",
+      "regd_signal", "regd_observed", "lmp", "grid_load_mw",
+      "p_base_norm", "p_flex_norm", "load_anomaly", "p_flex_nom_kw", "is_spike"
+    ],
+    "maximum_logged_commitment_observation_error_mw": 1.4901161193847656e-7,
+    "qualification_note": "Matching exogenous inputs and hardware does not equate the policies' endogenous temperature, queue, SOC, or previous-action histories."
+  },
+  "cases": [
+    {
+      "cell": "d196_s90002_b0",
+      "onset": {
+        "first_queue_tick": 16021,
+        "first_queue_timestamp": "2023-07-16T22:15:00",
+        "nominal_flex_power_before_after_mw": [9.6, 47.89634185],
+        "first_queue_served_flex_power_mw": 45.07076823,
+        "first_queue_kwh": 3.92440781,
+        "first_persistent_hvac_below_0p05_tick": 16038,
+        "first_persistent_hvac_below_0p05_timestamp": "2023-07-16T22:16:25",
+        "hvac_effort_at_that_tick": 0.02688745,
+        "backlog_at_that_tick_kwh": 159.01563354,
+        "hvac_below_0p05_through_fault_ticks": 256,
+        "persistent_full_bess_dispatch_start_tick": 16038,
+        "persistent_zero_pump_command_start_tick": 16047,
+        "first_post_step_queue_observation_capped_tick": 16068,
+        "backlog_at_first_cap_kwh": 253.28903779
+      },
+      "failure": {
+        "first_warning_tick": 16229,
+        "first_warning_timestamp": "2023-07-16T22:32:20",
+        "temp_B_before_first_warning_C": 32.97755627,
+        "temp_B_at_first_warning_C": 33.0091339,
+        "rule_temp_B_at_same_warning_tick_C": 26.42262724,
+        "warning_ticks_including_fault": 65,
+        "seconds_between_first_warning_and_fault_samples": 320,
+        "fault_tick": 16293,
+        "fault_timestamp": "2023-07-16T22:37:40",
+        "temp_B_before_fault_C": 34.99680517,
+        "temp_B_at_fault_C": 35.02820842,
+        "temp_A_at_fault_C": 32.07775371,
+        "max_logged_temp_A_C": 32.37735731,
+        "frequency_fault_at_termination": false,
+        "voltage_fault_at_termination": false,
+        "unobserved_ticks_of_17280": 987
+      },
+      "macro_sequence": [
+        {
+          "macro_tick": 89,
+          "hardware_ticks": [15841, 16020],
+          "bid_mw": 26.73686028,
+          "bid_price": 5.6368053,
+          "accepted": false,
+          "actual_commitment_mw": 5.0,
+          "mean_hvac_effort": 0.72724624,
+          "max_temp_B_C": 26.56478356,
+          "backlog_norm_mean": 0.0
+        },
+        {
+          "macro_tick": 90,
+          "hardware_ticks": [16021, 16200],
+          "bid_mw": 27.09716856,
+          "bid_price": 8.9910686,
+          "accepted": true,
+          "actual_commitment_mw": 27.09716856,
+          "mean_hvac_effort": 0.03173977,
+          "max_temp_B_C": 32.09033885,
+          "backlog_norm_mean": 1.8072521
+        },
+        {
+          "macro_tick": 91,
+          "observed_hardware_ticks": [16201, 16293],
+          "bid_mw": 28.82745624,
+          "bid_price": 99.44047332,
+          "accepted": false,
+          "actual_commitment_mw": 5.0,
+          "mean_hvac_effort": 0.00608792,
+          "backlog_norm_mean": 2.0,
+          "partial_interval_ended_by_fault": true
+        }
+      ],
+      "rejected_baseline_matched_window": {
+        "ticks": [16201, 16293],
+        "duration_seconds": 465,
+        "negative_regd_ticks": 37,
+        "same_mean_zone_B_IT_mw": 64.45969089,
+        "pair": {
+          "commitment_mw": 5.0,
+          "temp_B_before_window_and_at_end_C": [32.09033885, 35.02820842],
+          "mean_hvac_effort": 0.00608792,
+          "hvac_effort_range": [0.0047977, 0.00776088],
+          "mean_hvac_electric_mw": 0.30439591,
+          "pump_command_all_ticks": 0.0,
+          "mean_throttle": 0.02103851,
+          "bess_dispatch_all_ticks": 1.0,
+          "actual_bess_power_all_ticks_mw": 5.0,
+          "mean_demanded_actual_relief_mw": [0.04017455, 46.35526324],
+          "backlog_before_window_and_at_end_kwh": [2042.29031382, 2702.27726263],
+          "soc_before_window_and_at_end": [0.29660533, 0.25215407]
+        },
+        "rule": {
+          "commitment_mw": 9.00000036,
+          "temp_B_before_window_and_at_end_C": [26.4107307, 26.47552045],
+          "mean_hvac_effort": 0.70160828,
+          "mean_hvac_electric_mw": 35.08041395,
+          "mean_pump_command": 0.53840309,
+          "mean_throttle": 0.70474029,
+          "mean_bess_dispatch": -0.04523943,
+          "mean_demanded_actual_relief_mw": [0.0723142, -0.14549731],
+          "backlog_all_ticks_kwh": 0.0,
+          "soc_before_window_and_at_end": [0.38551767, 0.38734571]
+        }
+      },
+      "fault_step_heat_balance": {
+        "zone_B_IT_mw": 64.74204177,
+        "ambient_C": 32.8,
+        "hvac_effort": 0.00561467,
+        "hvac_electric_mw": 0.28073341,
+        "COP": 2.954,
+        "HVAC_capacity_mw_thermal": 0.82928648,
+        "airside_transfer_limit_mw_thermal": 59.25377913,
+        "IT_plus_envelope_heat_mw": 63.64363918,
+        "net_heating_mw": 62.8143527,
+        "observed_delta_temp_B_C_per_5s": 0.03140325,
+        "minimum_effort_for_zero_instantaneous_heat_at_35C": 0.43088722,
+        "full_effort_capacity_mw_thermal": 147.7,
+        "full_effort_instantaneous_net_heat_at_logged_pre_state_mw": -84.05636082,
+        "rule_at_same_fault_tick": {
+          "temp_B_C": 26.47552045,
+          "hvac_effort": 0.71602249,
+          "hvac_electric_mw": 35.80112457,
+          "throttle": 0.63706893,
+          "pump_command": 0.40011135,
+          "actual_bess_mw": 0.44245899
+        }
+      },
+      "work_and_SOC_obligations": {
+        "pair_work_arrived_kwh": 52733.27364597,
+        "pair_work_served_kwh": 50030.99638334,
+        "pair_unserved_backlog_kwh": 2702.27726263,
+        "pair_max_backlog_kwh": 2702.27726263,
+        "pair_terminal_SOC": 0.25215407,
+        "pair_minimum_SOC": 0.25215407,
+        "pair_nominal_stored_energy_drawdown_mwh": 3.7176889,
+        "pair_net_AC_discharge_mwh": 2.89441477,
+        "rule_work_served_at_same_tick_kwh": 52733.27364597,
+        "rule_SOC_at_same_tick": 0.38734571,
+        "rule_nominal_stored_energy_drawdown_at_same_tick_mwh": 1.68981431,
+        "rule_full_episode": {
+          "observed_ticks": 17280,
+          "constraint_qualified": true,
+          "thermal_warning_ticks": 0,
+          "max_logged_temp_B_C": 29.97985918,
+          "max_and_terminal_backlog_kwh": 0.0,
+          "terminal_SOC": 0.37624862,
+          "nominal_stored_energy_drawdown_mwh": 1.85627075
+        }
+      },
+      "earlier_high_commitment_falsifier": {
+        "pre_queue_ticks_with_commitment_at_least_25_mw": 3960,
+        "maximum_commitment_in_those_ticks_mw": 28.83988559,
+        "maximum_temp_B_in_those_ticks_C": 29.97446478,
+        "thermal_warning_ticks": 0,
+        "maximum_backlog_kwh": 0.0
+      }
+    },
+    {
+      "cell": "d256_s90003_b0p5",
+      "onset": {
+        "first_queue_tick": 16321,
+        "first_queue_timestamp": "2023-09-14T22:40:00",
+        "nominal_flex_power_before_after_mw": [23.59474375, 61.56533263],
+        "first_queue_served_flex_power_mw": 58.43000965,
+        "first_queue_kwh": 4.35461525,
+        "first_persistent_hvac_below_0p05_tick": 16326,
+        "first_persistent_hvac_below_0p05_timestamp": "2023-09-14T22:40:25",
+        "hvac_effort_at_that_tick": 0.02320364,
+        "backlog_at_that_tick_kwh": 143.12148582,
+        "hvac_below_0p05_through_fault_ticks": 284,
+        "persistent_full_bess_dispatch_start_tick": 16325,
+        "persistent_zero_pump_command_start_tick": 16355,
+        "first_post_step_queue_observation_capped_tick": 16359,
+        "backlog_at_first_cap_kwh": 266.0279091
+      },
+      "failure": {
+        "first_warning_tick": 16541,
+        "first_warning_timestamp": "2023-09-14T22:58:20",
+        "temp_B_before_first_warning_C": 32.9873524,
+        "temp_B_at_first_warning_C": 33.01751572,
+        "rule_temp_B_at_same_warning_tick_C": 26.1890986,
+        "warning_ticks_including_fault": 69,
+        "seconds_between_first_warning_and_fault_samples": 340,
+        "fault_tick": 16609,
+        "fault_timestamp": "2023-09-14T23:04:00",
+        "temp_B_before_fault_C": 34.97929097,
+        "temp_B_at_fault_C": 35.00786995,
+        "temp_A_at_fault_C": 31.9550758,
+        "max_logged_temp_A_C": 31.9550758,
+        "frequency_fault_at_termination": false,
+        "voltage_fault_at_termination": false,
+        "unobserved_ticks_of_17280": 671
+      },
+      "macro_sequence": [
+        {
+          "macro_tick": 91,
+          "hardware_ticks": [16201, 16380],
+          "bid_mw": 23.70063901,
+          "bid_price": 9.38273668,
+          "accepted": true,
+          "actual_commitment_mw": 23.70063901,
+          "mean_hvac_effort": 0.50322332,
+          "max_temp_B_C": 28.04302786,
+          "backlog_norm_mean": 0.50077178,
+          "note": "First 120 ticks have no queue; the batch-arrival increase and queue onset occur inside this already-active accepted interval."
+        },
+        {
+          "macro_tick": 92,
+          "hardware_ticks": [16381, 16560],
+          "bid_mw": 26.19399011,
+          "bid_price": 58.97823572,
+          "accepted": false,
+          "actual_commitment_mw": 5.0,
+          "mean_hvac_effort": 0.00697562,
+          "max_temp_B_C": 33.59047933,
+          "backlog_norm_mean": 2.0,
+          "thermal_warning_ticks": 20
+        },
+        {
+          "macro_tick": 93,
+          "observed_hardware_ticks": [16561, 16609],
+          "bid_mw": 29.99227881,
+          "bid_price": 197.82702923,
+          "accepted": false,
+          "actual_commitment_mw": 5.0,
+          "mean_hvac_effort": 0.00699316,
+          "backlog_norm_mean": 2.0,
+          "thermal_warning_ticks": 49,
+          "partial_interval_ended_by_fault": true
+        }
+      ],
+      "rejected_baseline_matched_window": {
+        "ticks": [16381, 16609],
+        "duration_seconds": 1145,
+        "negative_regd_ticks": 227,
+        "same_mean_zone_B_IT_mw": 64.76321695,
+        "pair": {
+          "commitment_mw": 5.0,
+          "temp_B_before_window_and_at_end_C": [28.04302786, 35.00786995],
+          "mean_hvac_effort": 0.00697938,
+          "hvac_effort_range": [0.0043999, 0.01232123],
+          "mean_hvac_electric_mw": 0.34896887,
+          "pump_command_all_ticks": 0.0,
+          "mean_throttle": 0.01241843,
+          "bess_dispatch_all_ticks": 1.0,
+          "actual_bess_power_all_ticks_mw": 5.0,
+          "mean_demanded_actual_relief_mw": [-0.97711749, 43.2232485],
+          "backlog_before_window_and_at_end_kwh": [1057.99890616, 1690.55593391],
+          "soc_before_window_and_at_end": [0.31544454, 0.20598117]
+        },
+        "rule": {
+          "commitment_mw": 5.0,
+          "temp_B_before_window_and_at_end_C": [26.03352164, 26.17579004],
+          "mean_hvac_effort": 0.70835131,
+          "mean_hvac_electric_mw": 35.41756574,
+          "mean_pump_command": 0.65889939,
+          "mean_throttle": 0.64296221,
+          "mean_bess_dispatch": -0.12592844,
+          "mean_demanded_actual_relief_mw": [-0.97711749, -0.91131701],
+          "backlog_all_ticks_kwh": 0.0,
+          "soc_before_window_and_at_end": [0.36829455, 0.3812253]
+        }
+      },
+      "fault_step_heat_balance": {
+        "zone_B_IT_mw": 64.30439791,
+        "ambient_C": 23.9,
+        "hvac_effort": 0.00894412,
+        "hvac_electric_mw": 0.4472062,
+        "COP": 3.577,
+        "HVAC_capacity_mw_thermal": 1.59965657,
+        "airside_transfer_limit_mw_thermal": 59.63842218,
+        "IT_plus_envelope_heat_mw": 58.76475242,
+        "net_heating_mw": 57.16509585,
+        "observed_delta_temp_B_C_per_5s": 0.02857898,
+        "minimum_effort_for_zero_instantaneous_heat_at_35C": 0.32851215,
+        "full_effort_capacity_mw_thermal": 178.85,
+        "full_effort_instantaneous_net_heat_at_logged_pre_state_mw": -120.08524758,
+        "rule_at_same_fault_tick": {
+          "temp_B_C": 26.17579004,
+          "hvac_effort": 0.74527347,
+          "hvac_electric_mw": 37.26367354,
+          "throttle": 0.46885663,
+          "pump_command": 0.35372162,
+          "actual_bess_mw": -1.14466906
+        }
+      },
+      "work_and_SOC_obligations": {
+        "pair_work_arrived_kwh": 58538.63781773,
+        "pair_work_served_kwh": 56848.08188383,
+        "pair_unserved_backlog_kwh": 1690.55593391,
+        "pair_max_backlog_kwh": 1729.99127795,
+        "pair_max_backlog_tick": 16560,
+        "pair_terminal_SOC": 0.20598117,
+        "pair_minimum_SOC": 0.15562619,
+        "pair_minimum_SOC_tick": 11409,
+        "pair_nominal_stored_energy_drawdown_mwh": 4.41028241,
+        "pair_net_AC_discharge_mwh": 3.41746695,
+        "rule_work_served_at_same_tick_kwh": 58538.63781773,
+        "rule_SOC_at_same_tick": 0.3812253,
+        "rule_nominal_stored_energy_drawdown_at_same_tick_mwh": 1.78162055,
+        "rule_full_episode": {
+          "observed_ticks": 17280,
+          "constraint_qualified": true,
+          "thermal_warning_ticks": 0,
+          "max_logged_temp_B_C": 29.9775714,
+          "max_and_terminal_backlog_kwh": 0.0,
+          "terminal_SOC": 0.38447906,
+          "nominal_stored_energy_drawdown_mwh": 1.73281409
+        }
+      },
+      "earlier_high_commitment_falsifier": {
+        "pre_queue_ticks_with_commitment_at_least_25_mw": 1800,
+        "maximum_commitment_in_those_ticks_mw": 28.24627519,
+        "maximum_temp_B_in_those_ticks_C": 26.72866254,
+        "thermal_warning_ticks": 0,
+        "maximum_backlog_kwh": 0.0
+      }
+    }
+  ],
+  "frozen_model_and_observation_interpretation": {
+    "Zone_B_heat_balance": "C_B*dT_B/dt = P_IT_B - Q_HVAC + 0.5*(T_amb-T_B), C_B=10000 MJ/C. With supply 20 C, Q_HVAC=min(50*hvac_effort*COP, 13*(0.3+0.7*hvac_effort)*max(T_B-20,0)) MW thermal. COP=3.5*max(0.3,1-0.02*(T_amb-25)) for this supply setting and fault_factor=1.",
+    "equation_check": {
+      "logged_steps_checked": 67462,
+      "maximum_absolute_one_step_temperature_residual_C": 3.552713678800501e-15,
+      "procedure": "Apply the source's closed-form branch equation independently to each logged preceding temperature and recorded inputs; never feed a predicted state into a later step.",
+      "failed_baseline_capacity_limited_ticks_by_cell": {"d196_s90002_b0": 93, "d256_s90003_b0p5": 229},
+      "mean_failed_baseline_net_heat_mw_by_cell": {"d196_s90002_b0": 63.1878887, "d256_s90003_b0p5": 60.83591902}
+    },
+    "actuator_separation": "Batch throttle controls flexible Zone-A work, not rigid Zone-B IT. Pump acts on Zone A; command zero still invokes the 0.15 physical pump floor. BESS offsets grid import but does not remove Zone-B heat. Total facility cooling electricity is not itself Zone-B thermal heat removal; HVAC electricity must be converted through COP and the air-side limit.",
+    "commitment_visibility": "The low observation includes temperatures, SOC, backlog, prior throttle/pump, and actual commitment at index 17. The macro environment updates that commitment observation at the handshake. The logged commitment-observation agreement does not support a stale-commitment explanation for these failures.",
+    "backlog_visibility": "The low queue observation min(backlog_kw/90000,2) saturates at 250 kWh with 5-second ticks. It first saturates in the post-step observations at ticks 16068 and 16359 and stays capped through the faults; subsequent low actions receive the capped value. This removes queue-magnitude resolution, but near-zero HVAC and full discharge begin BEFORE saturation, so clipping alone does not explain initiation.",
+    "macro_authority": "The macro controller changes bid quantity and price, not a direct thermal safety override. Rejection leaves a 5 MW standing commitment, not zero. Subsequent rejected bids do not restore the low-level actions in these observed trajectories.",
+    "SOC_falsifier_and_obligation": "SOC stays above the 0.10 hard minimum. Both failures still deliver the full 5 MW discharge, so exhausted battery output is not the immediate explanation. Their depleted stored energy and unserved queues remain obligations. Rule-macro runs also finish below initial SOC and must retain their own energy debit."
+  },
+  "limits_on_inference": [
+    "The rule-macro runs are observed alternative full trajectories with matched hardware and exogenous inputs, not interventions starting from the failed pair's already-hot, queued, depleted state.",
+    "Full-effort and minimum-holding-effort values are instantaneous frozen-state heat-balance calculations, not new rollouts, recovery guarantees, tracking-feasibility proofs, or prescriptions.",
+    "Earlier accepted commitments of at least 25 MW remain warning-free and queue-free; high commitments alone are not sufficient to explain collapse. September heating persists mostly while RegD requests increased consumption rather than relief.",
+    "The September fault occurs with ambient 23.9 C and improved COP, and the matched rule run sees the same weather; ambient severity alone is not a sufficient explanation.",
+    "These two cases do not establish generalization, held-out-day performance, a unique root cause, or that more training or a single fix would resolve the failures. Incomplete episodes remain incomplete rather than being compared as full-horizon successes."
+  ],
+  "source_references_relative_to_frozen_source_root": [
+    {"path": "c2g_env/config.yaml", "lines": "35-39,58-64,142-147", "supports": "35 C fault, 33 C warning, 30 MW maximum bid, 5 MW rejected-bid baseline"},
+    {"path": "c2g_env/physics/thermal.py", "lines": "73-117,175-202,253-288", "supports": "Cooling parameters, COP, exact exponential branches, physical pump floor"},
+    {"path": "c2g_env/env_low_level.py", "lines": "510-545,665-684,758-819,840-859", "supports": "Actuator mapping, thermal termination, post-step timestamps, physical heat, low observation"},
+    {"path": "c2g_env/env_high_level.py", "lines": "280-309,329-345,368-413,696-701", "supports": "Commitment update, inner control, 180-step aggregation, rejected-bid fallback"},
+    {"path": "c2g_env/physics/workload.py", "lines": "16-24,211-215,240-287", "supports": "Rigid Zone B, flexible Zone A, 90 MW flex nameplate, idle exclusion, conserved queued work"},
+    {"path": "c2g_env/physics/bess.py", "lines": "87-92,137-180", "supports": "15 MWh / 5 MW battery, SOC limits, derating and loss-aware energy accounting"}
+  ],
+  "verification": {
+    "json_parse": "PASS",
+    "trace_consistency_assertions_passed": 377,
+    "original_input_files_hash_checked_unchanged": 12,
+    "scratch_analysis_code_retained": false
+  },
+  "input_sha256_relative_to_trace_root": {
+    "old_pair_1002/d196_s90002_b0/hardware.csv.gz": "52166bf0d1a0d6584bf6cf1adc2606e158c459a16eb303ff9b7c05658a1f27de",
+    "old_pair_1002/d196_s90002_b0/macro.csv.gz": "0038b0c279961801d60ddd035067c3dd230f7268c7e7f637ea7ec6933a802c3f",
+    "old_pair_1002/d196_s90002_b0/episode.json": "535fb016d09832699e11ec36fc6dacac297161de92eff93304bc9717e6a646d3",
+    "old_low_1002/d196_s90002_b0/hardware.csv.gz": "0267ea9859e60763bd1891f71e177565de9116e2f449597789b7152a7f9bf3d9",
+    "old_low_1002/d196_s90002_b0/macro.csv.gz": "e772e7976716dc7b6092074319fc65ad206de1d9ea2193b8ae52e620d04dd100",
+    "old_low_1002/d196_s90002_b0/episode.json": "57f0adfab62fc62afc6a70e2f74fa4b3f4da624c53a20feebf2e3bc95c559299",
+    "old_pair_1002/d256_s90003_b0p5/hardware.csv.gz": "03d44487ef4594917a292a4536ff71dd80ae5a9d6d155464f9fae8ac20f2d156",
+    "old_pair_1002/d256_s90003_b0p5/macro.csv.gz": "869b7699febc7ffccc63d15d48de16f8badd9a1982385151daa4dcde5f6f0e9c",
+    "old_pair_1002/d256_s90003_b0p5/episode.json": "b0b1a81b24093250bb91eeb08d286e233a844e9c199a2b8cc0cdf2a8ea17e6b7",
+    "old_low_1002/d256_s90003_b0p5/hardware.csv.gz": "1eb434de5ac4f61d9ef89287c115584dd05a15ea63ac1723752f608c7330b04f",
+    "old_low_1002/d256_s90003_b0p5/macro.csv.gz": "2841f28fa8dd64fbdc45b30cae253a58787dd29a21a7907b186be29ace53a699",
+    "old_low_1002/d256_s90003_b0p5/episode.json": "b6dccdaa0a266637110cebf6414e10e4dd943e1fa899d4533f70239146bf73b1"
+  }
+}

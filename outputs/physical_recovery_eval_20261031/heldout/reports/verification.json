@@ -1,0 +1,25 @@
+{
+  "registration_id": "e3a4bf8b73e8822de3098d81628457cac9484c558b6419f66303bc7622174bde",
+  "planned_policy_cell_keys_verified": 600,
+  "qualification_flags_recomputed": 480,
+  "qualification_failures": 68,
+  "failure_criteria": {
+    "terminal_soc": 68
+  },
+  "primary_raw_26h_episodes_audited": 150,
+  "raw_ledger_scalar_checks": 1920,
+  "paired_primary_cashflow_and_throughput_checks": 60,
+  "frozen_source_and_checkpoint_verification": "passed",
+  "extra_policy_rollouts": 0,
+  "training_steps": 0,
+  "auditor_sha256": "b99787c10e6538a80664ea7329be582db64992e30b859255afd5ba970ccc9be4",
+  "interpretation_limits": [
+    "No selection changes were made after seeing held-out outcomes.",
+    "The primary macro's low RMSE accompanies much lower participation; it is not an overall success.",
+    "Bid/rejection diagnostics describe the observed policy; they do not prove that repricing alone fixes the hierarchy.",
+    "Supplemental 26h peaks do not replace registered 24h stress metrics.",
+    "These are isolated 26h episodes, not continuous multi-day operation; adjacent dates can overlap in their service/recovery windows.",
+    "The five seeds repeat across dates; sample SD is descriptive, not evidence of 15 independent calendar conditions.",
+    "After guiding further development, these peak dates cannot again be called an untouched test set."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "registration_id": "990d33de42fec3c0164aadc703ed696f989f1bc5bd0e8c8f72b76703538f7607",
+  "allowed": false,
+  "fully_qualified_constant_baselines": [],
+  "baseline_summary_sha256": "da2a5348b046647383edb36d7e5549caad4b83911c383d958f9f429d05f52df2",
+  "reason": "No constant baseline meets every approved joint gate. Stop before SAC; do not relax constraints or hide failed cases."
+}

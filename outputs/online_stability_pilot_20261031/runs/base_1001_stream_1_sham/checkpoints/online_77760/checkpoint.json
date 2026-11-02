@@ -1,0 +1,27 @@
+{
+  "job_id": "base_1001_stream_1_sham",
+  "base_seed": 1001,
+  "continuation_stream": 1,
+  "arm": "sham",
+  "registration_id": "b647d72ea028950bd04fd09e3e180a343f438359b8a1cf62292ab821721abf1f",
+  "simulation_mode": "physical_v1",
+  "visible_gpu": "3",
+  "device": "cuda:0",
+  "n_envs": 6,
+  "critic_only_calibration_updates": 500,
+  "condition_stream_seed": 2210736035,
+  "base_timesteps": 1000008,
+  "new_online_transitions": 77760,
+  "timesteps": 1077768,
+  "new_normal_sac_updates": 77712,
+  "model": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/online_stability_pilot_20261031/runs/base_1001_stream_1_sham/checkpoints/online_77760/model.zip",
+    "sha256": "10efaf32576f486cbc3c119a2bba4690c3b6108c0c858c68c322d88ca54a325e"
+  },
+  "replay_buffer": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/online_stability_pilot_20261031/runs/base_1001_stream_1_sham/checkpoints/online_77760/replay_buffer.pkl",
+    "sha256": "ceb267b3a879e99c74c4402faa00ce560ba09835a9ddfd0e9c1b5bcdce19b9b7"
+  },
+  "replay_position": 12960,
+  "snapshot_scope": "Mid-run callback snapshots precede current transition insertion; the final snapshot is post-update. No bit-exact simulator resume."
+}

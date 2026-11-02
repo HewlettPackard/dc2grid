@@ -1,0 +1,43 @@
+{
+  "fixed_entropy_coefficient": 1e-09,
+  "cash_normalization_usd": 2824000,
+  "reference_price": 27.51,
+  "reference_residual_mw": 15.0,
+  "reference_performance": 0.9,
+  "reference_gross_revenue_gradient": 2.1570250149311484e-05,
+  "rows": [
+    {
+      "quantity_fraction": 0.9,
+      "mean_log_density": 1.9089113683809007,
+      "old_alpha_gradient_ratio": 4.106068476392962,
+      "registered_alpha_gradient_ratio": 0.00041060684763929626
+    },
+    {
+      "quantity_fraction": 0.95,
+      "mean_log_density": 2.5462859716147905,
+      "old_alpha_gradient_ratio": 8.767220715615318,
+      "registered_alpha_gradient_ratio": 0.0008767220715615317
+    },
+    {
+      "quantity_fraction": 0.98,
+      "mean_log_density": 3.430355850561913,
+      "old_alpha_gradient_ratio": 22.68877763927253,
+      "registered_alpha_gradient_ratio": 0.002268877763927253
+    },
+    {
+      "quantity_fraction": 0.995,
+      "mean_log_density": 4.800831794060544,
+      "old_alpha_gradient_ratio": 92.23110443925525,
+      "registered_alpha_gradient_ratio": 0.009223110443925524
+    },
+    {
+      "quantity_fraction": 0.999,
+      "mean_log_density": 6.4058930761525605,
+      "old_alpha_gradient_ratio": 463.0005182256898,
+      "registered_alpha_gradient_ratio": 0.04630005182256898
+    }
+  ],
+  "maximum_registered_gradient_ratio": 0.04630005182256898,
+  "limit": 0.05,
+  "interpretation": "Calibration against a representative gross-revenue derivative, not a proof about the full cash gradient near a stationary point. No claim that entropy is negligible for every possible policy/distribution."
+}

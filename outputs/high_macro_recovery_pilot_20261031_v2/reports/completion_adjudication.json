@@ -1,0 +1,187 @@
+{
+  "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+  "classification": "Completed numerical study with a verified terminal provenance-guard false positive",
+  "native_clean_exit_runs": 0,
+  "native_failure_receipts_preserved": 8,
+  "adjudicated_complete_training_and_validation_runs": 8,
+  "macro_transitions": 163840,
+  "normal_sac_updates": 155648,
+  "critic_only_updates": 4096,
+  "supervised_initialization_updates": 2048,
+  "development_rollouts": 1152,
+  "rows": [
+    {
+      "variant": "cash",
+      "seed": 5000,
+      "native_exit_record_preserved": "runtime_failure",
+      "training_and_all_validation_budgets_completed": true,
+      "macro_transitions": 20480,
+      "normal_sac_updates": 19456,
+      "critic_only_updates": 512,
+      "supervised_initialization_updates": 256,
+      "development_rollouts": 144,
+      "only_protocol_delta": [
+        {
+          "path": "algorithm.policy_kwargs.use_sde",
+          "operation": "added",
+          "value": false
+        }
+      ],
+      "effective_sde_setting_matches_registered_default": true,
+      "frozen_hardware_workers_verified": 4,
+      "final_model_sha256": "80152cebc5c9fa5412530052ceccdf53eddf195aaffdd64543794c517d94146d"
+    },
+    {
+      "variant": "cash",
+      "seed": 5001,
+      "native_exit_record_preserved": "runtime_failure",
+      "training_and_all_validation_budgets_completed": true,
+      "macro_transitions": 20480,
+      "normal_sac_updates": 19456,
+      "critic_only_updates": 512,
+      "supervised_initialization_updates": 256,
+      "development_rollouts": 144,
+      "only_protocol_delta": [
+        {
+          "path": "algorithm.policy_kwargs.use_sde",
+          "operation": "added",
+          "value": false
+        }
+      ],
+      "effective_sde_setting_matches_registered_default": true,
+      "frozen_hardware_workers_verified": 4,
+      "final_model_sha256": "446e4583eb0be29e78314b9c143cbe5427fbece4a4c6206d61bad65315f1e2f9"
+    },
+    {
+      "variant": "cash",
+      "seed": 5002,
+      "native_exit_record_preserved": "runtime_failure",
+      "training_and_all_validation_budgets_completed": true,
+      "macro_transitions": 20480,
+      "normal_sac_updates": 19456,
+      "critic_only_updates": 512,
+      "supervised_initialization_updates": 256,
+      "development_rollouts": 144,
+      "only_protocol_delta": [
+        {
+          "path": "algorithm.policy_kwargs.use_sde",
+          "operation": "added",
+          "value": false
+        }
+      ],
+      "effective_sde_setting_matches_registered_default": true,
+      "frozen_hardware_workers_verified": 4,
+      "final_model_sha256": "7129f5ea690801916376c5cb1e24025ed4e72d7089ebf375ef02737404c91db5"
+    },
+    {
+      "variant": "cash",
+      "seed": 5003,
+      "native_exit_record_preserved": "runtime_failure",
+      "training_and_all_validation_budgets_completed": true,
+      "macro_transitions": 20480,
+      "normal_sac_updates": 19456,
+      "critic_only_updates": 512,
+      "supervised_initialization_updates": 256,
+      "development_rollouts": 144,
+      "only_protocol_delta": [
+        {
+          "path": "algorithm.policy_kwargs.use_sde",
+          "operation": "added",
+          "value": false
+        }
+      ],
+      "effective_sde_setting_matches_registered_default": true,
+      "frozen_hardware_workers_verified": 4,
+      "final_model_sha256": "5dbb62f5a8bba69c55604bc81ad1713ed700d47502d12e902aa4e175c1513e14"
+    },
+    {
+      "variant": "reserve_potential",
+      "seed": 5000,
+      "native_exit_record_preserved": "runtime_failure",
+      "training_and_all_validation_budgets_completed": true,
+      "macro_transitions": 20480,
+      "normal_sac_updates": 19456,
+      "critic_only_updates": 512,
+      "supervised_initialization_updates": 256,
+      "development_rollouts": 144,
+      "only_protocol_delta": [
+        {
+          "path": "algorithm.policy_kwargs.use_sde",
+          "operation": "added",
+          "value": false
+        }
+      ],
+      "effective_sde_setting_matches_registered_default": true,
+      "frozen_hardware_workers_verified": 4,
+      "final_model_sha256": "873a86e42d58df2b7d2ae618318a413b0745b7291e6e6790fcc14e8086534e4e"
+    },
+    {
+      "variant": "reserve_potential",
+      "seed": 5001,
+      "native_exit_record_preserved": "runtime_failure",
+      "training_and_all_validation_budgets_completed": true,
+      "macro_transitions": 20480,
+      "normal_sac_updates": 19456,
+      "critic_only_updates": 512,
+      "supervised_initialization_updates": 256,
+      "development_rollouts": 144,
+      "only_protocol_delta": [
+        {
+          "path": "algorithm.policy_kwargs.use_sde",
+          "operation": "added",
+          "value": false
+        }
+      ],
+      "effective_sde_setting_matches_registered_default": true,
+      "frozen_hardware_workers_verified": 4,
+      "final_model_sha256": "baab4cae43a66f34e2d0443f151f0e81b733401619d9c2bd61dba452bcaca2db"
+    },
+    {
+      "variant": "reserve_potential",
+      "seed": 5002,
+      "native_exit_record_preserved": "runtime_failure",
+      "training_and_all_validation_budgets_completed": true,
+      "macro_transitions": 20480,
+      "normal_sac_updates": 19456,
+      "critic_only_updates": 512,
+      "supervised_initialization_updates": 256,
+      "development_rollouts": 144,
+      "only_protocol_delta": [
+        {
+          "path": "algorithm.policy_kwargs.use_sde",
+          "operation": "added",
+          "value": false
+        }
+      ],
+      "effective_sde_setting_matches_registered_default": true,
+      "frozen_hardware_workers_verified": 4,
+      "final_model_sha256": "c6b70d1e877a05e7be1c4a34a139f5e323dacaa7ef38539887537db770db27ef"
+    },
+    {
+      "variant": "reserve_potential",
+      "seed": 5003,
+      "native_exit_record_preserved": "runtime_failure",
+      "training_and_all_validation_budgets_completed": true,
+      "macro_transitions": 20480,
+      "normal_sac_updates": 19456,
+      "critic_only_updates": 512,
+      "supervised_initialization_updates": 256,
+      "development_rollouts": 144,
+      "only_protocol_delta": [
+        {
+          "path": "algorithm.policy_kwargs.use_sde",
+          "operation": "added",
+          "value": false
+        }
+      ],
+      "effective_sde_setting_matches_registered_default": true,
+      "frozen_hardware_workers_verified": 4,
+      "final_model_sha256": "9085cc11e8a7408622b2f2294d21f86b33169ea00a442ce75db6c0b5b58cbffb"
+    }
+  ],
+  "cause": "A shared policy_kwargs dictionary was passed to SB3. Its constructor inserted use_sde=False, the already-effective default. Only the live protocol object changed; registered files, physics and effective algorithm parameters did not. The terminal guard ran after the final optimizer block, model save, validation and worker integrity checks.",
+  "disposition": "Numerical development results may be analyzed with this qualification. Do not relabel native failures as clean exits. No large retraining rerun or sealed evaluation was performed to repair bookkeeping.",
+  "forward_fix": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/learn.py",
+  "sealed_policy_rollouts": 0,
+  "adjudicator_sha256": "3dcd04413f76ef05864ae9ef8c053d1a7cc5852551a80575a06ccbba8bb4d799"
+}

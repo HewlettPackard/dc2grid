@@ -1,0 +1,27 @@
+[
+  {
+    "timesteps": 1152,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/training_smoke_v2/step_1152.zip",
+      "sha256": "c2add2d7fa84b3bf57d7fe2f94685b6c0d0fa7d308c3f8dc78c750a9b4c279f9"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 0.2282799929380417,
+      "bc_gradient_norm": 0.0031635798513889313,
+      "weighted_bc_gradient_norm": 2.3033339977264404,
+      "latent_policy_std_mean": [
+        0.008229086175560951,
+        0.00823365431278944,
+        0.00823928602039814
+      ],
+      "native_local_linearized_std_mean": [
+        0.0031958050094544888,
+        0.003343617543578148,
+        0.008239280432462692
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "smoke_cases": 1
+  }
+]

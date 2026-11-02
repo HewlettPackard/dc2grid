@@ -1,0 +1,70 @@
+[
+  {
+    "condition": {
+      "id": "train_5001_2_32",
+      "start_day": 225,
+      "regd_load_bias": 0.25,
+      "seed": 2492738825,
+      "curriculum_cycle": 2,
+      "curriculum_position": 32
+    },
+    "decisions": 32,
+    "service_steps": 5760,
+    "recovery_steps": 0,
+    "done": false,
+    "centered_cash_usd": 2355.1476298443436,
+    "base_return": 0.0008339757896049375,
+    "shaped_return": 0.0008339757896049375
+  },
+  {
+    "condition": {
+      "id": "train_5001_2_33",
+      "start_day": 157,
+      "regd_load_bias": 0.5,
+      "seed": 2792723746,
+      "curriculum_cycle": 2,
+      "curriculum_position": 33
+    },
+    "decisions": 32,
+    "service_steps": 5760,
+    "recovery_steps": 0,
+    "done": false,
+    "centered_cash_usd": 1146.3577549681718,
+    "base_return": 0.00040593404920969247,
+    "shaped_return": 0.00040593404920969247
+  },
+  {
+    "condition": {
+      "id": "train_5001_2_34",
+      "start_day": 297,
+      "regd_load_bias": 0.5,
+      "seed": 807211217,
+      "curriculum_cycle": 2,
+      "curriculum_position": 34
+    },
+    "decisions": 32,
+    "service_steps": 5760,
+    "recovery_steps": 0,
+    "done": false,
+    "centered_cash_usd": 1700.279292467322,
+    "base_return": 0.0006020819024317713,
+    "shaped_return": 0.0006020819024317713
+  },
+  {
+    "condition": {
+      "id": "train_5001_2_35",
+      "start_day": 227,
+      "regd_load_bias": 0.0,
+      "seed": 1430299576,
+      "curriculum_cycle": 2,
+      "curriculum_position": 35
+    },
+    "decisions": 32,
+    "service_steps": 5760,
+    "recovery_steps": 0,
+    "done": false,
+    "centered_cash_usd": 3228.8366843737813,
+    "base_return": 0.0011433557664213103,
+    "shaped_return": 0.0011433557664213103
+  }
+]

@@ -1,0 +1,54 @@
+# conf/config.yaml — Hydra top-level composition config for C2G-Bench
+# =====================================================================
+# All scenario, algorithm, and market parameters are composed from their
+# respective config groups. The environment itself reads c2g_env/config.yaml.
+#
+# Common usage patterns:
+#   # Single run (default scenario, PPO)
+#   python baselines/train_ppo.py
+#
+#   # Specify scenario
+#   python baselines/train_ppo.py scenario=scenario_b
+#
+#   # Override market independently of scenario
+#   python baselines/train_ppo.py scenario=default market=ercot_north
+#
+#   # Full cross-market sweep (36 runs: 6 markets × 3 seeds × 2 algos)
+#   python baselines/train_ppo.py --multirun \
+#     scenario=default,scenario_a,scenario_b,scenario_c \
+#     experiment.seed=1,2,3
+
+defaults:
+  - scenario: default
+  - algo: rule_macro_ppo
+  - market: nyiso_nyc
+  - plant_profiles: none
+  - logging: tensorboard
+  - _self_
+
+# Experiment identity — used to name output directories
+experiment:
+  name: "${algo.name}_${scenario.name}"
+  seed: 100
+  market: "${scenario.grid_market}"  # logged for tracking
+
+# Hardware — "auto" uses CUDA when available, otherwise CPU.
+# Override: python baselines/train_ppo.py device=cpu
+device: cpu
+
+environment:
+  simulation_mode: physical_v1
+  start_day: 0
+  regd_load_bias: 0.0
+
+validation:
+  start_day: 1
+  regd_load_bias: 0.0
+
+# Output directory structure: outputs/{algo}_{scenario}/seed_{N}/{timestamp}/
+hydra:
+  run:
+    dir: outputs/${experiment.name}/seed_${experiment.seed}/${now:%Y-%m-%d_%H-%M-%S}
+  sweep:
+    dir: multirun/${experiment.name}
+    subdir: ${hydra.job.num}_seed_${experiment.seed}

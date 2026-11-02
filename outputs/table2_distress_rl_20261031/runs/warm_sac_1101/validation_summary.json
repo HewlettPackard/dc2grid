@@ -1,0 +1,182 @@
+[
+  {
+    "timesteps": 4096,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/warm_sac_1101/step_4096.zip",
+      "sha256": "b1a43b414406a866c82055667c6a37510451bc31cb18ce43eade377d6a8338af"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 6.079885959625244,
+      "bc_gradient_norm": 0.24925068020820618,
+      "weighted_bc_gradient_norm": 0.0,
+      "latent_policy_std_mean": [
+        0.0019055292941629887,
+        0.00177079311106354,
+        0.002094629453495145
+      ],
+      "native_local_linearized_std_mean": [
+        0.0007017150055617094,
+        0.0007710703066550195,
+        0.0020684751216322184
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 2658.3315513918938,
+    "biased_facility_relief_mw": 5.8041373081821,
+    "mean_cashflow_26h_usd": -125749.47797491985,
+    "eligible": false
+  },
+  {
+    "timesteps": 8192,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/warm_sac_1101/step_8192.zip",
+      "sha256": "6cd7cf6da84d86a46990582d2060e6dcfa784db925295c45e122542470e40aa2"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 8.412566184997559,
+      "bc_gradient_norm": 0.29436174035072327,
+      "weighted_bc_gradient_norm": 0.0,
+      "latent_policy_std_mean": [
+        0.0008459745440632105,
+        0.0008025091956369579,
+        0.001008850522339344
+      ],
+      "native_local_linearized_std_mean": [
+        0.00033232566784136,
+        0.00031178316567093134,
+        0.0009803740540519357
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 2884.066349843733,
+    "biased_facility_relief_mw": 5.381429625746439,
+    "mean_cashflow_26h_usd": -128724.33153842496,
+    "eligible": false
+  },
+  {
+    "timesteps": 16384,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/warm_sac_1101/step_16384.zip",
+      "sha256": "422b298da12d7451906bcdca4924609faa1552e850362c82118318eca21b09c7"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 10.93622875213623,
+      "bc_gradient_norm": 0.41538205742836,
+      "weighted_bc_gradient_norm": 0.0,
+      "latent_policy_std_mean": [
+        0.0008684432250447571,
+        0.0008197271381504834,
+        0.0009506812784820795
+      ],
+      "native_local_linearized_std_mean": [
+        0.0003434160025790334,
+        0.00030105217592790723,
+        0.0009300054516643286
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 3633.853748213494,
+    "biased_facility_relief_mw": 0.9362694734975627,
+    "mean_cashflow_26h_usd": -129730.65664620783,
+    "eligible": false
+  },
+  {
+    "timesteps": 32768,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/warm_sac_1101/step_32768.zip",
+      "sha256": "d5dae6f8cd00bc239ef17ff11105a5143086fa92001d0d96a657ecd90d285932"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 12.554765701293945,
+      "bc_gradient_norm": 0.7925069332122803,
+      "weighted_bc_gradient_norm": 0.0,
+      "latent_policy_std_mean": [
+        0.0007656712550669909,
+        0.0009237063932232559,
+        0.0008199474541470408
+      ],
+      "native_local_linearized_std_mean": [
+        0.0003071629034820944,
+        0.0003661495866253972,
+        0.0007920684292912483
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 3449.441044931825,
+    "biased_facility_relief_mw": 1.8418073079835293,
+    "mean_cashflow_26h_usd": -128888.2638807075,
+    "eligible": false
+  },
+  {
+    "timesteps": 65536,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/warm_sac_1101/step_65536.zip",
+      "sha256": "9d2b12331c6a1f739e41acc863b35d4f4400c5ca4956e47f7e6f4b6b727179d0"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 8.151529312133789,
+      "bc_gradient_norm": 1.502205491065979,
+      "weighted_bc_gradient_norm": 0.0,
+      "latent_policy_std_mean": [
+        0.0009066115599125624,
+        0.000586592243053019,
+        0.0008760901400819421
+      ],
+      "native_local_linearized_std_mean": [
+        0.00035886705154553056,
+        0.00023667284403927624,
+        0.0007749305805191398
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 1779.3722202748543,
+    "biased_facility_relief_mw": 5.570919260034883,
+    "mean_cashflow_26h_usd": -126445.93911237868,
+    "eligible": false
+  },
+  {
+    "timesteps": 153600,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/runs/warm_sac_1101/step_153600.zip",
+      "sha256": "9a3c1a5a54bf6fbda3449ac1e808a305e9e4c8003ba8c8eb05e1bfdb2b84f7f3"
+    },
+    "learning_diagnostics": {
+      "q_gradient_norm": 4.142750263214111,
+      "bc_gradient_norm": 1.0228018760681152,
+      "weighted_bc_gradient_norm": 0.0,
+      "latent_policy_std_mean": [
+        0.0011857436038553715,
+        0.0008144736057147384,
+        0.0011721523478627205
+      ],
+      "native_local_linearized_std_mean": [
+        0.0004427888197824359,
+        0.00032403189106844366,
+        0.001091160112991929
+      ],
+      "fixed_initial_training_batch": true,
+      "stochastic_BC_also_penalizes_action_variance": true
+    },
+    "qualified": true,
+    "qualified_cells": 24,
+    "rmse_kw": 1652.5253666981723,
+    "biased_facility_relief_mw": 6.5631099783490825,
+    "mean_cashflow_26h_usd": -125654.10098850257,
+    "eligible": false
+  }
+]

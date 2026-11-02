@@ -1,0 +1,97 @@
+{
+  "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+  "training_gate": {
+    "registration_id": "60757aabef71aca114f3992aaae491aa7a06f1b7b30831ba343887dfac333f5f",
+    "allowed": true,
+    "fully_qualified_constant_baselines": [
+      "fraction_0.95",
+      "fraction_0.98",
+      "fraction_1"
+    ],
+    "baseline_summary_sha256": "f8acdc852f343f3bc26b9e68ddd6d320cee250d4be09686d048b67c02bd334fb",
+    "reason": "Full-development joint feasibility demonstrated"
+  },
+  "planned_training_runs": 8,
+  "recorded_learner_statuses": 8,
+  "completed_learners": 0,
+  "macro_transitions": 163840,
+  "normal_sac_updates": 155648,
+  "critic_only_updates": 4096,
+  "baseline_family": [
+    {
+      "policy_id": "fraction_0.9",
+      "qualified_cells": 23,
+      "all_qualified": false,
+      "cashflow": -123098.73732061079,
+      "delivered_service_ratio": 0.9119694806237306,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_0.9/summary.json"
+    },
+    {
+      "policy_id": "fraction_0.95",
+      "qualified_cells": 24,
+      "all_qualified": true,
+      "cashflow": -122698.55406827321,
+      "delivered_service_ratio": 0.9457778057024248,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_0.95/summary.json"
+    },
+    {
+      "policy_id": "fraction_0.98",
+      "qualified_cells": 24,
+      "all_qualified": true,
+      "cashflow": -122462.90478047449,
+      "delivered_service_ratio": 0.9657869588241389,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_0.98/summary.json"
+    },
+    {
+      "policy_id": "fraction_1",
+      "qualified_cells": 24,
+      "all_qualified": true,
+      "cashflow": -122307.90815282667,
+      "delivered_service_ratio": 0.9789857516961978,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_1/summary.json"
+    },
+    {
+      "policy_id": "zero_price_capped_rule",
+      "qualified_cells": 19,
+      "all_qualified": false,
+      "cashflow": -122751.10511313034,
+      "delivered_service_ratio": 0.9202684872861498,
+      "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/zero_price_capped_rule/summary.json"
+    }
+  ],
+  "strongest_qualified_baseline": {
+    "policy_id": "fraction_1",
+    "qualified_cells": 24,
+    "all_qualified": true,
+    "cashflow": -122307.90815282667,
+    "delivered_service_ratio": 0.9789857516961978,
+    "summary": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v2/baselines/fraction_1/summary.json"
+  },
+  "arms": [
+    {
+      "variant": "cash",
+      "planned_training_seeds": 4,
+      "qualified_selected_models": 4,
+      "mean_selected_cashflow": -122324.36167032282,
+      "mean_cash_delta_vs_strongest_baseline": -16.453517496152926
+    },
+    {
+      "variant": "reserve_potential",
+      "planned_training_seeds": 4,
+      "qualified_selected_models": 4,
+      "mean_selected_cashflow": -122413.5804785284,
+      "mean_cash_delta_vs_strongest_baseline": -105.67232570173292
+    }
+  ],
+  "sealed_test_policy_rollouts": 0,
+  "interpretation": [
+    "Development pilot only; the six-date sealed panel is not executed.",
+    "Initial imitation/warmup validate the pipeline, not RL superiority.",
+    "Four independent macro seeds per arm share one frozen hardware policy.",
+    "Missing selected seeds prevent a full-arm mean; no final-weight fallback.",
+    "Both bias conditions and all initial/failed evaluations remain explicit.",
+    "Stress-average relief is not actual maximum-load reduction.",
+    "Closed cash excludes wear/SLA valuation and is not total business profit.",
+    "Market/constant-quantity comparators are not robust physical MPC."
+  ]
+}
