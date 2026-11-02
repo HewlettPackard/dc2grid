@@ -1,0 +1,10 @@
+{
+  "macro_steps": 512,
+  "optimizer_updates": {
+    "actor": 40,
+    "critic": 296,
+    "critic_only": 256
+  },
+  "episodes": 4,
+  "state": "completed"
+}

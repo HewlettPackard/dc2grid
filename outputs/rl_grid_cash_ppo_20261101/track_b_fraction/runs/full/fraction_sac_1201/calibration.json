@@ -1,0 +1,10 @@
+{
+  "warmup_transitions": 256,
+  "critic_only_updates": 256,
+  "actor_unchanged": {
+    "actor": "c4e1a620f92873081a6ad4ffcbf5f1f9936bdab6eb99b30abfce327d01ceacc0"
+  },
+  "actor_optimizer_state_empty": true,
+  "ppo_calibration_uses_each_on_policy_warmup_rollout": false,
+  "sac_calibration_uses_the_complete_warmup_replay": true
+}

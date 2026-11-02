@@ -1,0 +1,224 @@
+{
+  "registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+  "implementation_commit": "bdba9ae4c0de8bae58ae42266a88ef6e7f7bdc34",
+  "stage": "full",
+  "state": "finished",
+  "jobs": [
+    {
+      "variant": "fraction",
+      "algorithm": "ppo",
+      "seed": 1200,
+      "cpus": [
+        0,
+        1,
+        2
+      ],
+      "pid": 1761825,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "fraction",
+      "algorithm": "ppo",
+      "seed": 1201,
+      "cpus": [
+        3,
+        4,
+        5
+      ],
+      "pid": 1761826,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "fraction",
+      "algorithm": "ppo",
+      "seed": 1202,
+      "cpus": [
+        6,
+        7,
+        8
+      ],
+      "pid": 1761827,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "fraction",
+      "algorithm": "ppo",
+      "seed": 1203,
+      "cpus": [
+        9,
+        10,
+        11
+      ],
+      "pid": 1761828,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "fraction",
+      "algorithm": "sac",
+      "seed": 1200,
+      "cpus": [
+        12,
+        13,
+        14
+      ],
+      "pid": 1761829,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "fraction",
+      "algorithm": "sac",
+      "seed": 1201,
+      "cpus": [
+        15,
+        16,
+        17
+      ],
+      "pid": 1761830,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "fraction",
+      "algorithm": "sac",
+      "seed": 1202,
+      "cpus": [
+        18,
+        19,
+        20
+      ],
+      "pid": 1761831,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "fraction",
+      "algorithm": "sac",
+      "seed": 1203,
+      "cpus": [
+        21,
+        22,
+        23
+      ],
+      "pid": 1761832,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "ppo",
+      "seed": 1200,
+      "cpus": [
+        24,
+        25,
+        26
+      ],
+      "pid": 1761833,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "ppo",
+      "seed": 1201,
+      "cpus": [
+        27,
+        28,
+        29
+      ],
+      "pid": 1761834,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "ppo",
+      "seed": 1202,
+      "cpus": [
+        30,
+        31,
+        32
+      ],
+      "pid": 1761835,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "ppo",
+      "seed": 1203,
+      "cpus": [
+        33,
+        34,
+        35
+      ],
+      "pid": 1761836,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "sac",
+      "seed": 1200,
+      "cpus": [
+        36,
+        37,
+        38
+      ],
+      "pid": 1761837,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "sac",
+      "seed": 1201,
+      "cpus": [
+        39,
+        40,
+        41
+      ],
+      "pid": 1761838,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "sac",
+      "seed": 1202,
+      "cpus": [
+        42,
+        43,
+        44
+      ],
+      "pid": 1761839,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "sac",
+      "seed": 1203,
+      "cpus": [
+        45,
+        46,
+        47
+      ],
+      "pid": 1761840,
+      "state": "completed",
+      "exit_code": 0
+    }
+  ],
+  "warmup_parity_smokes": {
+    "matched_physical_warmup": [
+      "ppo",
+      "sac"
+    ],
+    "only_sampled_reward_differs": true
+  },
+  "updated_unix": 1793566608.048233
+}

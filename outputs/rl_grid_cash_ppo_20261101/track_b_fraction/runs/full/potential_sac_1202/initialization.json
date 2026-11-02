@@ -1,0 +1,10 @@
+{
+  "actor_body_sha256": "56438de74809e0bef0ba5a02e40eccf48a583e8aec7fb5206d5715aa27dd9247",
+  "mean_head_sha256": "c4ffbb9c39ef6b78390bb427fb37afdddde907c3f13a60f78f087a8f7e136daf",
+  "initial_log_std": [
+    -2.995732307434082
+  ],
+  "initial_deterministic_overlay_mw": 0.0,
+  "initial_stochastic_distribution_shared": true,
+  "no_bc_initializer_or_imitation_prior": true
+}

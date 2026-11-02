@@ -1,0 +1,358 @@
+{
+  "runs": [
+    {
+      "run": "fraction_ppo_1200",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 3718,
+        "critic": 3974,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 1.694388014980027,
+      "maximum_shaped_return_error": null,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1200/training_episodes.jsonl",
+        "bytes": 9238971,
+        "sha256": "af4bec69fff084b7aac0d94e68df6821ee9e7aacb0eac8897de7782340d5ca90",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "fraction_ppo_1201",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 3742,
+        "critic": 3998,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 2.269159998106021,
+      "maximum_shaped_return_error": null,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1201/training_episodes.jsonl",
+        "bytes": 9265686,
+        "sha256": "ee9a476a3cb1ddc07b23846512c5f648b6d011182bf584591c2b42daefe47a44",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "fraction_ppo_1202",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 3800,
+        "critic": 4056,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 1.6122630396402335,
+      "maximum_shaped_return_error": null,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1202/training_episodes.jsonl",
+        "bytes": 9215281,
+        "sha256": "824573eb3e4821ca5b2ebfdf4c569c0ed6d54ea3d694e69b70f6bdb727a3cd68",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "fraction_ppo_1203",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 3732,
+        "critic": 3988,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 1.823185797933434,
+      "maximum_shaped_return_error": null,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1203/training_episodes.jsonl",
+        "bytes": 9250359,
+        "sha256": "e93312ece8d056a6aa1366256666e09ca9cd21b2ac75a07216c849bbf63c7b0d",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "fraction_sac_1200",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 24320,
+        "critic": 24576,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 3.0427180310990454,
+      "maximum_shaped_return_error": null,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1200/training_episodes.jsonl",
+        "bytes": 9532628,
+        "sha256": "6dbe4d163bbd4a0034fcfc11948dba1b60f4a2eb063d3f5ab03256faf96b7ad9",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "fraction_sac_1201",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 24320,
+        "critic": 24576,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 3.242296498986171,
+      "maximum_shaped_return_error": null,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1201/training_episodes.jsonl",
+        "bytes": 9545640,
+        "sha256": "b44ca7687d45a307e49ade31e8074bac0a51624b8090ca34eef76ba78b946f85",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "fraction_sac_1202",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 24320,
+        "critic": 24576,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 3.237752462848194,
+      "maximum_shaped_return_error": null,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1202/training_episodes.jsonl",
+        "bytes": 9621014,
+        "sha256": "8997c76b887c07d3a1efbb4660a5bcb804affcc7e5ab9bb854c167b55bd7c94b",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "fraction_sac_1203",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 24320,
+        "critic": 24576,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 3.2417032855820986,
+      "maximum_shaped_return_error": null,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1203/training_episodes.jsonl",
+        "bytes": 9631286,
+        "sha256": "ff46c12644c5b3c00222c629ce2ec77eed51a41782fe65f8475a04e5ac4ce619",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "potential_ppo_1200",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 3772,
+        "critic": 4028,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 1.3590106644326774,
+      "maximum_shaped_return_error": 3.552713678800501e-15,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1200/training_episodes.jsonl",
+        "bytes": 9304069,
+        "sha256": "4b9f36bfc192081438c8ecf8a5c97c6eb21a17ddd7ac732be93b63e771c564c3",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "potential_ppo_1201",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 3770,
+        "critic": 4026,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 1.5656027744850254,
+      "maximum_shaped_return_error": 3.1086244689504383e-15,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1201/training_episodes.jsonl",
+        "bytes": 9300378,
+        "sha256": "8efd97a07e4eeea5a138df834d4fd84cee85b20b7cb7df8f74cc411a3d8f7b94",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "potential_ppo_1202",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 3800,
+        "critic": 4056,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 0.7930301267379966,
+      "maximum_shaped_return_error": 2.6645352591003757e-15,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1202/training_episodes.jsonl",
+        "bytes": 9152608,
+        "sha256": "58c313841f1d99b843e4bfbd3e11b20d6766a279645c8c17dda064bc2e88ee1b",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "potential_ppo_1203",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 3775,
+        "critic": 4031,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 1.105598861584213,
+      "maximum_shaped_return_error": 3.552713678800501e-15,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1203/training_episodes.jsonl",
+        "bytes": 9252714,
+        "sha256": "e7d52de61566ceea64cb4456341bd5889a8e00212f600fed8e8ede24bfb41ea8",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "potential_sac_1200",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 24320,
+        "critic": 24576,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 3.2669818679667206,
+      "maximum_shaped_return_error": 3.552713678800501e-15,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1200/training_episodes.jsonl",
+        "bytes": 9464255,
+        "sha256": "de8f3b8738175e86c2322ee0f1d780eb9e1c49a2f35043d1bd6a3e508eee6653",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "potential_sac_1201",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 24320,
+        "critic": 24576,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 3.461710971387551,
+      "maximum_shaped_return_error": 1.7763568394002505e-15,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1201/training_episodes.jsonl",
+        "bytes": 9435529,
+        "sha256": "e2dba2fb97fac5e714027e57c5080dc7c82b905761ca965d7960c3f192e5e14d",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "potential_sac_1202",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 24320,
+        "critic": 24576,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 2.9317187655258543,
+      "maximum_shaped_return_error": 1.7763568394002505e-15,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1202/training_episodes.jsonl",
+        "bytes": 9124191,
+        "sha256": "ab2f93447a170f4ea6298288b713743aa6b21c153e9d595df1d3efb9b172a597",
+        "bulk_retained_on_disk": true
+      }
+    },
+    {
+      "run": "potential_sac_1203",
+      "macro_transitions": 24576,
+      "optimizer_updates": {
+        "actor": 24320,
+        "critic": 24576,
+        "critic_only": 256
+      },
+      "episodes": 256,
+      "complete": 256,
+      "qualified": 256,
+      "service_fast_steps": 4423680,
+      "recovery_fast_steps": 368640,
+      "reward_mean": 3.1758177347754075,
+      "maximum_shaped_return_error": 3.552713678800501e-15,
+      "raw_episode_log": {
+        "path": "outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1203/training_episodes.jsonl",
+        "bytes": 9028071,
+        "sha256": "ace554cd17ef295f7e7ddda94b61164a1b3a5546dcdf252570e198d1146bdbe0",
+        "bulk_retained_on_disk": true
+      }
+    }
+  ],
+  "all_runs_count": 16,
+  "raw_window_diagnostics_remain_on_disk": true
+}

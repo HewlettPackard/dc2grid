@@ -1,0 +1,308 @@
+{
+  "registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+  "implementation_commit": "bdba9ae4c0de8bae58ae42266a88ef6e7f7bdc34",
+  "role": "consumed_development_only",
+  "policies": [
+    {
+      "id": "fraction_ppo_1200",
+      "family": "fraction_ppo",
+      "variant": "fraction",
+      "algorithm": "ppo",
+      "training_seed": 1200,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1200/step_24576.zip",
+        "sha256": "941b71b3c436d9a975850883486d4418cb6b27557f3dbbdded7a6e5948cbbff1"
+      }
+    },
+    {
+      "id": "fraction_ppo_1201",
+      "family": "fraction_ppo",
+      "variant": "fraction",
+      "algorithm": "ppo",
+      "training_seed": 1201,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1201/step_24576.zip",
+        "sha256": "088d9aba826704e60ae9bc7c4c9fdca1793c286a384abd18e03ff0a1119a8b4e"
+      }
+    },
+    {
+      "id": "fraction_ppo_1202",
+      "family": "fraction_ppo",
+      "variant": "fraction",
+      "algorithm": "ppo",
+      "training_seed": 1202,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1202/step_24576.zip",
+        "sha256": "8a4b0f544c45dcaab5bfacf784a7faadb9b626219f09c47ae02bc5fc3cfc549c"
+      }
+    },
+    {
+      "id": "fraction_ppo_1203",
+      "family": "fraction_ppo",
+      "variant": "fraction",
+      "algorithm": "ppo",
+      "training_seed": 1203,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_ppo_1203/step_24576.zip",
+        "sha256": "9e1d5ac4d48d460a69cb50c3883f0c3549b17b895955336fb9a7f5350e1cb6ac"
+      }
+    },
+    {
+      "id": "fraction_sac_1200",
+      "family": "fraction_sac",
+      "variant": "fraction",
+      "algorithm": "sac",
+      "training_seed": 1200,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1200/step_24576.zip",
+        "sha256": "536a44dce895d9dfc966f66d2250da85ae249e89601b6e64f097d9f31384e7d3"
+      }
+    },
+    {
+      "id": "fraction_sac_1201",
+      "family": "fraction_sac",
+      "variant": "fraction",
+      "algorithm": "sac",
+      "training_seed": 1201,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1201/step_24576.zip",
+        "sha256": "51997238a0dc434b8ff25b4d84aba29fad5640cf3983dc1691ee9668f6b3e349"
+      }
+    },
+    {
+      "id": "fraction_sac_1202",
+      "family": "fraction_sac",
+      "variant": "fraction",
+      "algorithm": "sac",
+      "training_seed": 1202,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1202/step_24576.zip",
+        "sha256": "376ef243d56ab52c964aa07b588a794791e58c0e7372fd24d57bb5ad67824624"
+      }
+    },
+    {
+      "id": "fraction_sac_1203",
+      "family": "fraction_sac",
+      "variant": "fraction",
+      "algorithm": "sac",
+      "training_seed": 1203,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1203/step_24576.zip",
+        "sha256": "926d2db1a684a36173f75e6b739e54b720323ed5c15cad244be89778fd62061a"
+      }
+    },
+    {
+      "id": "potential_ppo_1200",
+      "family": "potential_ppo",
+      "variant": "potential",
+      "algorithm": "ppo",
+      "training_seed": 1200,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1200/step_24576.zip",
+        "sha256": "0a843ff88e0a1593ce7f6869070b5339f6640a53476d28c6149a14bb422fe057"
+      }
+    },
+    {
+      "id": "potential_ppo_1201",
+      "family": "potential_ppo",
+      "variant": "potential",
+      "algorithm": "ppo",
+      "training_seed": 1201,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1201/step_24576.zip",
+        "sha256": "730de5e8596aa6c45bec1aa805a130e914df00a5ae5d3191bc67f7d0cabfc61b"
+      }
+    },
+    {
+      "id": "potential_ppo_1202",
+      "family": "potential_ppo",
+      "variant": "potential",
+      "algorithm": "ppo",
+      "training_seed": 1202,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1202/step_24576.zip",
+        "sha256": "9acb4c0720a8c574ba767619197dafd02b5396790f94fca7918e9767d9a8592d"
+      }
+    },
+    {
+      "id": "potential_ppo_1203",
+      "family": "potential_ppo",
+      "variant": "potential",
+      "algorithm": "ppo",
+      "training_seed": 1203,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1203/step_24576.zip",
+        "sha256": "fedffd1609f29dc9ce4d7859a91ae87df892429fb567c1668ef72f461d9274f4"
+      }
+    },
+    {
+      "id": "potential_sac_1200",
+      "family": "potential_sac",
+      "variant": "potential",
+      "algorithm": "sac",
+      "training_seed": 1200,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1200/step_24576.zip",
+        "sha256": "d112e71db4b412096e0469be73060fb045c7937d6e39acea4308257b854ebcce"
+      }
+    },
+    {
+      "id": "potential_sac_1201",
+      "family": "potential_sac",
+      "variant": "potential",
+      "algorithm": "sac",
+      "training_seed": 1201,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1201/step_24576.zip",
+        "sha256": "805ec4e5ee151020b7085e3f1190e0df0bf40b57c933fabb087f35fd49816935"
+      }
+    },
+    {
+      "id": "potential_sac_1202",
+      "family": "potential_sac",
+      "variant": "potential",
+      "algorithm": "sac",
+      "training_seed": 1202,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1202/step_24576.zip",
+        "sha256": "02e683bbc1c90993e810dc89c6a14f7c6a00aa67838a004a74572265d159fc0f"
+      }
+    },
+    {
+      "id": "potential_sac_1203",
+      "family": "potential_sac",
+      "variant": "potential",
+      "algorithm": "sac",
+      "training_seed": 1203,
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_sac_1203/step_24576.zip",
+        "sha256": "4be3932fe90db5363865d01a2303ce63bcc587d65875eeed6153b0992c786f0c"
+      }
+    }
+  ],
+  "missing_training_slots": [],
+  "cells": [
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    }
+  ],
+  "expected_episodes": 384,
+  "manifest_id": "da5dfaa96a34633ddb04c54bf5f4a57a25546273d9b0f965963c7c7532191658"
+}

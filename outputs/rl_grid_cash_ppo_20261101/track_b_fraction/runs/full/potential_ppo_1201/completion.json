@@ -1,0 +1,82 @@
+{
+  "status": "completed",
+  "registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+  "variant": "potential",
+  "algorithm": "ppo",
+  "seed": 1201,
+  "stage": "full",
+  "macro_transitions": 24576,
+  "optimizer_updates": {
+    "actor": 3770,
+    "critic": 4026,
+    "critic_only": 256
+  },
+  "training_episodes": 256,
+  "final_checkpoint": {
+    "macro_steps": 24576,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1201/step_24576.zip",
+    "sha256": "730de5e8596aa6c45bec1aa805a130e914df00a5ae5d3191bc67f7d0cabfc61b",
+    "optimizer_updates": {
+      "actor": 3770,
+      "critic": 4026,
+      "critic_only": 256
+    }
+  },
+  "all_macro_transitions": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/potential_ppo_1201/all_macro_transitions.npz",
+    "sha256": "fd05a86b4da32d24931e7628b2b62ed952c26a74ff7d4db7d0041cf238360591",
+    "transitions": 24576,
+    "partial": false,
+    "model_timesteps": 24576
+  },
+  "training_prefixes": [
+    {
+      "condition": {
+        "start_day": 168,
+        "regd_load_bias": 0.0,
+        "seed": 1744458128,
+        "curriculum_cycle": 8,
+        "curriculum_position": 16
+      },
+      "condition_role": "training_only",
+      "decisions": 0,
+      "service_fast_steps": 0,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 0.0,
+      "reward_sum": 0.0,
+      "credit_mwh": 0.0,
+      "cashflow_26h_usd": null,
+      "raw_return": 0.0,
+      "shaped_return": 0.0,
+      "current_phi": 0.0,
+      "potential_delta_sum": 0.0,
+      "returned_terminal": false
+    },
+    {
+      "condition": {
+        "start_day": 102,
+        "regd_load_bias": 0.25,
+        "seed": 3276274612,
+        "curriculum_cycle": 8,
+        "curriculum_position": 17
+      },
+      "condition_role": "training_only",
+      "decisions": 0,
+      "service_fast_steps": 0,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 0.0,
+      "reward_sum": 0.0,
+      "credit_mwh": 0.0,
+      "cashflow_26h_usd": null,
+      "raw_return": 0.0,
+      "shaped_return": 0.0,
+      "current_phi": 0.0,
+      "potential_delta_sum": 0.0,
+      "returned_terminal": false
+    }
+  ],
+  "elapsed_seconds": 554.3004529699974,
+  "potential_is_training_only": true
+}

@@ -1,0 +1,72 @@
+{
+  "status": "completed",
+  "registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+  "variant": "fraction",
+  "algorithm": "sac",
+  "seed": 1203,
+  "stage": "full",
+  "macro_transitions": 24576,
+  "optimizer_updates": {
+    "actor": 24320,
+    "critic": 24576,
+    "critic_only": 256
+  },
+  "training_episodes": 256,
+  "final_checkpoint": {
+    "macro_steps": 24576,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1203/step_24576.zip",
+    "sha256": "926d2db1a684a36173f75e6b739e54b720323ed5c15cad244be89778fd62061a",
+    "optimizer_updates": {
+      "actor": 24320,
+      "critic": 24576,
+      "critic_only": 256
+    }
+  },
+  "all_macro_transitions": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/full/fraction_sac_1203/all_macro_transitions.npz",
+    "sha256": "df09dc7f686c70808975214640f0e994143cd6e108ee64df4746da3b6051dfa2",
+    "transitions": 24576,
+    "partial": false,
+    "model_timesteps": 24576
+  },
+  "training_prefixes": [
+    {
+      "condition": {
+        "start_day": 243,
+        "regd_load_bias": 0.0,
+        "seed": 2598910204,
+        "curriculum_cycle": 8,
+        "curriculum_position": 16
+      },
+      "condition_role": "training_only",
+      "decisions": 0,
+      "service_fast_steps": 0,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 0.0,
+      "reward_sum": 0.0,
+      "credit_mwh": 0.0,
+      "cashflow_26h_usd": null
+    },
+    {
+      "condition": {
+        "start_day": 50,
+        "regd_load_bias": 0.25,
+        "seed": 1720551103,
+        "curriculum_cycle": 8,
+        "curriculum_position": 17
+      },
+      "condition_role": "training_only",
+      "decisions": 0,
+      "service_fast_steps": 0,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 0.0,
+      "reward_sum": 0.0,
+      "credit_mwh": 0.0,
+      "cashflow_26h_usd": null
+    }
+  ],
+  "elapsed_seconds": 789.858491120016,
+  "potential_is_training_only": true
+}

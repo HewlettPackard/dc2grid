@@ -1,0 +1,72 @@
+{
+  "status": "completed",
+  "registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+  "variant": "fraction",
+  "algorithm": "sac",
+  "seed": 1200,
+  "stage": "smoke",
+  "macro_transitions": 512,
+  "optimizer_updates": {
+    "actor": 256,
+    "critic": 512,
+    "critic_only": 256
+  },
+  "training_episodes": 4,
+  "final_checkpoint": {
+    "macro_steps": 512,
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/smoke/fraction_sac_1200/step_512.zip",
+    "sha256": "e1f240041e177703b036e3c69d33f88b91eeaae06e6a0656a970fb5ab7aa5485",
+    "optimizer_updates": {
+      "actor": 256,
+      "critic": 512,
+      "critic_only": 256
+    }
+  },
+  "all_macro_transitions": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_grid_cash_ppo_20261101/track_b_fraction/runs/smoke/fraction_sac_1200/all_macro_transitions.npz",
+    "sha256": "615cdc8efcd107dc15d022ed68d6ed16d4a2d3587ed5d84e4227f504adf004c3",
+    "transitions": 512,
+    "partial": false,
+    "model_timesteps": 512
+  },
+  "training_prefixes": [
+    {
+      "condition": {
+        "start_day": 36,
+        "regd_load_bias": 0.25,
+        "seed": 2672047802,
+        "curriculum_cycle": 0,
+        "curriculum_position": 4
+      },
+      "condition_role": "training_only",
+      "decisions": 64,
+      "service_fast_steps": 11520,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 114.94026605130523,
+      "reward_sum": 1.1494026605130523,
+      "credit_mwh": 0.09417812085140732,
+      "cashflow_26h_usd": null
+    },
+    {
+      "condition": {
+        "start_day": 283,
+        "regd_load_bias": 0.5,
+        "seed": 724647429,
+        "curriculum_cycle": 0,
+        "curriculum_position": 5
+      },
+      "condition_role": "training_only",
+      "decisions": 64,
+      "service_fast_steps": 11520,
+      "recovery_fast_steps": 0,
+      "done": false,
+      "excess_cash_usd": 70.99577391621239,
+      "reward_sum": 0.7099577391621238,
+      "credit_mwh": 0.04653262320294683,
+      "cashflow_26h_usd": null
+    }
+  ],
+  "elapsed_seconds": 14.307369492016733,
+  "potential_is_training_only": true
+}

@@ -1,0 +1,62 @@
+{
+  "registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+  "implementation_commit": "bdba9ae4c0de8bae58ae42266a88ef6e7f7bdc34",
+  "stage": "smoke",
+  "state": "finished",
+  "jobs": [
+    {
+      "variant": "fraction",
+      "algorithm": "ppo",
+      "seed": 1200,
+      "cpus": [
+        0,
+        1,
+        2
+      ],
+      "pid": 1760108,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "fraction",
+      "algorithm": "sac",
+      "seed": 1200,
+      "cpus": [
+        12,
+        13,
+        14
+      ],
+      "pid": 1760109,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "ppo",
+      "seed": 1200,
+      "cpus": [
+        24,
+        25,
+        26
+      ],
+      "pid": 1760110,
+      "state": "completed",
+      "exit_code": 0
+    },
+    {
+      "variant": "potential",
+      "algorithm": "sac",
+      "seed": 1200,
+      "cpus": [
+        36,
+        37,
+        38
+      ],
+      "pid": 1760111,
+      "state": "completed",
+      "exit_code": 0
+    }
+  ],
+  "warmup_parity_smokes": null,
+  "updated_unix": 1793565695.1976178
+}

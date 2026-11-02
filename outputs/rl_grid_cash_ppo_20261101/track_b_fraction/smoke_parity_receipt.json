@@ -1,0 +1,8 @@
+{
+  "registration_id": "7a0965f5ba814bb0f3eb9f2747f3c23dae58c358d9761429ac70d258a690a129",
+  "matched_physical_warmup": [
+    "ppo",
+    "sac"
+  ],
+  "only_sampled_reward_differs": true
+}
