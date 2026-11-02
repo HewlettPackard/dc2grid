@@ -45,17 +45,19 @@ new complete-case inputs must match the already-audited confirmation inputs.
 
 ## Completed comparison extract
 
-[Open the seven-page PDF](publication/pid_progress_comparison.pdf).
+[Open the nine-page PDF](publication/pid_progress_comparison.pdf).
 It contains only Section 4.5 and the newly assembled comparison Appendix Q:
 
 - Page 1: the updated original rule-macro comparison, with PID and the best
   low-level follow-ups visible.
-- Page 2: the exact archived Table 2 body and the separate Final-B tracking
-  comparison.
-- Page 3: macro-only changes and historical matched economic-policy results.
-- Pages 4--6: the latest matched PID/SAC/PPO/scripted comparisons, separated by
-  calendar panel and signal bias, plus the relief/cash plot.
-- Page 7: PID work/SOC diagnostics and the gains, failures and limitations.
+- Pages 2--3: the exact archived Table 2 body and the independently reproduced
+  explanation of PID's 6.74 to 5.641 MW change.
+- Pages 4--5: Final-B tracking, macro-only changes and historical matched
+  economic-policy results.
+- Pages 6--7: the latest matched PID/SAC/PPO/scripted comparisons, separated by
+  calendar panel and signal bias.
+- Pages 8--9: the relief/cash plot, PID work/SOC diagnostics,
+  gains/failures/limitations and audit trail.
 
 All **440 PID episodes completed and recovered**. Each variant qualified in
 177/220 cases. The identical 43 failures per variant concern only the **24-hour
@@ -67,6 +69,21 @@ There is no survivor-only PID mean.
 The original finalized manuscript, original archive, 43-policy confirmation
 and its primary statistical decision remain unchanged. The new comparison is
 descriptive and does not attribute executor/overlay changes entirely to RL.
-Twelve focused tests passed. The new PID study performed 98,120 raw checks;
+Thirteen focused tests passed. The new PID study performed 98,120 raw checks;
 an additional read-only audit verified 42,240 window fee calculations using
 the actual 100 kW normalization floor and added work/SOC diagnostics.
+
+The added semantics explanation reuses a completed **60-trajectory
+reproduction**: 15 PID/nominal-reference pairs in each of `legacy_v0` and
+`physical_v1`. Both reported relief values reproduce, and all trajectories
+complete the full 24-hour service window. The 1.0977 MW decrease decomposes into
+-1.0984 MW cooling-related relief and +0.0007 MW remaining facility terms.
+This is an observed power balance, **not an individual-fix causal attribution**.
+The same integer date/seed labels generate different realized inputs across
+the two replay modes; no PID gain change, new training, or publication-result
+replacement is involved.
+
+The verified summary, source snapshot and trace inventory are retained in
+[the diagnostic record](reports/pid_semantics_reproduction.json),
+[the exact probe source](diagnostics/probe_pid_relief_semantics.py), and
+[the trace inventory](reports/pid_semantics_trace_inventory.csv).

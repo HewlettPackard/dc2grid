@@ -1,0 +1,101 @@
+[
+  {
+    "metric": "stress_observed_regd",
+    "earlier": 0.5128915597345896,
+    "corrected": 0.41104786053630676,
+    "change": -0.10184369919828279,
+    "displayed": [
+      "0.5129",
+      "0.4110",
+      "-0.1018"
+    ]
+  },
+  {
+    "metric": "stress_actual_commitment_mw",
+    "earlier": 13.779310510076325,
+    "corrected": 13.342528892659596,
+    "change": -0.43678161741672916,
+    "displayed": [
+      "13.7793",
+      "13.3425",
+      "-0.4368"
+    ]
+  },
+  {
+    "metric": "stress_demanded_response_mw",
+    "earlier": 7.043000800187152,
+    "corrected": 5.626339090700272,
+    "change": -1.4166617094868803,
+    "displayed": [
+      "7.0430",
+      "5.6263",
+      "-1.4167"
+    ]
+  },
+  {
+    "metric": "stress_nominal_facility_mw",
+    "earlier": 83.85463574427989,
+    "corrected": 100.6322255410308,
+    "change": 16.777589796750917,
+    "displayed": [
+      "83.8546",
+      "100.6322",
+      "+16.7776"
+    ]
+  },
+  {
+    "metric": "stress_actual_facility_mw",
+    "earlier": 77.11611164410952,
+    "corrected": 94.99142667710005,
+    "change": 17.875315032990528,
+    "displayed": [
+      "77.1161",
+      "94.9914",
+      "+17.8753"
+    ]
+  },
+  {
+    "metric": "stress_hvac_effort",
+    "earlier": 0.5696598385188771,
+    "corrected": 0.5908352551298123,
+    "change": 0.02117541661093514,
+    "displayed": [
+      "0.5697",
+      "0.5908",
+      "+0.0212"
+    ]
+  },
+  {
+    "metric": "stress_cooling_relief_mw",
+    "earlier": 6.717785690154249,
+    "corrected": 5.619359192354258,
+    "change": -1.0984264977999914,
+    "displayed": [
+      "6.7178",
+      "5.6194",
+      "-1.0984"
+    ]
+  },
+  {
+    "metric": "stress_other_facility_relief_mw",
+    "earlier": 0.02073841001610104,
+    "corrected": 0.021439671576473227,
+    "change": 0.0007012615603721878,
+    "displayed": [
+      "0.0207",
+      "0.0214",
+      "+0.0007"
+    ]
+  },
+  {
+    "metric": "reported_formula_relief_mw",
+    "earlier": 6.738524100170352,
+    "corrected": 5.640798863930732,
+    "change": -1.0977252362396204,
+    "displayed": [
+      "6.7385",
+      "5.6408",
+      "-1.0977"
+    ]
+  }
+]
