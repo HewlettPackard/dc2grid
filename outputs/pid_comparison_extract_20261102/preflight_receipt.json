@@ -1,0 +1,13 @@
+{
+  "baseline_commit": "9e2496a62c75f6593181d47c42ae117f9801fdf6",
+  "focused_tests_passed": 6,
+  "focused_tests_failed": 0,
+  "elapsed_seconds": 33.71,
+  "native_PID_reproduces_historical_matched_case": true,
+  "full_work_wrapper_changes_only_executed_throttle": true,
+  "complete_case_exogenous_inputs_match_frozen_confirmation": true,
+  "completed_outcomes_are_reused_without_rerolling": true,
+  "disqualified_and_incomplete_cohorts_are_not_silently_filtered": true,
+  "no_gain_tuning_or_training": true,
+  "new_PID_reference_panels_not_run_at_this_checkpoint": true
+}
