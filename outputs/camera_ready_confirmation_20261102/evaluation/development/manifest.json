@@ -1,0 +1,374 @@
+{
+  "evaluation_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+  "implementation_commit": "b74ebbf4c72698c53a8d625c2150226551a6b12b",
+  "panel": "development",
+  "scope": "already_consumed_Dev_B_same_coordinate_control_audit",
+  "policies": [
+    {
+      "id": "script_zero",
+      "family": "script_zero",
+      "kind": "scripted",
+      "mode": "constant",
+      "fraction": 0.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f025_always",
+      "family": "script_f025_always",
+      "kind": "scripted",
+      "mode": "constant",
+      "fraction": 0.25,
+      "threshold_usd_mwh": null,
+      "training_seed": null
+    },
+    {
+      "id": "script_f025_margin_00",
+      "family": "script_f025_margin_00",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.25,
+      "threshold_usd_mwh": 0.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f025_margin_05",
+      "family": "script_f025_margin_05",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.25,
+      "threshold_usd_mwh": 5.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f025_margin_10",
+      "family": "script_f025_margin_10",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.25,
+      "threshold_usd_mwh": 10.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f025_margin_15",
+      "family": "script_f025_margin_15",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.25,
+      "threshold_usd_mwh": 15.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f025_margin_20",
+      "family": "script_f025_margin_20",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.25,
+      "threshold_usd_mwh": 20.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f050_always",
+      "family": "script_f050_always",
+      "kind": "scripted",
+      "mode": "constant",
+      "fraction": 0.5,
+      "threshold_usd_mwh": null,
+      "training_seed": null
+    },
+    {
+      "id": "script_f050_margin_00",
+      "family": "script_f050_margin_00",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.5,
+      "threshold_usd_mwh": 0.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f050_margin_05",
+      "family": "script_f050_margin_05",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.5,
+      "threshold_usd_mwh": 5.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f050_margin_10",
+      "family": "script_f050_margin_10",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.5,
+      "threshold_usd_mwh": 10.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f050_margin_15",
+      "family": "script_f050_margin_15",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.5,
+      "threshold_usd_mwh": 15.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f050_margin_20",
+      "family": "script_f050_margin_20",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.5,
+      "threshold_usd_mwh": 20.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f075_always",
+      "family": "script_f075_always",
+      "kind": "scripted",
+      "mode": "constant",
+      "fraction": 0.75,
+      "threshold_usd_mwh": null,
+      "training_seed": null
+    },
+    {
+      "id": "script_f075_margin_00",
+      "family": "script_f075_margin_00",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.75,
+      "threshold_usd_mwh": 0.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f075_margin_05",
+      "family": "script_f075_margin_05",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.75,
+      "threshold_usd_mwh": 5.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f075_margin_10",
+      "family": "script_f075_margin_10",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.75,
+      "threshold_usd_mwh": 10.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f075_margin_15",
+      "family": "script_f075_margin_15",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.75,
+      "threshold_usd_mwh": 15.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f075_margin_20",
+      "family": "script_f075_margin_20",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 0.75,
+      "threshold_usd_mwh": 20.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f100_always",
+      "family": "script_f100_always",
+      "kind": "scripted",
+      "mode": "constant",
+      "fraction": 1.0,
+      "threshold_usd_mwh": null,
+      "training_seed": null
+    },
+    {
+      "id": "script_f100_margin_00",
+      "family": "script_f100_margin_00",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 1.0,
+      "threshold_usd_mwh": 0.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f100_margin_05",
+      "family": "script_f100_margin_05",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 1.0,
+      "threshold_usd_mwh": 5.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f100_margin_10",
+      "family": "script_f100_margin_10",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 1.0,
+      "threshold_usd_mwh": 10.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f100_margin_15",
+      "family": "script_f100_margin_15",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 1.0,
+      "threshold_usd_mwh": 15.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_f100_margin_20",
+      "family": "script_f100_margin_20",
+      "kind": "scripted",
+      "mode": "margin",
+      "fraction": 1.0,
+      "threshold_usd_mwh": 20.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_deadline_margin10",
+      "family": "script_deadline_margin10",
+      "kind": "scripted",
+      "mode": "deadline_margin",
+      "fraction": 1.0,
+      "threshold_usd_mwh": 10.0,
+      "training_seed": null
+    },
+    {
+      "id": "script_credit_one",
+      "family": "script_credit_one",
+      "kind": "scripted",
+      "mode": "credit",
+      "fraction": 1.0,
+      "threshold_credit_mwh": 1.0,
+      "training_seed": null
+    }
+  ],
+  "cells": [
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    }
+  ],
+  "expected_episodes": 648,
+  "started_utc": "2026-11-02T01:34:46.306657+00:00"
+}

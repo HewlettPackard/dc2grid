@@ -1,0 +1,44 @@
+{
+  "scientific_results_snapshot": "6b38dd50122ac3216dcfbdc404e16bb6887e2c2a",
+  "independent_adversarial_reviewers": 5,
+  "remaining_blocking_scientific_findings": [],
+  "reviews": [
+    {
+      "agent_id": "29e5f62f-7f70-4d8d-ba94-d44af4f355a0",
+      "scope": "Comparator coverage, deployable checkpoints, task/macro interpretation",
+      "result": "Arithmetic and full scripted coverage verified",
+      "publication_resolution": "Checkpoint range, different task from Table 1, smaller peak-panel increment, and stronger-script trade-offs are explicit"
+    },
+    {
+      "agent_id": "05b5d730-0430-4365-8929-446c5a40109c",
+      "scope": "Dates, streams, record identities, frozen inputs and amendment lineage",
+      "result": "Passed: no missing or duplicate slots, no wrong date/stream lineage, original registration unchanged",
+      "publication_resolution": "New-noise replication is not mixed with old shared-noise means; all publication changes receive a final commit"
+    },
+    {
+      "agent_id": "bdbfcaad-4c4d-4823-9823-c520b04dd6fe",
+      "scope": "Paired resampling, promotion rule, endpoint and frontier scope",
+      "result": "Registered decision and intervals verified; no remaining statistical defects",
+      "publication_resolution": "Conditional uncertainty, checkpoint concentration, case win counts, leave-one-date-out ranges and small relative cash effect are disclosed"
+    },
+    {
+      "agent_id": "0a6aa962-01cf-4bee-84c2-2f39a038d1bd",
+      "scope": "Independent raw metering, credit, closure and peak-metric spot audit",
+      "result": "No blocking defects; independent new-case calculations match ledgers",
+      "publication_resolution": "26-hour maxima are explicitly audited even though recovery never sets the maximum in this cohort"
+    },
+    {
+      "agent_id": "e1d3eba3-158b-4662-b34b-e971688a0c51",
+      "scope": "Manuscript claims, units, evidence boundaries and release hygiene",
+      "result": "No numerical or provenance defect; reporting improvements identified",
+      "publication_resolution": "Unbiased negative peak result, checkpoint range, boundary coincidence and panel trade-off are explicit; internal strategy notes are excluded from submission assets"
+    }
+  ],
+  "withdrawn_overclaims_not_adopted": [
+    "The full-fraction policy's observed relief is a physical saturation ceiling",
+    "A positive modeled cash increment can only be called no measurable penalty",
+    "A source-hash amendment necessarily requires overwriting the scientific registration",
+    "A four-checkpoint mean is an action-averaging deployable controller"
+  ],
+  "all_original_promotion_failures_and_unused_reservation_preserved": true
+}

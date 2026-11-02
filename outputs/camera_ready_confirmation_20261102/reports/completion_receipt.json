@@ -1,0 +1,58 @@
+{
+  "registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+  "technical_amendment_id": "e386a6314a06cbf18e107ca6dbcaaec51cb759fdfc4693a3527f615cdf5e6c7a",
+  "result_status": "supported_on_the_prespecified_conditional_panel",
+  "results_report_sha256": "69f423fcb4057c4b1f8fb590bc91d4c2810d82549c4f556641c1928d6c117129",
+  "raw_inventory": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/reports/raw_trace_inventory.csv",
+    "sha256": "db7c60b14b9b44c170025282f1ea4515e6cfbca496add03b8ce0ea71d6fa88fa",
+    "raw_trace_files": 32754,
+    "raw_trace_bytes": 71319302587,
+    "trace_hashes_reverified_by_frozen_raw_auditor": true,
+    "all_raw_traces_backed_up_in_git": false
+  },
+  "manuscript_package": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/publication/camera_ready_grid_relief_confirmed.zip",
+    "sha256": "c256217f20753ff0c75b4b8a046a412336c96738e4c4284ae93e13bc0b5e6c11",
+    "original_archive_sha256": "2f616b2f3b2d65e848be7246954011c59f897ea5fa365b3de15fc424509fcc2c",
+    "changed_existing_members": [
+      "camera_ready.tex",
+      "references.bib"
+    ],
+    "omitted_internal_strategy_members": [
+      "NeurIPS Rebuttal Strategy for C2G-BENCH.docx",
+      "Rebuttal.md",
+      "rebuttal-short-alt.md",
+      "rebuttal-short.md"
+    ],
+    "omitted_nonbuild_members": [
+      "NeurIPS Rebuttal Strategy for C2G-BENCH.docx",
+      "Rebuttal.md",
+      "camera-ready.tex",
+      "compile.sh",
+      "figures/fig1_architecture.py",
+      "figures/fig2_simulators.py",
+      "figures/fig3_learning_curves.py",
+      "figures/fig4_episode_trajectory.py",
+      "intro_choices.tex",
+      "main.tex",
+      "rebuttal-short-alt.md",
+      "rebuttal-short.md",
+      "reviewer_comments.md",
+      "temp.md",
+      "zzzOLD_neurips_2026.tex"
+    ],
+    "new_members": [
+      "GRID_RELIEF_BUILD.txt",
+      "figures/grid_relief_confirmation.pdf"
+    ],
+    "main": "camera_ready.tex"
+  },
+  "author_input_sha256": "b414ecbf6ae0272806fca5dfe955174f869932130022b82475e7b0cbf3ea0b33",
+  "new_source_sha256": "04897ac3249b3433bc6afeb0ec906dd2e8eeed61ed760d0bf179b57610e24c27",
+  "new_pdf_sha256": "071b6cae6d5a0b1fd69d38e5fb97422f2199d6bb24db6f0144228d388440bb6d",
+  "table2_preview_sha256": "9095610b3fa080651d4ab8df71f138a445a2d27cfe76461c25ed4359873ea228",
+  "public_branch_pushed": false,
+  "verified_main_content_pages": 10,
+  "table2_preview_pages": 1
+}

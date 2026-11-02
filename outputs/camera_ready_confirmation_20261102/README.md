@@ -139,3 +139,38 @@ physical failures**. It never re-rolls their seeds. Interrupted attempts and
 old receipt logs are retained; a new complete receipt view identifies reused
 and newly executed slots. An existing confirmation opening is validated and
 reused byte-for-byte, never deleted or rewritten.
+
+## Finalized outcome
+
+All 9,460 confirmation episodes qualified. On the primary biased panel, the
+fixed four-checkpoint SAC-plus-credit-potential mean improved stress-window PCC
+relief by **0.866 MW** (paired conditional interval **0.836 to 0.896 MW**) and
+26-hour modeled cash by **43.44 USD** (**41.21 to 45.66 USD**) relative to the
+prespecified full-fraction rule. All four checkpoint mean contrasts were
+positive; relief magnitudes ranged from 0.264 to 2.367 MW. The joint rule and
+zero-bias cash guard passed.
+
+This is not universal dominance. The strongest primary-panel cash script earns
+81.9 USD more but provides 0.782 MW less relief than the candidate family mean.
+The known-peak, new-noise comparison gives a smaller 0.053 MW relief increment
+and 71.54 USD cash increment versus full fraction. PPO and plain SAC do not
+displace the candidate on the economic comparison, and the earlier low-level
+tracking result still favors analytic control or BC.
+
+- [Final results and complete scope](reports/FINAL_RESULTS.md)
+- [Camera-ready PDF](publication/full_build/camera_ready.pdf): **10 content pages**,
+  with references beginning on page 11; 69 pages including all appendices.
+- [One-page Table 2 preview](publication/build/table2_preview.pdf): best displayed
+  means, including ties, are bold.
+- [Clean manuscript source archive](publication/camera_ready_grid_relief_confirmed.zip):
+  only `camera_ready.tex` is a manuscript entry point; internal strategy notes
+  and alternative drafts are excluded.
+- [Publication validation](publication/validation_receipt.json) and
+  [fresh archive-build verification](publication/archive_validation_receipt.json).
+
+The complete effort contains 10,918 newly executed episodes plus 864 exact
+reused neural records, with 12,924,854 raw scalar-or-array checks. Twenty
+scientific tests and five publication tests passed, and five independent
+adversarial reviewers checked the final evidence. The 32,754 new raw trace
+files remain local (71,319,302,587 bytes), with a committed hash inventory rather
+than a claim that all bulk traces are Git-backed. No branch was pushed.

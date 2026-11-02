@@ -1,0 +1,13 @@
+{
+  "completed": 648,
+  "qualified": 648,
+  "expected": 648,
+  "runtime_failures": [],
+  "finished": true,
+  "completion_log_sha256": "dc64ef06dcf0698abaa8f97c506a8d0e1948d57420ef032353744a3444ea32c7",
+  "completion_log": "completion_resume_0001.jsonl",
+  "reused_completed_slots": 483,
+  "technical_amendment_id": "e386a6314a06cbf18e107ca6dbcaaec51cb759fdfc4693a3527f615cdf5e6c7a",
+  "execution_commit": "42fcb796cefaf4fe540344582c46b2d2b63175f4",
+  "finished_utc": "2026-11-02T01:56:00.631408+00:00"
+}

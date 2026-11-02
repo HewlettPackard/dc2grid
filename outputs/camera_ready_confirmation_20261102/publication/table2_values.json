@@ -1,0 +1,857 @@
+[
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "stress_facility_relief_mw",
+    "value": 7.0833424440159005,
+    "displayed": "7.083",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "stress_pcc_relief_mw",
+    "value": 7.0833424440159005,
+    "displayed": "7.083",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "cash_delta_zero",
+    "value": 0.0,
+    "displayed": "0.0",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "tracking_rmse_kw",
+    "value": 0.23833859898188053,
+    "displayed": "0.2",
+    "bold": true
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 4.736569995552418,
+    "displayed": "4.737",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "stress_facility_relief_mw",
+    "value": 8.306593004201389,
+    "displayed": "8.307",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "stress_pcc_relief_mw",
+    "value": 8.306593004201389,
+    "displayed": "8.307",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "cash_delta_zero",
+    "value": 191.23113683210977,
+    "displayed": "191.2",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "tracking_rmse_kw",
+    "value": 1189.2314101407385,
+    "displayed": "1189.2",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 5.963642543118283,
+    "displayed": "5.964",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "stress_facility_relief_mw",
+    "value": 8.079774711003523,
+    "displayed": "8.080",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "stress_pcc_relief_mw",
+    "value": 8.079774711003523,
+    "displayed": "8.080",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "cash_delta_zero",
+    "value": 290.0427376519365,
+    "displayed": "290.0",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "tracking_rmse_kw",
+    "value": 1861.4412919732617,
+    "displayed": "1861.4",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 5.7508247443308615,
+    "displayed": "5.751",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "stress_facility_relief_mw",
+    "value": 8.390249682203642,
+    "displayed": "8.390",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "stress_pcc_relief_mw",
+    "value": 8.390249682203642,
+    "displayed": "8.390",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "cash_delta_zero",
+    "value": 316.5473370041582,
+    "displayed": "316.5",
+    "bold": true
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "tracking_rmse_kw",
+    "value": 2101.8862509791047,
+    "displayed": "2101.9",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 6.068368911807158,
+    "displayed": "6.068",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "stress_facility_relief_mw",
+    "value": 8.273026666573099,
+    "displayed": "8.273",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "stress_pcc_relief_mw",
+    "value": 8.273026666573099,
+    "displayed": "8.273",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "cash_delta_zero",
+    "value": 195.7307290030294,
+    "displayed": "195.7",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "tracking_rmse_kw",
+    "value": 2595.581911460541,
+    "displayed": "2595.6",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 4.962867418429573,
+    "displayed": "4.963",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "stress_facility_relief_mw",
+    "value": 8.196361563345476,
+    "displayed": "8.196",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "stress_pcc_relief_mw",
+    "value": 8.196361563345476,
+    "displayed": "8.196",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "cash_delta_zero",
+    "value": 173.2848414084001,
+    "displayed": "173.3",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "tracking_rmse_kw",
+    "value": 1005.2175562719503,
+    "displayed": "1005.2",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 5.852087987849461,
+    "displayed": "5.852",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "stress_facility_relief_mw",
+    "value": 8.236889925441577,
+    "displayed": "8.237",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "stress_pcc_relief_mw",
+    "value": 8.236889925441577,
+    "displayed": "8.237",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "cash_delta_zero",
+    "value": 184.25963935446634,
+    "displayed": "184.3",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "tracking_rmse_kw",
+    "value": 1160.2962061868113,
+    "displayed": "1160.3",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 5.882052776170042,
+    "displayed": "5.882",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "stress_facility_relief_mw",
+    "value": 7.977396237279746,
+    "displayed": "7.977",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "stress_pcc_relief_mw",
+    "value": 7.977396237279746,
+    "displayed": "7.977",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "cash_delta_zero",
+    "value": 132.8706170310179,
+    "displayed": "132.9",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "tracking_rmse_kw",
+    "value": 769.8249285488812,
+    "displayed": "769.8",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 5.63375415644135,
+    "displayed": "5.634",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "stress_facility_relief_mw",
+    "value": 9.172277935581238,
+    "displayed": "9.172",
+    "bold": true
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "stress_pcc_relief_mw",
+    "value": 9.172277935581238,
+    "displayed": "9.172",
+    "bold": true
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "cash_delta_zero",
+    "value": 234.67389420469408,
+    "displayed": "234.7",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "tracking_rmse_kw",
+    "value": 1612.3643364169627,
+    "displayed": "1612.4",
+    "bold": false
+  },
+  {
+    "panel": "calendar",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 6.886994104757804,
+    "displayed": "6.887",
+    "bold": true
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "stress_facility_relief_mw",
+    "value": 8.579389887850903,
+    "displayed": "8.579",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "stress_pcc_relief_mw",
+    "value": 8.579389887850903,
+    "displayed": "8.579",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "cash_delta_zero",
+    "value": 0.0,
+    "displayed": "0.0",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "tracking_rmse_kw",
+    "value": 0.1602728971178605,
+    "displayed": "0.2",
+    "bold": true
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_zero",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 5.821537625788854,
+    "displayed": "5.822",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "stress_facility_relief_mw",
+    "value": 10.01019124159589,
+    "displayed": "10.010",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "stress_pcc_relief_mw",
+    "value": 10.01019124159589,
+    "displayed": "10.010",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "cash_delta_zero",
+    "value": 1440.087398428528,
+    "displayed": "1440.1",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "tracking_rmse_kw",
+    "value": 1355.095767435192,
+    "displayed": "1355.1",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_always",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 7.255088162248224,
+    "displayed": "7.255",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "stress_facility_relief_mw",
+    "value": 10.01019124162463,
+    "displayed": "10.010",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "stress_pcc_relief_mw",
+    "value": 10.01019124162463,
+    "displayed": "10.010",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "cash_delta_zero",
+    "value": 1446.1782843610563,
+    "displayed": "1446.2",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "tracking_rmse_kw",
+    "value": 1390.256842107601,
+    "displayed": "1390.3",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f100_margin_10",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 7.255088162248224,
+    "displayed": "7.255",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "stress_facility_relief_mw",
+    "value": 10.010191241624577,
+    "displayed": "10.010",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "stress_pcc_relief_mw",
+    "value": 10.010191241624577,
+    "displayed": "10.010",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "cash_delta_zero",
+    "value": 1444.166596229421,
+    "displayed": "1444.2",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "tracking_rmse_kw",
+    "value": 1376.3869909386046,
+    "displayed": "1376.4",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_deadline_margin10",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 7.255088162248224,
+    "displayed": "7.255",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "stress_facility_relief_mw",
+    "value": 10.117083278468064,
+    "displayed": "10.117",
+    "bold": true
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "stress_pcc_relief_mw",
+    "value": 10.117083278468064,
+    "displayed": "10.117",
+    "bold": true
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "cash_delta_zero",
+    "value": 1439.4695037936035,
+    "displayed": "1439.5",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "tracking_rmse_kw",
+    "value": 2747.250810089039,
+    "displayed": "2747.3",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_credit_one",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 7.493150813563261,
+    "displayed": "7.493",
+    "bold": true
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f050_margin_20",
+    "metric": "stress_facility_relief_mw",
+    "value": 10.009330447638636,
+    "displayed": "10.009",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f050_margin_20",
+    "metric": "stress_pcc_relief_mw",
+    "value": 10.009330447638636,
+    "displayed": "10.009",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f050_margin_20",
+    "metric": "cash_delta_zero",
+    "value": 1489.4713126854913,
+    "displayed": "1489.5",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f050_margin_20",
+    "metric": "tracking_rmse_kw",
+    "value": 1473.5725732539788,
+    "displayed": "1473.6",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "script_f050_margin_20",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 7.253610309877331,
+    "displayed": "7.254",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "stress_facility_relief_mw",
+    "value": 9.9172014876115,
+    "displayed": "9.917",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "stress_pcc_relief_mw",
+    "value": 9.9172014876115,
+    "displayed": "9.917",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "cash_delta_zero",
+    "value": 1265.6911477703252,
+    "displayed": "1265.7",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "tracking_rmse_kw",
+    "value": 1170.723753275737,
+    "displayed": "1170.7",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_ppo",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 7.16204230735948,
+    "displayed": "7.162",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "stress_facility_relief_mw",
+    "value": 10.001237611151494,
+    "displayed": "10.001",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "stress_pcc_relief_mw",
+    "value": 10.001237611151494,
+    "displayed": "10.001",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "cash_delta_zero",
+    "value": 1382.8782935044437,
+    "displayed": "1382.9",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "tracking_rmse_kw",
+    "value": 1321.9208444742194,
+    "displayed": "1321.9",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "fraction_sac",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 7.242652466028176,
+    "displayed": "7.243",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "stress_facility_relief_mw",
+    "value": 9.626366117217213,
+    "displayed": "9.626",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "stress_pcc_relief_mw",
+    "value": 9.626366117217213,
+    "displayed": "9.626",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "cash_delta_zero",
+    "value": 952.5544855000626,
+    "displayed": "952.6",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "tracking_rmse_kw",
+    "value": 881.920467171114,
+    "displayed": "881.9",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_ppo",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 6.872680553684404,
+    "displayed": "6.873",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "stress_facility_relief_mw",
+    "value": 10.06362936321416,
+    "displayed": "10.064",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "stress_pcc_relief_mw",
+    "value": 10.06362936321416,
+    "displayed": "10.064",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "cash_delta_zero",
+    "value": 1511.6284339412232,
+    "displayed": "1511.6",
+    "bold": true
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "tracking_rmse_kw",
+    "value": 1462.1513949033254,
+    "displayed": "1462.2",
+    "bold": false
+  },
+  {
+    "panel": "peak_noise",
+    "bias": 0.5,
+    "family": "potential_sac",
+    "metric": "pcc_peak_reduction_26h_mw",
+    "value": 7.307849539806254,
+    "displayed": "7.308",
+    "bold": false
+  }
+]

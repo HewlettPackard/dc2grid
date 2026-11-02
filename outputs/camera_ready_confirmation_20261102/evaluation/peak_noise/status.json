@@ -1,0 +1,13 @@
+{
+  "completed": 2580,
+  "qualified": 2580,
+  "expected": 2580,
+  "runtime_failures": [],
+  "finished": true,
+  "completion_log_sha256": "3774761742459f583c982d722bcfa9d334cee529e87d504732ad7a2f0eafe053",
+  "completion_log": "completion.jsonl",
+  "reused_completed_slots": 0,
+  "technical_amendment_id": "e386a6314a06cbf18e107ca6dbcaaec51cb759fdfc4693a3527f615cdf5e6c7a",
+  "execution_commit": "42fcb796cefaf4fe540344582c46b2d2b63175f4",
+  "finished_utc": "2026-11-02T02:54:04.652474+00:00"
+}
