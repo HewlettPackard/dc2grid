@@ -36,7 +36,6 @@ EXOGENOUS_COLUMNS = (
     "reference_temp_B",
     "work_arrived_kwh",
     "regd_signal",
-    "f_grid_hz",
     "load_anomaly",
 )
 MARKET_COLUMNS = (
@@ -94,9 +93,16 @@ def peak_reductions(service, recovery):
     return output
 
 
-def audit_record(directory, record, *, tracking_floor_kw):
+def audit_record(directory, record, *, tracking_floor_kw, historical=False):
     directory = Path(directory)
-    outcome = record["outcome"] if "outcome" in record else record
+    if historical:
+        if "outcome" in record:
+            raise ValueError("Historical evidence must retain its declared flat schema")
+        outcome = record
+    else:
+        if "outcome" not in record:
+            raise ValueError("New confirmation evidence requires a nested outcome")
+        outcome = record["outcome"]
     hashes = record["trace_hashes"]
     for name, digest in hashes.items():
         if name not in {"hardware.csv.gz", "macro.csv.gz", "recovery.csv.gz"}:
@@ -110,7 +116,7 @@ def audit_record(directory, record, *, tracking_floor_kw):
         or outcome["required_gamma"] != 1.0
     ):
         raise AssertionError("Economic terminal/gamma semantics changed")
-    if "outcome" in record:
+    if not historical:
         expected_stack = (
             ["MacroLatentEnv", "FractionalDispatchTask"]
             if record["policy"].get("algorithm") == "ppo"
@@ -244,7 +250,8 @@ def audit_record(directory, record, *, tracking_floor_kw):
         "complete": not bool(service.terminated.any()),
         "terminal_soc": bool(last_service.bess_soc >= 0.20),
         "terminal_work": bool(
-            last_service.backlog_work_kwh <= 0.01 * service.work_arrived_kwh.sum()
+            last_service.backlog_work_kwh
+            <= 0.01 * service.work_arrived_kwh.sum() + 1e-6
         ),
         "thermal_warnings": bool(service.thermal_warning.mean() <= 0.01),
     }

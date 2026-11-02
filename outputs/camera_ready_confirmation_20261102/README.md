@@ -41,7 +41,7 @@ stochastic replication, **not unseen-calendar validation**. The two panels open
 together, and all 43 policies are run: 9,460 new confirmation episodes.
 
 Before that opening, the 27 scripts are checked on all 54 already-consumed
-development/original-peak cells: 1,458 new episodes. The 864 exact, hash-bound
+Dev-B (economic-track)/original-peak cells: 1,458 new episodes. The 864 exact, hash-bound
 neural records from those panels are reused. These checks cannot select a new
 model or screen out an inconvenient scripted comparator.
 
@@ -119,3 +119,23 @@ The author attachment is read-only. Publication work starts from a protected
 verbatim copy and produces a new manuscript, preserving unrelated author text.
 Historical simulator/accounting results must not be silently presented as
 reruns under this economic task.
+
+## Technical correction before confirmation
+
+The original registration and its Git commit remain immutable. A separately
+hashed, committed technical amendment repairs the raw auditor and operational
+resumption without changing policies, physics, cells, metrics, thresholds, or
+statistical decision functions. Runtime verification checks that amendment,
+the original source objects in Git, the unchanged scientific specification,
+and every completed pre-amendment outcome.
+
+Grid frequency is a closed-loop outcome, not an exogenous input. It remains in
+the raw traces but is excluded from cross-policy input-equality assertions.
+The auditor also mirrors the already-existing ledger's 1e-6 kWh backlog
+comparison tolerance and requires the declared historical/new record format.
+
+Restarting a stage reuses every verified completed episode, **including
+physical failures**. It never re-rolls their seeds. Interrupted attempts and
+old receipt logs are retained; a new complete receipt view identifies reused
+and newly executed slots. An existing confirmation opening is validated and
+reused byte-for-byte, never deleted or rewritten.

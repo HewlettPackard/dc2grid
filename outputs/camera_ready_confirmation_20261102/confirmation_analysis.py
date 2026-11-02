@@ -16,8 +16,10 @@ from confirmation_context import (
     cap_cpu,
     case_key,
     file_hash,
+    effective_source_hashes,
     initialize_worker,
     read_json,
+    technical_amendment_id,
     verify,
     write_json,
 )
@@ -115,7 +117,7 @@ def read_inventory(protocol, panel):
         or status["completed"] != manifest["expected_episodes"]
     ):
         raise ValueError("Evaluation inventory is incomplete or has the wrong identity")
-    log = output / "completion.jsonl"
+    log = output / status.get("completion_log", "completion.jsonl")
     if file_hash(log) != status["completion_log_sha256"]:
         raise ValueError("Completion receipts changed")
     with log.open() as handle:
@@ -161,6 +163,7 @@ def audit_slot(protocol, panel, artifact):
         path.parent,
         record,
         tracking_floor_kw=protocol["macro_tracking_floor_kw"],
+        historical=artifact["reused"],
     )
     return {
         "panel": panel,
@@ -511,7 +514,8 @@ def main(stage):
         "raw_checks": sum(row["raw_checks"] for row in records),
         "raw_trace_hash_checks": sum(row["raw_file_hashes_checked"] for row in records),
         "paired_exogenous_and_stress_masks_verified": True,
-        "source_hashes": protocol["source_hashes"],
+        "source_hashes": effective_source_hashes(protocol),
+        "technical_amendment_id": technical_amendment_id(),
         "summary": summary,
         "inference": confirmation_inference(protocol, records)
         if stage == "final"

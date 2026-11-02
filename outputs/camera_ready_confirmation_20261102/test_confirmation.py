@@ -5,10 +5,24 @@ from __future__ import annotations
 import copy
 
 # isort: off
-from confirmation_context import PREVIOUS, cap_cpu, read_json
+from confirmation_context import (
+    PREVIOUS,
+    cap_cpu,
+    case_key,
+    file_hash,
+    read_json,
+    write_json,
+)
 from controls import load_model, make_environment, scripted_action, scripted_family
 from confirmation_eval import evaluate_case
-from confirmation_audit import METRICS, audit_record, peak_reductions
+from confirmation_audit import (
+    EXOGENOUS_COLUMNS,
+    MARKET_COLUMNS,
+    METRICS,
+    audit_record,
+    inputs_digest,
+    peak_reductions,
+)
 from confirmation_analysis import (
     confirmation_inference,
     noise_indices,
@@ -21,6 +35,7 @@ from headroom_report import episode_metrics
 import numpy as np
 import pandas as pd
 import pytest
+import run_confirmation
 # isort: on
 
 
@@ -350,3 +365,121 @@ def test_zero_bias_guard_and_two_endpoint_threshold():
     assert confirmation_inference(protocol, records)["status"] == (
         "joint_improvement_not_supported_by_point_estimates"
     )
+
+
+def test_real_cross_policy_pairing_excludes_only_endogenous_frequency():
+    plan = read_json(PREVIOUS / "peak_regression_registration.json")
+    selected = [
+        entry
+        for entry in plan["policies"]
+        if entry["policy"]["family"] in {"analytic", "greedy_budget"}
+        or (
+            entry["policy"]["family"] == "potential_sac"
+            and entry["policy"]["training_seed"] == 1200
+        )
+    ]
+    assert len(selected) == 3
+    cell = {"start_day": 207, "seed": 100, "regd_load_bias": 0.5}
+    sets = []
+    for entry in selected:
+        directory = PREVIOUS / "original_peak_regression" / entry["id"] / case_key(cell)
+        sets.append(
+            [
+                pd.read_csv(directory / name)
+                for name in ("hardware.csv.gz", "recovery.csv.gz", "macro.csv.gz")
+            ]
+        )
+    assert "f_grid_hz" not in EXOGENOUS_COLUMNS
+    assert all("f_grid_hz" in frames[0] for frames in sets)
+    assert len({inputs_digest(*frames) for frames in sets}) == 1
+    assert any(
+        not np.array_equal(sets[0][0].f_grid_hz, frames[0].f_grid_hz)
+        for frames in sets[1:]
+    )
+    original = inputs_digest(*sets[0])
+    for frame_index, columns in ((0, EXOGENOUS_COLUMNS), (2, MARKET_COLUMNS)):
+        for column in columns:
+            changed = [frame.copy() for frame in sets[0]]
+            changed[frame_index][column] = changed[frame_index][column].astype(float)
+            changed[frame_index].loc[0, column] = np.nextafter(
+                changed[frame_index].loc[0, column],
+                np.inf,
+            )
+            assert inputs_digest(*changed) != original
+    modified_frequency = [frame.copy() for frame in sets[0]]
+    modified_frequency[0]["f_grid_hz"] += 0.1
+    assert inputs_digest(*modified_frequency) == original
+
+
+def cached_failure_fixture(tmp_path):
+    policy = next(row for row in scripted_family() if row["id"] == "script_zero")
+    cell = {"start_day": 16, "seed": 19000011, "regd_load_bias": 0.5}
+    protocol = {"registration_id": "resume-test-only"}
+    destination = tmp_path / "case"
+    destination.mkdir()
+    trace = destination / "hardware.csv.gz"
+    trace.write_bytes(b"immutable unit-test trace, not a physical rollout")
+    record = {
+        "evaluation_registration_id": protocol["registration_id"],
+        "panel": "smoke",
+        "policy": policy,
+        "cell": cell,
+        "outcome": {"complete": False, "qualified": False},
+        "trace_hashes": {trace.name: file_hash(trace)},
+    }
+    write_json(destination / "episode.json", record)
+    return protocol, policy, cell, destination, record
+
+
+def test_resume_never_rerolls_completed_physical_failure(tmp_path, monkeypatch):
+    protocol, policy, cell, destination, _ = cached_failure_fixture(tmp_path)
+
+    def forbidden_rollout(*args, **kwargs):
+        raise AssertionError("A completed physical failure must never be re-rolled")
+
+    monkeypatch.setattr(run_confirmation, "evaluate_case", forbidden_rollout)
+    before = file_hash(destination / "episode.json")
+    result = run_confirmation.execute(protocol, "smoke", policy, cell, destination)
+    assert not result["qualified"] and result["reused_completed_slot"]
+    assert result["sha256"] == before
+    assert file_hash(destination / "episode.json") == before
+    assert not (destination / "attempts").exists()
+
+
+def test_resume_rejects_tampered_and_duplicate_completed_evidence(tmp_path):
+    protocol, policy, cell, destination, record = cached_failure_fixture(tmp_path)
+    trace = destination / "hardware.csv.gz"
+    original = trace.read_bytes()
+    trace.write_bytes(b"changed")
+    with pytest.raises(ValueError, match="immutable raw trace changed"):
+        run_confirmation.completed_case(protocol, "smoke", policy, cell, destination)
+    trace.write_bytes(original)
+    duplicate = destination / "attempts/attempt_0001"
+    duplicate.mkdir(parents=True)
+    write_json(duplicate / "episode.json", record)
+    with pytest.raises(ValueError, match="Multiple completed"):
+        run_confirmation.completed_case(protocol, "smoke", policy, cell, destination)
+
+
+def test_partial_attempts_and_old_receipts_are_preserved(tmp_path):
+    directory = tmp_path / "partial"
+    directory.mkdir()
+    partial = directory / "hardware.csv.gz"
+    partial.write_bytes(b"retained interrupted attempt")
+    target = run_confirmation.next_attempt(directory)
+    assert target == directory / "attempts/attempt_0001"
+    target.mkdir(parents=True)
+    assert (
+        run_confirmation.next_attempt(directory) == directory / "attempts/attempt_0002"
+    )
+    assert partial.read_bytes() == b"retained interrupted attempt"
+    receipt = directory / "completion.jsonl"
+    receipt.write_text("retained prior receipt\n")
+    fresh = run_confirmation.next_completion_log(directory)
+    assert fresh.name == "completion_resume_0001.jsonl"
+    assert receipt.read_text() == "retained prior receipt\n"
+
+
+def test_new_record_cannot_silently_take_historical_schema(tmp_path):
+    with pytest.raises(ValueError, match="requires a nested outcome"):
+        audit_record(tmp_path, {}, tracking_floor_kw=100)

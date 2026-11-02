@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import os
 import subprocess
 import sys
@@ -52,12 +53,79 @@ def initialize_worker(queue) -> None:
     cap_cpu(queue.get())
 
 
+def effective_source_hashes(protocol: dict) -> dict:
+    hashes = dict(protocol["source_hashes"])
+    path = ROOT / "technical_amendment.json"
+    if not path.exists():
+        return hashes
+    amendment = read_json(path)
+    body = {key: value for key, value in amendment.items() if key != "amendment_id"}
+    if (
+        identity(body) != amendment["amendment_id"]
+        or amendment["registration_id"] != protocol["registration_id"]
+    ):
+        raise ValueError("The technical amendment identity changed")
+    permitted = {
+        str(ROOT / name)
+        for name in (
+            "confirmation_context.py",
+            "confirmation_audit.py",
+            "confirmation_analysis.py",
+            "run_confirmation.py",
+            "test_confirmation.py",
+        )
+    }
+    overrides = amendment["source_hash_overrides"]
+    if set(overrides) - permitted:
+        raise ValueError("The technical amendment cannot change policy or task code")
+    if amendment["new_source_files"] != {
+        str(ROOT / "register_technical_amendment.py"): file_hash(
+            ROOT / "register_technical_amendment.py"
+        ),
+    }:
+        raise ValueError("The amendment source generator changed")
+    commit = amendment["original_registration_commit"]
+    subprocess.run(
+        ["git", "merge-base", "--is-ancestor", commit, "HEAD"],
+        cwd=PROJECT,
+        check=True,
+    )
+    for name in overrides:
+        original = subprocess.check_output(
+            ["git", "show", f"{commit}:{Path(name).relative_to(PROJECT)}"],
+            cwd=PROJECT,
+        )
+        if hashlib.sha256(original).hexdigest() != hashes[name]:
+            raise ValueError("The original registered source was not preserved in Git")
+    for name in ("policies", "panels", "analysis", "task_protocol"):
+        if (
+            identity(protocol[name])
+            != amendment["unchanged_scientific_spec_hashes"][name]
+        ):
+            raise ValueError("A scientific decision changed in a technical amendment")
+    inventory = amendment["retained_known_result_inventory"]
+    if file_hash(inventory["path"]) != inventory["sha256"]:
+        raise ValueError("The pre-amendment evidence inventory changed")
+    for artifact in read_json(inventory["path"]):
+        if file_hash(artifact["path"]) != artifact["sha256"]:
+            raise ValueError("A completed pre-amendment outcome changed")
+    hashes.update(overrides)
+    hashes.update(amendment["new_source_files"])
+    return hashes
+
+
+def technical_amendment_id() -> str | None:
+    path = ROOT / "technical_amendment.json"
+    return read_json(path)["amendment_id"] if path.exists() else None
+
+
 def verify(protocol: dict, *, committed: bool = True) -> str:
     body = {key: value for key, value in protocol.items() if key != "registration_id"}
     if identity(body) != protocol["registration_id"]:
         raise ValueError("Confirmation registration identity changed")
-    for name in ("source_hashes", "input_hashes"):
-        for path, digest in protocol[name].items():
+    sources = effective_source_hashes(protocol)
+    for hashes in (sources, protocol["input_hashes"]):
+        for path, digest in hashes.items():
             if file_hash(path) != digest:
                 raise ValueError(f"Frozen confirmation input changed: {path}")
     if (PREVIOUS / "final_opening_grid_cash.json").exists():
@@ -72,10 +140,12 @@ def verify(protocol: dict, *, committed: bool = True) -> str:
     if committed:
         paths = [
             str(Path(path).relative_to(PROJECT))
-            for path in protocol["source_hashes"]
+            for path in sources
             if Path(path).is_relative_to(ROOT)
         ]
         paths += [str((ROOT / "registration.json").relative_to(PROJECT))]
+        if (ROOT / "technical_amendment.json").exists():
+            paths.append(str((ROOT / "technical_amendment.json").relative_to(PROJECT)))
         subprocess.run(
             ["git", "ls-files", "--error-unmatch", "--", *paths],
             cwd=PROJECT,

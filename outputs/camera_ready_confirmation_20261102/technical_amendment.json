@@ -1,0 +1,66 @@
+{
+  "schema": "frozen-confirmation-technical-amendment-v1",
+  "registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+  "original_registration_commit": "b74ebbf4c72698c53a8d625c2150226551a6b12b",
+  "created_utc": "2026-11-02T01:51:11.672484+00:00",
+  "no_confirmation_opening_or_outcomes": true,
+  "original_registration_byte_identical": true,
+  "source_hash_overrides": {
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/confirmation_context.py": "c82708a741c889065edd7247646027b54ba3e4ff416a92f7cb096971db376ced",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/confirmation_audit.py": "3de00ed680349b635f224c36aaf6d858765fe8e3fa9882dea911e84125a9c086",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/confirmation_analysis.py": "db9ce78c55519ab1364e9341fa2563c679798ee37601b650ccb636e4cf8957bf",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/run_confirmation.py": "607e153644c3c0adf73e4eeff69424028a732f65b1bde9899a3cb7d8c91755b1",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/test_confirmation.py": "a74bc4baa166f392315f4e7af451158880cc1dd71c8b5891d0daead90d789ac2"
+  },
+  "new_source_files": {
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/register_technical_amendment.py": "39679cf98c05e6b74b8a8c07056ac0d89428b577d83280d801a9d1f499e361f7"
+  },
+  "unchanged_scientific_spec_hashes": {
+    "policies": "6b54efb7021af1582f676866f498d77986d96a98203441afbbee0ffa6579c9a7",
+    "panels": "21b12863f6562305be16b83fb34596b779252a47cc8b732749a81fa3aafdf80c",
+    "analysis": "15e59e3d23243d43badfde9d827fdc325b8fe57edaf2093f3cbeb94003a481b2",
+    "task_protocol": "ae2b37c429436ba51e74bb0a9ea777efb641dce45b76c711b12c5277280c252c"
+  },
+  "unchanged_analysis_function_ast_sha256": {
+    "noise_indices": "c3b38ed275f21281c994287f91a37f9088bb6b3ce83864c4f71aeba075bb522b",
+    "paired_estimate": "d61d01332f1f63914255f1cbee29166dab54ab1360a0391a799f2bf3e5291d54",
+    "point_frontier": "42a9a7b63bf53a6b76fcb34ed72c75ade55c2800f366c33d8c0472cb388a48bc",
+    "summarize": "aa832fbbda80071d1b806c8371d39f5290fca7e75e2d344c9fdf8e4f8e66c8b4",
+    "contrast": "c948c9fdbc662dc2ea909d2913dd78e08eb5e8991e3bd04bcd38ab72e67a2d45",
+    "confirmation_inference": "df382db450cc60c498198a14a65510ef85d8779dc846447fea8ddf92ed65b285",
+    "zero_parity": "83bc36f914a69c299151948a1b75e1b7d7791dd7a9a7eb14cb3f305aac9455d9"
+  },
+  "retained_known_result_inventory": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/pre_amendment_completed_cases.json",
+    "sha256": "cc32c00868d627c73f7acfdabe1f586bcd2d600e6061fc711a3c10ac8b8b23cf",
+    "episodes": 483,
+    "no_result_deleted_or_replaced": true
+  },
+  "scope": [
+    "Exclude endogenous frequency from pairing equality, not raw traces",
+    "Mirror the frozen ledger's existing 1e-6kWh terminal-work slack",
+    "Require the declared new-vs-historical record schema in the auditor",
+    "Reuse completed slots, including physical failures, without re-rolling",
+    "Retain interrupted attempts; publish a new full receipt view on resume",
+    "Reuse but never rewrite the single unchanged confirmation opening",
+    "Verify this amendment and the original source Git objects on every run"
+  ],
+  "rollout_generator_and_controller_source_unchanged": {
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/controls.py": "992d47404d2b645f764d58ffd3b20b86e3c4d14617d8a7a66edfa591226fa409",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/confirmation_eval.py": "171ea7e973e208a691180fc0cf2c1e0e51546b62b51c9265891b5ea359f16eb3",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/camera_ready_confirmation_20261102/prepare_confirmation.py": "2431f2ec7871aa13fcb677e656bf71bb887aec29c04822da65521c7d18fdc2f2"
+  },
+  "physics_models_cases_thresholds_and_statistics_unchanged": true,
+  "evidence_basis": "source inspection and already-consumed original-peak traces",
+  "new_candidate_or_checkpoint_selection": false,
+  "clarifications": {
+    "secondary_bias": "zero-bias stratum, not a panel restriction",
+    "secondary_panel_bias_strata": [
+      0.0,
+      0.5
+    ],
+    "primary_calendar_scope": "below p90, with two dates between p75 and p90",
+    "checkpoint_means_are_not_action_averaging_ensembles": true
+  },
+  "amendment_id": "e386a6314a06cbf18e107ca6dbcaaec51cb759fdfc4693a3527f615cdf5e6c7a"
+}

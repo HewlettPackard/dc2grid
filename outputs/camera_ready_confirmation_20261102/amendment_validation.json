@@ -1,0 +1,21 @@
+{
+  "registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+  "technical_amendment_id": "e386a6314a06cbf18e107ca6dbcaaec51cb759fdfc4693a3527f615cdf5e6c7a",
+  "before_any_new_confirmation_outcome": true,
+  "original_registration_byte_identical_to_b74ebbf": true,
+  "focused_tests_passed": 20,
+  "focused_tests_failed": 0,
+  "test_elapsed_seconds": 45.12,
+  "ruff_passed": true,
+  "statistical_function_asts_unchanged": 7,
+  "completed_known_panel_episodes_preserved": 483,
+  "new_tests": [
+    "Real three-policy pairing despite different endogenous grid frequency",
+    "Digest sensitivity to one-ULP changes in every retained input column",
+    "Completed physical failures are never re-rolled during resume",
+    "Tampered or duplicate completed evidence is rejected",
+    "Interrupted attempts and prior completion logs remain unchanged",
+    "New evidence cannot silently use the historical flat record schema"
+  ],
+  "rollout_generator_controller_physics_and_scientific_spec_unchanged": true
+}
