@@ -1,0 +1,36 @@
+{
+  "registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+  "before_new_panel_outcomes": true,
+  "new_training_performed": false,
+  "focused_pytest": {
+    "file": "test_confirmation.py",
+    "passed": 15,
+    "failed": 0,
+    "elapsed_seconds": 35.96
+  },
+  "ruff": {
+    "source_files": 8,
+    "check_passed": true
+  },
+  "native_data_coverage": {
+    "closed_26h_windows": 11,
+    "samples_including_endpoint_per_window": 18721,
+    "macro_tracking_floor_kw": 100.0,
+    "weather_source": "real:NYC.csv:calendar_climatology_2024"
+  },
+  "frozen_physics_source_hashes_checked": 95,
+  "frozen_physics_source_hash_mismatches": 0,
+  "frozen_checkpoints_loaded_and_validated": 16,
+  "full_training_fixture_rollouts": 4,
+  "new_full_rollouts_raw_audited": 3,
+  "zero_overlay_matches_original_absolute_coordinate_task": true,
+  "old_reserved_panel_unopened": true,
+  "author_build_cleanup_authorization": {
+    "read_included_checklist": true,
+    "remove_algorithm_imports_only_if_unused": true,
+    "algorithm_commands_or_environments_in_active_author_source": 0,
+    "algorithm_commands_or_environments_in_checklist": 0,
+    "additional_checklist_inputs": 0,
+    "no_package_download_authorized_or_attempted": true
+  }
+}
