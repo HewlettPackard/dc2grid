@@ -1,0 +1,28 @@
+{
+  "independent_reviewers": 5,
+  "remaining_blocking_findings": [],
+  "scope": "matched PID reference design, complete outcomes and separate comparison publication",
+  "validated": [
+    "440 unique newly executed PID episodes on exactly the original 220 confirmation cells",
+    "165 source hashes and 11 input hashes unchanged",
+    "No gains tuned, no weights trained, original 43-policy confirmation unchanged",
+    "Native and executed-throttle-fixed PID variants are explicitly distinct",
+    "All PID means use all 80 or 30 complete cases, not qualified-only subsets",
+    "Both variants fail the identical 43 service-end SOC reserve checks",
+    "All episodes recover inventory and all meet the actual paid-service floor",
+    "Supplemental audit verifies runtime fee floor, non-null matched input hashes and work diagnostics",
+    "Legacy numbers, corrected semantics, macro changes and different noise panels remain separated",
+    "Appendix Q is clearly a newly assembled standalone comparison supplement"
+  ],
+  "withdrawn_or_not_adopted": [
+    "Treating qualification counts as the averaging denominator",
+    "Recomputing a survivor-only 177-case or 56-case comparison",
+    "Calling 24-hour reserve violations unreturned 26-hour battery energy",
+    "Calling correctly metered recovery cash optimistic because of unpriced recharge",
+    "Inferring work deferral solely from a throttle command below one",
+    "Conflating the analytic cash reference with the independent nominal relief reference",
+    "Interpreting the legacy-to-corrected SAC difference as an algorithm-only gain"
+  ],
+  "registered_PID_source_and_results_preserved": true,
+  "unrealized_incomplete_flag_handled_by_explicit_publisher_complete_and_qualified_predicate": true
+}

@@ -1,0 +1,7 @@
+{
+  "expected": 440,
+  "completed": 440,
+  "runtime_failures": [],
+  "completion_log": "completion.jsonl",
+  "completion_log_sha256": "b14b15964f6e56ae3a50c8c7a54af7debab206f9e39e39dc5b6be54f83e705bf"
+}

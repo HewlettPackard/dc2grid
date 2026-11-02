@@ -1,0 +1,10 @@
+{
+  "registration_id": "1dec2bf9a59d35dcc93fec46ff952f3d38b5d4d70db55c3ae184341d42cff51b",
+  "panel": "calendar",
+  "role": "post_confirmation_descriptive_reference_not_a_new_blind_test",
+  "full_work_variant": true,
+  "original_confirmation_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+  "episode_sha256": "0552e2feb03c187c2c025c4a1f4b9c98516ed9d9ff4d22e4e9a9eef4092d3cf6",
+  "no_training_or_gain_tuning": true,
+  "not_part_of_the_original_primary_test": true
+}

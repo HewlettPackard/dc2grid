@@ -1,0 +1,609 @@
+{
+  "registration_id": "1dec2bf9a59d35dcc93fec46ff952f3d38b5d4d70db55c3ae184341d42cff51b",
+  "role": "post_confirmation_descriptive_reference_not_a_new_blind_test",
+  "episodes": 440,
+  "complete": 440,
+  "qualified": 354,
+  "raw_checks": 98120,
+  "case_records_sha256": "eb31bc86f75101bc292f57597d42221a69b84ab17e7a8edfd6fd61f93d3951eb",
+  "inputs_match_frozen_confirmation": true,
+  "summary": {
+    "calendar": {
+      "0.0": {
+        "pid_native": {
+          "episodes": 80,
+          "complete": 80,
+          "qualified": 68,
+          "all_qualified": false,
+          "all_complete": true,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 0.012486528901290886,
+              "sd": 0.9027321889207423,
+              "admissible_mean": null
+            },
+            "stress_pcc_relief_mw": {
+              "mean": -0.005731455257444962,
+              "sd": 1.7990751569233654,
+              "admissible_mean": null
+            },
+            "cashflow_26h_usd": {
+              "mean": -87065.80329497231,
+              "sd": 16425.663640040737,
+              "admissible_mean": null
+            },
+            "tracking_rmse_kw": {
+              "mean": 607.706141341642,
+              "sd": 206.93142503284204,
+              "admissible_mean": null
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 56.193476490795355,
+              "sd": 7.087535910147075,
+              "admissible_mean": null
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": -2.7783765968850505,
+              "sd": 3.216301224152192,
+              "admissible_mean": null
+            },
+            "pcc_peak_reduction_26h_mw": {
+              "mean": -2.7783765968850505,
+              "sd": 3.216301224152192,
+              "admissible_mean": null
+            },
+            "delivered_service_ratio": {
+              "mean": 0.9864569259930225,
+              "sd": 0.007189166865053081,
+              "admissible_mean": null
+            },
+            "mean_throttle": {
+              "mean": 0.9942369430683364,
+              "sd": 0.006572809241837754,
+              "admissible_mean": null
+            },
+            "maximum_backlog_kwh": {
+              "mean": 4.131732403954286,
+              "sd": 29.873831895374177,
+              "admissible_mean": null
+            },
+            "service_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "recovery_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            }
+          },
+          "complete_but_failed_means_are_diagnostic_only": true,
+          "failure_counts": {
+            "terminal_soc": 12
+          }
+        },
+        "pid_full_work": {
+          "episodes": 80,
+          "complete": 80,
+          "qualified": 68,
+          "all_qualified": false,
+          "all_complete": true,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 0.012486528901859108,
+              "sd": 0.9027321889210332,
+              "admissible_mean": null
+            },
+            "stress_pcc_relief_mw": {
+              "mean": -0.005731455256876716,
+              "sd": 1.7990751569233754,
+              "admissible_mean": null
+            },
+            "cashflow_26h_usd": {
+              "mean": -87065.61345841896,
+              "sd": 16425.893789657686,
+              "admissible_mean": null
+            },
+            "tracking_rmse_kw": {
+              "mean": 599.9828796382933,
+              "sd": 200.7139679714609,
+              "admissible_mean": null
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 56.193476490795355,
+              "sd": 7.087535910147075,
+              "admissible_mean": null
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": -2.7783765968848115,
+              "sd": 3.2163012241522106,
+              "admissible_mean": null
+            },
+            "pcc_peak_reduction_26h_mw": {
+              "mean": -2.7783765968848115,
+              "sd": 3.2163012241522106,
+              "admissible_mean": null
+            },
+            "delivered_service_ratio": {
+              "mean": 0.9864809635984557,
+              "sd": 0.007190093299321219,
+              "admissible_mean": null
+            },
+            "mean_throttle": {
+              "mean": 1.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "maximum_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "service_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "recovery_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            }
+          },
+          "complete_but_failed_means_are_diagnostic_only": true,
+          "failure_counts": {
+            "terminal_soc": 12
+          }
+        }
+      },
+      "0.5": {
+        "pid_native": {
+          "episodes": 80,
+          "complete": 80,
+          "qualified": 56,
+          "all_qualified": false,
+          "all_complete": true,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 7.030738115495652,
+              "sd": 2.1372665000235416,
+              "admissible_mean": null
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 7.174079860182641,
+              "sd": 2.0946219196933664,
+              "admissible_mean": null
+            },
+            "cashflow_26h_usd": {
+              "mean": -86393.67094709357,
+              "sd": 15933.3372779543,
+              "admissible_mean": null
+            },
+            "tracking_rmse_kw": {
+              "mean": 788.7104883606944,
+              "sd": 214.92210434786963,
+              "admissible_mean": null
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 31.793642393943866,
+              "sd": 3.640987415664022,
+              "admissible_mean": null
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 4.806843560753544,
+              "sd": 3.5115925354177944,
+              "admissible_mean": null
+            },
+            "pcc_peak_reduction_26h_mw": {
+              "mean": 4.806843560753544,
+              "sd": 3.5115925354177944,
+              "admissible_mean": null
+            },
+            "delivered_service_ratio": {
+              "mean": 0.9767065158320118,
+              "sd": 0.002852119729168741,
+              "admissible_mean": null
+            },
+            "mean_throttle": {
+              "mean": 0.9496830837432452,
+              "sd": 0.01279257431440626,
+              "admissible_mean": null
+            },
+            "maximum_backlog_kwh": {
+              "mean": 41.30824602593285,
+              "sd": 146.31833837274624,
+              "admissible_mean": null
+            },
+            "service_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "recovery_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            }
+          },
+          "complete_but_failed_means_are_diagnostic_only": true,
+          "failure_counts": {
+            "terminal_soc": 24
+          }
+        },
+        "pid_full_work": {
+          "episodes": 80,
+          "complete": 80,
+          "qualified": 56,
+          "all_qualified": false,
+          "all_complete": true,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 7.0329644622951175,
+              "sd": 2.139879244637276,
+              "admissible_mean": null
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 7.176306206982106,
+              "sd": 2.097133696238865,
+              "admissible_mean": null
+            },
+            "cashflow_26h_usd": {
+              "mean": -86391.60293719529,
+              "sd": 15935.011683021234,
+              "admissible_mean": null
+            },
+            "tracking_rmse_kw": {
+              "mean": 733.4841939145269,
+              "sd": 80.02300485442052,
+              "admissible_mean": null
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 31.793642393943866,
+              "sd": 3.640987415664022,
+              "admissible_mean": null
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 4.80684983942997,
+              "sd": 3.511596607115707,
+              "admissible_mean": null
+            },
+            "pcc_peak_reduction_26h_mw": {
+              "mean": 4.80684983942997,
+              "sd": 3.511596607115707,
+              "admissible_mean": null
+            },
+            "delivered_service_ratio": {
+              "mean": 0.9769337666948946,
+              "sd": 0.002686197021176013,
+              "admissible_mean": null
+            },
+            "mean_throttle": {
+              "mean": 1.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "maximum_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "service_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "recovery_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            }
+          },
+          "complete_but_failed_means_are_diagnostic_only": true,
+          "failure_counts": {
+            "terminal_soc": 24
+          }
+        }
+      }
+    },
+    "peak_noise": {
+      "0.0": {
+        "pid_native": {
+          "episodes": 30,
+          "complete": 30,
+          "qualified": 26,
+          "all_qualified": false,
+          "all_complete": true,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 0.03334476656146914,
+              "sd": 1.3293561332766648,
+              "admissible_mean": null
+            },
+            "stress_pcc_relief_mw": {
+              "mean": -0.10961655416734666,
+              "sd": 2.1958057769454116,
+              "admissible_mean": null
+            },
+            "cashflow_26h_usd": {
+              "mean": -203543.6143335103,
+              "sd": 14550.40546912711,
+              "admissible_mean": null
+            },
+            "tracking_rmse_kw": {
+              "mean": 683.4305786733407,
+              "sd": 206.6900935554988,
+              "admissible_mean": null
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 60.399234487683856,
+              "sd": 6.567059549397186,
+              "admissible_mean": null
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": -3.110438971469557,
+              "sd": 3.483601536285681,
+              "admissible_mean": null
+            },
+            "pcc_peak_reduction_26h_mw": {
+              "mean": -3.110438971469557,
+              "sd": 3.483601536285681,
+              "admissible_mean": null
+            },
+            "delivered_service_ratio": {
+              "mean": 0.9856445964142657,
+              "sd": 0.006413773184107893,
+              "admissible_mean": null
+            },
+            "mean_throttle": {
+              "mean": 0.991530266277676,
+              "sd": 0.0065986186609697794,
+              "admissible_mean": null
+            },
+            "maximum_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "service_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "recovery_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            }
+          },
+          "complete_but_failed_means_are_diagnostic_only": true,
+          "failure_counts": {
+            "terminal_soc": 4
+          }
+        },
+        "pid_full_work": {
+          "episodes": 30,
+          "complete": 30,
+          "qualified": 26,
+          "all_qualified": false,
+          "all_complete": true,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 0.03334476656146914,
+              "sd": 1.3293561332766648,
+              "admissible_mean": null
+            },
+            "stress_pcc_relief_mw": {
+              "mean": -0.10961655416734666,
+              "sd": 2.1958057769454116,
+              "admissible_mean": null
+            },
+            "cashflow_26h_usd": {
+              "mean": -203543.6143335103,
+              "sd": 14550.40546912711,
+              "admissible_mean": null
+            },
+            "tracking_rmse_kw": {
+              "mean": 683.4305786733407,
+              "sd": 206.6900935554988,
+              "admissible_mean": null
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 60.399234487683856,
+              "sd": 6.567059549397186,
+              "admissible_mean": null
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": -3.110438971469557,
+              "sd": 3.483601536285681,
+              "admissible_mean": null
+            },
+            "pcc_peak_reduction_26h_mw": {
+              "mean": -3.110438971469557,
+              "sd": 3.483601536285681,
+              "admissible_mean": null
+            },
+            "delivered_service_ratio": {
+              "mean": 0.9856445964142657,
+              "sd": 0.006413773184107893,
+              "admissible_mean": null
+            },
+            "mean_throttle": {
+              "mean": 1.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "maximum_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "service_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "recovery_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            }
+          },
+          "complete_but_failed_means_are_diagnostic_only": true,
+          "failure_counts": {
+            "terminal_soc": 4
+          }
+        }
+      },
+      "0.5": {
+        "pid_native": {
+          "episodes": 30,
+          "complete": 30,
+          "qualified": 27,
+          "all_qualified": false,
+          "all_complete": true,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 8.6916608282022,
+              "sd": 2.4391369257195517,
+              "admissible_mean": null
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 8.694891126924894,
+              "sd": 2.4383417612361864,
+              "admissible_mean": null
+            },
+            "cashflow_26h_usd": {
+              "mean": -199362.4071913219,
+              "sd": 15018.500771378825,
+              "admissible_mean": null
+            },
+            "tracking_rmse_kw": {
+              "mean": 756.1855175804596,
+              "sd": 71.589517331965,
+              "admissible_mean": null
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 31.008687137438116,
+              "sd": 3.583885961969054,
+              "admissible_mean": null
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 5.8503607143341165,
+              "sd": 3.5586975782152908,
+              "admissible_mean": null
+            },
+            "pcc_peak_reduction_26h_mw": {
+              "mean": 5.8503607143341165,
+              "sd": 3.5586975782152908,
+              "admissible_mean": null
+            },
+            "delivered_service_ratio": {
+              "mean": 0.9780782055666244,
+              "sd": 0.0022572899762775124,
+              "admissible_mean": null
+            },
+            "mean_throttle": {
+              "mean": 0.9367385929956296,
+              "sd": 0.011559917728879342,
+              "admissible_mean": null
+            },
+            "maximum_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "service_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "recovery_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            }
+          },
+          "complete_but_failed_means_are_diagnostic_only": true,
+          "failure_counts": {
+            "terminal_soc": 3
+          }
+        },
+        "pid_full_work": {
+          "episodes": 30,
+          "complete": 30,
+          "qualified": 27,
+          "all_qualified": false,
+          "all_complete": true,
+          "metrics": {
+            "stress_facility_relief_mw": {
+              "mean": 8.6916608282022,
+              "sd": 2.4391369257195517,
+              "admissible_mean": null
+            },
+            "stress_pcc_relief_mw": {
+              "mean": 8.694891126924894,
+              "sd": 2.4383417612361864,
+              "admissible_mean": null
+            },
+            "cashflow_26h_usd": {
+              "mean": -199362.4071913219,
+              "sd": 15018.500771378825,
+              "admissible_mean": null
+            },
+            "tracking_rmse_kw": {
+              "mean": 756.1855175804596,
+              "sd": 71.589517331965,
+              "admissible_mean": null
+            },
+            "battery_throughput_26h_mwh": {
+              "mean": 31.008687137438116,
+              "sd": 3.583885961969054,
+              "admissible_mean": null
+            },
+            "actual_pcc_boundary_peak_reduction_mw": {
+              "mean": 5.8503607143341165,
+              "sd": 3.5586975782152908,
+              "admissible_mean": null
+            },
+            "pcc_peak_reduction_26h_mw": {
+              "mean": 5.8503607143341165,
+              "sd": 3.5586975782152908,
+              "admissible_mean": null
+            },
+            "delivered_service_ratio": {
+              "mean": 0.9780782055666244,
+              "sd": 0.0022572899762775124,
+              "admissible_mean": null
+            },
+            "mean_throttle": {
+              "mean": 1.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "maximum_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "service_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            },
+            "recovery_terminal_backlog_kwh": {
+              "mean": 0.0,
+              "sd": 0.0,
+              "admissible_mean": null
+            }
+          },
+          "complete_but_failed_means_are_diagnostic_only": true,
+          "failure_counts": {
+            "terminal_soc": 3
+          }
+        }
+      }
+    }
+  },
+  "previous_primary_test_and_models_unchanged": true
+}

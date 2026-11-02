@@ -42,3 +42,31 @@ The evaluator reuses the already-frozen generic physical runner through its
 explicit hardware-factory argument, without modifying or monkeypatching any
 frozen task. A historical native-PID case must reproduce its original values;
 new complete-case inputs must match the already-audited confirmation inputs.
+
+## Completed comparison extract
+
+[Open the seven-page PDF](publication/pid_progress_comparison.pdf).
+It contains only Section 4.5 and the newly assembled comparison Appendix Q:
+
+- Page 1: the updated original rule-macro comparison, with PID and the best
+  low-level follow-ups visible.
+- Page 2: the exact archived Table 2 body and the separate Final-B tracking
+  comparison.
+- Page 3: macro-only changes and historical matched economic-policy results.
+- Pages 4--6: the latest matched PID/SAC/PPO/scripted comparisons, separated by
+  calendar panel and signal bias, plus the relief/cash plot.
+- Page 7: PID work/SOC diagnostics and the gains, failures and limitations.
+
+All **440 PID episodes completed and recovered**. Each variant qualified in
+177/220 cases. The identical 43 failures per variant concern only the **24-hour
+service-end SOC reserve**, not the 26-hour recovery closure or the 90% paid
+service floor. Every displayed mean uses all complete planned cases (80 or 30),
+including these reserve failures, and is marked diagnostic where appropriate.
+There is no survivor-only PID mean.
+
+The original finalized manuscript, original archive, 43-policy confirmation
+and its primary statistical decision remain unchanged. The new comparison is
+descriptive and does not attribute executor/overlay changes entirely to RL.
+Twelve focused tests passed. The new PID study performed 98,120 raw checks;
+an additional read-only audit verified 42,240 window fee calculations using
+the actual 100 kW normalization floor and added work/SOC diagnostics.

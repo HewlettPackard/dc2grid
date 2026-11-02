@@ -1,0 +1,10 @@
+{
+  "registration_id": "1dec2bf9a59d35dcc93fec46ff952f3d38b5d4d70db55c3ae184341d42cff51b",
+  "panel": "peak_noise",
+  "role": "post_confirmation_descriptive_reference_not_a_new_blind_test",
+  "full_work_variant": true,
+  "original_confirmation_registration_id": "628973aa3ebcb14ea8d5bd1f32543dfc773de57e8298cfac30e7f0e8617fe5d7",
+  "episode_sha256": "0a08168416b0c65b1357351cb3421aea34630b67da924ce987b5cfc7a468b77c",
+  "no_training_or_gain_tuning": true,
+  "not_part_of_the_original_primary_test": true
+}
