@@ -1,0 +1,36 @@
+{
+  "actor": "abcda9a10cad7ae6d4da9b58a984c6b9f89caa0fbf666ff384db35f73d52947f",
+  "critic": "65c4269b99b7d0ae95e5b606d462018aa38e7c1d0a7a7f87b529e3b1e24e4e61",
+  "critic_target": "65c4269b99b7d0ae95e5b606d462018aa38e7c1d0a7a7f87b529e3b1e24e4e61",
+  "reference": "abcda9a10cad7ae6d4da9b58a984c6b9f89caa0fbf666ff384db35f73d52947f",
+  "policy_at_initialization": {
+    "mean_kl": 0.0,
+    "maximum_kl": 0.0,
+    "native_mean_action_rmse_from_reference": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "latent_std_mean": [
+      0.009999999776482582,
+      0.009999999776482582,
+      0.009999999776482582
+    ],
+    "native_local_std_mean": [
+      0.003880510339513421,
+      0.004061777610331774,
+      0.009999994188547134
+    ],
+    "reference_digest": "abcda9a10cad7ae6d4da9b58a984c6b9f89caa0fbf666ff384db35f73d52947f",
+    "feature_contract": "native18-own-command4-request-ema900s-clock-v1"
+  },
+  "warmup_replay": {
+    "observations": "f177df7a97520f9ea4430d35dd68587f6316f34269666f7ab8977424f01ddb5b",
+    "next_observations": "4585ba21eee3c5b4e1a48018449e71de18c67113573ca3b2681c3cb6e254a539",
+    "actions": "1170d4d713b0ef82b305151cd0e56f6e1b34452db241852fd75d101fe898d92c",
+    "rewards": "34bbbf4d8a27dd029ed1a8d81619f079e02f47175d2a04d8b0c978786b7530cc",
+    "dones": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+  },
+  "warmup_transitions": 1024,
+  "historical_raw_prefix_exact": true
+}

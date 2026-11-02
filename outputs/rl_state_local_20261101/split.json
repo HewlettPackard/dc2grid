@@ -1,0 +1,64 @@
+{
+  "schema": "state-local-improvement-calendar-split-v1",
+  "basis": "Prior registrations plus exogenous-only coverage and stratification audit by independent reviewer 3",
+  "new_development_days": [24, 137, 152, 188, 303, 345],
+  "new_development_seeds": [93001, 93002],
+  "new_final_days": [12, 96, 198, 218, 263, 314],
+  "new_final_seeds": [94001, 94002, 94003],
+  "biases": [0.0, 0.5],
+  "window_hours_including_recovery": 26,
+  "window_rule": "Closed [d 00:00, d+1 02:00]; separation >= 2 from every prior or other new start",
+  "previously_consumed_days": [
+    0, 16, 19, 20, 30, 36, 38, 40, 50, 52,
+    60, 72, 80, 81, 98, 100, 102, 104, 115, 120,
+    130, 140, 147, 149, 157, 160, 168, 178, 180, 184,
+    186, 190, 192, 194, 196, 200, 204, 207, 209, 210,
+    220, 225, 226, 227, 232, 236, 240, 243, 246, 248,
+    249, 250, 251, 254, 256, 260, 271, 279, 280, 283,
+    297, 300, 305, 316, 320, 323, 332, 337, 340, 349, 356
+  ],
+  "prior_registration_paths": [
+    "outputs/corrected_sac_8gpu_20261030/manifest.json",
+    "outputs/matched_validation_20261031/registration.json",
+    "outputs/physical_recovery_eval_20261031/heldout_registration.json",
+    "outputs/table2_distress_rl_20261031/registration.json"
+  ],
+  "forced_cross_panel_phase_repeat": {"days": [188, 218], "phase": 8, "recovery_phase": 9},
+  "development_load_tiers": {
+    "24": "medium",
+    "137": "low",
+    "152": "p75-high-tail-not-p90-high",
+    "188": "p90-high",
+    "303": "low",
+    "345": "medium"
+  },
+  "final_load_tiers": {
+    "12": "medium",
+    "96": "low",
+    "198": "p90-high",
+    "218": "p90-high",
+    "263": "medium",
+    "314": "low"
+  },
+  "coverage_audit": {
+    "eligible_unconsumed_starts": 177,
+    "remaining_p90_high_starts_before_reservation": [188, 198, 218],
+    "max_load_source_age_seconds_on_proposed_windows": 295,
+    "max_weather_source_age_seconds_on_proposed_windows": 3595,
+    "blocked_by_prior_closed_windows": 179,
+    "permitted_source_ages_seconds": {"load": 600, "weather": 7200},
+    "load_coverage_invalid_days": [10, 70, 223, 281, 319, 364],
+    "weather_coverage_invalid_days": [174, 230, 231, 266, 362, 363]
+  },
+  "claims": {
+    "no_policy_outcomes_observed_for_proposed_windows": true,
+    "sealing_scope": "Audited dc2grid campaigns, not a claim about every outside study",
+    "exogenous_data_inspected_for_stratification": true,
+    "not_unseen_workload_phases": true,
+    "not_independent_daily_samples": true,
+    "development_and_final_are_not_identically_stratified": true,
+    "final_remains_sealed_until_all_candidates_and_rules_are_locked": true,
+    "old_development_panel_used_for_regression_diagnostics_not_new_selection": true,
+    "no_further_p90_high_dates_remain_if_all_proposed_panels_are_consumed": true
+  }
+}

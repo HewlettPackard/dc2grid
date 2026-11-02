@@ -1,0 +1,142 @@
+{
+  "registration_id": "60d89d2a1cadf9b810843826530f3f229b914291629cb19e3717326f4d3e75cd",
+  "extend_both_arms": false,
+  "arms": {
+    "fixed_reference_kl": {
+      "all_four_pass": false,
+      "fits": [
+        {
+          "seed": 1100,
+          "qualified": false,
+          "summary": {
+            "rmse_kw": 61.93708397924471,
+            "all_qualified": true,
+            "rmse_ratio_to_bc": 1.3255846496972294,
+            "rmse_ratio_to_guided": 0.7534836672515128,
+            "increment_vs_bc": false,
+            "disqualification_reasons": []
+          },
+          "receipt_sha256": "40790d87861bf2091f554fc1bbafe9ebc04bf320084cf8adf384f2918be9d293"
+        },
+        {
+          "seed": 1101,
+          "qualified": true,
+          "summary": {
+            "rmse_kw": 63.90770839114875,
+            "all_qualified": true,
+            "rmse_ratio_to_bc": 1.180098188870001,
+            "rmse_ratio_to_guided": 0.20587627270100956,
+            "increment_vs_bc": false,
+            "disqualification_reasons": []
+          },
+          "receipt_sha256": "a8f9e6c6229aae93d87d1f81f0b104e729ee74d26aa1dca90735b63b6022d83c"
+        },
+        {
+          "seed": 1102,
+          "qualified": true,
+          "summary": {
+            "rmse_kw": 82.65441226197753,
+            "all_qualified": true,
+            "rmse_ratio_to_bc": 1.1030479647311393,
+            "rmse_ratio_to_guided": 0.4710642447860825,
+            "increment_vs_bc": false,
+            "disqualification_reasons": []
+          },
+          "receipt_sha256": "16500edac4bcfcd53994df1a5e172bacb22df6961841b92b6774fef0e4b4e214"
+        },
+        {
+          "seed": 1103,
+          "qualified": false,
+          "summary": {
+            "rmse_kw": null,
+            "all_qualified": false,
+            "rmse_ratio_to_bc": null,
+            "rmse_ratio_to_guided": null,
+            "increment_vs_bc": false,
+            "disqualification_reasons": [
+              "service_or_physical_gate_failure",
+              "recovery_not_closed",
+              "incomplete_cells"
+            ]
+          },
+          "receipt_sha256": "aa5840006d92253ff9312de98e90b5eb642d59c32d24e2cdd45c60e48fc0ad50"
+        }
+      ]
+    },
+    "replay_reference_kl": {
+      "all_four_pass": false,
+      "fits": [
+        {
+          "seed": 1100,
+          "qualified": false,
+          "summary": {
+            "rmse_kw": 132.6336652083808,
+            "all_qualified": true,
+            "rmse_ratio_to_bc": 2.8386410747433293,
+            "rmse_ratio_to_guided": 1.6135293113849114,
+            "increment_vs_bc": false,
+            "disqualification_reasons": []
+          },
+          "receipt_sha256": "a8be13a1031289650815a8331c9a20edde3c2423ba59d1f061f0fe6a3604b0a0"
+        },
+        {
+          "seed": 1101,
+          "qualified": true,
+          "summary": {
+            "rmse_kw": 59.38250370953816,
+            "all_qualified": true,
+            "rmse_ratio_to_bc": 1.0965372854442366,
+            "rmse_ratio_to_guided": 0.19129849645910355,
+            "increment_vs_bc": false,
+            "disqualification_reasons": []
+          },
+          "receipt_sha256": "c99daaa0f2f40c8e147ab1577391491ede9e42c9be022617e763584712dc0c28"
+        },
+        {
+          "seed": 1102,
+          "qualified": true,
+          "summary": {
+            "rmse_kw": 84.40203027842568,
+            "all_qualified": true,
+            "rmse_ratio_to_bc": 1.126370452223527,
+            "rmse_ratio_to_guided": 0.4810242740036807,
+            "increment_vs_bc": false,
+            "disqualification_reasons": []
+          },
+          "receipt_sha256": "9c8b8ef634a56ba4b67b990ba10ec56033458f2b1f59ae1607768f569277c208"
+        },
+        {
+          "seed": 1103,
+          "qualified": true,
+          "summary": {
+            "rmse_kw": 69.40220849166276,
+            "all_qualified": true,
+            "rmse_ratio_to_bc": 1.157142715198484,
+            "rmse_ratio_to_guided": 0.3377465885749496,
+            "increment_vs_bc": false,
+            "disqualification_reasons": []
+          },
+          "receipt_sha256": "56ed4cb916ffe3365a1bd57bdd8adfbdefce78852c9a93ceb146d33c22803388"
+        }
+      ]
+    }
+  },
+  "paired_initialization_and_warmup_exact": true,
+  "rule": {
+    "decision_checkpoint": 69120,
+    "all_four_fits_in_at_least_one_arm_must_pass": true,
+    "require_all_24_physical_and_recovery_gates_each_fit": true,
+    "maximum_rmse_ratio_to_own_BC": 1.25,
+    "maximum_rmse_ratio_to_locked_Guided_same_initializer": 0.8,
+    "rmse_statistic": "unweighted arithmetic mean of 24 complete-case RMSEs",
+    "run_both_arms_if_triggered": true,
+    "implementation": "rerun from exact initializer/seed, never replay-only resume",
+    "repeated_prefix_counts_as_compute_not_additional_replication": true,
+    "compare_prefix_parameter_digests_to_pilot": true,
+    "incomplete_reference_comparator": "halt before RL and preserve the failure; any alternative requires a new explicit preregistration, never a fabricated full-case mean",
+    "prefix_results_for_publication_if_rerun_differs": "original pilot"
+  },
+  "failure_inventory": [],
+  "supervisor_status_sha256": "7ee1e4feaeb31fc0c5baf6ba889c45b3b60cbbe2a044f96a3129cf532864f7b5",
+  "decision_id": "32cc6364c6db1436bb2b1970543a0e1d69807dac7bc0fc7d46cdf1759fa6e254"
+}

@@ -1,0 +1,189 @@
+{
+  "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+  "role": "development",
+  "policies": [
+    {
+      "id": "union_conditioned_1103_step_69120",
+      "family": "union_conditioned",
+      "training_seed": 1103,
+      "hardware": "history_sac",
+      "macro": "rule",
+      "checkpoint": {
+        "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1103/step_69120.zip",
+        "sha256": "6c7306370b5a2cf19dfb74f76a9e4707d405d86a3575e5559c3fcdd955de82e1"
+      }
+    }
+  ],
+  "cells": [
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 24,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 137,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 152,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 188,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 303,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93001,
+      "regd_load_bias": 0.5
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.0
+    },
+    {
+      "start_day": 345,
+      "seed": 93002,
+      "regd_load_bias": 0.5
+    }
+  ],
+  "cpus": [
+    69,
+    73,
+    82,
+    111
+  ],
+  "source_hashes": {
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/develop.py": "3a96e40930a3494f7c48e28faf4b2ddf17a18ceff4417c5ab74425a13a68b7f4",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/forecast.py": "eb14e0d5821b38899446b537032a576d411a91294d8f7e581bad2952db69c58e",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/launch_study.py": "415d6c2c16b1f11d63afecced56d019b25a9f616b23e998d0e4e8a6213a32044",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/low_core.py": "47e5835018a156485d328f457cec745eac7c8c2d6d1027d3ebce9a7aa9899b34",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/low_learn.py": "e943bea6e68fe61da5f89f79cebb1ed2d3c669740ec77e66c1c27659ccac42f7",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/low_task.py": "ca858db058d1795029aa7b13cb29fdd49e0a5aca027a307e7945eafb4867c7dc",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/market_policy.py": "3be46d38d0673e4f11e866a639b068aa9ca5dce6f0afccc7391c7730929f3acc",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/panel.py": "d52ab1c33191969a70368cafc1fdc6d3b12338e4ccc44ebb7fe10288fa803eb0",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/register_study.py": "9d5b60a071debdb97314e311b111c09f69c42fe3ff0d839487edfa4238cf570a",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/study.py": "102d176233df62161e6049e7d4d811bf3f550d815bc9ce8806738952615209c9",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/test_forecast.py": "c390dfef974f57fb2ce308337c521b4ab6bb1ebefa9d2b5d8eef1baa58607bed",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/test_low.py": "37b3ffb6f83e691b1718a4381282cbfc8ea3417eb5e5bb1f72e2f200f7c79df4",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/test_panel.py": "88aef571f2ab4f4aa727d4801b0dce9131f42485a32a7ea382154a6759b4d40b",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/test_registration.py": "11565b906fcd5eace160b3b57db3c6cf2d7b79b26ba38e59aabd4f295f818407",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/macro_task.py": "b85f5955c71f5230717f0951decc7177f8399bb23e0383d5be3e402f1f5695e1",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/recovery_ops.py": "45395520fd57814fac7551c0c0e19382f921f25b3e6add2592cbc1762fc8a069",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/study_common.py": "134dd05407f5c82873d4ebd3fc8161d8b439faf49fd88025213e9b1ca95b3e7c",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/prepare.py": "c7facafb75f3b5ea46303b6bfba131c615a98c14fffe49b753280a9dac657f39",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/launch_value.py": "4eb7044e731c6ed0308da843e9ca188c21e216b4c55f762459d0c95cee1ed45a",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/fit_value.py": "713c5389fda6576c25170f1a64572ca339decf9aa25fa10b60c55f8c57df5782",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/test_potential.py": "44891d459cf1d9e113a01221cbd456d1b663b57db9fcedcf00bb99d72f17450e",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/train_value.py": "d1fd7557548a5ade560c667d4886ad947751cbd062b4ec29b8494258aa954cc4",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/ctx.py": "391128ce5874529cf39428ec383c5f54a6087cab1396d740afdeb81cafac2935",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/gate_value.py": "666e1ec522c8a31367fd7b5368b12767201a9f93da2059c82a030b07d11c4c98",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/mixed_core.py": "9503399ff49dfa02a4137afd9a59546e06ac0f7c94d4f2b777d45f6112375eb7",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/value_replay.py": "e5a03c0e745fe13f6d2080ea330d6bec1c34dfdffe415f1945fada4ce758a812",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/register_value.py": "968c35400670b772f0210190bdb9d1c8385b1fd3e31314f9e977bcacc13a1716"
+  },
+  "implementation_commit": "037873fd14c74e2d84a54db634c9edd21cf21ef7"
+}

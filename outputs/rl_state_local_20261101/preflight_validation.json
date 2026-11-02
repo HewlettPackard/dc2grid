@@ -1,0 +1,34 @@
+{
+  "registration_id": "60d89d2a1cadf9b810843826530f3f229b914291629cb19e3717326f4d3e75cd",
+  "scope": "Pre-production implementation validation; not a training or performance result",
+  "ruff_check": "passed",
+  "ruff_format": "14 files unchanged in the final check",
+  "pytest": {
+    "passed": 17,
+    "failed": 0,
+    "elapsed_seconds": 20.57,
+    "warnings": "Four Pandas float_precision deprecation warnings in trace parity reads",
+    "files": [
+      "test_low.py",
+      "test_panel.py",
+      "test_forecast.py",
+      "test_registration.py"
+    ]
+  },
+  "verified_contracts": [
+    "Reference KL direction and variance-anchor gradient",
+    "Zero-prior ordinary-SAC update parity",
+    "Frozen reference and ordinary SAC inference round-trip",
+    "Matched global RNG consumption across reference-state sources",
+    "Non-mutating policy/gradient diagnostics",
+    "Unchanged low-task observations and reward",
+    "Full 24h plus 2h evaluator metrics and shared raw traces equal frozen baseline",
+    "Pre-action macro-window forecast history alignment",
+    "Causal forecasting and completed-service-only budget credit",
+    "Missing final lock blocks policy construction",
+    "Prospective calendar coverage, prior exposure and seed namespace guards"
+  ],
+  "new_development_policy_outcomes_observed": false,
+  "new_final_policy_outcomes_observed": false,
+  "native_4096_transition_learner_lifecycle": "pending"
+}

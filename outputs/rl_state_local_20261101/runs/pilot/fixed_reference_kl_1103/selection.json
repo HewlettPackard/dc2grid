@@ -1,0 +1,5 @@
+{
+  "primary": null,
+  "rule": "final registered step only; no early-best substitution",
+  "all_milestones_retained": true
+}

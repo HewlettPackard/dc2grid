@@ -1,0 +1,355 @@
+{
+  "status": "completed",
+  "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+  "variant": "union_original",
+  "seed": 1102,
+  "stage": "extended",
+  "online_transitions": 552960,
+  "sac_actor_updates": 551936,
+  "critic_updates": 552192,
+  "source_hashes": {
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/develop.py": "3a96e40930a3494f7c48e28faf4b2ddf17a18ceff4417c5ab74425a13a68b7f4",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/forecast.py": "eb14e0d5821b38899446b537032a576d411a91294d8f7e581bad2952db69c58e",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/launch_study.py": "415d6c2c16b1f11d63afecced56d019b25a9f616b23e998d0e4e8a6213a32044",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/low_core.py": "47e5835018a156485d328f457cec745eac7c8c2d6d1027d3ebce9a7aa9899b34",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/low_learn.py": "e943bea6e68fe61da5f89f79cebb1ed2d3c669740ec77e66c1c27659ccac42f7",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/low_task.py": "ca858db058d1795029aa7b13cb29fdd49e0a5aca027a307e7945eafb4867c7dc",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/market_policy.py": "3be46d38d0673e4f11e866a639b068aa9ca5dce6f0afccc7391c7730929f3acc",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/panel.py": "d52ab1c33191969a70368cafc1fdc6d3b12338e4ccc44ebb7fe10288fa803eb0",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/register_study.py": "9d5b60a071debdb97314e311b111c09f69c42fe3ff0d839487edfa4238cf570a",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/study.py": "102d176233df62161e6049e7d4d811bf3f550d815bc9ce8806738952615209c9",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/test_forecast.py": "c390dfef974f57fb2ce308337c521b4ab6bb1ebefa9d2b5d8eef1baa58607bed",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/test_low.py": "37b3ffb6f83e691b1718a4381282cbfc8ea3417eb5e5bb1f72e2f200f7c79df4",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/test_panel.py": "88aef571f2ab4f4aa727d4801b0dce9131f42485a32a7ea382154a6759b4d40b",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/test_registration.py": "11565b906fcd5eace160b3b57db3c6cf2d7b79b26ba38e59aabd4f295f818407",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/common.py": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/controllers.py": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/history_policy.py": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/fast_task.py": "bdf9bc45eef59c4fcb449792d9026753ba06d6d3daff8182fd0378ce1ed911be",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/fit_bc.py": "2f94d78fe716a31c91397163b8f16ed4767737acb852ad1fecf019e119a07657",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/sac_core.py": "caa905127cb9b5089c3d74c6f96820436a7410ebd1bcbf7ef15965dd4c93a361",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/evaluate.py": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/evaluate_models.py": "a09536dd8fb9bf58bc2620543d2fa3bb27c7315790a3d22c573d835daacc775a",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/train.py": "d55244e7f607dfa0498a5f8b73673d0f8a957ed25fda4b213ad3d260e9b60f07",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/launch_training.py": "6dd36cc5b104fd7a14da5d82606185ee373304993b09ff549934f50fd1d76a33",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/prepare_study.py": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/test_controllers.py": "565e52eff973781eddd137db124ce1533de733414fb5abae1937967114c41e27",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/test_learning_contract.py": "3b0039f75a9c1536aae1e32ce9b7165f071396457ff89332e009b291e306a441",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table2_distress_rl_20261031/test_sac_core.py": "ea532b7b29b50b779a55cb420745477e7ce4ef4eb04368781ac9208594999f35",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/macro_task.py": "b85f5955c71f5230717f0951decc7177f8399bb23e0383d5be3e402f1f5695e1",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/recovery_ops.py": "45395520fd57814fac7551c0c0e19382f921f25b3e6add2592cbc1762fc8a069",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/study_common.py": "134dd05407f5c82873d4ebd3fc8161d8b439faf49fd88025213e9b1ca95b3e7c",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/prepare.py": "c7facafb75f3b5ea46303b6bfba131c615a98c14fffe49b753280a9dac657f39",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/launch_value.py": "4eb7044e731c6ed0308da843e9ca188c21e216b4c55f762459d0c95cee1ed45a",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/fit_value.py": "713c5389fda6576c25170f1a64572ca339decf9aa25fa10b60c55f8c57df5782",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/test_potential.py": "44891d459cf1d9e113a01221cbd456d1b663b57db9fcedcf00bb99d72f17450e",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/train_value.py": "d1fd7557548a5ade560c667d4886ad947751cbd062b4ec29b8494258aa954cc4",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/ctx.py": "391128ce5874529cf39428ec383c5f54a6087cab1396d740afdeb81cafac2935",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/gate_value.py": "666e1ec522c8a31367fd7b5368b12767201a9f93da2059c82a030b07d11c4c98",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/mixed_core.py": "9503399ff49dfa02a4137afd9a59546e06ac0f7c94d4f2b777d45f6112375eb7",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/value_replay.py": "e5a03c0e745fe13f6d2080ea330d6bec1c34dfdffe415f1945fada4ce758a812",
+    "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/register_value.py": "968c35400670b772f0210190bdb9d1c8385b1fd3e31314f9e977bcacc13a1716"
+  },
+  "final": {
+    "timesteps": 552960,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/runs/extended/union_original_1102/step_552960.zip",
+      "sha256": "11ec77a86a0fc5ad5c84faa8b22e7202fb7ed9cea3f2a1b4885aea5b1d6cb555"
+    },
+    "actor_digest": "af7a543405f35186d77508ba3c9a76f413dc4eb4ce505265ee26ebd2389789c5",
+    "critic_digest": "42083eeee43819ab4251b060c45e96ed3e725f4302cb315ed6da2d3359e5ba15",
+    "diagnostics": {
+      "fixed_demonstration_states": {
+        "mean_kl": 0.0049926405772566795,
+        "maximum_kl": 0.20185071229934692,
+        "native_mean_action_rmse_from_reference": [
+          0.00011226406786590815,
+          0.0003747444716282189,
+          0.0004763438773807138
+        ],
+        "latent_std_mean": [
+          0.009990649297833443,
+          0.009947827085852623,
+          0.009985473938286304
+        ],
+        "native_local_std_mean": [
+          0.003877402748912573,
+          0.004026743117719889,
+          0.009985470212996006
+        ],
+        "reference_digest": "9efaebe3aea2b5f75380217f2d14b66b9aa760542ab173200f3c0f8f87eee237",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 2.089574098587036,
+        "weighted_kl_actor_gradient_norm": 0.8120794296264648,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              -0.001562051591463387,
+              -0.00014928774908185005
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              -0.001172153977677226,
+              0.0011582006700336933
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              0.00029681797605007887,
+              -0.0006836170796304941
+            ]
+          }
+        }
+      },
+      "fixed_warmup_states": {
+        "mean_kl": 0.009822960942983627,
+        "maximum_kl": 0.09052476286888123,
+        "native_mean_action_rmse_from_reference": [
+          0.00012998048623558134,
+          0.0005632922984659672,
+          0.0005390133010223508
+        ],
+        "latent_std_mean": [
+          0.009992988780140877,
+          0.009969005361199379,
+          0.01000361330807209
+        ],
+        "native_local_std_mean": [
+          0.0038783466443419456,
+          0.0041216895915567875,
+          0.010003609582781792
+        ],
+        "reference_digest": "9efaebe3aea2b5f75380217f2d14b66b9aa760542ab173200f3c0f8f87eee237",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 2.305818557739258,
+        "weighted_kl_actor_gradient_norm": 3.4436757564544678,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              0.004025958478450775,
+              -0.006039914675056934
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              -0.0012306522112339735,
+              0.0012264386750757694
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              -0.000701642595231533,
+              0.0005475864745676517
+            ]
+          }
+        }
+      },
+      "current_replay_states": {
+        "mean_kl": 0.007353846915066242,
+        "maximum_kl": 0.11219015717506409,
+        "native_mean_action_rmse_from_reference": [
+          0.00012924840848427266,
+          0.0004781835014000535,
+          0.0005023251287639141
+        ],
+        "latent_std_mean": [
+          0.009988639503717422,
+          0.00994584709405899,
+          0.009983140975236893
+        ],
+        "native_local_std_mean": [
+          0.0038766306824982166,
+          0.004115705378353596,
+          0.00998313631862402
+        ],
+        "reference_digest": "9efaebe3aea2b5f75380217f2d14b66b9aa760542ab173200f3c0f8f87eee237",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 2.743565797805786,
+        "weighted_kl_actor_gradient_norm": 3.012958288192749,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              -0.004295967519283295,
+              0.00119591667316854
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              -0.001500698970630765,
+              0.0014816026668995619
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              0.0004952696617692709,
+              -0.0011936724185943604
+            ]
+          }
+        }
+      },
+      "stored_native_action_std": [
+        0.003951492253690958,
+        0.09422964602708817,
+        0.010066737420856953
+      ],
+      "stored_native_action_quantiles": [
+        [
+          0.687589168548584,
+          0.2677069902420044,
+          -0.03284996747970581
+        ],
+        [
+          0.6941209256649017,
+          0.5154274284839631,
+          -0.017516103386878968
+        ],
+        [
+          0.7002569437026978,
+          0.6891598701477051,
+          -2.804398536682129e-05
+        ],
+        [
+          0.7068066358566284,
+          0.8427771657705305,
+          0.0159269630908966
+        ],
+        [
+          0.716189980506897,
+          0.9660962224006653,
+          0.030314087867736816
+        ]
+      ],
+      "replay_clock_min_max": [
+        5.7870369346346706e-05,
+        1.0
+      ],
+      "replay_clock_histogram": [
+        10356,
+        10368,
+        10368,
+        10368,
+        10368,
+        10368,
+        10380,
+        10356,
+        10380,
+        10356,
+        10368,
+        10368,
+        10380,
+        10368,
+        10356,
+        10368,
+        10368,
+        9932,
+        6912,
+        6912
+      ],
+      "replay_clock_bin_edges": [
+        0.0,
+        0.05,
+        0.1,
+        0.15000000000000002,
+        0.2,
+        0.25,
+        0.30000000000000004,
+        0.35000000000000003,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6000000000000001,
+        0.65,
+        0.7000000000000001,
+        0.75,
+        0.8,
+        0.8500000000000001,
+        0.9,
+        0.9500000000000001,
+        1.0
+      ]
+    },
+    "reward_probe": {
+      "scope": "entire currently stored replay, original rewards retained",
+      "sample_size": 200000,
+      "original_mean": -0.018146858493900735,
+      "original_sd": 0.07660360947381904,
+      "conditioned_mean": -0.018146858493900735,
+      "conditioned_sd": 0.07660360947381904,
+      "conditioned_min_max": [
+        -0.4406414031982422,
+        0.9999855160713196
+      ],
+      "potential_mean": 0.0,
+      "potential_sd": 0.0,
+      "shift_sd": 0.0,
+      "absolute_shift_quantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "timeout_count": 0,
+      "true_terminal_count": 12,
+      "early_true_terminal_count": 0,
+      "terminal_conditioned_min_max": [
+        -0.055435869842767715,
+        0.041945625096559525
+      ]
+    },
+    "cases": 24,
+    "qualified_cells": 24,
+    "complete_cells": 24,
+    "all_qualified": true,
+    "disqualification_reasons": [],
+    "rmse_kw": 78.09803753545633,
+    "case_rmse_p75_p90_kw": [
+      103.97198856460705,
+      119.63681754146747
+    ],
+    "biased_relief_mw": 5.451701912830663,
+    "cash_usd": -101002.13284100119,
+    "battery_26h_mwh": 0.12075953287152248,
+    "rmse_ratio_to_bc": 1.0422417750662518,
+    "rmse_ratio_to_guided": 0.44509654190401315,
+    "rmse_delta_to_bc_kw": 3.165292174628803,
+    "biased_relief_delta_to_bc_mw": -0.011225017825968742,
+    "cash_delta_to_bc_usd": -8.963549895779579,
+    "extension_qualified": true,
+    "stability_vs_guided": true,
+    "increment_vs_bc": false
+  },
+  "original_reward_records": [
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/runs/extended/union_original_1102/training_worker_0.npz",
+      "transitions": 138240
+    },
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/runs/extended/union_original_1102/training_worker_1.npz",
+      "transitions": 138240
+    },
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/runs/extended/union_original_1102/training_worker_2.npz",
+      "transitions": 138240
+    },
+    {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/runs/extended/union_original_1102/training_worker_3.npz",
+      "transitions": 138240
+    }
+  ],
+  "smoke_only": false,
+  "registration_unchanged": true,
+  "first_divergent_repeated_prefix": null,
+  "no_independent_replication_claimed": true
+}

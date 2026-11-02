@@ -1,0 +1,147 @@
+{
+  "registration_id": "60d89d2a1cadf9b810843826530f3f229b914291629cb19e3717326f4d3e75cd",
+  "panel_summary": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_state_local_20261101/development_baselines/summary.json",
+    "sha256": "24700dbfd3dbca2547f98c7064a73e4438e5f37d391c1c1ef5965bddf423e5ba"
+  },
+  "per_initializer": {
+    "1100": {
+      "bc": {
+        "cases": 24,
+        "qualified_cells": 24,
+        "complete_cells": 24,
+        "all_qualified": true,
+        "disqualification_reasons": [],
+        "rmse_kw": 46.72435215162719,
+        "case_rmse_p75_p90_kw": [
+          59.4997072791482,
+          74.75823214681554
+        ],
+        "biased_relief_mw": 5.448483737209398,
+        "cash_usd": -100992.76449173926,
+        "battery_26h_mwh": 0.06738929903130396
+      },
+      "guided": {
+        "cases": 24,
+        "qualified_cells": 24,
+        "complete_cells": 24,
+        "all_qualified": true,
+        "disqualification_reasons": [],
+        "rmse_kw": 82.20096422948755,
+        "case_rmse_p75_p90_kw": [
+          92.79771738543296,
+          102.33765317987834
+        ],
+        "biased_relief_mw": 5.511354486291418,
+        "cash_usd": -100971.10958919422,
+        "battery_26h_mwh": 0.11459537376369433
+      },
+      "literal_extension_rmse_bound_kw": 58.405440189533984,
+      "binding_comparator": "bc"
+    },
+    "1101": {
+      "bc": {
+        "cases": 24,
+        "qualified_cells": 24,
+        "complete_cells": 24,
+        "all_qualified": true,
+        "disqualification_reasons": [],
+        "rmse_kw": 54.15456865698892,
+        "case_rmse_p75_p90_kw": [
+          61.36828229864617,
+          76.40620318301181
+        ],
+        "biased_relief_mw": 5.454992157115435,
+        "cash_usd": -100996.4465223775,
+        "battery_26h_mwh": 0.18263749160892243
+      },
+      "guided": {
+        "cases": 24,
+        "qualified_cells": 24,
+        "complete_cells": 24,
+        "all_qualified": true,
+        "disqualification_reasons": [],
+        "rmse_kw": 310.4180367786276,
+        "case_rmse_p75_p90_kw": [
+          314.6572565287362,
+          382.8081143608125
+        ],
+        "biased_relief_mw": 5.4720552556993285,
+        "cash_usd": -101007.38682320969,
+        "battery_26h_mwh": 0.7137996597513036
+      },
+      "literal_extension_rmse_bound_kw": 67.69321082123615,
+      "binding_comparator": "bc"
+    },
+    "1102": {
+      "bc": {
+        "cases": 24,
+        "qualified_cells": 24,
+        "complete_cells": 24,
+        "all_qualified": true,
+        "disqualification_reasons": [],
+        "rmse_kw": 74.93274536082752,
+        "case_rmse_p75_p90_kw": [
+          100.83876045132202,
+          118.18774888930639
+        ],
+        "biased_relief_mw": 5.462926930656632,
+        "cash_usd": -100993.16929110541,
+        "battery_26h_mwh": 0.062207701322525566
+      },
+      "guided": {
+        "cases": 24,
+        "qualified_cells": 24,
+        "complete_cells": 24,
+        "all_qualified": true,
+        "disqualification_reasons": [],
+        "rmse_kw": 175.46314154985836,
+        "case_rmse_p75_p90_kw": [
+          208.77124046139795,
+          223.66504298306631
+        ],
+        "biased_relief_mw": 5.52748155867193,
+        "cash_usd": -100951.31734375247,
+        "battery_26h_mwh": 0.5145710389158383
+      },
+      "literal_extension_rmse_bound_kw": 93.66593170103441,
+      "binding_comparator": "bc"
+    },
+    "1103": {
+      "bc": {
+        "cases": 24,
+        "qualified_cells": 24,
+        "complete_cells": 24,
+        "all_qualified": true,
+        "disqualification_reasons": [],
+        "rmse_kw": 59.97722457230199,
+        "case_rmse_p75_p90_kw": [
+          69.10633819179901,
+          88.63889666331518
+        ],
+        "biased_relief_mw": 5.42347859377614,
+        "cash_usd": -101024.72710806112,
+        "battery_26h_mwh": 0.0528938047543677
+      },
+      "guided": {
+        "cases": 24,
+        "qualified_cells": 24,
+        "complete_cells": 24,
+        "all_qualified": true,
+        "disqualification_reasons": [],
+        "rmse_kw": 205.48603846597155,
+        "case_rmse_p75_p90_kw": [
+          229.09508706693674,
+          242.02237395721676
+        ],
+        "biased_relief_mw": 5.3797992661266845,
+        "cash_usd": -101026.14345381584,
+        "battery_26h_mwh": 2.166720800718728
+      },
+      "literal_extension_rmse_bound_kw": 74.9715307153775,
+      "binding_comparator": "bc"
+    }
+  },
+  "frozen_before_reinforcement_training": true,
+  "reference_id": "566d89ae974622ea54c6dc1a41a779852e25a730ef85f17b283a4c98872d1f47"
+}

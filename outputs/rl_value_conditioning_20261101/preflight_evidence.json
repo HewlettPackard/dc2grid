@@ -1,0 +1,29 @@
+{
+  "scope": "Before reinforcement training of either union arm",
+  "lint": "Repository Ruff check passed",
+  "tests": {"passed": 7, "failed": 0},
+  "causal_potential_training_evidence": {
+    "unique_training_transitions": 224640,
+    "date_groups": 13,
+    "date_group_state_return_rmse": 2.943983153646298,
+    "date_group_constant_return_rmse": 3.5909381305788552,
+    "raw_throughput_sd": 0.061268183560954995,
+    "potential_difference_sd": 0.3498986911740358,
+    "throughput_plus_potential_difference_sd": 0.3568250855960108,
+    "potential_mean_clip_lower_fraction": 0.0,
+    "potential_mean_clip_upper_fraction": 0.0,
+    "important_limitation": "Return-level prediction improves, but single-step reward variability increases. Better learning is a hypothesis, not established by these diagnostics."
+  },
+  "verified_contracts": [
+    "Potential telescoping for healthy and early true terminals",
+    "Early true-terminal flag survives ReplayBuffer timeout handling",
+    "Zero-potential updates match the frozen ReferenceSAC implementation",
+    "Mixed prior is one mean over equally sized state batches",
+    "Potential discount must equal the SAC discount",
+    "Replay storage keeps original rewards",
+    "Ordinary SAC inference does not load a training reward transform",
+    "Implicit conditioned training resume without configuration is rejected"
+  ],
+  "new_arm_training_steps_executed": 0,
+  "final_panel_opened": false
+}

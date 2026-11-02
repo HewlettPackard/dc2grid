@@ -1,0 +1,261 @@
+{
+  "registration_id": "a8addd8f287f4830016e12510fd37d25adf590b508543d29be9dcbc0668bbc94",
+  "unchanged_controls_reproduced": true,
+  "pairs": [
+    {
+      "cell": {
+        "start_day": 24,
+        "seed": 93001,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 0.5101185764506226,
+      "qualified": true,
+      "service_ratio": 0.9868651325317127
+    },
+    {
+      "cell": {
+        "start_day": 24,
+        "seed": 93001,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9945191877188895
+    },
+    {
+      "cell": {
+        "start_day": 24,
+        "seed": 93002,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9953322779386768
+    },
+    {
+      "cell": {
+        "start_day": 24,
+        "seed": 93002,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 9.038963688130025,
+      "qualified": true,
+      "service_ratio": 0.9867307120570337
+    },
+    {
+      "cell": {
+        "start_day": 137,
+        "seed": 93001,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9966660217039676
+    },
+    {
+      "cell": {
+        "start_day": 137,
+        "seed": 93001,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 1.2362330440519145,
+      "qualified": true,
+      "service_ratio": 0.9893907846156663
+    },
+    {
+      "cell": {
+        "start_day": 137,
+        "seed": 93002,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9967067715373356
+    },
+    {
+      "cell": {
+        "start_day": 137,
+        "seed": 93002,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 1.1451728433021344,
+      "qualified": true,
+      "service_ratio": 0.9829819879914888
+    },
+    {
+      "cell": {
+        "start_day": 152,
+        "seed": 93001,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9912849147325989
+    },
+    {
+      "cell": {
+        "start_day": 152,
+        "seed": 93001,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": -0.05404396675294265,
+      "qualified": true,
+      "service_ratio": 0.9826551211932427
+    },
+    {
+      "cell": {
+        "start_day": 152,
+        "seed": 93002,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9924197759901846
+    },
+    {
+      "cell": {
+        "start_day": 152,
+        "seed": 93002,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 7.27385408943519,
+      "qualified": true,
+      "service_ratio": 0.9831656978383891
+    },
+    {
+      "cell": {
+        "start_day": 188,
+        "seed": 93001,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9879023609407162
+    },
+    {
+      "cell": {
+        "start_day": 188,
+        "seed": 93001,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 44.42820624020533,
+      "qualified": true,
+      "service_ratio": 0.9570379597397416
+    },
+    {
+      "cell": {
+        "start_day": 188,
+        "seed": 93002,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 29.113254065887304,
+      "qualified": true,
+      "service_ratio": 0.9644694767211135
+    },
+    {
+      "cell": {
+        "start_day": 188,
+        "seed": 93002,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9887821393218437
+    },
+    {
+      "cell": {
+        "start_day": 303,
+        "seed": 93001,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9967155631398679
+    },
+    {
+      "cell": {
+        "start_day": 303,
+        "seed": 93001,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 0.7739298724773107,
+      "qualified": true,
+      "service_ratio": 0.9895751877880663
+    },
+    {
+      "cell": {
+        "start_day": 303,
+        "seed": 93002,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.997005023093493
+    },
+    {
+      "cell": {
+        "start_day": 345,
+        "seed": 93001,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9949137896344052
+    },
+    {
+      "cell": {
+        "start_day": 303,
+        "seed": 93002,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": -0.6127368826782913,
+      "qualified": true,
+      "service_ratio": 0.9830001117315867
+    },
+    {
+      "cell": {
+        "start_day": 345,
+        "seed": 93001,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 0.3470381520455703,
+      "qualified": true,
+      "service_ratio": 0.9866963968394878
+    },
+    {
+      "cell": {
+        "start_day": 345,
+        "seed": 93002,
+        "regd_load_bias": 0.0
+      },
+      "gain_usd": 0.0,
+      "qualified": true,
+      "service_ratio": 0.9956523274464891
+    },
+    {
+      "cell": {
+        "start_day": 345,
+        "seed": 93002,
+        "regd_load_bias": 0.5
+      },
+      "gain_usd": 8.665339870931348,
+      "qualified": true,
+      "service_ratio": 0.9868314851457555
+    }
+  ],
+  "mean_paired_cash_gain_usd": 4.244388733061896,
+  "by_bias_gain_usd": {
+    "0.0": 0.0,
+    "0.5": 8.488777466123793
+  },
+  "eligible": false,
+  "criteria": {
+    "all_24_physical_and_recovery_gates": true,
+    "all_24_actual_service_ratios_at_least": 0.9,
+    "minimum_mean_paired_cash_gain_usd": 5.0,
+    "both_bias_strata_nonnegative_mean_gain": true,
+    "no_new_learned_high_level_SAC_claim": true
+  },
+  "not_a_fresh_panel_or_independent_replication": true,
+  "starting_forecaster_selected_from_prior_three_candidate_argmax": true
+}

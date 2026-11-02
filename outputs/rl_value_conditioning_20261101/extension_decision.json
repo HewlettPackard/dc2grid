@@ -1,0 +1,859 @@
+{
+  "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+  "extend_both_arms": true,
+  "arms": {
+    "union_original": {
+      "fits": [
+        {
+          "seed": 1100,
+          "extension_qualified": true,
+          "rmse_kw": 49.09660277804995,
+          "qualified_cells": 24,
+          "rmse_ratio_to_bc": 1.0507711828453923,
+          "rmse_ratio_to_guided": 0.5972752660295165,
+          "increment_vs_bc": false,
+          "disqualification_reasons": [],
+          "receipt_sha256": "301d961de4116f2596e7e075e2d501a9f1668c153d4cba0b08b1104157d0f479"
+        },
+        {
+          "seed": 1101,
+          "extension_qualified": true,
+          "rmse_kw": 55.78742079140898,
+          "qualified_cells": 24,
+          "rmse_ratio_to_bc": 1.0301516967988873,
+          "rmse_ratio_to_guided": 0.1797170724045052,
+          "increment_vs_bc": false,
+          "disqualification_reasons": [],
+          "receipt_sha256": "cd6458b6802884ba704f7d611af19f8a4fd406e7a276f3816478a3b6f7a9847f"
+        },
+        {
+          "seed": 1102,
+          "extension_qualified": true,
+          "rmse_kw": 79.39093615364193,
+          "qualified_cells": 24,
+          "rmse_ratio_to_bc": 1.0594958955707101,
+          "rmse_ratio_to_guided": 0.45246503312539155,
+          "increment_vs_bc": false,
+          "disqualification_reasons": [],
+          "receipt_sha256": "df632581221d2abbe6d3be376d0a0a5216f866ab17ded8d263e90bd865cb4bac"
+        },
+        {
+          "seed": 1103,
+          "extension_qualified": true,
+          "rmse_kw": 59.650477806134255,
+          "qualified_cells": 24,
+          "rmse_ratio_to_bc": 0.9945521526129665,
+          "rmse_ratio_to_guided": 0.29028968708262076,
+          "increment_vs_bc": false,
+          "disqualification_reasons": [],
+          "receipt_sha256": "559d476c84ee801858f52edc50bd33953120de174ff6aba31cad356c41d61e4a"
+        }
+      ],
+      "all_four_pass": true
+    },
+    "union_conditioned": {
+      "fits": [
+        {
+          "seed": 1100,
+          "extension_qualified": true,
+          "rmse_kw": 47.73664752139886,
+          "qualified_cells": 24,
+          "rmse_ratio_to_bc": 1.0216652628266867,
+          "rmse_ratio_to_guided": 0.5807309922561045,
+          "increment_vs_bc": false,
+          "disqualification_reasons": [],
+          "receipt_sha256": "74eb7ed23a91f233169825a2f0105d20c8eb7c994e04a0a55d112e152267b1fc"
+        },
+        {
+          "seed": 1101,
+          "extension_qualified": true,
+          "rmse_kw": 54.60861167612649,
+          "qualified_cells": 24,
+          "rmse_ratio_to_bc": 1.0083842052553948,
+          "rmse_ratio_to_guided": 0.17591958329106447,
+          "increment_vs_bc": false,
+          "disqualification_reasons": [],
+          "receipt_sha256": "2fff23a680ec192dcc59bc3dd1bfe6619ca8bb9f8d213fbeb18be4fc4142ac62"
+        },
+        {
+          "seed": 1102,
+          "extension_qualified": true,
+          "rmse_kw": 77.05073085215533,
+          "qualified_cells": 24,
+          "rmse_ratio_to_bc": 1.0282651527196682,
+          "rmse_ratio_to_guided": 0.4391277288869306,
+          "increment_vs_bc": false,
+          "disqualification_reasons": [],
+          "receipt_sha256": "fcbd5ebf8a53a59f5128249f9954102e756f253de150f603f51040ed94861d66"
+        },
+        {
+          "seed": 1103,
+          "extension_qualified": true,
+          "rmse_kw": 57.85263707954579,
+          "qualified_cells": 24,
+          "rmse_ratio_to_bc": 0.964576762130848,
+          "rmse_ratio_to_guided": 0.2815404759926119,
+          "increment_vs_bc": false,
+          "disqualification_reasons": [],
+          "receipt_sha256": "21bbc6e9b8c0b0be274b41c187a4e4771bf990b4a9bf1f6c99ebb6ae12952516"
+        }
+      ],
+      "all_four_pass": true
+    }
+  },
+  "paired_raw_prefix_exact": true,
+  "conditioned_critic_calibration_intentionally_allowed_to_differ": true,
+  "training_conditions_match_by_seed": {
+    "1100": true,
+    "1101": true,
+    "1102": true,
+    "1103": true
+  },
+  "condition_sequences": {
+    "1100": [
+      {
+        "episodes": [
+          {
+            "condition": {
+              "start_day": 98,
+              "regd_load_bias": 0.0,
+              "seed": 121599606,
+              "curriculum_cycle": 0,
+              "curriculum_position": 0
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 305,
+              "regd_load_bias": 0.25,
+              "seed": 2018762033,
+              "curriculum_cycle": 0,
+              "curriculum_position": 1
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 356,
+              "regd_load_bias": 0.5,
+              "seed": 1270229694,
+              "curriculum_cycle": 0,
+              "curriculum_position": 2
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 102,
+              "regd_load_bias": 0.0,
+              "seed": 1270403555,
+              "curriculum_cycle": 0,
+              "curriculum_position": 3
+            },
+            "steps": 17280,
+            "complete": true
+          }
+        ],
+        "prefixes": [
+          {
+            "condition": {
+              "start_day": 50,
+              "regd_load_bias": 0.25,
+              "seed": 1993832544,
+              "curriculum_cycle": 0,
+              "curriculum_position": 4
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 332,
+              "regd_load_bias": 0.5,
+              "seed": 2224067636,
+              "curriculum_cycle": 0,
+              "curriculum_position": 5
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 81,
+              "regd_load_bias": 0.0,
+              "seed": 3217161439,
+              "curriculum_cycle": 0,
+              "curriculum_position": 6
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 227,
+              "regd_load_bias": 0.25,
+              "seed": 1549223242,
+              "curriculum_cycle": 0,
+              "curriculum_position": 7
+            },
+            "steps": 0
+          }
+        ]
+      },
+      {
+        "episodes": [
+          {
+            "condition": {
+              "start_day": 98,
+              "regd_load_bias": 0.0,
+              "seed": 121599606,
+              "curriculum_cycle": 0,
+              "curriculum_position": 0
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 305,
+              "regd_load_bias": 0.25,
+              "seed": 2018762033,
+              "curriculum_cycle": 0,
+              "curriculum_position": 1
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 356,
+              "regd_load_bias": 0.5,
+              "seed": 1270229694,
+              "curriculum_cycle": 0,
+              "curriculum_position": 2
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 102,
+              "regd_load_bias": 0.0,
+              "seed": 1270403555,
+              "curriculum_cycle": 0,
+              "curriculum_position": 3
+            },
+            "steps": 17280,
+            "complete": true
+          }
+        ],
+        "prefixes": [
+          {
+            "condition": {
+              "start_day": 50,
+              "regd_load_bias": 0.25,
+              "seed": 1993832544,
+              "curriculum_cycle": 0,
+              "curriculum_position": 4
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 332,
+              "regd_load_bias": 0.5,
+              "seed": 2224067636,
+              "curriculum_cycle": 0,
+              "curriculum_position": 5
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 81,
+              "regd_load_bias": 0.0,
+              "seed": 3217161439,
+              "curriculum_cycle": 0,
+              "curriculum_position": 6
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 227,
+              "regd_load_bias": 0.25,
+              "seed": 1549223242,
+              "curriculum_cycle": 0,
+              "curriculum_position": 7
+            },
+            "steps": 0
+          }
+        ]
+      }
+    ],
+    "1101": [
+      {
+        "episodes": [
+          {
+            "condition": {
+              "start_day": 323,
+              "regd_load_bias": 0.0,
+              "seed": 3444250759,
+              "curriculum_cycle": 0,
+              "curriculum_position": 0
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 98,
+              "regd_load_bias": 0.25,
+              "seed": 2806767528,
+              "curriculum_cycle": 0,
+              "curriculum_position": 1
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 305,
+              "regd_load_bias": 0.5,
+              "seed": 4043127945,
+              "curriculum_cycle": 0,
+              "curriculum_position": 2
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 283,
+              "regd_load_bias": 0.0,
+              "seed": 1304994578,
+              "curriculum_cycle": 0,
+              "curriculum_position": 3
+            },
+            "steps": 17280,
+            "complete": true
+          }
+        ],
+        "prefixes": [
+          {
+            "condition": {
+              "start_day": 204,
+              "regd_load_bias": 0.25,
+              "seed": 4036010561,
+              "curriculum_cycle": 0,
+              "curriculum_position": 4
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 194,
+              "regd_load_bias": 0.5,
+              "seed": 657537097,
+              "curriculum_cycle": 0,
+              "curriculum_position": 5
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 297,
+              "regd_load_bias": 0.0,
+              "seed": 97936264,
+              "curriculum_cycle": 0,
+              "curriculum_position": 6
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 251,
+              "regd_load_bias": 0.25,
+              "seed": 433932692,
+              "curriculum_cycle": 0,
+              "curriculum_position": 7
+            },
+            "steps": 0
+          }
+        ]
+      },
+      {
+        "episodes": [
+          {
+            "condition": {
+              "start_day": 323,
+              "regd_load_bias": 0.0,
+              "seed": 3444250759,
+              "curriculum_cycle": 0,
+              "curriculum_position": 0
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 98,
+              "regd_load_bias": 0.25,
+              "seed": 2806767528,
+              "curriculum_cycle": 0,
+              "curriculum_position": 1
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 305,
+              "regd_load_bias": 0.5,
+              "seed": 4043127945,
+              "curriculum_cycle": 0,
+              "curriculum_position": 2
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 283,
+              "regd_load_bias": 0.0,
+              "seed": 1304994578,
+              "curriculum_cycle": 0,
+              "curriculum_position": 3
+            },
+            "steps": 17280,
+            "complete": true
+          }
+        ],
+        "prefixes": [
+          {
+            "condition": {
+              "start_day": 204,
+              "regd_load_bias": 0.25,
+              "seed": 4036010561,
+              "curriculum_cycle": 0,
+              "curriculum_position": 4
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 194,
+              "regd_load_bias": 0.5,
+              "seed": 657537097,
+              "curriculum_cycle": 0,
+              "curriculum_position": 5
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 297,
+              "regd_load_bias": 0.0,
+              "seed": 97936264,
+              "curriculum_cycle": 0,
+              "curriculum_position": 6
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 251,
+              "regd_load_bias": 0.25,
+              "seed": 433932692,
+              "curriculum_cycle": 0,
+              "curriculum_position": 7
+            },
+            "steps": 0
+          }
+        ]
+      }
+    ],
+    "1102": [
+      {
+        "episodes": [
+          {
+            "condition": {
+              "start_day": 50,
+              "regd_load_bias": 0.0,
+              "seed": 492948528,
+              "curriculum_cycle": 0,
+              "curriculum_position": 0
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 130,
+              "regd_load_bias": 0.25,
+              "seed": 305131484,
+              "curriculum_cycle": 0,
+              "curriculum_position": 1
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 194,
+              "regd_load_bias": 0.5,
+              "seed": 1410360975,
+              "curriculum_cycle": 0,
+              "curriculum_position": 2
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 16,
+              "regd_load_bias": 0.0,
+              "seed": 318883018,
+              "curriculum_cycle": 0,
+              "curriculum_position": 3
+            },
+            "steps": 17280,
+            "complete": true
+          }
+        ],
+        "prefixes": [
+          {
+            "condition": {
+              "start_day": 115,
+              "regd_load_bias": 0.25,
+              "seed": 2665470714,
+              "curriculum_cycle": 0,
+              "curriculum_position": 4
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 251,
+              "regd_load_bias": 0.5,
+              "seed": 1988260539,
+              "curriculum_cycle": 0,
+              "curriculum_position": 5
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 227,
+              "regd_load_bias": 0.0,
+              "seed": 1266198368,
+              "curriculum_cycle": 0,
+              "curriculum_position": 6
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 178,
+              "regd_load_bias": 0.25,
+              "seed": 3320952835,
+              "curriculum_cycle": 0,
+              "curriculum_position": 7
+            },
+            "steps": 0
+          }
+        ]
+      },
+      {
+        "episodes": [
+          {
+            "condition": {
+              "start_day": 50,
+              "regd_load_bias": 0.0,
+              "seed": 492948528,
+              "curriculum_cycle": 0,
+              "curriculum_position": 0
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 130,
+              "regd_load_bias": 0.25,
+              "seed": 305131484,
+              "curriculum_cycle": 0,
+              "curriculum_position": 1
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 194,
+              "regd_load_bias": 0.5,
+              "seed": 1410360975,
+              "curriculum_cycle": 0,
+              "curriculum_position": 2
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 16,
+              "regd_load_bias": 0.0,
+              "seed": 318883018,
+              "curriculum_cycle": 0,
+              "curriculum_position": 3
+            },
+            "steps": 17280,
+            "complete": true
+          }
+        ],
+        "prefixes": [
+          {
+            "condition": {
+              "start_day": 115,
+              "regd_load_bias": 0.25,
+              "seed": 2665470714,
+              "curriculum_cycle": 0,
+              "curriculum_position": 4
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 251,
+              "regd_load_bias": 0.5,
+              "seed": 1988260539,
+              "curriculum_cycle": 0,
+              "curriculum_position": 5
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 227,
+              "regd_load_bias": 0.0,
+              "seed": 1266198368,
+              "curriculum_cycle": 0,
+              "curriculum_position": 6
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 178,
+              "regd_load_bias": 0.25,
+              "seed": 3320952835,
+              "curriculum_cycle": 0,
+              "curriculum_position": 7
+            },
+            "steps": 0
+          }
+        ]
+      }
+    ],
+    "1103": [
+      {
+        "episodes": [
+          {
+            "condition": {
+              "start_day": 227,
+              "regd_load_bias": 0.0,
+              "seed": 2153941075,
+              "curriculum_cycle": 0,
+              "curriculum_position": 0
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 194,
+              "regd_load_bias": 0.25,
+              "seed": 1895262048,
+              "curriculum_cycle": 0,
+              "curriculum_position": 1
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 184,
+              "regd_load_bias": 0.5,
+              "seed": 1245765744,
+              "curriculum_cycle": 0,
+              "curriculum_position": 2
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 279,
+              "regd_load_bias": 0.0,
+              "seed": 4091663436,
+              "curriculum_cycle": 0,
+              "curriculum_position": 3
+            },
+            "steps": 17280,
+            "complete": true
+          }
+        ],
+        "prefixes": [
+          {
+            "condition": {
+              "start_day": 251,
+              "regd_load_bias": 0.25,
+              "seed": 4049912554,
+              "curriculum_cycle": 0,
+              "curriculum_position": 4
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 178,
+              "regd_load_bias": 0.5,
+              "seed": 2403507138,
+              "curriculum_cycle": 0,
+              "curriculum_position": 5
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 36,
+              "regd_load_bias": 0.0,
+              "seed": 2443354842,
+              "curriculum_cycle": 0,
+              "curriculum_position": 6
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 19,
+              "regd_load_bias": 0.25,
+              "seed": 3143552004,
+              "curriculum_cycle": 0,
+              "curriculum_position": 7
+            },
+            "steps": 0
+          }
+        ]
+      },
+      {
+        "episodes": [
+          {
+            "condition": {
+              "start_day": 227,
+              "regd_load_bias": 0.0,
+              "seed": 2153941075,
+              "curriculum_cycle": 0,
+              "curriculum_position": 0
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 194,
+              "regd_load_bias": 0.25,
+              "seed": 1895262048,
+              "curriculum_cycle": 0,
+              "curriculum_position": 1
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 184,
+              "regd_load_bias": 0.5,
+              "seed": 1245765744,
+              "curriculum_cycle": 0,
+              "curriculum_position": 2
+            },
+            "steps": 17280,
+            "complete": true
+          },
+          {
+            "condition": {
+              "start_day": 279,
+              "regd_load_bias": 0.0,
+              "seed": 4091663436,
+              "curriculum_cycle": 0,
+              "curriculum_position": 3
+            },
+            "steps": 17280,
+            "complete": true
+          }
+        ],
+        "prefixes": [
+          {
+            "condition": {
+              "start_day": 251,
+              "regd_load_bias": 0.25,
+              "seed": 4049912554,
+              "curriculum_cycle": 0,
+              "curriculum_position": 4
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 178,
+              "regd_load_bias": 0.5,
+              "seed": 2403507138,
+              "curriculum_cycle": 0,
+              "curriculum_position": 5
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 36,
+              "regd_load_bias": 0.0,
+              "seed": 2443354842,
+              "curriculum_cycle": 0,
+              "curriculum_position": 6
+            },
+            "steps": 0
+          },
+          {
+            "condition": {
+              "start_day": 19,
+              "regd_load_bias": 0.25,
+              "seed": 3143552004,
+              "curriculum_cycle": 0,
+              "curriculum_position": 7
+            },
+            "steps": 0
+          }
+        ]
+      }
+    ]
+  },
+  "source_status_sha256": "a527ba853018de51abb0eac45ada5047a45fa59e28778e003adbd9d73039a81d",
+  "failure_inventory": [],
+  "rule": {
+    "decision_checkpoint": 69120,
+    "all_four_fits_in_at_least_one_arm_must_pass": true,
+    "require_all_24_physical_and_recovery_gates_each_fit": true,
+    "maximum_rmse_ratio_to_own_BC": 1.25,
+    "maximum_rmse_ratio_to_locked_Guided_same_initializer": 0.8,
+    "rmse_statistic": "unweighted arithmetic mean of 24 complete-case RMSEs",
+    "run_both_arms_if_triggered": true,
+    "implementation": "rerun from exact initializer/seed, never replay-only resume",
+    "repeated_prefix_counts_as_compute_not_additional_replication": true,
+    "compare_prefix_parameter_digests_to_pilot": true,
+    "incomplete_reference_comparator": "halt before RL and preserve the failure; any alternative requires a new explicit preregistration, never a fabricated full-case mean",
+    "prefix_results_for_publication_if_rerun_differs": "original pilot"
+  },
+  "decision_id": "16e66b1fad3f6217f2b88f2fe06533d37fc8dc59bd2d1ea5127968a3a79caf13"
+}

@@ -1,0 +1,836 @@
+[
+  {
+    "timesteps": 4096,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/runs/pilot/union_original_1103/step_4096.zip",
+      "sha256": "45cdd4c667dff39e51ce41369d1c34da37c0e6dd9eeb16feccce08bea0c28c97"
+    },
+    "actor_digest": "cdba28909977e48b1dd6c61012271e1369e8b4ae3091c97badd0277631e83e1a",
+    "critic_digest": "edbd588682deafed38e7b6d77192681ec098f3a655b1c4ab122320433190f53c",
+    "diagnostics": {
+      "fixed_demonstration_states": {
+        "mean_kl": 0.001189946779049933,
+        "maximum_kl": 0.023132234811782837,
+        "native_mean_action_rmse_from_reference": [
+          6.137567106634378e-05,
+          0.0001739930739859119,
+          8.933288336265832e-05
+        ],
+        "latent_std_mean": [
+          0.010001967661082745,
+          0.009998448193073273,
+          0.010002775117754936
+        ],
+        "native_local_std_mean": [
+          0.003882123390212655,
+          0.0040894765406847,
+          0.010002774186432362
+        ],
+        "reference_digest": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 1.7852576971054077,
+        "weighted_kl_actor_gradient_norm": 1.2975810766220093,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              -0.0012066964991390705,
+              0.0010741165606305003
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              0.0010958942584693432,
+              -0.0011039585806429386
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              -0.0019642296247184277,
+              0.0019481300842016935
+            ]
+          }
+        }
+      },
+      "fixed_warmup_states": {
+        "mean_kl": 0.007066486869007349,
+        "maximum_kl": 0.014559358358383179,
+        "native_mean_action_rmse_from_reference": [
+          6.488194776466116e-05,
+          0.0004864135989919305,
+          0.0003205368993803859
+        ],
+        "latent_std_mean": [
+          0.009968682192265987,
+          0.00999216828495264,
+          0.010001938790082932
+        ],
+        "native_local_std_mean": [
+          0.003868898842483759,
+          0.0042671384289860725,
+          0.010001933202147484
+        ],
+        "reference_digest": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 1.7262778282165527,
+        "weighted_kl_actor_gradient_norm": 4.193990707397461,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              -7.377238944172859e-05,
+              -0.002686001593247056
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              0.001046933000907302,
+              -0.0010551156010478735
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              -0.0018035729881376028,
+              0.001751338830217719
+            ]
+          }
+        }
+      },
+      "current_replay_states": {
+        "mean_kl": 0.008659467101097107,
+        "maximum_kl": 0.030780941247940063,
+        "native_mean_action_rmse_from_reference": [
+          0.00010167688742512837,
+          0.0005352456355467439,
+          0.00024823943385854363
+        ],
+        "latent_std_mean": [
+          0.009970365092158318,
+          0.00998909492045641,
+          0.01000006403774023
+        ],
+        "native_local_std_mean": [
+          0.0038698201533406973,
+          0.004121485631912947,
+          0.010000062175095081
+        ],
+        "reference_digest": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 1.9223428964614868,
+        "weighted_kl_actor_gradient_norm": 4.764131546020508,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              -0.0013373179826885462,
+              -0.0012841937132179737
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              0.0012183620128780603,
+              -0.0012341828551143408
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              -0.0009386710589751601,
+              0.0009099631570279598
+            ]
+          }
+        }
+      },
+      "stored_native_action_std": [
+        0.003910754341632128,
+        0.07226330041885376,
+        0.010036421939730644
+      ],
+      "stored_native_action_quantiles": [
+        [
+          0.6895517110824585,
+          0.5289226174354553,
+          -0.036791205406188965
+        ],
+        [
+          0.6936717331409454,
+          0.5740758180618286,
+          -0.01613878309726715
+        ],
+        [
+          0.6999785304069519,
+          0.6999235153198242,
+          -0.00026085972785949707
+        ],
+        [
+          0.7067737221717835,
+          0.8320097893476484,
+          0.016445451974868772
+        ],
+        [
+          0.713394045829773,
+          0.9235089421272278,
+          0.031485676765441895
+        ]
+      ],
+      "replay_clock_min_max": [
+        0.9407986402511597,
+        1.0
+      ],
+      "replay_clock_histogram": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        640,
+        3456
+      ],
+      "replay_clock_bin_edges": [
+        0.0,
+        0.05,
+        0.1,
+        0.15000000000000002,
+        0.2,
+        0.25,
+        0.30000000000000004,
+        0.35000000000000003,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6000000000000001,
+        0.65,
+        0.7000000000000001,
+        0.75,
+        0.8,
+        0.8500000000000001,
+        0.9,
+        0.9500000000000001,
+        1.0
+      ]
+    },
+    "reward_probe": {
+      "scope": "entire currently stored replay, original rewards retained",
+      "sample_size": 4096,
+      "original_mean": -0.012322770545726558,
+      "original_sd": 0.07151668897962613,
+      "conditioned_mean": -0.012322770545726558,
+      "conditioned_sd": 0.07151668897962613,
+      "conditioned_min_max": [
+        -0.32475414872169495,
+        0.30663377046585083
+      ],
+      "potential_mean": 0.0,
+      "potential_sd": 0.0,
+      "shift_sd": 0.0,
+      "absolute_shift_quantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "timeout_count": 0,
+      "true_terminal_count": 0,
+      "early_true_terminal_count": 0,
+      "terminal_conditioned_min_max": null
+    },
+    "cases": 24,
+    "qualified_cells": 24,
+    "complete_cells": 24,
+    "all_qualified": true,
+    "disqualification_reasons": [],
+    "rmse_kw": 56.990493743865066,
+    "case_rmse_p75_p90_kw": [
+      66.91674895119584,
+      86.45725474839134
+    ],
+    "biased_relief_mw": 5.42879645964091,
+    "cash_usd": -101015.75370940077,
+    "battery_26h_mwh": 0.05203757515172821,
+    "rmse_ratio_to_bc": 0.950202250108515,
+    "rmse_ratio_to_guided": 0.2773448462451267,
+    "rmse_delta_to_bc_kw": -2.986730828436926,
+    "biased_relief_delta_to_bc_mw": 0.005317865864770788,
+    "cash_delta_to_bc_usd": 8.973398660353268,
+    "extension_qualified": true,
+    "stability_vs_guided": true,
+    "increment_vs_bc": false
+  },
+  {
+    "timesteps": 16384,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/runs/pilot/union_original_1103/step_16384.zip",
+      "sha256": "3e3e4d0ebb50f43bad2be8ef13e8d1cf56c267256d7a9fb4e58160a1b819cc09"
+    },
+    "actor_digest": "c70a8c7657539594dfcaa5905249586547d6babd6bd51b283dd29365e27a1a2a",
+    "critic_digest": "6e9afd98c16bfb91a19f1e7fed1ba5c784dd5b110c7daac45527a702933f8a3f",
+    "diagnostics": {
+      "fixed_demonstration_states": {
+        "mean_kl": 0.005190723575651646,
+        "maximum_kl": 0.09725534915924072,
+        "native_mean_action_rmse_from_reference": [
+          0.0001253647933481261,
+          0.0003474389959592372,
+          0.0004939860082231462
+        ],
+        "latent_std_mean": [
+          0.009989287704229355,
+          0.00999007374048233,
+          0.009979555383324623
+        ],
+        "native_local_std_mean": [
+          0.0038777245208621025,
+          0.00408697035163641,
+          0.009979553520679474
+        ],
+        "reference_digest": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 3.817034959793091,
+        "weighted_kl_actor_gradient_norm": 1.9765836000442505,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              0.014509720727801323,
+              -0.014649633318185806
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              0.0022922861389815807,
+              -0.0022909874096512794
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              -0.00010419660247862339,
+              -0.00010099285282194614
+            ]
+          }
+        }
+      },
+      "fixed_warmup_states": {
+        "mean_kl": 0.03137440234422684,
+        "maximum_kl": 0.073020339012146,
+        "native_mean_action_rmse_from_reference": [
+          0.00043831500806845725,
+          0.0009247231064364314,
+          0.000654287519864738
+        ],
+        "latent_std_mean": [
+          0.009975681081414223,
+          0.009970614686608315,
+          0.00994869600981474
+        ],
+        "native_local_std_mean": [
+          0.003873769659548998,
+          0.004260980524122715,
+          0.009948690421879292
+        ],
+        "reference_digest": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 4.091310977935791,
+        "weighted_kl_actor_gradient_norm": 8.248234748840332,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              0.013683544471859932,
+              -0.015772627666592598
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              0.0023777096066623926,
+              -0.002363019622862339
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              0.000994382193312049,
+              -0.0014598413836210966
+            ]
+          }
+        }
+      },
+      "current_replay_states": {
+        "mean_kl": 0.03572677820920944,
+        "maximum_kl": 0.12829124927520752,
+        "native_mean_action_rmse_from_reference": [
+          0.00027169930399395525,
+          0.0009855979587882757,
+          0.0011454083723947406
+        ],
+        "latent_std_mean": [
+          0.009952807798981667,
+          0.009975751861929893,
+          0.009961496107280254
+        ],
+        "native_local_std_mean": [
+          0.003864153753966093,
+          0.0038333411794155836,
+          0.009961486794054508
+        ],
+        "reference_digest": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 3.9865033626556396,
+        "weighted_kl_actor_gradient_norm": 8.449739456176758,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              0.0023897895589470863,
+              -0.006546130869537592
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              0.002380677033215761,
+              -0.002432524925097823
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              0.006118527613580227,
+              -0.0064947642385959625
+            ]
+          }
+        }
+      },
+      "stored_native_action_std": [
+        0.0038229008205235004,
+        0.08369628340005875,
+        0.009915009140968323
+      ],
+      "stored_native_action_quantiles": [
+        [
+          0.6884604692459106,
+          0.5317885875701904,
+          -0.026402413845062256
+        ],
+        [
+          0.6937841236591339,
+          0.586633712053299,
+          -0.015644824504852294
+        ],
+        [
+          0.7001277804374695,
+          0.7149390578269958,
+          0.0007355213165283203
+        ],
+        [
+          0.7063867926597595,
+          0.8811752796173096,
+          0.016992306709289532
+        ],
+        [
+          0.7122613191604614,
+          0.9774229526519775,
+          0.036351561546325684
+        ]
+      ],
+      "replay_clock_min_max": [
+        0.7630208134651184,
+        1.0
+      ],
+      "replay_clock_histogram": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2556,
+        3456,
+        3460,
+        3456,
+        3456
+      ],
+      "replay_clock_bin_edges": [
+        0.0,
+        0.05,
+        0.1,
+        0.15000000000000002,
+        0.2,
+        0.25,
+        0.30000000000000004,
+        0.35000000000000003,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6000000000000001,
+        0.65,
+        0.7000000000000001,
+        0.75,
+        0.8,
+        0.8500000000000001,
+        0.9,
+        0.9500000000000001,
+        1.0
+      ]
+    },
+    "reward_probe": {
+      "scope": "entire currently stored replay, original rewards retained",
+      "sample_size": 16384,
+      "original_mean": -0.012050610682433169,
+      "original_sd": 0.06764615830084456,
+      "conditioned_mean": -0.012050610682433169,
+      "conditioned_sd": 0.06764615830084456,
+      "conditioned_min_max": [
+        -0.32475414872169495,
+        0.4538651406764984
+      ],
+      "potential_mean": 0.0,
+      "potential_sd": 0.0,
+      "shift_sd": 0.0,
+      "absolute_shift_quantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "timeout_count": 0,
+      "true_terminal_count": 0,
+      "early_true_terminal_count": 0,
+      "terminal_conditioned_min_max": null
+    },
+    "cases": 24,
+    "qualified_cells": 24,
+    "complete_cells": 24,
+    "all_qualified": true,
+    "disqualification_reasons": [],
+    "rmse_kw": 56.5445245619218,
+    "case_rmse_p75_p90_kw": [
+      67.2033580237046,
+      87.31810190383224
+    ],
+    "biased_relief_mw": 5.434070301474722,
+    "cash_usd": -101009.49193762582,
+    "battery_26h_mwh": 0.05423624669331025,
+    "rmse_ratio_to_bc": 0.9427666079106061,
+    "rmse_ratio_to_guided": 0.27517453245995377,
+    "rmse_delta_to_bc_kw": -3.432700010380195,
+    "biased_relief_delta_to_bc_mw": 0.010591707698582198,
+    "cash_delta_to_bc_usd": 15.235170435305918,
+    "extension_qualified": true,
+    "stability_vs_guided": true,
+    "increment_vs_bc": false
+  },
+  {
+    "timesteps": 69120,
+    "checkpoint": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/rl_value_conditioning_20261101/runs/pilot/union_original_1103/step_69120.zip",
+      "sha256": "e930ada43fa6918ceb8d4f224957cea43d5caf9071cd188fdc7ba0addb6517af"
+    },
+    "actor_digest": "c352fb063a5d9024460cfe76b2b221235e590dd32d642798161ed167709a601c",
+    "critic_digest": "bc632fca28fc4328db6240ff4fdcbb50d867a18bcd0db32a1864eff0d5aaba59",
+    "diagnostics": {
+      "fixed_demonstration_states": {
+        "mean_kl": 0.007149523589760065,
+        "maximum_kl": 0.19728893041610718,
+        "native_mean_action_rmse_from_reference": [
+          0.000258424726780504,
+          0.0002242950431536883,
+          0.0008139682468026876
+        ],
+        "latent_std_mean": [
+          0.009977109730243683,
+          0.00999477319419384,
+          0.009973928332328796
+        ],
+        "native_local_std_mean": [
+          0.0038728679064661264,
+          0.004087031818926334,
+          0.0099739208817482
+        ],
+        "reference_digest": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 1.335944414138794,
+        "weighted_kl_actor_gradient_norm": 0.8403921127319336,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              0.010761692188680172,
+              -0.01299069169908762
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              -0.00011374242603778839,
+              0.00010092789307236671
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              0.0013446835801005363,
+              -0.0017736731097102165
+            ]
+          }
+        }
+      },
+      "fixed_warmup_states": {
+        "mean_kl": 0.01803302764892578,
+        "maximum_kl": 0.07553055882453918,
+        "native_mean_action_rmse_from_reference": [
+          0.0004359230515547097,
+          0.00026702857576310635,
+          0.0013930228305980563
+        ],
+        "latent_std_mean": [
+          0.009931977838277817,
+          0.009977597743272781,
+          0.009956035763025284
+        ],
+        "native_local_std_mean": [
+          0.003856619354337454,
+          0.0042572966776788235,
+          0.00995602086186409
+        ],
+        "reference_digest": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 2.9949238300323486,
+        "weighted_kl_actor_gradient_norm": 3.572254180908203,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              0.014045209623873234,
+              -0.018675295636057854
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              -0.00010689953342080116,
+              8.789543062448502e-05
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              0.009518461301922798,
+              -0.010849441401660442
+            ]
+          }
+        }
+      },
+      "current_replay_states": {
+        "mean_kl": 0.015668541193008423,
+        "maximum_kl": 0.11436742544174194,
+        "native_mean_action_rmse_from_reference": [
+          0.00039177609141916037,
+          0.0003137284656986594,
+          0.0012266009580343962
+        ],
+        "latent_std_mean": [
+          0.009946826845407486,
+          0.009981011040508747,
+          0.009952186606824398
+        ],
+        "native_local_std_mean": [
+          0.003862129058688879,
+          0.0040572453290224075,
+          0.00995217077434063
+        ],
+        "reference_digest": "0ebdc8d60bca42f593c1d14d1ce5a2e162fcd7d618536af2bcd9b2325c82c620",
+        "feature_contract": "native18-own-command4-request-ema900s-clock-v1",
+        "q_actor_gradient_norm": 1.5728815793991089,
+        "weighted_kl_actor_gradient_norm": 1.6691570281982422,
+        "q_landscape_not_a_physical_counterfactual": {
+          "pump": {
+            "normalized_action_step": 0.023529411764705882,
+            "mean_q_delta_minus_plus": [
+              0.009053176268935204,
+              -0.01303640566766262
+            ]
+          },
+          "hvac": {
+            "normalized_action_step": 0.002,
+            "mean_q_delta_minus_plus": [
+              -0.0004957633791491389,
+              0.000468225684016943
+            ]
+          },
+          "bess": {
+            "normalized_action_step": 0.01,
+            "mean_q_delta_minus_plus": [
+              0.002628158777952194,
+              -0.0030639455653727055
+            ]
+          }
+        }
+      },
+      "stored_native_action_std": [
+        0.003780393162742257,
+        0.08158282190561295,
+        0.009823868051171303
+      ],
+      "stored_native_action_quantiles": [
+        [
+          0.6874452829360962,
+          0.4130029082298279,
+          -0.02786916494369507
+        ],
+        [
+          0.6937902808189392,
+          0.5786311864852905,
+          -0.015560755133628845
+        ],
+        [
+          0.6999343037605286,
+          0.6959719955921173,
+          -0.0001055300235748291
+        ],
+        [
+          0.7058683156967163,
+          0.8525138556957245,
+          0.01595491766929626
+        ],
+        [
+          0.7118977308273315,
+          0.9707697629928589,
+          0.03217649459838867
+        ]
+      ],
+      "replay_clock_min_max": [
+        5.7870369346346706e-05,
+        1.0
+      ],
+      "replay_clock_histogram": [
+        3452,
+        3456,
+        3456,
+        3456,
+        3456,
+        3456,
+        3460,
+        3452,
+        3460,
+        3452,
+        3456,
+        3456,
+        3460,
+        3456,
+        3452,
+        3456,
+        3456,
+        3460,
+        3456,
+        3456
+      ],
+      "replay_clock_bin_edges": [
+        0.0,
+        0.05,
+        0.1,
+        0.15000000000000002,
+        0.2,
+        0.25,
+        0.30000000000000004,
+        0.35000000000000003,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6000000000000001,
+        0.65,
+        0.7000000000000001,
+        0.75,
+        0.8,
+        0.8500000000000001,
+        0.9,
+        0.9500000000000001,
+        1.0
+      ]
+    },
+    "reward_probe": {
+      "scope": "entire currently stored replay, original rewards retained",
+      "sample_size": 69120,
+      "original_mean": -0.01351495683207402,
+      "original_sd": 0.07689811190098818,
+      "conditioned_mean": -0.01351495683207402,
+      "conditioned_sd": 0.07689811190098818,
+      "conditioned_min_max": [
+        -0.3791183829307556,
+        0.766631543636322
+      ],
+      "potential_mean": 0.0,
+      "potential_sd": 0.0,
+      "shift_sd": 0.0,
+      "absolute_shift_quantiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "timeout_count": 0,
+      "true_terminal_count": 4,
+      "early_true_terminal_count": 0,
+      "terminal_conditioned_min_max": [
+        -0.049208614975214005,
+        -0.009077154099941254
+      ]
+    },
+    "cases": 24,
+    "qualified_cells": 24,
+    "complete_cells": 24,
+    "all_qualified": true,
+    "disqualification_reasons": [],
+    "rmse_kw": 59.650477806134255,
+    "case_rmse_p75_p90_kw": [
+      69.19729665992445,
+      92.37647268910244
+    ],
+    "biased_relief_mw": 5.438905650979795,
+    "cash_usd": -101020.88657150471,
+    "battery_26h_mwh": 0.15663786349856915,
+    "rmse_ratio_to_bc": 0.9945521526129665,
+    "rmse_ratio_to_guided": 0.29028968708262076,
+    "rmse_delta_to_bc_kw": -0.32674676616773723,
+    "biased_relief_delta_to_bc_mw": 0.015427057203655004,
+    "cash_delta_to_bc_usd": 3.8405365564103704,
+    "extension_qualified": true,
+    "stability_vs_guided": true,
+    "increment_vs_bc": false
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "condition": {
+      "start_day": 50,
+      "regd_load_bias": 0.25,
+      "seed": 1993832544,
+      "curriculum_cycle": 0,
+      "curriculum_position": 4
+    },
+    "steps": 0,
+    "done": false,
+    "service": null,
+    "not_a_complete_episode": true
+  },
+  {
+    "condition": {
+      "start_day": 332,
+      "regd_load_bias": 0.5,
+      "seed": 2224067636,
+      "curriculum_cycle": 0,
+      "curriculum_position": 5
+    },
+    "steps": 0,
+    "done": false,
+    "service": null,
+    "not_a_complete_episode": true
+  },
+  {
+    "condition": {
+      "start_day": 81,
+      "regd_load_bias": 0.0,
+      "seed": 3217161439,
+      "curriculum_cycle": 0,
+      "curriculum_position": 6
+    },
+    "steps": 0,
+    "done": false,
+    "service": null,
+    "not_a_complete_episode": true
+  },
+  {
+    "condition": {
+      "start_day": 227,
+      "regd_load_bias": 0.25,
+      "seed": 1549223242,
+      "curriculum_cycle": 0,
+      "curriculum_position": 7
+    },
+    "steps": 0,
+    "done": false,
+    "service": null,
+    "not_a_complete_episode": true
+  }
+]

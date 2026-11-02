@@ -1,0 +1,40 @@
+{
+  "schema": "causal-six-feature-regd-mean-ridge-v1",
+  "training_registration_id": "60d89d2a1cadf9b810843826530f3f229b914291629cb19e3717326f4d3e75cd",
+  "features": [
+    "current_regd",
+    "previous_window_regd_mean",
+    "current_lmp_over_200",
+    "current_grid_load_normalized",
+    "sin_clock",
+    "cos_clock"
+  ],
+  "target": "mean(history[t:t+180,6]) from pre-action service records",
+  "ridge_penalty": 10.0,
+  "center": [
+    0.00328151608900616,
+    0.005371798856694673,
+    0.19517201660200953,
+    0.5480302695598868,
+    7.370165434740352e-17,
+    -3.673758828013105e-17
+  ],
+  "scale": [
+    0.33296599614508404,
+    0.3132072358207186,
+    0.07952494359769317,
+    0.1123666757363868,
+    0.7071067811865475,
+    0.7071067811865476
+  ],
+  "coefficients": [
+    0.24954077970824504,
+    0.024311510362762096,
+    -0.014878255053422622,
+    0.015223404506086518,
+    -0.016124812648785448,
+    -0.018648527008219822
+  ],
+  "intercept": 0.0038305851711764095,
+  "constant_columns": []
+}
