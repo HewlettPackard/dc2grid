@@ -1,0 +1,3159 @@
+{
+  "schema": "dc2grid-tracking-portable-replay-v1",
+  "original_head": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "archive_root_label": "/workspace/IBM/temp/dc2grid-repos/dc2grid",
+  "archive_root_label_is_never_an_execution_fallback": true,
+  "files": {
+    "outputs/high_macro_recovery_pilot_20261031_v3/macro_task.py": {
+      "sha256": "b85f5955c71f5230717f0951decc7177f8399bb23e0383d5be3e402f1f5695e1",
+      "size_bytes": 27254,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:input_hashes",
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/high_macro_recovery_pilot_20261031_v3/prepare.py": {
+      "sha256": "c7facafb75f3b5ea46303b6bfba131c615a98c14fffe49b753280a9dac657f39",
+      "size_bytes": 11906,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:input_hashes",
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/high_macro_recovery_pilot_20261031_v3/recovery_ops.py": {
+      "sha256": "45395520fd57814fac7551c0c0e19382f921f25b3e6add2592cbc1762fc8a069",
+      "size_bytes": 7646,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:input_hashes",
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/high_macro_recovery_pilot_20261031_v3/study_common.py": {
+      "sha256": "eb581e457e13091464b946501cdb70fece97bcaf4089e6d6abb571f706a8eee8",
+      "size_bytes": 7291,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:input_hashes",
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ]
+    },
+    "baselines/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "baselines/bang_bang.py": {
+      "sha256": "f97345bd5723885a1df5d5f826920c9f3f148bec8ba476d0a59cb5f4d2f2119d",
+      "size_bytes": 4920,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "baselines/pid_controller.py": {
+      "sha256": "420a38c6098e653ecf5b40fbf6201542512be19f2b7b4c52e0cd1ccb80db3d1d",
+      "size_bytes": 7152,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "baselines/rule_based_macro.py": {
+      "sha256": "42dc8bc42245556d23e41019fed400fc2d3dfafdc34fe61b0574011571d9bdc3",
+      "size_bytes": 3813,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "baselines/rule_based_mpc.py": {
+      "sha256": "342c978a0ee52acbebe3cb51b53ec6c1945d7bfda20eea77c4dcb8d01f662524",
+      "size_bytes": 8378,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/__init__.py": {
+      "sha256": "8d0bd53367b910a3e2bf04d86f388ffcf5068957d9a931d81cd1b240ea366905",
+      "size_bytes": 502,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/env_high_level.py": {
+      "sha256": "28fc67d639dffa74aa3c57d8ec056fd1701381f3b9f3a5f2eb8fb61c5b958c97",
+      "size_bytes": 30423,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/env_low_level.py": {
+      "sha256": "5af3087eebdb5576280a3c4bcdd3f410d67eb5d01c2a67c7f07c0c1197f2a1bc",
+      "size_bytes": 44720,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/experiments/__init__.py": {
+      "sha256": "b340890df4770fbd38a80a5b7707f6d925362c2658b16e9de0898d6395046a1c",
+      "size_bytes": 358,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/experiments/action_ablation_env.py": {
+      "sha256": "5b4ae4bb55bb7aa73359302a5e0c2631849c8d0d0c51d60b4109d446f4f04822",
+      "size_bytes": 5739,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/experiments/identity.py": {
+      "sha256": "e847618db0f2c837c38a3cad13cafba8ffac5201c02b74ff61f5a26c99090d03",
+      "size_bytes": 3793,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/obs_indices.py": {
+      "sha256": "881e9a8107d5b2645d3e11a3089fb2334e1e946d6a949221dc1b5bec5ee3ec10",
+      "size_bytes": 2236,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/physics/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/physics/bess.py": {
+      "sha256": "7f8621c4db624a559b3e16b982ce4c74cde58e1bc5fca403338fe8121b2a9ad0",
+      "size_bytes": 13597,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/physics/electrical.py": {
+      "sha256": "8bb8869bcbab04c25dd3eb2054fcc5a818f9c26b90179a1f2d0e72dfe77bcee1",
+      "size_bytes": 18033,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/physics/macro_grid.py": {
+      "sha256": "ffadb41d1883481deeb7dff9d13506b8cd3c16dd747aa8fb740cb18261b2994d",
+      "size_bytes": 32944,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/physics/thermal.py": {
+      "sha256": "7d81bd173f5442fde8c3661763031eda03d3cdbdffd886181436eee9ef388729",
+      "size_bytes": 14240,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/physics/weather.py": {
+      "sha256": "f00a81fa6560bcc4bfe6fdfd14bcaa1065d5d2325f7ec25b1b16dfb71d01d59d",
+      "size_bytes": 17840,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/physics/workload.py": {
+      "sha256": "00ec3849157e73b9bd5fe5cd25286463d7c5b0ff82dc72ffb515f4ef7927dddc",
+      "size_bytes": 15476,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/replay.py": {
+      "sha256": "c09bb0514ef14a0398c5daf76c79b60f65dc42c4b333ca54adbcaa37106bfe77",
+      "size_bytes": 1534,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/semantics.py": {
+      "sha256": "9a7525a4e7b63b463cbd0862e9a3ddecb3740744e258b84bea358167231f4aae",
+      "size_bytes": 403,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "c2g_env/thermal_limits.py": {
+      "sha256": "c86f2b5136a01d432c43e9226e07df41e843f49951dc6978a1eb606ea0923650",
+      "size_bytes": 2313,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "outputs/rl_state_local_20261101/forecast.py": {
+      "sha256": "eb14e0d5821b38899446b537032a576d411a91294d8f7e581bad2952db69c58e",
+      "size_bytes": 7975,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_state_local_20261101/market_policy.py": {
+      "sha256": "3be46d38d0673e4f11e866a639b068aa9ca5dce6f0afccc7391c7730929f3acc",
+      "size_bytes": 5675,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_state_local_20261101/panel.py": {
+      "sha256": "d52ab1c33191969a70368cafc1fdc6d3b12338e4ccc44ebb7fe10288fa803eb0",
+      "size_bytes": 16075,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_state_local_20261101/study.py": {
+      "sha256": "d23d5472d0ab4238a80da78b0b51151994a3d07d53a1ba03bd29368eab0cdcc9",
+      "size_bytes": 2736,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/common.py": {
+      "sha256": "709e3fb89f28e1edfbc0f61028b1cd0c8c15822be29bd0594d6932caaffa4d0a",
+      "size_bytes": 5215,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:code_hashes",
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/controllers.py": {
+      "sha256": "7b7fc7b23ca23fa7a68b8a74f865b76d67ae37990416ef3ede8093afdb3278ec",
+      "size_bytes": 9785,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:code_hashes",
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/evaluate.py": {
+      "sha256": "442e411197ff6047b791c101d98dd24fcc969efb9f979e959391a8134640cee7",
+      "size_bytes": 17791,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:code_hashes",
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/history_policy.py": {
+      "sha256": "f0f8cb8539761296aca383d17d0d7396772d22be80d446f9684f4df02b11e4a7",
+      "size_bytes": 2613,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:code_hashes",
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/prepare_study.py": {
+      "sha256": "e8c3bcf89af466d7d5b53fdc19f77cd18ae5e47e9382ee7a2cf6bb2e5dca9be5",
+      "size_bytes": 10977,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:code_hashes",
+        "outputs/rl_state_local_20261101/registration.json:source_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:source_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/reports/analyze_final.py": {
+      "sha256": "3453ff91e62ca44e6cb8d40ae09f232ec75fb208afcd8e5f28c03b766e1c949c",
+      "size_bytes": 15734,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/reports/recompute_comparators.py": {
+      "sha256": "0e851fe3143d2d323561b90f8af3e400ab5b7ddb21f165b479b8dea3e3922e05",
+      "size_bytes": 6557,
+      "tracked": true,
+      "kinds": [
+        "runtime_source"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/physical_recovery_eval_20261031/environment.yaml": {
+      "sha256": "fefc727951679cd3d2b724f046d67786c204250f6ab14d63aabe4277ac9fe5b8",
+      "size_bytes": 3846,
+      "tracked": true,
+      "kinds": [
+        "runtime_config"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:input_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "c2g_env/config.yaml": {
+      "sha256": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6",
+      "size_bytes": 11680,
+      "tracked": true,
+      "kinds": [
+        "runtime_config"
+      ],
+      "hash_authorities": [
+        "reproducibility/table2/integration.json:sources"
+      ],
+      "required_by_some_supported_replay": true,
+      "producer_hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ]
+    },
+    "data/processed/energy/NYC.csv": {
+      "sha256": "db33c788d440f5ba4aa0d4b968a409d428107b92c87c49ecee0c1823e5069203",
+      "size_bytes": 3159458,
+      "tracked": true,
+      "kinds": [
+        "scientific_data"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "data/processed/weather/NYC.csv": {
+      "sha256": "0a32b8fe345d6f5df1654b88c4d3f6664e32db1c231d3dea0083d2b0a22a8c46",
+      "size_bytes": 581193,
+      "tracked": true,
+      "kinds": [
+        "scientific_data"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "data/processed/workload_traces/batch_v2023.csv": {
+      "sha256": "52a5430a998a43a4eea0183ccee82dd88e02a6097cb49e3b17deb38fdb5daae9",
+      "size_bytes": 130593,
+      "tracked": true,
+      "kinds": [
+        "scientific_data"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "data/processed/workload_traces/dlrm_v2025.csv": {
+      "sha256": "e6336e6d67cbeef8fabd652c7d04279dfc6a41c7a93a500b8c5330d8699bf63e",
+      "size_bytes": 205906,
+      "tracked": true,
+      "kinds": [
+        "scientific_data"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "data/processed/workload_traces/genai_v2026.csv": {
+      "sha256": "8fa72a4f2b343ffda2742c8d656ea1107b8bdc9088f3c7eba4b1a2f7608aecf8",
+      "size_bytes": 9467,
+      "tracked": true,
+      "kinds": [
+        "scientific_data"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:frozen_physics"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/registration.json": {
+      "sha256": "32e136a3db4d350492e7063fbed9a5d72240835ae2f435e8ae67144a924f5b29",
+      "size_bytes": 31828,
+      "tracked": true,
+      "kinds": [
+        "authorization_document"
+      ],
+      "hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/final_registration.json": {
+      "sha256": "42f57bd98b84bc640da845e163fac4db1d571e126e455d9f29dd9326bd5fe455",
+      "size_bytes": 105194,
+      "tracked": true,
+      "kinds": [
+        "authorization_document"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/final_candidate_lock.json": {
+      "sha256": "4ada21ee303febc7ee4861cbdd5be9245d5d738036caf0e5489c887d3b1d9617",
+      "size_bytes": 32521,
+      "tracked": true,
+      "kinds": [
+        "authorization_document"
+      ],
+      "hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/final_regression/manifest.json": {
+      "sha256": "2cdd7e2f34bf7bc13d83610cea9a66e4881d9a71576864ba4ada0feb4adb82e2",
+      "size_bytes": 153271,
+      "tracked": true,
+      "kinds": [
+        "consumed_manifest"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/final_regression/summary.json": {
+      "sha256": "00e3cb5ad94f18e9010e1b06844d29fd5ef2f7348f72b247c7a02bc4a8480ffa",
+      "size_bytes": 7790276,
+      "tracked": true,
+      "kinds": [
+        "consumed_result"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/registration.json": {
+      "sha256": "ae7a5fa1f3a33bc96e729255f3c95591d8920e112a0c751af5860801c8f0d2fd",
+      "size_bytes": 58794,
+      "tracked": true,
+      "kinds": [
+        "authorization_document"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/candidate_lock.json": {
+      "sha256": "2fe808676c103e012cf1a562997f2e7efde1d68f72671c56c36e3c8e648ee646",
+      "size_bytes": 44111,
+      "tracked": true,
+      "kinds": [
+        "authorization_document"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/regression_registration.json": {
+      "sha256": "b97e0a7f8487e168e7dd1c6014497b622a91bf758439032ffe9b84fef50fd198",
+      "size_bytes": 60067,
+      "tracked": true,
+      "kinds": [
+        "authorization_document"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json": {
+      "sha256": "2c65f629f8fc5eb0bde6b4b50012a4b6564c995f94dd717418d7c007661192be",
+      "size_bytes": 23767,
+      "tracked": true,
+      "kinds": [
+        "consumed_manifest"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/peak_regression/summary.json": {
+      "sha256": "84d8ed0c1145fbe9ef81978e9e66daa45f2293066e0f1594b2db66755adc1a5e",
+      "size_bytes": 6988793,
+      "tracked": true,
+      "kinds": [
+        "consumed_result"
+      ],
+      "hash_authorities": [
+        "original_git_HEAD:34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip": {
+      "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024",
+      "size_bytes": 3227384,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/final_regression/manifest.json:policies",
+        "outputs/table2_distress_rl_20261031/final_sealed/manifest.json:policies",
+        "outputs/rl_state_local_20261101/development_baselines/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/bc_v1/history_1100/best_bc.zip": {
+      "sha256": "040f12daee07d1d11f35f96b630bd9e2be3a1838feee317a5ea494419239f175",
+      "size_bytes": 432858,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:input_hashes",
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes",
+        "outputs/table2_distress_rl_20261031/final_regression/manifest.json:policies",
+        "outputs/table2_distress_rl_20261031/final_sealed/manifest.json:policies",
+        "outputs/rl_state_local_20261101/development_baselines/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/bc_v1/history_1101/best_bc.zip": {
+      "sha256": "a37aece4596854f0c827442fb2a8db947396a0606e544b0637e0372f6818a0fe",
+      "size_bytes": 432858,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:input_hashes",
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes",
+        "outputs/table2_distress_rl_20261031/final_regression/manifest.json:policies",
+        "outputs/table2_distress_rl_20261031/final_sealed/manifest.json:policies",
+        "outputs/rl_state_local_20261101/development_baselines/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/bc_v1/history_1102/best_bc.zip": {
+      "sha256": "310639f3904a50975e79cd61c11e5bb24a5f86a5259efbcb8082c1ee6322ec57",
+      "size_bytes": 432858,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:input_hashes",
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes",
+        "outputs/table2_distress_rl_20261031/final_regression/manifest.json:policies",
+        "outputs/table2_distress_rl_20261031/final_sealed/manifest.json:policies",
+        "outputs/rl_state_local_20261101/development_baselines/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/bc_v1/history_1103/best_bc.zip": {
+      "sha256": "17b9357e8f04a6814bc8685bfafd394a454e606ea9a982a8ea2b18c0859ce9ed",
+      "size_bytes": 432862,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/table2_distress_rl_20261031/registration.json:input_hashes",
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes",
+        "outputs/table2_distress_rl_20261031/final_regression/manifest.json:policies",
+        "outputs/table2_distress_rl_20261031/final_sealed/manifest.json:policies",
+        "outputs/rl_state_local_20261101/development_baselines/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/runs/guided_sac_1100/step_4096.zip": {
+      "sha256": "93a3e235e3ffce409151f9dbabe65ac6b0bebb89e27b714c867fde6b5c381ee1",
+      "size_bytes": 979269,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes",
+        "outputs/table2_distress_rl_20261031/final_regression/manifest.json:policies",
+        "outputs/table2_distress_rl_20261031/final_sealed/manifest.json:policies",
+        "outputs/rl_state_local_20261101/development_baselines/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/runs/guided_sac_1101/step_8192.zip": {
+      "sha256": "53e8992f64507e9098ed12d346e43c0239b66586e9b6163006aaee7eb59dc1e5",
+      "size_bytes": 979302,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes",
+        "outputs/table2_distress_rl_20261031/final_regression/manifest.json:policies",
+        "outputs/table2_distress_rl_20261031/final_sealed/manifest.json:policies",
+        "outputs/rl_state_local_20261101/development_baselines/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_4096.zip": {
+      "sha256": "30a942428ae2918649d19faed5bf13e2149b2ff460cbb0de7d2e585a71627a01",
+      "size_bytes": 979273,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes",
+        "outputs/table2_distress_rl_20261031/final_regression/manifest.json:policies",
+        "outputs/table2_distress_rl_20261031/final_sealed/manifest.json:policies",
+        "outputs/rl_state_local_20261101/development_baselines/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip": {
+      "sha256": "0cf65bada29818b690e6e7bc59a40c35351d096f6cb1a58b1aa88fd035ba200d",
+      "size_bytes": 979275,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_state_local_20261101/registration.json:input_hashes",
+        "outputs/rl_value_conditioning_20261101/registration.json:input_hashes",
+        "outputs/table2_distress_rl_20261031/final_regression/manifest.json:policies",
+        "outputs/table2_distress_rl_20261031/final_sealed/manifest.json:policies",
+        "outputs/rl_state_local_20261101/development_baselines/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1100/step_552960.zip": {
+      "sha256": "67b0d09dd13b0c83eb4a1be54adbcd222258187d374a293c892a83d3e8c39bff",
+      "size_bytes": 935992,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1101/step_552960.zip": {
+      "sha256": "6f427d9681d383df2e7c1ffe83c6a3cf5f2e360f03bbb235ee9f6a7b0486867c",
+      "size_bytes": 935992,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1102/step_552960.zip": {
+      "sha256": "11ec77a86a0fc5ad5c84faa8b22e7202fb7ed9cea3f2a1b4885aea5b1d6cb555",
+      "size_bytes": 935988,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1103/step_552960.zip": {
+      "sha256": "04b787af4f80e28b0861ac6c6272020c51aa998432fa23f267952cae4e0e8962",
+      "size_bytes": 935988,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1100/step_552960.zip": {
+      "sha256": "c3a5318bc538bd4f1e6743446f0564559666472242943aaa5a355b49c3642e65",
+      "size_bytes": 936175,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1101/step_552960.zip": {
+      "sha256": "0641ccf157d99bd3d79ffe64b3165c4655e4af0bc85b905ec4ca12db2089dc3d",
+      "size_bytes": 936175,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1102/step_552960.zip": {
+      "sha256": "232402344d9533754b063509e0434f78d9ab06de4ec808fa641d3404c82424ce",
+      "size_bytes": 936171,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1103/step_552960.zip": {
+      "sha256": "056923855df7fc3ae1242bdac17dc9f6af0416ffd33defabdf1b1ff854fe8ca9",
+      "size_bytes": 936171,
+      "tracked": true,
+      "kinds": [
+        "selected_model"
+      ],
+      "hash_authorities": [
+        "outputs/rl_value_conditioning_20261101/full_macro_readiness/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json:policies",
+        "outputs/rl_value_conditioning_20261101/final_B/manifest.json:policies"
+      ],
+      "required_by_some_supported_replay": true
+    }
+  },
+  "runtime": {
+    "module_files": {
+      "analyze_final": "outputs/table2_distress_rl_20261031/reports/analyze_final.py",
+      "baselines": "baselines/__init__.py",
+      "baselines.bang_bang": "baselines/bang_bang.py",
+      "baselines.pid_controller": "baselines/pid_controller.py",
+      "baselines.rule_based_macro": "baselines/rule_based_macro.py",
+      "baselines.rule_based_mpc": "baselines/rule_based_mpc.py",
+      "c2g_env": "c2g_env/__init__.py",
+      "c2g_env.env_high_level": "c2g_env/env_high_level.py",
+      "c2g_env.env_low_level": "c2g_env/env_low_level.py",
+      "c2g_env.experiments": "c2g_env/experiments/__init__.py",
+      "c2g_env.experiments.action_ablation_env": "c2g_env/experiments/action_ablation_env.py",
+      "c2g_env.experiments.identity": "c2g_env/experiments/identity.py",
+      "c2g_env.obs_indices": "c2g_env/obs_indices.py",
+      "c2g_env.physics": "c2g_env/physics/__init__.py",
+      "c2g_env.physics.bess": "c2g_env/physics/bess.py",
+      "c2g_env.physics.electrical": "c2g_env/physics/electrical.py",
+      "c2g_env.physics.macro_grid": "c2g_env/physics/macro_grid.py",
+      "c2g_env.physics.thermal": "c2g_env/physics/thermal.py",
+      "c2g_env.physics.weather": "c2g_env/physics/weather.py",
+      "c2g_env.physics.workload": "c2g_env/physics/workload.py",
+      "c2g_env.replay": "c2g_env/replay.py",
+      "c2g_env.semantics": "c2g_env/semantics.py",
+      "c2g_env.thermal_limits": "c2g_env/thermal_limits.py",
+      "common": "outputs/table2_distress_rl_20261031/common.py",
+      "controllers": "outputs/table2_distress_rl_20261031/controllers.py",
+      "evaluate": "outputs/table2_distress_rl_20261031/evaluate.py",
+      "forecast": "outputs/rl_state_local_20261101/forecast.py",
+      "history_policy": "outputs/table2_distress_rl_20261031/history_policy.py",
+      "macro_task": "outputs/high_macro_recovery_pilot_20261031_v3/macro_task.py",
+      "market_policy": "outputs/rl_state_local_20261101/market_policy.py",
+      "panel": "outputs/rl_state_local_20261101/panel.py",
+      "prepare": "outputs/high_macro_recovery_pilot_20261031_v3/prepare.py",
+      "prepare_study": "outputs/table2_distress_rl_20261031/prepare_study.py",
+      "recompute_comparators": "outputs/table2_distress_rl_20261031/reports/recompute_comparators.py",
+      "recovery_ops": "outputs/high_macro_recovery_pilot_20261031_v3/recovery_ops.py",
+      "study": "outputs/rl_state_local_20261101/study.py",
+      "study_common": "outputs/high_macro_recovery_pilot_20261031_v3/study_common.py"
+    },
+    "import_directories": [
+      "outputs/table2_distress_rl_20261031",
+      "outputs/rl_state_local_20261101",
+      "outputs/high_macro_recovery_pilot_20261031_v3",
+      "outputs/table2_distress_rl_20261031/reports"
+    ],
+    "source_files": [
+      "outputs/high_macro_recovery_pilot_20261031_v3/macro_task.py",
+      "outputs/high_macro_recovery_pilot_20261031_v3/prepare.py",
+      "outputs/high_macro_recovery_pilot_20261031_v3/recovery_ops.py",
+      "outputs/high_macro_recovery_pilot_20261031_v3/study_common.py",
+      "baselines/__init__.py",
+      "baselines/bang_bang.py",
+      "baselines/pid_controller.py",
+      "baselines/rule_based_macro.py",
+      "baselines/rule_based_mpc.py",
+      "c2g_env/__init__.py",
+      "c2g_env/env_high_level.py",
+      "c2g_env/env_low_level.py",
+      "c2g_env/experiments/__init__.py",
+      "c2g_env/experiments/action_ablation_env.py",
+      "c2g_env/experiments/identity.py",
+      "c2g_env/obs_indices.py",
+      "c2g_env/physics/__init__.py",
+      "c2g_env/physics/bess.py",
+      "c2g_env/physics/electrical.py",
+      "c2g_env/physics/macro_grid.py",
+      "c2g_env/physics/thermal.py",
+      "c2g_env/physics/weather.py",
+      "c2g_env/physics/workload.py",
+      "c2g_env/replay.py",
+      "c2g_env/semantics.py",
+      "c2g_env/thermal_limits.py",
+      "outputs/rl_state_local_20261101/forecast.py",
+      "outputs/rl_state_local_20261101/market_policy.py",
+      "outputs/rl_state_local_20261101/panel.py",
+      "outputs/rl_state_local_20261101/study.py",
+      "outputs/table2_distress_rl_20261031/common.py",
+      "outputs/table2_distress_rl_20261031/controllers.py",
+      "outputs/table2_distress_rl_20261031/evaluate.py",
+      "outputs/table2_distress_rl_20261031/history_policy.py",
+      "outputs/table2_distress_rl_20261031/prepare_study.py",
+      "outputs/table2_distress_rl_20261031/reports/analyze_final.py",
+      "outputs/table2_distress_rl_20261031/reports/recompute_comparators.py"
+    ],
+    "config_files": [
+      "outputs/physical_recovery_eval_20261031/environment.yaml",
+      "c2g_env/config.yaml"
+    ],
+    "data_files": [
+      "data/processed/energy/NYC.csv",
+      "data/processed/weather/NYC.csv",
+      "data/processed/workload_traces/batch_v2023.csv",
+      "data/processed/workload_traces/dlrm_v2025.csv",
+      "data/processed/workload_traces/genai_v2026.csv"
+    ],
+    "data_directories": {
+      "trace_dir": "data/processed/workload_traces",
+      "energy_dir": "data/processed/energy",
+      "weather_dir": "data/processed/weather"
+    },
+    "cpu_only": true,
+    "python": "3.11",
+    "observed_environment_versions": {
+      "torch": "2.6.0+cu124",
+      "matplotlib": "3.11.2",
+      "numpy": "2.4.4",
+      "pytest": "9.2.0",
+      "PyYAML": "6.0.3",
+      "gymnasium": "1.2.3",
+      "pandas": "3.1.0",
+      "cloudpickle": "3.1.2",
+      "stable_baselines3": "2.7.1"
+    },
+    "model_recorded_versions": {
+      "numpy": "2.4.4",
+      "torch": "2.6.0",
+      "stable-baselines3": "2.7.1",
+      "gymnasium": "1.2.3",
+      "cloudpickle": "3.1.2"
+    }
+  },
+  "panels": {
+    "table2_regression": {
+      "directory": "outputs/table2_distress_rl_20261031/final_regression",
+      "protocol": "outputs/table2_distress_rl_20261031/final_registration.json",
+      "evaluator": "table2",
+      "authorization": "table2_final",
+      "role": "regression",
+      "metrics_csv": "outputs/table2_distress_rl_20261031/reports/final_episode_metrics.csv",
+      "metrics_panel": "regression",
+      "summary": "outputs/table2_distress_rl_20261031/final_regression/summary.json",
+      "manifest": "outputs/table2_distress_rl_20261031/final_regression/manifest.json",
+      "episodes": 840,
+      "runtime_failures": 0,
+      "physical_gate_failures": 4,
+      "policy_ids": [
+        "rule__rule_hardware",
+        "rule__pid",
+        "rule__bang_bang",
+        "rule__old_sac",
+        "rule__cooling_first",
+        "rule__bc_only_1100",
+        "rule__bc_only_1101",
+        "rule__bc_only_1102",
+        "rule__bc_only_1103",
+        "rule__guided_sac_1100",
+        "rule__guided_sac_1101",
+        "rule__guided_sac_1102",
+        "rule__guided_sac_1103"
+      ]
+    },
+    "value_peak_regression": {
+      "directory": "outputs/rl_value_conditioning_20261101/peak_regression",
+      "protocol": "outputs/rl_value_conditioning_20261101/regression_registration.json",
+      "evaluator": "state",
+      "authorization": "value_regression",
+      "role": "regression",
+      "summary": "outputs/rl_value_conditioning_20261101/peak_regression/summary.json",
+      "manifest": "outputs/rl_value_conditioning_20261101/peak_regression/manifest.json",
+      "episodes": 480,
+      "runtime_failures": 0,
+      "physical_gate_failures": 0,
+      "policy_ids": [
+        "rule__union_conditioned_1100",
+        "rule__union_conditioned_1101",
+        "rule__union_conditioned_1102",
+        "rule__union_conditioned_1103",
+        "rule__union_original_1100",
+        "rule__union_original_1101",
+        "rule__union_original_1102",
+        "rule__union_original_1103"
+      ]
+    }
+  },
+  "models": {
+    "outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip": {
+      "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024",
+      "family": "old_sac",
+      "training_seed": 1007,
+      "checkpoint_num_timesteps": 250002,
+      "checkpoint_n_updates": 240000,
+      "selected_supervised_updates": null,
+      "feature_contract": null,
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "stage": "low",
+        "seed": 1007,
+        "training_seed": 1007
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": true,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__old_sac",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__old_sac",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "rule__old_sac",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "full_residual__old_sac",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "state_development",
+          "policy_id": "old_sac",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__old_sac",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__old_sac",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__old_sac",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/bc_v1/history_1100/best_bc.zip": {
+      "sha256": "040f12daee07d1d11f35f96b630bd9e2be3a1838feee317a5ea494419239f175",
+      "family": "bc_only",
+      "training_seed": 1100,
+      "checkpoint_num_timesteps": 0,
+      "checkpoint_n_updates": 0,
+      "selected_supervised_updates": 11000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1100,
+        "online_transitions": 0
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": true,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__bc_only_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__bc_only_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "rule__bc_only_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "full_residual__bc_only_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "state_development",
+          "policy_id": "bc_only_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__bc_only_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__bc_only_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__bc_only_1100",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/bc_v1/history_1101/best_bc.zip": {
+      "sha256": "a37aece4596854f0c827442fb2a8db947396a0606e544b0637e0372f6818a0fe",
+      "family": "bc_only",
+      "training_seed": 1101,
+      "checkpoint_num_timesteps": 0,
+      "checkpoint_n_updates": 0,
+      "selected_supervised_updates": 12000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1101,
+        "online_transitions": 0
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": true,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__bc_only_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__bc_only_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "rule__bc_only_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "full_residual__bc_only_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "state_development",
+          "policy_id": "bc_only_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__bc_only_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__bc_only_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__bc_only_1101",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/bc_v1/history_1102/best_bc.zip": {
+      "sha256": "310639f3904a50975e79cd61c11e5bb24a5f86a5259efbcb8082c1ee6322ec57",
+      "family": "bc_only",
+      "training_seed": 1102,
+      "checkpoint_num_timesteps": 0,
+      "checkpoint_n_updates": 0,
+      "selected_supervised_updates": 11000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1102,
+        "online_transitions": 0
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": true,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__bc_only_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__bc_only_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "rule__bc_only_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "full_residual__bc_only_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "state_development",
+          "policy_id": "bc_only_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__bc_only_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__bc_only_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__bc_only_1102",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/bc_v1/history_1103/best_bc.zip": {
+      "sha256": "17b9357e8f04a6814bc8685bfafd394a454e606ea9a982a8ea2b18c0859ce9ed",
+      "family": "bc_only",
+      "training_seed": 1103,
+      "checkpoint_num_timesteps": 0,
+      "checkpoint_n_updates": 0,
+      "selected_supervised_updates": 12000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1103,
+        "online_transitions": 0
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": true,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__bc_only_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__bc_only_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "rule__bc_only_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "full_residual__bc_only_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "state_development",
+          "policy_id": "bc_only_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__bc_only_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__bc_only_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__bc_only_1103",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/runs/guided_sac_1100/step_4096.zip": {
+      "sha256": "93a3e235e3ffce409151f9dbabe65ac6b0bebb89e27b714c867fde6b5c381ee1",
+      "family": "guided_sac",
+      "training_seed": 1100,
+      "checkpoint_num_timesteps": 4096,
+      "checkpoint_n_updates": 3328,
+      "selected_supervised_updates": 11000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1100,
+        "variant": "guided_sac",
+        "registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "online_transitions": 4096,
+        "sac_actor_updates": 3072,
+        "critic_updates": 3328
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": true,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__guided_sac_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__guided_sac_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "rule__guided_sac_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "full_residual__guided_sac_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "state_development",
+          "policy_id": "guided_sac_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__guided_sac_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__guided_sac_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__guided_sac_1100",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/runs/guided_sac_1101/step_8192.zip": {
+      "sha256": "53e8992f64507e9098ed12d346e43c0239b66586e9b6163006aaee7eb59dc1e5",
+      "family": "guided_sac",
+      "training_seed": 1101,
+      "checkpoint_num_timesteps": 8192,
+      "checkpoint_n_updates": 7424,
+      "selected_supervised_updates": 12000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1101,
+        "variant": "guided_sac",
+        "registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "online_transitions": 8192,
+        "sac_actor_updates": 7168,
+        "critic_updates": 7424
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": true,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__guided_sac_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__guided_sac_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "rule__guided_sac_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "full_residual__guided_sac_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "state_development",
+          "policy_id": "guided_sac_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__guided_sac_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__guided_sac_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__guided_sac_1101",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_4096.zip": {
+      "sha256": "30a942428ae2918649d19faed5bf13e2149b2ff460cbb0de7d2e585a71627a01",
+      "family": "guided_sac",
+      "training_seed": 1102,
+      "checkpoint_num_timesteps": 4096,
+      "checkpoint_n_updates": 3328,
+      "selected_supervised_updates": 11000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1102,
+        "variant": "guided_sac",
+        "registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "online_transitions": 4096,
+        "sac_actor_updates": 3072,
+        "critic_updates": 3328
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": true,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__guided_sac_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__guided_sac_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "rule__guided_sac_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "full_residual__guided_sac_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "state_development",
+          "policy_id": "guided_sac_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__guided_sac_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__guided_sac_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__guided_sac_1102",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip": {
+      "sha256": "0cf65bada29818b690e6e7bc59a40c35351d096f6cb1a58b1aa88fd035ba200d",
+      "family": "guided_sac",
+      "training_seed": 1103,
+      "checkpoint_num_timesteps": 4096,
+      "checkpoint_n_updates": 3328,
+      "selected_supervised_updates": 12000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1103,
+        "variant": "guided_sac",
+        "registration_id": "07263d18059a52bf587d66987127ea77d15005b5ec9eceb2347012b8b102fa48",
+        "online_transitions": 4096,
+        "sac_actor_updates": 3072,
+        "critic_updates": 3328
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": true,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "rule__guided_sac_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_regression",
+          "policy_id": "full_residual__guided_sac_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "rule__guided_sac_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "table2_sealed",
+          "policy_id": "full_residual__guided_sac_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "state_development",
+          "policy_id": "guided_sac_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__guided_sac_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__guided_sac_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__guided_sac_1103",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1100/step_552960.zip": {
+      "sha256": "67b0d09dd13b0c83eb4a1be54adbcd222258187d374a293c892a83d3e8c39bff",
+      "family": "union_original",
+      "training_seed": 1100,
+      "checkpoint_num_timesteps": 552960,
+      "checkpoint_n_updates": 552192,
+      "selected_supervised_updates": 11000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1100,
+        "variant": "union_original",
+        "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "online_transitions": 552960,
+        "sac_actor_updates": 551936,
+        "critic_updates": 552192,
+        "potential_used_at_deployment": false
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": false,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__union_original_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_original_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_original_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_original_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_original_1100",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1101/step_552960.zip": {
+      "sha256": "6f427d9681d383df2e7c1ffe83c6a3cf5f2e360f03bbb235ee9f6a7b0486867c",
+      "family": "union_original",
+      "training_seed": 1101,
+      "checkpoint_num_timesteps": 552960,
+      "checkpoint_n_updates": 552192,
+      "selected_supervised_updates": 12000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1101,
+        "variant": "union_original",
+        "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "online_transitions": 552960,
+        "sac_actor_updates": 551936,
+        "critic_updates": 552192,
+        "potential_used_at_deployment": false
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": false,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__union_original_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_original_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_original_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_original_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_original_1101",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1102/step_552960.zip": {
+      "sha256": "11ec77a86a0fc5ad5c84faa8b22e7202fb7ed9cea3f2a1b4885aea5b1d6cb555",
+      "family": "union_original",
+      "training_seed": 1102,
+      "checkpoint_num_timesteps": 552960,
+      "checkpoint_n_updates": 552192,
+      "selected_supervised_updates": 11000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1102,
+        "variant": "union_original",
+        "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "online_transitions": 552960,
+        "sac_actor_updates": 551936,
+        "critic_updates": 552192,
+        "potential_used_at_deployment": false
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": false,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__union_original_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_original_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_original_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_original_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_original_1102",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1103/step_552960.zip": {
+      "sha256": "04b787af4f80e28b0861ac6c6272020c51aa998432fa23f267952cae4e0e8962",
+      "family": "union_original",
+      "training_seed": 1103,
+      "checkpoint_num_timesteps": 552960,
+      "checkpoint_n_updates": 552192,
+      "selected_supervised_updates": 12000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1103,
+        "variant": "union_original",
+        "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "online_transitions": 552960,
+        "sac_actor_updates": 551936,
+        "critic_updates": 552192,
+        "potential_used_at_deployment": false
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": false,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__union_original_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_original_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_original_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_original_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_original_1103",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1100/step_552960.zip": {
+      "sha256": "c3a5318bc538bd4f1e6743446f0564559666472242943aaa5a355b49c3642e65",
+      "family": "union_conditioned",
+      "training_seed": 1100,
+      "checkpoint_num_timesteps": 552960,
+      "checkpoint_n_updates": 552192,
+      "selected_supervised_updates": 11000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1100,
+        "variant": "union_conditioned",
+        "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "online_transitions": 552960,
+        "sac_actor_updates": 551936,
+        "critic_updates": 552192,
+        "potential_used_at_deployment": false
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": false,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__union_conditioned_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_conditioned_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_conditioned_1100",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_conditioned_1100",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_conditioned_1100",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1101/step_552960.zip": {
+      "sha256": "0641ccf157d99bd3d79ffe64b3165c4655e4af0bc85b905ec4ca12db2089dc3d",
+      "family": "union_conditioned",
+      "training_seed": 1101,
+      "checkpoint_num_timesteps": 552960,
+      "checkpoint_n_updates": 552192,
+      "selected_supervised_updates": 12000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1101,
+        "variant": "union_conditioned",
+        "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "online_transitions": 552960,
+        "sac_actor_updates": 551936,
+        "critic_updates": 552192,
+        "potential_used_at_deployment": false
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": false,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__union_conditioned_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_conditioned_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_conditioned_1101",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_conditioned_1101",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_conditioned_1101",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1102/step_552960.zip": {
+      "sha256": "232402344d9533754b063509e0434f78d9ab06de4ec808fa641d3404c82424ce",
+      "family": "union_conditioned",
+      "training_seed": 1102,
+      "checkpoint_num_timesteps": 552960,
+      "checkpoint_n_updates": 552192,
+      "selected_supervised_updates": 11000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1102,
+        "variant": "union_conditioned",
+        "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "online_transitions": 552960,
+        "sac_actor_updates": 551936,
+        "critic_updates": 552192,
+        "potential_used_at_deployment": false
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": false,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__union_conditioned_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_conditioned_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_conditioned_1102",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_conditioned_1102",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_conditioned_1102",
+          "macro": "full_residual"
+        }
+      ]
+    },
+    "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1103/step_552960.zip": {
+      "sha256": "056923855df7fc3ae1242bdac17dc9f6af0416ffd33defabdf1b1ff854fe8ca9",
+      "family": "union_conditioned",
+      "training_seed": 1103,
+      "checkpoint_num_timesteps": 552960,
+      "checkpoint_n_updates": 552192,
+      "selected_supervised_updates": 12000,
+      "feature_contract": {
+        "id": "native18-own-command4-request-ema900s-clock-v1",
+        "dimension": 24,
+        "source": "original low observations, own previously executed action and clock",
+        "analytic_observer_or_projection": false,
+        "action": "pump_hvac_bess_full_work"
+      },
+      "simulation_mode": "physical_v1",
+      "context_identity": {
+        "seed": 1103,
+        "variant": "union_conditioned",
+        "registration_id": "c75cc32cc4b67aa0b94a1a22f6238753cf847061008894c4cc6b5338b999b1f6",
+        "online_transitions": 552960,
+        "sac_actor_updates": 551936,
+        "critic_updates": 552192,
+        "potential_used_at_deployment": false
+      },
+      "system_info": "- OS: Linux-6.8.0-138-generic-x86_64-with-glibc2.35 # 138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026\n- Python: 3.11.12\n- Stable-Baselines3: 2.7.1\n- PyTorch: 2.6.0+cu124\n- GPU Enabled: True\n- Numpy: 2.4.4\n- Cloudpickle: 3.1.2\n- Gymnasium: 1.2.3\n",
+      "checkpoint_is_not_final_training_budget": false,
+      "not_promoted": false,
+      "policy_slots": [
+        {
+          "snapshot": "value_full_development",
+          "policy_id": "full__union_conditioned_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "rule__union_conditioned_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_peak_regression",
+          "policy_id": "full_residual__union_conditioned_1103",
+          "macro": "full_residual"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "rule__union_conditioned_1103",
+          "macro": "rule"
+        },
+        {
+          "snapshot": "value_final_B",
+          "policy_id": "full_residual__union_conditioned_1103",
+          "macro": "full_residual"
+        }
+      ]
+    }
+  },
+  "representatives": [
+    {
+      "id": "table2_regression__rule__rule_hardware__d207_s100_b0p5",
+      "policy_spec": {
+        "snapshot": "table2_regression",
+        "policy_id": "rule__rule_hardware"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 100,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Consumed peak case; exact original low/macro identity.",
+      "original_episode": "outputs/table2_distress_rl_20261031/final_regression/rule__rule_hardware/d207_s100_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": true,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": true,
+        "floor_enforced": false,
+        "delivered_service_ratio": null,
+        "delivered_service_gate": null,
+        "publication_qualified": true,
+        "tracking_rmse_kw": 740.6884823073568,
+        "service_prefix_rmse_kw": 740.6884823073568,
+        "stress_facility_relief_mw": 2.75334545736865,
+        "LFR_pct": 2.867225502470895,
+        "SPDR_pct": 0.02702468301558093,
+        "LWSR_pct": 0.021743184685738447,
+        "LWCF_pct": 6.601932603890261,
+        "cashflow_26h_usd": -185674.90545913362,
+        "cashflow_closed_recovery_usd": -185674.90545913362,
+        "regulation_revenue_usd": 10729.447283080162,
+        "battery_throughput_26h_mwh": 32.153656928514444,
+        "service_battery_throughput_mwh": 29.19734856902723,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.30902448338864946,
+        "service_terminal_temp_A_C": 30.60389532042524,
+        "service_terminal_temp_B_C": 22.82182849585296,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945672,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": 0.0
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__rule_hardware/d207_s100_b0p5/hardware.csv.gz",
+          "sha256": "b82908eb559f37d43f78bab99b50ce74fbe505aa0c24f97519d4ca05c4aa2ee6",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__rule_hardware/d207_s100_b0p5/macro.csv.gz",
+          "sha256": "af286d9a348feeb5cce49ba6a2d5902702ec60a879f706adf57a03d6b6a82e48",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__rule_hardware/d207_s100_b0p5/recovery.csv.gz",
+          "sha256": "bb1118291ea31d17dc9186cd3bfff9f25a9912a852e4cda87849938bcd03b41d",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    },
+    {
+      "id": "table2_regression__rule__pid__d207_s100_b0p5",
+      "policy_spec": {
+        "snapshot": "table2_regression",
+        "policy_id": "rule__pid"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 100,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Consumed peak case; exact original low/macro identity.",
+      "original_episode": "outputs/table2_distress_rl_20261031/final_regression/rule__pid/d207_s100_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": true,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": true,
+        "floor_enforced": false,
+        "delivered_service_ratio": null,
+        "delivered_service_gate": null,
+        "publication_qualified": true,
+        "tracking_rmse_kw": 814.9494991326783,
+        "service_prefix_rmse_kw": 814.9494991326783,
+        "stress_facility_relief_mw": 3.208615293152879,
+        "LFR_pct": 3.3413255759552443,
+        "SPDR_pct": 0.03149325522677841,
+        "LWSR_pct": 0.02625848668265448,
+        "LWCF_pct": 7.972924015714272,
+        "cashflow_26h_usd": -184883.15926769373,
+        "cashflow_closed_recovery_usd": -184883.15926769373,
+        "regulation_revenue_usd": 10783.50557079213,
+        "battery_throughput_26h_mwh": 30.024774695727114,
+        "service_battery_throughput_mwh": 26.378733303468913,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.264483783208648,
+        "service_terminal_temp_A_C": 30.604131053130736,
+        "service_terminal_temp_B_C": 22.822454564772823,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945672,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": 0.0
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__pid/d207_s100_b0p5/hardware.csv.gz",
+          "sha256": "821259c86a35a10df9bf80b52ad79f9bb2c5e3577f3a7d78ebf21545320fbad6",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__pid/d207_s100_b0p5/macro.csv.gz",
+          "sha256": "d2d681804edf2447865f1ca05b2ef19a9717a6d41d4edc9cc3ea07d5a5a7780e",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__pid/d207_s100_b0p5/recovery.csv.gz",
+          "sha256": "a881c7fafca0262f4a45652b3c9d8367895ab5582c97039e8c47792b642da9fd",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    },
+    {
+      "id": "table2_regression__rule__bang_bang__d207_s100_b0p5",
+      "policy_spec": {
+        "snapshot": "table2_regression",
+        "policy_id": "rule__bang_bang"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 100,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Consumed peak case; exact original low/macro identity.",
+      "original_episode": "outputs/table2_distress_rl_20261031/final_regression/rule__bang_bang/d207_s100_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": true,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": true,
+        "floor_enforced": false,
+        "delivered_service_ratio": null,
+        "delivered_service_gate": null,
+        "publication_qualified": true,
+        "tracking_rmse_kw": 1291.1713675852484,
+        "service_prefix_rmse_kw": 1291.1713675852484,
+        "stress_facility_relief_mw": 2.973374418634259,
+        "LFR_pct": 3.0963549955879173,
+        "SPDR_pct": 0.029184315006741738,
+        "LWSR_pct": 0.025681494149113224,
+        "LWCF_pct": 7.797730460839774,
+        "cashflow_26h_usd": -185208.72130105324,
+        "cashflow_closed_recovery_usd": -185208.72130105324,
+        "regulation_revenue_usd": 10632.394031594558,
+        "battery_throughput_26h_mwh": 41.499585703661346,
+        "service_battery_throughput_mwh": 41.43524151215153,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.5044262296997151,
+        "service_terminal_temp_A_C": 30.60906819966914,
+        "service_terminal_temp_B_C": 22.822887237554795,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945672,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": 0.0
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__bang_bang/d207_s100_b0p5/hardware.csv.gz",
+          "sha256": "e678c04afdbbcb8b331516f208a1c07c6f62f0bb7e3fdbe70282049e57585887",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__bang_bang/d207_s100_b0p5/macro.csv.gz",
+          "sha256": "ada37ad3b855ed86951d8ade1c76b3f0141a2e523a8d571d5b71d740d075d687",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__bang_bang/d207_s100_b0p5/recovery.csv.gz",
+          "sha256": "62b33e043b863b8e010f6f13f36fa145d96f14be57f9bf775d6409f67691477a",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    },
+    {
+      "id": "table2_regression__rule__old_sac__d207_s100_b0p5",
+      "policy_spec": {
+        "snapshot": "table2_regression",
+        "policy_id": "rule__old_sac"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 100,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Consumed peak case; exact original low/macro identity.",
+      "original_episode": "outputs/table2_distress_rl_20261031/final_regression/rule__old_sac/d207_s100_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": true,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": true,
+        "floor_enforced": false,
+        "delivered_service_ratio": null,
+        "delivered_service_gate": null,
+        "publication_qualified": true,
+        "tracking_rmse_kw": 327.64424075812826,
+        "service_prefix_rmse_kw": 327.64424075812826,
+        "stress_facility_relief_mw": 3.2872327478709606,
+        "LFR_pct": 3.423194696484153,
+        "SPDR_pct": 0.03226490260127039,
+        "LWSR_pct": 0.03283357070551364,
+        "LWCF_pct": 9.969331727428358,
+        "cashflow_26h_usd": -184107.14498555992,
+        "cashflow_closed_recovery_usd": -184107.14498555992,
+        "regulation_revenue_usd": 10932.738234773282,
+        "battery_throughput_26h_mwh": 29.616280925467102,
+        "service_battery_throughput_mwh": 26.012091894526172,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.7479903997053692,
+        "service_terminal_temp_A_C": 30.53053883515371,
+        "service_terminal_temp_B_C": 22.813066077483352,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945673,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": -1.8189894035458565e-12
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__old_sac/d207_s100_b0p5/hardware.csv.gz",
+          "sha256": "fdf64432968a52275f2572e7eb3eb7b78a1d5575fbb1d66d10ef44822f457701",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__old_sac/d207_s100_b0p5/macro.csv.gz",
+          "sha256": "a6e4b83889e24fbb51a9876e812a59348c8959e089a917437b5825314479667f",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__old_sac/d207_s100_b0p5/recovery.csv.gz",
+          "sha256": "9d70b295d68af50003128577c21bf5b9dc2e9413b683e9cfd70113e33459e816",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    },
+    {
+      "id": "table2_regression__rule__cooling_first__d207_s100_b0p5",
+      "policy_spec": {
+        "snapshot": "table2_regression",
+        "policy_id": "rule__cooling_first"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 100,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Consumed peak case; exact original low/macro identity.",
+      "original_episode": "outputs/table2_distress_rl_20261031/final_regression/rule__cooling_first/d207_s100_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": true,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": true,
+        "floor_enforced": false,
+        "delivered_service_ratio": null,
+        "delivered_service_gate": null,
+        "publication_qualified": true,
+        "tracking_rmse_kw": 0.1060329532176399,
+        "service_prefix_rmse_kw": 0.1060329532176399,
+        "stress_facility_relief_mw": 2.9876355713720915,
+        "LFR_pct": 3.1112059982890545,
+        "SPDR_pct": 0.029324291314889075,
+        "LWSR_pct": 0.03159953271981924,
+        "LWCF_pct": 9.594637967983878,
+        "cashflow_26h_usd": -184298.06256533472,
+        "cashflow_closed_recovery_usd": -184298.06256533472,
+        "regulation_revenue_usd": 11089.483805468684,
+        "battery_throughput_26h_mwh": 0.0,
+        "service_battery_throughput_mwh": 0.0,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.5,
+        "service_terminal_temp_A_C": 30.605932294783372,
+        "service_terminal_temp_B_C": 22.814800782189593,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945672,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": 0.0
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__cooling_first/d207_s100_b0p5/hardware.csv.gz",
+          "sha256": "3b8c9750541dea83ed2537aaa810964b0bf0200967a2d7fc19bae26d5eb5e01e",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__cooling_first/d207_s100_b0p5/macro.csv.gz",
+          "sha256": "8e229287d0b41d8023e4e99213946e4462c1851c9338a85341f8e6c770b84626",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__cooling_first/d207_s100_b0p5/recovery.csv.gz",
+          "sha256": "7ef57ccd94bbe5c746a885477320521563d1cf28e49f853b7c40570414f25151",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    },
+    {
+      "id": "table2_regression__rule__bc_only_1100__d207_s100_b0p5",
+      "policy_spec": {
+        "snapshot": "table2_regression",
+        "policy_id": "rule__bc_only_1100"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 100,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Consumed peak case; exact original low/macro identity.",
+      "original_episode": "outputs/table2_distress_rl_20261031/final_regression/rule__bc_only_1100/d207_s100_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": true,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": true,
+        "floor_enforced": false,
+        "delivered_service_ratio": null,
+        "delivered_service_gate": null,
+        "publication_qualified": true,
+        "tracking_rmse_kw": 63.56333862161679,
+        "service_prefix_rmse_kw": 63.56333862161679,
+        "stress_facility_relief_mw": 2.9694931711243218,
+        "LFR_pct": 3.09231321731701,
+        "SPDR_pct": 0.029146219720376437,
+        "LWSR_pct": 0.03133962026179421,
+        "LWCF_pct": 9.51572015738743,
+        "cashflow_26h_usd": -184368.51641066512,
+        "cashflow_closed_recovery_usd": -184368.51641066512,
+        "regulation_revenue_usd": 11060.194427837694,
+        "battery_throughput_26h_mwh": 0.0700333697928322,
+        "service_battery_throughput_mwh": 0.0377527148359351,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.5022204721120521,
+        "service_terminal_temp_A_C": 30.60598029997062,
+        "service_terminal_temp_B_C": 22.812753277205797,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945672,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": 0.0
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__bc_only_1100/d207_s100_b0p5/hardware.csv.gz",
+          "sha256": "85048daff6dfa5bd455d08839122768884575db9dd27822e017f734ca1807361",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__bc_only_1100/d207_s100_b0p5/macro.csv.gz",
+          "sha256": "22f0bbdcd898af9a509634d9d61d44af4930117926b8e9ccd62cefef98f311ed",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__bc_only_1100/d207_s100_b0p5/recovery.csv.gz",
+          "sha256": "5d50dd0ecda1099152dae5cfc8f236944c822816f1caaa87200cf9adfb54246d",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    },
+    {
+      "id": "table2_regression__rule__guided_sac_1100__d207_s100_b0p5",
+      "policy_spec": {
+        "snapshot": "table2_regression",
+        "policy_id": "rule__guided_sac_1100"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 100,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Consumed peak case; exact original low/macro identity.",
+      "original_episode": "outputs/table2_distress_rl_20261031/final_regression/rule__guided_sac_1100/d207_s100_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": true,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": true,
+        "floor_enforced": false,
+        "delivered_service_ratio": null,
+        "delivered_service_gate": null,
+        "publication_qualified": true,
+        "tracking_rmse_kw": 80.02663928678909,
+        "service_prefix_rmse_kw": 80.02663928678909,
+        "stress_facility_relief_mw": 3.0227565562591407,
+        "LFR_pct": 3.1477796085022387,
+        "SPDR_pct": 0.029669011401221645,
+        "LWSR_pct": 0.031951908735552315,
+        "LWCF_pct": 9.701630698842804,
+        "cashflow_26h_usd": -184282.82886883282,
+        "cashflow_closed_recovery_usd": -184282.82886883282,
+        "regulation_revenue_usd": 11049.794843462965,
+        "battery_throughput_26h_mwh": 0.10254429280757907,
+        "service_battery_throughput_mwh": 0.06892116243640585,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.4978275958183546,
+        "service_terminal_temp_A_C": 30.606369689490197,
+        "service_terminal_temp_B_C": 22.81366935780871,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945672,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": 0.0
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__guided_sac_1100/d207_s100_b0p5/hardware.csv.gz",
+          "sha256": "e815d6d1954df3362f50d6b170d8716c20ae837e9a1afe8325937be570ee4916",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__guided_sac_1100/d207_s100_b0p5/macro.csv.gz",
+          "sha256": "32b0ef706ae2d5d8576bcd0b38b0431eb65d5207009e15fc0600e097291549a5",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__guided_sac_1100/d207_s100_b0p5/recovery.csv.gz",
+          "sha256": "789c1b4a1bbfdc5d5afbfcec8bcb28f19524a507da5e1bf86893e0d17160233d",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    },
+    {
+      "id": "value_peak_regression__rule__union_original_1100__d207_s100_b0p5",
+      "policy_spec": {
+        "snapshot": "value_peak_regression",
+        "policy_id": "rule__union_original_1100"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 100,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Mandatory 552960-step final model; no reselection.",
+      "original_episode": "outputs/rl_value_conditioning_20261101/peak_regression/rule__union_original_1100/d207_s100_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": true,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": true,
+        "floor_enforced": false,
+        "delivered_service_ratio": 1.167219829686714,
+        "delivered_service_gate": true,
+        "publication_qualified": true,
+        "tracking_rmse_kw": 65.94174702135298,
+        "service_prefix_rmse_kw": 65.94174702135298,
+        "stress_facility_relief_mw": 2.97010601496862,
+        "LFR_pct": 3.092951408755975,
+        "SPDR_pct": 0.029152234915667638,
+        "LWSR_pct": 0.03133930410745668,
+        "LWCF_pct": 9.515624162727082,
+        "cashflow_26h_usd": -184372.0304077634,
+        "cashflow_closed_recovery_usd": -184372.0304077634,
+        "regulation_revenue_usd": 11058.874762885924,
+        "battery_throughput_26h_mwh": 0.19578948182364309,
+        "service_battery_throughput_mwh": 0.10260082657138508,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.5064104428409262,
+        "service_terminal_temp_A_C": 30.60596545403348,
+        "service_terminal_temp_B_C": 22.81272863756783,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945672,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": 0.0
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/rl_value_conditioning_20261101/peak_regression/rule__union_original_1100/d207_s100_b0p5/hardware.csv.gz",
+          "sha256": "129090628a2b97a6bbc5756edf55ca460c6b74768cbe57f048956b1919480b8c",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/rl_value_conditioning_20261101/peak_regression/rule__union_original_1100/d207_s100_b0p5/macro.csv.gz",
+          "sha256": "307ea24bb7347efd98971ac85c8e8b324df12eb577739c46bf9eb95806d3368f",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/rl_value_conditioning_20261101/peak_regression/rule__union_original_1100/d207_s100_b0p5/recovery.csv.gz",
+          "sha256": "dbb006248339e6ffcf22d524206447b70e32971cae0d07ee2f0ccb0a28b13de5",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    },
+    {
+      "id": "value_peak_regression__rule__union_conditioned_1100__d207_s100_b0p5",
+      "policy_spec": {
+        "snapshot": "value_peak_regression",
+        "policy_id": "rule__union_conditioned_1100"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 100,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Mandatory 552960-step final model; no reselection.",
+      "original_episode": "outputs/rl_value_conditioning_20261101/peak_regression/rule__union_conditioned_1100/d207_s100_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": true,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": true,
+        "floor_enforced": false,
+        "delivered_service_ratio": 1.167045551231054,
+        "delivered_service_gate": true,
+        "publication_qualified": true,
+        "tracking_rmse_kw": 67.83997301889332,
+        "service_prefix_rmse_kw": 67.83997301889332,
+        "stress_facility_relief_mw": 2.9666421511940753,
+        "LFR_pct": 3.0893442774659725,
+        "SPDR_pct": 0.02911823634121861,
+        "LWSR_pct": 0.03128364417601253,
+        "LWCF_pct": 9.498724011187992,
+        "cashflow_26h_usd": -184381.94190291577,
+        "cashflow_closed_recovery_usd": -184381.94190291577,
+        "regulation_revenue_usd": 11056.19498935818,
+        "battery_throughput_26h_mwh": 0.13934284552103948,
+        "service_battery_throughput_mwh": 0.0735993985500601,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.5045224348678985,
+        "service_terminal_temp_A_C": 30.606043631071714,
+        "service_terminal_temp_B_C": 22.812881528070044,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945672,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": 0.0
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/rl_value_conditioning_20261101/peak_regression/rule__union_conditioned_1100/d207_s100_b0p5/hardware.csv.gz",
+          "sha256": "3bb9f8479ffb9c5fb1747f73db1194af75a291038746c198b34335329e2a4a3d",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/rl_value_conditioning_20261101/peak_regression/rule__union_conditioned_1100/d207_s100_b0p5/macro.csv.gz",
+          "sha256": "d6b62da66be36450152cbdd254eb227f6454fec240b21c3b798900516658b65f",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/rl_value_conditioning_20261101/peak_regression/rule__union_conditioned_1100/d207_s100_b0p5/recovery.csv.gz",
+          "sha256": "b108fd03f22fbb5bc7b93b9c0a91ed5f0b5f13c6465965816e99e131ac2b91e9",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    },
+    {
+      "id": "table2_regression__rule__pid__d207_s104_b0p5",
+      "policy_spec": {
+        "snapshot": "table2_regression",
+        "policy_id": "rule__pid"
+      },
+      "cell": {
+        "start_day": 207,
+        "seed": 104,
+        "regd_load_bias": 0.5
+      },
+      "reason": "Complete 26 hours but terminal service SOC gate fails; do not rescue.",
+      "original_episode": "outputs/table2_distress_rl_20261031/final_regression/rule__pid/d207_s104_b0p5/episode.json",
+      "metrics": {
+        "complete": true,
+        "complete_26h": true,
+        "service_steps": 17280,
+        "recovery_steps": 1440,
+        "service_checks": {
+          "complete": true,
+          "terminal_soc": false,
+          "terminal_work": true,
+          "thermal_warnings": true
+        },
+        "recovery_closed": true,
+        "physical_gate_qualified": false,
+        "floor_enforced": false,
+        "delivered_service_ratio": null,
+        "delivered_service_gate": null,
+        "publication_qualified": false,
+        "tracking_rmse_kw": 713.3264040406805,
+        "service_prefix_rmse_kw": 713.3264040406805,
+        "stress_facility_relief_mw": 5.9492976096314925,
+        "LFR_pct": 6.195364182316128,
+        "SPDR_pct": 0.05839364676719446,
+        "LWSR_pct": 0.03738337415425387,
+        "LWCF_pct": 11.350798893516146,
+        "cashflow_26h_usd": -181646.11462803412,
+        "cashflow_closed_recovery_usd": -181646.11462803412,
+        "regulation_revenue_usd": 12615.103722893364,
+        "battery_throughput_26h_mwh": 27.58561964409668,
+        "service_battery_throughput_mwh": 22.712285238359815,
+        "thermal_warning_fraction": 0.0,
+        "service_terminal_soc": 0.18525390915960702,
+        "service_terminal_temp_A_C": 30.60769620796572,
+        "service_terminal_temp_B_C": 22.828008052083977,
+        "service_work_arrived_kwh": 15850.873310945672,
+        "service_work_served_kwh": 15850.873310945672,
+        "service_backlog_kwh": 0.0,
+        "service_work_conservation_error_kwh": 0.0
+      },
+      "trace_artifacts": [
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__pid/d207_s104_b0p5/hardware.csv.gz",
+          "sha256": "4a49d7112e27933fe8866586196dc1de8ba24665884655392a18fb0e5de2c898",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__pid/d207_s104_b0p5/macro.csv.gz",
+          "sha256": "033cd4e9074bb21fd0d8865983d505d4ab6ad5be4b7d7dc80cf7dc793d4160a4",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        },
+        {
+          "path": "outputs/table2_distress_rl_20261031/final_regression/rule__pid/d207_s104_b0p5/recovery.csv.gz",
+          "sha256": "4e4c6b03b52bf60b07e7f6e8c7b5663fc73ced7a9b7e82d2e5c0861f21e999ce",
+          "tracked": false,
+          "required_for_new_physics_replay": false
+        }
+      ]
+    }
+  ],
+  "macro_identity": {
+    "rule": {
+      "implementation": "outputs/online_stability_pilot_20261031/source/baselines/rule_based_macro.py:RuleBasedMacroController",
+      "price": "80% of posted RMCP; not zero-ask",
+      "quantity": "load-dependent 20/50/80 percent, with unchanged safety rules"
+    },
+    "full_residual": {
+      "implementation": "outputs/table2_distress_rl_20261031/controllers.py:FullResidualMacro",
+      "price": 0.0,
+      "quantity": "np.nextafter(float32(min(30,residual_from_macro_obs)/30), 0); never replace with exact residual",
+      "qualification": "physical+recovery AND actual capacity-service ratio >=0.90 for non-nominal families"
+    },
+    "state_and_union_adapter": "outputs/rl_state_local_20261101/market_policy.py:ExistingMacro",
+    "rule_service_ratio_is_diagnostic_not_a_quota": true,
+    "learned_high_level_sac_is_not_used": true
+  },
+  "work_restrictions": {
+    "nominal": "Original C2GMacroEnv default full-work control; no new throttling.",
+    "classical_and_old_sac": {
+      "rule_hardware": "RuleBasedController(committed_mw_max=30, bess_p_max_mw=5)",
+      "pid": "PIDController()",
+      "bang_bang": "BangBangController()",
+      "old_sac": "SAC.load(original corrected seed_1007 best_model.zip, device='cpu')"
+    },
+    "classical_and_old_sac_note": "Preserve native four-command policies and existing backlog/work-conservation gates. Do NOT impose the separate full-work wrapper on these historical rows.",
+    "cooling_first": "Original analytic controller fixes throttle_batch=1.",
+    "bc_guided_state_union": "Original HistorySACController produces [1,pump,hvac,bess] from 24 causal features and 3 actions; no teacher, projection, rescue, or deployment potential.",
+    "recovery_all": "Unchanged fixed 7200 seconds: [1,0.7,0.7,battery_dispatch], zero regulation, continuing physical plant."
+  },
+  "external_scientific_inputs": {
+    "required_for_runtime_not_in_original_git": [],
+    "original_runtime_data_symlink": {
+      "path": "outputs/online_stability_pilot_20261031/source/data",
+      "target": "/workspace/IBM/temp/dc2grid-repos/dc2grid/data",
+      "required_for_replay": false
+    },
+    "symlink_not_required": "Runtime YAML resolves the five fingerprinted root/data files directly. External symlinks are rejected.",
+    "representative_raw_traces": "See representatives[].trace_artifacts; original compressed hashes are archival evidence, not required to reevaluate physics.",
+    "software": "Python and scientific packages are external runtime dependencies; versions are separately recorded, never silently replaced."
+  },
+  "not_required_for_frozen_inference": [
+    "Original paper ZIP, LaTeX, manuscript, reviewer comments, AAAI-demo or attachments",
+    "Demonstration corpus, replay buffers, training worker state, optimizer-training replays",
+    "Union value potential and frozen-reference actors (training only, not queried at deployment)",
+    "Original absolute filesystem paths, original Git history, GPUs, or training launchers",
+    "Archival panel-opening orchestrators and their unpublished-paper provenance chains"
+  ],
+  "implementation_notes": [
+    "Use evaluate.run_case for Table2 and panel.evaluate_case for state/union; no function monkeypatching.",
+    "Verify byte hashes and original registration/candidate/final-lock identities before in-memory path rebasing.",
+    "The original evaluate_case final-stage guard compares archival absolute-path policy dictionaries. Before loading an actor the adapter invokes the unchanged panel.final_lock on the original protocol and checks the original policy and cell against its result. It then supplies resolved paths in a minimal case-execution protocol, without re-opening a panel. Physical and recovery gates and the 90% publication floor are retained.",
+    "The unchanged environment API accepts a YAML filename, not a configuration mapping. Only the three data-directory values are rebased in memory; a derived runtime YAML is written inside the new replay output, never over the archived YAML.",
+    "Original summary qualified is physical/recovery qualification; full-residual published qualification additionally applies the unchanged capacity-floor function.",
+    "No evaluation was run while constructing this inventory; parent must verify representative replay from a new checkout.",
+    "Gzip byte hashes and wall-clock timings are not reproducibility targets; numeric metrics, completion, gates, identities and data hashes are."
+  ],
+  "integration_core_commit": "910343302e6671b16112047bc98f81d530fe6cf0",
+  "integration_scope": "Updated Table 2 only; 21 policies and 630 selectors",
+  "source_binding_changes": {
+    "outputs/high_macro_recovery_pilot_20261031_v3/study_common.py": {
+      "producer_path": "outputs/high_macro_recovery_pilot_20261031_v3/study_common.py",
+      "producer_sha256": "134dd05407f5c82873d4ebd3fc8161d8b439faf49fd88025213e9b1ca95b3e7c",
+      "integration_sha256": "eb581e457e13091464b946501cdb70fece97bcaf4089e6d6abb571f706a8eee8"
+    },
+    "baselines/__init__.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/baselines/__init__.py",
+      "producer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "integration_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "baselines/bang_bang.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/baselines/bang_bang.py",
+      "producer_sha256": "f97345bd5723885a1df5d5f826920c9f3f148bec8ba476d0a59cb5f4d2f2119d",
+      "integration_sha256": "f97345bd5723885a1df5d5f826920c9f3f148bec8ba476d0a59cb5f4d2f2119d"
+    },
+    "baselines/pid_controller.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/baselines/pid_controller.py",
+      "producer_sha256": "420a38c6098e653ecf5b40fbf6201542512be19f2b7b4c52e0cd1ccb80db3d1d",
+      "integration_sha256": "420a38c6098e653ecf5b40fbf6201542512be19f2b7b4c52e0cd1ccb80db3d1d"
+    },
+    "baselines/rule_based_macro.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/baselines/rule_based_macro.py",
+      "producer_sha256": "42dc8bc42245556d23e41019fed400fc2d3dfafdc34fe61b0574011571d9bdc3",
+      "integration_sha256": "42dc8bc42245556d23e41019fed400fc2d3dfafdc34fe61b0574011571d9bdc3"
+    },
+    "baselines/rule_based_mpc.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/baselines/rule_based_mpc.py",
+      "producer_sha256": "342c978a0ee52acbebe3cb51b53ec6c1945d7bfda20eea77c4dcb8d01f662524",
+      "integration_sha256": "342c978a0ee52acbebe3cb51b53ec6c1945d7bfda20eea77c4dcb8d01f662524"
+    },
+    "c2g_env/__init__.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/__init__.py",
+      "producer_sha256": "8d0bd53367b910a3e2bf04d86f388ffcf5068957d9a931d81cd1b240ea366905",
+      "integration_sha256": "8d0bd53367b910a3e2bf04d86f388ffcf5068957d9a931d81cd1b240ea366905"
+    },
+    "c2g_env/env_high_level.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/env_high_level.py",
+      "producer_sha256": "6c5034698fdd011168d99b5e2fd99b13d2825c4af37eaab563fa6acf75381842",
+      "integration_sha256": "28fc67d639dffa74aa3c57d8ec056fd1701381f3b9f3a5f2eb8fb61c5b958c97"
+    },
+    "c2g_env/env_low_level.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/env_low_level.py",
+      "producer_sha256": "5af3087eebdb5576280a3c4bcdd3f410d67eb5d01c2a67c7f07c0c1197f2a1bc",
+      "integration_sha256": "5af3087eebdb5576280a3c4bcdd3f410d67eb5d01c2a67c7f07c0c1197f2a1bc"
+    },
+    "c2g_env/experiments/__init__.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/experiments/__init__.py",
+      "producer_sha256": "b340890df4770fbd38a80a5b7707f6d925362c2658b16e9de0898d6395046a1c",
+      "integration_sha256": "b340890df4770fbd38a80a5b7707f6d925362c2658b16e9de0898d6395046a1c"
+    },
+    "c2g_env/experiments/action_ablation_env.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/experiments/action_ablation_env.py",
+      "producer_sha256": "5b4ae4bb55bb7aa73359302a5e0c2631849c8d0d0c51d60b4109d446f4f04822",
+      "integration_sha256": "5b4ae4bb55bb7aa73359302a5e0c2631849c8d0d0c51d60b4109d446f4f04822"
+    },
+    "c2g_env/experiments/identity.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/experiments/identity.py",
+      "producer_sha256": "e847618db0f2c837c38a3cad13cafba8ffac5201c02b74ff61f5a26c99090d03",
+      "integration_sha256": "e847618db0f2c837c38a3cad13cafba8ffac5201c02b74ff61f5a26c99090d03"
+    },
+    "c2g_env/obs_indices.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/obs_indices.py",
+      "producer_sha256": "881e9a8107d5b2645d3e11a3089fb2334e1e946d6a949221dc1b5bec5ee3ec10",
+      "integration_sha256": "881e9a8107d5b2645d3e11a3089fb2334e1e946d6a949221dc1b5bec5ee3ec10"
+    },
+    "c2g_env/physics/__init__.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/physics/__init__.py",
+      "producer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "integration_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "c2g_env/physics/bess.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/physics/bess.py",
+      "producer_sha256": "7f8621c4db624a559b3e16b982ce4c74cde58e1bc5fca403338fe8121b2a9ad0",
+      "integration_sha256": "7f8621c4db624a559b3e16b982ce4c74cde58e1bc5fca403338fe8121b2a9ad0"
+    },
+    "c2g_env/physics/electrical.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/physics/electrical.py",
+      "producer_sha256": "8bb8869bcbab04c25dd3eb2054fcc5a818f9c26b90179a1f2d0e72dfe77bcee1",
+      "integration_sha256": "8bb8869bcbab04c25dd3eb2054fcc5a818f9c26b90179a1f2d0e72dfe77bcee1"
+    },
+    "c2g_env/physics/macro_grid.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/physics/macro_grid.py",
+      "producer_sha256": "ffadb41d1883481deeb7dff9d13506b8cd3c16dd747aa8fb740cb18261b2994d",
+      "integration_sha256": "ffadb41d1883481deeb7dff9d13506b8cd3c16dd747aa8fb740cb18261b2994d"
+    },
+    "c2g_env/physics/thermal.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/physics/thermal.py",
+      "producer_sha256": "7d81bd173f5442fde8c3661763031eda03d3cdbdffd886181436eee9ef388729",
+      "integration_sha256": "7d81bd173f5442fde8c3661763031eda03d3cdbdffd886181436eee9ef388729"
+    },
+    "c2g_env/physics/weather.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/physics/weather.py",
+      "producer_sha256": "f00a81fa6560bcc4bfe6fdfd14bcaa1065d5d2325f7ec25b1b16dfb71d01d59d",
+      "integration_sha256": "f00a81fa6560bcc4bfe6fdfd14bcaa1065d5d2325f7ec25b1b16dfb71d01d59d"
+    },
+    "c2g_env/physics/workload.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/physics/workload.py",
+      "producer_sha256": "00ec3849157e73b9bd5fe5cd25286463d7c5b0ff82dc72ffb515f4ef7927dddc",
+      "integration_sha256": "00ec3849157e73b9bd5fe5cd25286463d7c5b0ff82dc72ffb515f4ef7927dddc"
+    },
+    "c2g_env/replay.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/replay.py",
+      "producer_sha256": "c09bb0514ef14a0398c5daf76c79b60f65dc42c4b333ca54adbcaa37106bfe77",
+      "integration_sha256": "c09bb0514ef14a0398c5daf76c79b60f65dc42c4b333ca54adbcaa37106bfe77"
+    },
+    "c2g_env/semantics.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/semantics.py",
+      "producer_sha256": "9a7525a4e7b63b463cbd0862e9a3ddecb3740744e258b84bea358167231f4aae",
+      "integration_sha256": "9a7525a4e7b63b463cbd0862e9a3ddecb3740744e258b84bea358167231f4aae"
+    },
+    "c2g_env/thermal_limits.py": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/thermal_limits.py",
+      "producer_sha256": "c86f2b5136a01d432c43e9226e07df41e843f49951dc6978a1eb606ea0923650",
+      "integration_sha256": "c86f2b5136a01d432c43e9226e07df41e843f49951dc6978a1eb606ea0923650"
+    },
+    "outputs/rl_state_local_20261101/study.py": {
+      "producer_path": "outputs/rl_state_local_20261101/study.py",
+      "producer_sha256": "102d176233df62161e6049e7d4d811bf3f550d815bc9ce8806738952615209c9",
+      "integration_sha256": "d23d5472d0ab4238a80da78b0b51151994a3d07d53a1ba03bd29368eab0cdcc9"
+    },
+    "outputs/table2_distress_rl_20261031/common.py": {
+      "producer_path": "outputs/table2_distress_rl_20261031/common.py",
+      "producer_sha256": "a9df98ea08beee5ca20f2fa9bb749b6d1400b2c0bff5dd9eab2971e8021954f3",
+      "integration_sha256": "709e3fb89f28e1edfbc0f61028b1cd0c8c15822be29bd0594d6932caaffa4d0a"
+    },
+    "c2g_env/config.yaml": {
+      "producer_path": "outputs/online_stability_pilot_20261031/source/c2g_env/config.yaml",
+      "producer_sha256": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6",
+      "integration_sha256": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6"
+    }
+  }
+}

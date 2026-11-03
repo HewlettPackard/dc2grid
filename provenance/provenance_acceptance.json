@@ -1,0 +1,338 @@
+{
+  "schema": "dc2grid-pid-publication-provenance-acceptance-v1",
+  "source_repository_head": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "inputs": ["table_row_provenance.json", "controller_protocol_provenance.json"],
+  "scope": "Static provenance/aggregation verification and proposed release acceptance; no policy rollouts, training, renderer execution, source changes, or uploads.",
+  "verification_snapshot": {
+    "pdf_page_count": 9,
+    "numbered_tables": 12,
+    "tabular_parts": 13,
+    "row_counts": {"T2a": 9, "T2b": 9, "Q1": 9, "Q2": 6, "Q3": 3, "Q4": 9, "Q5": 5, "Q6": 18, "Q7": 10, "Q8": 10, "Q9": 11, "Q10": 11, "Q11": 8},
+    "total_data_rows": 118,
+    "all_118_rows_match_generated_TeX_numeric_cells": true,
+    "numeric_entries_checked_in_TeX_including_SDs_and_pass_counts": 1026,
+    "comparison_values_unique_records_checked": 528,
+    "comparison_values_scopes": {"rule_original_grid": 54, "rule_original_quality": 45, "final_b_rule": 45, "historical_economic": 90, "latest_calendar_0.5": 70, "latest_calendar_0.0": 70, "latest_peak_noise_0.5": 77, "latest_peak_noise_0.0": 77},
+    "source_to_assembled_to_display_mismatches": 0,
+    "SD_cells_checked": 144,
+    "gate_rows_checked_against_source_and_assembled": 87,
+    "archival_mean_SD_pairs_checked_against_extracted_report": 36,
+    "archival_pairs_with_a_separate_PID_relief_reproduction": 1,
+    "Q2_Q3_numeric_cells_checked": 27,
+    "Q5_numeric_cells_checked": 25,
+    "Q11_numeric_cells_checked": 40,
+    "source_file_SHA256_checks": 19,
+    "case_record_file_SHA256_checks": 3,
+    "learned_checkpoint_archives_hashed": 41,
+    "learned_checkpoint_hash_mismatches": 0,
+    "low_level_aggregate_rows_recomputed_from_preserved_case_metrics": 23,
+    "low_level_metric_mean_SD_pairs_recomputed": 414,
+    "confirmation_final_and_development_metric_mean_caseSD_pairs_recomputed": 3968,
+    "aggregate_recomputation_mismatches": 0,
+    "confirmation_original_episodes": 9460,
+    "confirmation_all_complete_and_qualified": true,
+    "new_PID_episodes": 440,
+    "new_PID_all_complete": true,
+    "new_PID_qualified": 354,
+    "new_PID_qualified_per_variant": 177,
+    "new_PID_declared_cells_exactly_equal_confirmation": true,
+    "unique_matched_panel_day_seed_bias_cells": 220,
+    "new_PID_exogenous_input_hashes_match_frozen_confirmation": true,
+    "new_PID_all_actual_service_ratios_at_least_0_90": true,
+    "new_PID_identical_failed_cells_per_variant": 43,
+    "new_PID_failure_reason_set": ["terminal_soc"],
+    "native_full_work_peak_pairs_identical_on_relief_cash_RMSE_and_BESS": 60,
+    "raw_hardware_trace_recomputation_performed": false,
+    "PDF_visual_layout_review_performed": false,
+    "method": "Read-only parsing, direct SHA256 checks, JSON-pointer resolution, aggregation of preserved scalar case records, and numeric extraction from generated TeX. pdftotext confirmed page/table placement and figure axis labels."
+  },
+  "unresolved_or_release_relevant_flags": [
+    {
+      "id": "ARCHIVE_REPORTED_ONLY",
+      "severity": "required_scientific_disclosure",
+      "tables": ["Q1"],
+      "issue": "The allowed extracted archive values do not bind the legacy Rule/Bang-bang/SAC cells to execution sources, exact model weights, training coverage, or later qualification. The PID facility-relief mean/SD alone have a separately recorded numerical reproduction.",
+      "do_not_infer": ["The archival SAC is corrected seed1007", "All PID archive metrics were independently reproduced", "Archived reward deltas are physical work/cash/energy", "Later physical/recovery gates apply to archival cells"],
+      "resolution": "Preserve report-only status for the other 35 mean/SD pairs and identify the one narrow PID exception. Unknown execution metadata may remain explicitly null."
+    },
+    {
+      "id": "EXCLUDED_ARCHIVE_ASSEMBLER_DEPENDENCY",
+      "severity": "portable_rebuild_blocker",
+      "sources": ["outputs/pid_comparison_extract_20261102/comparison_data.py"],
+      "issue": "assemble() unconditionally reads and hashes the excluded original paper ZIP; original_table() reads the complete active camera_ready.tex member.",
+      "resolution": "Parent-owned portable renderer/assembly integration must consume approved extracted comparison JSON/TeX table data and verify pinned hashes without shipping or reopening the archive/full manuscript. Do not copy the existing assembler unchanged and claim clean standalone rebuild.",
+      "final_numeric_resolution": "A NEW numeric-only renderer derives CSV/HTML/table TeX from approved result JSON and the row map. Original comparison_data.json, original TeX, make_document(data) and paper prose are not dependencies. The approved nine-page PDF is a frozen view, not regenerated.",
+      "renderer_implementation_not_inspected": true
+    },
+    {
+      "id": "PID_REPRODUCTION_PRIVATE_TRACE_LOCATORS",
+      "severity": "release_scope_and_reproducibility_disclosure",
+      "tables": ["Q2", "Q3"],
+      "source": "outputs/pid_comparison_extract_20261102/reports/pid_semantics_trace_inventory.csv",
+      "issue": "The repository inventory records the 60 diagnostic trajectories at private-session absolute locations. This task did not open or export those private files.",
+      "available_allowed_evidence": ["Imported per-case and per-mode summary", "Recorded source_id and probe source hash", "Repository diagnostic probe", "Inventory hashes"],
+      "resolution": "Do not ship private session trees or leak their absolute locators. A release must either clearly declare raw diagnostics unavailable in the clean export or obtain an explicitly authorized narrow scientific-artifact export; then rewrite locators without changing scientific hashes. Summary agreement alone is not public raw-trace closure."
+    },
+    {
+      "id": "EXECUTION_COMMIT_NOT_RECORDED_FOR_EARLY_FITS",
+      "severity": "required_provenance_disclosure",
+      "families": ["old_sac", "bc_only", "guided_sac"],
+      "issue": "The inspected run manifests preserve protocol/source content fingerprints but not an explicit contemporaneous execution Git commit.",
+      "resolution": "Use source_id, code_hashes, checkpoint hashes and run metadata as execution identities; keep execution_commit null rather than substituting later baseline/report commits."
+    },
+    {
+      "id": "PID_REPRODUCTION_COMMIT_NOT_RECORDED",
+      "severity": "required_provenance_disclosure",
+      "issue": "The PID mode reproduction records source_id and probe hash, not a contemporaneous execution commit.",
+      "resolution": "Do not relabel the later 34e01546 explanation commit as the reproduction's execution source."
+    },
+    {
+      "id": "HISTORICAL_FULL_RESIDUAL_GATE_LABEL_INCOMPLETE",
+      "severity": "editorial_metadata_correction_recommended",
+      "tables": ["Q5", "Q6"],
+      "issue": "comparison_data.low_row labels all low-level rows as historical physical/recovery gates, but final_episode_metrics explicitly sets floor_enforced=true for the displayed full-residual families and the report calls their definition physical_recovery_and_capacity.",
+      "verified_families": ["pid", "old_sac", "bc_only", "guided_sac", "union_conditioned"],
+      "observed_effect_on_numbers": "None: all corresponding full-residual cases pass the floor and the printed counts match the source.",
+      "resolution": "Preserve original admission counts but explain that these full-residual historical counts already include the recorded 90% capacity floor. Rule-macro rows do not enforce it. Do not infer gate semantics solely from the coarse assembler label."
+    },
+    {
+      "id": "MAIN_VALUES_MANIFEST_NOT_EXHAUSTIVE",
+      "severity": "acceptance_coverage_requirement",
+      "issue": "comparison_values.json covers 528 main comparison cells but excludes archival Q1, macro-only Q5 and PID diagnostics Q11; Q2/Q3 have a separate nine-record manifest.",
+      "resolution": "Use the exhaustive row map to check all 118 data rows, not just the 528-record file. Q5 needs cash differences; Q11 needs maxima/minima in addition to means."
+    },
+    {
+      "id": "SOURCE_EXECUTION_VERSUS_PACKAGING",
+      "severity": "required_provenance_disclosure",
+      "issue": "The supplied baseline/Union/economic/confirmation/PID snapshots are result packaging milestones, not interchangeable with actual training and evaluation commit identities.",
+      "verified_execution_examples": {
+        "Union_training": "9adbff4a173bbc0ccdab260a69f64d5bf4082912",
+        "Union_peak_regression": "93308feafa810dc6be3b48404f42d12956f1655f",
+        "Final_B": "db2cdbd57c0b0acaf5b3ab24cff53b2e61f3f02c",
+        "absolute_economic_training": "755b871ff700a047ee75d73818e7710538de9e3e",
+        "fraction_potential_training": "bdba9ae4c0de8bae58ae42266a88ef6e7f7bdc34",
+        "economic_original_peak_evaluation": "779c2881a8b6f905c29ab2d4f9b5b2208dffdbb2",
+        "confirmation_final_evaluation": "42fcb796cefaf4fe540344582c46b2d2b63175f4",
+        "new_PID_references": "e94e5d1dbf484c81332c90debf063340f1ad5ff9"
+      }
+    },
+    {
+      "id": "CHECKPOINT_BUDGET_NOT_CHECKPOINT_STEP",
+      "severity": "required_training_disclosure",
+      "issue": "The displayed corrected SAC is the selected seed1007 step250002 checkpoint, not its later final_model. Guided SAC fits trained 153600 transitions but displayed checkpoints are 4096/8192/4096/4096.",
+      "resolution": "Report both campaign budget and selected checkpoint step. Union uses final step552960; economic families use final macro step24576."
+    },
+    {
+      "id": "HISTORICAL_SELECTION_VERSUS_NEW_CONFIRMATION",
+      "severity": "required_statistical_disclosure",
+      "issue": "Earlier absolute and fractional economic families all failed their original development envelope/composite gate. Potential SAC later passed a different, preregistered fixed full-fraction comparison on conditional panels.",
+      "resolution": "Keep both outcomes. Do not call the old gate passed, the new result superiority over all scripts, or the later PID contrast a prespecified superiority test."
+    }
+  ],
+  "proposed_automated_acceptance_assertions": [
+    {
+      "id": "A01_release_scope",
+      "priority": "block",
+      "operation": "Inventory the final export and inspect all manifest/input locators",
+      "expected": "No original paper ZIP, full manuscript, private session trees, private attachment bodies, credentials, or public absolute private-session locators. Rebuild succeeds with excluded material inaccessible.",
+      "scope": "Release package, not the read-only original"
+    },
+    {
+      "id": "A02_pdf_and_table_completeness",
+      "priority": "block",
+      "portable_validator_scope": "New numeric table TeX parts, labels and all numeric rows. The existing approved PDF remains frozen; no new-layout page-count or byte-regeneration claim.",
+      "operation": "Extract PDF page count and table labels; parse generated TeX tabular bodies",
+      "expected_pages": 9,
+      "expected_numbered_tables": ["2", "Q.1", "Q.2", "Q.3", "Q.4", "Q.5", "Q.6", "Q.7", "Q.8", "Q.9", "Q.10", "Q.11"],
+      "expected_parts": 13,
+      "expected_rows": 118,
+      "row_count_source": "verification_snapshot.row_counts"
+    },
+    {
+      "id": "A03_source_hash_binding",
+      "priority": "block",
+      "operation": "For approved required inputs, compare actual bytes to recorded source hashes; for sanitized/repacked copies, retain original and derived digests plus the transformation. Excluded archive/blob/private locators remain historical references, not required file reads.",
+      "expected": "No silent stale report or regenerated manuscript substituted; all declared source pointers resolve",
+      "current_original_result": "19 direct source hashes and 3 case-record checksum references matched"
+    },
+    {
+      "id": "A04_model_identity",
+      "priority": "block",
+      "portable_validator_scope": "Declared identities and scalar-record checkpoint bindings only; checkpoint-byte verification belongs to the separate full artifact audit",
+      "operation": "Hash all 41 model_catalog checkpoints, resolve family model_ids, compare locks and per-case checkpoint_sha256",
+      "expected_count": 41,
+      "expected_hash_mismatches": 0,
+      "additional_assertions": ["No best-seed-only substitution", "No current/final_model substituted for a selected early checkpoint", "No later retraining substituted for Q6-to-Q10 frozen weights"]
+    },
+    {
+      "id": "A05_execution_source_identity",
+      "priority": "block",
+      "portable_validator_scope": "Preserve explicit null execution commits and declared metadata; reading old run/authorization manifests belongs to the separate provenance/artifact audit",
+      "operation": "Compare execution commits/source_id/code_hashes against per-run manifests and openings, not report commit titles",
+      "expected": "Training and evaluation identities remain distinct from packaging snapshots; unrecorded execution commits remain null",
+      "source": "controller_protocol_provenance.training_protocols and evaluation_execution_provenance"
+    },
+    {
+      "id": "A06_all_primary_value_cells",
+      "priority": "block",
+      "operation": "For every table with value_scope, resolve row.source_ref through its source_adapter, compare directly to the unique comparison_values(scope,family,metric) record and the matching approved renderer-generated TeX cell. assembled_ref is a historical locator and does not require the excluded comparison_data blob.",
+      "expected_records": 528,
+      "raw_value_rule": "value is unscaled source mean; display = fixed_decimal(value*factor,digits). sd_value is also unscaled.",
+      "source_numeric_tolerance": {"relative": 0.000000000001, "absolute": 0.000000001},
+      "printed_comparison": "Exact printed precision, with math-bold wrappers ignored",
+      "no_duplicate_or_unmapped_records": true
+    },
+    {
+      "id": "A07_mean_and_dispersion_denominator",
+      "priority": "block",
+      "operation": "Select all complete raw scalar cases by panel/macro/family/bias; group by day/noise, average all fixed checkpoints within group, then recompute mean and sample SD",
+      "expected": "15 case means for original peaks, 18 for Final-B, 80 for new calendar, 30 for new peak-noise, independent of 1 versus 4 checkpoints",
+      "forbid": ["Survivor filtering", "Pooling both biases in printed means", "Pooling old and new noise", "Treating 320 policy episodes as 320 independent cell replicates", "Calling descriptive SD a CI", "Substituting fixed_checkpoint_mean_sd for case_sd"]
+    },
+    {
+      "id": "A08_pass_denominators",
+      "priority": "block",
+      "operation": "Recompute all source qualification counts, completeness and eligibility separately from descriptive means",
+      "expected": {
+        "T2_and_Q5_Q6": "Both biases: 30 per checkpoint; 120 for four checkpoints",
+        "Q4": "Both biases: 36 per checkpoint; 144 for four checkpoints",
+        "Q7_Q8": "Displayed bias: 80 per checkpoint; 320 for four checkpoints",
+        "Q9_Q10": "Displayed bias: 30 per checkpoint; 120 for four checkpoints",
+        "Q11": "Displayed bias and one variant: 80 or 30"
+      },
+      "diagnostic_means_must_keep_failures": true
+    },
+    {
+      "id": "A09_historical_gate_semantics",
+      "priority": "block",
+      "operation": "Read low_case_records.floor_enforced, physical_gate_qualified and delivered_service_gate",
+      "expected": "Rule-macro displayed rows: no paid-service floor enforced. Full-residual displayed rows: 90% floor enforced and qualified = physical gate AND service gate.",
+      "countercheck": "Do not use the assembler's coarse low_row qualification_scope string as the sole gate specification."
+    },
+    {
+      "id": "A10_archive_exception",
+      "priority": "block",
+      "operation": "Compare all nine frozen reported numeric rows and four mean/SD pairs in the Q1 row map to approved generated TeX; check legacy PID relief summary rounds to 6.74 and 1.29. The archive and original comparison_data blob are not runtime inputs.",
+      "expected_reported_pairs": 36,
+      "expected_independently_reproduced_PID_relief_pairs": 1,
+      "disclosure_required": "Remaining 35 pairs remain reported-only; no reconstructed training/checkpoint/gate claims"
+    },
+    {
+      "id": "A11_pid_reproduction",
+      "priority": "block",
+      "operation": "For each Q2/Q3 metric, take the mean of 15 recorded cases per mode; compare summary, pid_reproduction_values and TeX; change must equal corrected-minus-earlier",
+      "expected_case_pairs": 30,
+      "expected_trajectories": 60,
+      "expected_complete_service_ticks": 17280,
+      "expected_recovery_run": false,
+      "expected_relief_means_mw": [6.738524100170352, 5.640798863930732],
+      "power_identity": "cooling_relief + other_facility_relief = total_facility_relief for each mode and the change",
+      "causal_limit": "No attribution of an independent MW share to any single implementation change; same labels do not imply equal realized exogenous inputs"
+    },
+    {
+      "id": "A12_macro_only_rows",
+      "priority": "block",
+      "operation": "For every Q5 row, verify identical controller checkpoint sets and date/noise/bias cells across the two macros, and recompute the five printed columns",
+      "cash_operation": "mean(full_residual.cashflow_26h_usd) - mean(rule.cashflow_26h_usd)",
+      "not_cash_vs_PID": true,
+      "expected_rows": 5,
+      "expected_numeric_cells": 25,
+      "diagnostic_PID_rule_cases_not_removed": true
+    },
+    {
+      "id": "A13_mixed_historical_economics",
+      "priority": "block",
+      "operation": "Verify Q6 has exactly five historical low rows, four earlier absolute-economic/script rows and nine confirmation-development fraction/script rows, all on the original 15 peak cells at beta0.5",
+      "expected_rows": 18,
+      "cash_reference_usd": -199630.0000381396,
+      "reuse_assertion": "The sixteen fractional/potential neural checkpoints reuse 480 original-peak records; newly added scripts do not mean new neural training",
+      "forbid": "Substituting Q9 new-noise means into Q6 or labeling all end-to-end improvements as the SAC update alone"
+    },
+    {
+      "id": "A14_confirmation_cohort_fixed",
+      "priority": "block",
+      "operation": "Compare registration policies, both final cell arrays, model hashes, technical amendment and final-case inventory",
+      "expected_fixed_policies": 43,
+      "expected_final_records": 9460,
+      "expected_neural_checkpoints": 16,
+      "expected_scripts": 27,
+      "expected_all_complete_and_qualified": true,
+      "PID_not_added_to_original_primary_roster": true
+    },
+    {
+      "id": "A15_new_PID_pairing",
+      "priority": "block",
+      "operation": "Compare complete registered panel/day/seed/bias triples and exogenous input digests between PID and frozen confirmation; compare failure sets across variants",
+      "expected_unique_cells": 220,
+      "expected_PID_records": 440,
+      "expected_complete": 440,
+      "expected_qualified_each": 177,
+      "expected_same_failed_cells_each": 43,
+      "expected_failure_reason_only": "terminal_soc",
+      "expected_all_actual_service_ratios_at_least": 0.9,
+      "all_PID_admissible_mean_fields_null": true,
+      "all_PID_rows_diagnostic": true
+    },
+    {
+      "id": "A16_cash_references_and_paired_SD",
+      "priority": "block",
+      "operation": "Check each table's explicitly mapped cash_reference_ref; for low-level SDs recompute paired controller-minus-PID case contrasts",
+      "expected": ["T2/T4 use same-panel same-macro historical PID", "Q6 uses original-peak full-residual PID", "Q7-Q10 use same-panel same-bias native PID", "Q5 changes the macro within hardware, not the PID reference"],
+      "forbid": ["Inferring paired uncertainty from marginal SDs", "Calling cash business profit", "Substituting analytic no-extra cash reference used by earlier confirmation reports"]
+    },
+    {
+      "id": "A17_resource_diagnostics",
+      "priority": "block",
+      "operation": "For each Q11 row recompute means of stress throttle, stress IT curtailment and positive service IT-curtailment energy; maximum of per-case maximum backlog; minimum of 24h terminal SOC; pass counts",
+      "expected_rows": 8,
+      "expected_numeric_cells": 40,
+      "SOC_factor": 100,
+      "no_intraepisode_SOC_minimum_substitution": true,
+      "full_work_expected_throttle": 1.0,
+      "full_work_expected_positive_IT_curtailment_and_backlog": 0.0,
+      "semantic_guard": "IT electrical energy, workload queue energy, and throttle are not interchangeable quantities"
+    },
+    {
+      "id": "A18_no_hypothesis_rewrite",
+      "priority": "block",
+      "operation": "Compare original development decisions and confirmation inference status/primary comparison",
+      "expected": "Earlier joint_improvement values remain false; later supported inference is potential_sac versus fixed script_f100_always, conditional on fixed dates/checkpoints, not versus PID or every script",
+      "thresholds": {"PCC_relief_MW": 0.001, "cash_USD": 5.0},
+      "bootstrap": {"replicates": 10000, "seed": 2026110201, "within_fixed_date_noise_resampling": true, "one_sided_quantile_each": 0.025},
+      "qualification_slots_for_original_primary_claim": 1100
+    },
+    {
+      "id": "A19_selected_script_frontier",
+      "priority": "block",
+      "operation": "Reproduce representative_scripts on source family groups: four fixed IDs, then lexicographic-tie-broken qualified maximum cash and relief scripts",
+      "expected_fixed": ["script_zero", "script_f100_always", "script_deadline_margin10", "script_credit_one"],
+      "expected_extra_original_and_peak_noise": ["script_f050_margin_20"],
+      "expected_extra_calendar": [],
+      "disclosure": "Observed-best display examples, not simultaneous superiority or fresh baseline selection"
+    },
+    {
+      "id": "A20_units_peak_scope_and_emphasis",
+      "priority": "block",
+      "operation": "Check metric_sets against columns and generated TeX; validate bold only at printed precision among eligible displayed means",
+      "expected": ["PCC includes battery; facility relief excludes it", "T2/T4 peak is 24h; newest panels use 26h peak", "BESS/cash include recovery", "Service factor=100 only for display", "SPDR is not difference of maxima", "Q8/Q10 negative peak reduction is not peak shaving", "Diagnostic PID excluded from best-qualified emphasis"],
+      "archive_exception": "Preserve original reported emphasis; do not retroactively apply newer qualification rules"
+    },
+    {
+      "id": "A21_frozen_runtime_dependency_closure",
+      "priority": "block",
+      "operation": "Use the separate artifact/runtime audit to resolve every frozen source import and compare source hashes before declaring code/results export reproducible",
+      "required_anchors": ["outputs/online_stability_pilot_20261031/source", "outputs/table2_distress_rl_20261031/common.py", "outputs/high_macro_recovery_pilot_20261031_v3/macro_task.py", "outputs/high_macro_recovery_pilot_20261031_v3/recovery_ops.py", "outputs/high_macro_recovery_pilot_20261031_v3/study_common.py", "outputs/high_macro_recovery_pilot_20261031_v3/prepare.py"],
+      "provenance_task_limit": "These runtime implementations were not inspected here; source/report/checkpoint traceability is not a substitute for dependency closure."
+    }
+  ],
+  "completion": {
+    "row_mapping_complete": true,
+    "numeric_mapping_verified_and_persistent": true,
+    "original_repository_modified": false,
+    "evaluations_rerun": false,
+    "training_run": false,
+    "agents_launched": false,
+    "upload_or_push_performed": false,
+    "writes": "Only provenance JSON, portable standard-library validator/tests, validation metadata and the Q5/Q6 metadata erratum under the requested provenance directory; source contents edited through apply_patch"
+  }
+}
