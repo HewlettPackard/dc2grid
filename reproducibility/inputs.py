@@ -93,7 +93,10 @@ def import_inputs(root: Path, source_root: Path) -> dict:
             or file_hash(temporary) != row["sha256"]
         ):
             raise ValueError(f"Input changed during copying; retained at {temporary}")
-        os.replace(temporary, target)
+        try:
+            os.link(temporary, target)
+        finally:
+            temporary.unlink()
         copied += 1
     result = status(root)
     if not result["ready_for_frozen_replay"]:

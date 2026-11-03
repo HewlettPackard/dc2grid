@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 import pytest
 
-from reproducibility import assets
+from reproducibility import assets, inputs
 from reproducibility.runtime import (
     CORE_COMMIT,
     CORE_SOURCE_AMENDMENTS,
@@ -154,3 +154,74 @@ def test_numeric_outputs_cannot_overwrite_or_escape(bundle, tmp_path):
     with pytest.raises(ValueError):
         new_output(tmp_path / "outside", root)
     assert new_output(root / "outputs/numeric", root).is_dir()
+
+
+def test_download_is_bounded_by_the_pinned_size(bundle):
+    root, payload, name, _, _ = bundle
+
+    class CountedStream(io.BytesIO):
+        bytes_read = 0
+
+        def read(self, size=-1):
+            block = super().read(size)
+            self.bytes_read += len(block)
+            return block
+
+    stream = CountedStream(payload * 100)
+    with patch.object(assets, "urlopen", return_value=stream):
+        with pytest.raises(ValueError, match="pinned identity"):
+            assets.fetch(root, "table2")
+    assert stream.bytes_read == len(payload) + 1
+    assert not (root / name).exists()
+
+
+def test_temporary_handle_is_closed_before_publication(bundle):
+    root, payload, _, _, _ = bundle
+    create = assets.tempfile.NamedTemporaryFile
+    link = assets.os.link
+    created = []
+
+    def temporary(*args, **kwargs):
+        result = create(*args, **kwargs)
+        created.append(result)
+        return result
+
+    def publish(source, destination):
+        assert created[0].closed
+        link(source, destination)
+
+    with (
+        patch.object(assets, "urlopen", return_value=io.BytesIO(payload)),
+        patch.object(assets.tempfile, "NamedTemporaryFile", side_effect=temporary),
+        patch.object(assets.os, "link", side_effect=publish),
+    ):
+        assert assets.fetch(root, "table2")["copied"] == 1
+
+
+def test_input_import_cannot_replace_a_concurrent_writer(bundle, tmp_path):
+    root, payload, _, _, _ = bundle
+    name = "data/processed/energy/input.csv"
+    source = tmp_path / "input-source"
+    path = source / name
+    path.parent.mkdir(parents=True)
+    path.write_bytes(payload)
+    target = root / name
+    spec = {
+        "path": name,
+        "bytes": len(payload),
+        "sha256": hashlib.sha256(payload).hexdigest(),
+    }
+    original_copy = inputs.shutil.copyfileobj
+
+    def concurrent_copy(source_stream, destination, length):
+        original_copy(source_stream, destination, length)
+        target.write_bytes(b"concurrent writer")
+
+    with (
+        patch.object(inputs, "specifications", return_value=[spec]),
+        patch.object(inputs.shutil, "copyfileobj", side_effect=concurrent_copy),
+    ):
+        with pytest.raises(FileExistsError):
+            inputs.import_inputs(root, source)
+    assert target.read_bytes() == b"concurrent writer"
+    assert not target.with_name(target.name + ".importing").exists()

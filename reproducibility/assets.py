@@ -6,7 +6,6 @@ import argparse
 import json
 import os
 import re
-import shutil
 import tempfile
 from pathlib import Path
 from urllib.parse import quote
@@ -107,27 +106,30 @@ def fetch(root: Path, study: str, *, source_root: Path | None = None) -> dict:
             delete=False,
         ) as temporary:
             temporary_path = Path(temporary.name)
-            try:
-                if source_root is None:
-                    url = (
-                        "https://raw.githubusercontent.com/HewlettPackard/dc2grid/"
-                        f"{record['source_public_commit']}/{quote(name, safe='/')}"
-                    )
-                    request = Request(
-                        url, headers={"User-Agent": "dc2grid-reproduction"}
-                    )
-                    source = urlopen(request, timeout=120)
-                else:
-                    source = inside(source_root, name).open("rb")
-                with source:
-                    shutil.copyfileobj(source, temporary, length=1024 * 1024)
-                temporary.flush()
-                verify_file(root, str(temporary_path.relative_to(root)), spec)
-                # Atomic publication cannot replace a concurrent file.
-                os.link(temporary_path, target)
-                verify_file(root, name, spec)
-            finally:
-                temporary_path.unlink()
+        try:
+            if source_root is None:
+                url = (
+                    "https://raw.githubusercontent.com/HewlettPackard/dc2grid/"
+                    f"{record['source_public_commit']}/{quote(name, safe='/')}"
+                )
+                request = Request(url, headers={"User-Agent": "dc2grid-reproduction"})
+                source = urlopen(request, timeout=120)
+            else:
+                source = inside(source_root, name).open("rb")
+            with source, temporary_path.open("wb") as stream:
+                remaining = spec["bytes"] + 1
+                while remaining:
+                    block = source.read(min(1024 * 1024, remaining))
+                    if not block:
+                        break
+                    stream.write(block)
+                    remaining -= len(block)
+            verify_file(root, str(temporary_path.relative_to(root)), spec)
+            # Atomic publication cannot replace a concurrent file.
+            os.link(temporary_path, target)
+            verify_file(root, name, spec)
+        finally:
+            temporary_path.unlink()
         copied += 1
     return {
         **verify(root, study),
