@@ -1,0 +1,307 @@
+{
+  "schema": "dc2grid-main-based-table-validation-v1",
+  "study": "table1",
+  "core_commit": "910343302e6671b16112047bc98f81d530fe6cf0",
+  "source_public_commit": "927c527adf19e5240caaf5580579646f4381d290",
+  "integration_source_binding_sha256": "efb5d338f21ea59b17972232366ed704ce1de231cbfd220c6836eec7582ecb09",
+  "focused_tests": {
+    "passed": 32,
+    "subtests_passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "shared_support_tests_included": 18
+  },
+  "numeric_checks": {
+    "printed_pdf_entries_checked": 93,
+    "printed_entry_kind": "nonmissing mean/SD metric cells",
+    "published_csv_byte_identical": true,
+    "original_scalar_cohorts_reaggregated": true,
+    "source_checkpoints_verified": 2
+  },
+  "replay": {
+    "planned_representative_cases": 8,
+    "verified_representative_cases": 8,
+    "all_match_frozen_outcomes": true,
+    "reproduced_qualification_failures": 1,
+    "decompressed_csv_payloads_compared": 24,
+    "all_csv_payloads_byte_identical": true,
+    "max_parallel_workers": 4,
+    "numeric_threads_per_worker": 1,
+    "comparison_scope": "Three entire service/macro/recovery CSV payloads per selected case, not only aggregate metrics or short traces. Not a complete new 35-case/630-case simulation campaign or new statistical confirmation.",
+    "cases": [
+      {
+        "request": {
+          "policy": "rule_macro+bang_bang",
+          "seed": 100
+        },
+        "matches_frozen_outcome": true,
+        "qualified": true,
+        "local_replay_receipt_sha256": "47ee4269ad6908daa8154bd7d9b75b44587f003591755100968b27ff93a733e1",
+        "trace_payloads": [
+          {
+            "name": "recovery_hardware.csv.gz",
+            "original_compressed_sha256": "aea9e05d4023d01d479ed5bea21efbd4ad1753bfbf717b3443648c1c8867b495",
+            "original_payload_sha256": "595d88ea7513d9440ad0e9fb802a5854ed78946b9c7e0a57f694ebd7240d2e03",
+            "replay_payload_sha256": "595d88ea7513d9440ad0e9fb802a5854ed78946b9c7e0a57f694ebd7240d2e03",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_hardware.csv.gz",
+            "original_compressed_sha256": "6b95aede82dc63543ce1addb1c750f2ee9d561f19c9958decbe559bd093630fc",
+            "original_payload_sha256": "2cb81446e274eb73e476f061e1bd95b1c4dbe0ba484f81e8314231ae9890dcac",
+            "replay_payload_sha256": "2cb81446e274eb73e476f061e1bd95b1c4dbe0ba484f81e8314231ae9890dcac",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_macro.csv.gz",
+            "original_compressed_sha256": "61f441ad321e80269ee9ebf295e86104051a31ffeefe524f87a4f163bd5241d6",
+            "original_payload_sha256": "1fdb79cd090c661e4356a1924e726d3b22db7cc36f628f844a0a442e084540df",
+            "replay_payload_sha256": "1fdb79cd090c661e4356a1924e726d3b22db7cc36f628f844a0a442e084540df",
+            "byte_identical_payload": true
+          }
+        ]
+      },
+      {
+        "request": {
+          "policy": "rule_macro+none",
+          "seed": 100
+        },
+        "matches_frozen_outcome": true,
+        "qualified": true,
+        "local_replay_receipt_sha256": "120c4cea8d58fce12d7e91f9c3b44025146f818e9c7a76f948493c4e35683bde",
+        "trace_payloads": [
+          {
+            "name": "recovery_hardware.csv.gz",
+            "original_compressed_sha256": "f906c6eea20ad55734af96ef4eefaa65de29a036f3bee775a2fbc61bce7407bd",
+            "original_payload_sha256": "7cb838039e869529d55be4eec6f7d4d21ef3910704077843adc60b4eed7af1ec",
+            "replay_payload_sha256": "7cb838039e869529d55be4eec6f7d4d21ef3910704077843adc60b4eed7af1ec",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_hardware.csv.gz",
+            "original_compressed_sha256": "7c0d94134ebb9cb197b3cfbccddc4f3ab3e3315e3509639fbd8bef7e85be40f8",
+            "original_payload_sha256": "58ee5dcc4c600b1677f7579cb7ff3a8d7fee40a9fcab6115be734be9ee02cd03",
+            "replay_payload_sha256": "58ee5dcc4c600b1677f7579cb7ff3a8d7fee40a9fcab6115be734be9ee02cd03",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_macro.csv.gz",
+            "original_compressed_sha256": "41b95c8e46efecb528d54f4a0b1e218d72cd2b7cf19fdd098e52a0e9e14b1ace",
+            "original_payload_sha256": "d80566c26acc72e98f6cb0864e704984c20a0e1f844e4d66d7403f2ebd2fc121",
+            "replay_payload_sha256": "d80566c26acc72e98f6cb0864e704984c20a0e1f844e4d66d7403f2ebd2fc121",
+            "byte_identical_payload": true
+          }
+        ]
+      },
+      {
+        "request": {
+          "policy": "rule_macro+pid",
+          "seed": 100
+        },
+        "matches_frozen_outcome": true,
+        "qualified": true,
+        "local_replay_receipt_sha256": "90451e25a614a8bfb753dbd271091854ee28d5c9eed7d44d8eba643da51c645d",
+        "trace_payloads": [
+          {
+            "name": "recovery_hardware.csv.gz",
+            "original_compressed_sha256": "1c2fafd904fdfbabc0938d516366a244baac24852e11f636d6f0a092c4c80649",
+            "original_payload_sha256": "f323ff08e76af16fa81383158c327ff7b3165bd95d33bfbf96bb026c23088844",
+            "replay_payload_sha256": "f323ff08e76af16fa81383158c327ff7b3165bd95d33bfbf96bb026c23088844",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_hardware.csv.gz",
+            "original_compressed_sha256": "0ff81f6428cdfec4095457ad818dfde73ab343f01cc6be798365f553e781899a",
+            "original_payload_sha256": "c9822fcedbce731c942dce726964f137daa0d8a9af784a7b11f2584e773ef4d8",
+            "replay_payload_sha256": "c9822fcedbce731c942dce726964f137daa0d8a9af784a7b11f2584e773ef4d8",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_macro.csv.gz",
+            "original_compressed_sha256": "3b26587880bf3d6e6b0fe9a3973ea4af1939bae7ba2b7691c14d8b7f1b1bb71b",
+            "original_payload_sha256": "4d272d34536c27a86d238cd935ed106b08a38e617a75f79c100e67ed2b204436",
+            "replay_payload_sha256": "4d272d34536c27a86d238cd935ed106b08a38e617a75f79c100e67ed2b204436",
+            "byte_identical_payload": true
+          }
+        ]
+      },
+      {
+        "request": {
+          "policy": "rule_macro+random",
+          "seed": 100
+        },
+        "matches_frozen_outcome": true,
+        "qualified": true,
+        "local_replay_receipt_sha256": "e26bbea32298bae9d9d7f6040de78ba54ac0a87ebf393f4c1c3f40d0d81d246f",
+        "trace_payloads": [
+          {
+            "name": "recovery_hardware.csv.gz",
+            "original_compressed_sha256": "bc711a545e58c4249904c650cb8a3aea85caffb6f30bd55bb3a7a9c8ef3cc5e1",
+            "original_payload_sha256": "01192ee9ad8fdcb4d7966a7c7de1b2cc9cfa1d1a52492d0aa2c415170d950d7b",
+            "replay_payload_sha256": "01192ee9ad8fdcb4d7966a7c7de1b2cc9cfa1d1a52492d0aa2c415170d950d7b",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_hardware.csv.gz",
+            "original_compressed_sha256": "732a8c65a003f9987af21802e97929dff02f615a4a71a71d722cb135777a8c5e",
+            "original_payload_sha256": "d1760e617f753864d921be696c6dfd2f91629ff24690f30c1a669cfd794226bc",
+            "replay_payload_sha256": "d1760e617f753864d921be696c6dfd2f91629ff24690f30c1a669cfd794226bc",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_macro.csv.gz",
+            "original_compressed_sha256": "38e57725ba8214410f14cdcd3ceb39f52576aa8be5731da880bcec701f82a673",
+            "original_payload_sha256": "f65c7571e04eec6b65cf0efa0c193a185847d4e1afdfaa518dc9387c2ba8e2b3",
+            "replay_payload_sha256": "f65c7571e04eec6b65cf0efa0c193a185847d4e1afdfaa518dc9387c2ba8e2b3",
+            "byte_identical_payload": true
+          }
+        ]
+      },
+      {
+        "request": {
+          "policy": "rule_macro+rule_based",
+          "seed": 100
+        },
+        "matches_frozen_outcome": true,
+        "qualified": true,
+        "local_replay_receipt_sha256": "65878c5ad48069f7500ed931c8776f3c539942acda9eee2749d4bde3523d187a",
+        "trace_payloads": [
+          {
+            "name": "recovery_hardware.csv.gz",
+            "original_compressed_sha256": "d75c2c210f7510e305df0bfd1f97de86f2a00ac9a0c601a9ab118383eef5a3d0",
+            "original_payload_sha256": "3f3cf149a111ceb757d5d48506ff7f6036b8c22f80295af95c36e19aaa0cd375",
+            "replay_payload_sha256": "3f3cf149a111ceb757d5d48506ff7f6036b8c22f80295af95c36e19aaa0cd375",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_hardware.csv.gz",
+            "original_compressed_sha256": "03adda49d8fb2b63018d91a5765a32fb165499754d81a65e344e664965f35a5e",
+            "original_payload_sha256": "a8ec20f1bfff2b633765af60a7b16cc55b1e4849ab3412ad602c2e6054a1b8ee",
+            "replay_payload_sha256": "a8ec20f1bfff2b633765af60a7b16cc55b1e4849ab3412ad602c2e6054a1b8ee",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_macro.csv.gz",
+            "original_compressed_sha256": "180bf5d95fafb6efde2b02b7e3439b2558008b4786fb71bfe8086e82993ef4fe",
+            "original_payload_sha256": "e3524ee0ae5ba41119158cec09389b2b51f57a669a7eab5dd8900f637111d9ea",
+            "replay_payload_sha256": "e3524ee0ae5ba41119158cec09389b2b51f57a669a7eab5dd8900f637111d9ea",
+            "byte_identical_payload": true
+          }
+        ]
+      },
+      {
+        "request": {
+          "policy": "rule_macro+sac",
+          "seed": 100
+        },
+        "matches_frozen_outcome": true,
+        "qualified": true,
+        "local_replay_receipt_sha256": "7140fd03ab2bff37f42b4f6fe46180804dc23951b561b394f9e2493a95b522a8",
+        "trace_payloads": [
+          {
+            "name": "recovery_hardware.csv.gz",
+            "original_compressed_sha256": "afc3a672f91264dcd1dd0f5a828074df60891046b12a337dfdede200bb2d8cf0",
+            "original_payload_sha256": "b85c9d65bb04e8559555092350b279bfb00daebe430915b8e9b660b0c93d4599",
+            "replay_payload_sha256": "b85c9d65bb04e8559555092350b279bfb00daebe430915b8e9b660b0c93d4599",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_hardware.csv.gz",
+            "original_compressed_sha256": "5c116e2290a03bf3511bab4b220f0f78b0e670443bed5613564ede757d480ace",
+            "original_payload_sha256": "603e3cd6f86325b01b5a50b03fa0035a6048c0a7bade6872075783bdd20f7c34",
+            "replay_payload_sha256": "603e3cd6f86325b01b5a50b03fa0035a6048c0a7bade6872075783bdd20f7c34",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_macro.csv.gz",
+            "original_compressed_sha256": "d4061e6eb895fdeb0ef10f1cc110a5853890d2707ca2aac7c74920f2a82fc77e",
+            "original_payload_sha256": "a4b85891a906551da97ea4b912a4fd35fa96f1b1fb936b2d6798205bfa516107",
+            "replay_payload_sha256": "a4b85891a906551da97ea4b912a4fd35fa96f1b1fb936b2d6798205bfa516107",
+            "byte_identical_payload": true
+          }
+        ]
+      },
+      {
+        "request": {
+          "policy": "sac_macro+sac",
+          "seed": 100
+        },
+        "matches_frozen_outcome": true,
+        "qualified": false,
+        "local_replay_receipt_sha256": "cc82fee54f8d286d75a64a61a442535fd6f95a26052f38766d681f7e3c04b0a6",
+        "trace_payloads": [
+          {
+            "name": "recovery_hardware.csv.gz",
+            "original_compressed_sha256": "9212a556fb0250ac75151eca02169fdaee740f6e756aa4867f0d32288b52e4e6",
+            "original_payload_sha256": "6a501c608fdf2876baf76b30dd778f276591e934d91beba9cfe6b69fe6a7e1ef",
+            "replay_payload_sha256": "6a501c608fdf2876baf76b30dd778f276591e934d91beba9cfe6b69fe6a7e1ef",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_hardware.csv.gz",
+            "original_compressed_sha256": "8bb43187ef7856c7997fe9155dcfebc9c9bf64c2f7701a1c390b63466bc1bd02",
+            "original_payload_sha256": "2457bd327fdd3ff7883d501d4a00f7560eb248085673967cc7ae4fde4d6b88f6",
+            "replay_payload_sha256": "2457bd327fdd3ff7883d501d4a00f7560eb248085673967cc7ae4fde4d6b88f6",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_macro.csv.gz",
+            "original_compressed_sha256": "c7ffc9542b2c771cb033f16c4d5e6ab6557890cfc9abe362e36715148ffbfc11",
+            "original_payload_sha256": "c67336264e0746a2ceff151b92a43cde08152248473befdcedfd9eafb0d34fa6",
+            "replay_payload_sha256": "c67336264e0746a2ceff151b92a43cde08152248473befdcedfd9eafb0d34fa6",
+            "byte_identical_payload": true
+          }
+        ]
+      },
+      {
+        "request": {
+          "policy": "sac_macro+sac",
+          "seed": 103
+        },
+        "matches_frozen_outcome": true,
+        "qualified": true,
+        "local_replay_receipt_sha256": "973dbeb1146b4ae2871a951efe24f23934a0d08f28fc67224e74a476aa5d9acb",
+        "trace_payloads": [
+          {
+            "name": "recovery_hardware.csv.gz",
+            "original_compressed_sha256": "b0a7bdcf621f583e10439bc8a1546c24d6ef43a6102bda2b085256648e6c2849",
+            "original_payload_sha256": "024dd6bdcd142f234184710777d286c37c9547ff7f361f5a453f9ec4b335bec2",
+            "replay_payload_sha256": "024dd6bdcd142f234184710777d286c37c9547ff7f361f5a453f9ec4b335bec2",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_hardware.csv.gz",
+            "original_compressed_sha256": "e605a47dcfe461ceae541249a2e215d64c5d0a9627544f18226df4fd3618624e",
+            "original_payload_sha256": "c257c66bed608071d03594f4feffef826b3d4edc8b412cb33c5e79f0115a8253",
+            "replay_payload_sha256": "c257c66bed608071d03594f4feffef826b3d4edc8b412cb33c5e79f0115a8253",
+            "byte_identical_payload": true
+          },
+          {
+            "name": "service_macro.csv.gz",
+            "original_compressed_sha256": "c5e3eb8179aca3814d1acb19df25e084eefecb79ed37d618fa40a682175f9001",
+            "original_payload_sha256": "5875665cd9b1a2c6a79dd0a7c69aaff5671f523e35542ff293c486586281ee6c",
+            "replay_payload_sha256": "5875665cd9b1a2c6a79dd0a7c69aaff5671f523e35542ff293c486586281ee6c",
+            "byte_identical_payload": true
+          }
+        ]
+      }
+    ]
+  },
+  "evidence_boundary": {
+    "public_assets_fetched_from_immutable_commit_and_hash_verified": true,
+    "asset_file_count": 43,
+    "asset_bytes": 7435158,
+    "raw_trace_payloads_uploaded": false,
+    "input_datasets_added_or_downloaded": false,
+    "training_or_llm_calls": false,
+    "frozen_result_branches_or_tags_changed": false,
+    "independent_external_fresh_clone_verified": false,
+    "fresh_clone_note": "Validation used new local main-based worktrees and public hash-checked downloads, not an independent external clone."
+  },
+  "remaining_limits": [
+    "Inherited RegD centering and voltage/PCC coupling remain unrepaired.",
+    "The shared-core Box repair changes constructor metadata, not old ZIPs.",
+    "Known failures remain failures and stay in the original cohort statistics.",
+    "The broader repository has known pre-existing missing-HA-driver test failures."
+  ]
+}
