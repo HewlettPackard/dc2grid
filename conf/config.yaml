@@ -36,6 +36,15 @@ experiment:
 # Override: python baselines/train_ppo.py device=cpu
 device: cpu
 
+environment:
+  simulation_mode: physical_v1
+  start_day: 0
+  regd_load_bias: 0.0
+
+validation:
+  start_day: 1
+  regd_load_bias: 0.0
+
 # Output directory structure: outputs/{algo}_{scenario}/seed_{N}/{timestamp}/
 hydra:
   run:

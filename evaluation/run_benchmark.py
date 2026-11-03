@@ -51,7 +51,8 @@ import yaml
 from tqdm import tqdm
 
 from c2g_env import C2GFastEnv, C2GMacroEnv
-from c2g_env.experiments.identity import file_fingerprint, source_id
+from c2g_env.experiments.identity import check_policy_semantics, file_fingerprint, source_id
+from c2g_env.semantics import SIMULATION_MODES
 from c2g_env.plant_profiles import available_plant_profiles, load_plant_profile
 from baselines.rule_based_mpc import RuleBasedController
 from baselines.rule_based_macro import RuleBasedMacroController
@@ -73,6 +74,8 @@ T_WARN_NORM  = T_WARN / T_SAFE   # normalised warning threshold
 # --plant_profile CLI flag. None = built-in 250 MW facility.
 _PLANT_OVERRIDES: dict | None = None
 _PLANT_PROFILE = "none"
+_SIMULATION_OPTIONS: dict[str, Any] = {}
+_ALLOW_SEMANTIC_MISMATCH = False
 _RL_ALGOS = {
     "ppo",
     "sac"
@@ -93,6 +96,8 @@ def _make_env(
 ) -> C2GFastEnv:
     """Return ActionAblationFastEnv when fixed-action overrides are active."""
     kwargs.setdefault("plant_overrides", _PLANT_OVERRIDES)
+    for key, value in _SIMULATION_OPTIONS.items():
+        kwargs.setdefault(key, value)
     if fixed_action_values:
         from c2g_env.experiments.action_ablation_env import ActionAblationFastEnv
         return ActionAblationFastEnv(
@@ -106,6 +111,8 @@ def _make_env(
 def _make_macro_env(scenario: str, sub_step_callback=None, **kwargs) -> C2GMacroEnv:
     """Return a C2GMacroEnv for macro-level agent evaluation."""
     kwargs.setdefault("plant_overrides", _PLANT_OVERRIDES)
+    for key, value in _SIMULATION_OPTIONS.items():
+        kwargs.setdefault(key, value)
     return C2GMacroEnv(scenario=scenario, sub_step_callback=sub_step_callback, **kwargs)
 
 
@@ -115,6 +122,7 @@ def _experiment_context(env, seed: int, agent, inner_action_fn=None) -> dict[str
         "run_id": uuid4().hex,
         "source_id": source_id(Path(__file__).resolve().parents[1]),
         "seed": seed,
+        "simulation_mode": fast_env.simulation_mode,
         "scenario": fast_env._scenario,
         "plant_profile": _PLANT_PROFILE,
         "facility_capacity_mw": fast_env._facility_cap_kw / 1_000.0,
@@ -172,6 +180,7 @@ def _make_inner_controller(
     scenario: str = "default",
     seed: int = 42,
     model_dir: str | None = None,
+    allow_semantic_mismatch: bool | None = None,
 ):
     """Instantiate a low-level controller by name."""
     if name == "random":
@@ -189,9 +198,13 @@ def _make_inner_controller(
     if name == "mpc_fast":
         return MPCFastController()
     if name == "ppo":
-        return load_sb3_agent("ppo", scenario, seed, model_dir)
+        return load_sb3_agent("ppo", scenario, seed, model_dir,
+                              simulation_mode=env.simulation_mode if env is not None else None,
+                              allow_semantic_mismatch=allow_semantic_mismatch)
     if name == "sac":
-        return load_sb3_agent("sac", scenario, seed, model_dir)
+        return load_sb3_agent("sac", scenario, seed, model_dir,
+                              simulation_mode=env.simulation_mode if env is not None else None,
+                              allow_semantic_mismatch=allow_semantic_mismatch)
     raise ValueError(f"Unknown inner controller '{name}'. Choose from: {_INNER_CONTROLLERS}")
 
 
@@ -292,23 +305,28 @@ def _resolve_sb3_spec(algo: str):
     raise ValueError(f"Unknown algo '{algo}'. Use ppo, sac, ppo_macro, or sac_macro.")
 
 
-def _maybe_load_obs_normalizer(stats_path: Path, scenario: str):
+def _maybe_load_obs_normalizer(stats_path: Path, scenario: str, *, macro: bool = False):
     if not stats_path.exists():
         return None
 
     from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 
-    vec_env = DummyVecEnv([lambda: C2GFastEnv(scenario=scenario)])
+    env_class = C2GMacroEnv if macro else C2GFastEnv
+    vec_env = DummyVecEnv([lambda: env_class(scenario=scenario)])
     vec_norm = VecNormalize.load(str(stats_path), vec_env)
     vec_norm.training = False
     vec_norm.norm_reward = False
     return vec_norm
 
 
-def load_sb3_agent(algo: str, scenario: str, seed: int, model_dir: str | None):
+def load_sb3_agent(
+    algo: str, scenario: str, seed: int, model_dir: str | None,
+    *, simulation_mode: str | None = None, allow_semantic_mismatch: bool | None = None,
+):
     cls, train_key, should_restore_norm = _resolve_sb3_spec(algo)
     if model_dir:
-        path = Path(model_dir) / "final_model"
+        supplied = Path(model_dir)
+        path = supplied.with_suffix("") if supplied.suffix == ".zip" else supplied / "final_model"
     else:
         path = Path("trained_models") / f"{train_key}_{scenario}_s{seed}" / "final_model"
     if not path.with_suffix(".zip").exists():
@@ -316,11 +334,19 @@ def load_sb3_agent(algo: str, scenario: str, seed: int, model_dir: str | None):
             f"No trained model at {path}.zip — run baselines/train_{algo}.py first."
         )
     model = cls.load(str(path))
+    expected_mode = simulation_mode or _SIMULATION_OPTIONS.get("simulation_mode", "physical_v1")
+    trained_mode = check_policy_semantics(
+        model, expected_mode,
+        allow_mismatch=_ALLOW_SEMANTIC_MISMATCH if allow_semantic_mismatch is None else allow_semantic_mismatch,
+    )
     obs_normalizer = None
     if should_restore_norm:
-        obs_normalizer = _maybe_load_obs_normalizer(path.parent / "vec_normalize.pkl", scenario)
+        obs_normalizer = _maybe_load_obs_normalizer(
+            path.parent / "vec_normalize.pkl", scenario, macro=algo.endswith("_macro"),
+        )
     return SB3Agent(model, algo_name=algo.lower(), obs_normalizer=obs_normalizer,
-                    checkpoint=file_fingerprint(path.with_suffix(".zip")))
+                    checkpoint={**file_fingerprint(path.with_suffix(".zip")),
+                                "simulation_mode": trained_mode})
 
 
 # Metric collection
@@ -342,6 +368,8 @@ def run_episode(
         fixed_action_values=fixed_action_values,
     )
     obs, _ = env.reset(seed=seed)
+    if env._physical and hasattr(agent, "reset"):
+        agent.reset()
     algo_for_logging = getattr(agent, "algo_name", (algo_name or "unknown"))
 
     transition_logger = None
@@ -478,6 +506,10 @@ def run_macro_episode(
         fixed_action_values=fixed_action_values or None,
     )
     obs, _ = env.reset(seed=seed)
+    if env._physical:
+        for controller in (agent, inner_action_fn):
+            if controller is not None and hasattr(controller, "reset"):
+                controller.reset()
     experiment_context = _experiment_context(env, seed, agent, inner_action_fn) if record_transitions else None
     hw_step_metrics: list[dict] = []
     inner_transition_logger = None
@@ -553,6 +585,7 @@ def run_macro_episode(
     perf_scores: list[float] = []
     committed_mws: list[float] = []
     tracking_errs: list[float] = []
+    tracking_steps: int = 0
     temp_a_maxes: list[float] = []
     temp_b_maxes: list[float] = []
     # Per-lever tracking contributions (mean across sub-steps, per macro tick)
@@ -600,7 +633,11 @@ def run_macro_episode(
         elec_costs.append(float(info.get("electricity_cost", 0.0)))
         perf_scores.append(float(info.get("perf_score", 0.0)))
         committed_mws.append(float(info.get("committed_mw", 0.0)))
-        tracking_errs.append(float(info.get("mean_tracking_err", 0.0)) ** 2)
+        if env._physical:
+            tracking_errs.append(info["tracking_error_sq_sum"])
+            tracking_steps += info["sub_steps_run"]
+        else:
+            tracking_errs.append(float(info.get("mean_tracking_err", 0.0)) ** 2)
         temp_a_maxes.append(float(info.get("temp_A_max", 0.0)))
         temp_b_maxes.append(float(info.get("temp_B_max", 0.0)))
         # Per-lever tracking contributions (mean over 180 sub-steps)
@@ -647,7 +684,9 @@ def run_macro_episode(
         "total_elec_cost":      float(np.sum(elec_costs)),
         "mean_perf_score":      float(np.mean(perf_scores)),
         "mean_committed_mw":    float(np.mean(committed_mws)),
-        "tracking_rmse":        float(np.sqrt(np.mean(tracking_errs))) if tracking_errs else 0.0,
+        "tracking_rmse":        float(np.sqrt(
+            np.sum(tracking_errs) / tracking_steps if env._physical else np.mean(tracking_errs)
+        )) if tracking_errs else 0.0,
         "temp_A_max":           float(np.max(temp_a_maxes)) if temp_a_maxes else 0.0,
         "temp_B_max":           float(np.max(temp_b_maxes)) if temp_b_maxes else 0.0,
         "episode_length":       n_steps,
@@ -769,6 +808,8 @@ def benchmark(
                         inner_action_fn.push_reward = _inner_agent.push_reward
 
                 inner_action_fn.checkpoint = getattr(_inner_agent, "checkpoint", None)
+                if hasattr(_inner_agent, "reset"):
+                    inner_action_fn.reset = _inner_agent.reset
 
             if agent_name == "rule_based":
                 agent = _make_inner_controller("rule_based", env=env_for_space)
@@ -867,6 +908,7 @@ def benchmark(
 
             row = {
                 "scenario"          : scenario,
+                "simulation_mode"   : getattr(env_for_space, "_fast_env", env_for_space).simulation_mode,
                 "agent"             : agent_name,
                 "facility_capacity_mw": getattr(env_for_space, "_fast_env", env_for_space)._facility_cap_kw / 1_000.0,
                 "n_episodes"        : n_episodes,
@@ -882,6 +924,7 @@ def benchmark(
                 inner_part_name = agent_name.split("+", 1)[1]
                 inner_row = {
                     "scenario"              : scenario,
+                    "simulation_mode"       : row["simulation_mode"],
                     "agent"                 : inner_part_name,
                     "facility_capacity_mw"  : row["facility_capacity_mw"],
                     "n_episodes"            : n_episodes,
@@ -1033,6 +1076,11 @@ if __name__ == "__main__":
     )
     parser.add_argument("--n_episodes", type=int, default=5)
     parser.add_argument("--seed",       type=int, default=100)
+    parser.add_argument("--simulation-mode", choices=SIMULATION_MODES, default="physical_v1")
+    parser.add_argument("--start-day", type=int, default=0)
+    parser.add_argument("--regd-load-bias", type=float, default=0.0)
+    parser.add_argument("--allow-semantic-mismatch", action="store_true",
+                        help="Explicitly diagnose a checkpoint trained under different simulator semantics.")
     parser.add_argument(
         "--plant_profile",
         default="none",
@@ -1145,6 +1193,12 @@ if __name__ == "__main__":
         ),
     )
     args = parser.parse_args()
+    _SIMULATION_OPTIONS = {
+        "simulation_mode": args.simulation_mode,
+        "start_day": args.start_day,
+        "regd_load_bias": args.regd_load_bias,
+    }
+    _ALLOW_SEMANTIC_MISMATCH = args.allow_semantic_mismatch
 
     project_root = Path(__file__).resolve().parent.parent
     evaluation_results_dir = project_root / "evaluation" / "results"

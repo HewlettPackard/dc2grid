@@ -23,7 +23,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import baselines._hydra_compat  # noqa: F401  # Hydra 1.3.x + Python ≥3.14 fix
-from baselines._hydra_compat import plant_overrides_from_cfg
+from baselines._hydra_compat import plant_overrides_from_cfg, simulation_options_from_cfg
 
 import hydra
 from hydra.core.hydra_config import HydraConfig
@@ -35,11 +35,12 @@ from stable_baselines3.common.env_util import make_vec_env
 
 from c2g_env import C2GFastEnv
 from baselines.metrics_callback import C2GMetricsCallback
+from baselines.sac_provenance import bind_training_context
 
 
-def make_env_fn(scenario: str, seed: int, plant_overrides: dict | None = None):
+def make_env_fn(scenario: str, seed: int, plant_overrides: dict | None = None, **simulation_options):
     def _init():
-        env = C2GFastEnv(scenario=scenario, plant_overrides=plant_overrides)
+        env = C2GFastEnv(scenario=scenario, plant_overrides=plant_overrides, **simulation_options)
         env.reset(seed=seed)
         return env
     return _init
@@ -55,15 +56,18 @@ def train(cfg: DictConfig) -> None:
     algo_cfg = cfg.algo
     log_cfg  = cfg.logging
     plant_overrides = plant_overrides_from_cfg(cfg)
+    if algo_cfg.name != "sac":
+        raise ValueError("This trainer requires algo=sac")
 
     print(f"[SAC] scenario={scenario}  seed={seed}  "
           f"timesteps={algo_cfg.timesteps:,}")
 
     # ── Environments ──────────────────────────────────────────────────────
     # SAC is off-policy: single env is fine; no VecNormalize needed
-    env = make_env_fn(scenario, seed, plant_overrides)()
+    env = make_env_fn(scenario, seed, plant_overrides, **simulation_options_from_cfg(cfg))()
 
-    eval_env = make_vec_env(make_env_fn(scenario, seed + 999, plant_overrides),
+    eval_env = make_vec_env(make_env_fn(scenario, seed + 999, plant_overrides,
+                                       **simulation_options_from_cfg(cfg, validation=True)),
                             n_envs=1, seed=seed + 999)
 
     # ── Callbacks ─────────────────────────────────────────────────────────
@@ -107,7 +111,9 @@ def train(cfg: DictConfig) -> None:
         tensorboard_log         = str(out_dir / "tensorboard") if log_cfg.tensorboard else None,
         verbose                 = 0,
         seed                    = seed,
+        device                  = cfg.device,
     )
+    bind_training_context(model, env, out_dir)
 
     # ── Train ─────────────────────────────────────────────────────────────
     model.learn(

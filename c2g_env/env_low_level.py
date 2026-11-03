@@ -68,6 +68,7 @@ Usage
 """
 from __future__ import annotations
 
+import copy
 import math
 from pathlib import Path
 from typing import Any, Mapping
@@ -80,9 +81,10 @@ from gymnasium import spaces
 from c2g_env.physics.workload   import WorkloadOrchestrator
 from c2g_env.physics.thermal    import ThermalTwin
 from c2g_env.physics.electrical import DatacenterElectrical
-from c2g_env.physics.bess       import BESSModel
+from c2g_env.physics.bess       import BESSModel, _SimpleBESSModel
 from c2g_env.physics.macro_grid import MacroGridSignal
 from c2g_env.physics.weather    import WeatherLoader
+from c2g_env.semantics import simulation_mode as resolve_simulation_mode
 
 # ---------------------------------------------------------------------------
 # Constants — kept in sync with electrical.py rack parameters
@@ -90,6 +92,7 @@ from c2g_env.physics.weather    import WeatherLoader
 _FACILITY_CAP_KW = 250_000.0    # Nameplate IT capacity (kW)
 
 _CONFIG_PATH = Path(__file__).parent / "config.yaml"
+_REFERENCE_COOLING = float(np.float32(0.7))
 
 _THERMAL_OVERRIDE_KEYS = frozenset({
     "C_A", "C_B", "K_liq", "K_air", "K_env_A", "K_env_B",
@@ -190,11 +193,17 @@ class C2GFastEnv(gym.Env):
         config_path: str | Path | None = None,
         thermal_overrides: Mapping[str, float] | None = None,
         plant_overrides: Mapping[str, float] | None = None,
+        simulation_mode: str | None = None,
+        start_day: int | None = None,
+        regd_load_bias: float | None = None,
+        grid_market: str | None = None,
+        weather_market: str | None = None,
         **kwargs: Any,
     ) -> None:
         super().__init__()
 
         cfg_path = Path(config_path) if config_path else _CONFIG_PATH
+        self._config_path = cfg_path
         with open(cfg_path, encoding="utf-8") as fh:
             full_cfg = yaml.safe_load(fh)
 
@@ -202,6 +211,16 @@ class C2GFastEnv(gym.Env):
         self._rcfg   = full_cfg["reward"]
         self._scfg   = full_cfg[scenario]
         self._scenario = scenario
+        self.simulation_mode = resolve_simulation_mode(
+            simulation_mode or self._gcfg.get("simulation_mode", "physical_v1")
+        )
+        self._physical = self.simulation_mode == "physical_v1"
+        self._grid_market_override = grid_market
+        self._weather_market_override = weather_market
+        self._start_day = self._gcfg.get("start_day", 0) if start_day is None else start_day
+        self._regd_load_bias = (
+            self._gcfg.get("regd_load_bias", 0.0) if regd_load_bias is None else regd_load_bias
+        )
         for key in ("tracking_floor_fraction", "macro_tracking_floor_fraction"):
             fraction = float(self._rcfg[key])
             if not np.isfinite(fraction) or fraction <= 0.0:
@@ -229,6 +248,7 @@ class C2GFastEnv(gym.Env):
         self.observation_space = spaces.Box(
             low=self._OBS_LOW, high=self._OBS_HIGH, dtype=np.float32
         )
+        self.observation_space.c2g_simulation_mode = self.simulation_mode
 
         # Simulator handles (reset on each reset() call)
         self._workload  = None
@@ -240,6 +260,7 @@ class C2GFastEnv(gym.Env):
 
         # Episode state
         self._tick           = 0
+        self._episode_done = True
         self._prev_throttle  = 1.0
         self._prev_pump_speed = 1.0
         self._prev_regd_signal = 0.0
@@ -254,6 +275,11 @@ class C2GFastEnv(gym.Env):
         self._committed_mw   = self._dr_baseline_mw
         self._episode_ticks  = int(self._gcfg["episode_ticks"])
         self._dt             = float(self._gcfg["dt_seconds"])
+        if self._dt <= 0 or not np.isfinite(self._dt) or self._episode_ticks < 1:
+            raise ValueError("dt_seconds and episode_ticks must be positive")
+        if self._physical and not np.isclose(900 / self._dt, round(900 / self._dt)):
+            raise ValueError("physical_v1 requires dt_seconds to divide the 900-second macro interval")
+        self.macro_substeps = round(900 / self._dt) if self._physical else 180
         # IT-nameplate normalisation denominator; recomputed per-plant in reset().
         self._facility_cap_kw = _FACILITY_CAP_KW
 
@@ -294,6 +320,8 @@ class C2GFastEnv(gym.Env):
             override the scenario for this episode.
         """
         super().reset(seed=seed)
+        if self._physical:
+            self.action_space.seed(seed)
         # Use Gymnasium's seeded RNG when no explicit seed is provided so
         # parallel worker envs (seeded independently by SB3's VecEnv) each
         # produce a distinct trajectory instead of all falling back to 42.
@@ -301,13 +329,24 @@ class C2GFastEnv(gym.Env):
 
         # Allow per-episode scenario override
         if options and "scenario" in options:
-            cfg_path = _CONFIG_PATH
+            cfg_path = self._config_path
             with open(cfg_path, encoding="utf-8") as fh:
                 full_cfg = yaml.safe_load(fh)
             self._scfg     = full_cfg[options["scenario"]]
             self._scenario = options["scenario"]
         scfg = self._scfg
         gcfg = self._gcfg
+        options = options or {}
+        start_day = options.get("start_day", self._start_day)
+        regd_bias = float(options.get("regd_load_bias", self._regd_load_bias))
+        if isinstance(start_day, bool) or not isinstance(start_day, (int, np.integer)) or start_day < 0:
+            raise ValueError("start_day must be a nonnegative integer")
+        if not np.isfinite(regd_bias):
+            raise ValueError("regd_load_bias must be finite")
+        if not self._physical and (start_day != 0 or regd_bias != 0):
+            raise ValueError("Environment replay/bias options require physical_v1; legacy replay is evaluation-only")
+        self._episode_start_day = int(start_day)
+        self._episode_regd_bias = regd_bias
 
         # --- Build / reset simulators ------------------------------------
         # Runtime plant_overrides (e.g. a Hydra plant_profiles group) win over
@@ -321,6 +360,8 @@ class C2GFastEnv(gym.Env):
             n_racks_a_flex=plant.get("n_racks_a_flex"),
             n_racks_a_base=plant.get("n_racks_a_base"),
             n_racks_b=plant.get("n_racks_b"),
+            physical_accounting=self._physical,
+            start_day=int(start_day),
         )
         self._thermal = ThermalTwin(dt_seconds=self._dt)
         # T_safe is the single-source-of-truth silicon limit from config.yaml.
@@ -336,7 +377,8 @@ class C2GFastEnv(gym.Env):
         )
         self._elec = DatacenterElectrical()
         self._elec.reset()
-        self._bess = BESSModel(dt_seconds=self._dt)
+        bess_class = _SimpleBESSModel if self._physical else BESSModel
+        self._bess = bess_class(dt_seconds=self._dt)
         self._bess.reset()
 
         # --- Apply plant capacity overrides ------------------------------
@@ -371,24 +413,41 @@ class C2GFastEnv(gym.Env):
         ))
         self._tracking_floor_kw = self._facility_cap_kw * float(self._rcfg["tracking_floor_fraction"])
         self._macro_tracking_floor_kw = self._facility_cap_kw * float(self._rcfg["macro_tracking_floor_fraction"])
+        if self._physical:
+            self._macro_tracking_floor_kw = max(self._macro_tracking_floor_kw, self._tracking_floor_kw)
+        effective_market = (
+            self._grid_market_override or scfg.get("grid_market", gcfg.get("grid_market", "nyiso_nyc"))
+        ) if self._physical else gcfg.get("grid_market", "nyiso_nyc")
         self._grid = MacroGridSignal(
             energy_dir=gcfg["energy_dir"],
-            zone=gcfg["nyiso_zone"],
+            zone=None if self._physical else gcfg["nyiso_zone"],
             dt_seconds=self._dt,
             committed_mw=self._dr_baseline_mw,
             seed=rng_seed,
-            market=gcfg.get("grid_market", "nyiso_nyc"),
+            market=effective_market,
+            timestamp_replay=self._physical,
+            start_day=int(start_day),
+            episode_ticks=self._episode_ticks,
+            regd_load_bias=regd_bias,
         )
         self._weather_driven = bool(scfg.get("weather_driven", True))
         _weather_market = scfg.get(
             "weather_market",
             scfg.get("grid_market", gcfg.get("grid_market", "nyiso_nyc")),
         )
+        if self._physical:
+            _weather_market = self._weather_market_override or (
+                effective_market if self._grid_market_override else _weather_market
+            )
         self._weather = WeatherLoader(
             weather_dir=gcfg.get("weather_dir", "data/processed/weather"),
             market=_weather_market,
             dt_seconds=self._dt,
             fallback_temp_c=float(scfg["T_amb"]),
+            replay_timestamps=(
+                self._grid.calendar_timestamps
+                if self._physical and self._weather_driven else None
+            ),
         )
 
         # --- Apply scenario parameters -----------------------------------
@@ -416,8 +475,19 @@ class C2GFastEnv(gym.Env):
         self._prev_throttle  = 1.0
         self._prev_pump_speed = 1.0
         self._prev_regd_signal = 0.0   # overwritten by _build_obs_at_reset
-
-        return self._build_obs_at_reset(), {}
+        self._episode_done = False
+        if self._physical:
+            self._reference_thermal = copy.deepcopy(self._thermal)
+            self._reference_elec = copy.deepcopy(self._elec)
+        obs = self._build_obs_at_reset()
+        return obs, {
+            "simulation_mode": self.simulation_mode,
+            "start_day": self._episode_start_day,
+            "regd_load_bias": self._episode_regd_bias,
+            "episode_ticks": self._episode_ticks,
+            "grid_market": effective_market,
+            "weather_source": self._weather.source,
+        } if self._physical else {}
 
     def step(
         self, action: np.ndarray
@@ -435,6 +505,10 @@ class C2GFastEnv(gym.Env):
         -------
         obs, reward, terminated, truncated, info
         """
+        if self._physical and self._episode_done:
+            raise RuntimeError("Call reset() before stepping a new or completed episode")
+        if self._physical and (action.shape != (4,) or not np.isfinite(action).all()):
+            raise ValueError("Hardware action must contain four finite values")
         action         = np.clip(action.astype(np.float32),
                                  self._ACT_LOW, self._ACT_HIGH)
         throttle_batch = float(action[0])
@@ -465,32 +539,10 @@ class C2GFastEnv(gym.Env):
             self._thermal.T_amb = self._weather.temp_c(self._tick)
         # else: T_amb remains as set during reset() (static scenario override)
 
-        p_it_A_mw = (w.p_base_a_kw + w.p_flex_kw) / 1_000.0
-        p_it_B_mw =  w.p_base_b_kw               / 1_000.0
-        (temp_A, temp_B), (p_cool_A_mw, p_hvac_mw, p_pump_mw) = self._thermal.step(
-            p_it_A_mw=p_it_A_mw,
-            p_it_B_mw=p_it_B_mw,
-            hvac_effort=hvac_effort,
-            pump_speed=pump_speed_A,
+        (temp_A, temp_B), (p_cool_A_mw, p_hvac_mw, p_pump_mw), elec = self._advance_plant(
+            self._thermal, self._elec, w.p_base_a_kw + w.p_flex_kw, w.p_base_b_kw,
+            pump_speed_A, hvac_effort, physical_heat=self._physical,
         )
-
-        # -----------------------------------------------------------------
-        # 4. Electrical  (full facility accounting: UPS/PDU/XFMR + PUE)
-        # -----------------------------------------------------------------
-        util_A = DatacenterElectrical._inverse_rack_util(
-            w.p_base_a_kw + w.p_flex_kw,
-            self._elec.n_racks_A, self._elec.p_idle_rack_A_kw,
-            self._elec.p_max_rack_A_kw - self._elec.p_idle_rack_A_kw,
-            self._elec.alpha_A,
-        )
-        util_B = DatacenterElectrical._inverse_rack_util(
-            w.p_base_b_kw,
-            self._elec.n_racks_B, self._elec.p_idle_rack_B_kw,
-            self._elec.p_max_rack_B_kw - self._elec.p_idle_rack_B_kw,
-            self._elec.alpha_B,
-        )
-        # p_pump_mw is a separate facility electrical load (CDU circulating pump)
-        elec = self._elec.step(util_A, util_B, p_cool_A_mw, p_hvac_mw + p_pump_mw)
 
         # -----------------------------------------------------------------
         # 5. ΔP tracking  (against the signal the agent observed last step)
@@ -512,6 +564,19 @@ class C2GFastEnv(gym.Env):
         # ΔP_actual = how much the DC has actually reduced its net draw.
         # Subtracting cool_delta_kw: increased cooling = more draw = less reduction.
         delta_p_actual_kw  = flex_reduction_kw + bess_actual_kw - cool_delta_kw
+        reference_elec = None
+        if self._physical:
+            self._reference_thermal.T_amb = self._thermal.T_amb
+            _, _, reference_elec = self._advance_plant(
+                self._reference_thermal, self._reference_elec,
+                w.p_base_a_kw + w.p_flex_nom_kw, w.p_base_b_kw,
+                _REFERENCE_COOLING, _REFERENCE_COOLING,
+            )
+            flex_reduction_kw = w.p_flex_nom_kw - w.p_flex_kw
+            cool_delta_kw = (elec["p_cooling_mw"] - reference_elec["p_cooling_mw"]) * 1000.0
+            delta_p_actual_kw = (
+                reference_elec["p_facility_mw"] - elec["p_facility_mw"]
+            ) * 1000.0 + bess_actual_kw
 
         # ΔP_demanded uses the RegD signal from the *previous* observation,
         # i.e. the signal the agent actually saw and responded to.
@@ -523,7 +588,10 @@ class C2GFastEnv(gym.Env):
         # -----------------------------------------------------------------
         # 6. Advance grid for next observation
         # -----------------------------------------------------------------
+        current_grid = self._current_grid_state if self._physical else None
         gs = self._grid.step(committed_mw=self._committed_mw)
+        if self._physical:
+            self._current_grid_state = gs
         self._prev_regd_signal = float(gs["regd_signal"])
 
         # -----------------------------------------------------------------
@@ -579,6 +647,9 @@ class C2GFastEnv(gym.Env):
         norm_kw = max(self._committed_mw * 1_000.0, self._tracking_floor_kw)
 
         r_throughput =  alpha * throttle_batch
+        if self._physical:
+            capacity_kwh = self._workload.work_capacity_kw * self._dt / 3600.0
+            r_throughput = alpha * w.work_served_kwh / capacity_kwh if capacity_kwh > 0 else 0.0
         r_tracking   = -beta  * (tracking_err_kw / norm_kw)
         r_thermal    = -gamma * thermal_pen
         r_soc        = -soc_pen
@@ -597,6 +668,8 @@ class C2GFastEnv(gym.Env):
         f_ufls = self._grid.f_nom - 0.5   # e.g. 59.5 Hz (US) / 49.5 Hz (EU)
         f_ofgt = self._grid.f_nom + 0.5   # over-frequency generator trip
         freq_fault = bool(f_grid_hz < f_ufls or f_grid_hz > f_ofgt)
+        if self._physical:
+            freq_fault = bool(f_grid_hz <= f_ufls or f_grid_hz >= f_ofgt)
 
         # Under-voltage relay trip (ANSI C84.1 Range B violation)
         v_uvr = 0.90   # 0.90 pu → UPS transfer to battery or relay trip
@@ -606,6 +679,9 @@ class C2GFastEnv(gym.Env):
 
         self._tick += 1
         truncated  = self._tick >= self._episode_ticks
+        if self._physical:
+            truncated = truncated and not terminated
+        self._episode_done = terminated or truncated
 
         # -----------------------------------------------------------------
         # 9. Observation
@@ -674,6 +750,29 @@ class C2GFastEnv(gym.Env):
             "throughput_ratio":      throttle_batch,
             "bess_age_frac":         self._bess._age_frac,
         }
+        if self._physical:
+            assert current_grid is not None and reference_elec is not None
+            available_work = w.work_served_kwh + w.backlog_work_kwh
+            info.update(
+                simulation_mode=self.simulation_mode,
+                duration_hours=self._dt / 3600.0,
+                lmp=current_grid["lmp_usd_mwh"],
+                grid_load_mw=current_grid["grid_load_mw"],
+                regd_signal=current_grid["regd_signal"],
+                timestamp=str(self._grid.calendar_timestamps[self._tick - 1]),
+                p_grid_import_mw=elec["p_facility_mw"] - bess_actual_kw / 1000.0,
+                p_reference_mw=reference_elec["p_facility_mw"],
+                facility_relief_kw=(reference_elec["p_facility_mw"] - elec["p_facility_mw"]) * 1000.0,
+                work_arrived_kwh=w.work_arrived_kwh,
+                work_served_kwh=w.work_served_kwh,
+                backlog_work_kwh=w.backlog_work_kwh,
+                throughput_ratio=w.work_served_kwh / available_work if available_work > 0 else 1.0,
+                episode_ticks=self._episode_ticks,
+                p_it_A_mw=elec["p_it_A_mw"],
+                p_it_B_mw=elec["p_it_B_mw"],
+                p_chiller_mw=p_cool_A_mw,
+                p_conversion_loss_mw=elec["p_ups_loss_mw"] + elec["p_pdu_loss_mw"] + elec["p_xfmr_loss_mw"],
+            )
         return obs, reward, terminated, truncated, info
 
     def render(self) -> None:
@@ -682,6 +781,50 @@ class C2GFastEnv(gym.Env):
     # ------------------------------------------------------------------
     # Private helpers
     # ------------------------------------------------------------------
+
+    @staticmethod
+    def _advance_plant(
+        thermal: ThermalTwin,
+        electrical: DatacenterElectrical,
+        p_it_A_kw: float,
+        p_it_B_kw: float,
+        pump: float,
+        hvac: float,
+        *,
+        physical_heat: bool = True,
+    ):
+        util_A = electrical._inverse_rack_util(
+            p_it_A_kw, electrical.n_racks_A, electrical.p_idle_rack_A_kw,
+            electrical.p_max_rack_A_kw - electrical.p_idle_rack_A_kw, electrical.alpha_A,
+        )
+        util_B = electrical._inverse_rack_util(
+            p_it_B_kw, electrical.n_racks_B, electrical.p_idle_rack_B_kw,
+            electrical.p_max_rack_B_kw - electrical.p_idle_rack_B_kw, electrical.alpha_B,
+        )
+        p_A = electrical._server_power_mw(
+            util_A, electrical.n_racks_A, electrical.p_idle_rack_A_kw,
+            electrical.p_max_rack_A_kw, electrical.alpha_A,
+        )
+        p_B = electrical._server_power_mw(
+            util_B, electrical.n_racks_B, electrical.p_idle_rack_B_kw,
+            electrical.p_max_rack_B_kw, electrical.alpha_B,
+        )
+        temps, cooling = thermal.step(
+            p_it_A_mw=p_A if physical_heat else p_it_A_kw / 1000.0,
+            p_it_B_mw=p_B if physical_heat else p_it_B_kw / 1000.0,
+            hvac_effort=hvac, pump_speed=pump,
+        )
+        elec = electrical.step(util_A, util_B, cooling[0], cooling[1] + cooling[2])
+        return temps, cooling, elec
+
+    def _ambient_norm(self, tick: int) -> float:
+        if not self._physical:
+            return self._weather.temp_norm(tick)
+        temperature = self._weather.temp_c(tick) if self._weather_driven else self._thermal.T_amb
+        preset = self._weather._preset
+        return float(np.clip(
+            (temperature - preset.norm_min_c) / (preset.norm_max_c - preset.norm_min_c), 0, 1,
+        ))
 
     def _build_obs(
         self,
@@ -710,7 +853,7 @@ class C2GFastEnv(gym.Env):
             self._prev_throttle,
             self._prev_pump_speed,
             min(elec["pue_dynamic"] / 2.5, 2.0),
-            self._weather.temp_norm(self._tick),
+            self._ambient_norm(self._tick),
             float(np.clip((f_grid_hz - f_nom) / 0.5, -1.0, 1.0)),  # freq_dev_norm
             float(np.clip(v_pcc_pu, 0.0, 1.1)),                     # v_pcc_pu
             min(w.backlog_kw / self._workload.p_flex_max_kw, 2.0),  # backlog_norm
@@ -726,6 +869,24 @@ class C2GFastEnv(gym.Env):
         that were wrong whenever the scenario or trace differed from defaults.
         """
         T_safe = self._thermal.T_safe
+        if self._physical:
+            w = copy.copy(self._workload).step(1.0)
+            gs = self._grid.step()
+            self._current_grid_state = gs
+            self._prev_regd_signal = float(gs["regd_signal"])
+            thermal = copy.copy(self._thermal)
+            if self._weather_driven:
+                thermal.T_amb = self._weather.temp_c(0)
+            _, _, elec = self._advance_plant(
+                thermal, copy.copy(self._elec),
+                w.p_base_a_kw + w.p_flex_kw, w.p_base_b_kw,
+                _REFERENCE_COOLING, _REFERENCE_COOLING,
+            )
+            return self._build_obs(
+                self._thermal.temp_A, self._thermal.temp_B,
+                {"soc_fraction": self._bess.soc_fraction}, w, elec, gs,
+                f_grid_hz=self._grid.f_nom, f_nom=self._grid.f_nom,
+            )
 
         # ── Peek workload tick 0 (advance then rewind) ───────────────────
         w = self._workload.step(1.0)     # full throttle → nominal p_flex

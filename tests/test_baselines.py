@@ -249,6 +249,7 @@ class TestBenchmarkImport:
         class FakeModel:
             def __init__(self):
                 self.last_obs = None
+                self.c2g_context = {"simulation_mode": "physical_v1"}
 
             @classmethod
             def load(cls, _path):
@@ -269,7 +270,7 @@ class TestBenchmarkImport:
         fake_norm = FakeNormalizer()
         fake_sb3 = types.SimpleNamespace(PPO=FakeModel, SAC=FakeModel)
         monkeypatch.setitem(sys.modules, "stable_baselines3", fake_sb3)
-        monkeypatch.setattr(runner, "_maybe_load_obs_normalizer", lambda _path, _scenario: fake_norm)
+        monkeypatch.setattr(runner, "_maybe_load_obs_normalizer", lambda _path, _scenario, **kwargs: fake_norm)
 
         model_dir = tmp_path / "ppo_default_s42"
         model_dir.mkdir(parents=True)

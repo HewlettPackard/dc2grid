@@ -46,7 +46,7 @@ class RuleMacroWrappedEnv(gym.Wrapper):
         self._macro_ctrl = RuleBasedMacroController()
 
         # Load handshake config from the same config file the env uses
-        cfg_path = _CONFIG_PATH
+        cfg_path = env._config_path
         with open(cfg_path, encoding="utf-8") as fh:
             full_cfg = yaml.safe_load(fh)
         hs_cfg = full_cfg.get("handshake", {})
@@ -65,6 +65,8 @@ class RuleMacroWrappedEnv(gym.Wrapper):
         self._prev_bid_price_norm = 0.5
         self._last_rmcp_norm = 0.0
         self._last_reg_need_norm = 0.0
+        self._substeps = env.macro_substeps
+        self._physical = env._physical
 
     def reset(
         self, *, seed: int | None = None, options: dict[str, Any] | None = None
@@ -79,22 +81,33 @@ class RuleMacroWrappedEnv(gym.Wrapper):
         self._prev_bid_price_norm = 0.5
         self._last_rmcp_norm = 0.0
         self._last_reg_need_norm = 0.0
+        self._last_hw_obs = obs.copy()
 
         # Perform initial macro decision to set committed_mw from rule-based bid
         self._do_macro_handshake()
+        if self._physical:
+            obs = obs.copy()
+            obs[17] = self.env.committed_mw / self._committed_max_mw
+            self._last_hw_obs = obs.copy()
         return obs, info
 
     def step(
         self, action: np.ndarray
     ) -> tuple[np.ndarray, float, bool, bool, dict]:
         # At the start of each new macro window (after the first), update commitment
-        if self._sub_tick > 0 and self._sub_tick % _SUBSTEPS == 0:
+        if not self._physical and self._sub_tick > 0 and self._sub_tick % _SUBSTEPS == 0:
             self._do_macro_handshake()
 
         obs, reward, terminated, truncated, info = self.env.step(action)
         self._obs_buffer.append(obs)
         self._info_buffer.append(info)
         self._sub_tick += 1
+        self._last_hw_obs = obs.copy()
+        if self._physical and not (terminated or truncated) and self._sub_tick % self._substeps == 0:
+            self._do_macro_handshake()
+            obs = obs.copy()
+            obs[17] = self.env.committed_mw / self._committed_max_mw
+            self._last_hw_obs = obs.copy()
         return obs, reward, terminated, truncated, info
 
     # ------------------------------------------------------------------
@@ -103,6 +116,10 @@ class RuleMacroWrappedEnv(gym.Wrapper):
 
     def _do_macro_handshake(self) -> None:
         """Run rule-based macro bid + grid clearing to update committed_mw."""
+        offer = self.env._grid.step_rmcp() if self._physical else None
+        if offer is not None:
+            self._last_rmcp_norm = offer["rmcp_usd"] / self._rmcp_max
+            self._last_reg_need_norm = offer["residual_mw"] / self._committed_max_mw
         macro_obs = self._build_macro_obs()
         bid_action, _ = self._macro_ctrl.predict(macro_obs)
 
@@ -117,6 +134,7 @@ class RuleMacroWrappedEnv(gym.Wrapper):
             rmcp_max=self._rmcp_max,
             dr_baseline_mw=self._dr_baseline_mw,
             dr_rate_usd_mw=self._dr_rate_usd_mw,
+            offer=offer,
         )
 
         self.env.committed_mw = hs["committed_mw"]  # type: ignore[attr-defined]
@@ -141,6 +159,8 @@ class RuleMacroWrappedEnv(gym.Wrapper):
             inner_obs = np.zeros(18, dtype=np.float32)
             inner_obs[7] = 0.5  # grid_load_norm (triggers mid-range bid)
             inner_obs[15] = 1.0  # v_pcc_pu (nominal)
+            if self._physical:
+                inner_obs = self._last_hw_obs
             T_safe = self.env._thermal.T_safe  # type: ignore[attr-defined]
             return C2GMacroEnv.macro_obs_from_reset(
                 inner_obs,
@@ -149,6 +169,8 @@ class RuleMacroWrappedEnv(gym.Wrapper):
                 temp_B=self.env._thermal.temp_B,  # type: ignore[attr-defined]
                 prev_bid_mw_norm=self._prev_bid_mw_norm,
                 prev_bid_price_norm=self._prev_bid_price_norm,
+                rmcp_norm=self._last_rmcp_norm,
+                reg_need_norm=self._last_reg_need_norm,
             )
 
         # Inject p_flex_max_kw so aggregate_macro_obs can compute backlog_norms

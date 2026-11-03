@@ -4,11 +4,26 @@ import hashlib
 import json
 import subprocess
 import zipfile
+import warnings
 from pathlib import Path
 from typing import Any, Mapping
 
 
-CONDITION_COLUMNS = ("plant_profile", "facility_capacity_mw", "config_id", "thermal_overrides")
+CONDITION_COLUMNS = ("simulation_mode", "plant_profile", "facility_capacity_mw", "config_id", "thermal_overrides")
+
+
+def check_policy_semantics(model: Any, mode: str, *, allow_mismatch: bool = False) -> str:
+    space_mode = getattr(getattr(model, "observation_space", None), "c2g_simulation_mode", "legacy_v0")
+    trained_mode = getattr(model, "c2g_context", {}).get("simulation_mode", space_mode)
+    if trained_mode != mode:
+        message = (
+            f"Checkpoint semantics {trained_mode!r} differ from environment {mode!r}. "
+            "Retrain for the new semantics, or explicitly allow a mismatch for frozen-policy diagnosis."
+        )
+        if not allow_mismatch:
+            raise ValueError(message)
+        warnings.warn(message, RuntimeWarning, stacklevel=2)
+    return trained_mode
 
 
 def result_condition(row: Mapping[str, Any]) -> dict[str, Any]:
@@ -43,14 +58,14 @@ def file_fingerprint(path: Path) -> dict[str, str]:
 
 def source_id(root: Path) -> str:
     sources = {}
-    for directory in ("c2g_env", "baselines"):
+    for directory in ("c2g_env", "baselines", "evaluation", "scripts"):
         for path in sorted((root / directory).rglob("*.py")):
             sources[path.relative_to(root).as_posix()] = file_fingerprint(path)["sha256"]
     return configuration_id(sources)
 
 
 def capture_source(root: Path, output_dir: Path) -> dict[str, Any]:
-    paths = [path for directory in ("c2g_env", "baselines") for path in (root / directory).rglob("*.py")]
+    paths = [path for directory in ("c2g_env", "baselines", "evaluation", "scripts") for path in (root / directory).rglob("*.py")]
     paths.extend((root / "conf").rglob("*.yaml"))
     paths.append(root / "c2g_env" / "config.yaml")
     checksums = {path.relative_to(root).as_posix(): file_fingerprint(path)["sha256"] for path in sorted(paths)}
@@ -62,7 +77,7 @@ def capture_source(root: Path, output_dir: Path) -> dict[str, Any]:
             for path in sorted(paths):
                 archive.write(path, path.relative_to(root).as_posix())
     revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, text=True, capture_output=True, check=True).stdout.strip()
-    status = subprocess.run(["git", "status", "--porcelain", "--", "c2g_env", "baselines", "conf"],
+    status = subprocess.run(["git", "status", "--porcelain", "--", "c2g_env", "baselines", "evaluation", "scripts", "conf"],
                             cwd=root, text=True, capture_output=True, check=True).stdout
     return {"source_id": identity, "code_revision": revision, "local_modifications": status.splitlines(),
             "source_archive": str(archive_path.resolve())}

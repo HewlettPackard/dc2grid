@@ -26,8 +26,11 @@
 # (Override via Hydra: ``+global.dt_seconds=5``)
 # ------------------------------------------------------------------------------
 global:
+  simulation_mode: physical_v1  # Use legacy_v0 only for historical checkpoint reproduction.
   dt_seconds: 5              # Simulation timestep [s]. Must divide 3600 evenly.
   episode_ticks: 17280       # 17280 × 5 s = 24-hour episodes
+  start_day: 0               # Zero-based source-calendar day; workload traces cycle independently.
+  regd_load_bias: 0.0        # Explicit stress-test bias, applied before the first observation.
 
   # Silicon thermal limit [°C]. Single source of truth for T_safe across the
   # environment, baselines, safety filters, and evaluation. Used as the

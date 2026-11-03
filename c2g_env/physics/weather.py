@@ -210,6 +210,7 @@ class WeatherLoader:
         zone: str | None = None,
         dt_seconds: float = 5.0,
         fallback_temp_c: float | None = None,
+        replay_timestamps: np.ndarray | None = None,
     ) -> None:
         if market not in WEATHER_PRESETS:
             raise ValueError(
@@ -233,6 +234,8 @@ class WeatherLoader:
         self._dewpoints_c: np.ndarray | None = None
         self._n_hours:     int = 0
         self._source:      str = "fallback"
+        self._replay_temps: np.ndarray | None = None
+        self._replay_dewpoints: np.ndarray | None = None
 
         if path and path.exists():
             df = pd.read_csv(path, parse_dates=["timestamp_utc"])
@@ -245,7 +248,30 @@ class WeatherLoader:
             self._n_hours = len(self._temps_c)
             self._market_id = market
             self._source  = f"real:{path.name}"
+            if replay_timestamps is not None:
+                from c2g_env.replay import sample_previous
+
+                times = pd.to_datetime(df["timestamp_utc"], utc=True).dt.tz_localize(None)
+                source_year = times.iloc[0].year
+                targets = np.array([
+                    pd.Timestamp(t).replace(year=source_year).to_datetime64()
+                    for t in replay_timestamps
+                ])
+                previous = times.iloc[-1].replace(year=source_year - 1).to_datetime64()
+                extended_times = np.concatenate(([previous], times.to_numpy()))
+                self._replay_temps = sample_previous(
+                    extended_times, np.r_[self._temps_c[-1], self._temps_c],
+                    targets, max_age_seconds=7200.0,
+                )
+                if self._dewpoints_c is not None and np.isfinite(self._dewpoints_c).all():
+                    self._replay_dewpoints = sample_previous(
+                        extended_times, np.r_[self._dewpoints_c[-1], self._dewpoints_c],
+                        targets, max_age_seconds=7200.0,
+                    )
+                self._source += f":calendar_climatology_{source_year}"
         else:
+            if replay_timestamps is not None:
+                raise FileNotFoundError(f"Timestamp replay requires real weather data: {path}")
             # Calibrated synthetic model
             if path:
                 warnings.warn(
@@ -266,6 +292,8 @@ class WeatherLoader:
 
     def temp_c(self, tick: int) -> float:
         """Return ambient dry-bulb temperature (°C) at simulation tick."""
+        if self._replay_temps is not None:
+            return float(self._replay_temps[tick])
         if self._temps_c is None:
             return self._fallback
         hour_idx = (tick // self._ticks_per_hour) % self._n_hours
@@ -273,6 +301,8 @@ class WeatherLoader:
 
     def dewpoint_c(self, tick: int) -> float:
         """Return dew-point temperature (°C) at simulation tick."""
+        if self._replay_dewpoints is not None:
+            return float(self._replay_dewpoints[tick])
         if self._dewpoints_c is None or self._temps_c is None:
             return self._fallback - 10.0
         hour_idx = (tick // self._ticks_per_hour) % self._n_hours
