@@ -1,0 +1,858 @@
+{
+  "schema": "dc2grid-updated-table2-snapshot-v1",
+  "scope": "Updated main Table 2, both parts, nine controller families only",
+  "source_public_commit": "246d60e49e2478ededba81e39e60c0141fec41fa",
+  "source_public_result_tag": "repro/20261102/pid-comparison",
+  "source_research_commit": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "source_stages": [
+    "repro/20261102/tracking-baseline",
+    "repro/20261102/union-tracking"
+  ],
+  "pdf": {
+    "path": "outputs/pid_comparison_extract_20261102/publication/pid_progress_comparison.pdf",
+    "sha256": "2c31e19948811377bbf68594698573c1aac9498c97f499452861c9330655a595",
+    "pages": 9,
+    "numbered_tables": 12,
+    "table_parts": 13,
+    "data_rows_counting_Table2_parts_separately": 118
+  },
+  "table_ids": [
+    "T2a",
+    "T2b"
+  ],
+  "panel": {
+    "source": "outputs/rl_value_conditioning_20261101/reports/final_report.json#/panels/regression",
+    "start_days_zero_based_2023": [
+      207,
+      248,
+      249
+    ],
+    "dates": [
+      "2023-07-27",
+      "2023-09-06",
+      "2023-09-07"
+    ],
+    "environment_seeds_per_day": [
+      100,
+      101,
+      102,
+      103,
+      104
+    ],
+    "biases": [
+      0.0,
+      0.5
+    ],
+    "cases_per_bias_per_policy": 15,
+    "cases_both_biases_per_policy": 30,
+    "status": "Consumed historical regression; not untouched validation or confirmation"
+  },
+  "mean_bias": 0.5,
+  "qualification_biases": [
+    0.0,
+    0.5
+  ],
+  "aggregation": {
+    "source": "outputs/rl_value_conditioning_20261101/reports/final_report.json#/statistical_scope",
+    "procedure": [
+      "Keep every planned complete case, including qualification failures",
+      "Select beta=0.5 metrics",
+      "For each date/noise case average all fixed checkpoints in the family",
+      "Take the unweighted mean and sample SD across those 15 or 18 case means"
+    ],
+    "raw_record_source": "outputs/rl_value_conditioning_20261101/reports/final_episode_metrics.json",
+    "raw_selection_fields": [
+      "panel",
+      "macro",
+      "family",
+      "start_day",
+      "env_seed",
+      "bias",
+      "training_seed"
+    ],
+    "mean_case_count_not_model_episode_count": true,
+    "cash": "Average paired per-case controller-minus-PID 26h cash under the same macro; its SD is the SD of paired case differences, not a combination of marginal SDs",
+    "revenue": "For each controller and matched case, 100*(R_beta0.5/R_beta0-1); not versus PID",
+    "gate_counts": "Both biases and all fixed checkpoints; denominator is 30/36 per checkpoint",
+    "not_confidence_intervals": true,
+    "not_deployed_action_averaging_ensemble": true
+  },
+  "gate": {
+    "extends": "physical_recovery",
+    "paid_service_floor_enforced": false,
+    "proof": "final_episode_metrics.json records floor_enforced=false for all displayed rule-macro rows",
+    "count_scope": "both_biases",
+    "no_success_inferred_from_complete": true
+  },
+  "families": {
+    "rule_hardware": {
+      "label": "Rule",
+      "kind": "fixed_hardware_rule",
+      "training_protocol": "fixed_controller",
+      "model_ids": [],
+      "low_policy_id_template": "{macro}__rule_hardware"
+    },
+    "pid": {
+      "label": "PID",
+      "kind": "native_four_actuator_PID",
+      "training_protocol": "fixed_controller",
+      "model_ids": [],
+      "low_policy_id_template": "{macro}__pid"
+    },
+    "bang_bang": {
+      "label": "Bang-bang",
+      "kind": "fixed_bang_bang",
+      "training_protocol": "fixed_controller",
+      "model_ids": [],
+      "low_policy_id_template": "{macro}__bang_bang"
+    },
+    "old_sac": {
+      "label": "Retrained SAC",
+      "kind": "corrected_native_low_SAC",
+      "training_protocol": "corrected_selected_sac",
+      "model_ids": [
+        "corrected_sac_1007"
+      ],
+      "low_policy_id_template": "{macro}__old_sac"
+    },
+    "cooling_first": {
+      "label": "Analytic",
+      "kind": "causal_analytic_hardware_controller",
+      "training_protocol": "fixed_controller",
+      "model_ids": [],
+      "low_policy_id_template": "{macro}__cooling_first",
+      "not_RL": true
+    },
+    "bc_only": {
+      "label": "BC only",
+      "kind": "supervised_direct_hardware",
+      "training_protocol": "bc",
+      "model_ids": [
+        "bc_only_1100",
+        "bc_only_1101",
+        "bc_only_1102",
+        "bc_only_1103"
+      ],
+      "low_policy_id_template": "{macro}__{model_id}"
+    },
+    "guided_sac": {
+      "label": "Guided SAC",
+      "kind": "BC_initialized_regularized_low_SAC",
+      "training_protocol": "guided_sac",
+      "model_ids": [
+        "guided_sac_1100",
+        "guided_sac_1101",
+        "guided_sac_1102",
+        "guided_sac_1103"
+      ],
+      "low_policy_id_template": "{macro}__{model_id}"
+    },
+    "union_conditioned": {
+      "label": "Union SAC + shaping",
+      "kind": "state_local_regularized_low_SAC_with_training_potential",
+      "training_protocol": "union",
+      "model_ids": [
+        "union_conditioned_1100",
+        "union_conditioned_1101",
+        "union_conditioned_1102",
+        "union_conditioned_1103"
+      ],
+      "low_policy_id_template": "{macro}__{model_id}"
+    },
+    "union_original": {
+      "label": "Union SAC",
+      "kind": "state_local_regularized_low_SAC_without_potential",
+      "training_protocol": "union",
+      "model_ids": [
+        "union_original_1100",
+        "union_original_1101",
+        "union_original_1102",
+        "union_original_1103"
+      ],
+      "low_policy_id_template": "{macro}__{model_id}"
+    }
+  },
+  "checkpoints": [
+    {
+      "id": "corrected_sac_1007",
+      "seed": 1007,
+      "selected_step": 250002,
+      "path": "outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip",
+      "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024",
+      "bytes": 3227384,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip"
+    },
+    {
+      "id": "bc_only_1100",
+      "seed": 1100,
+      "selected_supervised_update": 11000,
+      "path": "outputs/table2_distress_rl_20261031/bc_v1/history_1100/best_bc.zip",
+      "sha256": "040f12daee07d1d11f35f96b630bd9e2be3a1838feee317a5ea494419239f175",
+      "bytes": 432858,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/table2_distress_rl_20261031/bc_v1/history_1100/best_bc.zip"
+    },
+    {
+      "id": "bc_only_1101",
+      "seed": 1101,
+      "selected_supervised_update": 12000,
+      "path": "outputs/table2_distress_rl_20261031/bc_v1/history_1101/best_bc.zip",
+      "sha256": "a37aece4596854f0c827442fb2a8db947396a0606e544b0637e0372f6818a0fe",
+      "bytes": 432858,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/table2_distress_rl_20261031/bc_v1/history_1101/best_bc.zip"
+    },
+    {
+      "id": "bc_only_1102",
+      "seed": 1102,
+      "selected_supervised_update": 11000,
+      "path": "outputs/table2_distress_rl_20261031/bc_v1/history_1102/best_bc.zip",
+      "sha256": "310639f3904a50975e79cd61c11e5bb24a5f86a5259efbcb8082c1ee6322ec57",
+      "bytes": 432858,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/table2_distress_rl_20261031/bc_v1/history_1102/best_bc.zip"
+    },
+    {
+      "id": "bc_only_1103",
+      "seed": 1103,
+      "selected_supervised_update": 12000,
+      "path": "outputs/table2_distress_rl_20261031/bc_v1/history_1103/best_bc.zip",
+      "sha256": "17b9357e8f04a6814bc8685bfafd394a454e606ea9a982a8ea2b18c0859ce9ed",
+      "bytes": 432862,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/table2_distress_rl_20261031/bc_v1/history_1103/best_bc.zip"
+    },
+    {
+      "id": "guided_sac_1100",
+      "seed": 1100,
+      "selected_step": 4096,
+      "path": "outputs/table2_distress_rl_20261031/runs/guided_sac_1100/step_4096.zip",
+      "sha256": "93a3e235e3ffce409151f9dbabe65ac6b0bebb89e27b714c867fde6b5c381ee1",
+      "bytes": 979269,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/table2_distress_rl_20261031/runs/guided_sac_1100/step_4096.zip"
+    },
+    {
+      "id": "guided_sac_1101",
+      "seed": 1101,
+      "selected_step": 8192,
+      "path": "outputs/table2_distress_rl_20261031/runs/guided_sac_1101/step_8192.zip",
+      "sha256": "53e8992f64507e9098ed12d346e43c0239b66586e9b6163006aaee7eb59dc1e5",
+      "bytes": 979302,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/table2_distress_rl_20261031/runs/guided_sac_1101/step_8192.zip"
+    },
+    {
+      "id": "guided_sac_1102",
+      "seed": 1102,
+      "selected_step": 4096,
+      "path": "outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_4096.zip",
+      "sha256": "30a942428ae2918649d19faed5bf13e2149b2ff460cbb0de7d2e585a71627a01",
+      "bytes": 979273,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/table2_distress_rl_20261031/runs/guided_sac_1102/step_4096.zip"
+    },
+    {
+      "id": "guided_sac_1103",
+      "seed": 1103,
+      "selected_step": 4096,
+      "path": "outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip",
+      "sha256": "0cf65bada29818b690e6e7bc59a40c35351d096f6cb1a58b1aa88fd035ba200d",
+      "bytes": 979275,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/table2_distress_rl_20261031/runs/guided_sac_1103/step_4096.zip"
+    },
+    {
+      "id": "union_original_1100",
+      "seed": 1100,
+      "selected_step": 552960,
+      "path": "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1100/step_552960.zip",
+      "sha256": "67b0d09dd13b0c83eb4a1be54adbcd222258187d374a293c892a83d3e8c39bff",
+      "bytes": 935992,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/rl_value_conditioning_20261101/runs/extended/union_original_1100/step_552960.zip"
+    },
+    {
+      "id": "union_original_1101",
+      "seed": 1101,
+      "selected_step": 552960,
+      "path": "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1101/step_552960.zip",
+      "sha256": "6f427d9681d383df2e7c1ffe83c6a3cf5f2e360f03bbb235ee9f6a7b0486867c",
+      "bytes": 935992,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/rl_value_conditioning_20261101/runs/extended/union_original_1101/step_552960.zip"
+    },
+    {
+      "id": "union_original_1102",
+      "seed": 1102,
+      "selected_step": 552960,
+      "path": "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1102/step_552960.zip",
+      "sha256": "11ec77a86a0fc5ad5c84faa8b22e7202fb7ed9cea3f2a1b4885aea5b1d6cb555",
+      "bytes": 935988,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/rl_value_conditioning_20261101/runs/extended/union_original_1102/step_552960.zip"
+    },
+    {
+      "id": "union_original_1103",
+      "seed": 1103,
+      "selected_step": 552960,
+      "path": "outputs/rl_value_conditioning_20261101/runs/extended/union_original_1103/step_552960.zip",
+      "sha256": "04b787af4f80e28b0861ac6c6272020c51aa998432fa23f267952cae4e0e8962",
+      "bytes": 935988,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/rl_value_conditioning_20261101/runs/extended/union_original_1103/step_552960.zip"
+    },
+    {
+      "id": "union_conditioned_1100",
+      "seed": 1100,
+      "selected_step": 552960,
+      "path": "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1100/step_552960.zip",
+      "sha256": "c3a5318bc538bd4f1e6743446f0564559666472242943aaa5a355b49c3642e65",
+      "bytes": 936175,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1100/step_552960.zip"
+    },
+    {
+      "id": "union_conditioned_1101",
+      "seed": 1101,
+      "selected_step": 552960,
+      "path": "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1101/step_552960.zip",
+      "sha256": "0641ccf157d99bd3d79ffe64b3165c4655e4af0bc85b905ec4ca12db2089dc3d",
+      "bytes": 936175,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1101/step_552960.zip"
+    },
+    {
+      "id": "union_conditioned_1102",
+      "seed": 1102,
+      "selected_step": 552960,
+      "path": "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1102/step_552960.zip",
+      "sha256": "232402344d9533754b063509e0434f78d9ab06de4ec808fa641d3404c82424ce",
+      "bytes": 936171,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1102/step_552960.zip"
+    },
+    {
+      "id": "union_conditioned_1103",
+      "seed": 1103,
+      "selected_step": 552960,
+      "path": "outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1103/step_552960.zip",
+      "sha256": "056923855df7fc3ae1242bdac17dc9f6af0416ffd33defabdf1b1ff854fe8ca9",
+      "bytes": 936171,
+      "download_url": "https://raw.githubusercontent.com/HewlettPackard/dc2grid/246d60e49e2478ededba81e39e60c0141fec41fa/outputs/rl_value_conditioning_20261101/runs/extended/union_conditioned_1103/step_552960.zip"
+    }
+  ],
+  "replay_policies": [
+    {
+      "family": "rule_hardware",
+      "model_id": null,
+      "snapshot": "table2_regression",
+      "policy": "rule__rule_hardware"
+    },
+    {
+      "family": "pid",
+      "model_id": null,
+      "snapshot": "table2_regression",
+      "policy": "rule__pid"
+    },
+    {
+      "family": "bang_bang",
+      "model_id": null,
+      "snapshot": "table2_regression",
+      "policy": "rule__bang_bang"
+    },
+    {
+      "family": "old_sac",
+      "model_id": "corrected_sac_1007",
+      "snapshot": "table2_regression",
+      "policy": "rule__old_sac"
+    },
+    {
+      "family": "cooling_first",
+      "model_id": null,
+      "snapshot": "table2_regression",
+      "policy": "rule__cooling_first"
+    },
+    {
+      "family": "bc_only",
+      "model_id": "bc_only_1100",
+      "snapshot": "table2_regression",
+      "policy": "rule__bc_only_1100"
+    },
+    {
+      "family": "bc_only",
+      "model_id": "bc_only_1101",
+      "snapshot": "table2_regression",
+      "policy": "rule__bc_only_1101"
+    },
+    {
+      "family": "bc_only",
+      "model_id": "bc_only_1102",
+      "snapshot": "table2_regression",
+      "policy": "rule__bc_only_1102"
+    },
+    {
+      "family": "bc_only",
+      "model_id": "bc_only_1103",
+      "snapshot": "table2_regression",
+      "policy": "rule__bc_only_1103"
+    },
+    {
+      "family": "guided_sac",
+      "model_id": "guided_sac_1100",
+      "snapshot": "table2_regression",
+      "policy": "rule__guided_sac_1100"
+    },
+    {
+      "family": "guided_sac",
+      "model_id": "guided_sac_1101",
+      "snapshot": "table2_regression",
+      "policy": "rule__guided_sac_1101"
+    },
+    {
+      "family": "guided_sac",
+      "model_id": "guided_sac_1102",
+      "snapshot": "table2_regression",
+      "policy": "rule__guided_sac_1102"
+    },
+    {
+      "family": "guided_sac",
+      "model_id": "guided_sac_1103",
+      "snapshot": "table2_regression",
+      "policy": "rule__guided_sac_1103"
+    },
+    {
+      "family": "union_conditioned",
+      "model_id": "union_conditioned_1100",
+      "snapshot": "value_peak_regression",
+      "policy": "rule__union_conditioned_1100"
+    },
+    {
+      "family": "union_conditioned",
+      "model_id": "union_conditioned_1101",
+      "snapshot": "value_peak_regression",
+      "policy": "rule__union_conditioned_1101"
+    },
+    {
+      "family": "union_conditioned",
+      "model_id": "union_conditioned_1102",
+      "snapshot": "value_peak_regression",
+      "policy": "rule__union_conditioned_1102"
+    },
+    {
+      "family": "union_conditioned",
+      "model_id": "union_conditioned_1103",
+      "snapshot": "value_peak_regression",
+      "policy": "rule__union_conditioned_1103"
+    },
+    {
+      "family": "union_original",
+      "model_id": "union_original_1100",
+      "snapshot": "value_peak_regression",
+      "policy": "rule__union_original_1100"
+    },
+    {
+      "family": "union_original",
+      "model_id": "union_original_1101",
+      "snapshot": "value_peak_regression",
+      "policy": "rule__union_original_1101"
+    },
+    {
+      "family": "union_original",
+      "model_id": "union_original_1102",
+      "snapshot": "value_peak_regression",
+      "policy": "rule__union_original_1102"
+    },
+    {
+      "family": "union_original",
+      "model_id": "union_original_1103",
+      "snapshot": "value_peak_regression",
+      "policy": "rule__union_original_1103"
+    }
+  ],
+  "tables": [
+    {
+      "id": "T2a",
+      "number": "2",
+      "part": "a",
+      "pdf_page": 1,
+      "tex_label": "tab:updated_original_comparison",
+      "panel": "original_peaks",
+      "source_panel": "regression",
+      "macro": "rule",
+      "bias": 0.5,
+      "cases_per_policy_in_mean": 15,
+      "gate_biases": [
+        0.0,
+        0.5
+      ],
+      "gate": "historical_rule",
+      "aggregation": "low_level",
+      "source_adapter": "low",
+      "metric_set": "grid",
+      "show_sd": true,
+      "value_scope": "rule_original_grid",
+      "raw_records_ref": "low_case_records#",
+      "raw_filter": {
+        "panel": "regression",
+        "macro": "rule",
+        "bias": 0.5
+      },
+      "rows": [
+        {
+          "id": "T2a.rule_hardware",
+          "family": "rule_hardware",
+          "source_ref": "low_tracking#/aggregates/9",
+          "assembled_ref": "comparison_data#/low/regression_rule/0",
+          "pass": [
+            30,
+            30
+          ]
+        },
+        {
+          "id": "T2a.pid",
+          "family": "pid",
+          "source_ref": "low_tracking#/aggregates/7",
+          "assembled_ref": "comparison_data#/low/regression_rule/1",
+          "pass": [
+            26,
+            30
+          ],
+          "pass_by_bias": {
+            "0.0": [
+              12,
+              15
+            ],
+            "0.5": [
+              14,
+              15
+            ]
+          },
+          "diagnostic": true
+        },
+        {
+          "id": "T2a.bang_bang",
+          "family": "bang_bang",
+          "source_ref": "low_tracking#/aggregates/0",
+          "assembled_ref": "comparison_data#/low/regression_rule/2",
+          "pass": [
+            30,
+            30
+          ]
+        },
+        {
+          "id": "T2a.old_sac",
+          "family": "old_sac",
+          "source_ref": "low_tracking#/aggregates/6",
+          "assembled_ref": "comparison_data#/low/regression_rule/3",
+          "pass": [
+            30,
+            30
+          ]
+        },
+        {
+          "id": "T2a.cooling_first",
+          "family": "cooling_first",
+          "source_ref": "low_tracking#/aggregates/2",
+          "assembled_ref": "comparison_data#/low/regression_rule/4",
+          "pass": [
+            30,
+            30
+          ]
+        },
+        {
+          "id": "T2a.bc_only",
+          "family": "bc_only",
+          "source_ref": "low_tracking#/aggregates/1",
+          "assembled_ref": "comparison_data#/low/regression_rule/5",
+          "pass": [
+            120,
+            120
+          ]
+        },
+        {
+          "id": "T2a.guided_sac",
+          "family": "guided_sac",
+          "source_ref": "low_tracking#/aggregates/4",
+          "assembled_ref": "comparison_data#/low/regression_rule/6",
+          "pass": [
+            120,
+            120
+          ]
+        },
+        {
+          "id": "T2a.union_conditioned",
+          "family": "union_conditioned",
+          "source_ref": "low_tracking#/aggregates/10",
+          "assembled_ref": "comparison_data#/low/regression_rule/7",
+          "pass": [
+            120,
+            120
+          ]
+        },
+        {
+          "id": "T2a.union_original",
+          "family": "union_original",
+          "source_ref": "low_tracking#/aggregates/11",
+          "assembled_ref": "comparison_data#/low/regression_rule/8",
+          "pass": [
+            120,
+            120
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T2b",
+      "number": "2",
+      "part": "b",
+      "pdf_page": 1,
+      "tex_label": "tab:updated_original_comparison",
+      "panel": "original_peaks",
+      "source_panel": "regression",
+      "macro": "rule",
+      "bias": 0.5,
+      "cases_per_policy_in_mean": 15,
+      "gate_biases": [
+        0.0,
+        0.5
+      ],
+      "gate": "historical_rule",
+      "aggregation": "low_level",
+      "source_adapter": "low",
+      "metric_set": "quality",
+      "show_sd": true,
+      "value_scope": "rule_original_quality",
+      "raw_records_ref": "low_case_records#",
+      "raw_filter": {
+        "panel": "regression",
+        "macro": "rule",
+        "bias": 0.5
+      },
+      "cash_reference_ref": "low_tracking#/aggregates/7",
+      "rows": [
+        {
+          "id": "T2b.rule_hardware",
+          "family": "rule_hardware",
+          "source_ref": "low_tracking#/aggregates/9",
+          "assembled_ref": "comparison_data#/low/regression_rule/0",
+          "pass": [
+            30,
+            30
+          ]
+        },
+        {
+          "id": "T2b.pid",
+          "family": "pid",
+          "source_ref": "low_tracking#/aggregates/7",
+          "assembled_ref": "comparison_data#/low/regression_rule/1",
+          "pass": [
+            26,
+            30
+          ],
+          "pass_by_bias": {
+            "0.0": [
+              12,
+              15
+            ],
+            "0.5": [
+              14,
+              15
+            ]
+          },
+          "diagnostic": true
+        },
+        {
+          "id": "T2b.bang_bang",
+          "family": "bang_bang",
+          "source_ref": "low_tracking#/aggregates/0",
+          "assembled_ref": "comparison_data#/low/regression_rule/2",
+          "pass": [
+            30,
+            30
+          ]
+        },
+        {
+          "id": "T2b.old_sac",
+          "family": "old_sac",
+          "source_ref": "low_tracking#/aggregates/6",
+          "assembled_ref": "comparison_data#/low/regression_rule/3",
+          "pass": [
+            30,
+            30
+          ]
+        },
+        {
+          "id": "T2b.cooling_first",
+          "family": "cooling_first",
+          "source_ref": "low_tracking#/aggregates/2",
+          "assembled_ref": "comparison_data#/low/regression_rule/4",
+          "pass": [
+            30,
+            30
+          ]
+        },
+        {
+          "id": "T2b.bc_only",
+          "family": "bc_only",
+          "source_ref": "low_tracking#/aggregates/1",
+          "assembled_ref": "comparison_data#/low/regression_rule/5",
+          "pass": [
+            120,
+            120
+          ]
+        },
+        {
+          "id": "T2b.guided_sac",
+          "family": "guided_sac",
+          "source_ref": "low_tracking#/aggregates/4",
+          "assembled_ref": "comparison_data#/low/regression_rule/6",
+          "pass": [
+            120,
+            120
+          ]
+        },
+        {
+          "id": "T2b.union_conditioned",
+          "family": "union_conditioned",
+          "source_ref": "low_tracking#/aggregates/10",
+          "assembled_ref": "comparison_data#/low/regression_rule/7",
+          "pass": [
+            120,
+            120
+          ]
+        },
+        {
+          "id": "T2b.union_original",
+          "family": "union_original",
+          "source_ref": "low_tracking#/aggregates/11",
+          "assembled_ref": "comparison_data#/low/regression_rule/8",
+          "pass": [
+            120,
+            120
+          ]
+        }
+      ]
+    }
+  ],
+  "numeric_rows": 18,
+  "numeric_entries_per_view": 234,
+  "checkpoint_count": 17,
+  "checkpoint_bytes": 16364591,
+  "policy_case_count": 630,
+  "parent_numeric_validation": {
+    "status": "passed",
+    "counts": {
+      "PID_cases": 440,
+      "PID_metric_mean_SD_pairs": 96,
+      "PID_resource_aggregate_rows": 8,
+      "SD_cells": 144,
+      "TeX_numeric_entries": 1026,
+      "TeX_rows": 118,
+      "approved_input_files": 14,
+      "archival_reported_pairs": 36,
+      "confirmation_metric_mean_caseSD_pairs": 3968,
+      "declared_checkpoint_identities": 41,
+      "earlier_economic_report_bound_rows": 4,
+      "gate_rows": 87,
+      "identical_peak_PID_pairs": 60,
+      "low_aggregate_rows": 23,
+      "low_metric_mean_SD_pairs": 414,
+      "macro_only_numeric_cells": 25,
+      "main_value_cells": 528,
+      "paired_confirmation_cells": 220,
+      "recorded_source_byte_hashes_compared": 13,
+      "reproduction_mode_metric_means": 18,
+      "reproduction_numeric_cells": 27,
+      "resource_numeric_cells": 40,
+      "source_byte_hash_mismatches": 0
+    },
+    "numeric_source_byte_hashes_enforced": true
+  },
+  "source_inputs": [
+    {
+      "alias": "comparison_values",
+      "path": "outputs/pid_comparison_extract_20261102/publication/comparison_values.json",
+      "observed_sha256": "d74e385e5f1d1ac6d56e3629161f7e2b92642f14d5f3bbef803f872a56a865fe",
+      "recorded_source_sha256": "d74e385e5f1d1ac6d56e3629161f7e2b92642f14d5f3bbef803f872a56a865fe",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "confirmation",
+      "path": "outputs/camera_ready_confirmation_20261102/reports/final_report.json",
+      "observed_sha256": "750997bf9c9bd8db73234649189d02a446bb3dd5e76cd549a655b2c8c94bb6c0",
+      "recorded_source_sha256": "750997bf9c9bd8db73234649189d02a446bb3dd5e76cd549a655b2c8c94bb6c0",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "confirmation_development_cases",
+      "path": "outputs/camera_ready_confirmation_20261102/reports/development_cases.json",
+      "observed_sha256": "a12bd998bed9b93ca48302f003205720dfd94b67395252444c3b1a3d525b5952",
+      "recorded_source_sha256": "a12bd998bed9b93ca48302f003205720dfd94b67395252444c3b1a3d525b5952",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "confirmation_final_cases",
+      "path": "outputs/camera_ready_confirmation_20261102/reports/final_cases.json",
+      "observed_sha256": "0b80222d6190d3345721505c86f3abf7c33e7fb1f802481142e6b4757d9331ac",
+      "recorded_source_sha256": "0b80222d6190d3345721505c86f3abf7c33e7fb1f802481142e6b4757d9331ac",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "earlier_economic",
+      "path": "outputs/rl_grid_cash_ppo_20261101/reports/original_peak_regression.json",
+      "observed_sha256": "84ffb94eb40661f8319b5a0eafefe6f68ffe1b9bf8e9b5b7445c0958edd66a2a",
+      "recorded_source_sha256": "84ffb94eb40661f8319b5a0eafefe6f68ffe1b9bf8e9b5b7445c0958edd66a2a",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "economic_original_peak",
+      "path": "outputs/camera_ready_confirmation_20261102/reports/development_report.json",
+      "observed_sha256": "e1668e0980b94153a0af6088dc77e71c21a58315c8b1d754f33906b27873833c",
+      "recorded_source_sha256": "e1668e0980b94153a0af6088dc77e71c21a58315c8b1d754f33906b27873833c",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "low_case_records",
+      "path": "outputs/rl_value_conditioning_20261101/reports/final_episode_metrics.json",
+      "observed_sha256": "bc0a50f08bc03b3b66f7abc2e6f050545b929776d8e73c504d191bc3046c64af",
+      "recorded_source_sha256": "bc0a50f08bc03b3b66f7abc2e6f050545b929776d8e73c504d191bc3046c64af",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "low_tracking",
+      "path": "outputs/rl_value_conditioning_20261101/reports/final_report.json",
+      "observed_sha256": "0a8b0bc3664d69e667b545a21d46f19770052ff2cd9452dfa0de4ec3c1d272ba",
+      "recorded_source_sha256": "0a8b0bc3664d69e667b545a21d46f19770052ff2cd9452dfa0de4ec3c1d272ba",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "pid_audit_supplement",
+      "path": "outputs/pid_comparison_extract_20261102/reports/pid_audit_supplement.json",
+      "observed_sha256": "d61ed3d5a4e2fb7c852f5c5e0f6f001a710219947ae0f6e403a2515a1e786499",
+      "recorded_source_sha256": "d61ed3d5a4e2fb7c852f5c5e0f6f001a710219947ae0f6e403a2515a1e786499",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "pid_cases",
+      "path": "outputs/pid_comparison_extract_20261102/reports/pid_cases.json",
+      "observed_sha256": "eb31bc86f75101bc292f57597d42221a69b84ab17e7a8edfd6fd61f93d3951eb",
+      "recorded_source_sha256": "eb31bc86f75101bc292f57597d42221a69b84ab17e7a8edfd6fd61f93d3951eb",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "pid_report",
+      "path": "outputs/pid_comparison_extract_20261102/reports/pid_report.json",
+      "observed_sha256": "b2b4a23f5d204be6ee5419e04110760a683defd2dabb5dc622474c99e178e2d5",
+      "recorded_source_sha256": "b2b4a23f5d204be6ee5419e04110760a683defd2dabb5dc622474c99e178e2d5",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "pid_reproduction",
+      "path": "outputs/pid_comparison_extract_20261102/reports/pid_semantics_reproduction.json",
+      "observed_sha256": "b336fc5c14a9775620f2250601a4d79908920c13275b7b616606cdb9b8699baf",
+      "recorded_source_sha256": "b336fc5c14a9775620f2250601a4d79908920c13275b7b616606cdb9b8699baf",
+      "byte_identical_to_recorded": true
+    },
+    {
+      "alias": "reproduction_values",
+      "path": "outputs/pid_comparison_extract_20261102/publication/pid_reproduction_values.json",
+      "observed_sha256": "4a7938ae1868772df91df3f141af3092e28442e243ccd52e72ae1c352a75c4af",
+      "recorded_source_sha256": "4a7938ae1868772df91df3f141af3092e28442e243ccd52e72ae1c352a75c4af",
+      "byte_identical_to_recorded": true
+    }
+  ],
+  "checkpoint_usage_note": "old_sac is corrected/retrained low seed 1007 at step 250002, shared with Table 1. No learned macro checkpoint is used in Table 2; Table 1's learned-macro row additionally needs high1007.",
+  "training_performed": false,
+  "new_evaluation_performed": false,
+  "original_archive_or_input_datasets_included": false,
+  "generator": {
+    "path": "reproducibility/table2_snapshot.py",
+    "sha256": "1309104bf308c422559145b5a6627bdff55ba716606f462c4f1147addc2f8e8e"
+  }
+}
