@@ -1,0 +1,36 @@
+% New numeric table fragment; requires booktabs and graphicx.
+% Not manuscript source, original layout, or a nine-page PDF regeneration.
+
+\par\medskip\noindent\textbf{Table 2(a)}
+\par\noindent{\small panel=original\_peaks; macro=rule; bias=0.5; aggregation=low\_level}
+\par\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrrr}\toprule
+Controller & Facility relief [MW]; mean +/- SD & LFR [percent]; mean +/- SD & SPDR [percent]; mean +/- SD & LWSR [percent]; mean +/- SD & LW-CF [percent]; mean +/- SD & Delta R\_beta [percent]; mean +/- SD & Pass / planned \\\midrule
+Rule & $5.068 \pm 1.482$ & $5.03 \pm 1.45$ & $0.049 \pm 0.014$ & $0.020 \pm 0.006$ & $6.20 \pm 1.92$ & $-0.80 \pm 1.05$ & 30/30 \\
+PID$^\dagger$ & $5.641 \pm 1.484$ & $5.60 \pm 1.46$ & $0.054 \pm 0.014$ & $0.024 \pm 0.006$ & $7.45 \pm 1.85$ & $-1.60 \pm 0.47$ & 26/30 \\
+Bang-bang & $4.701 \pm 1.078$ & $4.67 \pm 1.06$ & $0.045 \pm 0.010$ & $0.022 \pm 0.006$ & $6.65 \pm 1.74$ & $-3.03 \pm 1.18$ & 30/30 \\
+Retrained SAC & $\mathbf{6.007} \pm 1.724$ & $\mathbf{5.97} \pm 1.70$ & $\mathbf{0.058} \pm 0.017$ & $\mathbf{0.030} \pm 0.006$ & $\mathbf{9.09} \pm 1.88$ & $-0.34 \pm 0.52$ & 30/30 \\
+Analytic & $5.626 \pm 1.645$ & $5.59 \pm 1.63$ & $0.054 \pm 0.016$ & $0.028 \pm 0.007$ & $8.54 \pm 2.17$ & $\mathbf{-0.02} \pm 0.03$ & 30/30 \\
+BC only & $5.583 \pm 1.636$ & $5.55 \pm 1.62$ & $0.054 \pm 0.016$ & $0.028 \pm 0.007$ & $8.52 \pm 2.09$ & $-0.26 \pm 0.26$ & 120/120 \\
+Guided SAC & $5.607 \pm 1.647$ & $5.57 \pm 1.63$ & $0.054 \pm 0.016$ & $0.028 \pm 0.007$ & $8.64 \pm 2.12$ & $-0.33 \pm 0.27$ & 120/120 \\
+Union SAC + shaping & $5.567 \pm 1.632$ & $5.53 \pm 1.62$ & $0.054 \pm 0.016$ & $0.028 \pm 0.007$ & $8.48 \pm 2.09$ & $-0.31 \pm 0.26$ & 120/120 \\
+Union SAC & $5.582 \pm 1.634$ & $5.55 \pm 1.62$ & $0.054 \pm 0.016$ & $0.028 \pm 0.007$ & $8.51 \pm 2.10$ & $-0.28 \pm 0.27$ & 120/120 \\
+\bottomrule\end{tabular}%
+}
+
+\par\medskip\noindent\textbf{Table 2(b)}
+\par\noindent{\small panel=original\_peaks; macro=rule; bias=0.5; aggregation=low\_level}
+\par\noindent\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrr}\toprule
+Controller & PCC relief [MW]; mean +/- SD & RMSE [kW]; mean +/- SD & BESS [MWh]; mean +/- SD & Delta cash/PID [USD]; mean +/- SD & Peak PCC24 [MW]; mean +/- SD & Pass / planned \\\midrule
+Rule & $4.972 \pm 1.635$ & $784.2 \pm 114.5$ & $31.003 \pm 2.216$ & $-769.4 \pm 219.9$ & $1.225 \pm 2.337$ & 30/30 \\
+PID$^\dagger$ & $5.610 \pm 1.537$ & $821.9 \pm 80.8$ & $29.344 \pm 1.495$ & $0.0 \pm 0.0$ & $1.995 \pm 2.153$ & 26/30 \\
+Bang-bang & $4.640 \pm 1.178$ & $1681.0 \pm 255.9$ & $40.171 \pm 5.149$ & $-871.9 \pm 400.1$ & $1.898 \pm 2.215$ & 30/30 \\
+Retrained SAC & $\mathbf{5.775} \pm 1.678$ & $658.4 \pm 308.1$ & $31.682 \pm 2.024$ & $\mathbf{648.4} \pm 140.7$ & $\mathbf{2.050} \pm 2.184$ & 30/30 \\
+Analytic & $5.626 \pm 1.645$ & $\mathbf{50.2} \pm 74.4$ & $0.950 \pm 1.510$ & $466.2 \pm 173.8$ & $2.005 \pm 2.058$ & 30/30 \\
+BC only & $5.581 \pm 1.636$ & $290.5 \pm 267.6$ & $\mathbf{0.109} \pm 0.006$ & $387.6 \pm 165.9$ & $2.003 \pm 2.042$ & 120/120 \\
+Guided SAC & $5.612 \pm 1.648$ & $382.7 \pm 239.3$ & $0.719 \pm 0.108$ & $427.4 \pm 179.4$ & $1.988 \pm 2.061$ & 120/120 \\
+Union SAC + shaping & $5.568 \pm 1.632$ & $295.3 \pm 263.4$ & $0.134 \pm 0.007$ & $364.5 \pm 165.8$ & $2.004 \pm 2.038$ & 120/120 \\
+Union SAC & $5.579 \pm 1.633$ & $294.4 \pm 264.1$ & $0.172 \pm 0.009$ & $377.7 \pm 167.9$ & $2.008 \pm 2.041$ & 120/120 \\
+\bottomrule\end{tabular}%
+}
