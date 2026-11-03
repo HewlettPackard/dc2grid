@@ -155,25 +155,22 @@ class C2GMacroEnv(gym.Env):
             dtype= np.float32,
         )
         # 19-D observation (17 original + 2 market signals)
-        self.observation_space = spaces.Box(
-            low  = np.full(19, -1.0, dtype=np.float32),
-            high = np.full(19,  5.0, dtype=np.float32),
-            dtype= np.float32,
-        )
+        obs_low = np.full(19, -1.0, dtype=np.float32)
+        obs_high = np.full(19, 5.0, dtype=np.float32)
         # Override bounds for strictly non-negative features
         _nonneg = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18]
-        self.observation_space.low[_nonneg] = 0.0
-        self.observation_space.high[:17] = np.array([
+        obs_low[_nonneg] = 0.0
+        obs_high[:17] = np.array([
             2.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 2.0, 1.0,
             1.0, 1.0, 1.0, 1.0, 1.0, 1.1, 2.0,
         ], dtype=np.float32)
         # freq_dev_mean can be negative (index 14)
-        self.observation_space.low[14] = -1.0
+        obs_low[14] = -1.0
         # bess_target_prev at [13] normalised to [0,1]
-        self.observation_space.low[13] = 0.0
+        obs_low[13] = 0.0
         # market signals [17, 18] bounded [0, 5]
-        self.observation_space.high[17] = 5.0
-        self.observation_space.high[18] = 5.0
+        obs_high[17] = 5.0
+        obs_high[18] = 5.0
 
         # Inner environment
         _fixed_action_values = kwargs.pop("fixed_action_values", None)
@@ -203,11 +200,15 @@ class C2GMacroEnv(gym.Env):
             )
 
         self.simulation_mode = self._fast_env.simulation_mode
-        self.observation_space.c2g_simulation_mode = self.simulation_mode
         self._physical = self._fast_env._physical
         self._substeps = self._fast_env.macro_substeps
         if self._physical:
-            self.observation_space.high[8] = np.inf
+            obs_high[8] = np.inf
+        # Box caches boundedness at construction, so finalize the bounds first.
+        self.observation_space = spaces.Box(
+            low=obs_low, high=obs_high, dtype=np.float32,
+        )
+        self.observation_space.c2g_simulation_mode = self.simulation_mode
         self._committed_max_mw = self._fast_env._committed_mw_max
         self._dr_baseline_mw = self._fast_env._dr_baseline_mw
 

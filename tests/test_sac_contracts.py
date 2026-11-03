@@ -141,3 +141,38 @@ def test_low_level_callback_does_not_count_early_fault_as_survival():
         },
     )
     assert _compute_episode_metrics(buffer)["ep/survived"] == 0
+
+
+def test_new_macro_checkpoint_preserves_consistent_observation_space(tmp_path):
+    from c2g_env import C2GMacroEnv
+
+    env = C2GMacroEnv(simulation_mode="physical_v1")
+    try:
+        model = SAC(
+            "MlpPolicy",
+            env,
+            policy_kwargs={"net_arch": [8, 8]},
+            device="cpu",
+            seed=17,
+        )
+        path = tmp_path / "macro-space.zip"
+        model.save(path)
+        loaded = SAC.load(path, device="cpu")
+        for agent in (model, loaded):
+            for space in (
+                agent.observation_space,
+                agent.policy.observation_space,
+                agent.actor.observation_space,
+                agent.critic.observation_space,
+                agent.critic_target.observation_space,
+            ):
+                assert space.c2g_simulation_mode == "physical_v1"
+                np.testing.assert_array_equal(
+                    space.bounded_above, np.isfinite(space.high)
+                )
+                space.seed(37)
+                sample = space.sample()
+                assert np.isfinite(sample).all()
+                assert space.contains(sample)
+    finally:
+        env.close()

@@ -220,3 +220,50 @@ def test_invalid_mode_and_replay_options_fail_explicitly():
         C2GFastEnv(simulation_mode="typo")
     with pytest.raises(ValueError, match="start_day"):
         C2GFastEnv(start_day=0.5).reset(seed=100)
+
+
+@pytest.mark.parametrize("mode", ["physical_v1", "legacy_v0"])
+def test_macro_observation_box_metadata_matches_its_bounds(short_config, mode):
+    env = C2GMacroEnv(config_path=short_config, simulation_mode=mode)
+    try:
+        observation, _ = env.reset(seed=100)
+        space = env.observation_space
+        expected_high = np.array(
+            [
+                2,
+                2,
+                1,
+                1,
+                2,
+                1,
+                1,
+                1,
+                np.inf if mode == "physical_v1" else 2,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1.1,
+                2,
+                5,
+                5,
+            ],
+            dtype=np.float32,
+        )
+        expected_low = np.zeros(19, dtype=np.float32)
+        expected_low[14] = -1
+        np.testing.assert_array_equal(space.low, expected_low)
+        np.testing.assert_array_equal(space.high, expected_high)
+        np.testing.assert_array_equal(space.bounded_below, np.isfinite(space.low))
+        np.testing.assert_array_equal(space.bounded_above, np.isfinite(space.high))
+        assert space.c2g_simulation_mode == mode
+        assert space.contains(observation)
+        space.seed(37)
+        for _ in range(32):
+            sample = space.sample()
+            assert np.isfinite(sample).all()
+            assert space.contains(sample)
+    finally:
+        env.close()
