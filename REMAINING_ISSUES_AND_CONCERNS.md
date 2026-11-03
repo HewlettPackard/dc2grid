@@ -2,24 +2,28 @@
 
 ## Public addendum scope
 
-This documentation-only addendum is published on
-`release/grid-relief-reproducibility-20261102`. The frozen result tag
+This register was first published as a documentation-only addendum on
+`release/grid-relief-reproducibility-20261102`. This separate Table 1 branch now
+includes the [clean source/results export](TABLE1_SNAPSHOT.md) mapped to the
+local `f477cdea` snapshot. The frozen result tag
 `repro/20261102/pid-comparison` remains at
 `246d60e49e2478ededba81e39e60c0141fec41fa`; no previous result tag, scientific
-file, checkpoint, dataset, or PDF is changed by this addition.
+file, checkpoint, dataset, or PDF is rewritten by this export.
 
 The local research commits cited below are provenance identifiers, not parents
-of this clean public history. Some later audit records and the new Table 1
-supporting files are not included in this release. Their links are explicitly
-marked **local-only** and lead to the availability inventory in Section 9,
-not to a public download. Publishing this disclosure does not publish those
-underlying records or constitute a new evaluation.
+of this clean public history. The Table 1 audit records and scalar results
+listed in Section 9 are now available in this branch. Its original archival
+table extraction is published only as a numeric derivative, without embedded
+manuscript TeX. Input datasets, raw traces, the original paper archive and full
+manuscripts remain excluded. This availability update is not a simulator repair,
+retraining campaign or new scientific result.
 
 The original local report is preserved separately. Its SHA256 is
 `efc97001e9fea3191dcdb1bbb20e81f0a5684a256da644383d3397e912c10ce8`.
-The 41 categorized items below are unchanged apart from public-link availability
-annotations. This additional document is not inserted into the frozen release
-file inventory; its version is identified by its own Git commit.
+The scientific concerns below remain unchanged; only publication availability
+and the corresponding PROV-06 status have been updated for this branch. This
+document is not inserted into the older frozen release file inventory; its
+version is identified by its own Git commit.
 
 **Status date:** 2026-11-03.
 **Local evidence snapshot:** `f477cdea7a1a7461d5d67fa27832c36d45d82388`.
@@ -32,7 +36,7 @@ audits, experiment reports, and publication checks. It is not a claim that every
 possible repository defect has been discovered. No simulator, checkpoint,
 registration, result, or previous PDF was changed to prepare this document.
 
-The [detailed source audit (local-only)][audit] supplies original/corrected function and line
+The [detailed source audit][audit] supplies original/corrected function and line
 anchors, counterexamples, fixed findings, and evidence boundaries. This register
 focuses on what remains unresolved or requires careful interpretation.
 
@@ -69,7 +73,7 @@ unless a specific experiment is cited.
 ### SIM-01: RegD centering does not enforce the advertised window neutrality
 
 **Status:** open defect. **Origin:** original code; retained in `physical_v1`.
-**Evidence:** M12 in the [macro audit ledger (local-only)][macro-ledger];
+**Evidence:** M12 in the [macro audit ledger][macro-ledger];
 [current generator](c2g_env/physics/macro_grid.py#L572).
 
 The generator emits the preceding samples unchanged, subtracts the block mean
@@ -97,7 +101,7 @@ The deliberate `beta = 0.5` stress intervention is not itself this defect.
 ### SIM-02: PCC voltage omits the battery's actual net-power contribution
 
 **Status:** model-coupling limitation. **Origin:** original code; retained.
-**Evidence:** R1 in the [physical audit ledger (local-only)][physical-ledger];
+**Evidence:** R1 in the [physical audit ledger][physical-ledger];
 [voltage calculation](c2g_env/physics/electrical.py#L327).
 
 Voltage drop uses gross facility power and facility reactive demand, rather than
@@ -123,9 +127,9 @@ then perform coupled-policy sensitivity evaluation.
 ### SIM-03: Corrected macro observation Box has stale sampling metadata
 
 **Status:** open software defect. **Origin:** introduced during the corrections.
-**Evidence:** C01 in the [macro audit ledger (local-only)][macro-ledger];
+**Evidence:** C01 in the [macro audit ledger][macro-ledger];
 [Box bound mutation](c2g_env/env_high_level.py#L209);
-[checkpoint preflight (local-only)][model-preflight].
+[checkpoint preflight][model-preflight].
 
 The corrected environment sets observation coordinate 8's upper bound to
 infinity after constructing the Box. The cached `bounded_above` flag remains
@@ -152,7 +156,7 @@ without retraining.
 ### SIM-04: RegD timebase/calibration still assumes five-second ticks
 
 **Status:** remaining timebase limitation. **Origin:** inherited.
-**Evidence:** M13 in the [macro audit ledger (local-only)][macro-ledger].
+**Evidence:** M13 in the [macro audit ledger][macro-ledger].
 
 Window tick counts and AR-process calibration retain five-second assumptions.
 For example, 180 ticks at a ten-second step span 1,800 seconds, not 900 seconds.
@@ -168,7 +172,7 @@ or explicitly reject unsupported timebases. Test nondefault and partial interval
 ### SIM-05: Declared clearing-temperature configuration is ignored
 
 **Status:** open configuration limitation. **Origin:** inherited.
-**Evidence:** M15 in the [macro audit ledger (local-only)][macro-ledger].
+**Evidence:** M15 in the [macro audit ledger][macro-ledger].
 
 The YAML advertises `handshake.sigmoid_k_p`, but clearing uses a local literal
 `k_p = 0.15`. Changing the YAML value alone therefore does not change that
@@ -181,7 +185,7 @@ or remove/document the unsupported setting in a new version.
 ### SIM-06: Battery charging-limit telemetry overstates available charge power
 
 **Status:** open diagnostic inconsistency. **Origin:** inherited.
-**Evidence:** R2 in the [physical audit ledger (local-only)][physical-ledger];
+**Evidence:** R2 in the [physical audit ledger][physical-ledger];
 [battery implementation](c2g_env/physics/bess.py).
 
 The reported `max_charge_mw` and actual charge derating use different SOC windows
@@ -196,7 +200,7 @@ Use one consistent limit calculation and test the SOC boundaries.
 ### SIM-07: Optional/legacy battery backends are not interchangeable
 
 **Status:** conditional backend/interface risk. **Origin:** inherited.
-**Evidence:** R4 in the [physical audit ledger (local-only)][physical-ledger].
+**Evidence:** R4 in the [physical audit ledger][physical-ledger].
 
 The legacy selector can choose PySAM based on package availability. The adapters
 declare different capacities: simple 15 MWh/5 MW versus PySAM-labelled
@@ -216,11 +220,11 @@ legacy risk to corrected SAC results without runtime evidence.
 
 | ID | Concern and scope | Required interpretation or follow-up |
 |---|---|---|
-| MODEL-01 | Work is an energy-equivalent dynamic-power proxy, not executed job counts, FLOPs, deadlines or application QoS. | Do not equate work-kWh conservation with demonstrated real computing-service preservation. Validate a richer service model before making those claims. See R3 in the [physical ledger (local-only)][physical-ledger]. |
+| MODEL-01 | Work is an energy-equivalent dynamic-power proxy, not executed job counts, FLOPs, deadlines or application QoS. | Do not equate work-kWh conservation with demonstrated real computing-service preservation. Validate a richer service model before making those claims. See R3 in the [physical ledger][physical-ledger]. |
 | MODEL-02 | Queue state resets between episodes; a per-step backlog penalty is not terminal repayment. | Within-episode conservation alone does not close debt. The two-hour audited recovery addresses its declared closure conditions, not every possible long-run service obligation. Preserve service-end failures even if later recovery closes. |
 | MODEL-03 | The original low observation clips backlog and does not expose every relevant clock, work, or reference state. | Distinct physical situations can share an observation. Consider causal history or explicitly declared state features; do not silently grant future information or privileged reference access. See [observation construction](c2g_env/env_low_level.py#L822). |
 | MODEL-04 | A fast-controller discount of 0.99 at five seconds has an effective discounted horizon near 8.3 minutes. | This can be short relative to storage/work/recovery obligations. It is a design concern, not an SAC update bug, and must not be generalized to macro policies with different step durations or discounts. |
-| MODEL-05 | Served-work rewards and actual PCC-dollar cost replaced paper-defined throttle/normalized-power proxies while outer coefficients could remain unchanged. | Reward meaning, scale and relative incentives changed. Compare rewards within a declared version; calibrate objectives explicitly rather than calling every difference a repaired formula. See the [audit clarification (local-only)][audit]. |
+| MODEL-05 | Served-work rewards and actual PCC-dollar cost replaced paper-defined throttle/normalized-power proxies while outer coefficients could remain unchanged. | Reward meaning, scale and relative incentives changed. Compare rewards within a declared version; calibrate objectives explicitly rather than calling every difference a repaired formula. See the [audit clarification][audit]. |
 | MODEL-06 | Relief is against an independent simulated nominal reference, with specified operating points. | This is not an externally validated utility/customer baseline. Changing reference controls changes the estimand; document the reference alongside every relief claim. |
 | MODEL-07 | Grid cash excludes business income, capital cost and a monetized aging charge; the electricity model uses its declared LMP settlement assumptions. | Do not call grid cash total business profit or assume a validated real import/export tariff. Battery wear and tracking remain separate trade-offs. |
 | MODEL-08 | Frequency/voltage and plant models are simplified, not a demonstrated real deployment or full network validation. | Results support the stated simulated task. Physical calibration, topology and deployment robustness require separate evidence. Passing internal accounting checks does not supply that validation. |
@@ -235,8 +239,8 @@ unambiguous metric keys. The PID/economic studies have their own registered
 runners and audits. Fixing an isolated collector does not repair every generic
 entrypoint.
 
-Source detail: E02-E09/E12 in the [evaluation ledger (local-only)][evaluation-ledger],
-TRAIN-006 in the [training ledger (local-only)][training-ledger], and the current
+Source detail: E02-E09/E12 in the [evaluation ledger][evaluation-ledger],
+TRAIN-006 in the [training ledger][training-ledger], and the current
 [generic benchmark](evaluation/run_benchmark.py) and
 [metrics callback](baselines/metrics_callback.py).
 
@@ -351,8 +355,8 @@ Under the registered default/day-0/bias-0 panel:
 These are limitations of the observed result, not newly diagnosed optimizer
 bugs. Do not hide them by post-result checkpoint replacement or substituting
 the economically successful fractional policy for the bidding policy.
-See [the corrected Table 1 report (local-only)][table1-results] and
-[configuration comparison (local-only)][configuration-comparison].
+See [the corrected Table 1 report][table1-results] and
+[configuration comparison][configuration-comparison].
 
 ### RESULT-06: Learning stability and superiority remain conditional
 
@@ -410,11 +414,11 @@ tracking very poorly. Less-negative grid cash alone is not task success.
 | PROV-03 | Corrected original-bidding PPO and paper-conformant LLM rows remain unestablished. | The new Table 1 has seven corrected rows, not nine. No compatible original-bidding PPO was established and no new training/LLM execution was authorized. Do not insert archival numbers or economic PPO into the corrected panel. |
 | PROV-04 | Large evidence and exact datasets are not fully available through the public Git release alone. | Local compressed evidence parts exist; the distributed location-map template contains null URLs. Input redistribution permission was not established, so datasets were excluded from new public history. User uploads/permissions and working external locations still require confirmation. Hashes prove identity, not licensing rights. |
 | PROV-05 | Independent external fresh-clone reproduction is not completed in the recorded validation. | Local clean-export checks, remote refs/API and release assets were verified; that is not the same as a completed independent external fresh-clone run. Do not advertise the latter as passed. |
-| PROV-06 | The latest Table 1 study is separate from the published PID release. | Its result snapshot is local commit `f477cdea`, tag `result/table1-corrected-existing-20261102`; its 105 raw traces remain local, with hashes and episode receipts tracked. It was not pushed or inserted into the earlier evidence bundles. The public release branch/tag must be used instead of assuming default `main` contains every correction or new result. |
+| PROV-06 | The Table 1 clean public export is separate from its private source history and the older PID release. | This branch maps to source commit `f477cdea` and its local result tag without importing that ancestry. It includes the source/result mapping, 35 episode receipts, raw trace inventory and matching high/low checkpoints. The 105 original raw traces remain local, and the new study is not retroactively inserted into earlier evidence bundles or the frozen PID tag. The new public commit is deliberately different from `f477cdea`; default `main` is not this snapshot. |
 
-Sources: [training provenance ledger (local-only)][training-ledger],
-[original Table 1 extraction (local-only)][original-table1],
-[checkpoint readiness (local-only)][checkpoint-readiness],
+Sources: [training provenance ledger][training-ledger],
+[numeric-only original Table 1 extraction][original-table1],
+[checkpoint readiness][checkpoint-readiness],
 [public release guide][release-guide],
 [artifact-location template][artifact-locations], and the
 [protected PID-comparison release][public-release].
@@ -488,18 +492,18 @@ Neither blanket invalidation nor blanket assurance of harmlessness is supported.
 
 <a id="local-only-supporting-evidence"></a>
 
-## 9. Local-only supporting evidence
+## 9. Supporting evidence available in this Table 1 branch
 
-The following records are identified for provenance but are **not included in
-this public addendum or the frozen PID release**. Their paths are local research
-identifiers, not public download links. The reported observations that rely on
-them are disclosures from the local audit, not a claim that the supporting
-Table 1 package has already been independently reproduced from this release.
+These supporting records are now included in the clean Table 1 export, rather
+than remaining local-only as in the earlier documentation-only addendum.
+Their source identities and the one numeric-only transformation are recorded in
+the [source export map](reproducibility/table1/source_export.json). This does not
+make the original private Git commit or excluded raw data publicly available.
 
-All paths in the table are relative to the local research study directory
+All paths in the table are relative to the exported study directory
 `outputs/table1_corrected_existing_20261102/`.
 
-| Supporting record | Local relative path |
+| Supporting record | Exported relative path |
 |---|---|
 | Detailed original/corrected source audit | `ORIGINAL_SAC_AUDIT.md` |
 | Macro/market/clock audit, including M12-M15 and C01 | `reports/original_macro_audit.json` |
@@ -509,28 +513,29 @@ All paths in the table are relative to the local research study directory
 | Saved-checkpoint observation-space preflight | `reports/model_preflight.json` |
 | Corrected seven-row Table 1 results and case summaries | `reports/table1_report.json` |
 | Training/evaluation configuration comparison | `reports/training_configuration_comparison.json` |
-| Original Table 1 extraction from the private paper archive | `original_table1.json` |
+| Numeric-only original Table 1 extraction; embedded manuscript TeX excluded | `original_table1.numeric.json` |
 | Checkpoint readiness and exposure inventory | `reports/original_checkpoint_readiness_audit.json` |
 
-Public simulator source links in the register remain usable. References to the
-PID comparison's prose point to the approved [comparison PDF][pid-pdf], rather
-than to excluded manuscript source. This addendum does not upload the original
-paper archive, full manuscripts, raw trajectories, input datasets, model files,
-or private Git history.
+Public simulator and audit-record links in this register are usable. References
+to the PID comparison's prose point to the approved [comparison PDF][pid-pdf],
+rather than excluded manuscript source. The Table 1 export adds its matching
+macro checkpoint and reuses the already-public low checkpoint, but does not
+upload the original paper archive, full manuscripts, raw trajectories, input
+datasets, or private Git history.
 
-[audit]: #local-only-supporting-evidence
-[macro-ledger]: #local-only-supporting-evidence
-[physical-ledger]: #local-only-supporting-evidence
-[training-ledger]: #local-only-supporting-evidence
-[evaluation-ledger]: #local-only-supporting-evidence
-[model-preflight]: #local-only-supporting-evidence
+[audit]: outputs/table1_corrected_existing_20261102/ORIGINAL_SAC_AUDIT.md
+[macro-ledger]: outputs/table1_corrected_existing_20261102/reports/original_macro_audit.json
+[physical-ledger]: outputs/table1_corrected_existing_20261102/reports/original_physical_audit.json
+[training-ledger]: outputs/table1_corrected_existing_20261102/reports/original_training_audit.json
+[evaluation-ledger]: outputs/table1_corrected_existing_20261102/reports/original_evaluation_audit.json
+[model-preflight]: outputs/table1_corrected_existing_20261102/reports/model_preflight.json
 [pid-pdf]: outputs/pid_comparison_extract_20261102/publication/pid_progress_comparison.pdf
 [pid-source]: outputs/pid_comparison_extract_20261102/publication/pid_progress_comparison.pdf#page=9
 [pid-readme]: outputs/pid_comparison_extract_20261102/README.md
-[table1-results]: #local-only-supporting-evidence
-[configuration-comparison]: #local-only-supporting-evidence
-[original-table1]: #local-only-supporting-evidence
-[checkpoint-readiness]: #local-only-supporting-evidence
+[table1-results]: outputs/table1_corrected_existing_20261102/reports/table1_report.json
+[configuration-comparison]: outputs/table1_corrected_existing_20261102/reports/training_configuration_comparison.json
+[original-table1]: outputs/table1_corrected_existing_20261102/original_table1.numeric.json
+[checkpoint-readiness]: outputs/table1_corrected_existing_20261102/reports/original_checkpoint_readiness_audit.json
 [release-guide]: https://github.com/HewlettPackard/dc2grid/blob/246d60e49e2478ededba81e39e60c0141fec41fa/REPRODUCIBILITY.md
 [gate-erratum]: https://github.com/HewlettPackard/dc2grid/blob/246d60e49e2478ededba81e39e60c0141fec41fa/provenance/metadata_erratum_q5_q6.json
 [artifact-locations]: https://github.com/HewlettPackard/dc2grid/blob/246d60e49e2478ededba81e39e60c0141fec41fa/reproducibility/artifact_locations.example.json

@@ -1,0 +1,106 @@
+{
+  "registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+  "paired_low_sac_vs_pid": [
+    {
+      "seed": 100,
+      "identical_actual_macro_contracts": true,
+      "rmse_delta_sac_minus_pid_kw": -214.10571437644182,
+      "revenue_delta_sac_minus_pid_usd": -13.029489369134353,
+      "aging_delta_sac_minus_pid_x1e4": 4.120580603516242
+    },
+    {
+      "seed": 101,
+      "identical_actual_macro_contracts": true,
+      "rmse_delta_sac_minus_pid_kw": -314.7426233216763,
+      "revenue_delta_sac_minus_pid_usd": 13.03513477715569,
+      "aging_delta_sac_minus_pid_x1e4": 4.320089091959819
+    },
+    {
+      "seed": 102,
+      "identical_actual_macro_contracts": true,
+      "rmse_delta_sac_minus_pid_kw": -86.21608781850122,
+      "revenue_delta_sac_minus_pid_usd": -33.85306838762153,
+      "aging_delta_sac_minus_pid_x1e4": 5.1566264805753015
+    },
+    {
+      "seed": 103,
+      "identical_actual_macro_contracts": true,
+      "rmse_delta_sac_minus_pid_kw": 211.81638276452756,
+      "revenue_delta_sac_minus_pid_usd": -71.90994623018196,
+      "aging_delta_sac_minus_pid_x1e4": -1.1532669417090489
+    },
+    {
+      "seed": 104,
+      "identical_actual_macro_contracts": true,
+      "rmse_delta_sac_minus_pid_kw": -207.2523555294997,
+      "revenue_delta_sac_minus_pid_usd": -32.94945439930689,
+      "aging_delta_sac_minus_pid_x1e4": 4.336850869133638
+    }
+  ],
+  "rmse_reduction_percent": 30.931623545454233,
+  "revenue_delta_usd": -27.741364721817263,
+  "aging_increase_percent": 12.621176649651877,
+  "cash26h_delta_usd": -129.68860109725938,
+  "high_macro_bidding": [
+    {
+      "seed": 100,
+      "windows": 96,
+      "accepted": 0,
+      "mean_bid_price_usd_mwh": 91.68743665019672,
+      "mean_posted_rmcp_usd_mwh": 25.133241838209045,
+      "bids_above_posted_price": 96,
+      "all_actual_commitments_mw": [
+        5.0
+      ]
+    },
+    {
+      "seed": 101,
+      "windows": 96,
+      "accepted": 0,
+      "mean_bid_price_usd_mwh": 92.48737562447786,
+      "mean_posted_rmcp_usd_mwh": 25.475390043433137,
+      "bids_above_posted_price": 96,
+      "all_actual_commitments_mw": [
+        5.0
+      ]
+    },
+    {
+      "seed": 102,
+      "windows": 96,
+      "accepted": 0,
+      "mean_bid_price_usd_mwh": 91.52358068774144,
+      "mean_posted_rmcp_usd_mwh": 24.546610648837838,
+      "bids_above_posted_price": 96,
+      "all_actual_commitments_mw": [
+        5.0
+      ]
+    },
+    {
+      "seed": 103,
+      "windows": 96,
+      "accepted": 0,
+      "mean_bid_price_usd_mwh": 92.41482478876908,
+      "mean_posted_rmcp_usd_mwh": 25.337320337500586,
+      "bids_above_posted_price": 96,
+      "all_actual_commitments_mw": [
+        5.0
+      ]
+    },
+    {
+      "seed": 104,
+      "windows": 96,
+      "accepted": 0,
+      "mean_bid_price_usd_mwh": 91.39494219173987,
+      "mean_posted_rmcp_usd_mwh": 24.215584332241132,
+      "bids_above_posted_price": 96,
+      "all_actual_commitments_mw": [
+        5.0
+      ]
+    }
+  ],
+  "high_total_accepted": 0,
+  "high_total_windows": 480,
+  "statistical_significance_claimed": false,
+  "original_vs_corrected_algorithm_only_gain_claimed": false,
+  "producer_sha256": "737e60a3a7e7e71c046ad8ea6c157bd75b153a073872c6abac0bde594fb524bd"
+}

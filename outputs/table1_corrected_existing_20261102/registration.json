@@ -1,0 +1,251 @@
+{
+  "schema": "table1-corrected-existing-models-v1",
+  "role": "new_corrected_default_panel_not_exact_archival_reproduction",
+  "source_baseline_commit": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "panel": {
+    "scenario": "default",
+    "simulation_mode": "physical_v1",
+    "start_day": 0,
+    "regd_load_bias": 0.0,
+    "seeds": [
+      100,
+      101,
+      102,
+      103,
+      104
+    ],
+    "dt_seconds": 5,
+    "macro_seconds": 900,
+    "service_seconds": 86400,
+    "service_fast_ticks": 17280,
+    "service_macro_calls": 96,
+    "thermal_warning_threshold_C": 33.0,
+    "thermal_warning_comparison": "post-step temp_A >= 33 or temp_B >= 33",
+    "conditions_are_source_default_reconstruction": true,
+    "original_producing_run_conditions_proven": false,
+    "start_day_was_in_training": true,
+    "independent_training_seeds": false
+  },
+  "policies": [
+    {
+      "id": "rule_macro+none",
+      "macro": "rule_macro",
+      "hardware": "none"
+    },
+    {
+      "id": "rule_macro+random",
+      "macro": "rule_macro",
+      "hardware": "random"
+    },
+    {
+      "id": "rule_macro+bang_bang",
+      "macro": "rule_macro",
+      "hardware": "bang_bang"
+    },
+    {
+      "id": "rule_macro+rule_based",
+      "macro": "rule_macro",
+      "hardware": "rule_based"
+    },
+    {
+      "id": "rule_macro+pid",
+      "macro": "rule_macro",
+      "hardware": "pid"
+    },
+    {
+      "id": "rule_macro+sac",
+      "macro": "rule_macro",
+      "hardware": "sac"
+    },
+    {
+      "id": "sac_macro+sac",
+      "macro": "sac_macro",
+      "hardware": "sac"
+    }
+  ],
+  "models": {
+    "low": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip",
+      "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024",
+      "training_seed": 1007,
+      "selected_timesteps": 250002
+    },
+    "high": {
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/corrected_sac_8gpu_20261030/seed_1007/high/best_model/best_model.zip",
+      "sha256": "a1b5e5752d68086565c7c4fec545c80b2c702b50f07fe90ab283379898bdb388",
+      "training_seed": 1007,
+      "selected_timesteps": 8004
+    }
+  },
+  "config": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/c2g_env/config.yaml",
+    "sha256": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6"
+  },
+  "source_files": {
+    "baselines/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "baselines/_hydra_compat.py": "06d8bc3d4247e7fa18da9a2276b2028ad14449204789b97914a76a631f3d673f",
+    "baselines/bang_bang.py": "f97345bd5723885a1df5d5f826920c9f3f148bec8ba476d0a59cb5f4d2f2119d",
+    "baselines/macro_metrics_callback.py": "7a57eed1522136f22343ed0a1d3d9786aa1f4ed66aeb548db0b0cdfcfabd3cbe",
+    "baselines/metrics_callback.py": "25cd72161485764ee34e462a8590eddf1bda20d38c3c8e7ad598f0cc5ea34aaf",
+    "baselines/milp_dispatch.py": "90305c1cafeb3a365c6f6ae31beeac0230a497099b7c338cad317b0114ee6e7b",
+    "baselines/mpc_fast.py": "1995e3ed79a4f71df9b5fe5c51c0d9b33610c3010b4c1c20ba0f6130170dfdc6",
+    "baselines/mpc_macro.py": "1945a5dd23e9166d2bff1fa0e7b4b838c282d2a3dd6adde6af905e0e728a4a72",
+    "baselines/pid_controller.py": "420a38c6098e653ecf5b40fbf6201542512be19f2b7b4c52e0cd1ccb80db3d1d",
+    "baselines/rule_based_macro.py": "42dc8bc42245556d23e41019fed400fc2d3dfafdc34fe61b0574011571d9bdc3",
+    "baselines/rule_based_mpc.py": "342c978a0ee52acbebe3cb51b53ec6c1945d7bfda20eea77c4dcb8d01f662524",
+    "baselines/sac_provenance.py": "0e94b3cd4b2b95b4a692384b169421c62b258c5d93e53730c1bfa795d4faf08d",
+    "baselines/safety/train_cpo.py": "e14342d480e54ff300e925883feb4d29a742d9c229eb10776f347977da602243",
+    "baselines/safety/train_ppo_lagrangian.py": "dd4a1eaa637b0476a0fad0ecc60d84b1f94843ffdc8b38ed372c4d1c7d088765",
+    "baselines/train_corrected_sac.py": "5ad016cf6b03c1091baaae80558581f5f09370d19661940ca3288f6a5dc1d327",
+    "baselines/train_hierarchical.py": "49d57bdd1ab127297fc4e8999feae71585bbe0071807697bdbdb751b758d1395",
+    "baselines/train_hierarchical_sac.py": "f0812638916980ce9ace95b30bbb78cb2026c24912a819cd7a0adad39788e34b",
+    "baselines/train_llm_agents.py": "465ab7e1cb1a4f13e33aba3e659d070d88c789d54a177915f6679b0bbdbc4c56",
+    "baselines/train_lowsac_highrandom.py": "69c17606dc5f6ce917cec581f4e3979f58a57ec70ce295d5b644fbbecb0852ec",
+    "baselines/train_ppo.py": "7b7ac6c9223a372d083ab229f32b1391d3981ac0da886248bcce5ab4ffc27720",
+    "baselines/train_ppo_macro.py": "7d34cf545b5d728d3d2d747e16499e8927cdcaa30df92b7be76e513d93ce417c",
+    "baselines/train_rule_macro_ppo.py": "d368122ac78366bb411ae56fad1ff63718f2782a8cc50164cd64e4faceb92a94",
+    "baselines/train_rule_macro_sac.py": "7980548b4f4ed28fc13833f59db3f0847631b02a50d1fbd57c5f291b42c7668a",
+    "baselines/train_sac.py": "4ef86d7f7199419e75019ea0144b6f54ee7d39176ff427260e32e574865eb027",
+    "c2g_env/__init__.py": "8d0bd53367b910a3e2bf04d86f388ffcf5068957d9a931d81cd1b240ea366905",
+    "c2g_env/env_high_level.py": "6c5034698fdd011168d99b5e2fd99b13d2825c4af37eaab563fa6acf75381842",
+    "c2g_env/env_low_level.py": "5af3087eebdb5576280a3c4bcdd3f410d67eb5d01c2a67c7f07c0c1197f2a1bc",
+    "c2g_env/experiments/__init__.py": "b340890df4770fbd38a80a5b7707f6d925362c2658b16e9de0898d6395046a1c",
+    "c2g_env/experiments/action_ablation_env.py": "5b4ae4bb55bb7aa73359302a5e0c2631849c8d0d0c51d60b4109d446f4f04822",
+    "c2g_env/experiments/analyze_thermal_cross_scenario.py": "af9670dc2c0e39076db332ce645d3dcf61c5bccdeca6566ae9952b8c7d0ac7a5",
+    "c2g_env/experiments/identity.py": "e847618db0f2c837c38a3cad13cafba8ffac5201c02b74ff61f5a26c99090d03",
+    "c2g_env/experiments/thermal_sensitivity.py": "b3a0e07be94813a2ca478bf843495712566082ab728f85859692434d946dff22",
+    "c2g_env/experiments/thermal_sensitivity_cross_scenario.py": "7ca88e2fec68a63c4395a62aea8bd3eb7367984af24f9b072330462045630a82",
+    "c2g_env/obs_indices.py": "881e9a8107d5b2645d3e11a3089fb2334e1e946d6a949221dc1b5bec5ee3ec10",
+    "c2g_env/physics/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "c2g_env/physics/bess.py": "7f8621c4db624a559b3e16b982ce4c74cde58e1bc5fca403338fe8121b2a9ad0",
+    "c2g_env/physics/electrical.py": "8bb8869bcbab04c25dd3eb2054fcc5a818f9c26b90179a1f2d0e72dfe77bcee1",
+    "c2g_env/physics/macro_grid.py": "ffadb41d1883481deeb7dff9d13506b8cd3c16dd747aa8fb740cb18261b2994d",
+    "c2g_env/physics/thermal.py": "7d81bd173f5442fde8c3661763031eda03d3cdbdffd886181436eee9ef388729",
+    "c2g_env/physics/weather.py": "f00a81fa6560bcc4bfe6fdfd14bcaa1065d5d2325f7ec25b1b16dfb71d01d59d",
+    "c2g_env/physics/workload.py": "00ec3849157e73b9bd5fe5cd25286463d7c5b0ff82dc72ffb515f4ef7927dddc",
+    "c2g_env/plant_profiles.py": "22832db868807586840d92ec207c41a455fbd06f8ba8c1562ef6c95281ba264d",
+    "c2g_env/replay.py": "c09bb0514ef14a0398c5daf76c79b60f65dc42c4b333ca54adbcaa37106bfe77",
+    "c2g_env/semantics.py": "9a7525a4e7b63b463cbd0862e9a3ddecb3740744e258b84bea358167231f4aae",
+    "c2g_env/thermal_limits.py": "c86f2b5136a01d432c43e9226e07df41e843f49951dc6978a1eb606ea0923650",
+    "c2g_env/train_envs/__init__.py": "063980296c2ccfb8b2424f7a1a23b29eb6da0391518c9d430f7fd658c89ba7c9",
+    "c2g_env/train_envs/fixed_action_wrapper.py": "e30accf10ca495ee46bf4f8b71596b210d4c4e2a4152d9da1d7df5718291ce27",
+    "c2g_env/train_envs/rule_macro_wrapped.py": "18df35431e3b44ab39a60ca8bad8313dccddc60a5b6963cb10c2ff3d94310566",
+    "evaluation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evaluation/failure_analysis.py": "4711574c1a3250b59bf493fe3906e8d0e4e3429307d23340c966c4082d04eaf7",
+    "evaluation/generate_plots.py": "fa75edfd23a4944968ec4c3eb57b93e913b728e776a1d66687112f07b26a97f0",
+    "evaluation/grid_relief.py": "2c8ad2c0c6f86f8351b267a402fe2809d8f51df379a531c549aca1806d64b2bc",
+    "evaluation/plot_episode_traces.py": "f51c8d02aa2472cf914461c6df27d935aadd83b76899db4eb2b0b152b906fb84",
+    "evaluation/run_benchmark.py": "c6f86fd32af0ff3ec6cdff569c5674fecd963fc132c32193da1c6d22216c455a",
+    "evaluation/run_sachigh_saclow_benchmark.py": "5ec6cc671d8d2d828ac8c693c6990dbc90acc60c32c584b335ad4c07204440f3",
+    "evaluation/statistical_analysis.py": "41d47d45d9f889213f40f6eae2ced717cdbfcb5d61de707aeaf978a61dabe2dc",
+    "evaluation/vis_reward.py": "347a1976e44820e43aa0054be2b5db6f1beef57a03497acffd1e79f674df344a",
+    "evaluation/vis_runbenchmark.py": "1bb5c3402933412e04f7b9ccecd0fd54738e4bac6ecdc22ce5d7a3c79008df46",
+    "scripts/download_energy.py": "2496cc2981e211d7026cf07bb0312baa7e4c8a3a31231ee80aaa0866a437da9a",
+    "scripts/download_weather.py": "e12f96739c411e2b742afd3d1621677a322db98cb400943aac86a8eb2acd507f",
+    "scripts/retrain_corrected_sac.py": "26aff123a567c4a7fd81793f7d8b61c2b36f7d2ca5c77360b96f3fa5977e7ebc"
+  },
+  "data_files": {
+    "data/processed/energy/NYC.csv": "db33c788d440f5ba4aa0d4b968a409d428107b92c87c49ecee0c1823e5069203",
+    "data/processed/weather/NYC.csv": "0a32b8fe345d6f5df1654b88c4d3f6664e32db1c231d3dea0083d2b0a22a8c46",
+    "data/processed/workload_traces/batch_v2023.csv": "52a5430a998a43a4eea0183ccee82dd88e02a6097cb49e3b17deb38fdb5daae9",
+    "data/processed/workload_traces/dlrm_v2025.csv": "e6336e6d67cbeef8fabd652c7d04279dfc6a41c7a93a500b8c5330d8699bf63e",
+    "data/processed/workload_traces/genai_v2026.csv": "8fa72a4f2b343ffda2742c8d656ea1107b8bdc9088f3c7eba4b1a2f7608aecf8"
+  },
+  "evaluator_sha256": "c6dce3d667d35c765a4376893df26e5d274490aa2269f6a0f650198075d9358f",
+  "implementation_files": {
+    "outputs/table1_corrected_existing_20261102/table1_eval.py": "c6dce3d667d35c765a4376893df26e5d274490aa2269f6a0f650198075d9358f",
+    "outputs/table1_corrected_existing_20261102/test_table1_eval.py": "7fc7b428e5702b0451208097b2acd430faba6ad9d9ac91f5f44b1d59c9436037",
+    "outputs/table1_corrected_existing_20261102/test_table1_registration.py": "072e214f4169cf67e1aee74e3ebc4d9c172a484efbff5dae1d1c9991e56c51e5",
+    "outputs/table1_corrected_existing_20261102/prepare_table1.py": "fc3bfd37066d863a7e3520f907aa923777e67b2649f7c7c167a89eee77654920",
+    "outputs/table1_corrected_existing_20261102/run_table1.py": "67f705fd27fb0adc00f5660a1741941e570800c3634a887d1bd5b07b1b4a56a1"
+  },
+  "recovery_ops": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/high_macro_recovery_pilot_20261031_v3/recovery_ops.py",
+    "sha256": "45395520fd57814fac7551c0c0e19382f921f25b3e6add2592cbc1762fc8a069"
+  },
+  "recovery": {
+    "duration_seconds": 7200,
+    "throttle": 1.0,
+    "pump": 0.7,
+    "hvac": 0.7,
+    "committed_mw": 0.0,
+    "regulation_revenue_usd": 0.0,
+    "soc_tolerance": 1e-06,
+    "backlog_tolerance_kwh": 1e-06,
+    "temperature_tolerance_C": 0.1,
+    "work_conservation_tolerance_kwh": 0.0001,
+    "soc_target": "episode_initial_soc",
+    "temperature_target": "continuing_nominal_reference_trajectory",
+    "fixed_duration_even_if_closed_early": true,
+    "terminate_on_existing_physical_faults": true,
+    "wear_price_model": "USD per MWh of absolute AC battery throughput",
+    "wear_prices_usd_per_mwh": [
+      0.0,
+      5.0,
+      10.0,
+      25.0,
+      50.0
+    ]
+  },
+  "service_gate": {
+    "min_service_end_soc": 0.2,
+    "max_backlog_fraction_of_arrived_work": 0.01,
+    "max_thermal_warning_fraction": 0.01,
+    "work_conservation_tolerance_kwh": 0.0001,
+    "require_physical_completion": true,
+    "require_existing_two_hour_recovery_closure": true,
+    "capacity_admission_floor": null,
+    "credit_guard": null,
+    "service_hardware_action_override": null
+  },
+  "original_table1": {
+    "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/original_table1.json",
+    "sha256": "c77cba28ac631ed559a9dc30d5f711bee66a2ce31f05da3adf62ec0f9d41ded3"
+  },
+  "planned_cases": 35,
+  "training_performed": false,
+  "checkpoint_selection_using_new_Table1_outcomes": false,
+  "missing_rows": {
+    "ppo_macro+sac": "No compatible corrected original-bidding PPO checkpoint; no new training authorized.",
+    "llm_macro+sac": "Pinned paper-conformant LLM execution not established; no LLM calls authorized."
+  },
+  "aggregation": {
+    "expected_cases_per_row": 5,
+    "sample_standard_deviation_ddof": 1,
+    "primary_scope": "24-hour service only",
+    "all_cases_must_complete_for_primary_mean": true,
+    "supplemental_failures_remain_in_complete_cohort_means": true,
+    "incomplete_primary_values": null,
+    "prefix_diagnostics_not_ranked_against_full_service": true,
+    "capacity_admission_floor_or_credit_guard": null,
+    "no_training_seed_ensemble": true
+  },
+  "supplemental_scope": "Existing two-hour physical recovery, metered 26-hour cash and battery throughput; not Table1 service metrics.",
+  "known_frozen_limits": [
+    "RegD is not guaranteed energy-neutral per window.",
+    "Voltage interface does not reflect signed battery PCC exchange.",
+    "Work is an energy-equivalent proxy, not measured job/FLOP completion.",
+    "Remaining queue/clock/reference-state observation limitations are not repaired by this evaluation."
+  ],
+  "execution": {
+    "workers": 8,
+    "worker_cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "numerical_threads": 1,
+    "inference_device": "cpu",
+    "retry_existing_attempts": false,
+    "physical_failure_is_a_recorded_outcome": true
+  },
+  "python_version_at_registration": "3.11.12",
+  "original_archive_and_previous_studies_must_remain_unchanged": true,
+  "automatic_publishing_authorized": false,
+  "registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971"
+}

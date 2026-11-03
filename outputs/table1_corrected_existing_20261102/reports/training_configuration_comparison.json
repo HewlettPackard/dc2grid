@@ -1,0 +1,174 @@
+{
+  "schema": "table1-training-configuration-followup-v1",
+  "request_timestamp_utc": "2026-11-02T23:44:38.466+00:00",
+  "scope": "Read-only inspection of existing metadata/configurations and earlier extracted configuration metadata. No commands, simulations, training, checkpoint selection, model loading, API calls or implementation inspection were performed in this follow-up. Only session audit reports were written.",
+  "conclusion": {
+    "recorded_static_configuration_mismatch_found": false,
+    "statement": "The recorded training/selection source configuration and native Table1 configuration are byte-identical. The Table2 physical-recovery YAML has the same market, default-plant/scenario, reward and handshake settings; its only primary configuration field differences are the three relative-to-absolute data-directory strings.",
+    "market_price_caution": "handshake.rmcp_max=100 is the configured price-normalization scale, not a claim that the mean posted price is 100. The parent-reported realized mean posted price near 25 and asked price near 92 do not, by themselves, demonstrate a price-scale configuration mismatch.",
+    "causal_limit": "The bid-rejection and SOC failures are not diagnosed here. Equal recorded configurations/source identities are not a proof of all runtime constructor arguments or trajectory distributions, and they do not justify substituting a checkpoint.",
+    "outcomes": "All 35 authorized outcomes remain untouched."
+  },
+  "provenance": {
+    "repository": "/workspace/IBM/temp/dc2grid-repos/dc2grid",
+    "training_low_manifest": "outputs/corrected_sac_8gpu_20261030/seed_1007/low/manifest.json",
+    "training_high_manifest": "outputs/corrected_sac_8gpu_20261030/seed_1007/high/manifest.json",
+    "training_protocol": "outputs/corrected_sac_8gpu_20261030/protocol.yaml",
+    "training_protocol_id": "03df24f39c4f8d2bab2e40d7000d85f97e44bd2b0f9050423ee1066e9dfaf4df",
+    "training_and_native_case_recorded_python_source_id": "af19cdcd74eb7ac9b5330f4afeab4983ade823c1151eb530c7dc501495c590f7",
+    "training_source_archive": {
+      "path": "outputs/corrected_sac_8gpu_20261030/source/source_f04ad498081d199f70600c9b3315fe4a2f9a8301fe24abe865477823f65ff832.zip",
+      "sha256_previously_verified": "d66cacce7c484d952f511d882446ec190c281dd31f34d4d07284ffe3f7ae4144",
+      "member": "c2g_env/config.yaml",
+      "member_sha256_previously_verified": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6",
+      "evidence": "checkpoint_readiness.json, frozen_physics_configuration_and_data.frozen_config_members; independently recorded archive/config provenance in outputs/matched_validation_20261031/policy_inventory.json."
+    },
+    "native_table1_registration": {
+      "path": "outputs/table1_corrected_existing_20261102/registration.json",
+      "registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+      "config_path": "c2g_env/config.yaml",
+      "config_sha256_recorded": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6"
+    },
+    "native_effective_case_metadata": {
+      "path": "outputs/table1_corrected_existing_20261102/cases/sac_macro__sac/seed_100/episode.json",
+      "fields_read": [
+        "provenance.config",
+        "provenance.source_id",
+        "provenance.source_files",
+        "provenance.data_files",
+        "environment.global_config",
+        "environment.scenario_config",
+        "environment.reward_config",
+        "environment.bess_backend",
+        "reset_info",
+        "hardware_reset_info",
+        "reset_plant_state"
+      ],
+      "scope": "This effective-case record corroborates the common registration; this follow-up did not re-audit all 35 result files."
+    },
+    "table2_recovery": {
+      "config_path": "outputs/physical_recovery_eval_20261031/environment.yaml",
+      "config_sha256_recorded": "fefc727951679cd3d2b724f046d67786c204250f6ab14d63aabe4277ac9fe5b8",
+      "registration": "outputs/physical_recovery_eval_20261031/heldout_registration.json",
+      "frozen_source_registration": "outputs/matched_validation_20261031/registration.json",
+      "frozen_source_config_path": "outputs/online_stability_pilot_20261031/source/c2g_env/config.yaml",
+      "frozen_source_config_sha256_recorded": "5be801e6ead6723514a56f70933d1d5115f4d1107853a61c1d9b561280b37df6"
+    },
+    "identical_recorded_source_file_hashes_without_reading_implementation": {
+      "c2g_env/physics/macro_grid.py": "ffadb41d1883481deeb7dff9d13506b8cd3c16dd747aa8fb740cb18261b2994d",
+      "c2g_env/plant_profiles.py": "22832db868807586840d92ec207c41a455fbd06f8ba8c1562ef6c95281ba264d",
+      "c2g_env/physics/bess.py": "7f8621c4db624a559b3e16b982ce4c74cde58e1bc5fca403338fe8121b2a9ad0",
+      "c2g_env/physics/thermal.py": "7d81bd173f5442fde8c3661763031eda03d3cdbdffd886181436eee9ef388729",
+      "c2g_env/env_high_level.py": "6c5034698fdd011168d99b5e2fd99b13d2825c4af37eaab563fa6acf75381842",
+      "c2g_env/env_low_level.py": "5af3087eebdb5576280a3c4bcdd3f410d67eb5d01c2a67c7f07c0c1197f2a1bc"
+    }
+  },
+  "exact_static_field_diffs": {
+    "training_source_config_vs_native_table1_config": [],
+    "training_source_config_vs_table2_recovery_config": [
+      {
+        "field": "global.energy_dir",
+        "training_and_native": "data/processed/energy",
+        "table2_recovery": "/workspace/IBM/temp/dc2grid-repos/dc2grid/data/processed/energy"
+      },
+      {
+        "field": "global.trace_dir",
+        "training_and_native": "data/processed/workload_traces",
+        "table2_recovery": "/workspace/IBM/temp/dc2grid-repos/dc2grid/data/processed/workload_traces"
+      },
+      {
+        "field": "global.weather_dir",
+        "training_and_native": "data/processed/weather",
+        "table2_recovery": "/workspace/IBM/temp/dc2grid-repos/dc2grid/data/processed/weather"
+      }
+    ],
+    "interpretation": "These path strings designate the same repository data directories when the relative paths are resolved from the registered repository root. No market-price, plant/scenario, reward or handshake scalar differs in the inspected configurations."
+  },
+  "unchanged_exact_fields": {
+    "global": {
+      "simulation_mode": "physical_v1",
+      "dt_seconds": 5,
+      "episode_ticks": 17280,
+      "T_safe": 35.0,
+      "grid_market": "nyiso_nyc",
+      "nyiso_zone": "NYC"
+    },
+    "handshake": {
+      "rmcp_max": 100.0,
+      "sigmoid_k_p": 0.15,
+      "lambda_rev": 1.0,
+      "lambda_elec": 0.5,
+      "lambda_churn": 0.05
+    },
+    "default": {
+      "grid_market": "nyiso_nyc",
+      "weather_market": "nyiso_nyc",
+      "weather_driven": true,
+      "T_amb": 25.0,
+      "committed_mw_max": 30.0,
+      "bess_soc_init": 0.5,
+      "cooling_fault": false,
+      "genai_spike_scale": 1.0,
+      "grid_stress_scale": 1.0,
+      "dr_baseline_mw": 5.0,
+      "dr_rate_usd_mw": 5.0
+    },
+    "reward": {
+      "alpha": 1.0,
+      "beta": 2.0,
+      "tracking_floor_fraction": 0.0004,
+      "macro_tracking_floor_fraction": 0.000004,
+      "gamma_thermal": 5.0,
+      "T_warn_A": 33.0,
+      "T_warn_B": 33.0,
+      "soc_penalty": 0.5,
+      "delta_freq_penalty": 2.0,
+      "delta_volt_penalty": 5.0,
+      "sla_backlog_penalty": 2.0
+    },
+    "plant_provenance_limit": {
+      "conf/plant_profiles/none.yaml": {"name": "none", "plant": null},
+      "documented_default_capacity_mw": 250.0,
+      "native_case_bess_backend": "_SimpleBESSModel",
+      "native_case_initial_soc": 0.5,
+      "native_case_initial_stored_mwh": 7.5,
+      "native_case_initial_temperatures_C": [30.0, 30.0],
+      "finding": "No applied plant-capacity override is recorded in the producing protocol or new registration. Plant/BESS/thermal implementation hashes match in saved provenance. A complete resolved training-constructor argument dump is not present, so this is recorded-contract equivalence rather than an independent runtime reconstruction."
+    }
+  },
+  "actual_panel_exposure_differences": {
+    "training_days": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 190, 200, 210, 220, 226, 236, 240, 246, 250, 260, 280, 300, 320, 340],
+    "training_biases": [0.0, 0.25, 0.5],
+    "selected_validation_cells": [
+      {"start_day": 196, "regd_load_bias": 0.0, "seed": 90001},
+      {"start_day": 196, "regd_load_bias": 0.5, "seed": 90002},
+      {"start_day": 256, "regd_load_bias": 0.0, "seed": 90003},
+      {"start_day": 256, "regd_load_bias": 0.5, "seed": 90004}
+    ],
+    "new_native_table1": {"start_day": 0, "regd_load_bias": 0.0, "seeds": [100, 101, 102, 103, 104]},
+    "table2_physical_recovery_panels": {
+      "development_days": [196, 256],
+      "previously_heldout_days": [207, 248, 249],
+      "previously_heldout_seeds": [100, 101, 102, 103, 104],
+      "biases": [0.0, 0.5]
+    },
+    "duration_scope": "Original checkpoint-selection records describe 24h service. The Table2 recovery study and new Table1 supplemental audit append the separately declared 2h recovery. New Table1 primary metrics remain 24h service; recovery must not be used to erase service-SOC failures."
+  },
+  "corrected_exposure_claim": {
+    "supersedes": "Reusing the default-day task is an in-distribution benchmark.",
+    "replacement": "Day0 is a registered and observed training date, so these results are not a fresh calendar-date holdout. This fact alone does not prove that the exact day0/bias0/noise cells or resulting state/market trajectories are in-distribution. Within the inspected provenance, no additional static market/plant/reward mismatch is documented.",
+    "completed_prefix_evidence": {
+      "low1007_before_selected_250002": "One completed day0/bias0.25 episode is explicitly recorded.",
+      "high1007_before_selected_8004": "Six completed day0 episodes at bias0.25 or bias0.5 are explicitly recorded.",
+      "limitation": "Episode-end logs are not an exhaustive account of partial-episode exposure. They do not prove exact-cell training on day0/bias0/seeds100..104.",
+      "source": "checkpoint_readiness.json, training_validation_and_consumed_case_exposure; original seed1007 low/high training_episodes.jsonl."
+    }
+  },
+  "remaining_metadata_limits": [
+    "The producing manifests and protocol do not serialize every resolved runtime constructor argument or a separate posted-price-mean calibration field. No unrecorded override is asserted either way.",
+    "Archived conf/scenario/default.yaml contains committed_mw=15; the runtime environment configuration contains the differently named committed_mw_max=30. This alone is not evidence of an applied training-versus-evaluation override. The new effective case explicitly reports committed_mw_max=30.",
+    "The five data hashes present in the new registration match the earlier producer: NYC energy, NYC weather, batch, DLRM and GenAI. The older manifest additionally inventories spot_v2026.csv, which the new registration does not list. This is a provenance-coverage difference, not evidence that the file changed or is consumed by this runner.",
+    "No new source hashing or runtime checks were executed; hash equivalence here is based on existing receipts and the prior metadata-only audit.",
+    "No mechanism causing the 480 rejected bids or four low-SOC outcomes is established by this configuration comparison."
+  ]
+}

@@ -1,0 +1,335 @@
+{
+  "scope": "Bounded, read-only original low-level physics/reward-contract audit, plus the requested fast-step signal/telemetry alignment check; not an SAC optimizer, checkpoint, manuscript, macro-handshake, or Table1 evaluator audit.",
+  "revisions": {
+    "original": "7550013331a865fa45684cb7cd973279312d4678",
+    "corrected": "5c7e057caf686853934a19f5c56e848dbc96ae68",
+    "current": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+  },
+  "provenance": {
+    "repository": "/workspace/IBM/temp/dc2grid-repos/dc2grid",
+    "anchors": "All line numbers are 1-based at the indicated revision; corrected anchors also apply to current for the five audited implementation files and tests/test_physical_contract.py.",
+    "corrected_current_identity": "Git blobs are identical for env_low_level.py, physics/{workload,electrical,thermal,bess}.py and test_physical_contract.py. No later research-code change to these files was found.",
+    "unchanged_since_original": [
+      "c2g_env/physics/electrical.py",
+      "c2g_env/physics/thermal.py",
+      "c2g_env/physics/bess.py"
+    ],
+    "manuscript": "Not independently read by this physical-contract audit. Parent subsequently verified the original ZIP's camera_ready.tex; see paper_alignment_addendum. No alternate manuscript was used.",
+    "writes": "Only this JSON ledger was intentionally written. No repository, attachment, study, Git-ref, remote, or demo edits; no training or full evaluation."
+  },
+  "paper_alignment_addendum": {
+    "received_at": "2026-11-02T23:02:33.425+00:00",
+    "verification_owner": "Parent audit; accepted source verification, not independently re-run here.",
+    "source": "camera_ready.tex in the original ZIP only",
+    "low_level_contract": {
+      "anchors": "camera_ready.tex:323-336; explicit throughput equation at :326",
+      "equation": "r_throughput = alpha * theta",
+      "original_seven_weights_in_order": [1, 2, 5, 0.5, 2, 5, 2],
+      "conclusion": "Original command-based throughput code agrees with the original paper. Converting it to actual served_dynamic_work/dynamic_capacity is a changed reward definition coupled to the physics correction, not an original paper/code violation or an incorrect SAC update."
+    },
+    "macro_contract_context": {
+      "anchor": "camera_ready.tex:401",
+      "paper_definition": "Explicit normalized P_fac term",
+      "classification": "Physical-accounting/interpretation inconsistency, not an SAC update error. Macro settlement analysis remains owned by the parent and outside this independent audit."
+    },
+    "audit_rerun": false
+  },
+  "notation": {
+    "u": "throttle_batch, dimensionless in [0,1]",
+    "dt": "step duration in seconds; audited default 5 s",
+    "N": "p_flex_nom_kw, nominal total batch-rack electrical power in kW",
+    "M": "p_flex_max_kw = 1200 * 75 = 90000 kW for the default plant",
+    "I": "batch idle power = 1200 * 8 = 9600 kW",
+    "C": "corrected dynamic-work capacity M-I = 80400 kW",
+    "Q": "queue stored as sums of per-step kW-equivalent work; Q*dt/3600 is its energy-equivalent in kWh at fixed dt, not an instantaneous power measurement",
+    "F": "gross facility electrical draw in MW, including IT, cooling, auxiliaries, PDU/UPS/transformer losses",
+    "B": "actual battery AC-side response as exposed by the simulator, in kW; positive discharge",
+    "D": "demanded response = committed_mw * 1000 * previous observed RegD signal, in kW"
+  },
+  "findings": [
+    {
+      "id": "P1",
+      "classification": "confirmed implementation/physical-response inconsistency, not an SAC algorithm bug",
+      "claim": "Original tracking credits throttle reduction even when the queue serves exactly the same work and electrical load; it also omits negative flex relief during backlog repayment.",
+      "original_anchors": [
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.step:239-267",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:453-504",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:514-521"
+      ],
+      "corrected_anchors": [
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.step:248-287",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:568-579"
+      ],
+      "equations": {
+        "original_service": "S=min(Q+N,u*M); Q'=Q+N-S; P_flex=S, all in stored kW-equivalent units",
+        "original_flex_credit": "L_old=(1-u)*N kW, independently of S",
+        "corrected_service": "A=max(0,N-I); S=min(Q+A,u*(M-I)); Q'=Q+A-S; P_flex=I+S",
+        "corrected_flex_credit": "L_new=N-P_flex=A-S kW for valid N>=I; negative on repayment"
+      },
+      "verified_counterexamples": [
+        {
+          "setup": "Empty queue, N=29600 kW, default plant; compare u=0.5 with u=1, equal cooling/BESS/state.",
+          "original": "Both serve 29600 kW and have identical gross facility power, but u=0.5 receives 14800 kW extra response credit.",
+          "corrected_physical_v1": "Both serve 20000 dynamic-work kW plus 9600 idle kW; both have zero flex/facility relief."
+        },
+        {
+          "setup": "N=19600 kW held constant; u sequence [0,0,1].",
+          "original": "P_flex=[0,0,58800] kW; flex credit=[19600,19600,0] kW. Final service exceeds nominal by 39200 kW but receives no negative flex credit.",
+          "corrected_physical_v1": "P_flex=[9600,9600,39600] kW; flex credit=[10000,10000,-20000] kW. Final full-facility relief was -20026.07711832155 kW in the synthetic microcheck."
+        }
+      ],
+      "existing_test_evidence": [
+        "tests/test_physical_contract.py:test_unused_service_capacity_does_not_create_tracking_credit:81-91",
+        "tests/test_physical_contract.py:test_deferral_repayment_idle_heat_and_work_conservation:94-117"
+      ],
+      "status": "Fixed in corrected/current physical_v1. Deliberately retained by legacy_v0.",
+      "impact": "Changes reward_tracking, reported tracking error, frequency-deficit input, and any RMSE/performance settlement derived from them. The sign of metric bias depends on the demanded response; no universal improvement or isolated SAC-gain attribution follows."
+    },
+    {
+      "id": "P2",
+      "classification": "confirmed idle-power/work-accounting inconsistency",
+      "claim": "Original nominal rack power, including nonzero idle power, is enqueued and can be deferred as if it were batch work.",
+      "original_anchors": [
+        "c2g_env/physics/workload.py:_rack_power_kw:68-95",
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.__init__:182-206",
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.step:239-268"
+      ],
+      "corrected_anchors": [
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.__init__:148-160,211-215",
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.step:248-287",
+        "c2g_env/env_low_level.py:C2GFastEnv.reset:358-364"
+      ],
+      "equations": {
+        "nominal": "N=1200*[8+(75-8)*util^1.4] kW; N=9600 kW at zero utilization",
+        "original": "Arrival proxy=N; service capacity=u*90000; u=0 sets batch electrical/thermal workload output to zero",
+        "corrected": "Arrival proxy=max(0,N-9600); service capacity=u*80400; batch draw=9600+served dynamic proxy",
+        "energy_fields": "work_arrived_kwh=A*dt/3600; work_served_kwh=S*dt/3600; backlog_work_kwh=Q'*dt/3600"
+      },
+      "verified_counterexample": {
+        "setup": "Zero dynamic utilization, N=9600 kW, empty queue, u=0, dt=5 s.",
+        "original": "Adds 9600 kW-equivalent to backlog despite no dynamic work; emits zero batch draw. This is 13.3333333333 kWh of idle power treated as deferred work for the step.",
+        "corrected_physical_v1": "Arrived work and backlog are zero; 9600 kW idle draw remains."
+      },
+      "existing_test_evidence": [
+        "original tests/test_workload.py:test_throttle_zero_zeroes_flex:151-156 explicitly enshrines the historical zero-flex behavior",
+        "corrected tests/test_physical_contract.py:test_deferral_repayment_idle_heat_and_work_conservation:94-117"
+      ],
+      "status": "Fixed when physical_accounting=True, as selected by physical_v1. Standalone WorkloadOrchestrator still defaults to physical_accounting=False for compatibility.",
+      "impact": "Changes service capacity, queue/SLA penalty and observation, flex power, and thermal loading. Corrected kWh are still energy-equivalent workload proxies, not measured job counts/FLOPs."
+    },
+    {
+      "id": "P3",
+      "classification": "confirmed cross-component electrical/thermal inconsistency",
+      "claim": "Original thermal heat uses raw queued-work power, whereas the electrical model clips inverted utilization and reinstates the server idle floor.",
+      "original_anchors": [
+        "c2g_env/env_low_level.py:C2GFastEnv.step:468-493",
+        "c2g_env/physics/electrical.py:DatacenterElectrical._inverse_rack_util:175-184",
+        "c2g_env/physics/electrical.py:DatacenterElectrical._server_power_mw:162-172",
+        "c2g_env/physics/thermal.py:ThermalTwin.step:230-249"
+      ],
+      "corrected_anchors": [
+        "c2g_env/env_low_level.py:C2GFastEnv.step:542-545",
+        "c2g_env/env_low_level.py:C2GFastEnv._advance_plant:786-818"
+      ],
+      "equations": {
+        "original_heat_A": "H_A=(P_base_A+S)/1000 MW",
+        "original_electric_A": "E_A=clip(P_base_A+S,16000,150000)/1000 MW for default Zone A",
+        "corrected_heat": "Invert/reconstruct server electrical power first, then feed exactly those reconstructed MW to ThermalTwin and the electrical accounting."
+      },
+      "verified_counterexample": "P_base_A=6400 kW, P_base_B=10000 kW, N=9600 kW, u=0: original heat input=16.4 MW but electrical IT=26 MW (9.6 MW discrepancy). Corrected physical_v1 heat and electrical IT both equal 26 MW.",
+      "qualification": "Not a blanket mismatch at every operating point: the inverse/forward round trip agrees when raw zone power is within the allowed rack-power range. Original kW-to-MW division itself is correct.",
+      "existing_test_evidence": "corrected tests/test_physical_contract.py:test_deferral_repayment_idle_heat_and_work_conservation:98-117",
+      "status": "Fixed in physical_v1 through matched heat input and retained idle load; legacy_v0 retains raw heat input.",
+      "impact": "Can change thermal warnings/faults, cooling demand, feasible actions, episode length and all accumulated metrics. This affects every controller using the environment, not SAC alone."
+    },
+    {
+      "id": "P4",
+      "classification": "confirmed response-meter boundary inconsistency plus intentional reference-policy change",
+      "claim": "Original 'actual response' is not the difference in complete modeled facility/grid electrical draw; it omits liquid-chiller and conversion-loss changes.",
+      "original_anchors": [
+        "c2g_env/env_low_level.py:C2GFastEnv.step:503-514",
+        "c2g_env/physics/thermal.py:ThermalTwin.p_cool_nominal_mw:73-76,148-155",
+        "c2g_env/physics/thermal.py:ThermalTwin.step:246-255",
+        "c2g_env/physics/electrical.py:DatacenterElectrical.step:282-319"
+      ],
+      "corrected_anchors": [
+        "c2g_env/env_low_level.py:_REFERENCE_COOLING:95",
+        "c2g_env/env_low_level.py:C2GFastEnv.reset:479-481",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:568-579,763-774"
+      ],
+      "equations": {
+        "original": "R_old=(1-u)*N+B-1000*(P_HVAC+P_pump-P_cool_nominal), kW",
+        "original_cooling_baseline": "P_cool_nominal=0.7*50+1.0*1.5=36.5 MW; excludes liquid chiller",
+        "corrected": "R_new=1000*(F_reference-F_actual)+B; facility_relief_kw=1000*(F_reference-F_actual); p_grid_import_mw=F_actual-B/1000",
+        "corrected_reference": "Separate persistent thermal/electrical state, same rigid/nominal flexible trace power and ambient, nominal full service, pump=HVAC=float32(0.7), no BESS; complete facility losses/cooling included."
+      },
+      "verified_counterexample": "At u=1, pump=HVAC=float32(0.7), B=0 and identical initial state: original reports 450.0006139278412 kW response; corrected physical_v1 reports exactly zero relative to its new reference. The approximately 450 kW difference reflects the intentional pump-reference change from 1.0 to 0.7, not solely a bug fix.",
+      "existing_test_evidence": [
+        "corrected tests/test_physical_contract.py:test_nominal_reference_has_zero_relief_and_preserves_service:70-78",
+        "corrected tests/test_physical_contract.py:test_battery_tracking_and_facility_relief_are_separate:120-130"
+      ],
+      "status": "Physical_v1 uses the complete modeled facility boundary; legacy_v0 retains the original proxy. Neither counterfactual is a directly measured external utility baseline.",
+      "impact": "RMSE in kW under the two reference/response definitions is not the same estimand. Gross p_facility_mw excluding BESS is not by itself a bug; using gross power as net import would be a separate evaluator/cost-accounting issue outside this audit."
+    },
+    {
+      "id": "D1",
+      "classification": "intentional throughput objective/metric redesign; not a demonstrated SAC or paper-implementation bug",
+      "claim": "Original rewards commanded throughput/DVFS fraction; corrected physical_v1 rewards served dynamic-work fraction of hardware capacity. The reported throughput_ratio has yet another denominator.",
+      "original_anchors": [
+        "c2g_env/env_low_level.py:module reward documentation:46-53",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:573-588,674",
+        "c2g_env/config.yaml:reward:50-61"
+      ],
+      "corrected_anchors": [
+        "c2g_env/env_low_level.py:C2GFastEnv.step:640-659,750-769"
+      ],
+      "equations": {
+        "original_throughput_reward": "r_throughput=alpha*u; original throughput_ratio=u",
+        "corrected_throughput_reward": "r_throughput=alpha*work_served_kwh/[(M-I)*dt/3600]=alpha*S/(M-I), with zero-capacity guard",
+        "corrected_throughput_metric": "throughput_ratio=served_work/(served_work+remaining_backlog), or 1 if available work is zero",
+        "tracking_reward_both": "r_tracking=-beta*abs(D-R)/max(committed_mw*1000,tracking_floor_kw)",
+        "backlog_penalty_both": "r_backlog=-sla_backlog_penalty*Q'/M; the queue's meaning changes under physical_accounting"
+      },
+      "verified_counterexamples": [
+        "N=29600 kW, empty queue, u=0.5 versus 1, alpha=1: identical service but original rewards [0.5,1]; corrected rewards [0.24875621890547264,0.24875621890547264], while corrected throughput_ratio=[1,1].",
+        "Zero dynamic work with u=1: original throughput reward=1; corrected reward=0 and corrected throughput_ratio=1."
+      ],
+      "interpretation": "The original source explicitly documents alpha*throttle. Parent verification of original ZIP camera_ready.tex:323-336, especially :326, confirms the paper explicitly defines alpha*theta with matching original weights. Conversion to actual served_dynamic_work/dynamic_capacity is a changed reward definition coupled to the physics correction, not an original paper/code violation or an incorrect SAC update. The config comment 'per unit ... served' is less precise than the actual documented equation.",
+      "existing_test_evidence": "corrected tests/test_physical_contract.py:test_legacy_mode_retains_historical_throttle_credit:208-215",
+      "status": "New objective in physical_v1; original definition retained in legacy_v0.",
+      "impact": "Training targets and summed reward scale change even for identical service. Original and corrected reward totals cannot be compared as if only the policy/optimizer changed."
+    },
+    {
+      "id": "N1",
+      "classification": "verified non-finding for the simple BESS backend",
+      "claim": "Original tracking already uses actual, SOC-limited BESS power, not the requested dispatch.",
+      "original_anchors": [
+        "c2g_env/env_low_level.py:C2GFastEnv.step:445-458,503-514,634-645",
+        "c2g_env/physics/bess.py:_SimpleBESSModel.step:137-178,195-204"
+      ],
+      "corrected_anchors": [
+        "c2g_env/env_low_level.py:C2GFastEnv.step:519-532,555-579",
+        "c2g_env/physics/bess.py:_SimpleBESSModel.step:137-178,195-204"
+      ],
+      "equations": {
+        "command": "P_cmd=dispatch*P_MAX_MW",
+        "discharge_soc": "delta_SOC=-P_derated*dt_hours/(eta*E_nom)",
+        "charge_soc": "delta_SOC=abs(P_derated)*eta*dt_hours/E_nom",
+        "hard_limit_actual": "Discharge P_actual=available_MWh*eta/dt_hours; charge P_actual=-headroom_MWh/(eta*dt_hours)",
+        "tracking_input": "B=1000*bess_out['actual_power_mw'], not 1000*P_cmd"
+      },
+      "verified_counterexamples": "At dt=5 s and command +/-5 MW: SOC=0.10/0.95 gives zero actual response; SOC=0.105/0.945 gives approximately +/-0.25 MW. Both revisions' tracking response increments equal those actual outputs, not the commands.",
+      "existing_test_evidence": {
+        "original": "tests/test_critical_bug_fixes.py:TestBESSDeratingFix:645-713",
+        "corrected": "tests/test_critical_bug_fixes.py:TestBESSDeratingFix:636-704",
+        "execution": "All four existing methods in this class passed when invoked directly against each revision's unmodified simple-BESS class: 8 method passes."
+      },
+      "qualification": "The complete BESS source file is unchanged across original, corrected, and current. This does not certify the optional PySAM adapter or the backend used by historical reported runs."
+    },
+    {
+      "id": "A1",
+      "classification": "fast reward/action signal alignment non-finding; confirmed transition-info signal alignment inconsistency",
+      "claim": "Original tracking is scored against the RegD signal the agent actually observed, not the newly generated next-observation signal. However, the same step's returned info['regd_signal'] contains that next signal, inconsistent with info['delta_p_demanded_kw'].",
+      "original_anchors": [
+        "c2g_env/env_low_level.py:C2GFastEnv._build_obs_at_reset:737-742,779",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:516-527,615-617,630-637",
+        "c2g_env/env_low_level.py:C2GFastEnv._build_obs:706",
+        "c2g_env/physics/macro_grid.py:MacroGridSignal.step:385-404"
+      ],
+      "corrected_anchors": [
+        "c2g_env/env_low_level.py:C2GFastEnv._build_obs_at_reset:872-888",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:581-595,759-761",
+        "c2g_env/env_low_level.py:C2GFastEnv._build_obs:849"
+      ],
+      "equations": {
+        "both_reward_paths": "D_t=1000*C_current*regd_observed_t; only afterwards generate gs_next and set _prev_regd_signal for the next action",
+        "original_info": "info.regd_signal=gs_next.regd_signal, while info.delta_p_demanded_kw refers to regd_observed_t",
+        "corrected_physical_info": "Save current_grid before advancing; info.regd_signal/current price/load use current_grid, while the returned next observation uses gs_next."
+      },
+      "verified_counterexample": "Executed the exact source assignments/info expressions with observed RegD=0.25, commitment=10 MW, next RegD=-0.5. Both revisions demand 2500 kW and show -0.5 in the next observation. Original info.regd_signal=-0.5; corrected physical_v1 info.regd_signal=0.25. Thus reconstructing demand from original info.regd_signal yields -5000 kW instead of the correctly scored +2500 kW.",
+      "commitment_distinction": "Original committed_mw setter at env_low_level.py:269-273 changes the current commitment; observations expose it at :717/:790. If an external macro wrapper changes commitment after the hardware actor's observation, D_t can use an unseen commitment. That is a stale-commitment/interface-ordering issue, not evidence that the fast reward uses the wrong RegD sample. Actual macro ordering was not audited here.",
+      "status": "Reward already aligned to observed RegD in original. Transition-info mismatch fixed in physical_v1, retained by legacy_v0. No unconditional stale-commitment bug established by this scope.",
+      "impact": "Original tracking_err_kw itself is computed from the observed signal. The metadata mismatch can corrupt action/signal reconstruction or consumers that reconstruct tracking from info.regd_signal. Returned info LMP likewise comes from the newly generated grid state in original (:636), whereas physical_v1 retains current-grid LMP (:759); Table1 settlement use remains unverified."
+    }
+  ],
+  "remaining_issues_and_limits": [
+    {
+      "id": "R1",
+      "classification": "remaining model-coupling limitation",
+      "claim": "PCC voltage still depends on gross facility power/reactive demand, not actual BESS net import.",
+      "anchors_both_revisions": [
+        "c2g_env/physics/electrical.py:DatacenterElectrical.step:325-337"
+      ],
+      "original_anchor": "c2g_env/env_low_level.py:C2GFastEnv.step:538-540,567-571",
+      "corrected_anchor": "c2g_env/env_low_level.py:C2GFastEnv.step:606-608,635-639,763",
+      "equation": "v_pcc=clip(1-[(F/S_base)*R_pu+(Q_reactive/S_base)*X_pu],0.85,1.10); B is absent.",
+      "verified_counterexample": "Same fresh plant/action except BESS=0 versus +5 MW actual discharge: v_pcc is 0.9935073774422036 pu in both cases in both revisions. Corrected net import drops 5 MW and tracking response rises 5000 kW, but voltage does not change.",
+      "impact": "Battery support cannot influence the voltage penalty/fault through this interface. Frequency deficit does include BESS; it is incorrect to claim the entire grid model ignores battery response."
+    },
+    {
+      "id": "R2",
+      "classification": "remaining BESS diagnostic inconsistency, not phantom tracking credit",
+      "claim": "Reported max_charge_mw uses a 0.05 SOC window; actual charge derating uses 0.10.",
+      "anchors_both_revisions": [
+        "c2g_env/physics/bess.py:_SimpleBESSModel.step:139-148,191-204"
+      ],
+      "verified_counterexample": "At SOC=0.90, querying with zero power reports max_charge_mw approximately 5; immediately commanding that charge produces approximately -2.5 MW.",
+      "impact": "The limit diagnostic overstates usable charging near SOC_MAX. The directly audited low-level tracking/reward path uses actual_power_mw and does not consume max_charge_mw, so no direct Table1 impact is established.",
+      "status": "Unfixed in all three revisions."
+    },
+    {
+      "id": "R3",
+      "classification": "remaining deliberate abstractions and compatibility behavior",
+      "claim": "Corrected work is a dynamic-power-derived energy proxy, not a job/FLOP completion model; queues reset at episode boundaries and legacy semantics remain selectable.",
+      "original_anchors": [
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.__init__:182-196",
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.reset:276-283"
+      ],
+      "corrected_anchors": [
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.__init__:156,214-215",
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.step:248-287",
+        "c2g_env/physics/workload.py:WorkloadOrchestrator.reset:290-297",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:649-652,769"
+      ],
+      "qualification": "There is a per-step backlog penalty, but no terminal clearance/payment in the audited low-level reward. Within-episode conservation does not prove service debt is repaid after reset. Holding a 300-second rate across 5-second steps is not itself a 60x work-arrival bug when integrated with dt.",
+      "status": "Design limitations/compatibility choices, not newly discovered SAC algorithm defects."
+    },
+    {
+      "id": "R4",
+      "classification": "conditional original backend/interface issue; source-verified, optional backend not executed",
+      "claim": "Original BESSModel auto-selects PySAM when importable; corrected physical_v1 explicitly selects _SimpleBESSModel. The PySAM adapter lacks the _age_frac attribute read by low-level info construction.",
+      "original_anchors": [
+        "c2g_env/physics/bess.py:backend selection:54-58,309-314",
+        "c2g_env/physics/bess.py:_SimpleBESSModel:87-102",
+        "c2g_env/physics/bess.py:_PySAMBESSModel:212-302",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:675"
+      ],
+      "corrected_anchors": [
+        "c2g_env/env_low_level.py:C2GFastEnv.reset:380-382",
+        "c2g_env/env_low_level.py:C2GFastEnv.step:751"
+      ],
+      "qualification": "Adapters declare different capacities (simple: 15 MWh/5 MW; PySAM-labelled: 150 MWh/50 MW). Native PySAM units/runtime compatibility and historical backend provenance were not established. If the PySAM adapter reaches info construction, the missing _age_frac is incompatible with that access.",
+      "status": "Physical_v1 avoids this optional path; adapter and legacy path remain unchanged. Do not attribute this condition to reported SAC results without runtime evidence."
+    }
+  ],
+  "table1_and_checkpoint_implications": {
+    "rmse": "A standard RMSE=sqrt(mean((D-R)^2)) in kW changes when R changes from the historical proxy to full counterfactual facility response. Changing the reference cooling policy also changes what is being measured.",
+    "reward": "Step reward includes throughput, tracking, thermal, SOC, frequency, voltage and backlog components. The throughput objective and queue semantics change; reward totals are not directly interchangeable across simulation modes.",
+    "revenue": "No Table1 evaluator or macro settlement source was audited. Any revenue depending on tracking performance inherits the changed R/error definition. Physical net energy should use (F-B/1000)*dt_hours MWh, not gross F; whether the original Table1 evaluator does so is outside this scope.",
+    "interface_evidence": "Both bare low-level environments expose four action levers and build 18 observations: original env_low_level.py:422-443,686-717; corrected:492-517,829-860. This alone does not establish compatibility of a particular Table2 checkpoint, wrapper, VecNormalize state, mode metadata, or macro-vs-low-level model.",
+    "recomputation_options": [
+      "Evaluating a corrected policy under the original contract would be a new-policy result on the historical proxy task, not recovery of the original trained SAC policy/result. Exact source or verified legacy behavior, checkpoint loading and normalization compatibility remain prerequisites.",
+      "Evaluating under physical_v1 would produce a corrected-physics Table1-style comparison, not literal reproduction of original Table1 metrics. Re-evaluate comparator rows under the same contract, reference, traces, scenarios and horizons.",
+      "Do not replace only the original SAC row with a physical_v1 score beside unchanged historical baseline rows, or describe the changed throughput objective as an SAC implementation repair."
+    ],
+    "causal_limit": "No isolated causal effect on reported SAC gains was measured or claimed. No checkpoint was loaded, no policy trained, and no Table1/Table2 full evaluation was run."
+  },
+  "validation": {
+    "method": "Read exact git-show blobs; compared corrected/current blob identity. Executed unmodified step-method bodies extracted in memory with AST, using synthetic valid workload state, default 5-second plant parameters, simple BESS, static grid/weather, and an observation stub. Gym inheritance/imports and reset/data-loading paths were bypassed; these were isolated contract checks, not end-to-end environment evaluations.",
+    "microcheck_results": "All final assertions passed: unused-capacity no-power-change, original/corrected flex credit, idle heat/electrical balance, corrected work conservation (residual 3.55e-15 kWh), repayment sign, actual BESS boundary response, unchanged voltage under BESS dispatch, and legacy credit retention. Additional exact-source statement/expression checks verified observed-signal scoring versus next-signal telemetry in original and corrected versions.",
+    "bounded_work": "27 low-level step calls across fresh synthetic states; no synthetic sequence longer than three steps.",
+    "existing_tests_executed": "Directly invoked the four original and four corrected TestBESSDeratingFix methods, with no pytest fixtures/files; all eight passed.",
+    "existing_tests_read_only": "Physical-contract tests and directly relevant original workload tests were inspected and cited, not run as a pytest suite.",
+    "dependencies": "Used existing system Python 3.10, NumPy and YAML. Pandas/Gymnasium were unavailable there; no dependencies were installed and no temporary files or test fixtures were created by the audit code."
+  }
+}

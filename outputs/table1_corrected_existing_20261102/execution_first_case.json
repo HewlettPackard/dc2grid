@@ -1,0 +1,15 @@
+{
+  "registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+  "stage": "first_case",
+  "planned_this_stage": 1,
+  "retained": [],
+  "completed": [
+    {
+      "policy": "rule_macro+none",
+      "seed": 100,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__none/seed_100/episode.json"
+    }
+  ],
+  "execution_errors": [],
+  "outcome_based_retries": false
+}

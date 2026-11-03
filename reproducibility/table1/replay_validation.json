@@ -1,0 +1,307 @@
+{
+  "schema": "table1-portable-replay-validation-v1",
+  "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+  "coverage": "One consumed seed-100 case for each of seven rows, plus learned macro seed103 to cover both its recorded pass and failure; no fresh generalization claim.",
+  "verified_replays": 8,
+  "all_verified": true,
+  "qualified_replay_cases": 7,
+  "expected_disqualified_replay_cases": 1,
+  "numerical_and_discrete_scalar_checks": 1728,
+  "cpu_assignments": {
+    "rule_macro+none/seed100": 33,
+    "rule_macro+random/seed100": 34,
+    "rule_macro+bang_bang/seed100": 35,
+    "rule_macro+rule_based/seed100": 36,
+    "rule_macro+pid/seed100": 37,
+    "sac_macro+sac/seed100": 38,
+    "sac_macro+sac/seed103": 39
+  },
+  "numerical_threads_per_process": 1,
+  "replays": [
+    {
+      "schema": "table1-public-replay-receipt-v1",
+      "verified": true,
+      "scalar_checks": 216,
+      "service_complete": true,
+      "qualified_supplemental": true,
+      "source_failure_outcome_preserved": true,
+      "float_tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-06,
+        "USD_atol": 1e-05
+      },
+      "not_compared": [
+        "Checkout-specific paths, registration IDs and host/runtime metadata",
+        "Cross-run state-digest strings; before/after preservation checked per run",
+        "Compressed trace hashes and wall-clock timing"
+      ],
+      "policy": "rule_macro+bang_bang",
+      "seed": 100,
+      "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+      "producer_registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+      "execution_registration_id": "16e8de0257906e92da4c2bfae6e03d6617955413cc434d4455ca2ed9ad21f7f7",
+      "source_export_sha256": "1369f74f3b4c89538ea168000c366041dad262161ae33af57ac409c0eef46d5c",
+      "public_adapter_sha256": "cb68ddd8177f66d9ffa5ee7fa24ed758fe75db4b3b481143f515b663723dc8cd",
+      "original_episode_sha256": "0d1300f12fd63a2ac638934433386129077b39114a937431755f2a4b3fcabade",
+      "replayed_episode_sha256": "31b3e25508c0b31bc15ff2a5cc30495ff0cfe51eac7a9d1044db10aadada4718",
+      "training_performed": false,
+      "new_case_selection_performed": false,
+      "output": "outputs/table1_corrected_existing_20261102/replays/public_validation_rule_macro__bang_bang_s100"
+    },
+    {
+      "schema": "table1-public-replay-receipt-v1",
+      "verified": true,
+      "scalar_checks": 216,
+      "service_complete": true,
+      "qualified_supplemental": true,
+      "source_failure_outcome_preserved": true,
+      "float_tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-06,
+        "USD_atol": 1e-05
+      },
+      "not_compared": [
+        "Checkout-specific paths, registration IDs and host/runtime metadata",
+        "Cross-run state-digest strings; before/after preservation checked per run",
+        "Compressed trace hashes and wall-clock timing"
+      ],
+      "policy": "rule_macro+none",
+      "seed": 100,
+      "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+      "producer_registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+      "execution_registration_id": "16e8de0257906e92da4c2bfae6e03d6617955413cc434d4455ca2ed9ad21f7f7",
+      "source_export_sha256": "1369f74f3b4c89538ea168000c366041dad262161ae33af57ac409c0eef46d5c",
+      "public_adapter_sha256": "cb68ddd8177f66d9ffa5ee7fa24ed758fe75db4b3b481143f515b663723dc8cd",
+      "original_episode_sha256": "dc042d4db7bf5dea505680c8d672977379e0a5e7b432470a5ef4a69c70ca4451",
+      "replayed_episode_sha256": "5333101e0a01cb92d7409cfa518a7b092a708c1a362ca014082659d812fabe70",
+      "training_performed": false,
+      "new_case_selection_performed": false,
+      "output": "outputs/table1_corrected_existing_20261102/replays/public_validation_rule_macro__none_s100"
+    },
+    {
+      "schema": "table1-public-replay-receipt-v1",
+      "verified": true,
+      "scalar_checks": 216,
+      "service_complete": true,
+      "qualified_supplemental": true,
+      "source_failure_outcome_preserved": true,
+      "float_tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-06,
+        "USD_atol": 1e-05
+      },
+      "not_compared": [
+        "Checkout-specific paths, registration IDs and host/runtime metadata",
+        "Cross-run state-digest strings; before/after preservation checked per run",
+        "Compressed trace hashes and wall-clock timing"
+      ],
+      "policy": "rule_macro+pid",
+      "seed": 100,
+      "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+      "producer_registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+      "execution_registration_id": "16e8de0257906e92da4c2bfae6e03d6617955413cc434d4455ca2ed9ad21f7f7",
+      "source_export_sha256": "1369f74f3b4c89538ea168000c366041dad262161ae33af57ac409c0eef46d5c",
+      "public_adapter_sha256": "cb68ddd8177f66d9ffa5ee7fa24ed758fe75db4b3b481143f515b663723dc8cd",
+      "original_episode_sha256": "ea7efefe1ef6550a8715a6be09c6dc46f08f20d28e66c40e56352fe14b4a15c1",
+      "replayed_episode_sha256": "bfcb458a73d24bfbe0cdfa74ecba8b32558c5e7f5dc84f30c1985b6c41c60107",
+      "training_performed": false,
+      "new_case_selection_performed": false,
+      "output": "outputs/table1_corrected_existing_20261102/replays/public_validation_rule_macro__pid_s100"
+    },
+    {
+      "schema": "table1-public-replay-receipt-v1",
+      "verified": true,
+      "scalar_checks": 216,
+      "service_complete": true,
+      "qualified_supplemental": true,
+      "source_failure_outcome_preserved": true,
+      "float_tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-06,
+        "USD_atol": 1e-05
+      },
+      "not_compared": [
+        "Checkout-specific paths, registration IDs and host/runtime metadata",
+        "Cross-run state-digest strings; before/after preservation checked per run",
+        "Compressed trace hashes and wall-clock timing"
+      ],
+      "policy": "rule_macro+random",
+      "seed": 100,
+      "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+      "producer_registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+      "execution_registration_id": "16e8de0257906e92da4c2bfae6e03d6617955413cc434d4455ca2ed9ad21f7f7",
+      "source_export_sha256": "1369f74f3b4c89538ea168000c366041dad262161ae33af57ac409c0eef46d5c",
+      "public_adapter_sha256": "cb68ddd8177f66d9ffa5ee7fa24ed758fe75db4b3b481143f515b663723dc8cd",
+      "original_episode_sha256": "5c19ef237d42487dc1e5080c82a665df825b5950fe60dc196189d1a6f1d78f2f",
+      "replayed_episode_sha256": "784daf01b3808e3d955663309d4bcfe60a19bd592a00f11a28f18327fb6792fe",
+      "training_performed": false,
+      "new_case_selection_performed": false,
+      "output": "outputs/table1_corrected_existing_20261102/replays/public_validation_rule_macro__random_s100"
+    },
+    {
+      "schema": "table1-public-replay-receipt-v1",
+      "verified": true,
+      "scalar_checks": 216,
+      "service_complete": true,
+      "qualified_supplemental": true,
+      "source_failure_outcome_preserved": true,
+      "float_tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-06,
+        "USD_atol": 1e-05
+      },
+      "not_compared": [
+        "Checkout-specific paths, registration IDs and host/runtime metadata",
+        "Cross-run state-digest strings; before/after preservation checked per run",
+        "Compressed trace hashes and wall-clock timing"
+      ],
+      "policy": "rule_macro+rule_based",
+      "seed": 100,
+      "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+      "producer_registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+      "execution_registration_id": "16e8de0257906e92da4c2bfae6e03d6617955413cc434d4455ca2ed9ad21f7f7",
+      "source_export_sha256": "1369f74f3b4c89538ea168000c366041dad262161ae33af57ac409c0eef46d5c",
+      "public_adapter_sha256": "cb68ddd8177f66d9ffa5ee7fa24ed758fe75db4b3b481143f515b663723dc8cd",
+      "original_episode_sha256": "30445809bc18929282ce517e50dbd74a0ab67e4218c73c131a91b683f3a71152",
+      "replayed_episode_sha256": "81c6d52260093afca42380fc4c6c6a6fff7dc59ebf500fa91de978600212de46",
+      "training_performed": false,
+      "new_case_selection_performed": false,
+      "output": "outputs/table1_corrected_existing_20261102/replays/public_validation_rule_macro__rule_based_s100"
+    },
+    {
+      "schema": "table1-public-replay-receipt-v1",
+      "verified": true,
+      "scalar_checks": 216,
+      "service_complete": true,
+      "qualified_supplemental": true,
+      "source_failure_outcome_preserved": true,
+      "float_tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-06,
+        "USD_atol": 1e-05
+      },
+      "not_compared": [
+        "Checkout-specific paths, registration IDs and host/runtime metadata",
+        "Cross-run state-digest strings; before/after preservation checked per run",
+        "Compressed trace hashes and wall-clock timing"
+      ],
+      "policy": "rule_macro+sac",
+      "seed": 100,
+      "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+      "producer_registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+      "execution_registration_id": "16e8de0257906e92da4c2bfae6e03d6617955413cc434d4455ca2ed9ad21f7f7",
+      "source_export_sha256": "1369f74f3b4c89538ea168000c366041dad262161ae33af57ac409c0eef46d5c",
+      "public_adapter_sha256": "cb68ddd8177f66d9ffa5ee7fa24ed758fe75db4b3b481143f515b663723dc8cd",
+      "original_episode_sha256": "d48ccb350a7104dfd91a6d1fe371bc7d8a9f0c2db8c46131ace8af8370c9685b",
+      "replayed_episode_sha256": "f9226cdd9465bca098f2407f3e08bb192ab8362da1e57b03fc69b661d40473f7",
+      "training_performed": false,
+      "new_case_selection_performed": false,
+      "output": "outputs/table1_corrected_existing_20261102/replays/public_validation_rule_sac_s100"
+    },
+    {
+      "schema": "table1-public-replay-receipt-v1",
+      "verified": true,
+      "scalar_checks": 216,
+      "service_complete": true,
+      "qualified_supplemental": false,
+      "source_failure_outcome_preserved": true,
+      "float_tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-06,
+        "USD_atol": 1e-05
+      },
+      "not_compared": [
+        "Checkout-specific paths, registration IDs and host/runtime metadata",
+        "Cross-run state-digest strings; before/after preservation checked per run",
+        "Compressed trace hashes and wall-clock timing"
+      ],
+      "policy": "sac_macro+sac",
+      "seed": 100,
+      "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+      "producer_registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+      "execution_registration_id": "16e8de0257906e92da4c2bfae6e03d6617955413cc434d4455ca2ed9ad21f7f7",
+      "source_export_sha256": "1369f74f3b4c89538ea168000c366041dad262161ae33af57ac409c0eef46d5c",
+      "public_adapter_sha256": "cb68ddd8177f66d9ffa5ee7fa24ed758fe75db4b3b481143f515b663723dc8cd",
+      "original_episode_sha256": "78eceb6ce8531085954a3d8ff2832cf85f79e9e67e9ce651aae7d90b52691a5b",
+      "replayed_episode_sha256": "1a0f17667abab3da251380105490b1d6447a138804419ac93997dfd143fb6eb8",
+      "training_performed": false,
+      "new_case_selection_performed": false,
+      "output": "outputs/table1_corrected_existing_20261102/replays/public_validation_sac_macro__sac_s100"
+    },
+    {
+      "schema": "table1-public-replay-receipt-v1",
+      "verified": true,
+      "scalar_checks": 216,
+      "service_complete": true,
+      "qualified_supplemental": true,
+      "source_failure_outcome_preserved": true,
+      "float_tolerance": {
+        "rtol": 1e-09,
+        "atol": 1e-06,
+        "USD_atol": 1e-05
+      },
+      "not_compared": [
+        "Checkout-specific paths, registration IDs and host/runtime metadata",
+        "Cross-run state-digest strings; before/after preservation checked per run",
+        "Compressed trace hashes and wall-clock timing"
+      ],
+      "policy": "sac_macro+sac",
+      "seed": 103,
+      "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+      "producer_registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+      "execution_registration_id": "16e8de0257906e92da4c2bfae6e03d6617955413cc434d4455ca2ed9ad21f7f7",
+      "source_export_sha256": "1369f74f3b4c89538ea168000c366041dad262161ae33af57ac409c0eef46d5c",
+      "public_adapter_sha256": "cb68ddd8177f66d9ffa5ee7fa24ed758fe75db4b3b481143f515b663723dc8cd",
+      "original_episode_sha256": "43f341a6a53589a3c8439a61144c70781943b503e40165cb086b4e7e7a8807e9",
+      "replayed_episode_sha256": "373034c17e4cc4735165fb929630361f965ef5416136b919668d565390fdabfa",
+      "training_performed": false,
+      "new_case_selection_performed": false,
+      "output": "outputs/table1_corrected_existing_20261102/replays/public_validation_sac_macro__sac_s103"
+    }
+  ],
+  "training_performed": false,
+  "original_results_replaced": false,
+  "native_reset_contract_checks": [
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 100,
+      "native_default_reset_and_backends_verified": true
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 100,
+      "native_default_reset_and_backends_verified": true
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 100,
+      "native_default_reset_and_backends_verified": true
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 100,
+      "native_default_reset_and_backends_verified": true
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 100,
+      "native_default_reset_and_backends_verified": true
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 100,
+      "native_default_reset_and_backends_verified": true
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 100,
+      "native_default_reset_and_backends_verified": true
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 103,
+      "native_default_reset_and_backends_verified": true
+    }
+  ],
+  "output_path_convention": "Checkout-relative paths to locally retained replay outputs; raw replay traces are not uploaded."
+}

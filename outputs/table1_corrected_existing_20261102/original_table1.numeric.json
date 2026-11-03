@@ -1,0 +1,276 @@
+{
+  "source_archive_sha256": "2f616b2f3b2d65e848be7246954011c59f897ea5fa365b3de15fc424509fcc2c",
+  "camera_ready_member_sha256": "128f2d557ec256048b95bd918522f961eabbdc44364f8ec58e903de1822ccd02",
+  "member_hash_kind": "SHA256 of the exact archived camera_ready.tex bytes",
+  "member": "camera_ready.tex",
+  "table_label": "tab:results_default",
+  "source_lines": [
+    614,
+    648
+  ],
+  "exact_producing_cases_or_checkpoint_mapping_recovered": false,
+  "reported_legacy_values_not_new_results": true,
+  "rows": [
+    {
+      "id": "rule_macro+none",
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 2737.0,
+          "sd": 244.0
+        },
+        "regulation_revenue_usd": {
+          "mean": 5121.0,
+          "sd": 238.0
+        },
+        "macro_mean_reward": {
+          "mean": 0.65,
+          "sd": 0.04
+        },
+        "low_mean_reward": {
+          "mean": null,
+          "sd": null
+        },
+        "thermal_warning_fraction": {
+          "mean": null,
+          "sd": null
+        },
+        "bess_aging_x1e4": {
+          "mean": null,
+          "sd": null
+        }
+      }
+    },
+    {
+      "id": "rule_macro+random",
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 22749.0,
+          "sd": 365.0
+        },
+        "regulation_revenue_usd": {
+          "mean": 15.0,
+          "sd": 17.0
+        },
+        "macro_mean_reward": {
+          "mean": -3.86,
+          "sd": 0.14
+        },
+        "low_mean_reward": {
+          "mean": -3.86,
+          "sd": 0.14
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 40.15,
+          "sd": 0.07
+        }
+      }
+    },
+    {
+      "id": "rule_macro+bang_bang",
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 1502.0,
+          "sd": 156.0
+        },
+        "regulation_revenue_usd": {
+          "mean": 5903.0,
+          "sd": 344.0
+        },
+        "macro_mean_reward": {
+          "mean": 0.75,
+          "sd": 0.06
+        },
+        "low_mean_reward": {
+          "mean": 0.69,
+          "sd": 0.06
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 52.97,
+          "sd": 7.03
+        }
+      }
+    },
+    {
+      "id": "rule_macro+rule_based",
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 621.0,
+          "sd": 90.0
+        },
+        "regulation_revenue_usd": {
+          "mean": 6092.0,
+          "sd": 351.0
+        },
+        "macro_mean_reward": {
+          "mean": 0.94,
+          "sd": 0.02
+        },
+        "low_mean_reward": {
+          "mean": 0.87,
+          "sd": 0.01
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 27.23,
+          "sd": 4.81
+        }
+      }
+    },
+    {
+      "id": "rule_macro+pid",
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 813.0,
+          "sd": 122.0
+        },
+        "regulation_revenue_usd": {
+          "mean": 6058.0,
+          "sd": 348.0
+        },
+        "macro_mean_reward": {
+          "mean": 0.92,
+          "sd": 0.03
+        },
+        "low_mean_reward": {
+          "mean": 0.86,
+          "sd": 0.02
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 27.3,
+          "sd": 5.33
+        }
+      }
+    },
+    {
+      "id": "rule_macro+sac",
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 229.0,
+          "sd": 18.0
+        },
+        "regulation_revenue_usd": {
+          "mean": 6287.0,
+          "sd": 353.0
+        },
+        "macro_mean_reward": {
+          "mean": 1.0,
+          "sd": 0.0
+        },
+        "low_mean_reward": {
+          "mean": 0.94,
+          "sd": 0.0
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 22.49,
+          "sd": 2.78
+        }
+      }
+    },
+    {
+      "id": "sac_macro+sac",
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 780.0,
+          "sd": 626.0
+        },
+        "regulation_revenue_usd": {
+          "mean": 8550.0,
+          "sd": 553.0
+        },
+        "macro_mean_reward": {
+          "mean": 0.94,
+          "sd": 0.13
+        },
+        "low_mean_reward": {
+          "mean": 0.85,
+          "sd": 0.13
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 18.38,
+          "sd": 1.74
+        }
+      }
+    },
+    {
+      "id": "ppo_macro+sac",
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 745.0,
+          "sd": 34.0
+        },
+        "regulation_revenue_usd": {
+          "mean": 7345.0,
+          "sd": 688.0
+        },
+        "macro_mean_reward": {
+          "mean": 0.92,
+          "sd": 0.13
+        },
+        "low_mean_reward": {
+          "mean": 0.81,
+          "sd": 0.17
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 21.22,
+          "sd": 2.25
+        }
+      }
+    },
+    {
+      "id": "llm_macro+sac",
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 296.0,
+          "sd": 60.0
+        },
+        "regulation_revenue_usd": {
+          "mean": 2939.0,
+          "sd": 445.0
+        },
+        "macro_mean_reward": {
+          "mean": 0.94,
+          "sd": 0.01
+        },
+        "low_mean_reward": {
+          "mean": 0.91,
+          "sd": 0.01
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 20.39,
+          "sd": 2.13
+        }
+      }
+    }
+  ]
+}

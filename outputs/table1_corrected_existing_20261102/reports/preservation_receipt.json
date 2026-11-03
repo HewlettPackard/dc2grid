@@ -1,0 +1,29 @@
+{
+  "baseline_commit": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a",
+  "files": [
+    {
+      "path": "NIPS26_Data_Center_Energy_Grid_Benchmark.zip",
+      "git_blob": "c9451ebb2a073f05be72ef74d9bba5cbde9e09ca",
+      "sha256": "2f616b2f3b2d65e848be7246954011c59f897ea5fa365b3de15fc424509fcc2c",
+      "bytes": 4239198,
+      "unchanged_from_baseline": true
+    },
+    {
+      "path": "outputs/pid_comparison_extract_20261102/publication/pid_progress_comparison.pdf",
+      "git_blob": "7760a7a22b2191fc029e97de3f12716770358950",
+      "sha256": "2c31e19948811377bbf68594698573c1aac9498c97f499452861c9330655a595",
+      "bytes": 358733,
+      "unchanged_from_baseline": true
+    },
+    {
+      "path": "outputs/camera_ready_confirmation_20261102/publication/full_build/camera_ready.pdf",
+      "git_blob": "dfe5577797be45d87da700825ae9885ab22c50fc",
+      "sha256": "071b6cae6d5a0b1fd69d38e5fb97422f2199d6bb24db6f0144228d388440bb6d",
+      "bytes": 1516343,
+      "unchanged_from_baseline": true
+    }
+  ],
+  "only_tex_member_read": "camera_ready.tex",
+  "camera_ready_member_sha256": "128f2d557ec256048b95bd918522f961eabbdc44364f8ec58e903de1822ccd02",
+  "remote_publication_performed": false
+}

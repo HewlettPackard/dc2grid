@@ -1,0 +1,593 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-11-02",
+  "audit_kind": "bounded_original_SAC_training_integration_provenance",
+  "repository": "/workspace/IBM/temp/dc2grid-repos/dc2grid",
+  "revisions": {
+    "original": "7550013331a865fa45684cb7cd973279312d4678",
+    "corrected": "5c7e057caf686853934a19f5c56e848dbc96ae68",
+    "current": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+  },
+  "anchor_convention": "revision_alias:path:symbol:inclusive_line_range; revision aliases resolve to the full hashes above. ZIP artifacts use archive-member JSON pointers, not invented source line numbers. 'installed' means the repository-local SB3 2.7.1 installation, not a Git-tracked file.",
+  "scope": {
+    "primary_files": [
+      "baselines/train_sac.py",
+      "baselines/train_rule_macro_sac.py",
+      "baselines/train_hierarchical_sac.py"
+    ],
+    "supporting_scope": "Original training wrapper/reset interfaces, configuration propagation, training callbacks, checkpoint JSON provenance, and narrowly relevant frozen-inner loading. Later pipeline code was read only to distinguish its fixes from original defects.",
+    "excluded": [
+      "Physics-model correctness",
+      "Market settlement/accounting correctness",
+      "Evaluation-driver audit or execution",
+      "Training or optimizer execution",
+      "Other-project execution",
+      "Remote actions",
+      "Subagents",
+      "Repository edits"
+    ],
+    "repository_clean_at_start_and_last_check": true,
+    "baseline_code_unchanged_between_corrected_and_current": [
+      "baselines/",
+      "c2g_env/",
+      "conf/"
+    ],
+    "only_persistent_output": "training/training_audit.json in the user-authorized audit directory"
+  },
+  "summary": {
+    "verified_original_source_or_artifact_discrepancies": 7,
+    "fixed_in_corrected_SAC_paths": 6,
+    "unfixed_historical_artifact_label_discrepancies": 1,
+    "qualification": "The six fixed findings include a manuscript/training-protocol wiring gap, configuration defects, training-log defects, and wrapper observation defects. They are not six demonstrated causes of the later tested SAC instability. Explicit legacy_v0 preserves some original behavior.",
+    "principal_result": "The original SAC macro trainer freezes a classical four-action RuleBasedController, not the Phase-1 SAC policy described for the manuscript's learned hierarchy. The shipped low checkpoint declares seed 200 although its directory is named s100. Neither original ZIP identifies its training environment/inner partner, so the actual training partner of the shipped macro checkpoint remains unproven.",
+    "performance_causality": "No new claim that any finding explains the tested learning instability, or changes any Table 1 number."
+  },
+  "findings": [
+    {
+      "id": "TRAIN-001",
+      "status": "fixed",
+      "severity": "high",
+      "kind": "manuscript_protocol_vs_training_wiring",
+      "title": "Original hierarchical SAC does not load or freeze Phase-1 SAC",
+      "verified_claim": "The original main always creates _make_rule_based_inner_fn(), which constructs RuleBasedController, and passes that callable to both training and evaluation C2GMacroEnv instances. There is no SAC.load or inner-checkpoint selection in this original trainer. It cannot implement the stated Phase-2 SAC-on-frozen-Phase-1-SAC protocol through its provided entrypoint.",
+      "violated_contract": "The original README's Phase-2 example pairs sac_macro with frozen SAC hardware; the local manuscript extract says the Phase-1 learned low policy is frozen and loaded for both SAC and PPO macro training. The original trainer itself openly describes a classical-inner baseline, so this is a mismatch between provided implementation and manuscript/reproduction assumptions, not a hidden action-dimensionality error.",
+      "original_anchors": [
+        "original:baselines/train_hierarchical_sac.py:_make_rule_based_inner_fn:63-74",
+        "original:baselines/train_hierarchical_sac.py:_make_macro_env:81-86",
+        "original:baselines/train_hierarchical_sac.py:train_macro_sac:99-103",
+        "original:baselines/train_hierarchical_sac.py:main:193-206",
+        "original:README.md:Phase-2 benchmark example:815-818"
+      ],
+      "corrected_anchors": [
+        "corrected:baselines/train_hierarchical_sac.py:_make_sac_inner_fn:71-86",
+        "corrected:baselines/train_hierarchical_sac.py:main:212-234",
+        "corrected:baselines/train_hierarchical_sac.py:train_macro_sac:161-169"
+      ],
+      "proof": [
+        "Original source imports RuleBasedController from baselines.rule_based_mpc and constructs it at line 68. Despite misleading RuleBasedMacroController wording in the original docstring/prints, the actual controller is the correct four-action hardware class.",
+        "The original main spy test reached train_macro_sac with a rule-hardware callable and no checkpoint/environment-option arguments.",
+        "Corrected pure-helper tests reject a 19-observation/2-action macro checkpoint as a frozen hardware policy, accept a synthetic 18/4 physical policy, call predict deterministically, and attach its fingerprint.",
+        "A search of original baseline SAC.load references found the separate train_ppo_macro.py loader, not a SAC-inner path in train_hierarchical_sac.py."
+      ],
+      "fix_status": "Corrected/current require +hrl.inner_checkpoint or explicit +hrl.inner_controller=rule_based. The loaded hardware policy's SHA-256 fingerprint is embedded in the macro training context.",
+      "limitations": [
+        "This proves what the checked-in original trainer does, not which unpublished or historical command produced the shipped macro ZIP.",
+        "The macro ZIP lacks an inner-policy identity. Its actual historical training partner is unproven.",
+        "Different training seeds for high and low learners are not themselves a pairing bug.",
+        "The original PPO-macro path can load SAC; do not generalize this missing SAC-macro path into a claim that all original frozen-RL hierarchies were impossible."
+      ]
+    },
+    {
+      "id": "TRAIN-002",
+      "status": "unfixed",
+      "severity": "medium",
+      "kind": "checkpoint_provenance_label",
+      "title": "Shipped low checkpoint's s100 label disagrees with its stored seed",
+      "verified_claim": "trained_models/BestCheckpoints/sac_default_s100/final_model.zip has SB3 data.seed = 200, not 100. Its recorded transition count is 215000 and target _total_timesteps is 400000. The macro s100 ZIP declares seed 100 and 400000 transitions.",
+      "original_anchors": [
+        "original:conf/experiments.yaml:shipped SAC checkpoint paths:100-101",
+        "original:README.md:shipped low checkpoint examples:806-818",
+        "original:baselines/train_sac.py:train seed forwarding:109-120",
+        "original:baselines/train_rule_macro_sac.py:train seed forwarding:147-158",
+        "original:baselines/train_hierarchical_sac.py:train_macro_sac seed forwarding:144-157"
+      ],
+      "artifact_anchors": [
+        "original:trained_models/BestCheckpoints/sac_default_s100/final_model.zip:data#/seed",
+        "original:trained_models/BestCheckpoints/sac_default_s100/final_model.zip:data#/num_timesteps",
+        "original:trained_models/BestCheckpoints/sac_default_s100/final_model.zip:data#/_n_updates",
+        "original:trained_models/BestCheckpoints/sac_macro_default_s100/final_model.zip:data#/seed"
+      ],
+      "corrected_anchors": [
+        "corrected:baselines/sac_provenance.py:bind_training_context:20-31",
+        "corrected:baselines/train_sac.py:train:113-116",
+        "corrected:baselines/train_rule_macro_sac.py:train:151-154",
+        "corrected:baselines/train_hierarchical_sac.py:train_macro_sac:158-161"
+      ],
+      "proof": [
+        "Read ZIP member data as ordinary JSON without unpickling or loading models.",
+        "All three revisions contain identical Git blob IDs for each original ZIP; neither historical label nor artifact has been changed.",
+        "Mocked original/current low trainer calls forward cfg.experiment.seed correctly. The observed discrepancy is artifact labeling/provenance, not evidence that these functions ignore their seed parameter."
+      ],
+      "fix_status": "Unfixed for the preserved original artifact and directory name. New context records the actual model.seed; it does not retroactively relabel the old ZIP or enforce that path text matches seed.",
+      "limitations": [
+        "Stored seed is the checkpoint's declared seed, not a reconstruction of every historical RNG state.",
+        "A file named final_model inside BestCheckpoints may deliberately be a selected intermediate checkpoint. Its 215000 transition count does not prove training stopped early or that a 400000-step budget was never completed.",
+        "Do not replace an intended seed-100 result with this model without disclosing the stored seed, fingerprint, and selection provenance."
+      ]
+    },
+    {
+      "id": "TRAIN-003",
+      "status": "fixed",
+      "severity": "medium",
+      "kind": "wrong_child_learner_configuration",
+      "title": "Bare hierarchical SAC invocation consumes the default PPO configuration",
+      "verified_claim": "Original conf/config.yaml selects rule_macro_ppo. The original hierarchical SAC usage omits algo=sac, while main forwards cfg.algo without validating its name. Thus the documented default supplies PPO net_arch keys pi/vf to SAC, along with a 30000000-step budget, learning_rate 3e-5, batch_size 64 and fixed ent_coef 0.005 instead of the SAC configuration.",
+      "violated_contract": "A script advertised as a runnable SAC hierarchical training entrypoint must select compatible SAC configuration or explicitly reject a non-SAC algorithm. SB3 2.7.1's off-policy architecture helper requires qf, not vf, for a dictionary architecture.",
+      "original_anchors": [
+        "original:conf/config.yaml:defaults:21-27",
+        "original:conf/algo/rule_macro_ppo.yaml:algorithm settings:1-22",
+        "original:conf/algo/sac.yaml:algorithm settings:1-18",
+        "original:baselines/train_hierarchical_sac.py:documented default invocation:13-28",
+        "original:baselines/train_hierarchical_sac.py:main:173-184",
+        "original:baselines/train_hierarchical_sac.py:train_macro_sac:125-145",
+        "original:baselines/train_sac.py:train:93-110",
+        "original:baselines/train_rule_macro_sac.py:train:131-148"
+      ],
+      "corrected_anchors": [
+        "corrected:baselines/train_hierarchical_sac.py:documented explicit algorithm:13-20",
+        "corrected:baselines/train_hierarchical_sac.py:main:189-192",
+        "corrected:baselines/train_sac.py:train:58-60",
+        "corrected:baselines/train_rule_macro_sac.py:train:95-98"
+      ],
+      "dependency_anchor": "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/torch_layers.py:get_actor_critic_arch:316-353",
+      "proof": [
+        "Executed the exact installed SB3 2.7.1 get_actor_critic_arch function, extracted without importing SB3, against the original PPO net_arch. It raises: Error: no key 'qf' was provided in net_arch for the critic network.",
+        "The original SAC list architecture [256, 256] passes the same exact helper.",
+        "Mocked execution of each original low trainer with the root default configuration raises ConfigAttributeError: Missing key buffer_size.",
+        "Corrected versions explicitly raise ValueError: This trainer requires algo=sac before creating the learner with incompatible settings."
+      ],
+      "fix_status": "Fixed by explicit algorithm guards and corrected hierarchical usage. The shared root default is still rule_macro_ppo; corrected trainers do not silently auto-switch it.",
+      "limitations": [
+        "The correctly documented low-level commands already include algo=sac; those valid invocations are not affected.",
+        "This is not a claim that entropy 0.005 or a different learning rate is intrinsically wrong. The bug is passing a different algorithm's configuration through an incompatible child-learner interface.",
+        "A full SB3 constructor/training run was not executed."
+      ]
+    },
+    {
+      "id": "TRAIN-004",
+      "status": "fixed",
+      "severity": "medium",
+      "kind": "configuration_not_forwarded",
+      "title": "Original hierarchical plant profile and all three trainers' device setting are dropped",
+      "verified_claim": "The original hierarchical macro factory accepts only scenario, seed and inner_fn, so a Hydra plant_profiles override never reaches its child fast environment. All three original SAC constructors omit device even though the shared configuration explicitly sets device: cpu; SB3 therefore uses its own default auto selection.",
+      "original_anchors": [
+        "original:conf/config.yaml:device contract:35-37",
+        "original:conf/plant_profiles/plant_100mw.yaml:plant override contract:1-18",
+        "original:baselines/train_hierarchical_sac.py:_make_macro_env:81-85",
+        "original:baselines/train_hierarchical_sac.py:main:167-201",
+        "original:baselines/train_hierarchical_sac.py:train_macro_sac:128-145",
+        "original:baselines/train_sac.py:train SAC constructor:93-110",
+        "original:baselines/train_rule_macro_sac.py:train SAC constructor:131-148"
+      ],
+      "corrected_anchors": [
+        "corrected:baselines/train_hierarchical_sac.py:_make_macro_env:93-98",
+        "corrected:baselines/train_hierarchical_sac.py:main:212-234",
+        "corrected:baselines/train_hierarchical_sac.py:train_macro_sac:158-159",
+        "corrected:baselines/train_sac.py:train:113-114",
+        "corrected:baselines/train_rule_macro_sac.py:train:151-152"
+      ],
+      "dependency_anchor": "installed:.venv/lib/python3.11/site-packages/stable_baselines3/sac/sac.py:SAC.__init__:119",
+      "proof": [
+        "A sentinel stopped original/current main immediately before training. Original forwarded no environment/device keyword options; corrected forwarded the requested plant dictionary to both train/evaluation factories and device='cpu'.",
+        "Learner-constructor spies for both low trainers observed no device argument originally and device='cpu' after correction."
+      ],
+      "fix_status": "Fixed in corrected/current SAC entrypoints.",
+      "limitations": [
+        "Original train_sac.py and train_rule_macro_sac.py already forward plant_overrides correctly; do not extend the hierarchical plant-profile defect to those low trainers.",
+        "The default plant_profiles=none run is not changed by the missing nondefault profile.",
+        "Ignoring device=cpu matters when auto selects a different device. No CPU/GPU numerical performance comparison was performed."
+      ]
+    },
+    {
+      "id": "TRAIN-005",
+      "status": "fixed",
+      "severity": "medium",
+      "kind": "training_callback_schema_mismatch",
+      "title": "Original macro SAC uses a low-level metrics callback on incompatible macro infos",
+      "verified_claim": "train_macro_sac instantiates C2GMetricsCallback, whose accumulators expect tick, temp_A, temp_B, bess_soc and tracking_err_kw. Original C2GMacroEnv.step instead emits macro_tick, temp_A_max/temp_B_max, bess_soc_end and mean_tracking_err, with last_inner_info nested. The callback never unwraps those fields and silently logs zeros for several hardware metrics and episode length.",
+      "original_anchors": [
+        "original:baselines/train_hierarchical_sac.py:train_macro_sac:119-123",
+        "original:baselines/train_hierarchical_sac.py:train_macro_sac callback list:149-153",
+        "original:c2g_env/env_high_level.py:C2GMacroEnv.step info_out:410-449",
+        "original:baselines/metrics_callback.py:_accumulate_step:290-307",
+        "original:baselines/metrics_callback.py:_compute_episode_metrics:334-371",
+        "original:baselines/metrics_callback.py:C2GMetricsCallback._on_step:473-489"
+      ],
+      "corrected_anchors": [
+        "corrected:baselines/train_hierarchical_sac.py:train_macro_sac:133-137",
+        "corrected:baselines/macro_metrics_callback.py:C2GMacroMetricsCallback._on_step:22-66",
+        "corrected:tests/test_sac_contracts.py:test_macro_callback_weights_fast_steps_and_records_faults:60-89"
+      ],
+      "proof": [
+        "An AST assertion on the entire original info_out dictionary, lines 410-449, confirmed all five low-callback keys are absent.",
+        "Exact original helper execution on representative macro info gave ep/length=0, ep/survived=0, thermal/mean_temp_A=0, bess/mean_soc=0 and grid/tracking_rmse_kw=0 despite nonzero macro temperature/SOC/error fields.",
+        "The corrected macro callback, with dummy infos and no file output, correctly aggregated 3 hardware steps, 6000000 squared-error sum, RMSE 1414.213562373095 and terminated=1."
+      ],
+      "fix_status": "Fixed for the inspected hierarchical SAC path by a separate macro-schema callback with fast-step-weighted error accumulation and explicit terminal flags.",
+      "limitations": [
+        "This is a training-log defect. SB3's reward and replay transition are not replaced by the callback's diagnostic zeros.",
+        "The best-model EvalCallback uses environment rewards; this finding alone does not establish a corrupted checkpoint-selection score.",
+        "No claim is made that Table 1 was computed from this callback or that all other macro training entrypoints were corrected."
+      ]
+    },
+    {
+      "id": "TRAIN-006",
+      "status": "fixed",
+      "severity": "medium",
+      "kind": "training_callback_horizon_contract",
+      "title": "Original low training logger counts early failures after tick 287 as survival",
+      "verified_claim": "_compute_episode_metrics declares survival whenever tick >= 287, independent of the configured 17280-tick episode horizon and termination cause. An early thermal/frequency/voltage failure late enough in an episode can therefore be recorded as survived.",
+      "original_anchors": [
+        "original:c2g_env/config.yaml:global horizon:29-30",
+        "original:baselines/metrics_callback.py:_accumulate_step:300-307",
+        "original:baselines/metrics_callback.py:_compute_episode_metrics:347-356",
+        "original:baselines/train_sac.py:train metrics callback:84-88",
+        "original:baselines/train_rule_macro_sac.py:train metrics callback:122-126"
+      ],
+      "corrected_anchors": [
+        "corrected:baselines/metrics_callback.py:_accumulate_step:304-311",
+        "corrected:baselines/metrics_callback.py:_compute_episode_metrics:351-356",
+        "corrected:c2g_env/env_low_level.py:C2GFastEnv.step terminal flags:727-731",
+        "corrected:c2g_env/env_low_level.py:C2GFastEnv.step physical metadata:753-770",
+        "corrected:tests/test_sac_contracts.py:test_low_level_callback_does_not_count_early_fault_as_survival:125-143"
+      ],
+      "proof": [
+        "Executed exact original and corrected aggregation functions on tick=500, episode_ticks=17280, terminated=True, truncated=False, thermal_fault=True.",
+        "Original reports ep/survived=1.0; corrected reports 0.0.",
+        "Inspected the corrected environment's actual physical-mode info.update and verified episode_ticks is supplied; this is not only a synthetic-field test."
+      ],
+      "fix_status": "Fixed for corrected physical_v1 training infos. The old >=287 fallback remains when episode_ticks is absent, including intentionally preserved legacy-style infos.",
+      "limitations": [
+        "The episode termination/replay behavior itself is not altered by this logging calculation.",
+        "Do not infer that the manuscript's independently computed survival column is wrong without the separate evaluation-driver evidence."
+      ]
+    },
+    {
+      "id": "TRAIN-007",
+      "status": "fixed",
+      "severity": "medium",
+      "kind": "training_wrapper_reset_observation_contract",
+      "title": "Original rule-macro training wrapper fabricates reset context and returns stale commitment",
+      "verified_claim": "At reset, _build_macro_obs fabricates a zero hardware observation, puts 0.5 in index 7 while calling it grid load, and discards the real reset observation. Actual Fast.GRID_LOAD is index 8. reset then runs a handshake that can change committed_mw but returns the previously obtained observation unchanged. At subsequent macro boundaries, step changes commitment before consuming an already chosen hardware action.",
+      "original_anchors": [
+        "original:baselines/train_rule_macro_sac.py:make_env_fn:73-79",
+        "original:c2g_env/train_envs/rule_macro_wrapped.py:RuleMacroWrappedEnv.reset:69-85",
+        "original:c2g_env/train_envs/rule_macro_wrapped.py:RuleMacroWrappedEnv.step:87-98",
+        "original:c2g_env/train_envs/rule_macro_wrapped.py:RuleMacroWrappedEnv._build_macro_obs:139-152",
+        "original:c2g_env/obs_indices.py:Fast observation indices:25-35",
+        "original:c2g_env/env_high_level.py:C2GMacroEnv.macro_obs_from_reset:565-584"
+      ],
+      "corrected_anchors": [
+        "corrected:c2g_env/train_envs/rule_macro_wrapped.py:RuleMacroWrappedEnv.reset:71-92",
+        "corrected:c2g_env/train_envs/rule_macro_wrapped.py:RuleMacroWrappedEnv.step:94-111",
+        "corrected:c2g_env/train_envs/rule_macro_wrapped.py:RuleMacroWrappedEnv._build_macro_obs:157-174",
+        "corrected:tests/test_physical_contract.py:test_rule_wrapper_observes_commitment_before_action_and_matches_macro:186-205"
+      ],
+      "proof": [
+        "Exact wrapper methods were invoked on dummy envs only, with initial commitment 5/30, a handshake stub changing it to 18/30, real reset grid load 0.9 and real reset RegD 0.7.",
+        "Original returns observation commitment approximately 0.166667 while actual commitment is 0.6; macro reset grid load and RegD are both zero.",
+        "Corrected physical mode returns commitment approximately 0.6 and preserves macro grid load approximately 0.9 and RegD approximately 0.7.",
+        "Corrected legacy mode reproduces the original stale/fabricated values.",
+        "Source inspection confirms corrected physical mode performs the boundary update before returning the observation for the next action, not before consuming that action."
+      ],
+      "fix_status": "Fixed for physical_v1; legacy_v0 explicitly retains the old observation schedule. This finding is limited to the training wrapper interface, not market-clearing or physics correctness.",
+      "limitations": [
+        "No actual handshake, simulator step, or regulation-bias campaign was executed.",
+        "This is an observation/wiring defect, not evidence of replay-buffer mutation or corrupted timeout storage.",
+        "The original trainers did not promise bias-randomized training; lack of such coverage is treated separately as design, not as this bug."
+      ]
+    }
+  ],
+  "provenance_and_semantics_assessment": {
+    "status": "unproven",
+    "historical_training_provenance": "Both original ZIPs lack c2g_context, simulation-mode tags and an inner-checkpoint identity. Shape and seed metadata alone cannot identify the original training wrapper, plant options, or exact frozen partner.",
+    "original_anchors": [
+      "original:baselines/train_sac.py:train model construction and save:93-120",
+      "original:baselines/train_rule_macro_sac.py:train model construction and save:131-158",
+      "original:baselines/train_hierarchical_sac.py:train_macro_sac model construction and save:128-157"
+    ],
+    "corrected_anchors": [
+      "corrected:baselines/sac_provenance.py:bind_training_context:11-32",
+      "corrected:c2g_env/experiments/identity.py:check_policy_semantics:15-26",
+      "corrected:baselines/train_hierarchical_sac.py:_make_sac_inner_fn:71-86",
+      "corrected:tests/test_sac_contracts.py:test_unknown_checkpoint_requires_explicit_mismatch:17-26"
+    ],
+    "new_training_guard_status": "fixed",
+    "new_training_guards": [
+      "New checkpoints bind source capture, simulation mode, model seed, effective environment/reward dictionaries, plant/thermal overrides, start day/bias, and the optional exact frozen-inner fingerprint.",
+      "Unknown/untagged models are treated as legacy_v0; check_policy_semantics rejects their use as physical_v1 unless a caller explicitly requests a diagnostic mismatch.",
+      "The corrected hierarchical loader enforces 18 hardware observations and 4 actions and stores the loaded file fingerprint."
+    ],
+    "guard_proofs": [
+      "Pure extracted check_policy_semantics accepts an untagged object for legacy_v0 and rejects it for physical_v1.",
+      "Pure corrected loader tests reject a synthetic macro-shaped model and confirm deterministic frozen prediction/fingerprint attachment for an 18/4 model."
+    ],
+    "important_distinction": "physical_v1/legacy_v0 migration semantics were introduced in the correction. Absence of that future-version guard is not by itself an original single-mode implementation bug. Missing original provenance is a verified reproducibility gap and prevents proving the historical Table 1 training pair.",
+    "remaining_limits": [
+      "New guards do not retroactively authenticate original training histories.",
+      "The inspected frozen-inner helper does not require the directory's seed label to match model.seed.",
+      "bind_training_context unwraps to the fast plant and does not explicitly identify bare-fast versus rule-macro training wrapper type in a dedicated field.",
+      "No evaluation-driver partner-enforcement claim is made."
+    ]
+  },
+  "checkpoint_inventory": [
+    {
+      "path": "trained_models/BestCheckpoints/sac_default_s100/final_model.zip",
+      "git_blob_all_three_revisions": "81b4df5e709be086ffb3594bcf4cd65c985b27bd",
+      "sha256": "918220d69452a53e40335ada709ffb73775f8b01dd8f6a1a4c893f97f181fa91",
+      "archive_sb3_version": "2.7.1",
+      "stored_seed": 200,
+      "observation_shape": [18],
+      "action_shape": [4],
+      "num_timesteps": 215000,
+      "total_timesteps_target": 400000,
+      "optimizer_updates": 212999,
+      "n_envs": 1,
+      "learning_starts": 2000,
+      "gradient_steps": 1,
+      "gamma": 0.99,
+      "ent_coef": "auto",
+      "net_arch": [256, 256],
+      "has_c2g_context": false,
+      "has_inner_partner_identity": false
+    },
+    {
+      "path": "trained_models/BestCheckpoints/sac_macro_default_s100/final_model.zip",
+      "git_blob_all_three_revisions": "adee249437faa0af4ed2e9e626b0ac0e24fc37ed",
+      "sha256": "f485b5a114513fdfb8df25126dbc6570b3bdcab1f56d637541f632d3610dacb3",
+      "archive_sb3_version": "2.7.1",
+      "stored_seed": 100,
+      "observation_shape": [19],
+      "action_shape": [2],
+      "num_timesteps": 400000,
+      "total_timesteps_target": 400000,
+      "optimizer_updates": 398000,
+      "n_envs": 1,
+      "learning_starts": 2000,
+      "gradient_steps": 1,
+      "gamma": 0.99,
+      "ent_coef": "auto",
+      "net_arch": [256, 256],
+      "has_c2g_context": false,
+      "has_inner_partner_identity": false
+    }
+  ],
+  "table1_training_assumptions": {
+    "manuscript_evidence": {
+      "path": "/root/.copilot/session-state/589eaa5d-3422-4cb3-97b1-1479f309d6e4/files/paper/camera_ready.tex",
+      "sha256": "128f2d557ec256048b95bd918522f961eabbdc44364f8ec58e903de1822ccd02",
+      "protocol_lines": [578, 599],
+      "table_lines": [622, 645],
+      "provenance_limit": "Existing session manuscript extract, read only. The original Git tree contains neither this .tex nor the later manuscript archive, so this audit does not independently authenticate its archive of origin. Original README 815-818 independently confirms the frozen-SAC Phase-2 pairing assumption."
+    },
+    "rows": [
+      {
+        "row": "Phase 1: rule-based macro + SAC low",
+        "status": "unproven",
+        "wiring": "Original train_rule_macro_sac.py does implement rule-macro + learned low SAC. Original train_sac.py instead trains bare C2GFastEnv. Both produce the same 18/4 policy spaces.",
+        "anchors": [
+          "original:baselines/train_rule_macro_sac.py:make_env_fn:73-79",
+          "original:baselines/train_sac.py:make_env_fn:40-45"
+        ],
+        "limit": "The shipped low ZIP does not identify which entrypoint/wrapper produced it."
+      },
+      {
+        "row": "Phase 2: SAC macro + frozen RL low",
+        "status": "unproven",
+        "wiring": "The provided original hierarchical SAC trainer uses classical hardware, not frozen SAC. Corrected/current explicitly support the frozen-SAC path.",
+        "finding": "TRAIN-001",
+        "limit": "A 19/2 macro model is present, but its original training partner cannot be recovered from its saved JSON."
+      },
+      {
+        "row": "Phase 2: PPO macro + frozen RL low",
+        "status": "unproven",
+        "wiring": "A separate original PPO macro loader supports a supplied inner_policy_path, trying PPO then SAC and calling the frozen model's predict deterministically.",
+        "anchors": [
+          "original:baselines/train_ppo_macro.py:_make_inner_action_fn:47-68",
+          "original:baselines/train_ppo_macro.py:train:97-104"
+        ],
+        "limit": "This proves an available code path, not which checkpoint, normalizer or historical command generated the manuscript's PPO row. PPO training itself was not audited."
+      },
+      {
+        "row": "LLM macro + frozen SAC low",
+        "status": "unproven",
+        "wiring": "Original README supplies the same low checkpoint directory to the LLM-macro example.",
+        "anchors": [
+          "original:README.md:LLM macro example:820-823"
+        ],
+        "limit": "Only the reused low-artifact provenance is within this audit. LLM and evaluation-driver execution were not traced."
+      }
+    ]
+  },
+  "checkpoint_and_evaluation_timing": {
+    "status": "design",
+    "original_behavior": "All three original trainers use SB3 CheckpointCallback/EvalCallback on rollout steps. In SB3 2.7.1 the callback runs after the transition counter increments but before replay insertion and before the subsequent optimizer update. A periodic checkpoint/evaluation at N transitions can therefore contain the parameters from before the update following transition N. Each original final_model save occurs after learn returns.",
+    "original_anchors": [
+      "original:baselines/train_sac.py:train callbacks and final save:70-120",
+      "original:baselines/train_rule_macro_sac.py:train callbacks and final save:108-158",
+      "original:baselines/train_hierarchical_sac.py:train_macro_sac:105-157"
+    ],
+    "dependency_anchors": [
+      "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/callbacks.py:CheckpointCallback._on_step:299-300",
+      "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/callbacks.py:EvalCallback._on_step:446-449",
+      "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/off_policy_algorithm.py:OffPolicyAlgorithm.collect_rollouts:568-582",
+      "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/off_policy_algorithm.py:OffPolicyAlgorithm.learn:334-358"
+    ],
+    "artifact_consistency_check": "Low ZIP: 215000 - 2000 - 1 = 212999 stored updates, consistent with on-step checkpoint timing. Macro ZIP: 400000 - 2000 = 398000 stored updates, consistent with a post-learn final save. This consistency is not proof of the low checkpoint's exact selection event.",
+    "bug_classification": "No original contract found requiring every periodic or best checkpoint to include the final transition's optimizer update. Standard callback timing and best-versus-final selection are not classified as original implementation bugs.",
+    "current_caveat": "The generic corrected trainer still evaluates inside TrainingJournal._on_step and only reevaluates after learn if last_eval != model.num_timesteps. A terminal on-step evaluation can make that condition false despite later optimizer updates. Do not claim that generic runner guarantees a final post-update reevaluation.",
+    "corrected_caveat_anchors": [
+      "corrected:baselines/train_corrected_sac.py:TrainingJournal._on_step:394-396",
+      "corrected:baselines/train_corrected_sac.py:train:530-535"
+    ],
+    "later_pipeline_resolution": "Later explicit milestone loops call learn, verify completed optimizer counts, then save and evaluate. That is a later pipeline timing contract/fix, not evidence that original SAC gradients or transition counts were corrupt.",
+    "later_anchors": [
+      "current:outputs/high_macro_recovery_pilot_20261031_v3/learn.py:train:357-400",
+      "current:outputs/table2_distress_rl_20261031/train.py:fit:203-227"
+    ]
+  },
+  "followup_only_fixes_not_original_bugs": [
+    {
+      "topic": "SB3 policy_kwargs provenance mutation",
+      "status": "fixed",
+      "origin": "Later high-macro recovery pilot; outputs/ is absent from the original tree.",
+      "later_bug_anchor": "current:outputs/high_macro_recovery_pilot_20261031_v2/learn.py:train:302-312",
+      "later_fix_anchor": "current:outputs/high_macro_recovery_pilot_20261031_v3/learn.py:train:303-314",
+      "mechanism_anchors": [
+        "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/base_class.py:BaseAlgorithm.__init__:133",
+        "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/off_policy_algorithm.py:OffPolicyAlgorithm.__init__:144-146"
+      ],
+      "proof": "The exact SB3 assignment inserts use_sde into the supplied policy_kwargs dictionary. A pure test of that extracted block mutates a shared protocol dictionary but not a deep-copied one. v3 passes a deepcopy and separately deep-copies embedded protocol provenance.",
+      "distinction": "Original trainers construct a fresh dict(net_arch=net_arch) and have no immutable protocol hash guard. Seeing use_sde=false in their saved model data is normal SB3 behavior, not proof of the later provenance failure in original training.",
+      "limit": "The old campaign failure receipts and full v3 lifecycle were not re-executed."
+    },
+    {
+      "topic": "Analysis steps-key collision",
+      "status": "fixed",
+      "origin": "Later learning-progress analysis, not an original learner or replay path.",
+      "fix_anchor": "session:files/analyze_learning_progress.py:flatten:44-52",
+      "proof": "Extracted current flatten preserves a synthetic training step 215000 while moving the cell's 17280 steps to episode_steps and excluding steps from the expanded cell mapping.",
+      "distinction": "This changes analysis labels, not collected transitions or SAC gradients.",
+      "limit": "The pre-fix analysis function was not located/authenticated in the original tree; no original-bug finding is inferred from this corrected external-session script."
+    },
+    {
+      "topic": "Post-final-update milestone evaluation",
+      "status": "fixed",
+      "origin": "Later explicitly registered milestone pipelines.",
+      "fix_anchors": [
+        "current:outputs/high_macro_recovery_pilot_20261031_v3/learn.py:train:357-400",
+        "current:outputs/table2_distress_rl_20261031/train.py:fit:203-227"
+      ],
+      "proof": "The later source orders learn, exact update-budget checks, model saving, then evaluation; the high-macro metadata explicitly sets after_all_optimizer_updates=true.",
+      "distinction": "Those paths did not exist in original 755. The older generic corrected TrainingJournal path retains the timing caveat documented separately, so 'fixed everywhere' would be inaccurate."
+    },
+    {
+      "topic": "Registered start-day/bias reset plumbing",
+      "status": "design",
+      "origin": "Corrected retraining protocol, not an original promised training-distribution contract.",
+      "anchors": [
+        "corrected:baselines/_hydra_compat.py:simulation_options_from_cfg:56-66",
+        "corrected:baselines/train_corrected_sac.py:EpisodeConditions.reset:123-143",
+        "corrected:baselines/train_corrected_sac.py:make_worker:150-180"
+      ],
+      "assessment": "Corrected EpisodeConditions chooses a cell and passes start_day/regd_load_bias in reset options before returning the observation, with fixed validation cells. Original training factories do not have this registration/sampling path. No verified original 'training bias applied after reset' bug is asserted; the verified original wrapper reset defect is TRAIN-007.",
+      "limit": "No physical bias response, recovery-horizon pipeline, or evaluation-driver bias test was executed."
+    }
+  ],
+  "non_findings_and_prior_instability_limits": [
+    {
+      "topic": "Gamma 0.99 at a five-second step",
+      "status": "design",
+      "anchors": [
+        "original:conf/algo/sac.yaml:gamma:13",
+        "original:README.md:formal low MDP discount:112-113"
+      ],
+      "assessment": "Explicitly documented and passed to SAC. A different effective horizon may be a research choice, not a verified implementation bug."
+    },
+    {
+      "topic": "Nominal-only training coverage, entropy/reward scaling, and checkpoint-selection objective",
+      "status": "design",
+      "anchors": [
+        "original:conf/algo/sac.yaml:training defaults:3-18",
+        "original:baselines/train_sac.py:train:53-110",
+        "original:baselines/train_rule_macro_sac.py:train:91-148"
+      ],
+      "assessment": "No original contract requiring stress/bias randomization or a different entropy/reward scale was identified. Changing these choices is not an implementation repair. Passing incompatible PPO settings under the documented SAC default is a separate verified configuration defect."
+    },
+    {
+      "topic": "Sixfold update-to-data ratio",
+      "status": "design",
+      "anchors": [
+        "original:conf/algo/sac.yaml:n_envs and update settings:4-15",
+        "original:baselines/train_sac.py:train:64-67",
+        "original:baselines/train_rule_macro_sac.py:train:102-105",
+        "original:baselines/train_hierarchical_sac.py:train_macro_sac:99-103",
+        "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/off_policy_algorithm.py:OffPolicyAlgorithm.learn:348-354"
+      ],
+      "assessment": "Original inspected SAC training is single-env, train_freq=1, gradient_steps=1. Saved update counts are consistent with one update per post-warmup transition, subject to periodic checkpoint timing. The actual SB3 code also uses rollout.episode_timesteps for gradient_steps=-1. No new sixfold-UTD finding is supported."
+    },
+    {
+      "topic": "Replay corruption and timeout/transition corruption",
+      "status": "unproven",
+      "anchors": [
+        "original:baselines/train_sac.py:train stock SAC construction:93-110",
+        "original:baselines/train_rule_macro_sac.py:train stock SAC construction:131-148",
+        "original:baselines/train_hierarchical_sac.py:train_macro_sac stock SAC construction:128-145",
+        "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/off_policy_algorithm.py:OffPolicyAlgorithm._store_transition:480-507",
+        "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/buffers.py:ReplayBuffer.add:265-278",
+        "installed:.venv/lib/python3.11/site-packages/stable_baselines3/common/buffers.py:ReplayBuffer._get_samples:316-323"
+      ],
+      "assessment": "No custom replay class is configured by these original trainers. Inspected SB3 2.7.1 source copies observations, substitutes terminal_observation for auto-reset transitions, records TimeLimit.truncated, and masks timeout dones during sampling. This audit introduces no contrary explanation to the user's prior tested exclusions; it does not rerun or expand them into a universal guarantee."
+    },
+    {
+      "topic": "Numerical NaNs as the instability explanation",
+      "status": "unproven",
+      "assessment": "No numeric training or model-weight stability run was permitted or performed. The prior reported exclusion remains prior evidence, not a newly reproduced result. No new NaN explanation is asserted."
+    },
+    {
+      "topic": "Original seed reset falls back to one fixed seed for every worker",
+      "status": "design",
+      "anchor": "original:c2g_env/env_low_level.py:C2GFastEnv.reset:296-300",
+      "assessment": "Original reset explicitly uses the supplied seed or derives a seed from Gymnasium's np_random when none is supplied. The inspected original SAC trainers use one training env. A fixed-seed worker-collapse claim is unsupported here."
+    }
+  ],
+  "verification": {
+    "mode": "Read-only source comparison, JSON-only ZIP inspection, pure installed helper extraction, and exact AST-extracted project functions with dummy environments/learner spies.",
+    "behavioral_and_pure_helper_checks_passed": 16,
+    "additional_original_schema_assertions_passed": 1,
+    "checks": [
+      "Original PPO dictionary architecture rejected by exact SB3 2.7.1 off-policy helper; SAC list architecture accepted.",
+      "Original and corrected train_sac default-algorithm errors, seed forwarding and device forwarding.",
+      "Original and corrected train_rule_macro_sac default-algorithm errors, seed forwarding and device forwarding.",
+      "Original and corrected hierarchical main plant/device forwarding, stopped before training.",
+      "Original early-fault survival calculation.",
+      "Original macro-info/low-callback zero fallbacks.",
+      "Corrected early-fault survival calculation.",
+      "Corrected macro callback fast-step weighting and terminal logging.",
+      "Original rule wrapper reset context/commitment.",
+      "Corrected physical rule wrapper reset context/commitment.",
+      "Corrected legacy rule wrapper preservation.",
+      "Corrected untagged-checkpoint semantic guard.",
+      "Corrected frozen-inner macro-space rejection.",
+      "Corrected frozen-inner deterministic prediction and fingerprint attachment.",
+      "Later shared SB3 kwargs mutation versus deepcopy isolation.",
+      "Later analysis separation of training steps and episode_steps.",
+      "Additional AST assertion on the complete original macro info dictionary."
+    ],
+    "test_execution_limits": [
+      "No SAC/PPO model was constructed, trained, deserialized, or numerically evaluated.",
+      "Dummy learner learn/save methods are no-ops; hierarchical main was intercepted before training/file copying.",
+      "No real simulator, market handshake, recovery episode or evaluation driver was executed.",
+      "Original/current source functions were compiled in memory with decorators/import side effects omitted; selected dependencies were supplied explicitly.",
+      "An initial combined probe stopped because its synthetic namespace omitted ACTION_SHORT_NAMES. The fixture was corrected and the independent final probes all passed; this was not a repository defect.",
+      "Existing tests/test_sac_contracts.py and tests/test_physical_contract.py were read for relevant coverage but their full suites were not run because they include model training or simulation outside this bounded audit.",
+      "Python -B disabled bytecode output. No dependency installation was performed."
+    ],
+    "reproduction_outline": [
+      "git show <revision>:<path> supplies historical source; ast.parse selects the named function/method bodies without changing repository files.",
+      "For TRAIN-003, execute installed get_actor_critic_arch with yaml.safe_load(original conf/algo/rule_macro_ppo.yaml)['net_arch'].",
+      "For TRAIN-005/006, execute original/corrected _make_episode_buffer, _accumulate_step and _compute_episode_metrics with the dummy infos described in the findings.",
+      "For TRAIN-007, execute reset and _build_macro_obs on a SimpleNamespace dummy env, using the exact original/corrected macro_obs_from_reset method and a handshake stub that only changes committed_mw.",
+      "For artifact proof, read git-show bytes with zipfile.ZipFile(io.BytesIO(...)), parse member data with json.loads, compute SHA-256, and never unpickle serialized fields.",
+      "For persistence/source checks, parse this JSON and resolve revision aliases before validating each source line range."
+    ]
+  },
+  "final_limits": [
+    "This audit does not establish the training command, effective plant, exact frozen partner, selection event, or complete learning history that produced either original ZIP.",
+    "The manuscript's original staged SAC assumption is not authenticated by the provided macro training source or artifact metadata; it should not be treated as established merely because two compatible-shape checkpoints exist.",
+    "The seed-label mismatch is proven by saved metadata; actual historical RNG provenance is not reconstructable from that scalar alone.",
+    "Physics, settlement and evaluation-driver findings belong to separate audits and are not duplicated here.",
+    "No new performance numbers, stability explanation, or publication-row recomputation is claimed.",
+    "The audit is complete at this bounded source/artifact/probe scope; no training or repository changes are recommended as already performed."
+  ]
+}

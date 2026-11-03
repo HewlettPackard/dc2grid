@@ -1,0 +1,1710 @@
+{
+  "schema": "table1-corrected-existing-results-v1",
+  "registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+  "planned": 35,
+  "recorded": 35,
+  "complete_service": 35,
+  "qualified_supplemental": 31,
+  "statistic": "equal mean of all five fixed evaluation cases; sample SD ddof=1",
+  "case_conditions_are_reconstructed_defaults_not_original_producing_proof": true,
+  "primary_metrics_exclude_recovery": true,
+  "no_survivor_only_primary_means": true,
+  "independent_training_seeds": false,
+  "no_training_or_post_result_checkpoint_selection": true,
+  "no_capacity_admission_floor": true,
+  "rows": [
+    {
+      "id": "rule_macro+none",
+      "label": "Rule macro + no hardware agent",
+      "planned": 5,
+      "complete_service": 5,
+      "qualified": 5,
+      "all_primary_means_available": true,
+      "diagnostic_not_admissible": false,
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 2619.5030826708335,
+          "sd": 185.41229233166123
+        },
+        "regulation_revenue_usd": {
+          "mean": 4611.607401464907,
+          "sd": 278.9786330404201
+        },
+        "macro_mean_reward": {
+          "mean": -0.5754557018605557,
+          "sd": 0.02413061805711784
+        },
+        "low_mean_reward": {
+          "mean": -0.34078041078276944,
+          "sd": 0.022566557058951404
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 0.0,
+          "sd": 0.0
+        }
+      },
+      "mean_committed_mw": 10.710416672439333,
+      "mean_cash_26h_usd": -54466.21284912156,
+      "mean_observed_battery_throughput_mwh": 0.0,
+      "service_end_soc_min": 0.5
+    },
+    {
+      "id": "rule_macro+random",
+      "label": "Rule macro + Random",
+      "planned": 5,
+      "complete_service": 5,
+      "qualified": 5,
+      "all_primary_means_available": true,
+      "diagnostic_not_admissible": false,
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 18354.996100583114,
+          "sd": 214.47181677923967
+        },
+        "regulation_revenue_usd": {
+          "mean": 174.2690309567136,
+          "sd": 41.16404173600888
+        },
+        "macro_mean_reward": {
+          "mean": -3.9063449945433626,
+          "sd": 0.13304675775535021
+        },
+        "low_mean_reward": {
+          "mean": -3.6617906049363897,
+          "sd": 0.13298288123786417
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 39.994407417649136,
+          "sd": 0.10884819761142246
+        }
+      },
+      "mean_committed_mw": 10.710416672439333,
+      "mean_cash_26h_usd": -51990.26328065219,
+      "mean_observed_battery_throughput_mwh": 62.278315872983306,
+      "service_end_soc_min": 0.32057612632383653
+    },
+    {
+      "id": "rule_macro+bang_bang",
+      "label": "Rule macro + Bang-bang",
+      "planned": 5,
+      "complete_service": 5,
+      "qualified": 5,
+      "all_primary_means_available": true,
+      "diagnostic_not_admissible": false,
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 998.6876170048457,
+          "sd": 239.00662209486725
+        },
+        "regulation_revenue_usd": {
+          "mean": 5450.030761271037,
+          "sd": 332.2673414915537
+        },
+        "macro_mean_reward": {
+          "mean": -0.34530544721566414,
+          "sd": 0.05910223091478592
+        },
+        "low_mean_reward": {
+          "mean": -0.11913106017503723,
+          "sd": 0.0568239650246361
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 55.33580556577874,
+          "sd": 4.90907899690149
+        }
+      },
+      "mean_committed_mw": 10.710416672439333,
+      "mean_cash_26h_usd": -53605.947222553914,
+      "mean_observed_battery_throughput_mwh": 86.08821802807508,
+      "service_end_soc_min": 0.3856688062530514
+    },
+    {
+      "id": "rule_macro+rule_based",
+      "label": "Rule macro + Rule hardware",
+      "planned": 5,
+      "complete_service": 5,
+      "qualified": 5,
+      "all_primary_means_available": true,
+      "diagnostic_not_admissible": false,
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 604.6957758912156,
+          "sd": 263.4246189079708
+        },
+        "regulation_revenue_usd": {
+          "mean": 5493.4752115148885,
+          "sd": 364.0913907340379
+        },
+        "macro_mean_reward": {
+          "mean": -0.2572567288961625,
+          "sd": 0.03390061160123428
+        },
+        "low_mean_reward": {
+          "mean": -0.030873222295735893,
+          "sd": 0.03139562576197415
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 27.40091650942697,
+          "sd": 3.693288016470839
+        }
+      },
+      "mean_committed_mw": 10.710416672439333,
+      "mean_cash_26h_usd": -53687.22281472366,
+      "mean_observed_battery_throughput_mwh": 44.350951357677474,
+      "service_end_soc_min": 0.40743927249973066
+    },
+    {
+      "id": "rule_macro+pid",
+      "label": "Rule macro + PID",
+      "planned": 5,
+      "complete_service": 5,
+      "qualified": 5,
+      "all_primary_means_available": true,
+      "diagnostic_not_admissible": false,
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 394.7419037894709,
+          "sd": 230.84928539317244
+        },
+        "regulation_revenue_usd": {
+          "mean": 5561.502500607817,
+          "sd": 338.83055908801543
+        },
+        "macro_mean_reward": {
+          "mean": -0.2338961713084265,
+          "sd": 0.025401858271144086
+        },
+        "low_mean_reward": {
+          "mean": -0.008912010255705084,
+          "sd": 0.023621498347266734
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 26.59162543919989,
+          "sd": 2.046971157742963
+        }
+      },
+      "mean_committed_mw": 10.710416672439333,
+      "mean_cash_26h_usd": -53527.744370470544,
+      "mean_observed_battery_throughput_mwh": 43.56842590376459,
+      "service_end_soc_min": 0.23835798304487466
+    },
+    {
+      "id": "rule_macro+sac",
+      "label": "Rule macro + Retrained SAC",
+      "planned": 5,
+      "complete_service": 5,
+      "qualified": 5,
+      "all_primary_means_available": true,
+      "diagnostic_not_admissible": false,
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 272.6418241331526,
+          "sd": 32.860812409786696
+        },
+        "regulation_revenue_usd": {
+          "mean": 5533.7611358859995,
+          "sd": 324.6205888565476
+        },
+        "macro_mean_reward": {
+          "mean": -0.24422937824537816,
+          "sd": 0.005713408956639924
+        },
+        "low_mean_reward": {
+          "mean": -0.018887790903066068,
+          "sd": 0.0033279214326868015
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 29.94780145989508,
+          "sd": 1.4353324271234305
+        }
+      },
+      "mean_committed_mw": 10.710416672439333,
+      "mean_cash_26h_usd": -53657.4329715678,
+      "mean_observed_battery_throughput_mwh": 47.07340126908981,
+      "service_end_soc_min": 0.2963141118100546
+    },
+    {
+      "id": "sac_macro+sac",
+      "label": "Retrained SAC macro + same SAC low",
+      "planned": 5,
+      "complete_service": 5,
+      "qualified": 1,
+      "all_primary_means_available": true,
+      "diagnostic_not_admissible": true,
+      "metrics": {
+        "tracking_rmse_kw": {
+          "mean": 358.12416383240037,
+          "sd": 67.26994221353354
+        },
+        "regulation_revenue_usd": {
+          "mean": 569.5232539329146,
+          "sd": 4.9475849187066725
+        },
+        "macro_mean_reward": {
+          "mean": -0.3594759232260121,
+          "sd": 0.019865721108223985
+        },
+        "low_mean_reward": {
+          "mean": -0.08126280027297741,
+          "sd": 0.0201418318326408
+        },
+        "thermal_warning_fraction": {
+          "mean": 0.0,
+          "sd": 0.0
+        },
+        "bess_aging_x1e4": {
+          "mean": 18.156916581657235,
+          "sd": 1.9685079360713753
+        }
+      },
+      "mean_committed_mw": 4.999999999999285,
+      "mean_cash_26h_usd": -58784.119361672994,
+      "mean_observed_battery_throughput_mwh": 32.202496502650476,
+      "service_end_soc_min": 0.16875525764257351
+    }
+  ],
+  "cases": [
+    {
+      "policy": "rule_macro+none",
+      "seed": 100,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 2792.3283426536127,
+        "regulation_revenue_usd": 4309.582948700667,
+        "macro_mean_reward": -0.6166723432920073,
+        "low_mean_reward": -0.3788509641645936,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 2792.3283426536127,
+        "regulation_revenue_usd": 4309.582948700667,
+        "macro_mean_reward": -0.6166723432920073,
+        "low_mean_reward": -0.3788509641645936,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.5,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.468750004655115,
+      "observed_cash_usd": -54768.23730188548,
+      "closed_26h_cash_usd": -54768.237301885805,
+      "battery_throughput_mwh": 0.0,
+      "episode_sha256": "dc042d4db7bf5dea505680c8d672977379e0a5e7b432470a5ef4a69c70ca4451",
+      "episode_path": "cases/rule_macro__none/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 101,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 2580.20948593354,
+        "regulation_revenue_usd": 4771.847678216825,
+        "macro_mean_reward": -0.569242636332805,
+        "low_mean_reward": -0.33623651480451805,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 2580.20948593354,
+        "regulation_revenue_usd": 4771.847678216825,
+        "macro_mean_reward": -0.569242636332805,
+        "low_mean_reward": -0.33623651480451805,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.5,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.687500005586408,
+      "observed_cash_usd": -54305.97257236932,
+      "closed_26h_cash_usd": -54305.97257236965,
+      "battery_throughput_mwh": 0.0,
+      "episode_sha256": "3f55e80045c5d77904be207c787759a6ab69c5189346ff48beddb9515a949a55",
+      "episode_path": "cases/rule_macro__none/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 102,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 2318.592941391008,
+        "regulation_revenue_usd": 4409.630571560603,
+        "macro_mean_reward": -0.5567019219815522,
+        "low_mean_reward": -0.3199227055922628,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 2318.592941391008,
+        "regulation_revenue_usd": 4409.630571560603,
+        "macro_mean_reward": -0.5567019219815522,
+        "low_mean_reward": -0.3199227055922628,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.5,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.385416673184439,
+      "observed_cash_usd": -54668.18967902555,
+      "closed_26h_cash_usd": -54668.18967902587,
+      "battery_throughput_mwh": 0.0,
+      "episode_sha256": "acf96f2c9b81b0d426bc35a286fe4d7ebfc9a3638c9070781a8984c594446dd8",
+      "episode_path": "cases/rule_macro__none/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 103,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 2730.973833332141,
+        "regulation_revenue_usd": 5000.904716099247,
+        "macro_mean_reward": -0.5599823005325385,
+        "low_mean_reward": -0.3293621898155267,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 2730.973833332141,
+        "regulation_revenue_usd": 5000.904716099247,
+        "macro_mean_reward": -0.5599823005325385,
+        "low_mean_reward": -0.3293621898155267,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.5,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.01041667318435,
+      "observed_cash_usd": -54076.9155344869,
+      "closed_26h_cash_usd": -54076.91553448723,
+      "battery_throughput_mwh": 0.0,
+      "episode_sha256": "7c328ddddbe965180a3f5f89f63c598a1061d4bfd8912f304eb1faaa8d159086",
+      "episode_path": "cases/rule_macro__none/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 104,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 2675.4108100438666,
+        "regulation_revenue_usd": 4566.071092747192,
+        "macro_mean_reward": -0.5746793071638753,
+        "low_mean_reward": -0.3395296795369462,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 2675.4108100438666,
+        "regulation_revenue_usd": 4566.071092747192,
+        "macro_mean_reward": -0.5746793071638753,
+        "low_mean_reward": -0.3395296795369462,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 0.0
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.5,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.000000005586362,
+      "observed_cash_usd": -54511.74915783895,
+      "closed_26h_cash_usd": -54511.74915783928,
+      "battery_throughput_mwh": 0.0,
+      "episode_sha256": "6ecfa981a41bcbba0eb0612df00efdb6ad12559a8a797a02f056127c38a38425",
+      "episode_path": "cases/rule_macro__none/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 100,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 18260.8930283433,
+        "regulation_revenue_usd": 197.53684048424662,
+        "macro_mean_reward": -3.993648755510627,
+        "low_mean_reward": -3.748841974464442,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 40.02034886380894
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 18260.8930283433,
+        "regulation_revenue_usd": 197.53684048424662,
+        "macro_mean_reward": -3.993648755510627,
+        "low_mean_reward": -3.748841974464442,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 40.02034886380894
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.39710192633347047,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.468750004655115,
+      "observed_cash_usd": -52042.56657276917,
+      "closed_26h_cash_usd": -52042.56657276915,
+      "battery_throughput_mwh": 61.62324653016675,
+      "episode_sha256": "5c19ef237d42487dc1e5080c82a665df825b5950fe60dc196189d1a6f1d78f2f",
+      "episode_path": "cases/rule_macro__random/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 101,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 18631.576704796676,
+        "regulation_revenue_usd": 149.10668216844056,
+        "macro_mean_reward": -3.9554304627761883,
+        "low_mean_reward": -3.710565037517883,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 40.12450195415104
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 18631.576704796676,
+        "regulation_revenue_usd": 149.10668216844056,
+        "macro_mean_reward": -3.9554304627761883,
+        "low_mean_reward": -3.710565037517883,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 40.12450195415104
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.33865742663173837,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.687500005586408,
+      "observed_cash_usd": -52030.724449294,
+      "closed_26h_cash_usd": -52030.72444929378,
+      "battery_throughput_mwh": 62.684251795741396,
+      "episode_sha256": "544007c919452fe1b70ea1deb4f7694fa4d2d8d1d5d0c404e6896ceeceeeb5c3",
+      "episode_path": "cases/rule_macro__random/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 102,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 18362.216884795154,
+        "regulation_revenue_usd": 148.1241420874726,
+        "macro_mean_reward": -4.050309405120118,
+        "low_mean_reward": -3.806045442443525,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 39.830065355611566
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 18362.216884795154,
+        "regulation_revenue_usd": 148.1241420874726,
+        "macro_mean_reward": -4.050309405120118,
+        "low_mean_reward": -3.806045442443525,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 39.830065355611566
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.32057612632383653,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.385416673184439,
+      "observed_cash_usd": -51922.08417111848,
+      "closed_26h_cash_usd": -51922.0841711186,
+      "battery_throughput_mwh": 62.5225471035829,
+      "episode_sha256": "2fe266adae68c138a079d7c0e41efcf84d603f82e76906924cdb850fb8f0d993",
+      "episode_path": "cases/rule_macro__random/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 103,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 18460.89000791433,
+        "regulation_revenue_usd": 140.71396918140127,
+        "macro_mean_reward": -3.7855278743608083,
+        "low_mean_reward": -3.541100480355551,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 40.035650648792846
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 18460.89000791433,
+        "regulation_revenue_usd": 140.71396918140127,
+        "macro_mean_reward": -3.7855278743608083,
+        "low_mean_reward": -3.541100480355551,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 40.035650648792846
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.3681672182493005,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.01041667318435,
+      "observed_cash_usd": -51925.45326928118,
+      "closed_26h_cash_usd": -51925.45326928127,
+      "battery_throughput_mwh": 62.094118264910676,
+      "episode_sha256": "3b2c5995ed49412275495b7935f4dbda1000e67f5f65d686ab41bceaa0c7bee6",
+      "episode_path": "cases/rule_macro__random/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 104,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 18059.403877066103,
+        "regulation_revenue_usd": 235.86352086200685,
+        "macro_mean_reward": -3.7468084749490704,
+        "low_mean_reward": -3.5024000899005476,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 39.961470265881275
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 18059.403877066103,
+        "regulation_revenue_usd": 235.86352086200685,
+        "macro_mean_reward": -3.7468084749490704,
+        "low_mean_reward": -3.5024000899005476,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 39.961470265881275
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.3368675512651886,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.000000005586362,
+      "observed_cash_usd": -52030.48794079802,
+      "closed_26h_cash_usd": -52030.48794079813,
+      "battery_throughput_mwh": 62.46741567051479,
+      "episode_sha256": "5f147f288635384b8873885bfd272a8a52313377174013a176f72f34b5f9787b",
+      "episode_path": "cases/rule_macro__random/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 100,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 1270.6645359253184,
+        "regulation_revenue_usd": 5171.67441994985,
+        "macro_mean_reward": -0.4413344105828516,
+        "low_mean_reward": -0.21252202208707693,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 49.49321131901078
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 1270.6645359253184,
+        "regulation_revenue_usd": 5171.67441994985,
+        "macro_mean_reward": -0.4413344105828516,
+        "low_mean_reward": -0.21252202208707693,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 49.49321131901078
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.8290860001915565,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.468750004655115,
+      "observed_cash_usd": -53766.592294457034,
+      "closed_26h_cash_usd": -53766.59229445715,
+      "battery_throughput_mwh": 79.02184705884845,
+      "episode_sha256": "0d1300f12fd63a2ac638934433386129077b39114a937431755f2a4b3fcabade",
+      "episode_path": "cases/rule_macro__bang_bang/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 101,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 1204.7675224246552,
+        "regulation_revenue_usd": 5540.104868190717,
+        "macro_mean_reward": -0.34080395779986183,
+        "low_mean_reward": -0.11499937257753132,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 51.04474686556043
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 1204.7675224246552,
+        "regulation_revenue_usd": 5540.104868190717,
+        "macro_mean_reward": -0.34080395779986183,
+        "low_mean_reward": -0.11499937257753132,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 51.04474686556043
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.9098973381468223,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.687500005586408,
+      "observed_cash_usd": -53524.8714214281,
+      "closed_26h_cash_usd": -53524.871421427975,
+      "battery_throughput_mwh": 82.52221421069514,
+      "episode_sha256": "43bfbfbb3406eb3f2c0817cd6a3945c6f6293ed835f0d2a48ea1acd8a41a0c81",
+      "episode_path": "cases/rule_macro__bang_bang/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 102,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 993.5642944388701,
+        "regulation_revenue_usd": 5137.886495453316,
+        "macro_mean_reward": -0.34126127349467045,
+        "low_mean_reward": -0.11187440308231276,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 57.258127319921506
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 993.5642944388701,
+        "regulation_revenue_usd": 5137.886495453316,
+        "macro_mean_reward": -0.34126127349467045,
+        "low_mean_reward": -0.11187440308231276,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 57.258127319921506
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.5513391402267733,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.385416673184439,
+      "observed_cash_usd": -53956.315399243686,
+      "closed_26h_cash_usd": -53956.315399243445,
+      "battery_throughput_mwh": 86.6334864110736,
+      "episode_sha256": "d5101bf4eeed111222b20c27916ec65ce2be6e8afd7eb58eee834372c6dc07f3",
+      "episode_path": "cases/rule_macro__bang_bang/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 103,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 752.2963310375369,
+        "regulation_revenue_usd": 5958.471976222423,
+        "macro_mean_reward": -0.2804990121099266,
+        "low_mean_reward": -0.05861007293652507,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 61.23574443910943
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 752.2963310375369,
+        "regulation_revenue_usd": 5958.471976222423,
+        "macro_mean_reward": -0.2804990121099266,
+        "low_mean_reward": -0.05861007293652507,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 61.23574443910943
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.6492491826943828,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.01041667318435,
+      "observed_cash_usd": -53297.41085544988,
+      "closed_26h_cash_usd": -53297.410855450034,
+      "battery_throughput_mwh": 94.02303737716153,
+      "episode_sha256": "83720b98038d0414fa650f67b46dcef5a9d9052cedabe932b4eda91cc998af87",
+      "episode_path": "cases/rule_macro__bang_bang/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 104,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 772.1454011978475,
+        "regulation_revenue_usd": 5442.016046538877,
+        "macro_mean_reward": -0.32262858209101014,
+        "low_mean_reward": -0.09764943019174,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 57.64719788529157
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 772.1454011978475,
+        "regulation_revenue_usd": 5442.016046538877,
+        "macro_mean_reward": -0.32262858209101014,
+        "low_mean_reward": -0.09764943019174,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 57.64719788529157
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.3856688062530514,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.000000005586362,
+      "observed_cash_usd": -53484.54614219104,
+      "closed_26h_cash_usd": -53484.54614219099,
+      "battery_throughput_mwh": 88.24050508259664,
+      "episode_sha256": "ac3549b1ebb2d1f726a4230c0ca705a4e2c56c615d109006a58281ddf9b74462",
+      "episode_path": "cases/rule_macro__bang_bang/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 100,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 926.4191100117215,
+        "regulation_revenue_usd": 5170.31805850507,
+        "macro_mean_reward": -0.29833155881383516,
+        "low_mean_reward": -0.06829339855666704,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 30.45334328267832
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 926.4191100117215,
+        "regulation_revenue_usd": 5170.31805850507,
+        "macro_mean_reward": -0.29833155881383516,
+        "low_mean_reward": -0.06829339855666704,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 30.45334328267832
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.8603855003487588,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.468750004655115,
+      "observed_cash_usd": -53987.96379067279,
+      "closed_26h_cash_usd": -53987.96379067286,
+      "battery_throughput_mwh": 50.916474171605,
+      "episode_sha256": "30445809bc18929282ce517e50dbd74a0ab67e4218c73c131a91b683f3a71152",
+      "episode_path": "cases/rule_macro__rule_based/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 101,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 244.63112874198896,
+        "regulation_revenue_usd": 5717.1535622379015,
+        "macro_mean_reward": -0.22393192951679475,
+        "low_mean_reward": 0.001507458961628287,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 21.24775248666233
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 244.63112874198896,
+        "regulation_revenue_usd": 5717.1535622379015,
+        "macro_mean_reward": -0.22393192951679475,
+        "low_mean_reward": 0.001507458961628287,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 21.24775248666233
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.898389949136165,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.687500005586408,
+      "observed_cash_usd": -53636.33227699422,
+      "closed_26h_cash_usd": -53636.3322769941,
+      "battery_throughput_mwh": 37.65972577899955,
+      "episode_sha256": "c899680a7bd74ea9b68828bf62ac5f4f9be655ce66c5abd31944900dcd11200d",
+      "episode_path": "cases/rule_macro__rule_based/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 102,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 568.0818207795576,
+        "regulation_revenue_usd": 5196.173043332315,
+        "macro_mean_reward": -0.2540297317288616,
+        "low_mean_reward": -0.02519790107324873,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 27.311921987371242
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 568.0818207795576,
+        "regulation_revenue_usd": 5196.173043332315,
+        "macro_mean_reward": -0.2540297317288616,
+        "low_mean_reward": -0.02519790107324873,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 27.311921987371242
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.46467624187101675,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.385416673184439,
+      "observed_cash_usd": -53944.13900834365,
+      "closed_26h_cash_usd": -53944.13900834383,
+      "battery_throughput_mwh": 41.51462791420024,
+      "episode_sha256": "eb200838dae417b12cbfb094005e6c306baafdff2a8447945cdee2eca63e8f67",
+      "episode_path": "cases/rule_macro__rule_based/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 103,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 500.27919280825535,
+        "regulation_revenue_usd": 6014.88385772016,
+        "macro_mean_reward": -0.22517341200380903,
+        "low_mean_reward": -0.004158268840726512,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 27.926283825533304
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 500.27919280825535,
+        "regulation_revenue_usd": 6014.88385772016,
+        "macro_mean_reward": -0.22517341200380903,
+        "low_mean_reward": -0.004158268840726512,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 27.926283825533304
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.7231896544028621,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.01041667318435,
+      "observed_cash_usd": -53155.905548456336,
+      "closed_26h_cash_usd": -53155.90554845654,
+      "battery_throughput_mwh": 45.133302408943166,
+      "episode_sha256": "afa1f73f7dccac1a668bf4ccf75612a3c8702b973487e03ad166fd4fd54e5c80",
+      "episode_path": "cases/rule_macro__rule_based/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 104,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 784.0676271145545,
+        "regulation_revenue_usd": 5368.847535778994,
+        "macro_mean_reward": -0.28481701241751206,
+        "low_mean_reward": -0.05822400196966544,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 30.065280964889645
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 784.0676271145545,
+        "regulation_revenue_usd": 5368.847535778994,
+        "macro_mean_reward": -0.28481701241751206,
+        "low_mean_reward": -0.05822400196966544,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 30.065280964889645
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.40743927249973066,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.000000005586362,
+      "observed_cash_usd": -53711.77344915131,
+      "closed_26h_cash_usd": -53711.77344915098,
+      "battery_throughput_mwh": 46.5306265146394,
+      "episode_sha256": "46217e7eaa13a0d1b33ab154cccc4c68beab3d32c9c55cd83fdd98e1f11336e5",
+      "episode_path": "cases/rule_macro__rule_based/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 100,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 503.06286587136105,
+        "regulation_revenue_usd": 5294.950269871374,
+        "macro_mean_reward": -0.25518254542962004,
+        "low_mean_reward": -0.02738162357097857,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 26.84954837560386
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 503.06286587136105,
+        "regulation_revenue_usd": 5294.950269871374,
+        "macro_mean_reward": -0.25518254542962004,
+        "low_mean_reward": -0.02738162357097857,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 26.84954837560386
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.7632235808624097,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.468750004655115,
+      "observed_cash_usd": -53722.56325651698,
+      "closed_26h_cash_usd": -53722.56325651725,
+      "battery_throughput_mwh": 44.09980299182683,
+      "episode_sha256": "ea7efefe1ef6550a8715a6be09c6dc46f08f20d28e66c40e56352fe14b4a15c1",
+      "episode_path": "cases/rule_macro__pid/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 101,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 611.8143120752055,
+        "regulation_revenue_usd": 5667.247710371055,
+        "macro_mean_reward": -0.2463916444882257,
+        "low_mean_reward": -0.021081266976153725,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 23.98669505357422
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 611.8143120752055,
+        "regulation_revenue_usd": 5667.247710371055,
+        "macro_mean_reward": -0.2463916444882257,
+        "low_mean_reward": -0.021081266976153725,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 23.98669505357422
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.9299256018117839,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.687500005586408,
+      "observed_cash_usd": -53548.898220100586,
+      "closed_26h_cash_usd": -53548.898220100215,
+      "battery_throughput_mwh": 42.22574990330827,
+      "episode_sha256": "bfc83ed17bc70aeece42e9cd8abaf914d35dcf9a35f266c573c9911890d1c8df",
+      "episode_path": "cases/rule_macro__pid/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 102,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 322.1732265106347,
+        "regulation_revenue_usd": 5257.49416355603,
+        "macro_mean_reward": -0.21719650865530035,
+        "low_mean_reward": 0.010481595772569801,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 26.28586190560244
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 322.1732265106347,
+        "regulation_revenue_usd": 5257.49416355603,
+        "macro_mean_reward": -0.21719650865530035,
+        "low_mean_reward": 0.010481595772569801,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 26.28586190560244
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.3267521519688796,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.385416673184439,
+      "observed_cash_usd": -53843.730854348454,
+      "closed_26h_cash_usd": -53843.730854348214,
+      "battery_throughput_mwh": 42.11061745075986,
+      "episode_sha256": "ff90043d3f12c957161d272324bab1cb6a422be80ae8c8a49c558e2523ed293e",
+      "episode_path": "cases/rule_macro__pid/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 103,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 26.37363836612194,
+        "regulation_revenue_usd": 6091.016829212846,
+        "macro_mean_reward": -0.1975432847921497,
+        "low_mean_reward": 0.022238482757680648,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 29.692283858504926
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 26.37363836612194,
+        "regulation_revenue_usd": 6091.016829212846,
+        "macro_mean_reward": -0.1975432847921497,
+        "low_mean_reward": 0.022238482757680648,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 29.692283858504926
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.6101569496668507,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.01041667318435,
+      "observed_cash_usd": -53041.22751450518,
+      "closed_26h_cash_usd": -53041.22751450546,
+      "battery_throughput_mwh": 46.13967582572219,
+      "episode_sha256": "ae6cdd85a3169e3bed0b6ed2ae30f6ceb47a8c3c8570ff856fcc446d94a087a9",
+      "episode_path": "cases/rule_macro__pid/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 104,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 510.2854761240313,
+        "regulation_revenue_usd": 5496.8035300277825,
+        "macro_mean_reward": -0.2531668731768367,
+        "low_mean_reward": -0.028817239261643573,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 26.143738002713988
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 510.2854761240313,
+        "regulation_revenue_usd": 5496.8035300277825,
+        "macro_mean_reward": -0.2531668731768367,
+        "low_mean_reward": -0.028817239261643573,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 26.143738002713988
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.23835798304487466,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.000000005586362,
+      "observed_cash_usd": -53482.30200688142,
+      "closed_26h_cash_usd": -53482.30200688158,
+      "battery_throughput_mwh": 43.26628334720577,
+      "episode_sha256": "16d4c5f94cee46181d374c4a09fa00f642b4e9960ad84505e060d08acefb68fc",
+      "episode_path": "cases/rule_macro__pid/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 100,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 288.95715149491923,
+        "regulation_revenue_usd": 5281.92078050224,
+        "macro_mean_reward": -0.25112859933221937,
+        "low_mean_reward": -0.023537808814474766,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 30.9701289791201
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 288.95715149491923,
+        "regulation_revenue_usd": 5281.92078050224,
+        "macro_mean_reward": -0.25112859933221937,
+        "low_mean_reward": -0.023537808814474766,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 30.9701289791201
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.2963141118100546,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.468750004655115,
+      "observed_cash_usd": -53865.82214820725,
+      "closed_26h_cash_usd": -53865.822148207335,
+      "battery_throughput_mwh": 49.6083154680673,
+      "episode_sha256": "d48ccb350a7104dfd91a6d1fe371bc7d8a9f0c2db8c46131ace8af8370c9685b",
+      "episode_path": "cases/rule_macro__sac/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 101,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 297.0716887535292,
+        "regulation_revenue_usd": 5680.282845148211,
+        "macro_mean_reward": -0.24476992521247373,
+        "low_mean_reward": -0.018760851685895072,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 28.30678414553404
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 297.0716887535292,
+        "regulation_revenue_usd": 5680.282845148211,
+        "macro_mean_reward": -0.24476992521247373,
+        "low_mean_reward": -0.018760851685895072,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 28.30678414553404
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.3310772977704928,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.687500005586408,
+      "observed_cash_usd": -53945.156804161204,
+      "closed_26h_cash_usd": -53945.156804161335,
+      "battery_throughput_mwh": 45.07503417465422,
+      "episode_sha256": "d2a7c3cd10c9c18b9e672e648fa03e88740baa138ae9bb146c74f41dedaac4a0",
+      "episode_path": "cases/rule_macro__sac/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 102,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 235.9571386921335,
+        "regulation_revenue_usd": 5223.641095168408,
+        "macro_mean_reward": -0.24532831867262614,
+        "low_mean_reward": -0.017405949031794005,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 31.442488386177743
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 235.9571386921335,
+        "regulation_revenue_usd": 5223.641095168408,
+        "macro_mean_reward": -0.24532831867262614,
+        "low_mean_reward": -0.017405949031794005,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 31.442488386177743
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.3428687715270135,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 10.385416673184439,
+      "observed_cash_usd": -53850.68045337528,
+      "closed_26h_cash_usd": -53850.68045337536,
+      "battery_throughput_mwh": 49.59603162097307,
+      "episode_sha256": "9a007775fe0be92d54f30011075b7e8957736b7e872afe6ab04fa29ff67e4f60",
+      "episode_path": "cases/rule_macro__sac/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 103,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 238.1900211306495,
+        "regulation_revenue_usd": 6019.106882982664,
+        "macro_mean_reward": -0.23521564397845282,
+        "low_mean_reward": -0.01455282993344193,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 28.539016916795877
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 238.1900211306495,
+        "regulation_revenue_usd": 6019.106882982664,
+        "macro_mean_reward": -0.23521564397845282,
+        "low_mean_reward": -0.01455282993344193,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 28.539016916795877
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.4987328795262083,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.01041667318435,
+      "observed_cash_usd": -53184.757878350276,
+      "closed_26h_cash_usd": -53184.75787834996,
+      "battery_throughput_mwh": 42.82813630956743,
+      "episode_sha256": "496301b7e93e53695949dc656b868740237e1b0fd52733af766613ea0877d29d",
+      "episode_path": "cases/rule_macro__sac/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 104,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 303.03312059453157,
+        "regulation_revenue_usd": 5463.854075628476,
+        "macro_mean_reward": -0.2447044040311188,
+        "low_mean_reward": -0.020181515049724565,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 30.480588871847626
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 303.03312059453157,
+        "regulation_revenue_usd": 5463.854075628476,
+        "macro_mean_reward": -0.2447044040311188,
+        "low_mean_reward": -0.020181515049724565,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 30.480588871847626
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.3360023603296375,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 11.000000005586362,
+      "observed_cash_usd": -53440.74757374476,
+      "closed_26h_cash_usd": -53440.74757374506,
+      "battery_throughput_mwh": 48.25948877218698,
+      "episode_sha256": "ea2162d83a5c46dceddaf9b0ece4903c9a0381a9b377491319348f09c498369f",
+      "episode_path": "cases/rule_macro__sac/seed_104/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 100,
+      "complete_service": true,
+      "qualified": false,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": false,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 406.1574438252443,
+        "regulation_revenue_usd": 566.3972875749648,
+        "macro_mean_reward": -0.3704862516616618,
+        "low_mean_reward": -0.09219897755747916,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 17.961198140358583
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 406.1574438252443,
+        "regulation_revenue_usd": 566.3972875749648,
+        "macro_mean_reward": -0.3704862516616618,
+        "low_mean_reward": -0.09219897755747916,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 17.961198140358583
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.16875525764257351,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 4.999999999999285,
+      "observed_cash_usd": -58796.91334810388,
+      "closed_26h_cash_usd": -58796.913348104164,
+      "battery_throughput_mwh": 32.07077465538867,
+      "episode_sha256": "78eceb6ce8531085954a3d8ff2832cf85f79e9e67e9ce651aae7d90b52691a5b",
+      "episode_path": "cases/sac_macro__sac/seed_100/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 101,
+      "complete_service": true,
+      "qualified": false,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": false,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 270.5114165407568,
+        "regulation_revenue_usd": 574.7207065023449,
+        "macro_mean_reward": -0.3400746190121478,
+        "low_mean_reward": -0.06102460656606347,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 20.918202810788635
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 270.5114165407568,
+        "regulation_revenue_usd": 574.7207065023449,
+        "macro_mean_reward": -0.3400746190121478,
+        "low_mean_reward": -0.06102460656606347,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 20.918202810788635
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.17290741524632877,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 4.999999999999285,
+      "observed_cash_usd": -58959.141298592636,
+      "closed_26h_cash_usd": -58959.14129859282,
+      "battery_throughput_mwh": 36.44194278634103,
+      "episode_sha256": "58bb96311236f9c4c1fbf9e8b3dfdc164ae9eb0acb63b38b8aa5e3edfc40cb67",
+      "episode_path": "cases/sac_macro__sac/seed_101/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 102,
+      "complete_service": true,
+      "qualified": false,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": false,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 383.09591170730494,
+        "regulation_revenue_usd": 567.0045718721418,
+        "macro_mean_reward": -0.3647804561263716,
+        "low_mean_reward": -0.08674504528471619,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 16.22744274486538
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 383.09591170730494,
+        "regulation_revenue_usd": 567.0045718721418,
+        "macro_mean_reward": -0.3647804561263716,
+        "low_mean_reward": -0.08674504528471619,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 16.22744274486538
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.17671323640345682,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 4.999999999999285,
+      "observed_cash_usd": -58743.83866952025,
+      "closed_26h_cash_usd": -58743.83866952019,
+      "battery_throughput_mwh": 29.346831402670944,
+      "episode_sha256": "849dbf469ef2394ee71638fab1bc5caa304301f0387007b98c7db02dcc8bd06f",
+      "episode_path": "cases/sac_macro__sac/seed_102/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 103,
+      "complete_service": true,
+      "qualified": true,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": true,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 304.65175308672264,
+        "regulation_revenue_usd": 574.9758792930247,
+        "macro_mean_reward": -0.33812756947854156,
+        "low_mean_reward": -0.06019183783255077,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 19.237424143133673
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 304.65175308672264,
+        "regulation_revenue_usd": 574.9758792930247,
+        "macro_mean_reward": -0.33812756947854156,
+        "low_mean_reward": -0.06019183783255077,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 19.237424143133673
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.20683694380209844,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 4.999999999999285,
+      "observed_cash_usd": -58727.633314759834,
+      "closed_26h_cash_usd": -58727.633314759754,
+      "battery_throughput_mwh": 33.39508644314333,
+      "episode_sha256": "43f341a6a53589a3c8439a61144c70781943b503e40165cb086b4e7e7a8807e9",
+      "episode_path": "cases/sac_macro__sac/seed_103/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 104,
+      "complete_service": true,
+      "qualified": false,
+      "checks": {
+        "physical_completion": true,
+        "service_end_soc": false,
+        "service_end_backlog": true,
+        "thermal_warning_fraction": true,
+        "work_conservation": true
+      },
+      "recovery_closed": true,
+      "metrics": {
+        "tracking_rmse_kw": 426.20429400197304,
+        "regulation_revenue_usd": 564.5178244220965,
+        "macro_mean_reward": -0.3839107198513377,
+        "low_mean_reward": -0.10615353412407752,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 16.440315069139892
+      },
+      "observed_prefix_metrics": {
+        "tracking_rmse_kw": 426.20429400197304,
+        "regulation_revenue_usd": 564.5178244220965,
+        "macro_mean_reward": -0.3839107198513377,
+        "low_mean_reward": -0.10615353412407752,
+        "thermal_warning_fraction": 0.0,
+        "bess_aging_x1e4": 16.440315069139892
+      },
+      "fast_ticks": 17280,
+      "recovery_ticks": 1440,
+      "service_end_soc": 0.1707948826432722,
+      "service_end_backlog_kwh": 0.0,
+      "mean_committed_mw": 4.999999999999285,
+      "observed_cash_usd": -58693.070177388065,
+      "closed_26h_cash_usd": -58693.070177388036,
+      "battery_throughput_mwh": 29.75784722570838,
+      "episode_sha256": "5b297e14a412c9e87e78895c8c164832a55411262d98bd127a37ca7ffbebb3c4",
+      "episode_path": "cases/sac_macro__sac/seed_104/episode.json"
+    }
+  ],
+  "raw_audit": {
+    "scalar_checks": 8366075,
+    "trace_files": 105,
+    "trace_bytes": 245073532,
+    "exogenous_fields": [
+      "regd_signal",
+      "grid_load_mw",
+      "lmp",
+      "T_amb",
+      "work_arrived_kwh",
+      "p_flex_nom_kw",
+      "p_reference_mw",
+      "reference_temp_A",
+      "reference_temp_B"
+    ],
+    "endogenous_frequency_not_in_pairing": true,
+    "implementation_sha256": "af45fc4797ad1a371a3f861cebae1d169ac811d231c885cdcba509cb859aae47"
+  }
+}

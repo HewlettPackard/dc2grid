@@ -1,0 +1,1220 @@
+{
+  "schema_version": 1,
+  "audit_date_utc": "2026-11-02",
+  "scope": "Read-only high-level/market reward and timing audit. Findings are bounded to the three requested implementation files, directly coupled tests, configuration, and low-level observation/clock/PCC interface contracts.",
+  "repository": "/workspace/IBM/temp/dc2grid-repos/dc2grid",
+  "revisions": {
+    "original": "7550013331a865fa45684cb7cd973279312d4678",
+    "corrected": "5c7e057caf686853934a19f5c56e848dbc96ae68",
+    "current": "34e015461a4c7e6a4fc1df8b61a72af92fc2db7a"
+  },
+  "line_convention": "All source and test line ranges are 1-based inclusive. Corrected references also apply verbatim to current for the three scoped implementation files.",
+  "source_identity": [
+    {
+      "file": "c2g_env/env_high_level.py",
+      "original_blob": "8017c83cfccfa1d3fa738334a5e337896969c65a",
+      "corrected_and_current_blob": "8cdbee7d38e3c2013bd60aeeb45dfcaeb390fecf",
+      "original_lines": 662,
+      "corrected_and_current_lines": 728
+    },
+    {
+      "file": "c2g_env/physics/macro_grid.py",
+      "original_blob": "8bf27cb10fbcbea8166f83bc688c54c19ac90b74",
+      "corrected_and_current_blob": "27b1168e80912e2cc80669af04ea0f0e88ba13a4",
+      "original_lines": 681,
+      "corrected_and_current_lines": 734
+    },
+    {
+      "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+      "original_blob": "3040b41578338641950ac0866423a376f8ffcb7d",
+      "corrected_and_current_blob": "4a0c3738398d06c417a4cff8775ff0e182e831e3",
+      "original_lines": 169,
+      "corrected_and_current_lines": 191
+    }
+  ],
+  "manuscript_alignment_refinement": {
+    "received_at_utc": "2026-11-02T23:02:33.495+00:00",
+    "provenance": "Parent agent's direct reading of camera_ready.tex only; this sub-audit did not independently read the manuscript or any attachment.",
+    "manuscript": "camera_ready.tex",
+    "reward_definition_lines": [388, 404],
+    "explicit_250mw_normalization_line": 401,
+    "published_electricity_penalty": "-lambda_elec * meanLMP * meanPfac_normalized_to_250MW * Delta_h / 1000",
+    "published_coefficients": {
+      "lambda_rev": 1.0,
+      "lambda_elec": 0.5,
+      "lambda_churn": 0.05
+    },
+    "original_normalized_product_of_means_matches_published_proxy": true,
+    "implementation_vs_paper_formula_divergence_for_M01_M02_M03": false,
+    "accounting_conclusion": "The original expression is dimensionally unsuitable as an actual-dollar electricity bill and is not metered PCC settlement. That criticism is conditional on interpreting or reporting it as actual electricity cost; it is not evidence that the implementation violated the manuscript's explicitly normalized facility-level proxy.",
+    "objective_change_conclusion": "Replacing the published proxy with sum(price * signed_PCC_import_MW * interval_hours) changes normalization, the facility-versus-PCC boundary, and within-window price-power aggregation. It materially changes the reward objective and scale, not merely implementation fidelity, even though the outer four-term structure and lambda values remain unchanged.",
+    "fixed_flag_interpretation_for_M01_M02_M03": "For these three findings, fixed=true means the mismatch with actual metered PCC-dollar accounting is resolved in physical_v1. It does not classify the published proxy or its faithful implementation as an implementation bug. Each finding explicitly records paper_fidelity_defect=false.",
+    "test_interpretation": "The source counterexamples remain valid quantitative comparisons of the two objectives. The physical_v1 settlement tests validate the new accounting contract, not a claim that the original code failed to implement the paper formula.",
+    "changes_in_this_refinement": "Report language and classification only; no code changes, new tests, experiments, or evaluation runs."
+  },
+  "important_causality_constraints": [
+    "The user states that every historical PID reproduction episode had 96 full macro windows. Thus partial-window duration settlement and dropped remainder ticks do not explain that reported MW difference. No historical PID reproduction was rerun here.",
+    "Electricity billing changes total macro reward and electricity_cost directly, but not the gross regulation_revenue formula for the same full-window rate, commitment, and performance. A revenue change through different learned actions or trajectories is indirect and was not measured here.",
+    "If the published normalized proxy is interpreted as an actual-dollar bill, its numeric value is 250-fold too small under default-scale, constant-price, unclipped, no-battery, full-window conditions, not universally 1000-fold too small. The normalization is explicitly specified in the manuscript, so this is not a code-versus-paper formula error. Different scales, covariance, battery exchange, clipping, and duration preclude a universal multiplier.",
+    "Source-level bugs, deterministic counterexamples, and passing regression tests do not identify their individual causal contributions to Table 1 or the PID-versus-SAC gap. No training, full evaluation, trainer/evaluation-driver inspection, or SB3 implementation audit was performed.",
+    "The findings below are not independent additive causal effects. M01-M03 describe three differences between the faithfully implemented published proxy and actual metered PCC-dollar accounting, not three implementation-versus-paper bugs.",
+    "Original and corrected macro rewards are not the same objective merely because their four-term layout and lambda coefficients agree. Table 1's original proxy reward and corrected physical_v1 reward require explicit objective/version disclosure rather than a like-for-like reward-improvement claim.",
+    "All fixes described as physical_v1-only are deliberately bypassed in legacy_v0 or, for MacroGridSignal, when timestamp_replay=False."
+  ],
+  "reward_equations": {
+    "notation": {
+      "n": "Number of executed low-level transitions in the macro window.",
+      "dt_s": "Fixed low-level timestep in seconds.",
+      "h0": "Original nominal settlement duration, 180 * dt_s / 3600 hours.",
+      "h": "Executed duration, n * dt_s / 3600 hours.",
+      "S": "Facility normalization scale in MW: _facility_cap_kw / 1000; default 250.",
+      "P_fac_i": "Facility draw in MW, excluding signed battery exchange.",
+      "B_i": "Actual battery power in MW; positive discharge reduces PCC imports.",
+      "P_pcc_i": "P_fac_i - B_i, supplied as p_grid_import_mw.",
+      "L_i": "Raw per-interval LMP in USD/MWh, not the clipped observation feature.",
+      "C": "Cleared commitment, or standing DR baseline on rejection, in MW.",
+      "e_bar": "Mean of the supplied tracking_err_kw values over executed substeps.",
+      "F": "Capacity-scaled macro tracking denominator floor supplied by FastEnv."
+    },
+    "original_electricity_cost": "h0 * mean(L_i) * mean(min(P_fac_i / S, 2))",
+    "original_electricity_cost_interpretation": "Code field name for the manuscript's normalized facility-level reward proxy, not an actual-dollar bill.",
+    "corrected_electricity_cost": "sum_i(L_i * P_pcc_i * duration_hours_i)",
+    "corrected_electricity_cost_interpretation": "Actual signed-PCC energy accounting in dollars under the simulator's single-LMP tariff; a materially redefined reward component relative to the published proxy.",
+    "performance_score_unchanged_formula": "max(0, 1 - e_bar / max(1000 * C, F))",
+    "original_regulation_revenue": "rate * C * performance_score * h0",
+    "corrected_regulation_revenue": "rate * C * performance_score * h",
+    "macro_reward_unchanged_structure": "lambda_rev * regulation_revenue / 1000 + mean(sub_rewards) - lambda_elec * electricity_cost / 1000 - lambda_churn * abs(bid_mw_norm - previous_bid_mw_norm)",
+    "default_coefficients_original_and_corrected": {
+      "lambda_rev": 1.0,
+      "lambda_elec": 0.5,
+      "lambda_churn": 0.05
+    },
+    "full_window_unclipped_decomposition": "For fixed equal-duration samples and h=h0: corrected_cost - S*original_cost = h*Cov(L,P_fac) - h*mean(L*B).",
+    "interpretation": "This is a mixed operational/economic reward, not net cash. Original normalized/product-of-means electricity arithmetic matches the paper's specified proxy; changing it to metered PCC dollars changes the objective and effective scale. Gross regulation_revenue includes the modeled standing-DR fallback. The performance formula uses mean tracking error, not the separately logged tracking RMSE. The floor and inner reward are external interfaces whose changed low-level meanings are outside this implementation audit."
+  },
+  "findings": [
+    {
+      "id": "M01",
+      "title": "Published normalized facility proxy is not an actual-dollar electricity bill",
+      "classification": "dimensional_accounting_inconsistency_if_published_proxy_is_reported_as_actual_cost",
+      "fixed": true,
+      "fixed_for": "Actual-dollar PCC accounting, not manuscript formula fidelity",
+      "paper_fidelity_defect": false,
+      "change_type": "Physical-accounting correction and material reward-objective/scale change",
+      "fix_scope": "physical_v1 replaces the published proxy with dollar-denominated PCC settlement; legacy formula retained",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [394, 396],
+          "excerpt": "electricity_cost = mean_lmp * mean_p_facility_norm * hours"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_low_level.py",
+          "function": "C2GFastEnv._build_obs",
+          "lines": [699, 718],
+          "excerpt": "min(elec[\"p_facility_mw\"] * 1_000.0 / self._facility_cap_kw, 2.0)",
+          "interface_only": true
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_low_level.py",
+          "function": "<module>",
+          "lines": [90, 90],
+          "excerpt": "_FACILITY_CAP_KW = 250_000.0",
+          "interface_only": true
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [427, 431],
+          "excerpt": "item[\"lmp\"] * item[\"p_grid_import_mw\"] * item[\"duration_hours\"]"
+        }
+      ],
+      "verified_counterexample": "100 MW facility, zero battery, $50/MWh, 180 five-second samples: original electricity_cost field is approximately 5 in normalized proxy units, not an actual $5 bill; corrected metered cost is $1250. At lambda_elec=0.5, reward_elec changes from approximately -0.0025 to -0.625. Exact source methods were executed against deterministic interface stubs; the numerical counterexample is unchanged.",
+      "test_refs": ["T_POSTED_SETTLEMENT"],
+      "expected_table1_impact": "The original Table 1 macro reward can faithfully report the published proxy objective. Its electricity term is much smaller than a dollar-cost term with the same lambda, so changing to metered cost materially changes high-level SAC's training target and reward scale; it is not a same-objective implementation repair. Full-window gross regulation revenue is unchanged when contract and performance are held fixed.",
+      "limits": "Factor 250 compares the proxy's numeric value with dollar accounting under the default scale, full duration, constant price/no covariance, no observation clipping, and zero battery exchange. It does not prove a paper-formula error or estimate the actual Table 1 reward change. Claims that the original field is actual USD remain dimensionally inconsistent."
+    },
+    {
+      "id": "M02",
+      "title": "Published facility-level proxy differs from signed-PCC electricity accounting",
+      "classification": "published_facility_proxy_to_pcc_objective_boundary_change",
+      "fixed": true,
+      "fixed_for": "Actual PCC electricity accounting, not manuscript formula fidelity",
+      "paper_fidelity_defect": false,
+      "change_type": "Physical-accounting correction if actual PCC cost is intended; otherwise a deliberate reward-boundary change",
+      "fix_scope": "physical_v1 uses signed PCC imports instead of the published facility-only proxy",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [394, 396],
+          "excerpt": "mean_p_facility_norm = float(np.mean([o[5] for o in sub_obs_list]))"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [427, 431],
+          "excerpt": "item[\"lmp\"] * item[\"p_grid_import_mw\"] * item[\"duration_hours\"]"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_low_level.py",
+          "function": "C2GFastEnv.step",
+          "lines": [763, 763],
+          "excerpt": "p_grid_import_mw=elec[\"p_facility_mw\"] - bess_actual_kw / 1000.0",
+          "interface_only": true
+        }
+      ],
+      "verified_counterexample": "At constant 100 MW facility draw and $50/MWh for 15 minutes, corrected bills are $1000 for 20 MW discharge, $1250 for neutral battery, and $1500 for 20 MW charging. The original normalized proxy is approximately 5 for all three, not an actual $5 bill, because only facility_norm enters its explicitly specified expression.",
+      "test_refs": ["T_POSTED_SETTLEMENT", "T_PCC_INTERFACE"],
+      "expected_table1_impact": "The corrected objective adds sensitivity to battery charging/discharging at the PCC that the published facility-only proxy deliberately does not represent. This changes economic incentives as well as accounting scope; it is not evidence of an original implementation-versus-paper mismatch. Facility relief and PCC/battery relief remain distinct. The cost-component change alone does not alter frozen-policy full-window gross regulation_revenue.",
+      "limits": "Omission of battery exchange is an error only if the proxy is claimed to be an actual PCC bill. The corrected model bills signed net PCC energy at one LMP; it is not a separately validated import/export tariff model."
+    },
+    {
+      "id": "M03",
+      "title": "Published product-of-means proxy differs from interval price-power settlement",
+      "classification": "published_aggregation_proxy_to_metered_cost_objective_change",
+      "fixed": true,
+      "fixed_for": "Interval-priced electricity accounting, not manuscript formula fidelity",
+      "paper_fidelity_defect": false,
+      "change_type": "Replacement of a specified reward proxy with metered settlement, materially changing the objective",
+      "fix_scope": "physical_v1 sums interval price-power products instead of the published product of means",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [358, 361],
+          "excerpt": "mean_lmp = float(np.mean(lmps))"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [394, 396],
+          "excerpt": "electricity_cost = mean_lmp * mean_p_facility_norm * hours"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [427, 431],
+          "excerpt": "for item in sub_infos"
+        }
+      ],
+      "verified_counterexample": "Equal half-windows at (50 USD/MWh, 100 MW) and (100 USD/MWh, 200 MW), no battery: original normalized proxy is approximately 11.25. Converting its power scale to MW gives a product-of-means estimate of $2812.50, versus metered interval cost $3125. The $312.50 difference is h*Cov(price,power). These numerical source counterexamples remain unchanged.",
+      "test_refs": ["T_POSTED_SETTLEMENT"],
+      "expected_table1_impact": "The paper explicitly specifies the product of means, and the original code implements it. Replacing it with mean products changes the reward response to within-window scheduling, so this is an objective refinement rather than a paper-fidelity fix. If actual metered cost is the intended reporting quantity, denormalization alone is insufficient; covariance determines the remaining difference. Corrected settlement also avoids the observation's upper clipping.",
+      "limits": "No claim is made that Table 1 had the synthetic covariance used here. Omitting covariance is not an implementation bug relative to the published proxy; representing that proxy as exact metered expenditure would be inaccurate."
+    },
+    {
+      "id": "M04",
+      "title": "Early-terminated macro windows settled a full nominal duration",
+      "classification": "true_original_duration_bug",
+      "fixed": true,
+      "fix_scope": "physical_v1",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [345, 348],
+          "excerpt": "if term or trunc:"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [383, 396],
+          "excerpt": "hours = _SUBSTEPS * self._fast_env._dt / 3600.0"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [412, 431],
+          "excerpt": "settled_steps = len(sub_rewards) if self._physical else _SUBSTEPS"
+        }
+      ],
+      "equation": "For the same rate, commitment and executed-sample performance, old gross payment / corrected gross payment = 180/n. The original normalized electricity proxy also used nominal hours. Because it is not itself a dollar bill, duration effects must be separated from normalization and objective changes when comparing it with actual expenditure.",
+      "verified_counterexample": "One five-second step, rate 40, commitment 10 MW, performance 0.9: original gross revenue $90; corrected $0.50. Full 180-step windows pay $90 under both methods.",
+      "test_refs": ["T_POSTED_SETTLEMENT"],
+      "expected_table1_impact": "Can over-credit partially completed or failed windows and alter high-level training returns. It cannot change settlement for 96 fully executed 180-step windows.",
+      "historical_pid_causality": "Excluded as an explanation of the reported PID MW difference by the user's 96-full-window fact. Also not an explanation of a direct gross-revenue change in those same full windows."
+    },
+    {
+      "id": "M05",
+      "title": "Macro clock hardcoded 180 steps and floor-divided the episode horizon",
+      "classification": "true_original_timebase_and_tail_bug",
+      "fixed": true,
+      "fix_scope": "physical_v1; validated fixed-step clock contract",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "<module>",
+          "lines": [87, 88],
+          "excerpt": "_SUBSTEPS = 180"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.__init__",
+          "lines": [205, 207],
+          "excerpt": "int(self._gcfg[\"episode_ticks\"]) // _SUBSTEPS"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [302, 305],
+          "excerpt": "for sub in range(_SUBSTEPS):"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv.step",
+          "lines": [90, 92],
+          "excerpt": "if self._sub_tick > 0 and self._sub_tick % _SUBSTEPS == 0:"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.__init__",
+          "lines": [205, 223],
+          "excerpt": "math.ceil(int(self._gcfg[\"episode_ticks\"]) / self._substeps)"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [331, 334],
+          "excerpt": "for sub in range(self._substeps):"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_low_level.py",
+          "function": "C2GFastEnv.__init__",
+          "lines": [282, 282],
+          "excerpt": "self.macro_substeps = round(900 / self._dt) if self._physical else 180",
+          "interface_only": true
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv.step",
+          "lines": [105, 110],
+          "excerpt": "self._sub_tick % self._substeps == 0"
+        }
+      ],
+      "verified_examples": [
+        "Original horizon 361 ticks uses floor(361/180)=2 macro windows and truncates after 360 ticks; corrected test executes 180+180+1.",
+        "Bounded current-mode probe with dt=10s and episode_ticks=181: legacy performs 180 steps and ends after one 30-minute macro window, omitting one tick. physical_v1 performs 90+90+1, settling 0.25+0.25+1/360 hours."
+      ],
+      "test_refs": ["T_POSTED_SETTLEMENT", "T_WRAPPER_TIMING"],
+      "expected_table1_impact": "Supports consistent 15-minute decisions under nondefault valid dt and preserves final partial windows. The default 5-second, 17280-tick, 96-window configuration has neither a macro-length nor an integer-remainder error.",
+      "remaining": "The independent RegD generator's tick-calibrated window and AR parameters are not made dt-aware by this fix; see M13."
+    },
+    {
+      "id": "M06",
+      "title": "Agents bid before seeing the offer actually used to clear their bid",
+      "classification": "true_original_causal_observation_bug",
+      "fixed": true,
+      "fix_scope": "physical_v1",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.macro_obs_from_reset",
+          "lines": [583, 584],
+          "excerpt": "0.0,            # 17 rmcp_norm (no market signal yet)"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.run_handshake",
+          "lines": [622, 631],
+          "excerpt": "offer = grid.step_rmcp()"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [369, 378],
+          "excerpt": "rmcp_norm=rmcp_norm"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv._do_macro_handshake",
+          "lines": [104, 120],
+          "excerpt": "bid_action, _ = self._macro_ctrl.predict(macro_obs)"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.reset",
+          "lines": [252, 257],
+          "excerpt": "self._post_offer()"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [285, 295],
+          "excerpt": "offer=self._pending_offer if self._physical else None"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [444, 447],
+          "excerpt": "obs[17] = np.clip(self._last_rmcp_norm, 0, 5)"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.run_handshake",
+          "lines": [684, 690],
+          "excerpt": "if offer is None:"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv._do_macro_handshake",
+          "lines": [117, 139],
+          "excerpt": "offer = self.env._grid.step_rmcp() if self._physical else None"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.step_rmcp",
+          "lines": [493, 500],
+          "excerpt": "tick = max(0, self._tick - 1) if self._timestamp_replay else self._tick"
+        }
+      ],
+      "explanation": "Original reset advertises zero market signals. A subsequent returned macro observation carries the preceding window's offer, but run_handshake draws a fresh price after the next action is already selected. The wrapper likewise predicts before run_handshake posts. Corrected reset and nonterminal next-state observations contain the next pending offer; clearing consumes it without redrawing. Timestamp replay uses the prepared current/next action signal's tick rather than advancing to an unseen load row.",
+      "test_refs": ["T_POSTED_SETTLEMENT", "T_WRAPPER_TIMING"],
+      "expected_table1_impact": "High-level SAC and rule macro decisions now condition on the actual posted price/need. Bid acceptance, selected commitments, performance and gross revenue can change. This fixes environment observability, not an SB3 algorithm defect.",
+      "limits": "The pending-offer protocol assumes no unrelated code mutates the grid's market state between posting and clearing. No violation of that assumption in the normal audited paths was found."
+    },
+    {
+      "id": "M07",
+      "title": "Low-level actions at reset/window boundaries observed the old commitment",
+      "classification": "true_original_action_observation_timing_bug",
+      "fixed": true,
+      "fix_scope": "physical_v1",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [279, 305],
+          "excerpt": "inner_obs = sub_obs_list[-1] if sub_obs_list else self._last_hw_obs"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv.reset",
+          "lines": [72, 85],
+          "excerpt": "return obs, info"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv.step",
+          "lines": [87, 98],
+          "excerpt": "self._do_macro_handshake()"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [305, 308],
+          "excerpt": "self._last_hw_obs[17] = committed_mw / self._committed_max_mw"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv.reset",
+          "lines": [86, 92],
+          "excerpt": "obs[17] = self.env.committed_mw / self._committed_max_mw"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv.step",
+          "lines": [99, 111],
+          "excerpt": "if self._physical and not (terminated or truncated) and self._sub_tick % self._substeps == 0:"
+        }
+      ],
+      "explanation": "MacroEnv set the new commitment but fed the first inner action the cached previous observation. Wrapper.reset returned the pre-handshake observation. At later boundaries the original wrapper waited until step(action), after the caller had already chosen action, to change commitment. Corrected wrapper changes commitment at the end of the prior nonterminal boundary step and patches returned obs[17] before the next action can be selected.",
+      "verified_counterexample": "In the source-method stub test, the original first inner observation reports commitment_norm=0 despite the just-cleared 10/20=0.5 commitment. Corrected reports 0.5 before the first inner action.",
+      "test_refs": ["T_POSTED_SETTLEMENT", "T_WRAPPER_TIMING"],
+      "expected_table1_impact": "Removes one-transition stale commitment input at each changed macro contract. Any low-level policy/controller depending on that feature can be affected, including SAC. The size and sign of any Table 1 tracking or revenue effect require matched trajectories.",
+      "non_bug": "After a corrected wrapper boundary step, info still describes the interval just executed while the returned observation may contain the next interval's commitment. That transition alignment is intentional."
+    },
+    {
+      "id": "M08",
+      "title": "Rule wrapper fabricated its initial macro state and wrote load to the LMP index",
+      "classification": "true_original_reset_observation_bug",
+      "fixed": true,
+      "fix_scope": "physical_v1",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv._build_macro_obs",
+          "lines": [139, 152],
+          "excerpt": "inner_obs[7] = 0.5  # grid_load_norm (triggers mid-range bid)"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.macro_obs_from_reset",
+          "lines": [538, 585],
+          "excerpt": "inner_obs[8],   # grid_load_norm"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv.reset",
+          "lines": [74, 84],
+          "excerpt": "self._last_hw_obs = obs.copy()"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv._build_macro_obs",
+          "lines": [157, 176],
+          "excerpt": "inner_obs = self._last_hw_obs"
+        }
+      ],
+      "verified_counterexample": "For a real interface observation with SOC .65, LMP_norm .7, load_norm .8, the exact original wrapper builder outputs SOC 0, LMP_norm .5, load_norm 0, and market fields 0. Corrected outputs .65, .7, .8 and the posted market fields. Inner index 7 is LMP; load is index 8.",
+      "test_refs": ["T_WRAPPER_TIMING"],
+      "expected_table1_impact": "The initial rule-macro training-wrapper decision was based on a fabricated cold start rather than the actual scenario state. Corrected wrapper and MacroEnv paths now agree on tested streams.",
+      "limits": "This is specifically a RuleMacroWrappedEnv reset defect, not evidence that the original bare C2GMacroEnv reset fabricated all hardware features."
+    },
+    {
+      "id": "M09",
+      "title": "Rule wrapper ignored the wrapped environment's custom configuration path",
+      "classification": "true_original_configuration_bug",
+      "fixed": true,
+      "fix_scope": "Both modes; this assignment is not behind a physical_v1 guard",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv.__init__",
+          "lines": [48, 53],
+          "excerpt": "cfg_path = _CONFIG_PATH"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/train_envs/rule_macro_wrapped.py",
+          "function": "RuleMacroWrappedEnv.__init__",
+          "lines": [48, 53],
+          "excerpt": "cfg_path = env._config_path"
+        }
+      ],
+      "explanation": "Despite its comment promising the same configuration, the original wrapper always loaded the repository default handshake rmcp_max. A FastEnv created with a different rmcp_max could therefore be paired with inconsistent rule bid-price normalization.",
+      "test_refs": [],
+      "coverage_gap": "No dedicated custom-rmcp_max wrapper regression was found among the directly relevant tests inspected; the short-config tests retain the default RMCP scale. Fix is verified statically.",
+      "expected_table1_impact": "Conditional on use of a custom configuration with different handshake parameters. No effect is established for default-config Table 1 runs."
+    },
+    {
+      "id": "M10",
+      "title": "Source data rows were treated as simulation ticks instead of timestamped load samples",
+      "classification": "true_original_calendar_replay_bug",
+      "fixed": true,
+      "fix_scope": "physical_v1 passes timestamp_replay=True; legacy and standalone default retain row replay",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal._load_zone",
+          "lines": [676, 681],
+          "excerpt": "loads = df[\"Load\"].values.astype(np.float64)"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.step",
+          "lines": [385, 394],
+          "excerpt": "load_mw = float(self._load_mw[idx])"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_low_level.py",
+          "function": "C2GFastEnv.reset",
+          "lines": [374, 381],
+          "excerpt": "dt_seconds=self._dt",
+          "interface_only": true
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.__init__",
+          "lines": [336, 359],
+          "excerpt": "self._calendar_load_mw = sample_previous("
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.load_at_tick",
+          "lines": [463, 468],
+          "excerpt": "return float(self._calendar_load_mw[tick])"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_low_level.py",
+          "function": "C2GFastEnv.reset",
+          "lines": [421, 432],
+          "excerpt": "timestamp_replay=self._physical",
+          "interface_only": true
+        }
+      ],
+      "explanation": "Original _load_zone sorted timestamps but discarded them, and step consumed one row per call. The enclosing environment passes its 5-second dt to a source described as five-minute data. Corrected replay constructs episode_ticks+1 calendar targets at dt, selects previous real observations with a 600-second maximum age, bounds the replay horizon, and derives start-day/load-bias state before observation.",
+      "data_witness": {
+        "file": "data/processed/energy/NYC.csv",
+        "original_and_current_blob": "a8874788342195578ef18869b17e2c9ca8626008",
+        "rows": 107260,
+        "row_0_timestamp": "2023-01-01 00:00:00",
+        "row_180_timestamp": "2023-01-01 15:00:00",
+        "row_180_source_elapsed_hours": 15.0,
+        "row_180_simulated_hours_at_5_seconds": 0.25,
+        "row_17280_timestamp": "2023-02-28 10:17:21",
+        "row_17280_source_elapsed_hours": 1402.2891666666667,
+        "row_17280_simulated_hours_at_5_seconds": 24.0
+      },
+      "test_refs": ["T_TIMESTAMP_HOLD", "T_CALENDAR_RESET"],
+      "expected_table1_impact": "Changes price/load/calendar dynamics and therefore observations, macro decisions, economic returns and the SAC training distribution. Nominal five-minute rows are compressed approximately 60-fold when consumed every five seconds, but irregular timestamps make the exact ratio data-dependent.",
+      "limits": "The data witness describes the generic unmodified loader at the beginning of the dataset. Historical evaluation drivers may have replaced/rebased arrays; they were outside this scope. Do not equate this witness with the exact source-calendar coverage of the historical PID episodes without driver evidence."
+    },
+    {
+      "id": "M11",
+      "title": "One RNG coupled exogenous RegD to market and frequency call counts",
+      "classification": "true_original_stochastic_isolation_bug",
+      "fixed": true,
+      "fix_scope": "timestamp_replay=True, as used by physical_v1; shared stream deliberately retained otherwise",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.__init__",
+          "lines": [318, 318],
+          "excerpt": "self._rng = np.random.default_rng(seed)"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.step_rmcp",
+          "lines": [452, 454],
+          "excerpt": "noise = float(self._rng.normal(0.0, m.rmcp_noise_std))"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.clear_bid",
+          "lines": [488, 493],
+          "excerpt": "accepted = bool(self._rng.random() < accept_prob)"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal._step_regd",
+          "lines": [529, 530],
+          "excerpt": "noise = float(self._rng.normal(0.0, self._regd_sigma))"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal._step_frequency",
+          "lines": [551, 590],
+          "excerpt": "noise = float(self._rng.normal(0.0, self._f_noise_std))"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal._reset_signal_rngs",
+          "lines": [457, 461],
+          "excerpt": "streams = np.random.SeedSequence(seed).spawn(4)"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.step_rmcp",
+          "lines": [493, 506],
+          "excerpt": "rng = self._market_rng if self._timestamp_replay else self._rng"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.clear_bid",
+          "lines": [542, 544],
+          "excerpt": "rng = self._bid_rng if self._timestamp_replay else self._rng"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal._step_regd",
+          "lines": [580, 582],
+          "excerpt": "rng = self._regd_rng if self._timestamp_replay else self._rng"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal._step_frequency",
+          "lines": [626, 628],
+          "excerpt": "rng = self._frequency_rng if self._timestamp_replay else self._rng"
+        }
+      ],
+      "test_refs": ["T_RNG_ISOLATION"],
+      "expected_table1_impact": "Extra market/frequency calls or different wrapper schedules no longer change exogenous RegD draws. Separating streams also intentionally changes realizations relative to the original under the same numeric seed.",
+      "limits": [
+        "If original policies consumed exactly the same sequence of RNG calls, different bid values alone did not necessarily change exogenous noise; clear_bid draws once regardless of acceptance.",
+        "The isolation test establishes RegD/LMP/load equality despite extra calls, not frequency equality. f_grid_hz depends on tracking as well as a random innovation and is endogenous.",
+        "No causal share of a reported PID or SAC metric change is assigned to the new seed streams."
+      ]
+    },
+    {
+      "id": "M12",
+      "title": "The advertised RegD window energy neutrality is not implemented",
+      "classification": "true_original_signal_model_and_documentation_bug",
+      "fixed": false,
+      "fix_scope": "Not fixed in corrected or current; RNG choice changed but the correction algorithm did not",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal._step_regd",
+          "lines": [521, 545],
+          "excerpt": "raw_corrected = raw - drift"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal._step_regd",
+          "lines": [572, 597],
+          "excerpt": "self._regd_buffer = []"
+        }
+      ],
+      "equation": "Let raw samples in an N-tick block be x_1,...,x_N with mean m. The code emits x_1,...,x_(N-1),clip(x_N-m,-1,1). When the final clip is inactive, sum(emitted)=(N-1)*m and mean(emitted)=(1-1/N)*m, not zero. It resets a tumbling buffer; it does not correct every rolling window.",
+      "verified_counterexample": "Exact original and corrected _step_regd methods, N=180 and deterministic raw=0.5 every tick: first 179 outputs are 0.5, last is 0, window mean is 0.49722222222222223. About 99.44% of the original block mean remains.",
+      "seeded_source_method_probe": {
+        "seed": 7,
+        "windows": 200,
+        "ticks_per_window": 180,
+        "rho": 0.9963,
+        "sigma": 0.022,
+        "original": {
+          "overall_mean": -0.04462342826933185,
+          "mean_absolute_window_mean": 0.17414581941517848,
+          "maximum_absolute_window_mean": 0.5692157997487877,
+          "windows_with_absolute_mean_over_0_1": 135
+        },
+        "corrected_physical_stream": {
+          "overall_mean": -0.008456531252492999,
+          "mean_absolute_window_mean": 0.1708625748038203,
+          "maximum_absolute_window_mean": 0.5637924751264596,
+          "windows_with_absolute_mean_over_0_1": 131
+        }
+      },
+      "test_refs": ["T_NEUTRALITY_WEAK"],
+      "test_gap": "The existing test checks only abs(mean(200 window means)) < 0.3. It passes despite large individual-window drift, and constructs the grid without setting dt_seconds=5. It is not evidence that each 15-minute window is neutral.",
+      "expected_table1_impact": "Even nominal unbiased RegD can produce sustained per-window energy imbalance, influencing storage state, tracking and learned policies. Its individual contribution to Table 1 or SAC-versus-PID differences is unmeasured.",
+      "limits": "The explicit load-correlated RegD bias is an intentional stress intervention and is separately non-neutral by design. This audit tests the simulator's neutrality claim, not the real-world legal/regulatory requirements of PJM."
+    },
+    {
+      "id": "M13",
+      "title": "RegD window length and AR calibration still assume a five-second tick",
+      "classification": "remaining_timebase_limitation",
+      "fixed": false,
+      "fix_scope": "Unchanged despite the corrected macro controller clock",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.__init__",
+          "lines": [295, 334],
+          "excerpt": "dt_seconds: float = 300.0"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "<module>",
+          "lines": [85, 90],
+          "excerpt": "Energy-neutrality correction window in ticks (= settlement interval / 5 s)."
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.__init__",
+          "lines": [361, 367],
+          "excerpt": "self._window_ticks: int = self._market.window_ticks"
+        }
+      ],
+      "verified_counterexample": "With valid physical dt=10 seconds, MacroEnv correctly uses 90 steps per 900-second action, but the NYC RegD generator still has window_ticks=180, hence a 1800-second correction block. The standalone constructor's unchanged default dt=300 and window_ticks=180 represent 15 hours, not 15 minutes.",
+      "expected_table1_impact": "Not an explanation of a default 5-second NYC Table 1 result. It limits alternative-dt interpretation. Fixed five-second rho and sigma similarly change their physical-time meaning at another dt.",
+      "related_model_choice": "Macro control remains uniformly 15 minutes; market presets separately use 180, 360 or 60 RegD correction ticks. The control horizon and market-specific signal correction horizon must not be conflated."
+    },
+    {
+      "id": "M14",
+      "title": "Macro tracking observation could violate its declared Box upper bound",
+      "classification": "true_original_observation_space_contract_bug",
+      "fixed": true,
+      "fix_scope": "physical_v1 numeric high bound and contains() behavior only; the in-place bound mutation introduces the separate current sampler-metadata limitation C01",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.__init__",
+          "lines": [165, 168],
+          "excerpt": "self.observation_space.high[:17] = np.array(["
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.aggregate_macro_obs",
+          "lines": [464, 535],
+          "excerpt": "float(np.mean(track_errs)) / max(committed_mw * 1_000, tracking_floor_kw)"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.__init__",
+          "lines": [209, 210],
+          "excerpt": "self.observation_space.high[8] = np.inf"
+        }
+      ],
+      "verified_counterexample": "Exact aggregation functions return obs[8]=1000 for tracking error 1000 kW, commitment 0, and a 1-kW interface floor. The original/legacy upper bound is 2. Current physical_v1 accepts the resulting otherwise-valid observation; legacy rejects it via observation_space.contains.",
+      "test_refs": ["T_MACRO_FLOOR"],
+      "expected_table1_impact": "Corrects the numeric upper bound used by observation_space.contains(), without changing the numerical tracking observation, gross revenue formula or an SB3 optimizer. It does not repair cached Box boundedness metadata: see the separately documented, newly introduced current limitation C01. Large observation/value scales remain a possible learning concern, not proof of an SB3 update bug.",
+      "limits": "The counterexample holds the interface floor fixed to isolate the numeric-bound bug and tests contains(), not sample(). Physical_v1 separately supplies a larger small-commitment floor; that low-level change is outside this audit."
+    },
+    {
+      "id": "M15",
+      "title": "Declared handshake sigmoid_k_p knob is not consumed by clearing",
+      "classification": "remaining_configuration_limitation",
+      "fixed": false,
+      "fix_scope": "Unchanged; default value agrees with the literal",
+      "original_evidence": [
+        {
+          "revision": "original",
+          "file": "c2g_env/config.yaml",
+          "function": null,
+          "lines": [69, 69],
+          "excerpt": "sigmoid_k_p: 0.15"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.clear_bid",
+          "lines": [488, 491],
+          "excerpt": "k_p = 0.15"
+        }
+      ],
+      "corrected_evidence": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/config.yaml",
+          "function": null,
+          "lines": [72, 72],
+          "excerpt": "sigmoid_k_p: 0.15"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.clear_bid",
+          "lines": [536, 539],
+          "excerpt": "k_p = 0.15"
+        }
+      ],
+      "explanation": "A configuration field advertises the sigmoid temperature, but clear_bid assigns a local literal. Changing only that YAML value does not change this clearing implementation.",
+      "expected_table1_impact": "None established: default 0.15 already matches the literal, and no evidence was inspected that the original Table 1 varied this knob.",
+      "test_refs": []
+    }
+  ],
+  "current_only_findings": [
+    {
+      "id": "C01",
+      "related_original_finding": "M14",
+      "title": "Corrected high-level Box retains a finite-upper-bound sampling flag after high[8] becomes infinity",
+      "classification": "introduced_current_observation_space_metadata_and_sampler_bug",
+      "fixed": false,
+      "present_in_original_75500133": false,
+      "present_by_corrected_5c7e057c_and_current_34e01546": true,
+      "scope": "physical_v1 high-level 19-D observation Box; observed in the selected high1007 checkpoint preflight. This is not a reported defect of the original SAC update implementation or the low-level 18-D Box.",
+      "status": "Recorded without changing core code, frozen checkpoints, or published physical_v1 semantics.",
+      "original_comparison": "At the original endpoint, high[8]=2 and the constructor-cached bounded_above[8]=True agree, although the numeric bound is too restrictive for actual tracking features (M14). Corrected code changes only high[8] to infinity, leaving the cached boundedness flag inconsistent.",
+      "source_evidence": [
+        {
+          "revision": "current",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.__init__",
+          "lines": [158, 162],
+          "excerpt": "high = np.full(19, 5.0, dtype=np.float32)",
+          "meaning": "Box construction initially gives every coordinate a finite upper bound."
+        },
+        {
+          "revision": "current",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.__init__",
+          "lines": [166, 169],
+          "excerpt": "self.observation_space.high[:17] = np.array([",
+          "meaning": "The following finite overrides include high[8]=2; they do not change finite-versus-infinite classification."
+        },
+        {
+          "revision": "current",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.__init__",
+          "lines": [209, 210],
+          "excerpt": "self.observation_space.high[8] = np.inf",
+          "meaning": "The physical_v1 branch mutates the bound after Box construction without rebuilding the Box or updating bounded_above."
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.__init__",
+          "lines": [165, 168],
+          "excerpt": "self.observation_space.high[:17] = np.array([",
+          "meaning": "Original high[8] remains finite. The new metadata inconsistency is distinct from the original overly restrictive numeric bound."
+        }
+      ],
+      "dependency_evidence": [
+        {
+          "dependency_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/.venv/lib/python3.11/site-packages/gymnasium/spaces/box.py",
+          "function": "Box.__init__",
+          "lines": [147, 149],
+          "excerpt": "self.high, self.bounded_above = self._cast_high(high, dtype_max)",
+          "meaning": "The installed Box caches a bounded_above array at construction."
+        },
+        {
+          "dependency_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/.venv/lib/python3.11/site-packages/gymnasium/spaces/box.py",
+          "function": "Box._cast_high",
+          "lines": [286, 286],
+          "excerpt": "bounded_above = high < np.inf",
+          "meaning": "A correctly constructed infinite upper bound would have bounded_above=False."
+        },
+        {
+          "dependency_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/.venv/lib/python3.11/site-packages/gymnasium/spaces/box.py",
+          "function": "Box.sample",
+          "lines": [373, 397],
+          "excerpt": "bounded = self.bounded_below & self.bounded_above",
+          "meaning": "Sampling chooses interval type from cached flags, then passes the current numeric high array into uniform sampling for coordinates classified as bounded. Axis 8 is therefore routed to uniform sampling with upper=inf rather than lower-bounded exponential sampling."
+        },
+        {
+          "dependency_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/.venv/lib/python3.11/site-packages/gymnasium/spaces/box.py",
+          "function": "Box.contains",
+          "lines": [421, 435],
+          "excerpt": "and np.all(x <= self.high)",
+          "meaning": "Membership checks use the current numeric bounds rather than the cached sampling flags, explaining why a finite in-bounds observation and the earlier M14 contains() check can succeed."
+        }
+      ],
+      "preflight_evidence": {
+        "report": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/reports/model_preflight.json",
+        "read_only_inspected": true,
+        "registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+        "report_no_environment_episode_or_training": true,
+        "report_probe_is_explicit_finite_in_bounds_not_sampled_physical_state": true,
+        "report_Box_sample_limitation_recorded_not_silently_fixed": true,
+        "high_model": {
+          "identifier_from_parent": "selected high1007",
+          "json_pointer": "/models/1",
+          "checkpoint_sha256": "a1b5e5752d68086565c7c4fec545c80b2c702b50f07fe90ab283379898bdb388",
+          "selected_timesteps": 8004,
+          "observation_dimension": 19,
+          "action_dimension": 2,
+          "nonfinite_upper_axes": [8],
+          "saved_Box_bounded_above_flag_mismatch_axes": [8],
+          "finite_in_bounds_forward_pass": true
+        },
+        "low_model": {
+          "json_pointer": "/models/0",
+          "checkpoint_sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024",
+          "selected_timesteps": 250002,
+          "observation_dimension": 18,
+          "action_dimension": 4,
+          "nonfinite_upper_axes": [],
+          "saved_Box_bounded_above_flag_mismatch_axes": [],
+          "finite_in_bounds_forward_pass": true
+        },
+        "parent_reported_additional_observations": [
+          "high[8]=inf while bounded_above[8]=True.",
+          "A numeric midpoint probe was infinite.",
+          "observation_space.sample() raised an OverflowError from NumPy.",
+          "An explicit finite in-bounds observation produced a valid deterministic SAC action."
+        ],
+        "evidence_boundary": "The persisted JSON independently confirms the axis-8 bound/flag mismatch and finite forward passes. The detailed midpoint and OverflowError observations are supplied by the parent; they are not separately serialized as exception details in that JSON and were not rerun by this sub-audit."
+      },
+      "mechanism_confirmation": "Confirmed from the current environment source, the installed Gymnasium Box construction/sampling logic, and the saved checkpoint preflight metadata. In-place high[8] mutation leaves a stale bounded_above flag, so the sampler attempts a finite-interval uniform draw with an infinite endpoint.",
+      "responsibility": "The environment changes Box bounds without maintaining its cached metadata. This finding does not allege a Gymnasium/NumPy sampling algorithm defect or an SAC update-rule defect.",
+      "midpoint_caveat": "The midpoint (low+high)/2 is infinite for a genuinely upper-unbounded coordinate even when Box metadata is correct. Thus midpoint infinity is a limitation of that synthetic probe, not independent evidence of damaged SAC weights or an update-rule failure. The incorrect sampling flag is the actual implementation defect.",
+      "expected_impact": "Generic code that samples the high-level observation space can fail; finite observation membership and checkpoint inference can still work. The defect concerns observation_space.sample(), not evidence of an action-space or SAC gradient-update defect. The finite preflight demonstrates a working deterministic forward pass only, not full-episode qualification or Table 1 performance.",
+      "causality_limits": [
+        "This finding was introduced between the original and corrected code endpoints and must not be added to the list of original SAC failures.",
+        "No evidence here shows that the observation-space sampler was used in historical SAC updates or that this metadata inconsistency caused training degradation.",
+        "No contribution to the historical PID MW difference or Table 1 algorithm gap is established."
+      ],
+      "parent_protocol_decision": "Retain the published physical_v1 implementation and frozen selected checkpoints for the new Table 1 work, use real observations for environment inference, and record rather than silently repair this limitation.",
+      "future_remediation_out_of_scope": "A separately versioned change could construct Box with its final finite/infinite bounds from the outset and add a finite-sampling regression. No such core or checkpoint change was made here.",
+      "validation": "Static source/library inspection, JSON/source-citation validation, and reading the parent's existing preflight report only; no new model execution, environment episode, training, or sampler probe."
+    }
+  ],
+  "intentional_changes_and_non_bugs": [
+    {
+      "topic": "Published proxy fidelity versus physical accounting",
+      "conclusion": "Parent-verified camera_ready.tex lines 388-404 explicitly use mean LMP times mean facility power normalized to 250 MW, times duration, divided by 1000; line 401 states the normalization. M01-M03 therefore are not original implementation-versus-paper bugs. Metered signed-PCC interval settlement resolves actual-cost accounting limitations while deliberately changing the reward objective, aggregation and scale."
+    },
+    {
+      "topic": "Compatibility branch",
+      "conclusion": "legacy_v0 deliberately retains the original billing, timing and shared RNG semantics. Finding these behaviors in that branch is not evidence that the physical_v1 fixes are absent."
+    },
+    {
+      "topic": "Explicit biased RegD",
+      "conclusion": "Corrected MacroGridSignal.step applies clip(regd + regd_load_bias * load_anomaly, -1, 1) before exposing the signal. Non-neutrality under beta>0 is intentional, unlike the false claim that the underlying beta=0 generator enforces every-window neutrality.",
+      "references": [
+        {
+          "revision": "corrected",
+          "file": "c2g_env/physics/macro_grid.py",
+          "function": "MacroGridSignal.step",
+          "lines": [420, 424],
+          "excerpt": "regd + self._regd_bias * self._load_anomaly[self._tick]"
+        }
+      ]
+    },
+    {
+      "topic": "Reward structure and coefficients",
+      "conclusion": "The four-term macro reward layout and lambda values remain unchanged, but their names and coefficients do not imply an unchanged objective. In particular, the paper-specified normalized facility/product-of-means proxy was replaced by dollar-denominated signed-PCC interval settlement. This is a material objective/scale change as well as a physical-accounting correction; it must not be described solely as restoring implementation fidelity.",
+      "references": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [398, 405],
+          "excerpt": "reward = float(r_regulation + r_sub + r_elec + r_churn)"
+        },
+        {
+          "revision": "corrected",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [433, 440],
+          "excerpt": "reward = float(r_regulation + r_sub + r_elec + r_churn)"
+        }
+      ]
+    },
+    {
+      "topic": "Standing DR on rejection",
+      "conclusion": "Original run_handshake already used dr_baseline_mw and dr_rate_usd_mw on rejection. The corrected test changes an incorrect zero-commitment expectation; the standing contract is not a newly invented fallback.",
+      "references": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.run_handshake",
+          "lines": [633, 638],
+          "excerpt": "committed_mw = dr_baseline_mw"
+        },
+        {
+          "revision": "corrected",
+          "file": "tests/test_critical_bug_fixes.py",
+          "function": "TestCommittedMwProperty.test_macro_env_committed_mw_flows_through_to_fast_env",
+          "lines": [767, 770],
+          "excerpt": "\"Rejected bid must use the standing DR contract.\""
+        }
+      ]
+    },
+    {
+      "topic": "Previously fixed defects are not defects of original commit 75500133",
+      "conclusion": "The original audited MacroEnv already wrote through the public committed_mw property and guarded horizon truncation with not terminated. Earlier historical bug names in tests do not establish that private-assignment or simultaneous-fault/horizon flag bugs remained at this baseline.",
+      "references": [
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [279, 279],
+          "excerpt": "self._fast_env.committed_mw = committed_mw"
+        },
+        {
+          "revision": "original",
+          "file": "c2g_env/env_high_level.py",
+          "function": "C2GMacroEnv.step",
+          "lines": [350, 353],
+          "excerpt": "and not terminated:"
+        }
+      ]
+    },
+    {
+      "topic": "Unchanged market simplifications",
+      "conclusion": "LMP is a load-derived proxy with a $500/MWh cap, not replayed historical prices. Acceptance is a sigmoid-price probability times a quantity factor; successful bids receive all offered MW, rather than a deterministic partial fill capped at residual need. These are explicit unchanged model choices, not discovered SAC implementation faults."
+    },
+    {
+      "topic": "Unchanged reward choices",
+      "conclusion": "Churn penalizes the normalized offered quantity, not actual cleared MW. mean_sub_reward is a mean per macro transition, not duration-scaled cash. Partial-window settlement corrections do not redefine either term. These choices can affect learning but are not arithmetic mistakes established by this audit."
+    },
+    {
+      "topic": "Hardening and metadata",
+      "conclusion": "Corrected code adds finite/shape/lifecycle checks, reset action-space seeding, simulation-mode metadata, duration fields, squared-error/RMSE diagnostics and aggregates. Such additions are not evidence of an original SB3 failure; newly logged RMSE is not substituted into the existing regulation performance formula."
+    }
+  ],
+  "test_evidence": {
+    "T_POSTED_SETTLEMENT": {
+      "revision": "corrected",
+      "file": "tests/test_physical_contract.py",
+      "function": "test_posted_offer_commitment_and_interval_settlement",
+      "lines": [147, 183],
+      "assertions": "Reset observation contains the posted RMCP; next clearing uses that price; first inner commitment observation matches clearing; electricity_cost equals interval LMP*PCC_import*duration sum; tracking RMSE matches samples; 361 ticks execute two full windows and one five-second final settlement.",
+      "execution": "Passed unchanged assertions by direct invocation with the existing default configuration path and an in-memory YAML episode_ticks=361 override; file-writing short_config fixture deliberately not invoked."
+    },
+    "T_WRAPPER_TIMING": {
+      "revision": "corrected",
+      "file": "tests/test_physical_contract.py",
+      "function": "test_rule_wrapper_observes_commitment_before_action_and_matches_macro",
+      "lines": [186, 205],
+      "assertions": "For two windows, each low-level observation's commitment equals the current commitment before action; wrapper and macro hardware observation trajectories agree under matched rule macro and nominal inner control.",
+      "execution": "Passed via the same read-only in-memory short-config harness."
+    },
+    "T_RNG_ISOLATION": {
+      "revision": "corrected",
+      "file": "tests/test_physical_contract.py",
+      "function": "test_market_calls_cannot_change_exogenous_regd",
+      "lines": [133, 144],
+      "assertions": "Adding step_rmcp, clear_bid and frequency calls to one matched environment leaves RegD/LMP/load observation coordinates exactly equal for ten steps.",
+      "execution": "Passed via the same read-only in-memory short-config harness."
+    },
+    "T_PCC_INTERFACE": {
+      "revision": "corrected",
+      "file": "tests/test_physical_contract.py",
+      "function": "test_battery_tracking_and_facility_relief_are_separate",
+      "lines": [120, 130],
+      "assertions": "p_grid_import_mw equals p_facility_mw minus bess_actual_kw/1000; facility-only relief remains distinct.",
+      "execution": "Inspected as an interface contract; not executed separately by this audit."
+    },
+    "T_TIMESTAMP_HOLD": {
+      "revision": "corrected",
+      "file": "tests/test_physical_contract.py",
+      "function": "test_timestamp_hold_uses_time_not_row_number",
+      "lines": [24, 50],
+      "assertions": "Irregular source timestamps use previous-value time sampling; stale or before-coverage queries raise.",
+      "execution": "Passed with pytest."
+    },
+    "T_CALENDAR_RESET": {
+      "revision": "corrected",
+      "file": "tests/test_physical_contract.py",
+      "function": "test_calendar_covers_full_day_and_bias_is_observed_at_reset",
+      "lines": [54, 67],
+      "assertions": "Days 0,207,248,249 expose a 24-hour timestamp axis, physical metadata, beta-applied first RegD observation, and correctly normalized first calendar load.",
+      "execution": "All four parameterized reset-only cases passed with pytest; no full-day rollouts."
+    },
+    "T_NEUTRALITY_WEAK": {
+      "revision": "original",
+      "also_unchanged_in_corrected": true,
+      "file": "tests/test_macro_grid.py",
+      "function": "test_regd_energy_neutrality_over_15min",
+      "lines": [115, 131],
+      "assertions": "Only abs(mean(window_means)) < 0.3 across 200 windows; not each-window neutrality.",
+      "execution": "Existing current test passed. Independent exact-source counterexamples establish that passing this test does not validate the stated property."
+    },
+    "T_MACRO_FLOOR": {
+      "revision": "corrected",
+      "file": "tests/test_gym_api.py",
+      "function": "TestCapacityContracts.test_macro_tracking_floor_scales_with_capacity",
+      "lines": [694, 713],
+      "original_lines": [691, 709],
+      "assertions": "obs[8] and performance use the capacity-scaled supplied floor, with separate physical/legacy expectations. This tests the denominator, not original Box membership.",
+      "execution": "All selected profile/mode cases passed with pytest."
+    }
+  },
+  "validation": {
+    "repository_writes": "None by this sub-audit. Initial scoped git status was clean before and after the audit. Subsequent refinements wrote only this JSON evidence deliverable outside the repository.",
+    "manuscript_refinement_validation": "The 23:02 UTC manuscript-alignment refinement changed only report interpretation/classification using parent-supplied evidence. That refinement performed no new code inspection, source edits, tests, experiment runs or evaluations. Existing source references and numerical counterexamples were retained.",
+    "current_metadata_refinement_validation": "The 23:28 UTC follow-up added separate CURRENT-only finding C01 after reading the current high-level Box construction, installed Gymnasium Box metadata/sampling code, and the parent's existing model_preflight.json, with JSON/source-citation validation only. No core, checkpoint or preflight-report edits and no new model, sampler, training or environment-episode execution.",
+    "implementations_identical_between_corrected_and_current": true,
+    "interpreter": "/workspace/IBM/temp/dc2grid-repos/dc2grid/.venv/bin/python",
+    "environment": "PYTHONDONTWRITEBYTECODE=1; pytest cache disabled; plugin autoload disabled; native thread counts capped at one. No dependencies installed.",
+    "pytest_batches": [
+      {
+        "passed": 31,
+        "elapsed_seconds": 3.87,
+        "selected_tests": [
+          "tests/test_macro_grid.py::test_regd_energy_neutrality_over_15min",
+          "tests/test_macro_grid.py::test_reset_reproducible",
+          "tests/test_macro_grid.py::test_zero_committed_gives_zero_delta_p",
+          "tests/test_gym_api.py::TestMacroEnvSpaces",
+          "tests/test_gym_api.py::TestMacroEnvReset",
+          "tests/test_gym_api.py::TestMacroEnvStep",
+          "tests/test_gym_api.py::TestCapacityContracts::test_rule_wrapper_aggregates_after_capacity_scaled_window",
+          "tests/test_gym_api.py::TestCapacityContracts::test_macro_tracking_floor_scales_with_capacity",
+          "tests/test_critical_bug_fixes.py::TestCommittedMwProperty::test_macro_env_uses_property_not_private"
+        ]
+      },
+      {
+        "passed": 5,
+        "elapsed_seconds": 1.14,
+        "selected_tests": [
+          "tests/test_physical_contract.py::test_timestamp_hold_uses_time_not_row_number",
+          "tests/test_physical_contract.py::test_calendar_covers_full_day_and_bias_is_observed_at_reset"
+        ]
+      }
+    ],
+    "existing_test_functions_run_with_read_only_fixture_equivalent": [
+      "T_POSTED_SETTLEMENT",
+      "T_WRAPPER_TIMING",
+      "T_RNG_ISOLATION"
+    ],
+    "additional_bounded_probes": [
+      "Exact original/corrected AST-extracted MacroEnv.step with deterministic FastEnv interface stubs: five billing/duration cases per revision; also verified first inner commitment observation.",
+      "Exact original/corrected AST-extracted RegD generator: deterministic constant-input non-neutrality proof and 200-block seed-7 distribution statistics.",
+      "Exact original/corrected wrapper reset-observation builder with known interface coordinates.",
+      "Current legacy/physical clock-contract comparison with in-memory dt=10s, episode_ticks=181; no full evaluation.",
+      "Exact original/corrected macro aggregation output compared with declared original/legacy and corrected physical observation bounds.",
+      "Read-only source timestamp inspection of NYC.csv; no simulator/evaluation-driver rollout."
+    ],
+    "failed_attempts_and_resolution": [
+      "Initial system Python 3.10 commands lacked gymnasium/pandas and failed collection/import before tests ran. Retried successfully using the existing project .venv interpreter; no installation or repository change.",
+      "The first isolated MacroEnv.step stub probe omitted action_space and raised AttributeError. Added that missing interface to the in-memory stub and reran successfully; no production-code failure."
+    ]
+  },
+  "unproven_hypotheses": [
+    "That the original paper-specified proxy's weaker numeric electricity penalty caused the original high-level SAC result, or that choosing the metered-PCC objective would necessarily improve SAC over PID.",
+    "That any one timing, RNG, replay or neutrality issue explains a specified fraction of the original Table 1 metric gap or the later PID MW change.",
+    "That original controllers with identical market/frequency call schedules received action-dependent exogenous RegD solely because they chose different bids.",
+    "That a corrected full-window gross regulation-revenue change is a direct arithmetic consequence of the electricity-cost fix.",
+    "That original Table 1 used nondefault dt, a partial episode horizon, changed sigmoid_k_p, or a custom wrapper rmcp_max; these require driver/provenance evidence outside this scope.",
+    "That SB3 SAC itself has a replay, optimizer, timeout, entropy, or numerical implementation defect; no such evidence was sought or found in this scoped environment audit."
+  ]
+}

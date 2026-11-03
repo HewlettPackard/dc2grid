@@ -1,0 +1,32 @@
+{
+  "registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+  "no_environment_episode_or_training": true,
+  "preflight_observation_is_explicit_finite_in_bounds_not_a_sampled_physical_state": true,
+  "Box_sample_limitation_recorded_not_silently_fixed": true,
+  "models": [
+    {
+      "role": "low",
+      "checkpoint_sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024",
+      "selected_timesteps": 250002,
+      "observation_dimension": 18,
+      "action_dimension": 4,
+      "nonfinite_upper_axes": [],
+      "saved_Box_bounded_above_flag_mismatch_axes": [],
+      "finite_in_bounds_forward_pass": true
+    },
+    {
+      "role": "high",
+      "checkpoint_sha256": "a1b5e5752d68086565c7c4fec545c80b2c702b50f07fe90ab283379898bdb388",
+      "selected_timesteps": 8004,
+      "observation_dimension": 19,
+      "action_dimension": 2,
+      "nonfinite_upper_axes": [
+        8
+      ],
+      "saved_Box_bounded_above_flag_mismatch_axes": [
+        8
+      ],
+      "finite_in_bounds_forward_pass": true
+    }
+  ]
+}

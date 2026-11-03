@@ -1,0 +1,136 @@
+{
+  "original_revision": "7550013331a865fa45684cb7cd973279312d4678",
+  "source": "Read-only evaluation audit; original source anchors verified by the evaluation reviewer",
+  "findings": [
+    {
+      "id": "E01",
+      "title": "Macro RMSE averaged errors before squaring",
+      "finding": "Original macro-side summaries computed RMS of window-mean errors, not fast-tick RMSE; partial windows were equally weighted. The separate hardware summary already aggregated per-tick environment-reported error. Missing producing records prevent proving which column supplied the archived Table 1.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:run_macro_episode:603-650",
+        "evaluation/run_sachigh_saclow_benchmark.py:run_hierarchical_episode:179-207"
+      ],
+      "disposition": "Fixed physical-mode aggregation uses tracking_error_sq_sum/sub_steps_run. Do not claim signed-error cancellation if the source error is absolute."
+    },
+    {
+      "id": "E02",
+      "title": "First BESS aging increment omitted",
+      "finding": "Aging was final_age minus the first post-step age, rather than reset age, multiplied by 10000. It is the simulator's aging fraction, not battery-throughput MWh.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:run_episode:424-433",
+        "evaluation/run_benchmark.py:run_macro_episode:626-633"
+      ],
+      "disposition": "Still present in the generic runner. The new separate Table 1 collector must use reset-to-service-end aging."
+    },
+    {
+      "id": "E03",
+      "title": "No-inner row lacked fast metric collection",
+      "finding": "The generic benchmark installed the fast instrumentation only when an inner controller existed, leaving no-hardware low reward, warning and aging uncollected.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:run_macro_episode:485-526"
+      ],
+      "disposition": "Still present in the generic runner. A new explicit fixed-setpoint callback can collect the same physical fields without changing the plant."
+    },
+    {
+      "id": "E04",
+      "title": "Hardware SD field names contain an extra underscore",
+      "finding": "Output keys such as tracking_rmse__std use two underscores, so consumers expecting _std can miss hardware SDs.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:benchmark:902-903"
+      ],
+      "disposition": "Still present in the generic exporter; the new study uses explicit metric/SD keys."
+    },
+    {
+      "id": "E05",
+      "title": "Random-controller action RNG was not an episode-seeded stream",
+      "finding": "Global Python/NumPy/Torch seeding does not seed a Gym action space. The sampled action space belongs to a seed-0 construction environment, not each evaluated episode.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:RandomAgent:250-255",
+        "evaluation/run_benchmark.py:benchmark:687-742"
+      ],
+      "disposition": "Physical resets seed action spaces, but the generic construction-space stream is still not an independent per-episode policy stream. The new study seeds its case-local random controller explicitly."
+    },
+    {
+      "id": "E06",
+      "title": "Stateful classical controllers carried state across episodes",
+      "finding": "The original generic runner reused controllers without reset. PID integrators and bang-bang hysteresis can therefore carry prior-episode state into another seed.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:benchmark:726-853",
+        "baselines/pid_controller.py:_PIDLoop:65-83"
+      ],
+      "disposition": "Current runner resets controllers exposing reset(); bang-bang has no reset method. The new study constructs fresh controllers per case."
+    },
+    {
+      "id": "E07",
+      "title": "Macro survival counted calls, not successful fast completion",
+      "finding": "Termination during the last macro call can still satisfy the macro-call count. Full survival requires all fast ticks and no physical termination.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:run_macro_episode:618-635"
+      ],
+      "disposition": "Still present in the generic runner. It does not prove that the archived 100% survival claim was wrong; original raw episodes are unavailable."
+    },
+    {
+      "id": "E08",
+      "title": "PPO normalization restoration was not fail-closed",
+      "finding": "An absent normalization pickle could leave PPO unnormalized; the original restore constructed a fast environment even for a macro PPO policy.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:load_sb3_agent:295-302"
+      ],
+      "disposition": "Corrected loader chooses the appropriate environment class. No original-bidding PPO artifact was found for this requested rerun; economic fractional PPO is not a substitute."
+    },
+    {
+      "id": "E09",
+      "title": "LLM warm-up filtering changes the requested cohort",
+      "finding": "Warm-up filtering can remove evaluation episodes while the reported requested count stays unchanged; excessive skipping falls back to all episodes.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:benchmark:857-872"
+      ],
+      "disposition": "Do not use this behavior to construct a matched five-case table. No LLM row is run in the authorized seven-row study."
+    },
+    {
+      "id": "E10",
+      "title": "Table 2's legacy calendar shim is not timestamp-faithful",
+      "finding": "Repeating each NYC source row sixty times assumes exact five-minute intervals. The selected peak dates contain 302/299/294 valid rows, and their first 288 rows end at 22:45/23:00/23:30. Workload phase remained zero, and bias was patched after the reset observation.",
+      "original_anchors": [
+        "evaluation/grid_relief.py:_align_calendar:91-108",
+        "evaluation/grid_relief.py:_run_episode:165-170"
+      ],
+      "disposition": "Physical-mode replay uses actual timestamps, advances workload start day, and applies bias before reset. This particular shim belongs to Table 2, not the nominal Table 1 runner."
+    },
+    {
+      "id": "E11",
+      "title": "Table 2 prefix comparisons concealed incomplete horizons",
+      "finding": "The original evaluator used a common available prefix and recomputed stress quantiles on that prefix, while revenue remained an episode total.",
+      "original_anchors": [
+        "evaluation/grid_relief.py:_metrics:257-300"
+      ],
+      "disposition": "Physical-mode evaluation rejects incomplete matched comparisons and suppresses incomplete aggregate estimates. Do not infer this altered Table 1 if all its runs completed."
+    },
+    {
+      "id": "E12",
+      "title": "Thermal-warning boundary conventions differ",
+      "finding": "The benchmark uses normalized observations with >=33 C; the callback uses actual info temperatures with >33 C. A fraction of warning ticks is not the fraction of episodes with any warning.",
+      "original_anchors": [
+        "evaluation/run_benchmark.py:run_episode:407",
+        "evaluation/run_benchmark.py:run_macro_episode:505",
+        "baselines/metrics_callback.py:_compute_episode_metrics:301-304"
+      ],
+      "disposition": "Still distinct. The new study explicitly records its actual-temperature boundary and both interpretations where available."
+    },
+    {
+      "id": "E13",
+      "title": "Original Table 1 provenance is incomplete",
+      "finding": "No original Table 1 episode manifests, exact command, matching full result CSV, PPO weights/normalizer, or LLM execution receipt was recovered. Older summary CSVs do not match the published 229 +/-18 kW. Original README says macro SAC 780 +/-26, whereas camera_ready.tex says 780 +/-626.",
+      "original_anchors": [
+        "README.md:reported macro SAC result:1282",
+        "evaluation/run_benchmark.py:benchmark:829-865"
+      ],
+      "disposition": "The discrepancy cannot be adjudicated without producing records. New results must be labelled a corrected Table 1-style comparison, not an exact reproduction of all archival numbers."
+    }
+  ],
+  "not_findings": [
+    "Source uses sample SD with ddof=1, not population SD.",
+    "No silent SAC-to-PPO or rule-controller checkpoint substitution was found.",
+    "The specialized SAC-high/SAC-low runner alone lacks all Table 1 columns."
+  ]
+}

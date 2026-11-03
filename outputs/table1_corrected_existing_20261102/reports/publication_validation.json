@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+  "pdf_pages": 4,
+  "nonmissing_mean_and_sample_sd_cells_verified": 93,
+  "numeric_statistics_verified": 186,
+  "missing_archival_cells_preserved": 3,
+  "csv_metric_cells_verified": 96,
+  "supplemental_rows_verified": 7,
+  "pdf_word_bounding_boxes_checked": 2087,
+  "corrected_primary_counts_and_diagnostic_markers_verified": true,
+  "models_panel_and_registration_verified": true,
+  "prior_archive_and_pdfs_unchanged": true,
+  "output_sha256": {
+    "publication/table1_corrected_comparison.pdf": "57a12d2d2a9792fb7411215277f92471f24c7766409cf758189923dce6f9c28e",
+    "publication/table1_corrected_comparison.tex": "5e98c57689b9de45cc25f9775dfa866270d3ac760794e6d0f004737d591af75e",
+    "publication/table1_values.tex": "21189eca23c045f7fd85622f26c035668e4ff8f8ac2d294f1626da0b5a9f35b4",
+    "publication/table1_values.json": "6d7914b2b67dd409797600be875a5be09bf3edc249869cbb8bdf06ae73c3b6fc",
+    "publication/table1_cells.csv": "df2df4897d27c5d198c606b3b3a79ea0c9d1ec649f4fd6e0dadcc3369e98e0d7",
+    "ORIGINAL_SAC_AUDIT.md": "3e32b2308af0404dd285f0fd0485d8e0f3a5749a120c8f634c6eabc48d8dfd89",
+    "reports/table1_report.json": "6b1b286a78076fe78ba3dba11d25e311e7bb09e7861ccb6bf78eed10d86ff71f",
+    "reports/observed_tradeoffs.json": "7e80a01f62a93f6416d67a8f9e17df5c805d70e7e1a5e5f0fd4a48a7148b1df9",
+    "reports/preservation_receipt.json": "f4affc0113e7149c1398de3d3230fd2658cef0dc5eb1ff6836719bca2ae8b1e4"
+  },
+  "verifier_sha256": "a9f2ec8cc944373d1922c9920df4d6c874733d86aa11a4a3da30fe709835b249",
+  "training_performed": false,
+  "remote_publication_performed": false
+}

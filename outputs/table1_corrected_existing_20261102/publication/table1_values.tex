@@ -1,0 +1,61 @@
+\newcommand{\RegisteredCases}{35}
+\newcommand{\CompletedCases}{35}
+\newcommand{\QualifiedCases}{31}
+\newcommand{\RawChecks}{8,366,075}
+\newcommand{\RawTraceFiles}{105}
+\newcommand{\SACPIDRMSEGainPct}{30.9}
+\newcommand{\SACPIDRevenueDelta}{-27.74}
+\newcommand{\SACPIDAgeIncreasePct}{12.6}
+\newcommand{\SACPIDCashDelta}{-129.69}
+\newcommand{\SACPIDRMSEWins}{4}
+\newcommand{\HighBidWindows}{480}
+\newcommand{\HighAcceptedBids}{0}
+\newcommand{\HighMeanBidPrice}{91.90}
+\newcommand{\HighMeanPostedPrice}{24.94}
+\newcommand{\RegistrationID}{ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971}
+\newcommand{\RegistrationCommit}{f1e15376b242851f24213fafd1a06241e8a82622}
+\newcommand{\BaselineCommit}{34e015461a4c7e6a4fc1df8b61a72af92fc2db7a}
+\newcommand{\LowModelHash}{5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024}
+\newcommand{\HighModelHash}{a1b5e5752d68086565c7c4fec545c80b2c702b50f07fe90ab283379898bdb388}
+\newcommand{\ArchiveHash}{2f616b2f3b2d65e848be7246954011c59f897ea5fa365b3de15fc424509fcc2c}
+\newcommand{\ArchiveMemberHash}{128f2d557ec256048b95bd918522f961eabbdc44364f8ec58e903de1822ccd02}
+\newcommand{\LowSelectedSteps}{250,002}
+\newcommand{\HighSelectedSteps}{8,004}
+\newcommand{\CorrectedServiceTable}{%
+\begin{tabular}{lrrrrrrrr}\toprule
+Macro + hardware & \shortstack{RMSE\\(kW)} & \shortstack{Reg. rev.\\(USD)} & \shortstack{Macro\\reward} & \shortstack{Low\\reward} & \shortstack{Warning\\fraction} & \shortstack{Age\\($10^{-4}$)} & \shortstack{Full\\24h} & \shortstack{All\\gates} \\\midrule
+Rule macro + no agent & \numcell{2{,}619.5}{185.4} & \numcell{4{,}611.6}{279.0} & \numcell{-0.575}{0.024} & \numcell{-0.341}{0.023} & \numcell{0.000}{0.000} & \numcell{0.00}{0.00} & 5/5 & 5/5 \\
+Rule macro + Random & \numcell{18{,}355.0}{214.5} & \numcell{174.3}{41.2} & \numcell{-3.906}{0.133} & \numcell{-3.662}{0.133} & \numcell{0.000}{0.000} & \numcell{39.99}{0.11} & 5/5 & 5/5 \\
+Rule macro + Bang-bang & \numcell{998.7}{239.0} & \numcell{5{,}450.0}{332.3} & \numcell{-0.345}{0.059} & \numcell{-0.119}{0.057} & \numcell{0.000}{0.000} & \numcell{55.34}{4.91} & 5/5 & 5/5 \\
+Rule macro + Rule & \numcell{604.7}{263.4} & \numcell{5{,}493.5}{364.1} & \numcell{-0.257}{0.034} & \numcell{-0.031}{0.031} & \numcell{0.000}{0.000} & \numcell{27.40}{3.69} & 5/5 & 5/5 \\
+Rule macro + PID & \numcell{394.7}{230.8} & \numcell{5{,}561.5}{338.8} & \numcell{-0.234}{0.025} & \numcell{-0.009}{0.024} & \numcell{0.000}{0.000} & \numcell{26.59}{2.05} & 5/5 & 5/5 \\
+Rule macro + SAC & \numcell{272.6}{32.9} & \numcell{5{,}533.8}{324.6} & \numcell{-0.244}{0.006} & \numcell{-0.019}{0.003} & \numcell{0.000}{0.000} & \numcell{29.95}{1.44} & 5/5 & 5/5 \\
+SAC macro + SAC$^\dagger$ & \numcell{358.1}{67.3} & \numcell{569.5}{4.9} & \numcell{-0.359}{0.020} & \numcell{-0.081}{0.020} & \numcell{0.000}{0.000} & \numcell{18.16}{1.97} & 5/5 & 1/5 \\
+\bottomrule\end{tabular}
+}
+\newcommand{\ArchivedServiceTable}{%
+\begin{tabular}{lrrrrrr}\toprule
+Macro + hardware & \shortstack{RMSE\\(kW)} & \shortstack{Reg. rev.\\(USD)} & \shortstack{Macro\\reward} & \shortstack{Low\\reward} & \shortstack{Warning\\fraction} & \shortstack{Age\\($10^{-4}$)} \\\midrule
+Rule macro + no agent & \numcell{2{,}737}{244} & \numcell{5{,}121}{238} & \numcell{0.65}{0.04} & --- & --- & --- \\
+Rule macro + Random & \numcell{22{,}749}{365} & \numcell{15}{17} & \numcell{-3.86}{0.14} & \numcell{-3.86}{0.14} & \numcell{0.0}{0.0} & \numcell{40.15}{0.07} \\
+Rule macro + Bang-bang & \numcell{1{,}502}{156} & \numcell{5{,}903}{344} & \numcell{0.75}{0.06} & \numcell{0.69}{0.06} & \numcell{0.0}{0.0} & \numcell{52.97}{7.03} \\
+Rule macro + Rule & \numcell{621}{90} & \numcell{6{,}092}{351} & \numcell{0.94}{0.02} & \numcell{0.87}{0.01} & \numcell{0.0}{0.0} & \numcell{27.23}{4.81} \\
+Rule macro + PID & \numcell{813}{122} & \numcell{6{,}058}{348} & \numcell{0.92}{0.03} & \numcell{0.86}{0.02} & \numcell{0.0}{0.0} & \numcell{27.30}{5.33} \\
+Rule macro + SAC & \numcell{229}{18} & \numcell{6{,}287}{353} & \numcell{1.00}{0.00} & \numcell{0.94}{0.00} & \numcell{0.0}{0.0} & \numcell{22.49}{2.78} \\
+SAC macro + SAC & \numcell{780}{626} & \numcell{8{,}550}{553} & \numcell{0.94}{0.13} & \numcell{0.85}{0.13} & \numcell{0.0}{0.0} & \numcell{18.38}{1.74} \\
+PPO macro + SAC & \numcell{745}{34} & \numcell{7{,}345}{688} & \numcell{0.92}{0.13} & \numcell{0.81}{0.17} & \numcell{0.0}{0.0} & \numcell{21.22}{2.25} \\
+LLM macro + SAC & \numcell{296}{60} & \numcell{2{,}939}{445} & \numcell{0.94}{0.01} & \numcell{0.91}{0.01} & \numcell{0.0}{0.0} & \numcell{20.39}{2.13} \\
+\bottomrule\end{tabular}
+}
+\newcommand{\SupplementalTable}{%
+\begin{tabular}{lrrrrrr}\toprule
+Macro + hardware & \shortstack{Mean\\commitment\\(MW)} & \shortstack{Mean grid cash\\26h (USD)} & \shortstack{Mean BESS\\throughput\\26h (MWh)} & \shortstack{Minimum\\SOC at 24h} & \shortstack{Recovery\\closed} & \shortstack{All\\gates} \\\midrule
+Rule macro + no agent & $10.710$ & $-54{,}466.21$ & $0.000$ & $0.5000$ & 5/5 & 5/5 \\
+Rule macro + Random & $10.710$ & $-51{,}990.26$ & $62.278$ & $0.3206$ & 5/5 & 5/5 \\
+Rule macro + Bang-bang & $10.710$ & $-53{,}605.95$ & $86.088$ & $0.3857$ & 5/5 & 5/5 \\
+Rule macro + Rule & $10.710$ & $-53{,}687.22$ & $44.351$ & $0.4074$ & 5/5 & 5/5 \\
+Rule macro + PID & $10.710$ & $-53{,}527.74$ & $43.568$ & $0.2384$ & 5/5 & 5/5 \\
+Rule macro + SAC & $10.710$ & $-53{,}657.43$ & $47.073$ & $0.2963$ & 5/5 & 5/5 \\
+SAC macro + SAC & $5.000$ & $-58{,}784.12$ & $32.202$ & $0.1688$ & 5/5 & 1/5 \\
+\bottomrule\end{tabular}
+}

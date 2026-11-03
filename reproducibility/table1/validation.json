@@ -1,0 +1,77 @@
+{
+  "schema": "table1-clean-publication-validation-v1",
+  "validated_utc": "2026-11-03T20:12:22.101971+00:00",
+  "source_export": {
+    "verified": true,
+    "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+    "producer_registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+    "byte_preserved_producer_files": 69,
+    "numeric_only_derived_file": 1,
+    "episode_receipts": 35,
+    "native_source_files": 61,
+    "complete_service": 35,
+    "qualified_supplemental": 31,
+    "checkpoints": {
+      "low": {
+        "sha256": "5940bf534f1ff5222c5eac1554ba7a0108951df864e6a28e220b45a277a09024",
+        "training_seed": 1007,
+        "selected_timesteps": 250002,
+        "path": "outputs/corrected_sac_8gpu_20261030/seed_1007/low/best_model/best_model.zip"
+      },
+      "high": {
+        "sha256": "a1b5e5752d68086565c7c4fec545c80b2c702b50f07fe90ab283379898bdb388",
+        "training_seed": 1007,
+        "selected_timesteps": 8004,
+        "path": "outputs/corrected_sac_8gpu_20261030/seed_1007/high/best_model/best_model.zip"
+      }
+    },
+    "input_datasets_verified": true,
+    "source_export_sha256": "1369f74f3b4c89538ea168000c366041dad262161ae33af57ac409c0eef46d5c",
+    "public_adapter_sha256": "cb68ddd8177f66d9ffa5ee7fa24ed758fe75db4b3b481143f515b663723dc8cd"
+  },
+  "frozen_parent_release": {
+    "verified_files": 12721,
+    "verified_bytes": 567041215,
+    "release_tag": "repro/20261102/pid-comparison"
+  },
+  "pdf": {
+    "pages": 4,
+    "mean_sd_cells": 93,
+    "word_bounds_checked": 2087,
+    "sha256": "57a12d2d2a9792fb7411215277f92471f24c7766409cf758189923dce6f9c28e"
+  },
+  "numeric_metric_cells_verified": 96,
+  "nonmissing_mean_sd_cells_verified": 93,
+  "public_adapter_tests_passed": 14,
+  "compatible_frozen_producer_tests_passed": 17,
+  "focused_tests_passed": 31,
+  "subtests_passed": 4,
+  "historical_test_dependency_boundary": {
+    "original_attempt": "17 passed, 1 failed because an intentionally excluded private parent registration was absent",
+    "test": "test_native_default_reset_contract_and_inherited_recovery_configuration",
+    "missing_private_file": "outputs/physical_recovery_eval_20261031/heldout_registration.json",
+    "original_test_bytes_preserved": true,
+    "excluded_from_final_public_test_selection": true,
+    "public_contract_replacement": "test_published_recovery_and_panel_contract_match_the_frozen_evaluator",
+    "actual_native_reset_contracts_checked_in_complete_replays": 8,
+    "no_fake_replacement_registration_created": true
+  },
+  "replay_validation": {
+    "path": "reproducibility/table1/replay_validation.json",
+    "sha256": "dbf0651d257925e555cb4b5b41721c9a70aec14412b831ff0c73e0d412531704",
+    "cases": 8,
+    "all_verified": true,
+    "expected_disqualified_case_preserved": true,
+    "scalar_checks": 1728
+  },
+  "full_trace_validation": {
+    "path": "reproducibility/table1/full_trace_validation.json",
+    "sha256": "3f6945fdfa4d3744e66225b27468f243a0a858c6d81c409793ed74e34ad2df05",
+    "trace_files": 24,
+    "uncompressed_bytes_identical": true
+  },
+  "no_new_training_or_scientific_case_selection": true,
+  "input_datasets_or_raw_traces_uploaded": false,
+  "original_private_history_imported": false,
+  "original_scientific_values_changed": false
+}

@@ -1,0 +1,186 @@
+{
+  "registration_id": "ed5313c9b6566c816769176f0a99eac2bd9566af1f402e4cfd087437005a1971",
+  "stage": "remaining",
+  "planned_this_stage": 34,
+  "retained": [
+    {
+      "policy": "rule_macro+none",
+      "seed": 100,
+      "path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__none/seed_100/episode.json"
+    }
+  ],
+  "completed": [
+    {
+      "policy": "rule_macro+none",
+      "seed": 101,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__none/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 104,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__none/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 102,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__none/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 103,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__none/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 103,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__random/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 102,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__random/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 100,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__random/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 101,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__random/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 100,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__bang_bang/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 101,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__bang_bang/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 102,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__bang_bang/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 104,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__random/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 103,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__bang_bang/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 104,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__bang_bang/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 103,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__rule_based/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 102,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__rule_based/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 104,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__rule_based/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 100,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__pid/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 101,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__pid/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 102,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__pid/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 100,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__rule_based/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 101,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__rule_based/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 103,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__pid/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 104,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__pid/seed_104/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 100,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__sac/seed_100/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 101,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__sac/seed_101/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 102,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__sac/seed_102/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 101,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/sac_macro__sac/seed_101/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 102,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/sac_macro__sac/seed_102/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 103,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__sac/seed_103/episode.json"
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 104,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/rule_macro__sac/seed_104/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 100,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/sac_macro__sac/seed_100/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 103,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/sac_macro__sac/seed_103/episode.json"
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 104,
+      "result_path": "/workspace/IBM/temp/dc2grid-repos/dc2grid/outputs/table1_corrected_existing_20261102/cases/sac_macro__sac/seed_104/episode.json"
+    }
+  ],
+  "execution_errors": [],
+  "outcome_based_retries": false
+}

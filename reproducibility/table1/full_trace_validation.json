@@ -1,0 +1,202 @@
+{
+  "schema": "table1-portable-full-trace-comparison-v1",
+  "source_commit": "f477cdea7a1a7461d5d67fa27832c36d45d82388",
+  "replayed_cases": 8,
+  "trace_files_compared": 24,
+  "all_uncompressed_trace_bytes_identical": true,
+  "raw_trace_files_uploaded": false,
+  "comparisons": [
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 100,
+      "trace": "service_hardware.csv.gz",
+      "uncompressed_original_sha256": "2cb81446e274eb73e476f061e1bd95b1c4dbe0ba484f81e8314231ae9890dcac",
+      "uncompressed_replay_sha256": "2cb81446e274eb73e476f061e1bd95b1c4dbe0ba484f81e8314231ae9890dcac",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 100,
+      "trace": "service_macro.csv.gz",
+      "uncompressed_original_sha256": "1fdb79cd090c661e4356a1924e726d3b22db7cc36f628f844a0a442e084540df",
+      "uncompressed_replay_sha256": "1fdb79cd090c661e4356a1924e726d3b22db7cc36f628f844a0a442e084540df",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+bang_bang",
+      "seed": 100,
+      "trace": "recovery_hardware.csv.gz",
+      "uncompressed_original_sha256": "595d88ea7513d9440ad0e9fb802a5854ed78946b9c7e0a57f694ebd7240d2e03",
+      "uncompressed_replay_sha256": "595d88ea7513d9440ad0e9fb802a5854ed78946b9c7e0a57f694ebd7240d2e03",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 100,
+      "trace": "service_hardware.csv.gz",
+      "uncompressed_original_sha256": "58ee5dcc4c600b1677f7579cb7ff3a8d7fee40a9fcab6115be734be9ee02cd03",
+      "uncompressed_replay_sha256": "58ee5dcc4c600b1677f7579cb7ff3a8d7fee40a9fcab6115be734be9ee02cd03",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 100,
+      "trace": "service_macro.csv.gz",
+      "uncompressed_original_sha256": "d80566c26acc72e98f6cb0864e704984c20a0e1f844e4d66d7403f2ebd2fc121",
+      "uncompressed_replay_sha256": "d80566c26acc72e98f6cb0864e704984c20a0e1f844e4d66d7403f2ebd2fc121",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+none",
+      "seed": 100,
+      "trace": "recovery_hardware.csv.gz",
+      "uncompressed_original_sha256": "7cb838039e869529d55be4eec6f7d4d21ef3910704077843adc60b4eed7af1ec",
+      "uncompressed_replay_sha256": "7cb838039e869529d55be4eec6f7d4d21ef3910704077843adc60b4eed7af1ec",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 100,
+      "trace": "service_hardware.csv.gz",
+      "uncompressed_original_sha256": "c9822fcedbce731c942dce726964f137daa0d8a9af784a7b11f2584e773ef4d8",
+      "uncompressed_replay_sha256": "c9822fcedbce731c942dce726964f137daa0d8a9af784a7b11f2584e773ef4d8",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 100,
+      "trace": "service_macro.csv.gz",
+      "uncompressed_original_sha256": "4d272d34536c27a86d238cd935ed106b08a38e617a75f79c100e67ed2b204436",
+      "uncompressed_replay_sha256": "4d272d34536c27a86d238cd935ed106b08a38e617a75f79c100e67ed2b204436",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+pid",
+      "seed": 100,
+      "trace": "recovery_hardware.csv.gz",
+      "uncompressed_original_sha256": "f323ff08e76af16fa81383158c327ff7b3165bd95d33bfbf96bb026c23088844",
+      "uncompressed_replay_sha256": "f323ff08e76af16fa81383158c327ff7b3165bd95d33bfbf96bb026c23088844",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 100,
+      "trace": "service_hardware.csv.gz",
+      "uncompressed_original_sha256": "d1760e617f753864d921be696c6dfd2f91629ff24690f30c1a669cfd794226bc",
+      "uncompressed_replay_sha256": "d1760e617f753864d921be696c6dfd2f91629ff24690f30c1a669cfd794226bc",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 100,
+      "trace": "service_macro.csv.gz",
+      "uncompressed_original_sha256": "f65c7571e04eec6b65cf0efa0c193a185847d4e1afdfaa518dc9387c2ba8e2b3",
+      "uncompressed_replay_sha256": "f65c7571e04eec6b65cf0efa0c193a185847d4e1afdfaa518dc9387c2ba8e2b3",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+random",
+      "seed": 100,
+      "trace": "recovery_hardware.csv.gz",
+      "uncompressed_original_sha256": "01192ee9ad8fdcb4d7966a7c7de1b2cc9cfa1d1a52492d0aa2c415170d950d7b",
+      "uncompressed_replay_sha256": "01192ee9ad8fdcb4d7966a7c7de1b2cc9cfa1d1a52492d0aa2c415170d950d7b",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 100,
+      "trace": "service_hardware.csv.gz",
+      "uncompressed_original_sha256": "a8ec20f1bfff2b633765af60a7b16cc55b1e4849ab3412ad602c2e6054a1b8ee",
+      "uncompressed_replay_sha256": "a8ec20f1bfff2b633765af60a7b16cc55b1e4849ab3412ad602c2e6054a1b8ee",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 100,
+      "trace": "service_macro.csv.gz",
+      "uncompressed_original_sha256": "e3524ee0ae5ba41119158cec09389b2b51f57a669a7eab5dd8900f637111d9ea",
+      "uncompressed_replay_sha256": "e3524ee0ae5ba41119158cec09389b2b51f57a669a7eab5dd8900f637111d9ea",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+rule_based",
+      "seed": 100,
+      "trace": "recovery_hardware.csv.gz",
+      "uncompressed_original_sha256": "3f3cf149a111ceb757d5d48506ff7f6036b8c22f80295af95c36e19aaa0cd375",
+      "uncompressed_replay_sha256": "3f3cf149a111ceb757d5d48506ff7f6036b8c22f80295af95c36e19aaa0cd375",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 100,
+      "trace": "service_hardware.csv.gz",
+      "uncompressed_original_sha256": "603e3cd6f86325b01b5a50b03fa0035a6048c0a7bade6872075783bdd20f7c34",
+      "uncompressed_replay_sha256": "603e3cd6f86325b01b5a50b03fa0035a6048c0a7bade6872075783bdd20f7c34",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 100,
+      "trace": "service_macro.csv.gz",
+      "uncompressed_original_sha256": "a4b85891a906551da97ea4b912a4fd35fa96f1b1fb936b2d6798205bfa516107",
+      "uncompressed_replay_sha256": "a4b85891a906551da97ea4b912a4fd35fa96f1b1fb936b2d6798205bfa516107",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "rule_macro+sac",
+      "seed": 100,
+      "trace": "recovery_hardware.csv.gz",
+      "uncompressed_original_sha256": "b85c9d65bb04e8559555092350b279bfb00daebe430915b8e9b660b0c93d4599",
+      "uncompressed_replay_sha256": "b85c9d65bb04e8559555092350b279bfb00daebe430915b8e9b660b0c93d4599",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 100,
+      "trace": "service_hardware.csv.gz",
+      "uncompressed_original_sha256": "2457bd327fdd3ff7883d501d4a00f7560eb248085673967cc7ae4fde4d6b88f6",
+      "uncompressed_replay_sha256": "2457bd327fdd3ff7883d501d4a00f7560eb248085673967cc7ae4fde4d6b88f6",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 100,
+      "trace": "service_macro.csv.gz",
+      "uncompressed_original_sha256": "c67336264e0746a2ceff151b92a43cde08152248473befdcedfd9eafb0d34fa6",
+      "uncompressed_replay_sha256": "c67336264e0746a2ceff151b92a43cde08152248473befdcedfd9eafb0d34fa6",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 100,
+      "trace": "recovery_hardware.csv.gz",
+      "uncompressed_original_sha256": "6a501c608fdf2876baf76b30dd778f276591e934d91beba9cfe6b69fe6a7e1ef",
+      "uncompressed_replay_sha256": "6a501c608fdf2876baf76b30dd778f276591e934d91beba9cfe6b69fe6a7e1ef",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 103,
+      "trace": "service_hardware.csv.gz",
+      "uncompressed_original_sha256": "c257c66bed608071d03594f4feffef826b3d4edc8b412cb33c5e79f0115a8253",
+      "uncompressed_replay_sha256": "c257c66bed608071d03594f4feffef826b3d4edc8b412cb33c5e79f0115a8253",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 103,
+      "trace": "service_macro.csv.gz",
+      "uncompressed_original_sha256": "5875665cd9b1a2c6a79dd0a7c69aaff5671f523e35542ff293c486586281ee6c",
+      "uncompressed_replay_sha256": "5875665cd9b1a2c6a79dd0a7c69aaff5671f523e35542ff293c486586281ee6c",
+      "byte_identical_after_gzip_decompression": true
+    },
+    {
+      "policy": "sac_macro+sac",
+      "seed": 103,
+      "trace": "recovery_hardware.csv.gz",
+      "uncompressed_original_sha256": "024dd6bdcd142f234184710777d286c37c9547ff7f361f5a453f9ec4b335bec2",
+      "uncompressed_replay_sha256": "024dd6bdcd142f234184710777d286c37c9547ff7f361f5a453f9ec4b335bec2",
+      "byte_identical_after_gzip_decompression": true
+    }
+  ]
+}

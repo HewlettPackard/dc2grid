@@ -1,0 +1,254 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{amsmath,booktabs,array,hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue,
+pdftitle={Table 1: corrected existing-checkpoint comparison and original-code audit}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\newcommand{\numcell}[2]{\begin{tabular}[t]{@{}r@{}}$#1$\\$\pm #2$\end{tabular}}
+\input{table1_values.tex}
+\begin{document}
+
+\section*{1. Corrected Table 1-style comparison}
+\textbf{Existing checkpoints, matched baselines, no new training.}
+This separate report uses the exact low-level ``Retrained SAC'' checkpoint
+from the PID-inclusive Table 2 comparison, plus its compatible original-bidding
+macro SAC partner. It does not replace the original manuscript or the prior
+PID comparison. Table~1A is a newly registered evaluation, not an exact replay
+of the archival producing runs.
+
+\textbf{Table 1A. Corrected, service-only results.}
+Default scenario; \texttt{physical\_v1}; start day 0; bias $\beta=0$;
+seeds 100--104; 24 hours per case. Each cell gives the mean over all five
+cases, followed by $\pm$ sample SD ($n-1$ denominator).
+All SAC labels here mean the corrected checkpoints.
+\begin{center}\small
+\CorrectedServiceTable
+\end{center}
+
+RMSE, warning fraction and age increment are lower-is-better; revenue and
+rewards are higher-is-better within this protocol. The age column is the
+simulated age-fraction increment in $10^{-4}$ units, not battery throughput.
+``Full 24h'' requires all 17,280 fast ticks, 96 full macro windows and no
+native termination. ``All gates'' additionally checks service reserve,
+backlog, warning fraction, work conservation and two-hour recovery.
+
+$^\dagger$\textbf{Diagnostic, not fully qualified.}
+All five learned-macro cases completed service and recovery, but four ended
+service below the 0.20 SOC reserve. Their complete-cohort means are retained;
+they are not recomputed from the single qualifying case.
+Original-bidding PPO and LLM rows are \textbf{not rerun}; old values are not
+inserted into this corrected panel.
+
+\subsection*{What the comparison actually establishes}
+\begin{itemize}
+\setlength{\itemsep}{3pt}
+\item \textbf{Low-level tracking improves relative to matched PID.}
+Retrained SAC has \SACPIDRMSEGainPct\% lower mean RMSE and wins
+\SACPIDRMSEWins/5 paired cases. PID and SAC have identical actual market
+contracts in every window. The smaller SD describes these evaluation cases;
+it is not a claim about stability across independent training runs.
+\item \textbf{It is not a win on every objective.}
+SAC minus PID is \SACPIDRevenueDelta~USD in 24-hour regulation revenue,
++\SACPIDAgeIncreasePct\% in service aging, and \SACPIDCashDelta~USD in
+26-hour grid cash. PID also has the higher mean native rewards.
+The biased peak-date Table 2 comparison is a different panel; its
+SAC/PID economic advantage does not automatically transfer to this nominal one.
+\item \textbf{The learned macro is not an improved bidding result.}
+It has \HighAcceptedBids/\HighBidWindows\ accepted bids:
+mean ask \HighMeanBidPrice\ versus mean posted price
+\HighMeanPostedPrice~USD/MWh. It retains the standing 5 MW commitment.
+The observed low revenue and reserve failures are not hidden by selecting
+another checkpoint after seeing this table.
+\end{itemize}
+
+These are descriptive results for fixed policies and five noise cases,
+not significance tests or fresh calendar-date generalization.
+
+\newpage
+\section*{2. Archived Table 1, kept separate}
+\textbf{Table 1B. Historical values only.}
+The numbers below were extracted from \texttt{camera\_ready.tex},
+lines 614--648, in the original ZIP. They are not new evaluations,
+and their exact producing cases/checkpoint mapping were not recovered.
+The archived caption reports five episodes and 100\% survival.
+No new supplemental qualification is assigned to these old rows.
+\begin{center}\small
+\ArchivedServiceTable
+\end{center}
+
+The same mean/$\pm$SD layout is used for readability.
+``---'' preserves unreported archival quantities; it does not mean zero.
+The original paper has nine configurations, including distinct
+SAC, PPO and LLM macro rows. It is not a table produced by a single SAC policy.
+The SAC-macro RMSE SD is \textbf{626} in the requested archived source;
+the differing README value cannot be adjudicated without producing records.
+
+\subsection*{Why the old and new columns cannot simply be subtracted}
+\begin{itemize}
+\setlength{\itemsep}{4pt}
+\item \textbf{Reward definitions changed.}
+The archived paper explicitly defines throughput reward as
+$\alpha\theta$ and uses mean LMP times normalized facility power as its
+electricity-cost proxy. The old code implements those expressions.
+Served-dynamic-work reward and actual PCC electricity expenditure are
+deliberate changes of reward meaning and scale, not repairs to SAC's
+actor/critic update equations. Negative corrected rewards are not directly
+comparable to the old near-one reward values.
+\item \textbf{The simulated response and inputs changed.}
+Corrected work/idle-power handling, consistent electrical and thermal
+load, a complete modeled grid-import response boundary, a declared
+nominal reference, timestamp-faithful replay and isolated random streams
+change the trajectories seen by every controller.
+The original nominal loader advanced a five-minute source row every
+five seconds; matching a day label does not recreate matching inputs.
+\item \textbf{Evaluation and policy provenance differ.}
+Fast-tick RMSE is used here, aging includes the first transition,
+random-action streams are seeded independently, and classical controllers
+are fresh per case. The original Table 1 producing records are insufficient
+to prove which earlier metric-export path supplied each number.
+New SAC checkpoints were selected before this evaluation, not to maximize
+this new table.
+\end{itemize}
+
+Thus, comparing 229 with 272.6 kW across these panels is neither an isolated
+algorithm improvement nor an isolated regression. The valid current
+SAC/PID comparison is \textbf{within Table 1A}, where both use the same
+declared physical and evaluation protocol.
+
+\newpage
+\section*{3. Protocol, physical checks and economic trade-offs}
+\textbf{Service and recovery are separate.}
+Primary columns use only 24-hour service. A fixed two-hour continuation
+then uses zero market revenue/commitment, full-work and nominal cooling
+controls, and a battery controller targeting initial SOC. Workload,
+weather, grid, reference and RNG states continue; the plant is not reset.
+All \CompletedCases\ cases completed recovery closure.
+
+\textbf{Table 1C. Supplemental quantities, not extra primary columns.}
+Cash is regulation revenue minus metered electricity expenditure over
+the whole 26 hours. It excludes capital cost, a monetized aging charge
+and computing-service income; it is not total business profit.
+\begin{center}\small
+\SupplementalTable
+\end{center}
+
+Cash alone is not task performance: Random has poor tracking and very low
+regulation revenue despite its less-negative grid cash. This original-bidding
+comparison does not add the later economic maximum-capacity service floor,
+credit guard, full-work override or bid-quantity constraint.
+Lower absolute tracking error or battery use under a different commitment
+does not establish equal-service superiority.
+
+\textbf{The only supplemental failures.}
+The learned macro with SAC low ends service at SOC below 0.20 in seeds
+100, 101, 102 and 104. Seed 103 qualifies. All other service checks and
+all two-hour closures pass, including those four cases.
+Recovery does not erase a service-time reserve failure.
+
+\subsection*{Exact primary definitions}
+For each five-second service tick, let $G_t$ be actual signed grid-import
+power and $F_t^{\rm ref}$ the continuing nominal reference in MW:
+\[
+ R_t=1000(F_t^{\rm ref}-G_t),\qquad
+ {\rm RMSE}=\sqrt{\frac{1}{N}\sum_{t=1}^N(D_t-R_t)^2}.
+\]
+This is not RMS of macro-window mean errors. Regulation revenue is summed
+using actual commitment, performance and executed duration.
+Electricity expenditure is $\sum_t {\rm LMP}_t G_t\Delta t_{\rm hours}$.
+Low reward is averaged over fast ticks; macro reward over returned macro
+windows. Warning fraction counts post-step ticks with either zone
+temperature at least $33^\circ$C. Aging is
+$10^4(a_{\rm end,24h}-a_{\rm reset})$, including the first transition.
+
+The additional gates require full service, service-end SOC $\geq0.20$,
+backlog at most 1\% of arrived work, warning fraction at most 0.01,
+work conservation and recovery closure. If any planned case were incomplete,
+no full-horizon primary means would be reported for that row.
+Qualification failures are never removed from otherwise-complete cohort means.
+
+\textbf{Exposure and configuration.}
+Day 0 was a training start date, so this is not a fresh calendar holdout.
+That does not prove exact-cell or trajectory-level training exposure.
+Recorded training/native YAML hashes match; the Table 2 recovery YAML changes
+only three relative data paths to absolute paths. No static market, plant
+or reward-scalar mismatch was found. This is not a causal explanation of
+the high-level policy's rejected bids.
+
+\newpage
+\section*{4. Source audit and reproducibility}
+\textbf{The checkpoint match is explicit.}
+Low SAC: training seed 1007, selected at \LowSelectedSteps\ physical
+transitions (training continued to 2,000,016).
+Macro SAC: seed 1007, selected at \HighSelectedSteps\ macro transitions.
+Its recorded frozen-low hash is exactly the selected low checkpoint.
+They have 18 observations/4 hardware actions and 19 observations/2 bidding
+actions, respectively. The 23-observation/1-action fractional economic
+controllers are different policies and were not substituted.
+
+\begin{small}
+Low model SHA256: \texttt{\LowModelHash}\\
+High model SHA256: \texttt{\HighModelHash}\\
+Registration ID: \texttt{\RegistrationID}\\
+Pre-execution commit: \texttt{\RegistrationCommit}\\
+Preserved source baseline: \texttt{\BaselineCommit}
+\end{small}
+
+\textbf{Independent result audit.}
+\RegisteredCases/\RegisteredCases\ cases are recorded,
+\CompletedCases\ complete service and \QualifiedCases\ pass all supplemental
+gates. The independent analysis passed \RawChecks\ scalar checks over
+\RawTraceFiles\ raw trace files, checking physical tracking, both reward sums,
+settlement duration, price/power integration, work conservation and recovery.
+Exogenous/reference trajectories are paired across policies; endogenous
+frequency is not incorrectly treated as an exogenous fingerprint.
+
+\subsection*{Verified original-code issues, versus deliberate changes}
+The companion \texttt{ORIGINAL\_SAC\_AUDIT.md} provides exact original-revision
+and corrected source links, numerical counterexamples and scope limits:
+\begin{itemize}
+\setlength{\itemsep}{3pt}
+\item \textbf{Physical inconsistencies:} command-based flex credit despite
+unchanged served work; idle power treated as deferrable work; heat/electrical
+load disagreement; incomplete response-meter boundaries.
+\item \textbf{Causal interfaces and clocks:} stale market offers and low-level
+commitments; malformed reset context; ignored custom config; accelerated
+source replay; shared random-stream coupling; nominal-duration settlement
+for an early-ended macro window. The returned RegD telemetry, not the
+original fast reward's observed-signal timing, was mismatched.
+\item \textbf{Trainer/configuration defects:} the checked-in macro SAC trainer
+used a rule executor rather than the claimed frozen low SAC; ignored
+profile/device settings; misleading checkpoint seed labels; wrong callback
+interfaces and a 287-tick ``survival'' threshold for a 17,280-tick task.
+This proves checked-in behavior, not an unknown historical model's producer.
+\item \textbf{Reporting defects:} window-mean instead of fast-tick macro RMSE,
+omitted first aging increment, missing no-agent fast metrics, RNG/controller
+state leakage, survival based on macro call count, and inconsistent export
+or filtering paths. Missing historical producing records limit attribution.
+\end{itemize}
+
+The throughput/cost-proxy redesign, standardized reference, wider training
+coverage, independent fits, early checkpoint selection and added recovery are
+not all ``bug fixes.'' No one-factor ablation assigns the gains to each change.
+No faulty SB3 SAC update equation was established.
+The original simple BESS already used actual SOC-limited output.
+
+\textbf{Remaining or newly introduced limitations are not concealed.}
+These include imperfect RegD window centering, a fixed-five-second calibration,
+the voltage/PCC interface and energy-equivalent workload approximation.
+A newer corrected macro-Box sampling-metadata defect is separately labelled:
+finite real-observation inference works, but generic observation-space
+sampling can fail. The frozen simulator and checkpoint bytes were not
+silently changed to improve this table.
+
+\textbf{Machine-readable evidence.}
+\path{table1_values.json} and \path{table1_cells.csv} record every
+displayed metric, precision and source/model identity.
+\path{reports/table1_report.json} contains all 35 audited case summaries;
+\path{reports/raw_trace_inventory.csv} identifies the retained raw traces.
+The study README gives re-audit and rendering commands.
+No new training, LLM invocation, manuscript replacement or remote publication
+was performed by this study.
+\end{document}
