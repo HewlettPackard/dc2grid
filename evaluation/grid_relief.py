@@ -49,6 +49,7 @@ import json
 import os
 import sys
 import tempfile
+import warnings
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
@@ -59,6 +60,9 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "evaluation"))
+
+from c2g_env.experiments.identity import file_fingerprint, source_id
+from c2g_env.semantics import SIMULATION_MODES
 
 STRESS_QUANTILE = 0.90
 F_DEADBAND_HZ = 0.2
@@ -76,14 +80,25 @@ METRIC_TRACE_COLUMNS = (
     "p_fac_mw", "load_norm", "f_dev_hz", "dp_act_kw", "dp_dem_kw",
     "err_kw", "throttle", "backlog_kw", "lmp", "load_mw",
 )
+PHYSICAL_TRACE_COLUMNS = (
+    "timestamp", "p_grid_import_mw", "p_reference_mw", "facility_relief_kw",
+    "work_arrived_kwh", "work_served_kwh", "backlog_work_kwh", "throughput_ratio",
+    "p_it_A_mw", "p_it_B_mw", "p_chiller_mw", "p_conversion_loss_mw",
+    "regd_observed",
+)
 
 
-def _market_config(market: str) -> str:
+def _market_config(market: str, directory: str, simulation_mode: str) -> str:
     # The grid simulator reads grid_market/nyiso_zone from the *global* block, not the scenario.
     cfg = yaml.safe_load((ROOT / "c2g_env" / "config.yaml").read_text())
     cfg["global"]["grid_market"] = market
     cfg["global"]["nyiso_zone"] = None
-    path = Path(tempfile.gettempdir()) / f"c2g_grid_relief_{market}.yaml"
+    cfg["global"]["simulation_mode"] = simulation_mode
+    for block in cfg.values():
+        if simulation_mode == "physical_v1" and isinstance(block, dict) and "weather_market" in block:
+            block["weather_market"] = market
+            block["grid_market"] = market
+    path = Path(directory) / f"{market}.yaml"
     path.write_text(yaml.safe_dump(cfg))
     return str(path)
 
@@ -123,23 +138,25 @@ def _bias_regd(grid, day_load: np.ndarray, beta: float) -> None:
 def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
                  macro: str = "rule_macro", macro_model_dir: str | None = None,
                  config_path: str | None = None, start_day: int | None = None,
-                 regd_bias: float = 0.0, trace_dir: str | None = None) -> pd.DataFrame:
+                 regd_bias: float = 0.0, trace_dir: str | None = None,
+                 simulation_mode: str = "physical_v1") -> pd.DataFrame:
     import torch
     torch.set_num_threads(1)
     import run_benchmark as rb
 
     from baselines.rule_based_macro import RuleBasedMacroController
-    from c2g_env.env_high_level import _SUBSTEPS
     from c2g_env.obs_indices import Fast as _F
 
     inner_fn = None
     ctrl = None
     if hw != "none":
-        inner_env = rb._make_env(scenario=scenario)
+        inner_env = rb._make_env(scenario=scenario, config_path=config_path,
+                                 simulation_mode=simulation_mode)
         inner_env.reset(seed=0)
         ctrl = rb._make_inner_controller(hw, env=inner_env, scenario=scenario,
                                          seed=seed, model_dir=model_dir)
         inner_fn = lambda obs, _a, c=ctrl: c.predict(obs)[0]  # noqa: E731
+        inner_env.close()
 
     rows: list[dict] = []
 
@@ -158,17 +175,21 @@ def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
             "committed_observed_mw": float(pre_obs[_F.COMMITTED] * env._committed_max_mw),
             "committed_actual_mw": float(env._fast_env.committed_mw),
             **{key: info[key] for key in TRACE_INFO_FIELDS},
+            **{key: info[key] for key in PHYSICAL_TRACE_COLUMNS if key in info},
+            **({"load_mw": info["grid_load_mw"]} if "grid_load_mw" in info else {}),
         })
 
     env = rb._make_macro_env(scenario=scenario, inner_action_fn=inner_fn, sub_step_callback=cb,
-                             config_path=config_path)
+                             config_path=config_path, simulation_mode=simulation_mode,
+                             start_day=(start_day or 0) if simulation_mode == "physical_v1" else 0,
+                             regd_load_bias=regd_bias if simulation_mode == "physical_v1" else 0)
     obs, _ = env.reset(seed=seed)
     initial_hardware_obs = env._last_hw_obs.tolist()
-    if start_day is not None:
+    if simulation_mode == "legacy_v0" and start_day is not None:
         day_load = _align_calendar(env._fast_env, start_day)
         if regd_bias:
             _bias_regd(env._fast_env._grid, day_load, regd_bias)
-    elif regd_bias:
+    elif simulation_mode == "legacy_v0" and regd_bias:
         raise ValueError("--regd-load-bias requires --start-days (calendar-aligned load)")
     if macro == "rule_macro":
         agent = RuleBasedMacroController()
@@ -183,7 +204,7 @@ def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
         macro_rows.append({
             **{key: value for key, value in info.items() if key != "last_inner_info"},
             "duration_hours": info["sub_steps_run"] * env._fast_env._dt / 3600.0,
-            "settlement_hours": _SUBSTEPS * env._fast_env._dt / 3600.0,
+            "settlement_hours": info["settlement_hours"],
             "terminated": term,
             "truncated": trunc,
         })
@@ -192,14 +213,24 @@ def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
     g = env._fast_env._grid
     df = pd.DataFrame(rows)
     macro_df = pd.DataFrame(macro_rows)
-    df["load_mw"] = df["load_norm"] * float(np.max(g._load_mw))
+    if simulation_mode == "legacy_v0":
+        df["load_mw"] = df["load_norm"] * float(np.max(g._load_mw))
     df.attrs.update(
         load_median=float(g._load_median), lmp_base=float(g.lmp_base_usd),
         lmp_slope=float(g.lmp_slope), dt_s=float(env._fast_env._dt),
         c_max=float(getattr(env, "_committed_max_mw", 30.0)),
         revenue_usd=revenue,
+        simulation_mode=simulation_mode,
+        expected_ticks=env._fast_env._episode_ticks,
+        terminated=bool(term),
+        truncated=bool(trunc),
+        weather_source=env._fast_env._weather.source,
         diagnostics=_episode_diagnostics(df, macro_df, float(env._fast_env._dt)),
     )
+    if simulation_mode == "physical_v1":
+        df.attrs["stress_threshold_mw"] = float(np.quantile(
+            g._calendar_load_mw[:env._fast_env._episode_ticks], STRESS_QUANTILE,
+        ))
     if trace_dir is not None:
         directory = Path(trace_dir)
         directory.mkdir(parents=True, exist_ok=False)
@@ -215,11 +246,27 @@ def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
             "terminated": bool(term), "truncated": bool(trunc),
             "metric_context": {key: value for key, value in df.attrs.items() if key != "diagnostics"},
             "diagnostics": df.attrs["diagnostics"],
+            "simulation_mode": simulation_mode,
+            "source_id": source_id(ROOT),
+            "config": {"global": env._fast_env._gcfg, "scenario": env._fast_env._scfg,
+                       "reward": env._fast_env._rcfg},
+            "data_files": {
+                name: file_fingerprint(path)
+                for name, path in {
+                    "load": ROOT / "data/processed/energy" / f"{g._market.zone_csv}.csv",
+                    "batch": ROOT / "data/processed/workload_traces/batch_v2023.csv",
+                    "rigid": ROOT / "data/processed/workload_traces/genai_v2026.csv",
+                    "inference": ROOT / "data/processed/workload_traces/dlrm_v2025.csv",
+                    "weather": ROOT / "data/processed/weather" / f"{env._fast_env._weather._preset.zone_file}.csv",
+                }.items()
+            },
         }
         (directory / "episode.json").write_text(
             json.dumps(context, indent=2, allow_nan=False), encoding="utf-8",
         )
-    return df.loc[:, list(METRIC_TRACE_COLUMNS)]
+    env.close()
+    extra = [key for key in PHYSICAL_TRACE_COLUMNS if key in df]
+    return df.loc[:, list(METRIC_TRACE_COLUMNS) + extra]
 
 
 def _episode_diagnostics(hardware, macro, dt_s):
@@ -253,7 +300,7 @@ def _lmp(load_mw, a) -> np.ndarray:
     return np.clip(a["lmp_base"] + a["lmp_slope"] * excess_gw, 0.0, 500.0)
 
 
-def _metrics(A: pd.DataFrame, B: pd.DataFrame) -> dict[str, float]:
+def _legacy_metrics(A: pd.DataFrame, B: pd.DataFrame) -> dict[str, float]:
     agent_ticks, baseline_ticks = len(A), len(B)
     n = min(agent_ticks, baseline_ticks)
     A, B, at = A.iloc[:n], B.iloc[:n], A.attrs
@@ -261,7 +308,7 @@ def _metrics(A: pd.DataFrame, B: pd.DataFrame) -> dict[str, float]:
     a, b = A["p_fac_mw"].to_numpy(), B["p_fac_mw"].to_numpy()
     dP = b - a
     dt_h = at["dt_s"] / 3600.0
-    S = L >= np.quantile(L, STRESS_QUANTILE)
+    S = L >= at.get("stress_threshold_mw", np.quantile(L, STRESS_QUANTILE))
     w = np.maximum(0.0, L - at["load_median"])
     dlmp = _lmp(L + b, at) - _lmp(L + a, at)
     f = A["f_dev_hz"].to_numpy()
@@ -303,6 +350,71 @@ def _metrics(A: pd.DataFrame, B: pd.DataFrame) -> dict[str, float]:
     }
 
 
+def _metrics(A: pd.DataFrame, B: pd.DataFrame) -> dict:
+    mode = A.attrs.get("simulation_mode", "legacy_v0")
+    if mode != B.attrs.get("simulation_mode", "legacy_v0"):
+        raise ValueError("Cannot compare trajectories with different simulation semantics")
+    expected = A.attrs.get("expected_ticks", len(A))
+    if expected != B.attrs.get("expected_ticks", len(B)):
+        raise ValueError("Paired trajectories must have the same planned horizon")
+    n = min(len(A), len(B))
+    qualified = len(A) == len(B) == expected and not (
+        A.attrs.get("terminated", False) or B.attrs.get("terminated", False)
+    )
+    audit = {
+        "agent_ticks": len(A), "baseline_ticks": len(B), "paired_ticks": n,
+        "expected_ticks": expected, "qualified": qualified,
+        "comparison_status": "complete" if qualified else "incomplete_or_terminated",
+        "observed_revenue_usd": A.attrs["revenue_usd"],
+    }
+    if mode == "physical_v1":
+        for key in ("timestamp", "load_mw", "regd_observed", "work_arrived_kwh"):
+            if not np.array_equal(A[key].to_numpy()[:n], B[key].to_numpy()[:n]):
+                raise ValueError(f"Paired exogenous trajectories differ: {key}")
+        if not qualified:
+            warnings.warn(
+                f"Unqualified grid-relief comparison: agent {len(A)}, baseline {len(B)}, "
+                f"planned {expected} ticks; no common-prefix performance score",
+                RuntimeWarning, stacklevel=2,
+            )
+            unavailable = (*RELIEF_KEYS, "rmse_kw", "revenue_usd", "f_rms_mhz",
+                           "f_rms_base_mhz", "dP_dem_stress_mw", "dP_act_stress_mw",
+                           "throughput_ratio", "pcc_relief_stress_mw")
+            return {**dict.fromkeys(unavailable, float("nan")), **audit}
+    result = {**_legacy_metrics(A, B), **audit}
+    if mode == "physical_v1":
+        stress = A["load_mw"].to_numpy() >= A.attrs["stress_threshold_mw"]
+        result.update(
+            pcc_relief_stress_mw=float(
+                (B["p_grid_import_mw"].to_numpy() - A["p_grid_import_mw"].to_numpy())[stress].mean()
+            ),
+            throughput_ratio=float(A["throughput_ratio"].mean()),
+            work_arrived_kwh=float(A["work_arrived_kwh"].sum()),
+            work_served_kwh=float(A["work_served_kwh"].sum()),
+            backlog_final_kwh=float(A["backlog_work_kwh"].iloc[-1]),
+            facility_relief_mwh=float(
+                (B["p_fac_mw"] - A["p_fac_mw"]).sum() * A.attrs["dt_s"] / 3600
+            ),
+        )
+    return result
+
+
+def _aggregate_results(per_episode: pd.DataFrame, keys: list[str], *, strict: bool) -> pd.DataFrame:
+    numeric = per_episode.select_dtypes(include=["number", "bool"]).columns.difference(keys + ["seed"])
+    grouped = per_episode.groupby(keys, sort=False)
+    aggregate = grouped[list(numeric)].agg(["mean", "std"])
+    aggregate.columns = [f"{c}_std" if stat == "std" else c for c, stat in aggregate.columns]
+    aggregate["attempts"] = grouped.size()
+    aggregate["qualified_count"] = grouped["qualified"].sum()
+    if strict:
+        incomplete = aggregate["qualified_count"] != aggregate["attempts"]
+        audit_columns = {"attempts", "qualified_count", "qualified", "qualified_std",
+                         "expected_ticks", "agent_ticks", "baseline_ticks", "paired_ticks",
+                         "expected_ticks_std", "agent_ticks_std", "baseline_ticks_std", "paired_ticks_std"}
+        aggregate.loc[incomplete, [key for key in aggregate.columns if key not in audit_columns]] = np.nan
+    return aggregate
+
+
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--hw", nargs="+", default=["rule_based", "pid", "bang_bang", "sac"],
@@ -312,20 +424,24 @@ def main() -> None:
     p.add_argument("--scenarios", nargs="+", default=["default"])
     p.add_argument("--markets", nargs="+", default=["nyiso_nyc"],
                    help="Grid market presets; nyiso_nyc reproduces the shipped config.")
-    p.add_argument("--start-days", nargs="+", default=["legacy"],
+    p.add_argument("--start-days", nargs="+", default=["0"],
                    help="Calendar day-of-year of the load file to replay at real time; 'legacy' = shipped indexing.")
     p.add_argument("--regd-load-bias", nargs="+", type=float, default=[0.0],
                    help="Add beta * (day-ahead load anomaly) to RegD; requires calendar start days.")
     p.add_argument("--n_episodes", type=int, default=5)
     p.add_argument("--seed", type=int, default=100)
-    p.add_argument("--workers", type=int, default=min(75, os.cpu_count() or 1))
+    p.add_argument("--workers", type=int, default=min(4, os.cpu_count() or 1))
+    p.add_argument("--simulation-mode", choices=SIMULATION_MODES, default="physical_v1")
     p.add_argument("--output", default="evaluation/results/grid_relief")
     p.add_argument("--trace-dir", help="Save per-rollout hardware/macro CSVs and checkpoint identities.")
     args = p.parse_args()
 
     ctrls = ["none"] + args.hw
     seeds = [args.seed + i for i in range(args.n_episodes)]
-    cfgs = {m: _market_config(m) for m in args.markets}
+    if args.n_episodes < 1 or args.workers < 1:
+        p.error("--n_episodes and --workers must be positive")
+    if args.simulation_mode == "physical_v1" and "legacy" in args.start_days:
+        p.error("'legacy' start days require --simulation-mode legacy_v0")
     days = [None if d == "legacy" else int(d) for d in args.start_days]
     combos = [(sc, m, d, b) for sc in args.scenarios for m in args.markets
               for d in days for b in args.regd_load_bias]
@@ -335,13 +451,16 @@ def main() -> None:
         trace_dir = None if args.trace_dir is None else str(
             Path(args.trace_dir) / f"{sc}_{m}_d{d}_b{b:g}_{h}_s{s}"
         )
-        return (hw, sc, s, args.hw_model_dir, macro, args.macro_model_dir, cfgs[m], d, b, trace_dir)
+        return (hw, sc, s, args.hw_model_dir, macro, args.macro_model_dir, cfgs[m], d, b,
+                trace_dir, args.simulation_mode)
 
-    jobs = {(*c, h, s): _job(*c, h, s) for c in combos for h in ctrls for s in seeds}
-    print(f"Running {len(jobs)} episodes on {args.workers} workers ...", flush=True)
-    with ProcessPoolExecutor(max_workers=min(len(jobs), args.workers)) as ex:
-        futs = {k: ex.submit(_run_episode, *v) for k, v in jobs.items()}
-        traces = {k: f.result() for k, f in futs.items()}
+    with tempfile.TemporaryDirectory(prefix="c2g-grid-relief-") as directory:
+        cfgs = {m: _market_config(m, directory, args.simulation_mode) for m in args.markets}
+        jobs = {(*c, h, s): _job(*c, h, s) for c in combos for h in ctrls for s in seeds}
+        print(f"Running {len(jobs)} episodes on {args.workers} workers ...", flush=True)
+        with ProcessPoolExecutor(max_workers=min(len(jobs), args.workers)) as ex:
+            futs = {k: ex.submit(_run_episode, *v) for k, v in jobs.items()}
+            traces = {k: f.result() for k, f in futs.items()}
 
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -350,22 +469,23 @@ def main() -> None:
         for h in args.hw:
             for s in seeds:
                 per_ep.append({"scenario": sc, "market": m, "day": "legacy" if d is None else d,
+                               "simulation_mode": args.simulation_mode,
                                "regd_bias": b, "hw": h, "seed": s,
                                **_metrics(traces[(sc, m, d, b, h, s)], traces[(sc, m, d, b, "none", s)]),
                                **traces[(sc, m, d, b, h, s)].attrs["diagnostics"]})
     per_ep_df = pd.DataFrame(per_ep)
     keys = ["scenario", "market", "day", "regd_bias", "hw"]
-    agg = per_ep_df.drop(columns="seed").groupby(keys, sort=False).agg(["mean", "std"])
-    agg.columns = [f"{c}_{st}" if st == "std" else c for c, st in agg.columns]
+    agg = _aggregate_results(per_ep_df, keys, strict=args.simulation_mode == "physical_v1")
 
-    t_crit = T_CRIT_ONE_SIDED_95.get(len(seeds) - 1, 1.645)
+    from scipy.stats import t as student_t
+    t_crit = float(student_t.ppf(0.95, len(seeds) - 1)) if len(seeds) > 1 else float("nan")
     for k in RELIEF_KEYS:
         t = agg[k] / (agg[f"{k}_std"] / np.sqrt(len(seeds)))
         agg[f"{k}_sig_pos"] = t > t_crit
     agg["f_rms_reduction_pct"] = 100 * (1 - agg["f_rms_mhz"] / agg["f_rms_base_mhz"])
     agg["n_relief_sig_pos"] = agg[[f"{k}_sig_pos" for k in RELIEF_KEYS]].sum(axis=1)
 
-    tag = (args.scenarios[0] if len(args.scenarios) == 1 else "sweep")
+    tag = (args.scenarios[0] if len(args.scenarios) == 1 else "sweep") + f"_{args.simulation_mode}"
     if args.markets != ["nyiso_nyc"]:
         tag += "_markets"
     if args.start_days != ["legacy"]:
@@ -377,7 +497,14 @@ def main() -> None:
     meta = {"scenarios": args.scenarios, "markets": args.markets, "seeds": seeds,
             "start_days": args.start_days, "regd_load_bias": args.regd_load_bias,
             "regd_bias_definition": "r_t + beta * clip((L_t - mean_day) / (max_day - mean_day), -1, 1); "
-                                    "evaluation-only patch, env code unchanged",
+                                    "physical_v1 applies before reset observation; legacy_v0 evaluation-only patch",
+            "simulation_mode": args.simulation_mode,
+            "source_id": source_id(ROOT),
+            "weather_alignment": (
+                "calendar climatology from source year, not coincident historical weather"
+                if args.simulation_mode == "physical_v1" else "historical row-index replay"
+            ),
+            "comparison_policy": "all attempts retained; physical_v1 incomplete groups have no performance estimate",
             "hw_model_dir": args.hw_model_dir, "macro_model_dir": args.macro_model_dir,
             "trace_dir": args.trace_dir,
             "diagnostic_fields": list(next(iter(traces.values())).attrs["diagnostics"]),
@@ -385,7 +512,7 @@ def main() -> None:
             "baseline": "rule_macro, no inner controller",
             "market_override": "global.grid_market (scenario grid_market is ignored by the env)"}
     Path(f"{out}_{tag}_meta.json").write_text(json.dumps(meta, indent=2))
-    cols = ["dP_stress_mw", "dP_stress_mw_std", "LFR_pct", "SPDR_pct", "LWCF_pct", "n_relief_sig_pos",
+    cols = ["attempts", "qualified_count", "dP_stress_mw", "dP_stress_mw_std", "LFR_pct", "SPDR_pct", "LWCF_pct", "n_relief_sig_pos",
             "dP_dem_stress_mw", "dP_act_stress_mw", "rmse_kw", "revenue_usd", "f_rms_reduction_pct",
             "throughput_ratio"]
     with pd.option_context("display.width", 250, "display.max_rows", 500,

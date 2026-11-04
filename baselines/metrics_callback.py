@@ -278,6 +278,7 @@ def _make_episode_buffer() -> dict:
         "bess_actual_kw": [], "p_facility_mw": [],
         "spike": [], "thermal_viol": [],
         "tick": 0, "terminated": 0,
+        "episode_ticks": None, "episode_completed": False,
         "actions": [],  # list of (4,) arrays
         "r_throughput": [], "r_tracking": [], "r_thermal": [],
         "r_soc": [], "r_freq": [], "r_volt": [], "r_backlog": [],
@@ -303,6 +304,9 @@ def _accumulate_step(buf: dict, reward: float, info: dict) -> None:
                 or info.get("temp_B", 0) > T_WARN_B) else 0.0
     )
     buf["tick"] = info.get("tick", 0)
+    if "episode_ticks" in info:
+        buf["episode_ticks"] = info["episode_ticks"]
+        buf["episode_completed"] = bool(info["truncated"] and not info["terminated"])
     if info.get("thermal_fault", False):
         buf["terminated"] = 1
 
@@ -346,6 +350,8 @@ def _compute_episode_metrics(buf: dict) -> dict[str, float]:
 
     ep_len   = buf["tick"]
     survived = 1.0 if ep_len >= 287 else 0.0
+    if buf["episode_ticks"] is not None:
+        survived = float(ep_len >= buf["episode_ticks"] and buf["episode_completed"])
     total_r  = float(np.sum(buf["rewards"]))
     mean_r   = _mean(buf["rewards"])
 

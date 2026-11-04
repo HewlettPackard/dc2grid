@@ -109,6 +109,9 @@ class WorkloadState:
     tick:           int     # Current trace tick index
     backlog_kw:     float   # Deferred batch work remaining in queue           [kW]
     avg_delay_steps: float  # Little's Law average delay (steps)
+    work_arrived_kwh: float = 0.0
+    work_served_kwh: float = 0.0
+    backlog_work_kwh: float = 0.0
 
 
 class WorkloadOrchestrator:
@@ -150,13 +153,17 @@ class WorkloadOrchestrator:
         n_racks_a_flex: int | None = None,
         n_racks_a_base: int | None = None,
         n_racks_b: int | None = None,
+        physical_accounting: bool = False,
+        start_day: int = 0,
     ) -> None:
         self.dt = dt_seconds
+        self.physical_accounting = physical_accounting
+        self._start_tick = int(start_day * 86400 / dt_seconds)
         self._rng = np.random.default_rng(seed)
         self._n_racks_a_flex = int(n_racks_a_flex) if n_racks_a_flex is not None else _ZONE_A_N_RACKS_FLEX
         self._n_racks_a_base = int(n_racks_a_base) if n_racks_a_base is not None else _ZONE_A_N_RACKS_BASE
         self._n_racks_b      = int(n_racks_b)      if n_racks_b      is not None else _ZONE_B_N_RACKS
-        self._tick: int = 0
+        self._tick: int = self._start_tick
         # Traces are at 300-s resolution; this many env steps share each tick.
         self._steps_per_trace_tick: int = max(1, round(300.0 / dt_seconds))
 
@@ -204,6 +211,8 @@ class WorkloadOrchestrator:
         self._p_flex_max_kw: float = float(_rack_power_kw(
             1.0, self._n_racks_a_flex, _P_IDLE_A_KW, _P_MAX_A_KW, _ALPHA_A
         ))
+        self.p_flex_idle_kw = self._n_racks_a_flex * _P_IDLE_A_KW
+        self.work_capacity_kw = self._p_flex_max_kw - self.p_flex_idle_kw
 
     # ------------------------------------------------------------------
     # Public API
@@ -236,7 +245,9 @@ class WorkloadOrchestrator:
         p_base_a = float(self._p_base_a_arr[idx])
         p_base_b = float(self._p_base_b_arr[idx])
         p_base   = p_base_a + p_base_b
-        arrived  = float(self._p_flex_arr[idx])   # new batch work this tick
+        nominal_kw = float(self._p_flex_arr[idx])
+        idle_kw = self.p_flex_idle_kw if self.physical_accounting else 0.0
+        arrived = max(0.0, nominal_kw - idle_kw)
         is_spike = bool(self._spike_arr[idx])
 
         # --- Queue model -------------------------------------------------
@@ -247,7 +258,7 @@ class WorkloadOrchestrator:
         self._backlog_kw += arrived
 
         # Serve up to hardware capacity (DVFS throttle limits throughput)
-        capacity_kw = self._p_flex_max_kw * throttle_batch
+        capacity_kw = (self._p_flex_max_kw - idle_kw) * throttle_batch
         served_kw   = min(self._backlog_kw, capacity_kw)
         self._backlog_kw  -= served_kw
         self._total_served_kw += served_kw
@@ -263,19 +274,22 @@ class WorkloadOrchestrator:
             p_base_kw       = p_base,
             p_base_a_kw     = p_base_a,
             p_base_b_kw     = p_base_b,
-            p_flex_nom_kw   = arrived,
-            p_flex_kw       = served_kw,
-            p_total_it_kw   = p_base + served_kw,
+            p_flex_nom_kw   = nominal_kw,
+            p_flex_kw       = idle_kw + served_kw,
+            p_total_it_kw   = p_base + idle_kw + served_kw,
             throttle        = throttle_batch,
             is_spike_active = is_spike,
             tick            = idx,
             backlog_kw      = self._backlog_kw,
             avg_delay_steps = avg_delay_steps,
+            work_arrived_kwh = arrived * self.dt / 3600.0,
+            work_served_kwh = served_kw * self.dt / 3600.0,
+            backlog_work_kwh = self._backlog_kw * self.dt / 3600.0,
         )
 
     def reset(self, seed: int | None = None) -> None:
         """Reset trace pointer and queue state to the beginning."""
-        self._tick = 0
+        self._tick = self._start_tick
         self._backlog_kw           = 0.0
         self._delay_accum_kw_steps = 0.0
         self._total_served_kw      = 0.0

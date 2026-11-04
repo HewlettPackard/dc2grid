@@ -105,6 +105,7 @@ def run_hierarchical_episode(
     seed: int,
     episode_number: int = 0,
     record_transitions: bool = True,
+    simulation_mode: str = "physical_v1",
 ) -> dict[str, float]:
     """Run one macro episode with SAC-high driving SAC-low and return metrics."""
 
@@ -113,7 +114,7 @@ def run_hierarchical_episode(
         action, _ = inner_agent.predict(inner_obs, deterministic=True)
         return action
 
-    env = C2GMacroEnv(scenario=scenario, inner_action_fn=inner_action_fn)
+    env = C2GMacroEnv(scenario=scenario, inner_action_fn=inner_action_fn, simulation_mode=simulation_mode)
     obs, _ = env.reset(seed=seed)
 
     combo_name = f"{macro_agent.algo_name}+{inner_agent.algo_name}"
@@ -137,6 +138,7 @@ def run_hierarchical_episode(
     perf_scores: list[float] = []
     committed_mws: list[float] = []
     tracking_errs: list[float] = []
+    tracking_steps = 0
     temp_a_maxes: list[float] = []
     temp_b_maxes: list[float] = []
     flex_reductions: list[float] = []
@@ -176,7 +178,11 @@ def run_hierarchical_episode(
         elec_costs.append(float(info.get("electricity_cost", 0.0)))
         perf_scores.append(float(info.get("perf_score", 0.0)))
         committed_mws.append(float(info.get("committed_mw", 0.0)))
-        tracking_errs.append(float(info.get("mean_tracking_err", 0.0)) ** 2)
+        if env._physical:
+            tracking_errs.append(info["tracking_error_sq_sum"])
+            tracking_steps += info["sub_steps_run"]
+        else:
+            tracking_errs.append(float(info.get("mean_tracking_err", 0.0)) ** 2)
         temp_a_maxes.append(float(info.get("temp_A_max", 0.0)))
         temp_b_maxes.append(float(info.get("temp_B_max", 0.0)))
         flex_reductions.append(float(info.get("mean_flex_reduction_kw", 0.0)))
@@ -204,7 +210,9 @@ def run_hierarchical_episode(
         "total_elec_cost":      float(np.sum(elec_costs)),
         "mean_perf_score":      float(np.mean(perf_scores)),
         "mean_committed_mw":    float(np.mean(committed_mws)),
-        "tracking_rmse":        float(np.sqrt(np.mean(tracking_errs))) if tracking_errs else 0.0,
+        "tracking_rmse":        float(np.sqrt(
+            np.sum(tracking_errs) / tracking_steps if env._physical else np.mean(tracking_errs)
+        )) if tracking_errs else 0.0,
         "temp_A_max":           float(np.max(temp_a_maxes)) if temp_a_maxes else 0.0,
         "temp_B_max":           float(np.max(temp_b_maxes)) if temp_b_maxes else 0.0,
         "episode_length":       n_steps,
@@ -232,6 +240,7 @@ def benchmark(
     macro_model_dir: Path,
     inner_model_dir: Path,
     record_transitions: bool,
+    simulation_mode: str = "physical_v1",
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
 
@@ -256,6 +265,7 @@ def benchmark(
                 seed=seed_start + ep,
                 episode_number=ep,
                 record_transitions=record_transitions,
+                simulation_mode=simulation_mode,
             )
             ep_metrics.append(m)
 
@@ -272,6 +282,7 @@ def benchmark(
 
         row: dict[str, Any] = {
             "scenario":   scenario,
+            "simulation_mode": simulation_mode,
             "agent":      combo_name,
             "n_episodes": n_episodes,
             "wall_time_s": round(elapsed, 2),
@@ -360,6 +371,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--n_episodes", type=int, default=5)
     parser.add_argument("--seed", type=int, default=100)
+    parser.add_argument("--simulation-mode", choices=["physical_v1", "legacy_v0"], default="physical_v1")
     parser.add_argument(
         "--macro-model-dir", type=str, default=None,
         help="Directory containing the trained SAC macro model "
@@ -420,6 +432,7 @@ if __name__ == "__main__":
             macro_model_dir=macro_dir,
             inner_model_dir=inner_dir,
             record_transitions=args.record_transitions,
+            simulation_mode=args.simulation_mode,
         )
         all_rows.extend(rows)
 

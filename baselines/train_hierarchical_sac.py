@@ -1,34 +1,25 @@
 """
-baselines/train_hierarchical_sac.py  —  Rule-Based Low + SAC High Hierarchical
+baselines/train_hierarchical_sac.py  —  Frozen Hardware + SAC Macro
 ================================================================================
 Two-phase hierarchical pipeline:
 
-  Phase 1  Rule-based low-level controller (no training needed)
+  Phase 1  Select a separately trained hardware SAC checkpoint
   Phase 2  Train SAC high-level agent on C2GMacroEnv (15-minute bidding)
-           using the rule-based controller as the inner policy
+           with that exact hardware policy frozen
 
-The rule-based controller (RuleBasedMacroController) acts as the frozen
-inner policy — it doesn't need training, so Phase 1 is instant.
+The rule-based hardware controller is an explicitly selected alternative,
+not an implicit replacement for the learned hardware policy.
 
 Usage
 -----
-  # Default (seed=42, 400k high-level steps)
-  python baselines/train_hierarchical_sac.py
+  # Staged SAC (hardware checkpoint must match the environment semantics)
+  python -m baselines.train_hierarchical_sac algo=sac \\
+      +hrl.inner_checkpoint=/path/to/hardware/final_model.zip
 
-  # Custom seed
-  python baselines/train_hierarchical_sac.py experiment.seed=100
+  # Explicit classical-inner baseline
+  python -m baselines.train_hierarchical_sac algo=sac +hrl.inner_controller=rule_based
 
-  # Multiple seeds (Hydra multirun)
-  python baselines/train_hierarchical_sac.py --multirun experiment.seed=1,2,3,42,100
-
-  # Custom output directory
-  python baselines/train_hierarchical_sac.py hydra.run.dir=outputs/my_experiment/run1
-
-  # Override high-level training steps
-  python baselines/train_hierarchical_sac.py +hrl.phase2_steps=800000
-
-  # Override scenario
-  python baselines/train_hierarchical_sac.py scenario=scenario_a
+  # Add experiment.seed=N, +hrl.phase2_steps=N, or scenario=scenario_a as needed.
 
 Outputs
 -------
@@ -53,7 +44,10 @@ from stable_baselines3.common.env_util import make_vec_env
 
 from c2g_env import C2GMacroEnv
 from baselines.rule_based_mpc import RuleBasedController
-from baselines.metrics_callback import C2GMetricsCallback
+from baselines.macro_metrics_callback import C2GMacroMetricsCallback
+from baselines._hydra_compat import plant_overrides_from_cfg, simulation_options_from_cfg
+from baselines.sac_provenance import bind_training_context
+from c2g_env.experiments.identity import check_policy_semantics, file_fingerprint
 
 
 # ---------------------------------------------------------------------------
@@ -74,13 +68,31 @@ def _make_rule_based_inner_fn():
     return inner_fn
 
 
+def _make_sac_inner_fn(checkpoint: str, simulation_mode: str):
+    path = Path(checkpoint)
+    if path.is_dir():
+        path = path / "final_model.zip"
+    if path.suffix != ".zip":
+        path = path.with_suffix(".zip")
+    model = SAC.load(str(path), device="cpu")
+    check_policy_semantics(model, simulation_mode)
+    if model.observation_space.shape != (18,) or model.action_space.shape != (4,):
+        raise ValueError("The frozen hardware SAC must have 18 observations and 4 actions")
+
+    def inner_fn(inner_obs: np.ndarray, macro_action: np.ndarray) -> np.ndarray:
+        return model.predict(inner_obs, deterministic=True)[0]
+
+    inner_fn.checkpoint = file_fingerprint(path)
+    return inner_fn
+
+
 # ---------------------------------------------------------------------------
 # Environment factory
 # ---------------------------------------------------------------------------
 
-def _make_macro_env(scenario: str, seed: int, inner_fn):
+def _make_macro_env(scenario: str, seed: int, inner_fn, **env_options):
     def _init():
-        env = C2GMacroEnv(scenario=scenario, inner_action_fn=inner_fn)
+        env = C2GMacroEnv(scenario=scenario, inner_action_fn=inner_fn, **env_options)
         env.reset(seed=seed)
         return env
     return _init
@@ -91,15 +103,17 @@ def _make_macro_env(scenario: str, seed: int, inner_fn):
 # ---------------------------------------------------------------------------
 
 def train_macro_sac(scenario: str, seed: int, timesteps: int,
-                    inner_fn, out_dir: Path, log_cfg, algo_cfg: dict) -> Path:
-    """Train a SAC agent on C2GMacroEnv with a rule-based inner policy."""
+                    inner_fn, out_dir: Path, log_cfg, algo_cfg: dict,
+                    env_options: dict | None = None, eval_options: dict | None = None,
+                    device: str = "cpu") -> Path:
+    """Train macro SAC against the explicitly selected frozen inner policy."""
     phase_dir = out_dir / "phase2"
     phase_dir.mkdir(parents=True, exist_ok=True)
 
     # SAC is off-policy — single env, no VecNormalize needed
-    env = _make_macro_env(scenario, seed, inner_fn)()
+    env = _make_macro_env(scenario, seed, inner_fn, **(env_options or {}))()
 
-    eval_env = make_vec_env(_make_macro_env(scenario, seed + 999, inner_fn),
+    eval_env = make_vec_env(_make_macro_env(scenario, seed + 999, inner_fn, **(eval_options or env_options or {})),
                             n_envs=1, seed=seed + 999)
 
     # ── Callbacks ─────────────────────────────────────────────────────────
@@ -116,7 +130,7 @@ def train_macro_sac(scenario: str, seed: int, timesteps: int,
         n_eval_episodes=algo_cfg.get("n_eval_episodes", 5),
         deterministic=True, verbose=0,
     )
-    metrics_cb = C2GMetricsCallback(
+    metrics_cb = C2GMacroMetricsCallback(
         print_freq=getattr(log_cfg, "console_freq", 20),
         csv_path=phase_dir / "episode_metrics.csv",
         verbose=1,
@@ -142,10 +156,12 @@ def train_macro_sac(scenario: str, seed: int, timesteps: int,
         tensorboard_log=str(phase_dir / "tensorboard"),
         verbose=0,
         seed=seed,
+        device=device,
     )
+    bind_training_context(model, env, phase_dir, inner_checkpoint=getattr(inner_fn, "checkpoint", None))
 
     # ── Train ─────────────────────────────────────────────────────────────
-    print(f"[Phase 2] Training macro SAC (rule-based inner): {timesteps:,} steps")
+    print(f"[Phase 2] Training macro SAC with frozen inner policy: {timesteps:,} steps")
     model.learn(
         total_timesteps=timesteps,
         callback=[checkpoint_cb, eval_cb, metrics_cb],
@@ -172,6 +188,8 @@ def main(cfg: DictConfig) -> None:
 
     # Get algo config (use sac.yaml if available)
     algo_cfg = OmegaConf.to_container(cfg.algo, resolve=True) if "algo" in cfg else {}
+    if algo_cfg.get("name") != "sac":
+        raise ValueError("This trainer requires algo=sac")
 
     # HRL-specific overrides (optional, via +hrl.xxx on CLI)
     hrl_cfg = cfg.get("hrl")
@@ -184,20 +202,35 @@ def main(cfg: DictConfig) -> None:
     phase2_steps = hrl.get("phase2_steps", algo_cfg.get("timesteps", 400_000))
 
     print("═" * 60)
-    print("  C2G-Bench: Rule-Based Low + SAC High Hierarchical")
+    print("  C2G-Bench: Frozen Hardware + SAC Macro")
     print(f"  scenario={scenario}  seed={seed}")
-    print(f"  Phase 1: Rule-based controller (no training)")
+    print("  Phase 1: Explicit frozen hardware policy")
     print(f"  Phase 2: SAC — {phase2_steps:,} steps")
     print("═" * 60)
 
     # ── Phase 1: Rule-based (instant) ────────────────────────────────────
-    inner_fn = _make_rule_based_inner_fn()
-    print("[Phase 1] Using RuleBasedMacroController as inner policy (no training)")
+    env_options = simulation_options_from_cfg(cfg)
+    eval_options = simulation_options_from_cfg(cfg, validation=True)
+    env_options["plant_overrides"] = plant_overrides_from_cfg(cfg)
+    eval_options["plant_overrides"] = plant_overrides_from_cfg(cfg)
+    checkpoint = hrl.get("inner_checkpoint")
+    if checkpoint:
+        inner_fn = _make_sac_inner_fn(checkpoint, env_options.get("simulation_mode", "physical_v1"))
+        print(f"[Phase 1] Frozen hardware SAC: {inner_fn.checkpoint}")
+    elif hrl.get("inner_controller") == "rule_based":
+        inner_fn = _make_rule_based_inner_fn()
+        print("[Phase 1] Explicit rule-based hardware baseline")
+    else:
+        raise ValueError(
+            "Specify +hrl.inner_checkpoint=/path/to/hardware.zip for staged SAC, "
+            "or +hrl.inner_controller=rule_based for the explicit classical-inner baseline"
+        )
 
     # ── Phase 2: SAC high-level ──────────────────────────────────────────
     macro_model_path = train_macro_sac(
         scenario, seed, phase2_steps,
         inner_fn, out_dir, log_cfg, algo_cfg,
+        env_options=env_options, eval_options=eval_options, device=cfg.device,
     )
 
     # Copy final model to top-level for easy discovery
@@ -207,7 +240,7 @@ def main(cfg: DictConfig) -> None:
 
     print(f"\n{'═' * 60}")
     print(f"  HRL-SAC training complete → {out_dir.resolve()}")
-    print(f"  Inner policy:  RuleBasedMacroController (deterministic)")
+    print(f"  Inner policy:  {checkpoint or 'rule_based hardware'} (frozen)")
     print(f"  Macro model:   {macro_model_path}")
     print(f"{'═' * 60}")
 

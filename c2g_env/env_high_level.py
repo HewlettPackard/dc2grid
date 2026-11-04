@@ -72,6 +72,7 @@ Usage
 """
 from __future__ import annotations
 
+import math
 from pathlib import Path
 from typing import Any, Callable
 
@@ -154,30 +155,33 @@ class C2GMacroEnv(gym.Env):
             dtype= np.float32,
         )
         # 19-D observation (17 original + 2 market signals)
-        self.observation_space = spaces.Box(
-            low  = np.full(19, -1.0, dtype=np.float32),
-            high = np.full(19,  5.0, dtype=np.float32),
-            dtype= np.float32,
-        )
+        obs_low = np.full(19, -1.0, dtype=np.float32)
+        obs_high = np.full(19, 5.0, dtype=np.float32)
         # Override bounds for strictly non-negative features
         _nonneg = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18]
-        self.observation_space.low[_nonneg] = 0.0
-        self.observation_space.high[:17] = np.array([
+        obs_low[_nonneg] = 0.0
+        obs_high[:17] = np.array([
             2.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 2.0, 1.0,
             1.0, 1.0, 1.0, 1.0, 1.0, 1.1, 2.0,
         ], dtype=np.float32)
         # freq_dev_mean can be negative (index 14)
-        self.observation_space.low[14] = -1.0
+        obs_low[14] = -1.0
         # bess_target_prev at [13] normalised to [0,1]
-        self.observation_space.low[13] = 0.0
+        obs_low[13] = 0.0
         # market signals [17, 18] bounded [0, 5]
-        self.observation_space.high[17] = 5.0
-        self.observation_space.high[18] = 5.0
+        obs_high[17] = 5.0
+        obs_high[18] = 5.0
 
         # Inner environment
         _fixed_action_values = kwargs.pop("fixed_action_values", None)
         _thermal_overrides = kwargs.pop("thermal_overrides", None)
         _plant_overrides = kwargs.pop("plant_overrides", None)
+        simulation_options = {
+            key: kwargs.pop(key) for key in (
+                "simulation_mode", "start_day", "regd_load_bias", "grid_market", "weather_market",
+            )
+            if key in kwargs
+        }
         if _fixed_action_values:
             from c2g_env.experiments.action_ablation_env import ActionAblationFastEnv
             self._fast_env = ActionAblationFastEnv(
@@ -185,14 +189,26 @@ class C2GMacroEnv(gym.Env):
                 fixed_action_values=_fixed_action_values,
                 thermal_overrides=_thermal_overrides,
                 plant_overrides=_plant_overrides,
+                **simulation_options,
             )
         else:
             self._fast_env = C2GFastEnv(
                 scenario=scenario, config_path=cfg_path,
                 thermal_overrides=_thermal_overrides,
                 plant_overrides=_plant_overrides,
+                **simulation_options,
             )
 
+        self.simulation_mode = self._fast_env.simulation_mode
+        self._physical = self._fast_env._physical
+        self._substeps = self._fast_env.macro_substeps
+        if self._physical:
+            obs_high[8] = np.inf
+        # Box caches boundedness at construction, so finalize the bounds first.
+        self.observation_space = spaces.Box(
+            low=obs_low, high=obs_high, dtype=np.float32,
+        )
+        self.observation_space.c2g_simulation_mode = self.simulation_mode
         self._committed_max_mw = self._fast_env._committed_mw_max
         self._dr_baseline_mw = self._fast_env._dr_baseline_mw
 
@@ -203,7 +219,8 @@ class C2GMacroEnv(gym.Env):
         self._last_rmcp_norm    = 0.0
         self._last_reg_need_norm = 0.0
         self._episode_macro_ticks = (
-            int(self._gcfg["episode_ticks"]) // _SUBSTEPS
+            math.ceil(int(self._gcfg["episode_ticks"]) / self._substeps)
+            if self._physical else int(self._gcfg["episode_ticks"]) // _SUBSTEPS
         )
 
     # ------------------------------------------------------------------
@@ -220,6 +237,8 @@ class C2GMacroEnv(gym.Env):
         Reset both the outer macro environment and the inner FastEnv.
         """
         super().reset(seed=seed)
+        if self._physical:
+            self.action_space.seed(seed)
         inner_obs, inner_info = self._fast_env.reset(seed=seed, options=options)
         self._last_hw_reset_info = inner_info
         self._committed_max_mw = self._fast_env._committed_mw_max
@@ -231,9 +250,12 @@ class C2GMacroEnv(gym.Env):
         self._last_rmcp_norm     = 0.0
         self._last_reg_need_norm = 0.0
         self._last_hw_obs        = inner_obs  # persisted across macro steps
+        self._pending_offer = None
+        if self._physical:
+            self._post_offer()
 
         # Build macro obs from the reset inner obs
-        return self._obs_from_reset(inner_obs), {}
+        return self._obs_from_reset(inner_obs), inner_info if self._physical else {}
 
     def step(
         self, action: np.ndarray
@@ -246,6 +268,10 @@ class C2GMacroEnv(gym.Env):
         action : ndarray of shape (2,)
             [bid_mw_norm, bid_price_norm]
         """
+        if self._physical and self._fast_env._episode_done:
+            raise RuntimeError("Call reset() before stepping a new or completed episode")
+        if self._physical and (action.shape != (2,) or not np.isfinite(action).all()):
+            raise ValueError("Macro action must contain two finite values")
         action          = np.clip(action.astype(np.float32),
                                   self.action_space.low,
                                   self.action_space.high)
@@ -266,6 +292,7 @@ class C2GMacroEnv(gym.Env):
             rmcp_max=self._rmcp_max,
             dr_baseline_mw=self._dr_baseline_mw,
             dr_rate_usd_mw=self._dr_rate_usd_mw,
+            offer=self._pending_offer if self._physical else None,
         )
         committed_mw = hs["committed_mw"]
         rate = hs["rate"]
@@ -277,6 +304,9 @@ class C2GMacroEnv(gym.Env):
         self._last_reg_need_norm = reg_need_norm
 
         self._fast_env.committed_mw = committed_mw
+        if self._physical:
+            self._last_hw_obs = self._last_hw_obs.copy()
+            self._last_hw_obs[17] = committed_mw / self._committed_max_mw
 
         # =================================================================
         # Run 180 sub-steps
@@ -299,7 +329,7 @@ class C2GMacroEnv(gym.Env):
         truncated      = False
         last_info: dict = {}
 
-        for sub in range(_SUBSTEPS):
+        for sub in range(self._substeps):
             if self._inner_action_fn is not None:
                 inner_obs = sub_obs_list[-1] if sub_obs_list else self._last_hw_obs
                 low_action = self._inner_action_fn(inner_obs, action)
@@ -380,7 +410,8 @@ class C2GMacroEnv(gym.Env):
         # -----------------------------------------------------------------
         # Macro reward (market handshake)
         # -----------------------------------------------------------------
-        hours = _SUBSTEPS * self._fast_env._dt / 3600.0  # 0.25 h for 15-min
+        settled_steps = len(sub_rewards) if self._physical else _SUBSTEPS
+        hours = settled_steps * self._fast_env._dt / 3600.0
 
         # Tracking performance score [0, 1]
         tracking_err_norm = float(np.mean(track_errs)) / max(
@@ -394,6 +425,11 @@ class C2GMacroEnv(gym.Env):
         # Electricity cost (always runs, prevents "never bid" exploit)
         mean_p_facility_norm = float(np.mean([o[5] for o in sub_obs_list]))
         electricity_cost = mean_lmp * mean_p_facility_norm * hours
+        if self._physical:
+            electricity_cost = sum(
+                item["lmp"] * item["p_grid_import_mw"] * item["duration_hours"]
+                for item in sub_infos
+            )
 
         mean_sub_reward  = float(np.mean(sub_rewards))
         commit_churn_pen = abs(bid_mw_norm - self._prev_bid_mw_norm)
@@ -406,6 +442,10 @@ class C2GMacroEnv(gym.Env):
 
         self._prev_bid_mw_norm = bid_mw_norm
         self._prev_bid_price_norm = bid_price_norm
+        if self._physical and not (terminated or truncated):
+            self._post_offer()
+            obs[17] = np.clip(self._last_rmcp_norm, 0, 5)
+            obs[18] = np.clip(self._last_reg_need_norm, 0, 5)
 
         info_out = {
             "macro_tick":            self._macro_tick,
@@ -446,7 +486,23 @@ class C2GMacroEnv(gym.Env):
             "reward_sub":            r_sub,
             "reward_elec":           r_elec,
             "reward_churn":          r_churn,
+            "simulation_mode":      self.simulation_mode,
+            "duration_hours":       len(sub_rewards) * self._fast_env._dt / 3600.0,
+            "settlement_hours":     hours,
+            "tracking_error_sq_sum": float(np.square(track_errs).sum()),
+            "tracking_rmse_kw":     float(np.sqrt(np.mean(np.square(track_errs)))),
+            "terminated":          terminated,
+            "truncated":           truncated,
         }
+        if self._physical:
+            info_out.update(
+                work_arrived_kwh=sum(item["work_arrived_kwh"] for item in sub_infos),
+                work_served_kwh=sum(item["work_served_kwh"] for item in sub_infos),
+                thermal_warning_ticks=sum(int(item["thermal_warning"]) for item in sub_infos),
+                facility_relief_kwh=sum(
+                    item["facility_relief_kw"] * item["duration_hours"] for item in sub_infos
+                ),
+            )
         return obs, reward, terminated, truncated, info_out
 
     def render(self) -> None:
@@ -543,6 +599,8 @@ class C2GMacroEnv(gym.Env):
         temp_B: float,
         prev_bid_mw_norm: float = 0.5,
         prev_bid_price_norm: float = 0.5,
+        rmcp_norm: float = 0.0,
+        reg_need_norm: float = 0.0,
     ) -> np.ndarray:
         """
         Build macro observation from a single inner env reset observation.
@@ -580,8 +638,8 @@ class C2GMacroEnv(gym.Env):
             0.0,            # 14 freq_dev_mean (nominal)
             1.0,            # 15 v_pcc_mean (nominal)
             0.0,            # 16 backlog_norm_mean
-            0.0,            # 17 rmcp_norm (no market signal yet)
-            0.0,            # 18 reg_need_norm (no market signal yet)
+            float(np.clip(rmcp_norm, 0, 5)),
+            float(np.clip(reg_need_norm, 0, 5)),
         ], dtype=np.float32)
 
     @staticmethod
@@ -594,6 +652,7 @@ class C2GMacroEnv(gym.Env):
         rmcp_max: float,
         dr_baseline_mw: float,
         dr_rate_usd_mw: float,
+        offer: dict | None = None,
     ) -> dict:
         """
         Execute the 3-phase market handshake (RMCP → bid → clear).
@@ -623,7 +682,8 @@ class C2GMacroEnv(gym.Env):
         bid_price = bid_price_norm * 2.0 * rmcp_max
 
         # Phase 1: Grid posts RMCP + regulation need
-        offer = grid.step_rmcp()
+        if offer is None:
+            offer = grid.step_rmcp()
         rmcp_norm = offer["rmcp_usd"] / rmcp_max
         reg_need_norm = offer["residual_mw"] / max(committed_max_mw, 1.0)
 
@@ -650,6 +710,11 @@ class C2GMacroEnv(gym.Env):
     # Private helpers
     # ------------------------------------------------------------------
 
+    def _post_offer(self) -> None:
+        self._pending_offer = self._fast_env._grid.step_rmcp()
+        self._last_rmcp_norm = self._pending_offer["rmcp_usd"] / self._rmcp_max
+        self._last_reg_need_norm = self._pending_offer["residual_mw"] / self._committed_max_mw
+
     def _obs_from_reset(self, inner_obs: np.ndarray) -> np.ndarray:
         """Build macro observation from inner env's reset observation."""
         return self.macro_obs_from_reset(
@@ -659,4 +724,6 @@ class C2GMacroEnv(gym.Env):
             temp_B=self._fast_env._thermal.temp_B,
             prev_bid_mw_norm=self._prev_bid_mw_norm,
             prev_bid_price_norm=self._prev_bid_price_norm,
+            rmcp_norm=self._last_rmcp_norm,
+            reg_need_norm=self._last_reg_need_norm,
         )

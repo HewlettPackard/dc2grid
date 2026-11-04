@@ -233,23 +233,14 @@ class TestMacroEnvTerminatedTruncated:
             assert not last_term, "Clean episode end must not set terminated"
 
     def test_terminated_set_on_fault(self):
-        """
-        When a fault occurs, terminated must be True and truncated False.
-        Use scenario_d (cooling fault) which is most likely to trigger a fault.
-        """
+        """A real thermal fault terminates without advancing beyond the horizon."""
         from c2g_env import C2GMacroEnv
         env = C2GMacroEnv(scenario="scenario_c")
-        # Feed worst-case actions: max BESS discharge, no cooling
-        obs, _ = env.reset(seed=7)
-        for _ in range(200):
-            # aggressive: zero cooling, max discharge → likely thermal fault
-            action = np.array([1.0, 0.0], dtype=np.float32)
-            obs, rew, terminated, truncated, info = env.step(action)
-            if terminated:
-                assert not truncated, (
-                    f"terminated=True but also truncated=True. Bug #4 not fixed."
-                )
-                break
+        env.reset(seed=7)
+        env._fast_env._thermal.temp_A = env._fast_env._thermal.T_safe + 2.0
+        _, _, terminated, truncated, info = env.step(np.array([1.0, 0.0], dtype=np.float32))
+        assert terminated and not truncated
+        assert info["sub_steps_run"] == 1
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -774,6 +765,6 @@ class TestCommittedMwProperty:
                 f"expected {expected:.2f}. Medium Bug #5 not fixed."
             )
         else:
-            assert env._fast_env.committed_mw == pytest.approx(0.0, abs=0.01), (
-                "Bid was rejected but committed_mw is not zero."
+            assert env._fast_env.committed_mw == pytest.approx(env._dr_baseline_mw, abs=0.01), (
+                "Rejected bid must use the standing DR contract."
             )

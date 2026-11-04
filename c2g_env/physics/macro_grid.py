@@ -302,6 +302,10 @@ class MacroGridSignal:
         lmp_slope: float | None = None,
         seed: int = 42,
         market: str = "nyiso_nyc",
+        timestamp_replay: bool = False,
+        start_day: int = 0,
+        episode_ticks: int = 17280,
+        regd_load_bias: float = 0.0,
     ) -> None:
         # Resolve market preset — explicit lmp_* args override the preset
         if market not in MARKET_PRESETS:
@@ -316,6 +320,12 @@ class MacroGridSignal:
         self.lmp_base_usd = lmp_base_usd if lmp_base_usd is not None else self._market.lmp_base_usd
         self.lmp_slope    = lmp_slope    if lmp_slope    is not None else self._market.lmp_slope_usd
         self._rng = np.random.default_rng(seed)
+        self._timestamp_replay = timestamp_replay
+        self._reset_signal_rngs(seed)
+        self._calendar_load_mw: np.ndarray | None = None
+        self._regd_bias = float(regd_load_bias)
+        if not np.isfinite(self._regd_bias):
+            raise ValueError("regd_load_bias must be finite")
 
         # Resolve zone: explicit arg > market preset default > "NYC"
         effective_zone = zone or self._market.zone_csv or "NYC"
@@ -323,6 +333,29 @@ class MacroGridSignal:
             Path(energy_dir), effective_zone, seed
         )
         self._n = len(self._load_mw)
+        self._load_max = float(self._load_mw.max())
+        if timestamp_replay:
+            from c2g_env.replay import sample_previous
+
+            path = Path(energy_dir) / f"{effective_zone}.csv"
+            if not path.exists():
+                raise FileNotFoundError(f"Timestamp replay requires real load data: {path}")
+            frame = pd.read_csv(path, parse_dates=["Time Stamp"])
+            frame = frame.dropna(subset=["Load"]).sort_values("Time Stamp")
+            self.calendar_start = frame["Time Stamp"].iloc[0].normalize() + pd.Timedelta(days=start_day)
+            self.calendar_timestamps = (
+                self.calendar_start.to_datetime64()
+                + np.arange(episode_ticks + 1) * np.timedelta64(round(self.dt * 1e9), "ns")
+            )
+            self._calendar_load_mw = sample_previous(
+                frame["Time Stamp"].to_numpy(), frame["Load"].to_numpy(),
+                self.calendar_timestamps, max_age_seconds=600.0,
+            )
+            day_load = self._calendar_load_mw[:episode_ticks]
+            mean, peak = day_load.mean(), day_load.max()
+            self._load_anomaly = np.clip(
+                (self._calendar_load_mw - mean) / max(peak - mean, 1e-9), -1.0, 1.0,
+            )
 
         # AR(1) parameters from market preset
         self._regd_rho:   float = self._market.regd_rho
@@ -383,13 +416,15 @@ class MacroGridSignal:
             self.committed_mw = float(committed_mw)
 
         idx = self._tick % self._n
-        load_mw = float(self._load_mw[idx])
+        load_mw = self.load_at_tick(self._tick)
 
         regd = self._step_regd()
+        if self._timestamp_replay:
+            regd = float(np.clip(regd + self._regd_bias * self._load_anomaly[self._tick], -1, 1))
         delta_p_kw = regd * self.committed_mw * 1_000.0   # MW → kW
 
         lmp = self._load_to_lmp(load_mw)
-        load_norm = load_mw / float(self._load_mw.max())
+        load_norm = load_mw / (self._load_max if self._timestamp_replay else float(self._load_mw.max()))
 
         self._tick += 1
         return {
@@ -417,6 +452,20 @@ class MacroGridSignal:
         )
         if seed is not None:
             self._rng = np.random.default_rng(seed)
+            self._reset_signal_rngs(seed)
+
+    def _reset_signal_rngs(self, seed: int) -> None:
+        streams = np.random.SeedSequence(seed).spawn(4)
+        self._regd_rng, self._market_rng, self._bid_rng, self._frequency_rng = (
+            np.random.default_rng(stream) for stream in streams
+        )
+
+    def load_at_tick(self, tick: int) -> float:
+        if self._calendar_load_mw is not None:
+            if tick < 0 or tick >= len(self._calendar_load_mw):
+                raise ValueError(f"Tick {tick} is outside the configured replay horizon")
+            return float(self._calendar_load_mw[tick])
+        return float(self._load_mw[tick % self._n])
 
     def set_committed(self, committed_mw: float) -> None:
         """Update the committed regulation capacity [MW]."""
@@ -444,12 +493,13 @@ class MacroGridSignal:
             load_norm    : Current normalised grid load [0, 1].
         """
         m = self._market
-        idx = self._tick % self._n
-        load_mw = float(self._load_mw[idx])
+        tick = max(0, self._tick - 1) if self._timestamp_replay else self._tick
+        load_mw = self.load_at_tick(tick)
         lmp = self._load_to_lmp(load_mw)
-        load_norm = load_mw / float(self._load_mw.max())
+        load_norm = load_mw / (self._load_max if self._timestamp_replay else float(self._load_mw.max()))
 
-        noise = float(self._rng.normal(0.0, m.rmcp_noise_std))
+        rng = self._market_rng if self._timestamp_replay else self._rng
+        noise = float(rng.normal(0.0, m.rmcp_noise_std))
         self._rmcp = m.rmcp_base_usd + m.rmcp_lmp_beta * (lmp - m.lmp_base_usd) + noise
         self._rmcp = float(np.clip(self._rmcp, 0.0, 500.0))
 
@@ -489,7 +539,8 @@ class MacroGridSignal:
         price_prob = 1.0 / (1.0 + np.exp(-k_p * (self._rmcp - bid_price)))
         quantity_factor = min(1.0, self._residual / max(bid_mw, 0.01))
         accept_prob = float(price_prob * quantity_factor)
-        accepted = bool(self._rng.random() < accept_prob)
+        rng = self._bid_rng if self._timestamp_replay else self._rng
+        accepted = bool(rng.random() < accept_prob)
         accepted_mw = bid_mw if accepted else 0.0
         return {
             "accepted":       accepted,
@@ -526,7 +577,8 @@ class MacroGridSignal:
         15-minute windows, matching PJM's requirement that RegD integrates
         to approximately zero over any 15-minute settlement period.
         """
-        noise = float(self._rng.normal(0.0, self._regd_sigma))
+        rng = self._regd_rng if self._timestamp_replay else self._rng
+        noise = float(rng.normal(0.0, self._regd_sigma))
         self._regd_state = self._regd_rho * self._regd_state + noise
 
         # Soft clip: tanh keeps the signal smooth near ±1
@@ -572,7 +624,8 @@ class MacroGridSignal:
         delta_p_pu = -tracking_deficit_mw / max(self._load_median, 1.0)
 
         # Stochastic background grid noise (other generators, load fluctuations)
-        noise = float(self._rng.normal(0.0, self._f_noise_std))
+        rng = self._frequency_rng if self._timestamp_replay else self._rng
+        noise = float(rng.normal(0.0, self._f_noise_std))
 
         # Swing equation: df/dt = (1/2H) * (ΔP - D * Δf)
         delta_f = self._f_grid - self._f_nom

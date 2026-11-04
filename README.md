@@ -1,5 +1,14 @@
 # DC2Grid: Hierarchical AI Orchestration for Grid-Interactive Hyperscale Data Centers
 
+> **Versioned runtime:** new experiments default to `physical_v1`; historical
+> checkpoints were trained under `legacy_v0` and should be evaluated with that
+> mode selected explicitly (`--simulation-mode legacy_v0`). The two modes are
+> defined in `c2g_env/semantics.py` and selected via `global.simulation_mode`
+> in `c2g_env/config.yaml`.
+> Existing reported results below are retained as historical evidence, not
+> relabelled as results of this integration. No new checkpoint or dataset is
+> introduced by the shared-core changes.
+
 ![DC2Grid Architecture](figures/dc2grid_architecture.png)
 
 ---
@@ -46,7 +55,7 @@ where $C_{\text{MW}}$ (`committed_mw`) is the regulation capacity the data cente
 
 ### Statistical properties (AR(1) model)
 
-The RegD signal is statistically modelled as a **first-order autoregressive (AR(1)) process** — persistent but zero-mean. At the 5-minute scale it has autocorrelation ρ ≈ 0.80, which time-scales to ρ ≈ 0.997 at the 5-second simulation step used in DC2Grid. The signal averages to zero over a settlement period, meaning the data center neither gains nor loses net energy from providing regulation.
+The RegD signal is statistically modelled as a **first-order autoregressive (AR(1)) process** with zero-mean innovations. At the 5-minute scale it has autocorrelation ρ ≈ 0.80, which time-scales to ρ ≈ 0.997 at the 5-second simulation step used in DC2Grid. This does **not** guarantee zero net energy in each realized settlement window. The existing last-sample centering implementation does not enforce the advertised window neutrality and remains a known limitation; the deliberate load-correlated stress bias is a separate intervention.
 
 In `c2g_env/physics/macro_grid.py`:
 
@@ -57,7 +66,7 @@ regd = np.clip(self._regd_state, -1.0, 1.0)               # normalise to [-1,1]
 
 ### The performance score (mileage metric)
 
-Under FERC Order 755, the *performance score* is the correlation between the demanded signal and the actual response. A score of 1.0 = perfect tracking; 0.0 = random; below a threshold (typically 0.75) results in zero payment and market suspension. This maps directly to the **β tracking term** in the DC2Grid reward function.
+The benchmark discounts committed-capacity revenue using a simplified normalized absolute-tracking-error score. This is not a complete implementation of every market's correlation/mileage settlement rules. The hardware **β tracking reward term** and the macro settlement performance score are distinct quantities.
 
 ### Why a data center is uniquely suited
 
@@ -757,6 +766,16 @@ uv sync --extra dev   # pytest, ruff, mypy
 uv run pytest tests/ -q
 ```
 
+The full suite retains optional/private-helper dependencies that report
+explicit skips. The focused shared-core checks are:
+
+```bash
+CUDA_VISIBLE_DEVICES="" uv run pytest -q -rs \
+  tests/test_physical_contract.py tests/test_sac_contracts.py \
+  tests/test_parallel_sac.py tests/test_baselines.py \
+  tests/test_critical_bug_fixes.py tests/test_grid_relief.py tests/test_gym_api.py
+```
+
 ### Train a single agent
 
 ```bash
@@ -805,29 +824,34 @@ uv run evaluation/run_benchmark.py --agents rule_based bang_bang pid random
 
 # SAC low-level agent (requires a trained model)
 uv run evaluation/run_benchmark.py --agents sac --scenarios default scenario_b \
-    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100/final_model.zip \
+    --simulation-mode legacy_v0
 
 # Hierarchical combos: rule-based macro + hardware controller
 uv run evaluation/run_benchmark.py --agents rule_macro+sac rule_macro+rule_based \
     rule_macro+pid rule_macro+bang_bang rule_macro+random \
-    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100/final_model.zip \
+    --simulation-mode legacy_v0
 
 # RL macro (Phase 2) + frozen SAC low-level
 uv run evaluation/run_benchmark.py --agents sac_macro+sac \
-    --macro-model-dir trained_models/BestCheckpoints/sac_macro_default_s100 \
-    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
+    --macro-model-dir trained_models/BestCheckpoints/sac_macro_default_s100/final_model.zip \
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100/final_model.zip \
+    --simulation-mode legacy_v0
 
 # LLM macro + hardware controller (requires a running vLLM server)
 uv run evaluation/run_benchmark.py --agents llm_policy_macro+sac \
-    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100 \
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100/final_model.zip \
+    --simulation-mode legacy_v0 \
     --llm-api-base http://localhost:8000/v1
 
 # With transition logging (per-step CSV traces)
 uv run evaluation/run_benchmark.py --agents rule_macro+sac --record_transitions \
-    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100/final_model.zip \
+    --simulation-mode legacy_v0
 ```
 
-SAC agents select default checkpoint directories by algorithm, scenario, and seed. The examples above use bundled, Git-tracked SAC checkpoints via `--hw-model-dir` and `--macro-model-dir`; use these options to select other model directories.
+SAC agents select default checkpoint directories by algorithm, scenario, and seed. The examples above load the bundled, Git-tracked historical SAC checkpoints by direct `.zip` path and explicitly select `legacy_v0`. Loaders do not enforce a match between the checkpoint's recorded semantics and `--simulation-mode`; the recorded mode is written to result provenance, so a policy evaluated under semantics it was not trained for should be labelled as such rather than treated as a matched retrained-policy result.
 
 **Agents used in the paper:**
 
@@ -851,14 +875,16 @@ Pin actuators to fixed setpoints to isolate each lever's contribution:
 # Disable BESS (throttle + cooling only)
 uv run evaluation/run_benchmark.py --agents rule_macro+sac \
     --fixed-action bess_dispatch=0.0 \
-    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100/final_model.zip \
+    --simulation-mode legacy_v0
 
 # Disable BESS and fix cooling (throttle only)
 uv run evaluation/run_benchmark.py --agents rule_macro+sac \
     --fixed-action bess_dispatch=0.0 \
     --fixed-action pump_speed_A=0.7 \
     --fixed-action hvac_effort=0.7 \
-    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100/final_model.zip \
+    --simulation-mode legacy_v0
 ```
 
 Action bounds: `throttle_batch ∈ [0, 1]`, `pump_speed_A ∈ [0, 1]`, `hvac_effort ∈ [0, 1]`, `bess_dispatch ∈ [-1, 1]`. Values are validated and clipped to these ranges.
@@ -871,8 +897,11 @@ Action bounds: `throttle_batch ∈ [0, 1]`, `pump_speed_A ∈ [0, 1]`, `hvac_eff
 | `--scenarios` | all 4 | Subset of `default scenario_a scenario_b scenario_c` |
 | `--n_episodes` | `5` | Episodes per agent × scenario combination |
 | `--seed` | `100` | Starting RNG seed; episode `i` uses `seed + i` |
-| `--hw-model-dir` | `None` | Model directory for the hardware/inner SAC agent |
-| `--macro-model-dir` | `None` | Model directory for the macro-level SAC agent |
+| `--simulation-mode` | `physical_v1` | Explicit physical or historical `legacy_v0` contract |
+| `--start-day` | `0` | Zero-based calendar start for physical replay |
+| `--regd-load-bias` | `0.0` | Deliberate load-correlated RegD stress bias |
+| `--hw-model-dir` | `None` | Hardware/inner SAC checkpoint: a directory containing `final_model.zip`, or a direct path to the `.zip` |
+| `--macro-model-dir` | `None` | Macro-level SAC checkpoint: a directory containing `final_model.zip`, or a direct path to the `.zip` |
 | `--output` | auto-generated | Output CSV destination; otherwise named by algorithm, scenario, controller type, and ablation |
 | `--record_transitions` / `--no-record_transitions` | disabled | Write per-step state/action/reward traces to per-episode CSVs in the runner's log hierarchy |
 | `--append` | `False` | Append rows to an existing CSV instead of overwriting |
@@ -895,11 +924,14 @@ For hardware agents, each row in the output CSV contains:
 | `mean_reward`       | Mean step reward over the episode                      |
 | `total_reward`      | Sum of step rewards                                    |
 | `tracking_rmse`     | RMSE of `ΔP_demanded − ΔP_actual` (kW)            |
-| `thermal_viol_rate` | Fraction of ticks with temperature > T_warn (33 °C)   |
-| `throughput_ratio`  | Mean `p_flex_served / p_flex_nom`                    |
+| `thermal_viol_rate` | Benchmark warning-tick fraction; callback boundary conventions differ (see runtime caveats) |
+| `throughput_ratio`  | Mean reported per-step throughput ratio; in `physical_v1`, served / (served + remaining backlog), with 1 for an empty queue |
 | `bess_degradation`  | Cumulative capacity fade × 10⁴                       |
 | `episode_length`    | Ticks completed (< 17 280 indicates early termination) |
 | `survival_rate`     | Fraction of episodes surviving to 24 h                 |
+
+The generic collectors retain known aging/survival and missing-metric limitations;
+their CSV columns are not automatically the audited paper-table quantities.
 
 For macro agents, additional columns include:
 
@@ -936,8 +968,9 @@ uv run evaluation/run_benchmark.py --agents rule_based bang_bang pid \
 
 # Sweep every capacity in one run; each output row is tagged with `plant_profile`
 uv run evaluation/run_benchmark.py --agents sac_macro+sac \
-    --macro-model-dir trained_models/BestCheckpoints/sac_macro_default_s100 \
-    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100 \
+    --macro-model-dir trained_models/BestCheckpoints/sac_macro_default_s100/final_model.zip \
+    --hw-model-dir trained_models/BestCheckpoints/sac_default_s100/final_model.zip \
+    --simulation-mode legacy_v0 \
     --plant_profile all
 ```
 

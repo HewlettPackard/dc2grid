@@ -273,16 +273,18 @@ class TestFastEnvStep:
 
 class TestFastEnvReward:
     def test_full_throttle_higher_throughput(self):
-        """Full-throttle should yield a higher batch throughput component."""
+        """Serving actual pending work, not an idle command, earns throughput."""
         env = make_fast()
         env.reset(seed=0)
+        env._workload._p_flex_arr[:] = env._workload.p_flex_idle_kw + 10_000
         full_act  = np.array([1.0, 0.7, 0.7, 0.0], dtype=np.float32)
         zero_act  = np.array([0.0, 0.7, 0.7, 0.0], dtype=np.float32)
-        _, r_full, *_ = env.step(full_act)
+        info_full = env.step(full_act)[-1]
         env.reset(seed=0)
-        _, r_zero, *_ = env.step(zero_act)
-        # Alpha * 1 > Alpha * 0 → full throttle earns more throughput reward
-        assert r_full > r_zero
+        env._workload._p_flex_arr[:] = env._workload.p_flex_idle_kw + 10_000
+        info_zero = env.step(zero_act)[-1]
+        assert info_full["reward_throughput"] > info_zero["reward_throughput"]
+        assert info_full["work_served_kwh"] > info_zero["work_served_kwh"]
 
     def test_extreme_heat_terminates(self):
         """Sustained zero-cooling in scenario_b should trigger thermal fault."""
@@ -688,9 +690,11 @@ class TestCapacityContracts:
             env.close()
 
     @pytest.mark.parametrize("profile", available_plant_profiles())
-    def test_macro_tracking_floor_scales_with_capacity(self, monkeypatch, profile):
+    @pytest.mark.parametrize("mode", ["legacy_v0", "physical_v1"])
+    def test_macro_tracking_floor_scales_with_capacity(self, monkeypatch, profile, mode):
         monkeypatch.setattr("c2g_env.env_high_level._SUBSTEPS", 1)
-        env = C2GMacroEnv(plant_overrides=load_plant_profile(profile))
+        env = C2GMacroEnv(plant_overrides=load_plant_profile(profile), simulation_mode=mode)
+        env._substeps = 1
         try:
             env.reset(seed=0)
             monkeypatch.setattr(env._fast_env._grid, "clear_bid", lambda price, quantity: {
@@ -700,7 +704,7 @@ class TestCapacityContracts:
                 "clearing_price": 10.0,
             })
             obs, _, _, _, info = env.step(np.array([0.0, 0.0], dtype=np.float32))
-            floor_kw = env._fast_env._facility_cap_kw / 250_000.0
+            floor_kw = env._fast_env._facility_cap_kw / 250_000.0 * (100 if mode == "physical_v1" else 1)
             expected = info["mean_tracking_err"] / floor_kw
             assert env._fast_env._macro_tracking_floor_kw == pytest.approx(floor_kw)
             assert obs[8] == pytest.approx(expected)

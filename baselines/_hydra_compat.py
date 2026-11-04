@@ -51,3 +51,16 @@ def plant_overrides_from_cfg(cfg) -> dict | None:
     if not plant:
         return None
     return OmegaConf.to_container(plant, resolve=True)
+
+
+def simulation_options_from_cfg(cfg, *, validation: bool = False) -> dict:
+    from omegaconf import OmegaConf
+
+    options = OmegaConf.to_container(cfg.environment, resolve=True) if "environment" in cfg else {}
+    if validation and "validation" in cfg and options.get("simulation_mode") != "legacy_v0":
+        options.update(OmegaConf.to_container(cfg.validation, resolve=True))
+    if "env_overrides" in cfg and options.get("simulation_mode") != "legacy_v0":
+        for key in ("grid_market", "weather_market"):
+            if key in cfg.env_overrides:
+                options[key] = cfg.env_overrides[key]
+    return options
