@@ -43,9 +43,7 @@ def test_short_sac_update_checkpoint_and_frozen_partner(tmp_path):
     assert model._n_updates > 0
     path = tmp_path / "final_model.zip"
     model.save(path)
-    agent = load_sb3_agent(
-        "sac", "default", 100, str(path), simulation_mode="physical_v1"
-    )
+    agent = load_sb3_agent("sac", "default", 100, str(path))
     assert agent.checkpoint["simulation_mode"] == "physical_v1"
     assert agent._model.c2g_context["training_seed"] == 100
     frozen = _make_sac_inner_fn(str(path), "physical_v1")
@@ -113,7 +111,6 @@ def test_ppo_normalizer_and_space_semantics_survive_save(tmp_path, macro):
         "default",
         100,
         str(tmp_path),
-        simulation_mode="physical_v1",
     )
     assert agent.checkpoint["simulation_mode"] == "physical_v1"
     assert agent._obs_normalizer.observation_space.shape == obs.shape[1:]

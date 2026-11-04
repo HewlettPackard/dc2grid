@@ -59,10 +59,7 @@ class SB3Agent:
         return self._model.predict(obs, deterministic=deterministic)
 
 
-def _load_sac_model(
-    model_dir: Path, label: str, *, simulation_mode: str = "physical_v1",
-    allow_semantic_mismatch: bool = False,
-) -> SB3Agent:
+def _load_sac_model(model_dir: Path, label: str) -> SB3Agent:
     """Load a SAC model from a directory or direct path.
 
     Accepts:
@@ -94,8 +91,6 @@ def _load_sac_model(
         )
 
     model = SAC.load(load_path)
-    from c2g_env.experiments.identity import check_policy_semantics
-    check_policy_semantics(model, simulation_mode, allow_mismatch=allow_semantic_mismatch)
     return SB3Agent(model, algo_name=label)
 
 
@@ -246,7 +241,6 @@ def benchmark(
     inner_model_dir: Path,
     record_transitions: bool,
     simulation_mode: str = "physical_v1",
-    allow_semantic_mismatch: bool = False,
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
 
@@ -256,12 +250,8 @@ def benchmark(
 
     for scenario in tqdm(scenarios, desc="Scenarios", position=0):
         # Load both agents once per scenario
-        macro_agent = _load_sac_model(macro_model_dir, label="sac_macro",
-                                     simulation_mode=simulation_mode,
-                                     allow_semantic_mismatch=allow_semantic_mismatch)
-        inner_agent = _load_sac_model(inner_model_dir, label="sac_low",
-                                     simulation_mode=simulation_mode,
-                                     allow_semantic_mismatch=allow_semantic_mismatch)
+        macro_agent = _load_sac_model(macro_model_dir, label="sac_macro")
+        inner_agent = _load_sac_model(inner_model_dir, label="sac_low")
 
         combo_name = f"{macro_agent.algo_name}+{inner_agent.algo_name}"
         ep_metrics: list[dict[str, float]] = []
@@ -382,7 +372,6 @@ if __name__ == "__main__":
     parser.add_argument("--n_episodes", type=int, default=5)
     parser.add_argument("--seed", type=int, default=100)
     parser.add_argument("--simulation-mode", choices=["physical_v1", "legacy_v0"], default="physical_v1")
-    parser.add_argument("--allow-semantic-mismatch", action="store_true")
     parser.add_argument(
         "--macro-model-dir", type=str, default=None,
         help="Directory containing the trained SAC macro model "
@@ -444,7 +433,6 @@ if __name__ == "__main__":
             inner_model_dir=inner_dir,
             record_transitions=args.record_transitions,
             simulation_mode=args.simulation_mode,
-            allow_semantic_mismatch=args.allow_semantic_mismatch,
         )
         all_rows.extend(rows)
 

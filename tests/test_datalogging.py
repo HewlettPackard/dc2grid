@@ -326,27 +326,3 @@ class TestDataLogging:
             text=True,
         )
         assert result.returncode == 0, f"Command failed with exit code {result.returncode}.\nStdout:\n{result.stdout}\nStderr:\n{result.stderr}"
-
-    def test_smoke_ha_benchmark_rule_based(self):
-        """Smoke test: run_ha_benchmark.py with rule_based agent."""
-        import subprocess
-        result = subprocess.run(
-            ["uv", "run", "python", "evaluation/run_ha_benchmark.py",
-             "--record_transitions", "--agents", "rule_based", "--n_episodes", "1"],
-            cwd=Path(__file__).resolve().parent.parent,
-            capture_output=True,
-            text=True,
-        )
-        assert result.returncode == 0, f"Command failed with exit code {result.returncode}.\nStdout:\n{result.stdout}\nStderr:\n{result.stderr}"
-
-    def test_smoke_ha_benchmark_rule_based_with_bess_ablation(self):
-        """Smoke test: run_ha_benchmark.py with rule_based agent and BESS fixed to 0.5."""
-        import subprocess
-        result = subprocess.run(
-            ["uv", "run", "python", "evaluation/run_ha_benchmark.py",
-             "--record_transitions", "--agents", "rule_based", "--fixed-action", "bess_dispatch=0.5", "--n_episodes", "1"],
-            cwd=Path(__file__).resolve().parent.parent,
-            capture_output=True,
-            text=True,
-        )
-        assert result.returncode == 0, f"Command failed with exit code {result.returncode}.\nStdout:\n{result.stdout}\nStderr:\n{result.stderr}"

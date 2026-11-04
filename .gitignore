@@ -36,6 +36,7 @@ logs/
 .idea/
 
 # LaTeX build artifacts
+docs/
 paper/*
 paper/*.aux
 paper/*.bbl

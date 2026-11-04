@@ -139,8 +139,7 @@ def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
                  macro: str = "rule_macro", macro_model_dir: str | None = None,
                  config_path: str | None = None, start_day: int | None = None,
                  regd_bias: float = 0.0, trace_dir: str | None = None,
-                 simulation_mode: str = "physical_v1",
-                 allow_semantic_mismatch: bool = False) -> pd.DataFrame:
+                 simulation_mode: str = "physical_v1") -> pd.DataFrame:
     import torch
     torch.set_num_threads(1)
     import run_benchmark as rb
@@ -155,8 +154,7 @@ def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
                                  simulation_mode=simulation_mode)
         inner_env.reset(seed=0)
         ctrl = rb._make_inner_controller(hw, env=inner_env, scenario=scenario,
-                                         seed=seed, model_dir=model_dir,
-                                         allow_semantic_mismatch=allow_semantic_mismatch)
+                                         seed=seed, model_dir=model_dir)
         inner_fn = lambda obs, _a, c=ctrl: c.predict(obs)[0]  # noqa: E731
         inner_env.close()
 
@@ -196,10 +194,7 @@ def _run_episode(hw: str, scenario: str, seed: int, model_dir: str | None,
     if macro == "rule_macro":
         agent = RuleBasedMacroController()
     else:
-        agent = rb.load_sb3_agent(
-            macro, scenario, seed, macro_model_dir, simulation_mode=simulation_mode,
-            allow_semantic_mismatch=allow_semantic_mismatch,
-        )
+        agent = rb.load_sb3_agent(macro, scenario, seed, macro_model_dir)
     revenue, done = 0.0, False
     macro_rows = []
     while not done:
@@ -437,7 +432,6 @@ def main() -> None:
     p.add_argument("--seed", type=int, default=100)
     p.add_argument("--workers", type=int, default=min(4, os.cpu_count() or 1))
     p.add_argument("--simulation-mode", choices=SIMULATION_MODES, default="physical_v1")
-    p.add_argument("--allow-semantic-mismatch", action="store_true")
     p.add_argument("--output", default="evaluation/results/grid_relief")
     p.add_argument("--trace-dir", help="Save per-rollout hardware/macro CSVs and checkpoint identities.")
     args = p.parse_args()
@@ -458,7 +452,7 @@ def main() -> None:
             Path(args.trace_dir) / f"{sc}_{m}_d{d}_b{b:g}_{h}_s{s}"
         )
         return (hw, sc, s, args.hw_model_dir, macro, args.macro_model_dir, cfgs[m], d, b,
-                trace_dir, args.simulation_mode, args.allow_semantic_mismatch)
+                trace_dir, args.simulation_mode)
 
     with tempfile.TemporaryDirectory(prefix="c2g-grid-relief-") as directory:
         cfgs = {m: _market_config(m, directory, args.simulation_mode) for m in args.markets}
@@ -505,7 +499,6 @@ def main() -> None:
             "regd_bias_definition": "r_t + beta * clip((L_t - mean_day) / (max_day - mean_day), -1, 1); "
                                     "physical_v1 applies before reset observation; legacy_v0 evaluation-only patch",
             "simulation_mode": args.simulation_mode,
-            "allow_semantic_mismatch": args.allow_semantic_mismatch,
             "source_id": source_id(ROOT),
             "weather_alignment": (
                 "calendar climatology from source year, not coincident historical weather"

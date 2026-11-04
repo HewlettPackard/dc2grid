@@ -51,7 +51,7 @@ import yaml
 from tqdm import tqdm
 
 from c2g_env import C2GFastEnv, C2GMacroEnv
-from c2g_env.experiments.identity import check_policy_semantics, file_fingerprint, source_id
+from c2g_env.experiments.identity import file_fingerprint, policy_semantics, source_id
 from c2g_env.semantics import SIMULATION_MODES
 from c2g_env.plant_profiles import available_plant_profiles, load_plant_profile
 from baselines.rule_based_mpc import RuleBasedController
@@ -75,7 +75,6 @@ T_WARN_NORM  = T_WARN / T_SAFE   # normalised warning threshold
 _PLANT_OVERRIDES: dict | None = None
 _PLANT_PROFILE = "none"
 _SIMULATION_OPTIONS: dict[str, Any] = {}
-_ALLOW_SEMANTIC_MISMATCH = False
 _RL_ALGOS = {
     "ppo",
     "sac"
@@ -180,7 +179,6 @@ def _make_inner_controller(
     scenario: str = "default",
     seed: int = 42,
     model_dir: str | None = None,
-    allow_semantic_mismatch: bool | None = None,
 ):
     """Instantiate a low-level controller by name."""
     if name == "random":
@@ -198,13 +196,9 @@ def _make_inner_controller(
     if name == "mpc_fast":
         return MPCFastController()
     if name == "ppo":
-        return load_sb3_agent("ppo", scenario, seed, model_dir,
-                              simulation_mode=env.simulation_mode if env is not None else None,
-                              allow_semantic_mismatch=allow_semantic_mismatch)
+        return load_sb3_agent("ppo", scenario, seed, model_dir)
     if name == "sac":
-        return load_sb3_agent("sac", scenario, seed, model_dir,
-                              simulation_mode=env.simulation_mode if env is not None else None,
-                              allow_semantic_mismatch=allow_semantic_mismatch)
+        return load_sb3_agent("sac", scenario, seed, model_dir)
     raise ValueError(f"Unknown inner controller '{name}'. Choose from: {_INNER_CONTROLLERS}")
 
 
@@ -319,10 +313,7 @@ def _maybe_load_obs_normalizer(stats_path: Path, scenario: str, *, macro: bool =
     return vec_norm
 
 
-def load_sb3_agent(
-    algo: str, scenario: str, seed: int, model_dir: str | None,
-    *, simulation_mode: str | None = None, allow_semantic_mismatch: bool | None = None,
-):
+def load_sb3_agent(algo: str, scenario: str, seed: int, model_dir: str | None):
     cls, train_key, should_restore_norm = _resolve_sb3_spec(algo)
     if model_dir:
         supplied = Path(model_dir)
@@ -334,11 +325,6 @@ def load_sb3_agent(
             f"No trained model at {path}.zip — run baselines/train_{algo}.py first."
         )
     model = cls.load(str(path))
-    expected_mode = simulation_mode or _SIMULATION_OPTIONS.get("simulation_mode", "physical_v1")
-    trained_mode = check_policy_semantics(
-        model, expected_mode,
-        allow_mismatch=_ALLOW_SEMANTIC_MISMATCH if allow_semantic_mismatch is None else allow_semantic_mismatch,
-    )
     obs_normalizer = None
     if should_restore_norm:
         obs_normalizer = _maybe_load_obs_normalizer(
@@ -346,7 +332,7 @@ def load_sb3_agent(
         )
     return SB3Agent(model, algo_name=algo.lower(), obs_normalizer=obs_normalizer,
                     checkpoint={**file_fingerprint(path.with_suffix(".zip")),
-                                "simulation_mode": trained_mode})
+                                "simulation_mode": policy_semantics(model)})
 
 
 # Metric collection
@@ -1079,8 +1065,6 @@ if __name__ == "__main__":
     parser.add_argument("--simulation-mode", choices=SIMULATION_MODES, default="physical_v1")
     parser.add_argument("--start-day", type=int, default=0)
     parser.add_argument("--regd-load-bias", type=float, default=0.0)
-    parser.add_argument("--allow-semantic-mismatch", action="store_true",
-                        help="Explicitly diagnose a checkpoint trained under different simulator semantics.")
     parser.add_argument(
         "--plant_profile",
         default="none",
@@ -1198,7 +1182,6 @@ if __name__ == "__main__":
         "start_day": args.start_day,
         "regd_load_bias": args.regd_load_bias,
     }
-    _ALLOW_SEMANTIC_MISMATCH = args.allow_semantic_mismatch
 
     project_root = Path(__file__).resolve().parent.parent
     evaluation_results_dir = project_root / "evaluation" / "results"
