@@ -1,21 +1,20 @@
 """
-Battery Energy Storage System (BESS) — 150 MWh / 50 MW Li-ion NMC
-====================================================================
-Two backend implementations, selected automatically at import time:
+Battery Energy Storage System (BESS)
+===================================
+The default physical_v1 environment uses the 15 MWh / 5 MW pure-Python
+model. The legacy_v0 environment uses the BESSModel alias, which selects
+PySAM at import time when available and the pure-Python model otherwise.
 
-  1. **PySAM backend** (preferred) — NREL BatteryStateful electrochemical
-     model with Shepherd voltage curve, I²R thermal losses, and temperature-
-     dependent capacity.  Requires ``nrel-pysam`` to be installed.
-
-  2. **Pure-Python fallback** (default) — equivalent-circuit model that
+  1. **Pure-Python backend** — equivalent-circuit model that
      reproduces the key non-linearities the RL agent must learn:
        - Non-linear round-trip efficiency: η(C-rate, SOC)
        - SOC-dependent power limits (derating near empty/full)
        - Internal resistance heat dissipation
        - Calendar + cycle capacity fade (linear approximation)
 
-Both backends expose an identical public API so the RL environment is
-completely backend-agnostic.
+  2. **Legacy PySAM backend** — NREL BatteryStateful electrochemical model
+     with Shepherd voltage curve, I²R thermal losses, and temperature-
+     dependent capacity. Requires ``nrel-pysam`` to be installed.
 
 References
 ----------
@@ -303,7 +302,7 @@ class _PySAMBESSModel:
 
 
 # ===========================================================================
-# Public alias — pick the best available backend
+# Backend alias used by legacy_v0
 # ===========================================================================
 
 if _PYSAM_AVAILABLE:

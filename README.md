@@ -332,9 +332,20 @@ Six independent physics/data modules, all with exact-exponential or analytical s
 | **Workload Orchestrator** | `workload.py`   | Fuses Alibaba batch (2023), DLRM (2025), and GenAI (2026) traces into P_base + P_flex at 5-min resolution. FIFO queue model: unserved batch work defers rather than drops; exposes `backlog_kw` and `avg_delay_steps` (Little's Law) per step |
 | **Thermal Twin**          | `thermal.py`    | Exact exponential ODE integration for dual-zone cooling (Zone A: HPE Cray EX liquid, Zone B: HPE ProLiant air)                                                                                                                                    |
 | **Electrical Chain**      | `electrical.py` | Non-linear UPS/PDU/XFMR loss curves + PUE calculation                                                                                                                                                                                             |
-| **BESS**                  | `bess.py`       | 15 MWh / 5 MW Li-ion NMC (pure-Python backend + optional PySAM) with C-rate η, SOC derating, capacity fade                                                                                                                                       |
+| **BESS**                  | `bess.py`       | 15 MWh / 5 MW pure-Python Li-ion NMC in default mode, with C-rate η, SOC derating, and capacity fade                                                                                                                                       |
 | **Macro-Grid**            | `macro_grid.py` | AR(1) RegD signal + LMP proxy; calibrated for 6 global markets                                                                                                                                                                                    |
 | **Weather**               | `weather.py`    | NOAA ISD-Lite real data or calibrated synthetic (6 climate profiles)                                                                                                                                                                              |
+
+### Battery backends
+
+| Simulation mode | Battery backend and rating |
+| --- | --- |
+| `physical_v1` (default) | Pure Python, 15 MWh / 5 MW for the standard configuration, regardless of PySAM availability. |
+| `legacy_v0` | PySAM if it imports successfully, otherwise the 15 MWh / 5 MW pure-Python model if the module is absent. |
+
+The legacy PySAM adapter defines `NOMINAL_ENERGY_MWH = 150.0` and
+`MAX_POWER_MW = 50.0`. These are wrapper constants for historical runs.
+For legacy comparisons, record PySAM availability and version. See the [simulator reference](c2g_env/ENVIRONMENTS.md#5-simulator-bess) for the adapter's unit conventions.
 
 ---
 
@@ -649,7 +660,7 @@ dc2grid/
 │       ├── workload.py                  # Alibaba trace fusion (batch/DLRM/GenAI)
 │       ├── thermal.py                   # Exact-exponential ODEs, dual-zone cooling
 │       ├── electrical.py                # Non-linear UPS/PDU/XFMR loss + PUE
-│       ├── bess.py                      # 15 MWh NMC BESS (pure-Python + PySAM)
+│       ├── bess.py                      # BESS models (pure Python and legacy PySAM)
 │       ├── macro_grid.py                # AR(1) RegD + LMP proxy, 6 market presets
 │       └── weather.py                   # NOAA ISD real data + synthetic climate, 6 presets
 │
@@ -1064,8 +1075,7 @@ Then open [http://localhost:6006](http://localhost:6006) in your browser.
 uv run jupyter lab notebooks/
 ```
 
-> **Note:** The optional `nrel-pysam` BESS backend requires `uv pip install nrel-pysam`.
-> The environment automatically falls back to the pure-Python `_SimpleBESSModel` if absent.
+> Install `nrel-pysam` with `uv pip install nrel-pysam` to use the optional PySAM backend in `legacy_v0`. See [Battery backends](#battery-backends).
 
 ---
 
