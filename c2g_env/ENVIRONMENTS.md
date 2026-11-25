@@ -68,7 +68,7 @@ Both environments share the same six physics engines and the same `config.yaml`.
 | 0 | `throttle_batch` | [0, 1] | DVFS throttle on schedulable batch jobs. 0 = full speed, 1 = fully throttled (zero batch power). GenAI/DLRM rigid loads are **not** affected. |
 | 1 | `pump_speed_A` | [0, 1] | CDU circulating pump speed (Zone A). Minimum clamped to 0.15 to maintain minimum server-blade flow. |
 | 2 | `hvac_effort` | [0, 1] | Zone B HVAC fan + chiller effort. 1 = full HVAC power (50 MW). |
-| 3 | `bess_dispatch` | [-1, 1] | BESS dispatch: −1 = full charge (50 MW into battery), +1 = full discharge (50 MW to grid). |
+| 3 | `bess_dispatch` | [-1, 1] | −1 requests full charge and +1 requests full discharge. The standard `physical_v1` configuration requests up to 5 MW in either direction, subject to SOC limits. |
 
 ### 2.2 Observation Space
 
@@ -338,15 +338,17 @@ K_\text{eff} = K_\text{air} \cdot f_\text{fault} \cdot (0.3 + 0.7 \cdot u_\text{
 ## 5. Simulator: BESS
 
 **File:** `c2g_env/physics/bess.py`  
-**Class:** `BESSModel` (auto-selects backend)  
-**Design spec:** 150 MWh / 50 MW Li-ion NMC (utility Megapack-class)
+The standard configuration uses a 15 MWh / 5 MW pure-Python Li-ion NMC battery.
 
-Two backend implementations with an identical public API:
+| Simulation mode | Battery backend |
+|-----------------|-----------------|
+| `physical_v1` (default) | `_SimpleBESSModel`, regardless of PySAM availability. |
+| `legacy_v0` | `BESSModel`, which selects `_PySAMBESSModel` if PySAM imports successfully and `_SimpleBESSModel` if the module is absent. |
 
-| Backend | Selected when | Model |
-|---------|--------------|-------|
-| `_PySAMBESSModel` | `nrel-pysam` installed | NREL BatteryStateful — Shepherd voltage curve, I²R thermal, temperature-dependent capacity |
-| `_SimpleBESSModel` | Default (no PySAM) | Equivalent-circuit with key non-linearities |
+The legacy PySAM adapter passes its energy and power values directly to
+BatteryStateful, whose inputs are in kWh and kW. Its MW/MWh-named wrapper
+constants of 150.0 and 50.0 therefore do not establish a verified 150 MWh /
+50 MW rating. For legacy comparisons, record PySAM availability and version. [1]
 
 ### 5.1 Round-Trip Efficiency (Pure-Python Backend)
 
@@ -383,12 +385,12 @@ f_\text{age} \mathrel{+}= \frac{|P_\text{actual}| \cdot \Delta t}{E_\text{nom} \
 ```math
 E_\text{effective} = E_\text{nom} \cdot (1 - 0.2 \cdot f_\text{age})
 ```
-### 5.5 BESS Parameters
+### 5.5 Standard Pure-Python BESS Parameters
 
 | Parameter | Symbol | Value | Unit |
 |-----------|--------|-------|------|
-| Nominal energy | $E_\text{nom}$ | 150 | MWh |
-| Max power | $P_\text{max}$ | 50 | MW |
+| Nominal energy | $E_\text{nom}$ | 15 | MWh |
+| Max power | $P_\text{max}$ | 5 | MW |
 | Min SOC (hard floor) | $\text{SOC}_\text{min}$ | 0.10 | — |
 | Max SOC (hard ceil) | $\text{SOC}_\text{max}$ | 0.95 | — |
 | Peak one-way efficiency | $\eta_\text{peak}$ | 0.97 | — |

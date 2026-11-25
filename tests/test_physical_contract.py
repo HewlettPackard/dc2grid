@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import yaml
 
-from c2g_env import C2GFastEnv, C2GMacroEnv
+from c2g_env import C2GFastEnv, C2GMacroEnv, env_low_level
 from c2g_env.replay import sample_previous
 from c2g_env.train_envs import RuleMacroWrappedEnv
 
@@ -128,6 +128,22 @@ def test_battery_tracking_and_facility_relief_are_separate(short_config):
     assert info["p_grid_import_mw"] == pytest.approx(
         info["p_facility_mw"] - info["bess_actual_kw"] / 1000
     )
+
+
+def test_default_battery_rating_is_independent_of_legacy_backend(short_config, monkeypatch):
+    def unexpected_legacy_backend(*args, **kwargs):
+        pytest.fail("The default physical mode must use the pure-Python battery")
+
+    monkeypatch.setattr(env_low_level, "BESSModel", unexpected_legacy_backend)
+    env = C2GFastEnv(config_path=short_config)
+    _, info = env.reset(seed=100)
+
+    assert info["simulation_mode"] == "physical_v1"
+    assert env._bess.E_NOM_MWH == 15.0
+    assert env._bess.P_MAX_MW == 5.0
+    action = NOMINAL.copy()
+    action[3] = 1.0
+    assert env.step(action)[-1]["bess_actual_kw"] == pytest.approx(5_000.0)
 
 
 def test_market_calls_cannot_change_exogenous_regd(short_config):
